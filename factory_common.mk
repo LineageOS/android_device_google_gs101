@@ -72,6 +72,7 @@ PRODUCT_PACKAGES += \
 # Disable DebugFS restrictions in factory builds
 PRODUCT_SET_DEBUGFS_RESTRICTIONS := false
 
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 # PixelLogger for RF testing
 PRODUCT_PACKAGES_DEBUG += \
     PixelLogger
@@ -79,3 +80,4 @@ PRODUCT_PACKAGES_DEBUG += \
 # Tool for installing Widevine keybox
 PRODUCT_PACKAGES_DEBUG += \
     WvInstallKeybox
+endif
