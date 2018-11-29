@@ -200,7 +200,7 @@ BOARD_USES_GENERIC_AUDIO := true
 
 $(call soong_config_set,aoc_audio_func,ext_hidl,true)
 
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 $(call soong_config_set,aoc_audio_func,dump_usecase_data,true)
 $(call soong_config_set,aoc_audio_func,hal_socket_control,true)
 $(call soong_config_set,aoc_audio_func,record_tunning_keys,true)
