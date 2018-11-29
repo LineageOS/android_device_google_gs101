@@ -1,5 +1,5 @@
 # Fingerprint extension feature
-ifneq (,$(filter userdebug, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 SOONG_CONFIG_fp_hal_feature += report_bug_support
 SOONG_CONFIG_fp_hal_feature_report_bug_support := true
 BOARD_SEPOLICY_DIRS += hardware/google/pixel-sepolicy/fingerprint-extension/vendor/
