@@ -209,7 +209,7 @@ SOONG_CONFIG_aoc_audio_func += \
 
 SOONG_CONFIG_aoc_audio_func_ext_hidl := true
 
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 SOONG_CONFIG_aoc_audio_func += \
     dump_usecase_data \
     hal_socket_control \
