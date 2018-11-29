@@ -15,7 +15,7 @@
 #
 
 # Fingerprint manifest
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 DEVICE_MANIFEST_FILE += \
     device/google/gs101/fingerprint/vendor.goodix.hardware.biometrics.fingerprint@2.1-service.xml
 endif
