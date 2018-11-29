@@ -161,7 +161,7 @@ cat "/sys/class/power_supply/main-charger/device/registers_dump"
 echo "\n------ max77729_pmic registers dump ------"
 cat /sys/devices/platform/10d50000.hsi2c/i2c-*/*-0066/registers_dump
 
-if [ $build_type = "userdebug" ]
+if [ $build_type = "eng" ]
 then
   echo "\n------ Charging table dump ------"
   cat "/d/google_battery/chg_raw_profile"
@@ -207,7 +207,7 @@ fi
 
 echo "\n------ Charger Stats ------"
 cat "/sys/class/power_supply/battery/charge_details"
-if [ $build_type = "userdebug" ]
+if [ $build_type = "eng" ]
 then
   echo "\n------ Google Charger ------"
   cd /sys/kernel/debug/google_charger/
@@ -234,7 +234,7 @@ cat "/sys/class/power_supply/wireless/device/fw_rev"
 echo "\n------ RTX ------"
 cat "/dev/logbuffer_rtx"
 
-if [ $build_type = "userdebug" ]
+if [ $build_type = "eng" ]
 then
   echo "\n------ gvotables ------"
   cat /sys/kernel/debug/gvotables/*/status

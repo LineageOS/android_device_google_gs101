@@ -49,8 +49,8 @@ BOARD_KERNEL_CMDLINE += cma_sysfs.experimental=Y
 BOARD_KERNEL_CMDLINE += swiotlb=noforce
 BOARD_BOOTCONFIG += androidboot.boot_devices=14700000.ufs
 
-# Enable KUnit for userdebug and eng builds
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+# Enable KUnit for eng builds
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
   BOARD_KERNEL_CMDLINE += kunit.enable=1
 endif
 
@@ -205,7 +205,7 @@ BOARD_USES_GENERIC_AUDIO := true
 
 $(call soong_config_set,aoc_audio_func,ext_hidl,true)
 
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 $(call soong_config_set,aoc_audio_func,dump_usecase_data,true)
 $(call soong_config_set,aoc_audio_func,hal_socket_control,true)
 $(call soong_config_set,aoc_audio_func,record_tuning_keys,true)

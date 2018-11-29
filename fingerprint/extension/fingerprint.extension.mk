@@ -2,7 +2,7 @@
 ifneq (,$(filter aosp% factory%, $(TARGET_PRODUCT)))
 # Skip if device is AOSP or factory build
 else
-    ifneq (,$(filter userdebug, $(TARGET_BUILD_VARIANT)))
+    ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
     $(call soong_config_set,fp_hal_feature,report_bug_support,true)
     BOARD_SEPOLICY_DIRS += hardware/google/pixel-sepolicy/fingerprint-extension/vendor/
     SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += hardware/google/pixel-sepolicy/fingerprint-extension/system_ext/public/
