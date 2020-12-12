@@ -17,7 +17,128 @@
 <resources>
     <string-array name="configs_device">
         <!-- ConnectivityThermalPowerManager 5G modem monitoring rules -->
+        <item>connectivity_thermal_power_manager/apply_action_time_seconds=10</item>
         <item>connectivity_thermal_power_manager/atm_power_threshold_mw=800</item>
         <item>connectivity_thermal_power_manager/cellular_thermal_adaptive_thermal_status_adaptive_action_list=</item>
+        <item>connectivity_thermal_power_manager/wifi_disconnected_time_seconds=180</item>
+        <item>connectivity_thermal_power_manager/wifi_internet_driven_endc_product_carrier_id_set=shiba,husky,akita,komodo,tokay,caiman,comet@1,1989,2023,2576,2067,2071,2073,2577,2522,2075,2578,2083,2433,1949</item>
+
+        <!-- Live Caption (Pixel 2017 + OEM) -->
+        <item>device_personalization_services/Captions__allow_box_x_axis_movement=true</item>
+        <item>device_personalization_services/Captions__allow_use_public_speech_recognition=true</item>
+        <item>device_personalization_services/Captions__allow_voip_call_without_audio_recording=false</item>
+        <item>device_personalization_services/Captions__available_for_download=en-US;en-GB;en-CA;en-IE;en-AU;en-SG;en-IN;fr-FR;fr-CA;fr-BE;fr-CH;it-IT;it-CH;de-DE;de-AT;de-BE;de-CH;ja-JP;es-ES;es-US</item>
+        <item>device_personalization_services/Captions__disable_prod=false</item>
+        <!-- <item>device_personalization_services/Captions__enable=false</item> -->
+        <item>device_personalization_services/Captions__enable_adaptive_box_width=true</item>
+        <item>device_personalization_services/Captions__enable_augmented_modality=true</item>
+        <item>device_personalization_services/Captions__enable_augmented_modality_input=true</item>
+        <item>device_personalization_services/Captions__enable_augmented_modality_language_detection=true</item>
+        <item>device_personalization_services/Captions__enable_augmented_music=true</item>
+        <!-- <item>device_personalization_services/Captions__enable_clearcut_logging=true</item> -->
+        <item>device_personalization_services/Captions__enable_drag_and_double_tap_to_resize=false</item>
+        <item>device_personalization_services/Captions__enable_language_detection=true</item>
+        <item>device_personalization_services/Captions__enable_one_caption_experiment=false</item>
+        <item>device_personalization_services/Captions__enable_punctuations=true</item>
+        <item>device_personalization_services/Captions__enable_setting_page=false</item>
+        <item>device_personalization_services/Captions__enable_text_transform=true</item>
+        <item>device_personalization_services/Captions__enable_westworld_logging=false</item>
+        <item>device_personalization_services/Captions__enable_zero_day=false</item>
+        <item>device_personalization_services/Captions__manifest_url_template=https://storage.googleapis.com/captions/%{NAMESPACE}_%{VERSION}_manifest.json</item>
+        <item>device_personalization_services/Captions__model_version_v1=20190613</item>
+        <item>device_personalization_services/Captions__model_version_v1_2=20200112</item>
+        <item>device_personalization_services/Captions__new_model_version=20210623</item>
+        <item>device_personalization_services/Captions__new_model_version_advanced=20221227</item>
+        <item>device_personalization_services/Captions__speech_threshold=0.2</item>
+        <item>device_personalization_services/Captions__supported_languages=en-US;fr-FR;it-IT;de-DE;ja-JP;es-ES</item>
+        <item>device_personalization_services/Captions__surface_sound_events=true</item>
+        <item>device_personalization_services/Captions__text_transform_augmented_input=true</item>
+        <item>device_personalization_services/Captions__visibility_playing_duration_millis=5000</item>
+        <item>device_personalization_services/Captions__visibility_stopped_duration_millis=1500</item>
+
+        <!-- Now Playing (Pixel 2017) -->
+        <item>device_personalization_services/NowPlaying__ambient_music_apk_music_detector_min_score=0.45</item>
+        <item>device_personalization_services/NowPlaying__ambient_music_get_model_state_cooldown_seconds_cloud_search=9</item>
+        <item>device_personalization_services/NowPlaying__ambient_music_index_manifest_17_09_02=3082:https://storage.googleapis.com/music-iq-db/updatable_db_v3/20240421-030101/manifest.json</item>
+        <item>device_personalization_services/NowPlaying__ambient_music_matcher_match_threshold_17_09_02=1.0E-6</item>
+        <item>device_personalization_services/NowPlaying__ambient_music_on_demand_enabled=true</item>
+        <item>device_personalization_services/NowPlaying__ambient_music_on_demand_music_confidence=0.48</item>
+        <item>device_personalization_services/NowPlaying__cloud_api_allowed=true</item>
+        <item>device_personalization_services/NowPlaying__dsp_model_checksum_enabled=false</item>
+        <!-- <item>device_personalization_services/NowPlaying__enable_usage_fa=true</item> -->
+        <item>device_personalization_services/NowPlaying__favorites_enabled=true</item>
+        <item>device_personalization_services/NowPlaying__feature_users_count_enabled=true</item>
+        <!-- <item>device_personalization_services/NowPlaying__federated_analytics_allowed=true</item> -->
+        <item>device_personalization_services/NowPlaying__handle_ambient_music_results_with_history=true</item>
+        <item>device_personalization_services/NowPlaying__min_training_interval_millis=86400000</item>
+        <item>device_personalization_services/NowPlaying__nnfp_v3_model_enabled=true</item>
+        <item>device_personalization_services/NowPlaying__on_demand_enable_eager_prompt=true</item>
+        <item>device_personalization_services/NowPlaying__on_demand_fingerprinter_being_setup_warning=true</item>
+        <item>device_personalization_services/NowPlaying__on_demand_hide_if_fingerprinter_install_not_confirmed=true</item>
+        <item>device_personalization_services/NowPlaying__on_demand_min_supported_aga_version=12.35.17</item>
+        <item>device_personalization_services/NowPlaying__on_demand_retry_fingerprinter_install=true</item>
+        <item>device_personalization_services/NowPlaying__youtube_export_enabled=true</item>
+
+        <!-- Adaptive Sound (Pixel 2020) -->
+        <item>device_personalization_services/AdaptiveAudio__enable_adaptive_audio=true</item>
+        <item>device_personalization_services/AdaptiveAudio__show_promo_notification=false</item>
+        <item>device_personalization_services/AdaptiveAudio__use_silence_detector_state_bug_fix=true</item>
+
+        <!-- Screen attention (Pixel 2019) -->
+        <item>device_personalization_services/Attention__accel_sensor_enabled=false</item>
+        <item>device_personalization_services/Attention__accel_sensor_threshold_mss=0.2</item>
+        <item>device_personalization_services/Attention__enabled=true</item>
+        <item>device_personalization_services/Attention__margin_horizontal_px=1000</item>
+        <item>device_personalization_services/Attention__margin_vertical_px=1000</item>
+        <item>device_personalization_services/Attention__proximity_sensor_enabled=false</item>
+
+        <!-- Translation -->
+        <item>device_personalization_services/Translate__app_blocklist=com.google.android.talk</item>
+        <item>device_personalization_services/Translate__blue_chip_translate_enabled=true</item>
+        <item>device_personalization_services/Translate__characterset_lang_detection_enabled=true</item>
+        <item>device_personalization_services/Translate__chat_translate_languages=de,en,es,fr,it,ja,hi,zh,ru,pl,pt,ko,th,tr,nl,zh_Hant,sv,da,vi,ar,fa,no,bn,fil</item>
+        <item>device_personalization_services/Translate__copy_to_translate_enabled=true</item>
+        <item>device_personalization_services/Translate__differentiate_simplified_and_traditional_chinese=true</item>
+        <item>device_personalization_services/Translate__disable_translate_without_system_animation=false</item>
+        <item>device_personalization_services/Translate__enable_chronicle_migration=true</item>
+        <item>device_personalization_services/Translate__enable_default_langid_model=false</item>
+        <item>device_personalization_services/Translate__enable_dictionary_langid_detection=true</item>
+        <item>device_personalization_services/Translate__enable_opmv4_service=true</item>
+        <item>device_personalization_services/Translate__enable_setup_wizard_dialog_v2=false</item>
+        <item>device_personalization_services/Translate__enable_spa_setting=false</item>
+        <item>device_personalization_services/Translate__interpreter_source_languages=de,en,ja,es,fr,it</item>
+        <item>device_personalization_services/Translate__interpreter_target_languages=de,en,ja,es,fr,it</item>
+        <item>device_personalization_services/Translate__replace_auto_translate_copied_text_enabled=true</item>
+        <item>device_personalization_services/Translate__text_to_text_language_list=vi,ja,fa,ro,nl,mr,mt,ar,ms,it,eo,is,et,es,iw,zh,uk,af,id,ur,mk,cy,hi,el,be,pt,lt,hr,lv,hu,ht,te,de,bg,th,bn,tl,pl,tr,kn,sv,gl,ko,sw,cs,da,ta,gu,ka,sl,ca,sk,ga,sq,no,fi,ru,fr,en,zh_Hant,fil</item>
+        <item>device_personalization_services/Translate__translation_service_enabled=true</item>
+        <item>device_personalization_services/Translate__translator_expiration_enabled=true</item>
+        <item>device_personalization_services/Translate__use_translate_kit_streaming_api=true</item>
+
+        <!-- Recents text selection (for Pixel Launcher users) -->
+        <item>device_personalization_services/Overview__enable_barcode_detection=false</item>
+        <item>device_personalization_services/Overview__enable_image_search=false</item>
+        <item>device_personalization_services/Overview__enable_image_selection=true</item>
+        <item>device_personalization_services/Overview__enable_japanese_ocr=true</item>
+        <item>device_personalization_services/Overview__enable_lens_r_overview_long_press=true</item>
+        <item>device_personalization_services/Overview__enable_lens_r_overview_select_mode=true</item>
+        <item>device_personalization_services/Overview__enable_lens_r_overview_translate_action=false</item>
+        <item>device_personalization_services/Overview__enable_overview=true</item>
+        <item>device_personalization_services/Overview__enable_pir_clearcut_logging=true</item>
+        <item>device_personalization_services/Overview__enable_pir_westworld_logging=true</item>
+        <item>device_personalization_services/Overview__enable_proactive_hints=false</item>
+        <item>device_personalization_services/Overview__enable_superpacks_pir_protocol=true</item>
+        <item>device_personalization_services/Overview__min_lens_agsa_app_version=301084649</item>
+        <!-- Disable federated learning -->
+        <item>device_personalization_services/OverviewFederatedAnalytics__enable_fa=false</item>
+        <item>device_personalization_services/OverviewFederatedAnalytics__enable_min_training_interval=false</item>
+        <item>device_personalization_services/OverviewFederatedAnalytics__enable_non_synthetic_logs=false</item>
+
+        <!-- Disable unused AiAi features -->
+        <item>device_personalization_services/Autofill__enable=false</item>
+        <item>device_personalization_services/Autofill__enable_fa=false</item>
+        <item>device_personalization_services/Fedex__enable_fedex=false</item>
+        <item>device_personalization_services/Logging__enable_aiai_clearcut_logging=false</item>
+        <item>device_personalization_services/NotificationAssistant__enable_service=false</item>
+        <item>device_personalization_services/VisualCortex__enable=false</item>
     </string-array>
 </resources>
