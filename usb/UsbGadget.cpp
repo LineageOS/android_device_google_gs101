@@ -223,14 +223,12 @@ static V1_0::Status validateAndSetVidPid(uint64_t functions) {
         case static_cast<uint64_t>(GadgetFunction::NCM):
             if (!(vendorFunctions == "user" || vendorFunctions == ""))
                 ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
-            // TODO(b/170953147): need to request a new PID. Sharing PID of rndis now.
-            ret = setVidPid("0x18d1", "0x4ee3");
+            ret = setVidPid("0x18d1", "0x4eeb");
             break;
         case GadgetFunction::ADB | GadgetFunction::NCM:
             if (!(vendorFunctions == "user" || vendorFunctions == ""))
                 ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
-            // TODO(b/170953147): need to request a new PID. Sharing PID of rndis+adb now.
-            ret = setVidPid("0x18d1", "0x4ee4");
+            ret = setVidPid("0x18d1", "0x4eec");
             break;
         default:
             ALOGE("Combination not supported");
@@ -263,30 +261,15 @@ V1_0::Status UsbGadget::setupFunctions(uint64_t functions,
     bool ffsEnabled = false;
     int i = 0;
 
-    // Use the NCM support hack because the gadget function has no NCM definition.
-    // TODO: add formal NCM function setup once gadget function supports NCM.
-    uint64_t usbFunctions = functions;
-    bool ncmEnabled = false;
-    const std::string vendorRndisConfig = GetProperty(google::pixel::usb::kVendorRndisConfig, "");
-    if ((functions & GadgetFunction::RNDIS) && (vendorRndisConfig.find("ncm.gs", 0) == 0)) {
-        ncmEnabled = true;
-        usbFunctions &= ~static_cast<uint64_t>(GadgetFunction::RNDIS);
-    }
-
-    if (addGenericAndroidFunctions(&monitorFfs, usbFunctions, &ffsEnabled, &i) !=
+    if (addGenericAndroidFunctions(&monitorFfs, functions, &ffsEnabled, &i) !=
         Status::SUCCESS)
         return Status::ERROR;
-
-    if ((functions & GadgetFunction::NCM) != 0) {
-        if (linkFunction("ncm.gs9", i++))
-            return Status::ERROR;
-    }
 
     std::string vendorFunctions = getVendorFunctions();
 
     if (vendorFunctions == "dm") {
         ALOGI("enable usbradio debug functions");
-        if ((usbFunctions & GadgetFunction::RNDIS) != 0) {
+        if ((functions & GadgetFunction::RNDIS) != 0) {
             if (linkFunction("acm.gs6", i++))
 	        return Status::ERROR;
             if (linkFunction("dm.gs7", i++))
@@ -303,17 +286,15 @@ V1_0::Status UsbGadget::setupFunctions(uint64_t functions,
             return Status::ERROR;
     }
 
-    if ((usbFunctions & GadgetFunction::ADB) != 0) {
+    if ((functions & GadgetFunction::ADB) != 0) {
         ffsEnabled = true;
         if (addAdb(&monitorFfs, &i) != Status::SUCCESS)
             return Status::ERROR;
     }
 
-    // Reordering NCM function makes Windows generic NCM driver work when vendor funcs are enabled.
-    // TODO: possibly remove the reordering once vendor function Windows driver supports NCM.
-    if (ncmEnabled) {
-        ALOGI("set ncm function");
-        if (linkFunction(vendorRndisConfig.c_str(), i++))
+    if ((functions & GadgetFunction::NCM) != 0) {
+        ALOGI("setCurrentUsbFunctions ncm");
+        if (linkFunction("ncm.gs9", i++))
             return Status::ERROR;
     }
 
