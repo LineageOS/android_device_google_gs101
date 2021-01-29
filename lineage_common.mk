@@ -26,3 +26,6 @@ PRODUCT_PACKAGES += \
 # Parts
 PRODUCT_PACKAGES += \
     GoogleParts
+
+# Touch
+include hardware/google/pixel/touch/device.mk
