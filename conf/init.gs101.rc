@@ -17,7 +17,6 @@ service vendor.charger /system/bin/charger
 on early-init
     mkdir /mnt/vendor/efs 0771 radio system
     mkdir /mnt/vendor/efs_backup 0771 radio system
-    mkdir /mnt/vendor/modem_img 0771 radio system
     mkdir /mnt/vendor/modem_userdata 0771 radio system
     mkdir /mnt/vendor/persist 0771 system system
     mount debugfs /sys/kernel/debug /sys/kernel/debug
@@ -406,10 +405,6 @@ on fs
     restorecon_recursive /mnt/vendor/efs_backup
     chown radio system /mnt/vendor/modem_userdata
     restorecon_recursive /mnt/vendor/modem_userdata
-
-    # Configure multi-bin radio
-    chown radio system /mnt/vendor/modem_img
-    restorecon_recursive /mnt/vendor/modem_img
 
     restorecon_recursive /mnt/vendor/persist
     restorecon_recursive /mnt/vendor/persist/audio
