@@ -1,0 +1,3 @@
+on property:vendor.debug.ramdump.force_crash=true
+    write /sys/kernel/pixel_debug/trigger "null"
+

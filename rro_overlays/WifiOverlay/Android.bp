@@ -1,0 +1,25 @@
+package {
+    // See: http://go/android-license-faq
+    // A large-scale-change added 'default_applicable_licenses' to import
+    // all of the 'license_kinds' from "//device/google/gs101:device_google_gs101_license"
+    // to get the below license kinds:
+    //   SPDX-license-identifier-Apache-2.0
+    default_applicable_licenses: [
+        "//device/google/gs101:device_google_gs101_license",
+    ],
+}
+
+override_runtime_resource_overlay {
+    name: "PixelWifiOverlayGs101",
+    base: "//device/google/gs101:WifiOverlay",
+    package_name: "com.google.android.wifi.resources.pixel",
+    target_package_name: "com.google.android.wifi.resources",
+}
+
+runtime_resource_overlay {
+    name: "WifiOverlay",
+    theme: "WifiOverlay",
+    certificate: "platform",
+    sdk_version: "current",
+    product_specific: true
+}
