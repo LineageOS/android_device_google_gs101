@@ -8,6 +8,7 @@ system                                                   /system                
 system_ext                                               /system_ext                 ext4    ro,barrier=1             wait,slotselect,avb=vbmeta_system,logical,first_stage_mount
 product                                                  /product                    ext4    ro,barrier=1             wait,slotselect,avb=vbmeta_system,logical,first_stage_mount
 vendor                                                   /vendor                     ext4    ro,barrier=1             wait,slotselect,avb=vbmeta,logical,first_stage_mount
+vendor_dlkm                                              /vendor_dlkm                ext4    ro,barrier=1             wait,slotselect,avb=vbmeta,logical,first_stage_mount
 /dev/block/platform/14700000.ufs/by-name/efs             /mnt/vendor/efs             ext4    defaults,noatime,rw      wait,check,formattable
 /dev/block/platform/14700000.ufs/by-name/efs_backup      /mnt/vendor/efs_backup      ext4    defaults,noatime,rw      wait,check,formattable
 /dev/block/platform/14700000.ufs/by-name/modem_userdata  /mnt/vendor/modem_userdata  ext4    defaults,noatime,rw      wait,check,formattable
