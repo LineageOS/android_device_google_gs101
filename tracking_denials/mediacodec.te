@@ -1,0 +1,6 @@
+# b/172173484
+dontaudit mediacodec sysfs:file { getattr };
+dontaudit mediacodec sysfs:file { open };
+dontaudit mediacodec sysfs:file { read };
+# b/176777184
+dontaudit mediacodec default_android_vndservice:service_manager add ;

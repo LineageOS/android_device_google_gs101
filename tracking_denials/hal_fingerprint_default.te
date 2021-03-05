@@ -1,0 +1,52 @@
+# b/174438167
+dontaudit hal_fingerprint_default hal_fingerprint_default:netlink_socket { read };
+dontaudit hal_fingerprint_default tee_device:chr_file { ioctl };
+dontaudit hal_fingerprint_default system_data_root_file:file { read };
+dontaudit hal_fingerprint_default system_data_root_file:file { open };
+dontaudit hal_fingerprint_default hal_fingerprint_default:netlink_socket { create };
+dontaudit hal_fingerprint_default hal_fingerprint_default:netlink_socket { bind };
+dontaudit hal_fingerprint_default hal_fingerprint_default:netlink_socket { write };
+dontaudit hal_fingerprint_default hal_fingerprint_default:netlink_socket { read };
+dontaudit hal_fingerprint_default tee_device:chr_file { open };
+dontaudit hal_fingerprint_default tee_device:chr_file { ioctl };
+dontaudit hal_fingerprint_default tee_device:chr_file { open };
+dontaudit hal_fingerprint_default tee_device:chr_file { read write };
+dontaudit hal_fingerprint_default device:chr_file { open };
+dontaudit hal_fingerprint_default device:chr_file { read write };
+dontaudit hal_fingerprint_default tee_device:chr_file { read write };
+dontaudit hal_fingerprint_default device:chr_file { ioctl };
+dontaudit hal_fingerprint_default device:chr_file { open };
+dontaudit hal_fingerprint_default system_data_root_file:file { read };
+dontaudit hal_fingerprint_default system_data_root_file:file { open };
+dontaudit hal_fingerprint_default hal_fingerprint_default:netlink_socket { create };
+dontaudit hal_fingerprint_default hal_fingerprint_default:netlink_socket { bind };
+dontaudit hal_fingerprint_default hal_fingerprint_default:netlink_socket { write };
+dontaudit hal_fingerprint_default hal_fingerprint_default:netlink_socket { read };
+dontaudit hal_fingerprint_default device:chr_file { ioctl };
+dontaudit hal_fingerprint_default device:chr_file { read write };
+# b/174714991
+dontaudit hal_fingerprint_default system_data_file:file { read };
+dontaudit hal_fingerprint_default system_data_file:file { open };
+dontaudit hal_fingerprint_default system_data_file:file { read };
+dontaudit hal_fingerprint_default system_data_file:file { open };
+# b/177966377
+dontaudit hal_fingerprint_default default_prop:file { getattr };
+dontaudit hal_fingerprint_default default_prop:file { map };
+dontaudit hal_fingerprint_default default_prop:file { open };
+dontaudit hal_fingerprint_default default_prop:file { read };
+dontaudit hal_fingerprint_default default_prop:file { map };
+dontaudit hal_fingerprint_default default_prop:file { getattr };
+dontaudit hal_fingerprint_default default_android_hwservice:hwservice_manager { add };
+dontaudit hal_fingerprint_default default_prop:file { open };
+dontaudit hal_fingerprint_default default_prop:file { read };
+# b/180655836
+dontaudit hal_fingerprint_default system_data_root_file:dir { write };
+dontaudit hal_fingerprint_default system_data_root_file:file { write };
+dontaudit hal_fingerprint_default system_data_root_file:file { create };
+dontaudit hal_fingerprint_default system_data_root_file:dir { create };
+dontaudit hal_fingerprint_default system_data_root_file:dir { write };
+dontaudit hal_fingerprint_default system_data_root_file:file { write };
+dontaudit hal_fingerprint_default system_data_root_file:file { create };
+dontaudit hal_fingerprint_default system_data_root_file:dir { create };
+dontaudit hal_fingerprint_default system_data_root_file:dir { add_name };
+dontaudit hal_fingerprint_default system_data_root_file:dir { add_name };

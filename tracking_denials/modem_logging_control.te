@@ -1,0 +1,13 @@
+# b/176777145
+dontaudit modem_logging_control vendor_sys_default_prop:property_service set ;
+# b/176851633
+dontaudit modem_logging_control vendor_sys_default_prop:file { read };
+dontaudit modem_logging_control vendor_sys_default_prop:file { read };
+dontaudit modem_logging_control vendor_sys_default_prop:file { open };
+dontaudit modem_logging_control vendor_sys_default_prop:file { getattr };
+dontaudit modem_logging_control vendor_sys_default_prop:file { map };
+dontaudit modem_logging_control vendor_sys_default_prop:file { open };
+dontaudit modem_logging_control vendor_sys_default_prop:file { getattr };
+dontaudit modem_logging_control vendor_sys_default_prop:file { map };
+# b/176868315
+dontaudit modem_logging_control vendor_sys_default_prop:property_service set ;

@@ -1,0 +1,16 @@
+# b/178980065
+dontaudit rild unlabeled:dir { search };
+dontaudit rild unlabeled:lnk_file { read };
+dontaudit rild unlabeled:dir { search };
+dontaudit rild unlabeled:lnk_file { read };
+# b/179198085
+dontaudit rild unlabeled:file { ioctl };
+dontaudit rild unlabeled:file { open };
+dontaudit rild unlabeled:file { read };
+dontaudit rild unlabeled:file { getattr };
+dontaudit rild unlabeled:file { lock };
+dontaudit rild unlabeled:file { ioctl };
+dontaudit rild unlabeled:file { open };
+dontaudit rild unlabeled:file { read };
+dontaudit rild unlabeled:file { getattr };
+dontaudit rild unlabeled:file { lock };

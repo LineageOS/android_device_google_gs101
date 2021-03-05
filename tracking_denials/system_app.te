@@ -1,0 +1,4 @@
+# b/178433618
+dontaudit system_app property_type:file *;
+# b/179435036
+dontaudit system_app default_android_service:service_manager { add };
