@@ -1,0 +1,3 @@
+# Allow system server to send sensor data callbacks to GPS and camera HALs
+binder_call(system_server, gpsd);
+binder_call(system_server, hal_camera_default);

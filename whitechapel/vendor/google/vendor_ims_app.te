@@ -1,0 +1,2 @@
+type vendor_ims_app, domain;
+app_domain(vendor_ims_app)

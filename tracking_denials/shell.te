@@ -1,0 +1,7 @@
+# b/171760597
+dontaudit shell property_type:file *;
+# b/178979984
+dontaudit shell device:chr_file { ioctl };
+dontaudit shell device:chr_file { read write };
+dontaudit shell device:chr_file { read write };
+dontaudit shell device:chr_file { ioctl };

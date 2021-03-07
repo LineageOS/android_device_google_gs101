@@ -1,0 +1,21 @@
+# b/174961423
+dontaudit vendor_telephony_app vendor_persist_sys_default_prop:file open ;
+dontaudit vendor_telephony_app vendor_persist_sys_default_prop:file read ;
+dontaudit vendor_telephony_app system_app_data_file:dir search ;
+dontaudit vendor_telephony_app system_app_data_file:dir getattr ;
+dontaudit vendor_telephony_app system_data_file:dir search ;
+# b/176868380
+dontaudit vendor_telephony_app user_profile_root_file:dir search ;
+dontaudit vendor_telephony_app user_profile_root_file:dir search ;
+dontaudit vendor_telephony_app vendor_persist_sys_default_prop:file getattr ;
+dontaudit vendor_telephony_app vendor_persist_sys_default_prop:file map ;
+dontaudit vendor_telephony_app vendor_slog_file:dir search ;
+# b/177176900
+dontaudit vendor_telephony_app vendor_rild_prop:file getattr ;
+dontaudit vendor_telephony_app vendor_rild_prop:file open ;
+dontaudit vendor_telephony_app vendor_rild_prop:file read ;
+dontaudit vendor_telephony_app vendor_rild_prop:file map ;
+# b/179437464
+dontaudit vendor_telephony_app activity_service:service_manager { find };
+dontaudit vendor_telephony_app thermal_service:service_manager { find };
+dontaudit vendor_telephony_app tethering_service:service_manager { find };

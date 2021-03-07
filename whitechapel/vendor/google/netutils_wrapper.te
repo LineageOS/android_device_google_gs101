@@ -1,0 +1,4 @@
+allow netutils_wrapper pktrouter:fd use;
+allow netutils_wrapper pktrouter:fifo_file write;
+allow netutils_wrapper pktrouter:packet_socket { read write };
+allow netutils_wrapper pktrouter:rawip_socket { read write };

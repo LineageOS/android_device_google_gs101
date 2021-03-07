@@ -1,0 +1,15 @@
+# b/177966434
+dontaudit hal_health_default sysfs_wlc:dir { search };
+# b/181177925
+dontaudit hal_health_default thermal_link_device:dir { search };
+dontaudit hal_health_default sysfs_thermal:file { open };
+dontaudit hal_health_default sysfs_thermal:file { write };
+dontaudit hal_health_default sysfs_thermal:lnk_file { read };
+dontaudit hal_health_default sysfs_thermal:dir { search };
+dontaudit hal_health_default sysfs_thermal:file { write };
+dontaudit hal_health_default sysfs_thermal:file { open };
+dontaudit hal_health_default sysfs_batteryinfo:file { write };
+dontaudit hal_health_default sysfs_thermal:dir { search };
+dontaudit hal_health_default thermal_link_device:dir { search };
+dontaudit hal_health_default sysfs_batteryinfo:file { write };
+dontaudit hal_health_default sysfs_thermal:lnk_file { read };

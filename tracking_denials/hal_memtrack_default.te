@@ -1,0 +1,3 @@
+# b/181913683
+dontaudit hal_memtrack_default vendor_ion_debugfs:dir { search };
+dontaudit hal_memtrack_default vendor_ion_debugfs:dir { search };

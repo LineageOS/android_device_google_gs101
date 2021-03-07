@@ -1,0 +1,4 @@
+type vendor_telephony_app, domain;
+app_domain(vendor_telephony_app)
+
+set_prop(vendor_telephony_app, vendor_modem_prop)
