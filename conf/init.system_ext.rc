@@ -1,0 +1,4 @@
+on post-fs-data
+    # EdgeTPU data directory
+    mkdir /data/edgetpu 0770 system system encryption=Require
+    mkdir /data/edgetpu/cache 0770 system system

@@ -1,0 +1,19 @@
+package {
+    // See: http://go/android-license-faq
+    // A large-scale-change added 'default_applicable_licenses' to import
+    // all of the 'license_kinds' from "//device/google/gs101:device_google_gs101_license"
+    // to get the below license kinds:
+    //   SPDX-license-identifier-Apache-2.0
+    default_applicable_licenses: [
+        "//device/google/gs101:device_google_gs101_license",
+    ],
+}
+
+soong_config_module_type {
+  name: "pixel_usbgadget_cc_defaults",
+  module_type: "cc_defaults",
+  config_namespace: "usb",
+  bool_variables: ["older_gadget"],
+  properties: ["cflags"],
+}
+
