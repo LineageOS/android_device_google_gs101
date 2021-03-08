@@ -21,3 +21,6 @@ BOARD_SEPOLICY_DIRS += hardware/google/pixel-sepolicy/powerstats
 # Display
 BOARD_SEPOLICY_DIRS += device/google/gs101-sepolicy/display/common
 BOARD_SEPOLICY_DIRS += device/google/gs101-sepolicy/display/gs101
+
+# Micro sensor framework (usf)
+BOARD_SEPOLICY_DIRS += device/google/gs101-sepolicy/usf
