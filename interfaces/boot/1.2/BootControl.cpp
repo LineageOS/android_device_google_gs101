@@ -17,16 +17,15 @@
 #define LOG_TAG "bootcontrolhal"
 
 #include "BootControl.h"
-#include "GptUtils.h"
 
 #include <android-base/file.h>
 #include <android-base/unique_fd.h>
 #include <bootloader_message/bootloader_message.h>
 #include <cutils/properties.h>
-//#include <hardware/boot_control.h>
 #include <libboot_control/libboot_control.h>
 #include <log/log.h>
 
+#include "GptUtils.h"
 
 namespace android {
 namespace hardware {
@@ -37,11 +36,13 @@ namespace implementation {
 using android::bootable::GetMiscVirtualAbMergeStatus;
 using android::bootable::InitMiscVirtualAbMessageIfNeeded;
 using android::bootable::SetMiscVirtualAbMergeStatus;
-using android::hardware::boot::V1_1::MergeStatus;
-using android::hardware::boot::V1_0::CommandResult;
 using android::hardware::boot::V1_0::BoolResult;
+using android::hardware::boot::V1_0::CommandResult;
+using android::hardware::boot::V1_1::MergeStatus;
 
 namespace {
+
+// clang-format off
 
 #define BOOT_A_PATH     "/dev/block/by-name/boot_a"
 #define BOOT_B_PATH     "/dev/block/by-name/boot_b"
@@ -58,6 +59,8 @@ namespace {
 
 #define AB_ATTR_MAX_PRIORITY        3UL
 #define AB_ATTR_MAX_RETRY_COUNT     3UL
+
+// clang-format on
 
 static std::string getDevPath(uint32_t slot) {
     char real_path[PATH_MAX];
@@ -122,17 +125,17 @@ static int setSlotFlag(uint32_t slot, uint64_t flag) {
     return 0;
 }
 
-}
+}  // namespace
 
 // Methods from ::android::hardware::boot::V1_0::IBootControl follow.
 Return<uint32_t> BootControl::getNumberSlots() {
     uint32_t slots = 0;
 
     if (access(BOOT_A_PATH, F_OK) == 0)
-      slots++;
+        slots++;
 
     if (access(BOOT_B_PATH, F_OK) == 0)
-      slots++;
+        slots++;
 
     return slots;
 }
@@ -189,14 +192,14 @@ Return<void> BootControl::setActiveBootSlot(uint32_t slot, setActiveBootSlot_cb 
         return Void();
     }
 
-    std::string boot_lun_path = std::string("/sys/devices/platform/") +
-                                boot_dev + "/pixel/boot_lun_enabled";
+    std::string boot_lun_path =
+            std::string("/sys/devices/platform/") + boot_dev + "/pixel/boot_lun_enabled";
     int fd = open(boot_lun_path.c_str(), O_RDWR);
     if (fd < 0) {
         // Try old path for kernels < 5.4
         // TODO: remove once kernel 4.19 support is deprecated
-        std::string boot_lun_path = std::string("/sys/devices/platform/") +
-                                    boot_dev + "/attributes/boot_lun_enabled";
+        std::string boot_lun_path =
+                std::string("/sys/devices/platform/") + boot_dev + "/attributes/boot_lun_enabled";
         fd = open(boot_lun_path.c_str(), O_RDWR);
         if (fd < 0) {
             _hidl_cb({false, "failed to open ufs attr boot_lun_enabled"});
@@ -257,7 +260,8 @@ Return<::android::hardware::boot::V1_0::BoolResult> BootControl::isSlotBootable(
     return isSlotFlagSet(slot, AB_ATTR_UNBOOTABLE) ? BoolResult::FALSE : BoolResult::TRUE;
 }
 
-Return<::android::hardware::boot::V1_0::BoolResult> BootControl::isSlotMarkedSuccessful(uint32_t slot) {
+Return<::android::hardware::boot::V1_0::BoolResult> BootControl::isSlotMarkedSuccessful(
+        uint32_t slot) {
     if (getNumberSlots() == 0) {
         // just return true so that we don't we another call trying to mark it as successful
         // when there is no slots
@@ -278,7 +282,8 @@ bool BootControl::Init() {
     return InitMiscVirtualAbMessageIfNeeded();
 }
 
-Return<bool> BootControl::setSnapshotMergeStatus(::android::hardware::boot::V1_1::MergeStatus status) {
+Return<bool> BootControl::setSnapshotMergeStatus(
+        ::android::hardware::boot::V1_1::MergeStatus status) {
     return SetMiscVirtualAbMergeStatus(getCurrentSlot(), status);
 }
 
@@ -300,8 +305,7 @@ Return<uint32_t> BootControl::getActiveBootSlot() {
 
 // Methods from ::android::hidl::base::V1_0::IBase follow.
 
-
-IBootControl* HIDL_FETCH_IBootControl(const char* /* name */) {
+IBootControl *HIDL_FETCH_IBootControl(const char * /* name */) {
     auto module = new BootControl();
 
     module->Init();
