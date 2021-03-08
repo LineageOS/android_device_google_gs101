@@ -75,9 +75,6 @@
     <!-- Type of the ambient tap sensor. Empty if ambient tap is not supported. -->
     <string name="config_dozeTapSensorType" translatable="false">com.google.sensor.single_touch</string>
 
-    <!-- Type of the udfps long press sensor. Empty if long press is not supported. -->
-    <string name="config_dozeUdfpsLongPressSensorType" translatable="false">com.google.sensor.long_press</string>
-
     <!-- If this is true, the screen will come on when you unplug usb/power/whatever. -->
     <bool name="config_unplugTurnsOnScreen">true</bool>
 
