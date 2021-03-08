@@ -148,11 +148,6 @@
     <!-- Is the device capable of hot swapping an UICC Card -->
     <bool name="config_hotswapCapable">true</bool>
 
-    <!-- Ser Gnss Psds Servers -->
-    <string name="config_longterm_psds_server_1">https://agnss.goog/lto2.dat</string>
-    <string name="config_normal_psds_server">https://agnss.goog/rto.dat</string>
-    <string name="config_realtime_psds_server">https://agnss.goog/rtistatus.dat</string>
-
     <!-- The default refresh rate. P21 manages this using the peak refresh rate setting, so set
          this value to 0 so it has no effect. -->
     <integer name="config_defaultRefreshRate">0</integer>
