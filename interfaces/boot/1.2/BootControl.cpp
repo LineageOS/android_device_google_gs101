@@ -25,6 +25,7 @@
 #include <libboot_control/libboot_control.h>
 #include <log/log.h>
 
+#include "DevInfo.h"
 #include "GptUtils.h"
 
 namespace android {
@@ -46,6 +47,7 @@ namespace {
 
 #define BOOT_A_PATH     "/dev/block/by-name/boot_a"
 #define BOOT_B_PATH     "/dev/block/by-name/boot_b"
+#define DEVINFO_PATH    "/dev/block/by-name/devinfo"
 
 // slot flags
 #define AB_ATTR_PRIORITY_SHIFT      52
@@ -100,29 +102,76 @@ static bool isSlotFlagSet(uint32_t slot, uint64_t flag) {
     return !!(e->attr & flag);
 }
 
-static int setSlotFlag(uint32_t slot, uint64_t flag) {
+static bool setSlotFlag(uint32_t slot, uint64_t flag) {
     std::string dev_path = getDevPath(slot);
     if (dev_path.empty()) {
         ALOGI("Could not get device path for slot %d\n", slot);
-        return -1;
+        return false;
     }
 
     GptUtils gpt(dev_path);
     if (gpt.Load()) {
         ALOGI("failed to load gpt data\n");
-        return -1;
+        return false;
     }
 
     gpt_entry *e = gpt.GetPartitionEntry(slot ? "boot_b" : "boot_a");
     if (e == nullptr) {
         ALOGI("failed to get gpt entry\n");
-        return -1;
+        return false;
     }
 
     e->attr |= flag;
     gpt.Sync();
 
-    return 0;
+    return true;
+}
+
+static bool is_devinfo_valid;
+static bool is_devinfo_initialized;
+static std::mutex devinfo_lock;
+static devinfo_t devinfo;
+
+static bool isDevInfoValid() {
+    const std::lock_guard<std::mutex> lock(devinfo_lock);
+
+    if (is_devinfo_initialized) {
+        return is_devinfo_valid;
+    }
+
+    is_devinfo_initialized = true;
+
+    android::base::unique_fd fd(open(DEVINFO_PATH, O_RDONLY));
+    android::base::ReadFully(fd, &devinfo, sizeof devinfo);
+
+    if (devinfo.magic != DEVINFO_MAGIC) {
+        return is_devinfo_valid;
+    }
+
+    uint32_t version = ((uint32_t)devinfo.ver_major << 16) | devinfo.ver_minor;
+    // only version 3.3+ supports A/B data
+    if (version >= 0x0003'0003) {
+        is_devinfo_valid = true;
+    }
+
+    return is_devinfo_valid;
+}
+
+static bool DevInfoSync() {
+    if (!isDevInfoValid()) {
+        return false;
+    }
+
+    android::base::unique_fd fd(open(DEVINFO_PATH, O_WRONLY));
+    return android::base::WriteFully(fd, &devinfo, sizeof devinfo);
+}
+
+static void DevInfoInitSlot(devinfo_ab_slot_data_t &slot_data) {
+    slot_data.retry_count = AB_ATTR_MAX_RETRY_COUNT;
+    slot_data.unbootable = 0;
+    slot_data.successful = 0;
+    slot_data.active = 1;
+    slot_data.fastboot_ok = 0;
 }
 
 }  // namespace
@@ -152,8 +201,17 @@ Return<void> BootControl::markBootSuccessful(markBootSuccessful_cb _hidl_cb) {
         _hidl_cb({true, ""});
         return Void();
     }
-    int ret = setSlotFlag(getCurrentSlot(), AB_ATTR_SUCCESSFUL);
-    ret ? _hidl_cb({false, "Failed to set successful flag"}) : _hidl_cb({true, ""});
+
+    bool ret;
+    if (isDevInfoValid()) {
+        auto const slot = getCurrentSlot();
+        devinfo.ab_data.slots[slot].successful = 1;
+        ret = DevInfoSync();
+    } else {
+        ret = setSlotFlag(getCurrentSlot(), AB_ATTR_SUCCESSFUL);
+    }
+
+    !ret ? _hidl_cb({false, "Failed to set successful flag"}) : _hidl_cb({true, ""});
     return Void();
 }
 
@@ -163,27 +221,45 @@ Return<void> BootControl::setActiveBootSlot(uint32_t slot, setActiveBootSlot_cb 
         return Void();
     }
 
-    std::string dev_path = getDevPath(slot);
-    if (dev_path.empty()) {
-        _hidl_cb({false, "Could not get device path for slot"});
-        return Void();
-    }
+    if (isDevInfoValid()) {
+        auto &active_slot_data = devinfo.ab_data.slots[slot];
+        auto &inactive_slot_data = devinfo.ab_data.slots[!slot];
 
-    GptUtils gpt(dev_path);
-    if (gpt.Load()) {
-        _hidl_cb({false, "failed to load gpt data"});
-        return Void();
-    }
+        inactive_slot_data.active = 0;
+        DevInfoInitSlot(active_slot_data);
 
-    gpt_entry *active_entry = gpt.GetPartitionEntry(slot == 0 ? "boot_a" : "boot_b");
-    gpt_entry *inactive_entry = gpt.GetPartitionEntry(slot == 0 ? "boot_b" : "boot_a");
-    if (active_entry == nullptr || inactive_entry == nullptr) {
-        _hidl_cb({false, "failed to get entries for boot partitions"});
-        return Void();
-    }
+        if (!DevInfoSync()) {
+            _hidl_cb({false, "Could not update DevInfo data"});
+            return Void();
+        }
+    } else {
+        std::string dev_path = getDevPath(slot);
+        if (dev_path.empty()) {
+            _hidl_cb({false, "Could not get device path for slot"});
+            return Void();
+        }
 
-    ALOGV("slot active attributes %lx\n", active_entry->attr);
-    ALOGV("slot inactive attributes %lx\n", inactive_entry->attr);
+        GptUtils gpt(dev_path);
+        if (gpt.Load()) {
+            _hidl_cb({false, "failed to load gpt data"});
+            return Void();
+        }
+
+        gpt_entry *active_entry = gpt.GetPartitionEntry(slot == 0 ? "boot_a" : "boot_b");
+        gpt_entry *inactive_entry = gpt.GetPartitionEntry(slot == 0 ? "boot_b" : "boot_a");
+        if (active_entry == nullptr || inactive_entry == nullptr) {
+            _hidl_cb({false, "failed to get entries for boot partitions"});
+            return Void();
+        }
+
+        ALOGV("slot active attributes %lx\n", active_entry->attr);
+        ALOGV("slot inactive attributes %lx\n", inactive_entry->attr);
+
+        // update attributes for active and inactive
+        inactive_entry->attr &= ~AB_ATTR_ACTIVE;
+        active_entry->attr = AB_ATTR_ACTIVE | (AB_ATTR_MAX_PRIORITY << AB_ATTR_PRIORITY_SHIFT) |
+                             (AB_ATTR_MAX_RETRY_COUNT << AB_ATTR_RETRY_COUNT_SHIFT);
+    }
 
     char boot_dev[PROPERTY_VALUE_MAX];
     property_get("ro.boot.bootdevice", boot_dev, "");
@@ -207,11 +283,6 @@ Return<void> BootControl::setActiveBootSlot(uint32_t slot, setActiveBootSlot_cb 
         }
     }
 
-    // update attributes for active and inactive
-    inactive_entry->attr &= ~AB_ATTR_ACTIVE;
-    active_entry->attr = AB_ATTR_ACTIVE | (AB_ATTR_MAX_PRIORITY << AB_ATTR_PRIORITY_SHIFT) |
-                         (AB_ATTR_MAX_RETRY_COUNT << AB_ATTR_RETRY_COUNT_SHIFT);
-
     //
     // bBootLunEn
     // 0x1  => Boot LU A = enabled, Boot LU B = disable
@@ -234,19 +305,28 @@ Return<void> BootControl::setSlotAsUnbootable(uint32_t slot, setSlotAsUnbootable
         return Void();
     }
 
-    std::string dev_path = getDevPath(slot);
-    if (dev_path.empty()) {
-        _hidl_cb({false, "Could not get device path for slot"});
-        return Void();
+    if (isDevInfoValid()) {
+        auto &slot_data = devinfo.ab_data.slots[slot];
+        slot_data.unbootable = 1;
+        if (!DevInfoSync()) {
+            _hidl_cb({false, "Could not update DevInfo data"});
+            return Void();
+        }
+    } else {
+        std::string dev_path = getDevPath(slot);
+        if (dev_path.empty()) {
+            _hidl_cb({false, "Could not get device path for slot"});
+            return Void();
+        }
+
+        GptUtils gpt(dev_path);
+        gpt.Load();
+
+        gpt_entry *e = gpt.GetPartitionEntry(slot ? "boot_b" : "boot_a");
+        e->attr |= AB_ATTR_UNBOOTABLE;
+
+        gpt.Sync();
     }
-
-    GptUtils gpt(dev_path);
-    gpt.Load();
-
-    gpt_entry *e = gpt.GetPartitionEntry(slot ? "boot_b" : "boot_a");
-    e->attr |= AB_ATTR_UNBOOTABLE;
-
-    gpt.Sync();
 
     _hidl_cb({true, ""});
     return Void();
@@ -257,7 +337,16 @@ Return<::android::hardware::boot::V1_0::BoolResult> BootControl::isSlotBootable(
         return BoolResult::FALSE;
     if (slot >= getNumberSlots())
         return BoolResult::INVALID_SLOT;
-    return isSlotFlagSet(slot, AB_ATTR_UNBOOTABLE) ? BoolResult::FALSE : BoolResult::TRUE;
+
+    bool unbootable;
+    if (isDevInfoValid()) {
+        auto &slot_data = devinfo.ab_data.slots[slot];
+        unbootable = !!slot_data.unbootable;
+    } else {
+        unbootable = isSlotFlagSet(slot, AB_ATTR_UNBOOTABLE);
+    }
+
+    return unbootable ? BoolResult::FALSE : BoolResult::TRUE;
 }
 
 Return<::android::hardware::boot::V1_0::BoolResult> BootControl::isSlotMarkedSuccessful(
@@ -269,7 +358,16 @@ Return<::android::hardware::boot::V1_0::BoolResult> BootControl::isSlotMarkedSuc
     }
     if (slot >= getNumberSlots())
         return BoolResult::INVALID_SLOT;
-    return isSlotFlagSet(slot, AB_ATTR_SUCCESSFUL) ? BoolResult::TRUE : BoolResult::FALSE;
+
+    bool successful;
+    if (isDevInfoValid()) {
+        auto &slot_data = devinfo.ab_data.slots[slot];
+        successful = !!slot_data.successful;
+    } else {
+        successful = isSlotFlagSet(slot, AB_ATTR_SUCCESSFUL);
+    }
+
+    return successful ? BoolResult::TRUE : BoolResult::FALSE;
 }
 
 Return<void> BootControl::getSuffix(uint32_t slot, getSuffix_cb _hidl_cb) {
@@ -300,6 +398,8 @@ Return<uint32_t> BootControl::getActiveBootSlot() {
     if (getNumberSlots() == 0)
         return 0;
 
+    if (isDevInfoValid())
+        return devinfo.ab_data.slots[1].active ? 1 : 0;
     return isSlotFlagSet(1, AB_ATTR_ACTIVE) ? 1 : 0;
 }
 
