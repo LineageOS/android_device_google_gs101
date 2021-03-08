@@ -61,17 +61,6 @@ LOCAL_USES_SDMMC_BOOT := false
 LOCAL_USES_UFS_BOOT := true
 LOCAL_USES_EMMC_BOOT := false
 
-# Metadata Encryption
-# Because the kernel interface to dm-default-key changed in Android R,
-# you also need to ensure that you have set the correct value for
-# PRODUCT_SHIPPING_API_LEVEL in device.mk. For example, if your device
-# launches with Android R (API level 30), device.mk should contain:
-#     PRODUCT_SHIPPING_API_LEVEL := 30
-# You can also set the following system property to force the use of
-# the new dm-default-key API regardless of shipping API level:
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.crypto.dm_default_key.options_format.version=2
-
 # OEM Unlock reporting
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	ro.oem_unlock_supported=1
@@ -280,9 +269,6 @@ PRODUCT_PACKAGES += \
 	linker.vendor_ramdisk \
 	tune2fs.vendor_ramdisk \
 	resize2fs.vendor_ramdisk
-
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.crypto.volume.filenames_mode=aes-256-cts
 
 # Userdata Checkpointing OTA GC
 PRODUCT_PACKAGES += \
