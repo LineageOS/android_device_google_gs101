@@ -31,6 +31,7 @@ const struct SysfsCollector::SysfsPaths sysfs_paths = {
     .UFSLifetimeA = UFSHC_PATH(health_descriptor/life_time_estimation_a),
     .UFSLifetimeB = UFSHC_PATH(health_descriptor/life_time_estimation_b),
     .UFSLifetimeC = UFSHC_PATH(health_descriptor/life_time_estimation_c),
+    .UFSHostResetPath = UFSHC_PATH(err_stats/dev_reset_count),
     .F2fsStatsPath = "/sys/fs/f2fs/",
 };
 
