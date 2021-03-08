@@ -57,10 +57,6 @@ else
 LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
 
-LOCAL_USES_SDMMC_BOOT := false
-LOCAL_USES_UFS_BOOT := true
-LOCAL_USES_EMMC_BOOT := false
-
 # OEM Unlock reporting
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	ro.oem_unlock_supported=1
@@ -210,23 +206,13 @@ endif
 # Recovery files
 PRODUCT_COPY_FILES += \
 	device/google/gs101/conf/init.recovery.device.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.gs101.rc
-ifeq ($(LOCAL_USES_SDMMC_BOOT),true)
-PRODUCT_COPY_FILES += \
-	device/google/gs101/conf/fstab.gs101.sdboot:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.gs101 \
-	device/google/gs101/conf/fstab.gs101.sdboot:$(TARGET_COPY_OUT_RECOVERY)/root/first_stage_ramdisk/fstab.gs101
-else
-ifeq ($(LOCAL_USES_UFS_BOOT),true)
+
+# Fstab files
 PRODUCT_COPY_FILES += \
 	device/google/gs101/conf/fstab.gs101:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.gs101 \
 	device/google/gs101/conf/fstab.gs101:$(TARGET_COPY_OUT_RECOVERY)/root/first_stage_ramdisk/fstab.gs101 \
 	device/google/gs101/conf/fstab.persist:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.persist \
 	device/google/gs101/conf/fstab.gs101:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.gs101
-else
-PRODUCT_COPY_FILES += \
-	device/google/gs101/conf/fstab.gs101.emmc:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.gs101 \
-	device/google/gs101/conf/fstab.gs101.emmc:$(TARGET_COPY_OUT_RECOVERY)/root/first_stage_ramdisk/fstab.gs101
-endif
-endif
 
 # Shell scripts
 PRODUCT_COPY_FILES += \
