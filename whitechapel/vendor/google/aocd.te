@@ -1,0 +1,14 @@
+type aocd, domain;
+type aocd_exec, vendor_file_type, exec_type, file_type;
+init_daemon_domain(aocd)
+
+# access persist files
+allow aocd mnt_vendor_file:dir search;
+allow aocd persist_file:dir search;
+
+# sysfs operations
+allow aocd sysfs_aoc:dir search;
+allow aocd sysfs_aoc_firmware:file w_file_perms;
+
+# dev operations
+allow aocd aoc_device:chr_file r_file_perms;

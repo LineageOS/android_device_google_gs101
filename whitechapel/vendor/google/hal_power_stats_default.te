@@ -1,0 +1,9 @@
+allow hal_power_stats_default sysfs_scsi_devices_0000:dir r_dir_perms;
+allow hal_power_stats_default sysfs_scsi_devices_0000:file r_file_perms;
+
+# getStats AIDL callback to each power entry
+binder_call(hal_power_stats_default, hal_bluetooth_btlinux)
+
+allow hal_power_stats_default odpm_config_file:dir search;
+allow hal_power_stats_default odpm_config_file:file r_file_perms;
+allow hal_power_stats_default sysfs_odpm:file rw_file_perms;

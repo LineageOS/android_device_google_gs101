@@ -1,0 +1,2 @@
+# b/171267323
+dontaudit aocd device:dir r_dir_perms;

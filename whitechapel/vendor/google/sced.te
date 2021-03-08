@@ -1,0 +1,10 @@
+type sced, domain;
+type sced_exec, vendor_file_type, exec_type, file_type;
+init_daemon_domain(sced)
+
+userdebug_or_eng(`
+hwbinder_use(sced)
+binder_call(sced, dmd)
+
+get_prop(sced, hwservicemanager_prop)
+')

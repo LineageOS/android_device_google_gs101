@@ -1,0 +1,30 @@
+# Samsung S.LSI telephony
+user=system seinfo=platform name=com.samsung.slsi.telephony.silentlogging domain=vendor_telephony_app
+user=system seinfo=platform name=com.samsung.slsi.telephony.silentlogging:remote domain=vendor_telephony_app
+user=system seinfo=platform name=com.samsung.slsi.telephony.testmode domain=vendor_telephony_app
+user=system seinfo=platform name=com.samsung.slsi.telephony.uartswitch domain=vendor_telephony_app
+user=system seinfo=platform name=com.samsung.slsi.sysdebugmode domain=vendor_telephony_app
+user=system seinfo=platform name=com.samsung.slsi.telephony.networktestmode domain=vendor_telephony_app
+
+# Samsung S.LSI IMS
+user=system seinfo=platform name=com.shannon.imsservice domain=vendor_ims_app
+user=system seinfo=platform name=com.shannon.imsservice:remote domain=vendor_ims_app
+user=system seinfo=platform name=com.shannon.dataservice domain=vendor_ims_app
+user=system seinfo=platform name=com.shannon.networkservice domain=vendor_ims_app
+user=system seinfo=platform name=com.shannon.qualifiednetworksservice domain=vendor_ims_app
+
+# coredump/ramdump
+user=system seinfo=platform name=com.google.SSRestartDetector domain=ssr_detector_app type=system_app_data_file levelFrom=user
+user=_app seinfo=platform name=com.android.ramdump domain=ramdump_app type=app_data_file levelFrom=all
+
+# grilservice
+user=_app isPrivApp=true seinfo=platform name=com.google.android.grilservice domain=grilservice_app levelFrom=all
+
+# PixelLogger
+user=_app seinfo=platform name=com.android.pixellogger domain=logger_app type=app_data_file levelFrom=all
+
+# HbmSVManager
+user=_app seinfo=platform name=com.android.hbmsvmanager domain=hbmsvmanager_app type=app_data_file levelFrom=all
+
+# Hardware Info Collection
+user=_app isPrivApp=true name=com.google.android.hardwareinfo domain=hardware_info_app type=app_data_file levelFrom=user

@@ -1,0 +1,1 @@
+allow {domain -appdomain -rs} sysfs_vendor_sched:file w_file_perms;

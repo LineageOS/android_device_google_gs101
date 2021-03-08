@@ -1,0 +1,15 @@
+# b/178980085
+dontaudit hal_camera_default system_data_file:dir { search };
+dontaudit hal_camera_default system_data_file:dir { search };
+# b/180567725
+dontaudit hal_camera_default traced:unix_stream_socket { connectto };
+dontaudit hal_camera_default traced:unix_stream_socket { connectto };
+dontaudit hal_camera_default traced_producer_socket:sock_file { write };
+dontaudit hal_camera_default traced_producer_socket:sock_file { write };
+# b/181913550
+dontaudit hal_camera_default dmabuf_system_heap_device:chr_file { read };
+dontaudit hal_camera_default dmabuf_system_heap_device:chr_file { read };
+dontaudit hal_camera_default dmabuf_system_heap_device:chr_file { open };
+dontaudit hal_camera_default dmabuf_system_heap_device:chr_file { ioctl };
+dontaudit hal_camera_default dmabuf_system_heap_device:chr_file { open };
+dontaudit hal_camera_default dmabuf_system_heap_device:chr_file { ioctl };

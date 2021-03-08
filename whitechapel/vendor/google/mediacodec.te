@@ -1,0 +1,6 @@
+userdebug_or_eng(`
+  set_prop(mediacodec, vendor_codec2_debug_prop)
+')
+
+add_service(mediacodec, eco_service)
+allow mediacodec hal_camera_default:binder call;

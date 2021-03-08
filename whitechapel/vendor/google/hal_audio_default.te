@@ -1,0 +1,22 @@
+vndbinder_use(hal_audio_default)
+hwbinder_use(hal_audio_default)
+
+allow hal_audio_default audio_vendor_data_file:dir rw_dir_perms;
+allow hal_audio_default audio_vendor_data_file:file create_file_perms;
+
+r_dir_file(hal_audio_default, aoc_audio_file);
+r_dir_file(hal_audio_default, mnt_vendor_file);
+r_dir_file(hal_audio_default, persist_audio_file);
+
+allow hal_audio_default persist_file:dir search;
+allow hal_audio_default aoc_device:file rw_file_perms;
+allow hal_audio_default aoc_device:chr_file rw_file_perms;
+
+allow hal_audio_default hal_audio_ext_hwservice:hwservice_manager { find add };
+
+get_prop(hal_audio_default, vendor_audio_prop);
+
+userdebug_or_eng(`
+    allow hal_audio_default self:unix_stream_socket create_stream_socket_perms;
+    allow hal_audio_default audio_vendor_data_file:sock_file { create unlink };
+')

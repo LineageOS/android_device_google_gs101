@@ -1,0 +1,6 @@
+type edgetpu_logging, domain;
+type edgetpu_logging_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(edgetpu_logging)
+
+# The logging service accesses /dev/abrolhos
+allow edgetpu_logging edgetpu_device:chr_file rw_file_perms;

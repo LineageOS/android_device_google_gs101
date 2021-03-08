@@ -1,0 +1,5 @@
+allow kernel vendor_fw_file:dir search;
+allow kernel vendor_fw_file:file r_file_perms;
+
+# ZRam
+allow kernel per_boot_file:file r_file_perms;
