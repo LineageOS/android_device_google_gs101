@@ -3,6 +3,7 @@ set_prop(vendor_init, vendor_modem_prop)
 set_prop(vendor_init, vendor_cbd_prop)
 get_prop(vendor_init, vendor_rild_prop)
 get_prop(vendor_init, vendor_persist_sys_modem_prop)
+set_prop(vendor_init, vendor_usb_config_prop)
 
 allow vendor_init proc_dirty:file w_file_perms;
 allow vendor_init proc_sched:file write;
