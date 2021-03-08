@@ -1,0 +1,68 @@
+# b/171760721
+dontaudit hal_power_stats_default sysfs:file { read };
+dontaudit hal_power_stats_default sysfs:file { getattr };
+dontaudit hal_power_stats_default citadeld:binder { call };
+dontaudit hal_power_stats_default sysfs:file { read };
+dontaudit hal_power_stats_default sysfs:file { getattr };
+dontaudit hal_power_stats_default sysfs:file { open };
+dontaudit hal_power_stats_default sysfs:file { getattr };
+dontaudit hal_power_stats_default sysfs:dir { read };
+dontaudit hal_power_stats_default sysfs:dir { open };
+dontaudit hal_power_stats_default sysfs:file { read };
+dontaudit hal_power_stats_default sysfs:file { open };
+dontaudit hal_power_stats_default sysfs:file { open };
+# b/176777337
+dontaudit hal_power_stats_default sysfs_leds:dir search ;
+dontaudit hal_power_stats_default sysfs_leds:file open ;
+dontaudit hal_power_stats_default sysfs_leds:dir search ;
+dontaudit hal_power_stats_default sysfs_leds:file read ;
+dontaudit hal_power_stats_default sysfs_leds:file open ;
+# b/176868314
+dontaudit hal_power_stats_default sysfs_leds:file read ;
+dontaudit hal_power_stats_default sysfs_leds:file open ;
+dontaudit hal_power_stats_default sysfs_leds:dir search ;
+# b/179093124
+dontaudit hal_power_stats_default sysfs_backlight:file { open };
+dontaudit hal_power_stats_default sysfs_backlight:file { read };
+dontaudit hal_power_stats_default sysfs_backlight:file { open };
+dontaudit hal_power_stats_default sysfs_backlight:dir { search };
+dontaudit hal_power_stats_default sysfs_backlight:dir { search };
+dontaudit hal_power_stats_default sysfs_backlight:file { read };
+# b/180963514
+dontaudit hal_power_stats_default sysfs_aoc:file { read };
+dontaudit hal_power_stats_default sysfs_aoc:file { read };
+dontaudit hal_power_stats_default sysfs_aoc:file { open };
+dontaudit hal_power_stats_default sysfs_aoc:file { getattr };
+dontaudit hal_power_stats_default sysfs_aoc:file { open };
+dontaudit hal_power_stats_default sysfs_aoc:file { getattr };
+dontaudit hal_power_stats_default sysfs_aoc:dir { search };
+dontaudit hal_power_stats_default sysfs_aoc:file { read };
+dontaudit hal_power_stats_default sysfs_aoc:file { open };
+dontaudit hal_power_stats_default sysfs_aoc:file { open };
+dontaudit hal_power_stats_default sysfs_aoc:file { getattr };
+dontaudit hal_power_stats_default sysfs_aoc:dir { search };
+dontaudit hal_power_stats_default sysfs_aoc:dir { search };
+dontaudit hal_power_stats_default sysfs_aoc:file { read };
+dontaudit hal_power_stats_default sysfs_aoc:file { open };
+dontaudit hal_power_stats_default sysfs_aoc:file { getattr };
+dontaudit hal_power_stats_default sysfs_aoc:file { read };
+# b/181915165
+dontaudit hal_power_stats_default sysfs_acpm_stats:file { read };
+dontaudit hal_power_stats_default sysfs_acpm_stats:dir { search };
+dontaudit hal_power_stats_default sysfs_wifi:file { getattr };
+dontaudit hal_power_stats_default sysfs_acpm_stats:file { read };
+dontaudit hal_power_stats_default sysfs_acpm_stats:dir { search };
+dontaudit hal_power_stats_default sysfs_wifi:file { open };
+dontaudit hal_power_stats_default sysfs_acpm_stats:file { open };
+dontaudit hal_power_stats_default sysfs_acpm_stats:file { getattr };
+dontaudit hal_power_stats_default sysfs_wifi:file { getattr };
+dontaudit hal_power_stats_default sysfs_wifi:file { open };
+dontaudit hal_power_stats_default sysfs_acpm_stats:file { read };
+dontaudit hal_power_stats_default sysfs_wifi:file { read };
+dontaudit hal_power_stats_default sysfs_wifi:dir { search };
+dontaudit hal_power_stats_default sysfs_acpm_stats:file { getattr };
+dontaudit hal_power_stats_default sysfs_acpm_stats:file { open };
+dontaudit hal_power_stats_default sysfs_acpm_stats:file { read };
+dontaudit hal_power_stats_default sysfs_acpm_stats:dir { search };
+dontaudit hal_power_stats_default sysfs_wifi:dir { search };
+dontaudit hal_power_stats_default sysfs_wifi:file { read };

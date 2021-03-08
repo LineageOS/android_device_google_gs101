@@ -1,0 +1,4 @@
+type sg_device, dev_type;
+
+allow tee sg_device:chr_file rw_file_perms;
+allow tee self:capability { setgid setuid };

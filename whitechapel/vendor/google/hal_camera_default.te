@@ -1,0 +1,36 @@
+allow hal_camera_default self:global_capability_class_set sys_nice;
+
+vndbinder_use(hal_camera_default);
+
+allow hal_camera_default vendor_camera_tuning_file:dir r_dir_perms;
+allow hal_camera_default vendor_camera_tuning_file:file r_file_perms;
+allow hal_camera_default vendor_camera_data_file:dir rw_dir_perms;
+allow hal_camera_default vendor_camera_data_file:file create_file_perms;
+allow hal_camera_default lwis_device:chr_file rw_file_perms;
+allow hal_camera_default gpu_device:chr_file rw_file_perms;
+allow hal_camera_default edgetpu_device:chr_file rw_file_perms;
+allow hal_camera_default sysfs_edgetpu:dir r_dir_perms;
+allow hal_camera_default sysfs_edgetpu:file r_file_perms;
+allow hal_camera_default sysfs_chip_id:file r_file_perms;
+
+allow hal_camera_default mnt_vendor_file:dir search;
+allow hal_camera_default persist_file:dir search;
+allow hal_camera_default persist_camera_file:dir search;
+allow hal_camera_default persist_camera_file:file r_file_perms;
+
+get_prop(hal_camera_default, vendor_camera_prop);
+get_prop(hal_camera_default, vendor_camera_debug_prop);
+
+hal_client_domain(hal_camera_default, hal_graphics_allocator);
+hal_client_domain(hal_camera_default, hal_power);
+hal_client_domain(hal_camera_default, hal_thermal);
+
+# Allow access to sensor service for sensor_listener
+binder_call(hal_camera_default, system_server);
+
+# Allow Binder calls to ECO service, needed by Entropy-Aware Filtering
+allow hal_camera_default eco_service:service_manager find;
+binder_call(hal_camera_default, mediacodec);
+
+# grant access to hal_graphics_composer
+hal_client_domain(hal_camera_default, hal_graphics_composer)

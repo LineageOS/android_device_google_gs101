@@ -1,0 +1,19 @@
+type logger_app, domain;
+
+userdebug_or_eng(`
+  app_domain(logger_app)
+  net_domain(logger_app)
+
+  allow logger_app app_api_service:service_manager find;
+  allow logger_app surfaceflinger_service:service_manager find;
+
+  allow logger_app radio_vendor_data_file:file create_file_perms;
+  allow logger_app radio_vendor_data_file:dir create_dir_perms;
+  allow logger_app vendor_slog_file:file {r_file_perms unlink};
+  allow logger_app vendor_gps_file:file create_file_perms;
+  allow logger_app vendor_gps_file:dir create_dir_perms;
+
+  set_prop(logger_app, vendor_modem_prop)
+  set_prop(logger_app, vendor_persist_sys_modem_prop)
+  set_prop(logger_app, vendor_gps_prop)
+')

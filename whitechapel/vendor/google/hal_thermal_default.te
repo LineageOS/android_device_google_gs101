@@ -1,0 +1,1 @@
+allow hal_thermal_default self:netlink_generic_socket create_socket_perms_no_ioctl;

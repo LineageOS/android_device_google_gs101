@@ -1,0 +1,23 @@
+# b/181712799
+dontaudit hal_graphics_composer_default hal_power_default:binder { call };
+dontaudit hal_graphics_composer_default boot_status_prop:file { read };
+dontaudit hal_graphics_composer_default boot_status_prop:file { open };
+dontaudit hal_graphics_composer_default boot_status_prop:file { getattr };
+dontaudit hal_graphics_composer_default boot_status_prop:file { map };
+dontaudit hal_graphics_composer_default hal_power_default:binder { call };
+dontaudit hal_graphics_composer_default boot_status_prop:file { map };
+dontaudit hal_graphics_composer_default vendor_log_file:file { create };
+dontaudit hal_graphics_composer_default vendor_log_file:file { append open };
+dontaudit hal_graphics_composer_default vendor_log_file:file { getattr };
+dontaudit hal_graphics_composer_default vendor_log_file:file { getattr };
+dontaudit hal_graphics_composer_default vendor_log_file:file { append open };
+dontaudit hal_graphics_composer_default vendor_log_file:file { create };
+dontaudit hal_graphics_composer_default hal_power_service:service_manager { find };
+dontaudit hal_graphics_composer_default boot_status_prop:file { read };
+dontaudit hal_graphics_composer_default boot_status_prop:file { open };
+dontaudit hal_graphics_composer_default boot_status_prop:file { getattr };
+# b/181915065
+dontaudit hal_graphics_composer_default hal_dumpstate_default:fd { use };
+dontaudit hal_graphics_composer_default hal_dumpstate_default:fifo_file { write };
+dontaudit hal_graphics_composer_default hal_dumpstate_default:fd { use };
+dontaudit hal_graphics_composer_default hal_dumpstate_default:fifo_file { write };

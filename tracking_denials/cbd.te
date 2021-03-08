@@ -1,0 +1,51 @@
+# b/171267363
+dontaudit cbd cbd:capability {setuid };
+dontaudit cbd proc_cmdline:file {open };
+dontaudit cbd persist_file:dir {search };
+dontaudit cbd init:unix_stream_socket {connectto };
+dontaudit cbd proc_cmdline:file {read };
+dontaudit cbd kernel:system {syslog_read };
+# b/173971138
+dontaudit cbd radio_prop:file { map };
+dontaudit cbd radio_prop:file { open };
+dontaudit cbd radio_prop:file { read };
+dontaudit cbd radio_prop:file { open };
+dontaudit cbd radio_prop:file { map };
+dontaudit cbd radio_prop:file { read };
+dontaudit cbd radio_prop:file { getattr };
+dontaudit cbd radio_prop:file { getattr };
+# b/178331928
+dontaudit cbd mnt_vendor_file:dir { search };
+dontaudit cbd mnt_vendor_file:dir { search };
+# b/178979986
+dontaudit cbd unlabeled:dir { getattr };
+dontaudit cbd unlabeled:file { open };
+dontaudit cbd unlabeled:file { read };
+dontaudit cbd unlabeled:file { getattr };
+dontaudit cbd unlabeled:lnk_file { read };
+dontaudit cbd unlabeled:dir { search };
+dontaudit cbd unlabeled:file { getattr };
+dontaudit cbd unlabeled:dir { getattr };
+dontaudit cbd unlabeled:lnk_file { read };
+dontaudit cbd unlabeled:dir { search };
+dontaudit cbd unlabeled:file { read };
+dontaudit cbd unlabeled:file { open };
+# b/179198083
+dontaudit cbd radio_vendor_data_file:dir { search };
+dontaudit cbd radio_vendor_data_file:dir { write };
+dontaudit cbd radio_vendor_data_file:dir { add_name };
+dontaudit cbd radio_vendor_data_file:file { create };
+dontaudit cbd radio_vendor_data_file:file { write };
+dontaudit cbd radio_vendor_data_file:file { open };
+dontaudit cbd unlabeled:file { ioctl };
+dontaudit cbd radio_vendor_data_file:file { open };
+dontaudit cbd radio_vendor_data_file:file { read };
+dontaudit cbd radio_vendor_data_file:dir { search };
+dontaudit cbd unlabeled:file { ioctl };
+dontaudit cbd radio_vendor_data_file:file { open };
+dontaudit cbd radio_vendor_data_file:file { read };
+dontaudit cbd radio_vendor_data_file:file { write };
+dontaudit cbd radio_vendor_data_file:file { create };
+dontaudit cbd radio_vendor_data_file:dir { add_name };
+dontaudit cbd radio_vendor_data_file:dir { search };
+dontaudit cbd radio_vendor_data_file:dir { write };

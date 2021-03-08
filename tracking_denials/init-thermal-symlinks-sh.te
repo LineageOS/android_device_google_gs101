@@ -1,0 +1,9 @@
+# b/177862403
+dontaudit init-thermal-symlinks-sh sysfs_thermal:lnk_file { read };
+dontaudit init-thermal-symlinks-sh sysfs_thermal:lnk_file { read };
+dontaudit init-thermal-symlinks-sh sysfs_thermal:lnk_file { read };
+dontaudit init-thermal-symlinks-sh sysfs_thermal:lnk_file { read };
+dontaudit init-thermal-symlinks-sh sysfs_thermal:lnk_file { read };
+dontaudit init-thermal-symlinks-sh sysfs_thermal:lnk_file { read };
+dontaudit init-thermal-symlinks-sh sysfs_thermal:lnk_file { read };
+dontaudit init-thermal-symlinks-sh sysfs_thermal:lnk_file { read };

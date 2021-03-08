@@ -1,0 +1,11 @@
+# b/173971240
+dontaudit tee persist_file:file { open };
+dontaudit tee tee_data_file:lnk_file { read };
+dontaudit tee mnt_vendor_file:dir { search };
+dontaudit tee persist_file:dir { search };
+dontaudit tee persist_file:file { open };
+dontaudit tee persist_file:file { read write };
+dontaudit tee persist_file:dir { search };
+dontaudit tee mnt_vendor_file:dir { search };
+dontaudit tee tee_data_file:lnk_file { read };
+dontaudit tee persist_file:file { read write };

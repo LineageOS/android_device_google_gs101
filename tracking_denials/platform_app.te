@@ -1,0 +1,8 @@
+# b/178433506
+dontaudit platform_app property_type:file *;
+# b/179093352
+dontaudit platform_app hal_wlc:binder { transfer };
+dontaudit platform_app hal_wlc:binder { call };
+dontaudit platform_app hal_wlc_hwservice:hwservice_manager { find };
+dontaudit platform_app hal_wlc:binder { call };
+dontaudit platform_app hal_wlc:binder { transfer };
