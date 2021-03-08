@@ -254,6 +254,8 @@
 /mnt/vendor/efs_backup(/.*)?                                  u:object_r:modem_efs_file:s0
 /mnt/vendor/modem_img(/.*)?                                   u:object_r:modem_img_file:s0
 /mnt/vendor/modem_userdata(/.*)?                              u:object_r:modem_userdata_file:s0
+/mnt/vendor/persist/modem(/.*)?                               u:object_r:persist_modem_file:s0
+
 
 # Subsystem coredump
 /vendor/bin/sscoredump                         u:object_r:sscoredump_exec:s0

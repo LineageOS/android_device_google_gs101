@@ -21,6 +21,14 @@ allow cbd sysfs_chosen:dir r_dir_perms;
 
 allow cbd radio_device:chr_file rw_file_perms;
 
+allow cbd proc_cmdline:file r_file_perms;
+
+allow cbd persist_modem_file:dir create_dir_perms;
+allow cbd persist_modem_file:file create_file_perms;
+
+allow cbd radio_vendor_data_file:dir create_dir_perms;
+allow cbd radio_vendor_data_file:file create_file_perms;
+
 # Allow cbd to operate with modem EFS file/dir
 allow cbd modem_efs_file:dir create_dir_perms;
 allow cbd modem_efs_file:file create_file_perms;
@@ -34,10 +42,12 @@ allow cbd modem_img_file:dir r_dir_perms;
 allow cbd modem_img_file:file r_file_perms;
 
 # Allow cbd to collect crash info
-allow cbd sscoredump_vendor_data_crashinfo_file:dir r_dir_perms;
+allow cbd sscoredump_vendor_data_crashinfo_file:dir create_dir_perms;
 allow cbd sscoredump_vendor_data_crashinfo_file:file create_file_perms;
 
 userdebug_or_eng(`
+  allow cbd kernel:system syslog_read;
+
   allow cbd sscoredump_vendor_data_coredump_file:dir create_dir_perms;
   allow cbd sscoredump_vendor_data_coredump_file:file create_file_perms;
 ')
