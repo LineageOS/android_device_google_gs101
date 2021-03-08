@@ -1,0 +1,4 @@
+# b/182086551
+dontaudit nfc dmabuf_heap_device:chr_file { open };
+dontaudit nfc dmabuf_heap_device:chr_file { ioctl };
+dontaudit nfc dmabuf_heap_device:chr_file { read };

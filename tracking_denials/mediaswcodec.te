@@ -1,0 +1,7 @@
+# b/182086550
+dontaudit mediaswcodec dmabuf_heap_device:chr_file { open };
+dontaudit mediaswcodec dmabuf_heap_device:chr_file { read };
+dontaudit mediaswcodec dmabuf_heap_device:chr_file { read };
+dontaudit mediaswcodec dmabuf_heap_device:chr_file { ioctl };
+dontaudit mediaswcodec dmabuf_heap_device:chr_file { open };
+dontaudit mediaswcodec dmabuf_heap_device:chr_file { ioctl };

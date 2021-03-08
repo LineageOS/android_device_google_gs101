@@ -4,3 +4,10 @@ dontaudit mediacodec sysfs:file { open };
 dontaudit mediacodec sysfs:file { read };
 # b/176777184
 dontaudit mediacodec default_android_vndservice:service_manager add ;
+# b/182086552
+dontaudit mediacodec dmabuf_heap_device:chr_file { open };
+dontaudit mediacodec dmabuf_heap_device:chr_file { read };
+dontaudit mediacodec dmabuf_heap_device:chr_file { ioctl };
+dontaudit mediacodec dmabuf_heap_device:chr_file { read };
+dontaudit mediacodec dmabuf_heap_device:chr_file { open };
+dontaudit mediacodec dmabuf_heap_device:chr_file { ioctl };
