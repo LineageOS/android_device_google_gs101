@@ -361,6 +361,9 @@ void DumpstateDevice::dumpPowerSection(int fd) {
     DumpFileToFd(fd, "RTX", "/dev/logbuffer_rtx");
 
     RunCommandToFd(fd, "gvotables", {"/vendor/bin/sh", "-c", "cat /sys/kernel/debug/gvotables/*/status"});
+    DumpFileToFd(fd, "BCL", "/sys/devices/virtual/pmic/mitigation/triggered_stats");
+    DumpFileToFd(fd, "IF PMIC", "/sys/devices/virtual/pmic/max77759-mitigation/triggered_stats");
+
 }
 
 // Dump items related to thermal
