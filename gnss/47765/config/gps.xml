@@ -54,6 +54,7 @@
        IgnoreInjectedSystemTime="true"
 
        AttributionAppPkgName="com.google.android.carrierlocation"
+       CpResetInvalidateSec="15"
 
   />
 
@@ -76,10 +77,13 @@
        RfPathLossDb_Cp="3.5"
        RfPathLossDb_Ap_L5="3.5"
        RfPathLossDb_Cp_L5="3.5"
+
+       EnableNavic="true"
   />
 
   <gll_features
        EnableLowPowerPmm="true"
+       EnableNicAutoSwitch="true"
   />
 
 </glgps>
