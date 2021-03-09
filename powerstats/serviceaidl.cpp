@@ -24,6 +24,7 @@
 #include <dataproviders/IioEnergyMeterDataProvider.h>
 #include <dataproviders/PowerStatsEnergyConsumer.h>
 #include <dataproviders/PowerStatsEnergyAttribution.h>
+#include <dataproviders/PixelStateResidencyDataProvider.h>
 
 #include <android-base/logging.h>
 #include <android-base/properties.h>
@@ -37,6 +38,7 @@ using aidl::android::hardware::power::stats::DvfsStateResidencyDataProvider;
 using aidl::android::hardware::power::stats::EnergyConsumerType;
 using aidl::android::hardware::power::stats::GenericStateResidencyDataProvider;
 using aidl::android::hardware::power::stats::IioEnergyMeterDataProvider;
+using aidl::android::hardware::power::stats::PixelStateResidencyDataProvider;
 using aidl::android::hardware::power::stats::PowerStats;
 using aidl::android::hardware::power::stats::PowerStatsEnergyConsumer;
 
@@ -54,7 +56,8 @@ void addAoC(std::shared_ptr<PowerStats> p) {
     };
     std::vector<std::pair<std::string, std::string>> coreStates = {
             {"DWN", "off"}, {"RET", "retention"}, {"WFI", "wfi"}};
-    p->addStateResidencyDataProvider(new AocStateResidencyDataProvider(coreIds, coreStates));
+    p->addStateResidencyDataProvider(std::make_shared<AocStateResidencyDataProvider>(coreIds,
+            coreStates));
 
     // Add AoC voltage stats
     std::vector<std::pair<std::string, std::string>> voltageIds = {
@@ -65,7 +68,7 @@ void addAoC(std::shared_ptr<PowerStats> p) {
                                                                       {"UUD", "ultra_underdrive"},
                                                                       {"UD", "underdrive"}};
     p->addStateResidencyDataProvider(
-            new AocStateResidencyDataProvider(voltageIds, voltageStates));
+            std::make_shared<AocStateResidencyDataProvider>(voltageIds, voltageStates));
 
     // Add AoC monitor mode
     std::vector<std::pair<std::string, std::string>> monitorIds = {
@@ -75,7 +78,7 @@ void addAoC(std::shared_ptr<PowerStats> p) {
             {"MON", "mode"},
     };
     p->addStateResidencyDataProvider(
-            new AocStateResidencyDataProvider(monitorIds, monitorStates));
+            std::make_shared<AocStateResidencyDataProvider>(monitorIds, monitorStates));
 }
 
 void addDvfsStats(std::shared_ptr<PowerStats> p) {
@@ -167,7 +170,7 @@ void addDvfsStats(std::shared_ptr<PowerStats> p) {
         std::make_pair("1066MHz", "1066000000"),
     }});
 
-    p->addStateResidencyDataProvider(new DvfsStateResidencyDataProvider(
+    p->addStateResidencyDataProvider(std::make_shared<DvfsStateResidencyDataProvider>(
             "/sys/devices/platform/1742048c.acpm_stats/fvp_stats", NS_TO_MS, cfgs));
 }
 
@@ -235,7 +238,7 @@ void addSoC(std::shared_ptr<PowerStats> p) {
     cfgs.emplace_back(generateGenericStateResidencyConfigs(reqStateConfig, slcReqStateHeaders),
             "SLC-REQ", "SLC_REQ:");
 
-    android::sp<GenericStateResidencyDataProvider> socSdp = new GenericStateResidencyDataProvider(
+    auto socSdp = std::make_shared<GenericStateResidencyDataProvider>(
             "/sys/devices/platform/1742048c.acpm_stats/soc_stats", cfgs);
 
     p->addStateResidencyDataProvider(socSdp);
@@ -248,25 +251,32 @@ void setEnergyMeter(std::shared_ptr<PowerStats> p) {
 
 void addDisplay(std::shared_ptr<PowerStats> p) {
     // Add display residency stats
-    android::sp<DisplayStateResidencyDataProvider> displaySdp =
-        new DisplayStateResidencyDataProvider("Display",
+
+    /*
+     * TODO(b/167216667): Add complete set of display states here. Must account
+     * for ALL devices built using this source
+     */
+    std::vector<std::string> states = {
+        "Off",
+        "LP: 1440x3040@30",
+        "On: 1440x3040@60",
+        "On: 1440x3040@90",
+        "HBM: 1440x3040@60",
+        "HBM: 1440x3040@90"};
+
+    auto displaySdp =
+        std::make_shared<DisplayStateResidencyDataProvider>("Display",
             "/sys/class/backlight/panel0-backlight/state",
-            /*
-             * TODO(b/167216667): Add complete set of display states here. Must account
-             * for ALL devices built using this source
-             */
-            {"Off", "LP: 1440x3040@30", "On: 1440x3040@60", "On: 1440x3040@90", "HBM: 1440x3040@60",
-            "HBM: 1440x3040@90"});
+            states);
     p->addStateResidencyDataProvider(displaySdp);
 
     // Add display energy consumer
-    android::sp<PowerStatsEnergyConsumer> displayConsumer;
     /*
      * TODO(b/167216667): Add correct display power model here. Must read from display rail
      * and include proper coefficients for display states. Must account for ALL devices built
      * using this source.
      */
-    displayConsumer = PowerStatsEnergyConsumer::createMeterAndEntityConsumer(p,
+    auto displayConsumer = PowerStatsEnergyConsumer::createMeterAndEntityConsumer(p,
             EnergyConsumerType::DISPLAY, "display", {"PPVAR_VSYS_PWR_DISP"}, "Display",
             {{"LP: 1440x3040@30", 1},
              {"On: 1440x3040@60", 2},
@@ -287,7 +297,6 @@ void addCPUclusters(std::shared_ptr<PowerStats> p)
 
 void addGPU(std::shared_ptr<PowerStats> p) {
     // Add gpu energy consumer
-    android::sp<PowerStatsEnergyConsumer> gpuConsumer;
     std::map<std::string, int32_t> stateCoeffs;
     const int socRev = android::base::GetIntProperty(kBootHwSoCRev, 0);
 
@@ -315,7 +324,7 @@ void addGPU(std::shared_ptr<PowerStats> p) {
             {"670000",  50}};
     }
 
-    gpuConsumer = PowerStatsEnergyConsumer::createMeterAndAttrConsumer(p,
+    auto gpuConsumer = PowerStatsEnergyConsumer::createMeterAndAttrConsumer(p,
             EnergyConsumerType::OTHER, "GPU", {"S2S_VDD_G3D"},
             {{UID_TIME_IN_STATE, "/sys/devices/platform/1c500000.mali/uid_time_in_state"}},
             stateCoeffs);
@@ -349,10 +358,8 @@ void addMobileRadio(std::shared_ptr<PowerStats> p)
     cfgs.emplace_back(generateGenericStateResidencyConfigs(powerStateConfig, powerStateHeaders),
             "MODEM", "");
 
-    android::sp<GenericStateResidencyDataProvider> modemSdp = new GenericStateResidencyDataProvider(
-            "/sys/devices/platform/cpif/modem/power_stats", cfgs);
-
-    p->addStateResidencyDataProvider(modemSdp);
+    p->addStateResidencyDataProvider(std::make_shared<GenericStateResidencyDataProvider>(
+            "/sys/devices/platform/cpif/modem/power_stats", cfgs));
 
     p->addEnergyConsumer(PowerStatsEnergyConsumer::createMeterConsumer(p,
             EnergyConsumerType::MOBILE_RADIO, "MODEM", {"VSYS_PWR_MODEM", "VSYS_PWR_RFFE"}));
@@ -362,6 +369,21 @@ void addGNSS(std::shared_ptr<PowerStats> p)
 {
     p->addEnergyConsumer(PowerStatsEnergyConsumer::createMeterConsumer(p,
             EnergyConsumerType::GNSS, "GPS", {"L9S_GNSS_CORE"}));
+}
+/**
+ * Unlike other data providers, which source power entity state residency data from the kernel,
+ * this data provider acts as a general-purpose channel for state residency data providers
+ * that live in user space. Entities are defined here and user space clients of this provider's
+ * vendor service register callbacks to provide state residency data for their given pwoer entity.
+ */
+void addPixelStateResidencyDataProvider(std::shared_ptr<PowerStats> p) {
+    std::shared_ptr<PixelStateResidencyDataProvider> pixelSdp =
+            ndk::SharedRefBase::make<PixelStateResidencyDataProvider>();
+
+    pixelSdp->addEntity("Bluetooth", {{0, "Idle"}, {1, "Active"}, {2, "Tx"}, {3, "Rx"}});
+
+    pixelSdp->start();
+    p->addStateResidencyDataProvider(pixelSdp);
 }
 
 int main() {
@@ -374,6 +396,7 @@ int main() {
 
     setEnergyMeter(p);
 
+    addPixelStateResidencyDataProvider(p);
     addAoC(p);
     addDisplay(p);
     addDvfsStats(p);
