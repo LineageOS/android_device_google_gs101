@@ -17,3 +17,7 @@ allow hal_sensors_default fwk_stats_hwservice:hwservice_manager find;
 
 # Allow access to the sysfs_aoc.
 allow hal_sensors_default sysfs_aoc:dir search;
+
+# Allow SensorSuez to connect AIDL stats.
+binder_use(hal_sensors_default);
+allow hal_sensors_default fwk_stats_service:service_manager find;
