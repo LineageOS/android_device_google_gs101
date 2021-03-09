@@ -10,6 +10,3 @@ dontaudit hal_power_default sysfs:file { read };
 dontaudit hal_power_default sysfs:file { getattr };
 dontaudit hal_power_default sysfs:file { read };
 dontaudit hal_power_default sysfs:file { getattr };
-# b/181713002
-dontaudit hal_power_default hal_graphics_composer_default:binder { transfer };
-dontaudit hal_power_default hal_graphics_composer_default:binder { transfer };
