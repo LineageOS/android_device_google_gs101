@@ -19,3 +19,6 @@ dontaudit cbd unlabeled:file { open };
 # b/179198083
 dontaudit cbd unlabeled:file { ioctl };
 dontaudit cbd unlabeled:file { ioctl };
+# b/182219008
+dontaudit cbd persist_file:dir { search };
+dontaudit cbd persist_file:dir { search };
