@@ -13,71 +13,56 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef HARDWARE_GOOGLE_PIXEL_POWERSTATS_DVFSSTATERESIDENCYDATAPROVIDER_H
-#define HARDWARE_GOOGLE_PIXEL_POWERSTATS_DVFSSTATERESIDENCYDATAPROVIDER_H
+#pragma once
 
-#include <pixelpowerstats/PowerStats.h>
+#include <PowerStatsAidl.h>
 
+namespace aidl {
 namespace android {
 namespace hardware {
-namespace google {
-namespace pixel {
-namespace powerstats {
+namespace power {
+namespace stats {
 
-class DvfsStateResidencyDataProvider : public IStateResidencyDataProvider {
+class DvfsStateResidencyDataProvider : public PowerStats::IStateResidencyDataProvider {
   public:
-    /*
-     * path - path to dvfs sysfs node.
-     * clockRate - clock rate in KHz.
-     */
-    DvfsStateResidencyDataProvider(std::string path, uint64_t clockRate);
-    ~DvfsStateResidencyDataProvider() = default;
-
-    /*
-     * id - the power entity id
-     * name - the power entity name to parse from sysfs node
-     * frequencies - list of pairs (frequency display name, frequency in sysfs
-     *               node).
-     */
-    void addEntity(uint32_t id, std::string name,
-                   std::vector<std::pair<std::string, std::string>> frequencies);
-
-    /*
-     * See IStateResidencyDataProvider::getResults.
-     */
-    bool getResults(
-            std::unordered_map<uint32_t, PowerEntityStateResidencyResult> &results) override;
-
-    /*
-     * See IStateResidencyDataProvider::getStateSpaces.
-     */
-    std::vector<PowerEntityStateSpace> getStateSpaces() override;
-
-  private:
-    int32_t matchEntity(char *line);
-    int32_t matchState(char *line, int32_t entityId);
-    bool parseState(char *line, uint64_t &duration, uint64_t &count);
-
-    const std::string mPath;
-    const uint64_t mClockRate;
-
-    struct config {
-        // Power entity id.
-        uint32_t powerEntityId;
-
+    class Config {
+      public:
         // Power entity name to parse.
         std::string powerEntityName;
 
         // List of state pairs (name to display, name to parse).
         std::vector<std::pair<std::string, std::string>> states;
     };
-    std::vector<config> mPowerEntities;
+    /*
+     * path - path to dvfs sysfs node.
+     * clockRate - clock rate in KHz.
+     */
+    DvfsStateResidencyDataProvider(std::string path, uint64_t clockRate, std::vector<Config> cfgs);
+    ~DvfsStateResidencyDataProvider() = default;
+
+    /*
+     * See IStateResidencyDataProvider::getStateResidencies
+     */
+    bool getStateResidencies(
+        std::unordered_map<std::string, std::vector<StateResidency>> *residencies) override;
+
+    /*
+     * See IStateResidencyDataProvider::getInfo
+     */
+    std::unordered_map<std::string, std::vector<State>> getInfo() override;
+
+  private:
+    int32_t matchEntity(char const *line);
+    int32_t matchState(char const *line, const Config& powerEntity);
+    bool parseState(char const *line, uint64_t *duration, uint64_t *count);
+
+    const std::string mPath;
+    const uint64_t mClockRate;
+    std::vector<Config> mPowerEntities;
 };
 
-}  // namespace powerstats
-}  // namespace pixel
-}  // namespace google
+}  // namespace stats
+}  // namespace power
 }  // namespace hardware
 }  // namespace android
-
-#endif  // HARDWARE_GOOGLE_PIXEL_POWERSTATS_DVFSSTATERESIDENCYDATAPROVIDER_H
+}  // namespace aidl

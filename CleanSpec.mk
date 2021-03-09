@@ -72,3 +72,8 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/vintf/manifest/android.h
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.usb@1.3-service.slider)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.usb@1.3-service.slider.rc)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/vintf/manifest/android.hardware.usb@1.3-service.slider.xml)
+
+# Power Stats HAL 1.0 to AIDL
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.power.stats@1.0-service.gs101)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/vendor/etc/init/android.hardware.power.stats@1.0-service.gs101.rc)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/vendor/etc/vintf/manifest/android.hardware.power.stats@1.0-service.gs101.xml)
