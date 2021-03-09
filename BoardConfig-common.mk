@@ -178,7 +178,8 @@ BOARD_GOOGLE_DYNAMIC_PARTITIONS_PARTITION_LIST := \
     system \
     system_ext \
     product \
-    vendor
+    vendor \
+    vendor_dlkm
 
 # Set error limit to BOARD_SUPER_PARTITON_SIZE - 500MB
 BOARD_SUPER_PARTITION_ERROR_LIMIT := 8006926336
@@ -344,6 +345,10 @@ else
 ARMNN_COMPUTE_CL_ENABLE := 0
 endif
 ARMNN_COMPUTE_NEON_ENABLE := 1
+
+BOARD_USES_VENDOR_DLKMIMAGE := true
+BOARD_VENDOR_DLKMIMAGE_FILE_SYSTEM_TYPE := ext4
+TARGET_COPY_OUT_VENDOR_DLKM := vendor_dlkm
 
 # Boot.img
 BOARD_RAMDISK_USE_LZ4     := true
