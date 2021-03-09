@@ -1,4 +1,10 @@
 type vendor_telephony_app, domain;
 app_domain(vendor_telephony_app)
 
+get_prop(vendor_telephony_app, vendor_rild_prop)
+get_prop(vendor_telephony_app, vendor_persist_sys_default_prop)
 set_prop(vendor_telephony_app, vendor_modem_prop)
+r_dir_file(vendor_telephony_app, system_app_data_file)
+r_dir_file(vendor_telephony_app, vendor_slog_file)
+
+allow vendor_telephony_app app_api_service:service_manager find;
