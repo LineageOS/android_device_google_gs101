@@ -377,160 +377,216 @@ void DumpstateDevice::dumpThermalSection(int fd) {
 
 // Dump items related to touch
 void DumpstateDevice::dumpTouchSection(int fd) {
-    const char c2_spi_path[] = "/sys/class/spi_master/spi11/spi11.0";
-    const char r3_spi_path[] = "/sys/devices/virtual/sec/tsp";
+    const char stm_cmd_path[4][50] = {"/sys/class/spi_master/spi11/spi11.0",
+                                      "/proc/fts/driver_test",
+                                      "/sys/class/spi_master/spi6/spi6.0",
+                                      "/proc/fts_ext/driver_test"};
+    const char lsi_spi_path[] = "/sys/devices/virtual/sec/tsp";
     char cmd[256];
 
-    snprintf(cmd, sizeof(cmd), "%s/appid", c2_spi_path);
-    if (!access(cmd, R_OK)) {
-        // Touch firmware version
-        DumpFileToFd(fd, "STM touch firmware version", cmd);
+    for (int i = 0; i < 4; i+=2) {
+        snprintf(cmd, sizeof(cmd), "%s", stm_cmd_path[i + 1]);
+        if (!access(cmd, R_OK)) {
+            snprintf(cmd, sizeof(cmd), "echo A0 01 > %s", stm_cmd_path[i + 1]);
+            RunCommandToFd(fd, "Force Set AP as Bus Owner",
+                           {"/vendor/bin/sh", "-c", cmd});
+        }
 
-        // Touch controller status
-        snprintf(cmd, sizeof(cmd), "%s/status", c2_spi_path);
-        DumpFileToFd(fd, "STM touch status", cmd);
+        snprintf(cmd, sizeof(cmd), "%s/appid", stm_cmd_path[i]);
+        if (!access(cmd, R_OK)) {
+            // Touch firmware version
+            DumpFileToFd(fd, "STM touch firmware version", cmd);
 
-        // Mutual raw data
-        snprintf(cmd, sizeof(cmd),
-                 "echo 13 00 > %s/stm_fts_cmd && cat %s/stm_fts_cmd",
-                 c2_spi_path, c2_spi_path);
-        RunCommandToFd(fd, "Mutual Raw", {"/vendor/bin/sh", "-c", cmd});
+            // Touch controller status
+            snprintf(cmd, sizeof(cmd), "%s/status", stm_cmd_path[i]);
+            DumpFileToFd(fd, "STM touch status", cmd);
 
-        // Mutual strength data
-        snprintf(cmd, sizeof(cmd),
-                 "echo 17 > %s/stm_fts_cmd && cat %s/stm_fts_cmd",
-                 c2_spi_path, c2_spi_path);
-        RunCommandToFd(fd, "Mutual Strength", {"/vendor/bin/sh", "-c", cmd});
+            // Mutual raw data
+            snprintf(cmd, sizeof(cmd),
+                     "echo 13 00 01 > %s/stm_fts_cmd && cat %s/stm_fts_cmd",
+                     stm_cmd_path[i], stm_cmd_path[i]);
+            RunCommandToFd(fd, "Mutual Raw", {"/vendor/bin/sh", "-c", cmd});
 
-        // Self raw data
-        snprintf(cmd, sizeof(cmd),
-                 "echo 15 00 > %s/stm_fts_cmd && cat %s/stm_fts_cmd",
-                 c2_spi_path, c2_spi_path);
-        RunCommandToFd(fd, "Self Raw", {"/vendor/bin/sh", "-c", cmd});
+            // Mutual strength data
+            snprintf(cmd, sizeof(cmd),
+                     "echo 17 01 > %s/stm_fts_cmd && cat %s/stm_fts_cmd",
+                     stm_cmd_path[i], stm_cmd_path[i]);
+            RunCommandToFd(fd, "Mutual Strength", {"/vendor/bin/sh", "-c", cmd});
+
+            // Self raw data
+            snprintf(cmd, sizeof(cmd),
+                     "echo 15 00 01 > %s/stm_fts_cmd && cat %s/stm_fts_cmd",
+                     stm_cmd_path[i], stm_cmd_path[i]);
+            RunCommandToFd(fd, "Self Raw", {"/vendor/bin/sh", "-c", cmd});
+        }
+
+        snprintf(cmd, sizeof(cmd), "%s", stm_cmd_path[i + 1]);
+        if (!access(cmd, R_OK)) {
+            snprintf(cmd, sizeof(cmd), "echo 23 00 > %s && cat %s",
+                     stm_cmd_path[i + 1], stm_cmd_path[i + 1]);
+            RunCommandToFd(fd, "Mutual Raw Data",
+                           {"/vendor/bin/sh", "-c", cmd});
+
+            snprintf(cmd, sizeof(cmd), "echo 23 03 > %s && cat %s",
+                     stm_cmd_path[i + 1], stm_cmd_path[i + 1]);
+            RunCommandToFd(fd, "Mutual Baseline Data",
+                           {"/vendor/bin/sh", "-c", cmd});
+
+            snprintf(cmd, sizeof(cmd), "echo 23 02 > %s && cat %s",
+                     stm_cmd_path[i + 1], stm_cmd_path[i + 1]);
+            RunCommandToFd(fd, "Mutual Strength Data",
+                           {"/vendor/bin/sh", "-c", cmd});
+
+            snprintf(cmd, sizeof(cmd), "echo 24 00 > %s && cat %s",
+                     stm_cmd_path[i + 1], stm_cmd_path[i + 1]);
+            RunCommandToFd(fd, "Self Raw Data",
+                           {"/vendor/bin/sh", "-c", cmd});
+
+            snprintf(cmd, sizeof(cmd), "echo 24 03 > %s && cat %s",
+                     stm_cmd_path[i + 1], stm_cmd_path[i + 1]);
+            RunCommandToFd(fd, "Self Baseline Data",
+                           {"/vendor/bin/sh", "-c", cmd});
+
+            snprintf(cmd, sizeof(cmd), "echo 24 02 > %s && cat %s",
+                     stm_cmd_path[i + 1], stm_cmd_path[i + 1]);
+            RunCommandToFd(fd, "Self Strength Data",
+                           {"/vendor/bin/sh", "-c", cmd});
+
+            snprintf(cmd, sizeof(cmd), "echo 32 10 > %s && cat %s",
+                     stm_cmd_path[i + 1], stm_cmd_path[i + 1]);
+            RunCommandToFd(fd, "Mutual Compensation",
+                           {"/vendor/bin/sh", "-c", cmd});
+
+            snprintf(cmd, sizeof(cmd), "echo 32 11 > %s && cat %s",
+                     stm_cmd_path[i + 1], stm_cmd_path[i + 1]);
+            RunCommandToFd(fd, "Mutual Low Power Compensation",
+                           {"/vendor/bin/sh", "-c", cmd});
+
+            snprintf(cmd, sizeof(cmd), "echo 33 12 > %s && cat %s",
+                     stm_cmd_path[i + 1], stm_cmd_path[i + 1]);
+            RunCommandToFd(fd, "Self Compensation",
+                           {"/vendor/bin/sh", "-c", cmd});
+
+            snprintf(cmd, sizeof(cmd), "echo 34 > %s && cat %s",
+                     stm_cmd_path[i + 1], stm_cmd_path[i + 1]);
+            RunCommandToFd(fd, "Golden Mutual Raw Data",
+                           {"/vendor/bin/sh", "-c", cmd});
+
+            snprintf(cmd, sizeof(cmd), "echo 01 FA 20 00 00 24 80 > %s",
+                     stm_cmd_path[i + 1]);
+            RunCommandToFd(fd, "Packaging Plant - HW reset",
+                           {"/vendor/bin/sh", "-c", cmd});
+            snprintf(cmd, sizeof(cmd), "echo 01 FA 20 00 00 68 08 > %s",
+                     stm_cmd_path[i + 1]);
+            RunCommandToFd(fd, "Packaging Plant - Hibernate Memory",
+                           {"/vendor/bin/sh", "-c", cmd});
+            snprintf(cmd, sizeof(cmd),
+                     "echo 02 FB 00 04 3F D8 00 10 01 > %s && cat %s",
+                     stm_cmd_path[i + 1], stm_cmd_path[i + 1]);
+            RunCommandToFd(fd, "Packaging Plant - Read 16 bytes from Address 0x00041FD8",
+                           {"/vendor/bin/sh", "-c", cmd});
+        }
+
+        snprintf(cmd, sizeof(cmd), "%s/stm_fts_cmd", stm_cmd_path[i]);
+        if (!access(cmd, R_OK)) {
+            // ITO raw data
+            snprintf(cmd, sizeof(cmd),
+                     "echo 01 > %s/stm_fts_cmd && cat %s/stm_fts_cmd",
+                     stm_cmd_path[i], stm_cmd_path[i]);
+            RunCommandToFd(fd, "ITO Raw", {"/vendor/bin/sh", "-c", cmd});
+        }
+
+        if (!access(cmd, R_OK)) {
+            snprintf(cmd, sizeof(cmd), "echo A0 00 > %s", stm_cmd_path[i + 1]);
+            RunCommandToFd(fd, "Restore Bus Owner",
+                           {"/vendor/bin/sh", "-c", cmd});
+        }
     }
 
-    if (!access("/proc/fts/driver_test", R_OK)) {
-        RunCommandToFd(fd, "Mutual Raw Data",
-                       {"/vendor/bin/sh", "-c",
-                        "echo 23 00 > /proc/fts/driver_test && "
-                        "cat /proc/fts/driver_test"});
-        RunCommandToFd(fd, "Mutual Baseline Data",
-                       {"/vendor/bin/sh", "-c",
-                        "echo 23 03 > /proc/fts/driver_test && "
-                        "cat /proc/fts/driver_test"});
-        RunCommandToFd(fd, "Mutual Strength Data",
-                       {"/vendor/bin/sh", "-c",
-                        "echo 23 02 > /proc/fts/driver_test && "
-                        "cat /proc/fts/driver_test"});
-        RunCommandToFd(fd, "Self Raw Data",
-                       {"/vendor/bin/sh", "-c",
-                        "echo 24 00 > /proc/fts/driver_test && "
-                        "cat /proc/fts/driver_test"});
-        RunCommandToFd(fd, "Self Baseline Data",
-                       {"/vendor/bin/sh", "-c",
-                        "echo 24 03 > /proc/fts/driver_test && "
-                        "cat /proc/fts/driver_test"});
-        RunCommandToFd(fd, "Self Strength Data",
-                       {"/vendor/bin/sh", "-c",
-                        "echo 24 02 > /proc/fts/driver_test && "
-                        "cat /proc/fts/driver_test"});
-        RunCommandToFd(fd, "Mutual Compensation",
-                       {"/vendor/bin/sh", "-c",
-                        "echo 32 10 > /proc/fts/driver_test && "
-                        "cat /proc/fts/driver_test"});
-        RunCommandToFd(fd, "Self Compensation",
-                       {"/vendor/bin/sh", "-c",
-                        "echo 33 12 > /proc/fts/driver_test && "
-                        "cat /proc/fts/driver_test"});
-        RunCommandToFd(fd, "Golden Mutual Raw Data",
-                       {"/vendor/bin/sh", "-c",
-                        "echo 34 > /proc/fts/driver_test && "
-                        "cat /proc/fts/driver_test"});
-    }
-    if (!access(r3_spi_path, R_OK)) {
+    if (!access(lsi_spi_path, R_OK)) {
         // Enable: force touch active
         snprintf(cmd, sizeof(cmd),
                  "echo %s > %s/cmd && cat %s/cmd_result",
                  "force_touch_active,1",
-                 r3_spi_path, r3_spi_path);
+                 lsi_spi_path, lsi_spi_path);
         RunCommandToFd(fd, "Force Touch Active", {"/vendor/bin/sh", "-c", cmd});
 
         // Firmware info
-        snprintf(cmd, sizeof(cmd), "%s/fw_version", r3_spi_path);
+        snprintf(cmd, sizeof(cmd), "%s/fw_version", lsi_spi_path);
         DumpFileToFd(fd, "LSI firmware version", cmd);
 
         // Touch status
-        snprintf(cmd, sizeof(cmd), "%s/status", r3_spi_path);
+        snprintf(cmd, sizeof(cmd), "%s/status", lsi_spi_path);
         DumpFileToFd(fd, "LSI touch status", cmd);
 
         // Calibration info
         snprintf(cmd, sizeof(cmd),
                  "echo %s > %s/cmd && cat %s/cmd_result",
                  "get_mis_cal_info",
-                 r3_spi_path, r3_spi_path);
+                 lsi_spi_path, lsi_spi_path);
         RunCommandToFd(fd, "Calibration info", {"/vendor/bin/sh", "-c", cmd});
 
         // Mutual strength
         snprintf(cmd, sizeof(cmd),
                  "echo %s > %s/cmd && cat %s/cmd_result",
                  "run_delta_read_all",
-                 r3_spi_path, r3_spi_path);
+                 lsi_spi_path, lsi_spi_path);
         RunCommandToFd(fd, "Mutual Strength", {"/vendor/bin/sh", "-c", cmd});
 
         // Self strength
         snprintf(cmd, sizeof(cmd),
                  "echo %s > %s/cmd && cat %s/cmd_result",
                  "run_self_delta_read_all",
-                 r3_spi_path, r3_spi_path);
+                 lsi_spi_path, lsi_spi_path);
         RunCommandToFd(fd, "Self Strength", {"/vendor/bin/sh", "-c", cmd});
 
         // Raw cap
         snprintf(cmd, sizeof(cmd),
                  "echo %s > %s/cmd && cat %s/cmd_result",
                  "run_rawcap_read_all",
-                 r3_spi_path, r3_spi_path);
+                 lsi_spi_path, lsi_spi_path);
         RunCommandToFd(fd, "Mutual Raw Cap", {"/vendor/bin/sh", "-c", cmd});
 
         // Self raw cap
         snprintf(cmd, sizeof(cmd),
                  "echo %s > %s/cmd && cat %s/cmd_result",
                  "run_self_rawcap_read_all",
-                 r3_spi_path, r3_spi_path);
+                 lsi_spi_path, lsi_spi_path);
         RunCommandToFd(fd, "Self Raw Cap", {"/vendor/bin/sh", "-c", cmd});
 
         // TYPE_AMBIENT_DATA
         snprintf(cmd, sizeof(cmd),
                  "echo %s > %s/cmd && cat %s/cmd_result",
                  "run_rawdata_read_type,3",
-                 r3_spi_path, r3_spi_path);
+                 lsi_spi_path, lsi_spi_path);
         RunCommandToFd(fd, "TYPE_AMBIENT_DATA", {"/vendor/bin/sh", "-c", cmd});
 
         // TYPE_DECODED_DATA
         snprintf(cmd, sizeof(cmd),
                  "echo %s > %s/cmd && cat %s/cmd_result",
                  "run_rawdata_read_type,5",
-                 r3_spi_path, r3_spi_path);
+                 lsi_spi_path, lsi_spi_path);
         RunCommandToFd(fd, "TYPE_DECODED_DATA", {"/vendor/bin/sh", "-c", cmd});
 
         // TYPE_NOI_P2P_MIN
         snprintf(cmd, sizeof(cmd),
                  "echo %s > %s/cmd && cat %s/cmd_result",
                  "run_rawdata_read_type,30",
-                 r3_spi_path, r3_spi_path);
+                 lsi_spi_path, lsi_spi_path);
         RunCommandToFd(fd, "TYPE_NOI_P2P_MIN", {"/vendor/bin/sh", "-c", cmd});
 
         // TYPE_NOI_P2P_MAX
         snprintf(cmd, sizeof(cmd),
                  "echo %s > %s/cmd && cat %s/cmd_result",
                  "run_rawdata_read_type,31",
-                 r3_spi_path, r3_spi_path);
+                 lsi_spi_path, lsi_spi_path);
         RunCommandToFd(fd, "TYPE_NOI_P2P_MAX", {"/vendor/bin/sh", "-c", cmd});
 
         // Disable: force touch active
         snprintf(cmd, sizeof(cmd),
                  "echo %s > %s/cmd && cat %s/cmd_result",
                  "force_touch_active,0",
-                 r3_spi_path, r3_spi_path);
+                 lsi_spi_path, lsi_spi_path);
         RunCommandToFd(fd, "Force Touch Active", {"/vendor/bin/sh", "-c", cmd});
     }
 }
