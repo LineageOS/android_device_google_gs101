@@ -114,4 +114,7 @@
 
     <!-- Enable concurrent STA + Bridged access point (AP) support -->
     <bool translatable="false" name="config_wifiStaWithBridgedSoftApConcurrencySupported">true</bool>
+
+    <!-- Enable aggregation of Wifi link layer radio stats from all radios -->
+    <bool translatable="false" name="config_config_wifiLinkLayerAllRadiosStatsAggregationEnabled">true</bool>
 </resources>
