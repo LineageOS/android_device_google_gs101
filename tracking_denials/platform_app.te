@@ -6,3 +6,7 @@ dontaudit platform_app hal_wlc:binder { call };
 dontaudit platform_app hal_wlc_hwservice:hwservice_manager { find };
 dontaudit platform_app hal_wlc:binder { call };
 dontaudit platform_app hal_wlc:binder { transfer };
+# b/182086482
+dontaudit platform_app dmabuf_heap_device:chr_file { ioctl };
+dontaudit platform_app dmabuf_heap_device:chr_file { read };
+dontaudit platform_app dmabuf_heap_device:chr_file { open };

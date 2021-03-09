@@ -1,0 +1,10 @@
+# b/182086686
+dontaudit mediaserver dmabuf_heap_device:chr_file { open };
+dontaudit mediaserver dmabuf_heap_device:chr_file { ioctl };
+dontaudit mediaserver dmabuf_heap_device:chr_file { ioctl };
+dontaudit mediaserver dmabuf_heap_device:chr_file { read };
+dontaudit mediaserver dmabuf_heap_device:chr_file { read };
+dontaudit mediaserver dmabuf_heap_device:chr_file { open };
+dontaudit mediaserver dmabuf_heap_device:chr_file { ioctl };
+dontaudit mediaserver dmabuf_heap_device:chr_file { ioctl };
+dontaudit mediaserver dmabuf_heap_device:chr_file { ioctl };
