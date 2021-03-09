@@ -285,8 +285,7 @@ void addDisplay(std::shared_ptr<PowerStats> p) {
     p->addEnergyConsumer(displayConsumer);
 }
 
-void addCPUclusters(std::shared_ptr<PowerStats> p)
-{
+void addCPUclusters(std::shared_ptr<PowerStats> p) {
     p->addEnergyConsumer(PowerStatsEnergyConsumer::createMeterConsumer(p,
             EnergyConsumerType::CPU_CLUSTER, "CPUCL0", {"S4M_VDD_CPUCL0"}));
     p->addEnergyConsumer(PowerStatsEnergyConsumer::createMeterConsumer(p,
@@ -370,6 +369,112 @@ void addGNSS(std::shared_ptr<PowerStats> p)
     p->addEnergyConsumer(PowerStatsEnergyConsumer::createMeterConsumer(p,
             EnergyConsumerType::GNSS, "GPS", {"L9S_GNSS_CORE"}));
 }
+
+void addNFC(std::shared_ptr<PowerStats> p) {
+    const GenericStateResidencyDataProvider::StateResidencyConfig nfcStateConfig = {
+        .entryCountSupported = true,
+        .entryCountPrefix = "Cumulative count:",
+        .totalTimeSupported = true,
+        .totalTimePrefix = "Cumulative duration msec:",
+        .lastEntrySupported = true,
+        .lastEntryPrefix = "Last entry timestamp msec:",
+    };
+    const std::vector<std::pair<std::string, std::string>> nfcStateHeaders = {
+        std::make_pair("IDLE", "Idle mode:"),
+        std::make_pair("ACTIVE", "Active mode:"),
+        std::make_pair("ACTIVE-RW", "Active Reader/Writer mode:"),
+    };
+
+    std::vector<GenericStateResidencyDataProvider::PowerEntityConfig> cfgs;
+    cfgs.emplace_back(generateGenericStateResidencyConfigs(nfcStateConfig, nfcStateHeaders),
+            "NFC", "NFC subsystem");
+
+    auto nfcSdp = std::make_shared<GenericStateResidencyDataProvider>(
+            "/sys/devices/platform/10960000.hsi2c/i2c-3/3-0008/power_stats", cfgs);
+
+    p->addStateResidencyDataProvider(nfcSdp);
+}
+
+void addPCIe(std::shared_ptr<PowerStats> p) {
+    // Add PCIe power entities for Modem and WiFi
+    const GenericStateResidencyDataProvider::StateResidencyConfig pcieStateConfig = {
+        .entryCountSupported = true,
+        .entryCountPrefix = "Cumulative count:",
+        .totalTimeSupported = true,
+        .totalTimePrefix = "Cumulative duration msec:",
+        .lastEntrySupported = true,
+        .lastEntryPrefix = "Last entry timestamp msec:",
+    };
+    const std::vector<std::pair<std::string, std::string>> pcieStateHeaders = {
+        std::make_pair("UP", "Link up:"),
+        std::make_pair("DOWN", "Link down:"),
+    };
+
+    // Add PCIe - Modem
+    const std::vector<GenericStateResidencyDataProvider::PowerEntityConfig> pcieModemCfgs = {
+        {generateGenericStateResidencyConfigs(pcieStateConfig, pcieStateHeaders), "PCIe-Modem",
+                "Version: 1"}
+    };
+    auto pcieModemSdp = std::make_shared<GenericStateResidencyDataProvider>(
+            "/sys/devices/platform/11920000.pcie/power_stats", pcieModemCfgs);
+    p->addStateResidencyDataProvider(pcieModemSdp);
+
+    // Add PCIe - WiFi
+    const std::vector<GenericStateResidencyDataProvider::PowerEntityConfig> pcieWifiCfgs = {
+        {generateGenericStateResidencyConfigs(pcieStateConfig, pcieStateHeaders),
+            "PCIe-WiFi", "Version: 1"}
+    };
+    auto pcieWifiSdp = std::make_shared<GenericStateResidencyDataProvider>(
+            "/sys/devices/platform/14520000.pcie/power_stats", pcieWifiCfgs);
+    p->addStateResidencyDataProvider(pcieWifiSdp);
+}
+
+void addWifi(std::shared_ptr<PowerStats> p) {
+    // The transform function converts microseconds to milliseconds.
+    std::function<uint64_t(uint64_t)> usecToMs = [](uint64_t a) { return a / 1000; };
+    const GenericStateResidencyDataProvider::StateResidencyConfig stateConfig = {
+        .entryCountSupported = true,
+        .entryCountPrefix = "count:",
+        .totalTimeSupported = true,
+        .totalTimePrefix = "duration_usec:",
+        .totalTimeTransform = usecToMs,
+        .lastEntrySupported = true,
+        .lastEntryPrefix = "last_entry_timestamp_usec:",
+        .lastEntryTransform = usecToMs,
+    };
+    const GenericStateResidencyDataProvider::StateResidencyConfig pcieStateConfig = {
+        .entryCountSupported = true,
+        .entryCountPrefix = "count:",
+        .totalTimeSupported = true,
+        .totalTimePrefix = "duration_usec:",
+        .totalTimeTransform = usecToMs,
+        .lastEntrySupported = false,
+    };
+
+    const std::vector<std::pair<std::string, std::string>> stateHeaders = {
+        std::make_pair("AWAKE", "AWAKE:"),
+        std::make_pair("ASLEEP", "ASLEEP:"),
+
+    };
+    const std::vector<std::pair<std::string, std::string>> pcieStateHeaders = {
+        std::make_pair("L0", "L0:"),
+        std::make_pair("L1", "L1:"),
+        std::make_pair("L1_1", "L1_1:"),
+        std::make_pair("L1_2", "L1_2:"),
+        std::make_pair("L2", "L2:"),
+    };
+
+    const std::vector<GenericStateResidencyDataProvider::PowerEntityConfig> cfgs = {
+        {generateGenericStateResidencyConfigs(stateConfig, stateHeaders), "WIFI", "WIFI"},
+        {generateGenericStateResidencyConfigs(pcieStateConfig, pcieStateHeaders), "WIFI-PCIE",
+                "WIFI-PCIE"}
+    };
+
+    auto wifiSdp = std::make_shared<GenericStateResidencyDataProvider>("/sys/wifi/power_stats",
+            cfgs);
+    p->addStateResidencyDataProvider(wifiSdp);
+}
+
 /**
  * Unlike other data providers, which source power entity state residency data from the kernel,
  * this data provider acts as a general-purpose channel for state residency data providers
@@ -405,6 +510,9 @@ int main() {
     addGPU(p);
     addMobileRadio(p);
     addGNSS(p);
+    addNFC(p);
+    addPCIe(p);
+    addWifi(p);
 
     const std::string instance = std::string() + PowerStats::descriptor + "/default";
     binder_status_t status = AServiceManager_addService(p->asBinder().get(), instance.c_str());
