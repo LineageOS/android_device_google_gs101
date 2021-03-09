@@ -20,3 +20,6 @@ include device/google/gs101/device.mk
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.carrierlock.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.carrierlock.xml
 
+# Factory OTA
+-include vendor/google/factoryota/client/factoryota.mk
+
