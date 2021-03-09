@@ -26,16 +26,15 @@ namespace boot {
 namespace V1_2 {
 namespace implementation {
 
+using ::android::sp;
 using ::android::hardware::hidl_array;
 using ::android::hardware::hidl_memory;
 using ::android::hardware::hidl_string;
 using ::android::hardware::hidl_vec;
 using ::android::hardware::Return;
 using ::android::hardware::Void;
-using ::android::sp;
 
 struct BootControl : public IBootControl {
-
     bool Init();
 
     // Methods from ::android::hardware::boot::V1_0::IBootControl follow.
@@ -45,22 +44,23 @@ struct BootControl : public IBootControl {
     Return<void> setActiveBootSlot(uint32_t slot, setActiveBootSlot_cb _hidl_cb) override;
     Return<void> setSlotAsUnbootable(uint32_t slot, setSlotAsUnbootable_cb _hidl_cb) override;
     Return<::android::hardware::boot::V1_0::BoolResult> isSlotBootable(uint32_t slot) override;
-    Return<::android::hardware::boot::V1_0::BoolResult> isSlotMarkedSuccessful(uint32_t slot) override;
+    Return<::android::hardware::boot::V1_0::BoolResult> isSlotMarkedSuccessful(
+            uint32_t slot) override;
     Return<void> getSuffix(uint32_t slot, getSuffix_cb _hidl_cb) override;
 
     // Methods from ::android::hardware::boot::V1_1::IBootControl follow.
-    Return<bool> setSnapshotMergeStatus(::android::hardware::boot::V1_1::MergeStatus status) override;
+    Return<bool> setSnapshotMergeStatus(
+            ::android::hardware::boot::V1_1::MergeStatus status) override;
     Return<::android::hardware::boot::V1_1::MergeStatus> getSnapshotMergeStatus() override;
 
     // Methods from ::android::hardware::boot::V1_2::IBootControl follow.
     Return<uint32_t> getActiveBootSlot() override;
 
     // Methods from ::android::hidl::base::V1_0::IBase follow.
-
 };
 
 // FIXME: most likely delete, this is only for passthrough implementations
-extern "C" IBootControl* HIDL_FETCH_IBootControl(const char* name);
+extern "C" IBootControl *HIDL_FETCH_IBootControl(const char *name);
 
 }  // namespace implementation
 }  // namespace V1_2

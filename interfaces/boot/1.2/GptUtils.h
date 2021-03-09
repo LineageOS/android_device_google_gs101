@@ -16,9 +16,9 @@
 
 #pragma once
 
+#include <map>
 #include <string>
 #include <vector>
-#include <map>
 
 namespace android {
 namespace hardware {
@@ -26,7 +26,7 @@ namespace boot {
 namespace V1_2 {
 namespace implementation {
 
-#define GPT_SIGNATURE       0x5452415020494645UL
+#define GPT_SIGNATURE 0x5452415020494645UL
 
 typedef struct {
     uint8_t type_guid[16];
@@ -55,21 +55,21 @@ typedef struct {
 } __attribute__((packed)) gpt_header;
 
 class GptUtils {
-   public:
+  public:
     GptUtils(const std::string dev_path);
     int Load(void);
     gpt_entry *GetPartitionEntry(std::string name);
     int Sync(void);
     ~GptUtils();
 
-   private:
+  private:
     std::string dev_path;
     int fd;
     uint32_t block_size;
     gpt_header gpt_primary;
     gpt_header gpt_backup;
     std::vector<gpt_entry> entry_array;
-    std::map<std::string, gpt_entry *>entries;
+    std::map<std::string, gpt_entry *> entries;
 };
 
 }  // namespace implementation
