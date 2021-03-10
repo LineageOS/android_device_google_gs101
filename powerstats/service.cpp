@@ -286,6 +286,37 @@ void addDisplay(std::shared_ptr<PowerStats> p) {
 }
 
 void addCPUclusters(std::shared_ptr<PowerStats> p) {
+    // A constant to represent the number of nanoseconds in one millisecond.
+    const int NS_TO_MS = 1000000;
+
+    std::function<uint64_t(uint64_t)> acpmNsToMs = [](uint64_t a) { return a / NS_TO_MS; };
+    const GenericStateResidencyDataProvider::StateResidencyConfig cpuStateConfig = {
+            .entryCountSupported = true,
+            .entryCountPrefix = "down_count:",
+            .totalTimeSupported = true,
+            .totalTimePrefix = "total_down_time_ns:",
+            .totalTimeTransform = acpmNsToMs,
+            .lastEntrySupported = true,
+            .lastEntryPrefix = "last_down_time_ns:",
+            .lastEntryTransform = acpmNsToMs,
+    };
+
+    const std::vector<std::pair<std::string, std::string>> cpuStateHeaders = {
+            std::make_pair("DOWN", ""),
+    };
+
+    std::vector<GenericStateResidencyDataProvider::PowerEntityConfig> cfgs;
+    for (std::string name : {"CORE00", "CORE01", "CORE02", "CORE03", "CORE10", "CORE11",
+                                "CORE20", "CORE21", "CLUSTER0", "CLUSTER1", "CLUSTER2"}) {
+        cfgs.emplace_back(generateGenericStateResidencyConfigs(cpuStateConfig, cpuStateHeaders),
+            name, name);
+    }
+
+    auto cpuSdp = std::make_shared<GenericStateResidencyDataProvider>(
+            "/sys/devices/platform/acpm_stats/core_stats", cfgs);
+
+    p->addStateResidencyDataProvider(cpuSdp);
+
     p->addEnergyConsumer(PowerStatsEnergyConsumer::createMeterConsumer(p,
             EnergyConsumerType::CPU_CLUSTER, "CPUCL0", {"S4M_VDD_CPUCL0"}));
     p->addEnergyConsumer(PowerStatsEnergyConsumer::createMeterConsumer(p,
