@@ -2,3 +2,12 @@
 dontaudit init-insmod-sh vendor_regmap_debugfs:dir { search };
 dontaudit init-insmod-sh vendor_regmap_debugfs:dir { search };
 dontaudit init-insmod-sh vendor_regmap_debugfs:dir { search };
+# b/182320258
+dontaudit init-insmod-sh vendor_file:system { module_load };
+dontaudit init-insmod-sh vendor_file:system { module_load };
+dontaudit init-insmod-sh vendor_file:system { module_load };
+dontaudit init-insmod-sh vendor_file:system { module_load };
+dontaudit init-insmod-sh vendor_file:system { module_load };
+dontaudit init-insmod-sh vendor_file:system { module_load };
+dontaudit init-insmod-sh vendor_file:system { module_load };
+dontaudit init-insmod-sh vendor_file:system { module_load };
