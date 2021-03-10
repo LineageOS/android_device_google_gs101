@@ -1,6 +1,2 @@
 # b/178980142
 dontaudit system_server property_type:file *;
-# b/182086481
-dontaudit system_server dmabuf_heap_device:chr_file { ioctl };
-dontaudit system_server dmabuf_heap_device:chr_file { open };
-dontaudit system_server dmabuf_heap_device:chr_file { read };
