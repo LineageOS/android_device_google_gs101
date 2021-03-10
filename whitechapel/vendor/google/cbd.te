@@ -6,6 +6,12 @@ set_prop(cbd, vendor_modem_prop)
 set_prop(cbd, vendor_cbd_prop)
 set_prop(cbd, vendor_rild_prop)
 
+# Allow cbd to setuid from root to radio
+# TODO: confirming with vendor via b/182334947
+allow cbd self:capability { setgid setuid };
+
+allow cbd mnt_vendor_file:dir r_dir_perms;
+
 allow cbd kmsg_device:chr_file rw_file_perms;
 
 allow cbd vendor_shell_exec:file execute_no_trans;
