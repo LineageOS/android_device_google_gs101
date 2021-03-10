@@ -13,29 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#define LOG_TAG "libpixelpowerstats"
 
 #include "AocStateResidencyDataProvider.h"
 
 #include <android-base/logging.h>
 
-#include <utility>
-
+namespace aidl {
 namespace android {
 namespace hardware {
-namespace google {
-namespace pixel {
-namespace powerstats {
+namespace power {
+namespace stats {
 
-AocStateResidencyDataProvider::AocStateResidencyDataProvider(
-        std::vector<std::pair<uint32_t, std::string>> ids,
-        std::vector<std::pair<std::string, std::string>> states) {
+AocStateResidencyDataProvider::AocStateResidencyDataProvider(std::vector<std::pair<std::string,
+        std::string>> ids, std::vector<std::pair<std::string, std::string>> states) {
     // AoC stats are reported in ticks of 244.140625ns. The transform
     // function converts ticks to milliseconds.
     // 1000000 / 244.140625 = 4096.
     static const uint64_t AOC_CLK = 4096;
     std::function<uint64_t(uint64_t)> aocTickToMs = [](uint64_t a) { return a / AOC_CLK; };
-    StateResidencyConfig config = {
+    GenericStateResidencyDataProvider::StateResidencyConfig config = {
             .entryCountSupported = true,
             .entryCountPrefix = "Counter:",
             .totalTimeSupported = true,
@@ -45,61 +41,88 @@ AocStateResidencyDataProvider::AocStateResidencyDataProvider(
             .lastEntryPrefix = "Time last entered:",
             .lastEntryTransform = aocTickToMs,
     };
-    uint32_t state_id;
-    for (auto &id : ids) {
-        state_id = 1;
-        for (auto &state : states) {
+    for (const auto &id : ids) {
+        for (const auto &state : states) {
             std::vector<std::pair<std::string, std::string>> aocStateHeaders = {
-                    std::make_pair(state.first, ""),
+                std::make_pair(state.first, ""),
             };
+            std::vector<GenericStateResidencyDataProvider::PowerEntityConfig> cfgs;
+            cfgs.emplace_back(generateGenericStateResidencyConfigs(config, aocStateHeaders),
+                    id.first, "");
             std::unique_ptr<GenericStateResidencyDataProvider> sdp(
-                    new GenericStateResidencyDataProvider(id.second + state.second));
-            sdp->addEntity(id.first, PowerEntityConfig(state_id++, "",
-                                                       generateGenericStateResidencyConfigs(
-                                                               config, aocStateHeaders)));
-            mProviders.push_back(std::move(sdp));
+                    new GenericStateResidencyDataProvider(id.second + state.second, cfgs));
+            mProviders[id.first].push_back(std::move(sdp));
         }
     }
 }
 
-bool AocStateResidencyDataProvider::getResults(
-        std::unordered_map<uint32_t, PowerEntityStateResidencyResult> &results) {
-    for (auto &provider : mProviders) {
-        provider->getResults(results);
-    }
-    return true;
-}
-
-std::vector<PowerEntityStateSpace> AocStateResidencyDataProvider::getStateSpaces() {
-    // Return state spaces based on all configured providers.
+bool AocStateResidencyDataProvider::getStateResidencies(
+        std::unordered_map<std::string, std::vector<StateResidency>> *residencies) {
     // States from the same power entity are merged.
-    std::map<uint32_t, PowerEntityStateSpace> stateSpaces;
-    for (auto &provider : mProviders) {
-        for (auto &stateSpace : provider->getStateSpaces()) {
-            auto it = stateSpaces.find(stateSpace.powerEntityId);
-            if (it != stateSpaces.end()) {
-                auto &states = it->second.states;
-                auto size = states.size();
-                states.resize(size + stateSpace.states.size());
-                for (uint32_t i = 0; i < stateSpace.states.size(); i++) {
-                    states[size + i] = stateSpace.states[i];
+    bool ret = true;
+    for (const auto &providerList : mProviders) {
+        int32_t stateId = 0;
+        std::string curEntity = providerList.first;
+        std::vector<StateResidency> stateResidencies;
+
+        // Iterate over each provider in the providerList, appending each of the states
+        for (const auto &provider : providerList.second) {
+            std::unordered_map<std::string, std::vector<StateResidency>> residency;
+            ret &= provider->getStateResidencies(&residency);
+
+            // Each provider should only return data for curEntity but checking anyway
+            if (residency.find(curEntity) != residency.end()) {
+                for (auto &r : residency.at(curEntity)) {
+                    /*
+                     * Modifying stateId here because we are stitching together infos from
+                     * multiple GenericStateResidencyDataProviders. stateId must be modified
+                     * to maintain uniqueness for a given entity
+                     */
+                    r.id = stateId++;
+                    stateResidencies.push_back(r);
                 }
-            } else {
-                stateSpaces.insert(std::pair<uint32_t, PowerEntityStateSpace>(
-                        stateSpace.powerEntityId, stateSpace));
             }
         }
-    }
 
-    std::vector<PowerEntityStateSpace> ret;
-    for (auto &stateSpace : stateSpaces) {
-        ret.push_back(stateSpace.second);
+        residencies->emplace(curEntity, stateResidencies);
     }
     return ret;
 }
 
-}  // namespace powerstats
-}  // namespace pixel
-}  // namespace google
+std::unordered_map<std::string, std::vector<State>> AocStateResidencyDataProvider::getInfo() {
+    // States from the same power entity are merged
+    std::unordered_map<std::string, std::vector<State>> infos;
+    for (const auto &providerList : mProviders) {
+        int32_t stateId = 0;
+        std::string curEntity = providerList.first;
+        std::vector<State> stateInfos;
+
+        // Iterate over each provider in the providerList, appending each of the states
+        for (const auto &provider : providerList.second) {
+            std::unordered_map<std::string, std::vector<State>> info = provider->getInfo();
+
+            // Each provider should only return data for curEntity but checking anyway
+            if (info.find(curEntity) != info.end()) {
+                for (auto &i : info.at(curEntity)) {
+                    /*
+                     * Modifying stateId because we are stitching together infos from
+                     * multiple GenericStateResidencyDataProviders. stateId must be modified
+                     * to maintain uniqueness for a given entity
+                     */
+                    i.id = stateId++;
+                    stateInfos.push_back(i);
+                }
+            }
+        }
+
+        infos.emplace(curEntity, stateInfos);
+    }
+
+    return infos;
+}
+
+}  // namespace stats
+}  // namespace power
 }  // namespace hardware
 }  // namespace android
+}  // namespace aidl
