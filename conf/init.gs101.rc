@@ -216,8 +216,6 @@ on late-fs
 
 on post-fs-data
     # Log data folder
-    mkdir /data/log 0771 radio system
-    mkdir /data/log/abox 0771 audioserver system
     mkdir /data/vendor 0771 radio system
     mkdir /data/vendor/log 0771 radio system
     mkdir /data/vendor/log/cbd 0771 radio system
