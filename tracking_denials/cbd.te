@@ -1,8 +1,3 @@
-# b/171267363
-dontaudit cbd cbd:capability {setuid };
-# b/178331928
-dontaudit cbd mnt_vendor_file:dir { search };
-dontaudit cbd mnt_vendor_file:dir { search };
 # b/178979986
 dontaudit cbd unlabeled:dir { getattr };
 dontaudit cbd unlabeled:file { open };
@@ -19,6 +14,3 @@ dontaudit cbd unlabeled:file { open };
 # b/179198083
 dontaudit cbd unlabeled:file { ioctl };
 dontaudit cbd unlabeled:file { ioctl };
-# b/182219008
-dontaudit cbd persist_file:dir { search };
-dontaudit cbd persist_file:dir { search };
