@@ -1065,6 +1065,10 @@ PRODUCT_PROPERTY_OVERRIDES += vendor.pktrouter=1
 include hardware/google/pixel/thermal/device.mk
 PRODUCT_PROPERTY_OVERRIDES += persist.vendor.enable.thermal.genl=true
 
+# TPU firmware
+PRODUCT_PACKAGES += \
+	edgetpu-abrolhos.fw
+
 # TPU NN HAL
 PRODUCT_PACKAGES += \
 	android.hardware.neuralnetworks@1.3-service-darwinn
