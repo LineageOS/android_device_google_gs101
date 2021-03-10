@@ -9,3 +9,6 @@ dontaudit tee persist_file:dir { search };
 dontaudit tee mnt_vendor_file:dir { search };
 dontaudit tee tee_data_file:lnk_file { read };
 dontaudit tee persist_file:file { read write };
+userdebug_or_eng(`
+  permissive tee;
+')
