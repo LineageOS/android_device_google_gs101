@@ -171,7 +171,7 @@ void addDvfsStats(std::shared_ptr<PowerStats> p) {
     }});
 
     p->addStateResidencyDataProvider(std::make_shared<DvfsStateResidencyDataProvider>(
-            "/sys/devices/platform/1742048c.acpm_stats/fvp_stats", NS_TO_MS, cfgs));
+            "/sys/devices/platform/acpm_stats/fvp_stats", NS_TO_MS, cfgs));
 }
 
 void addSoC(std::shared_ptr<PowerStats> p) {
@@ -239,7 +239,7 @@ void addSoC(std::shared_ptr<PowerStats> p) {
             "SLC-REQ", "SLC_REQ:");
 
     auto socSdp = std::make_shared<GenericStateResidencyDataProvider>(
-            "/sys/devices/platform/1742048c.acpm_stats/soc_stats", cfgs);
+            "/sys/devices/platform/acpm_stats/soc_stats", cfgs);
 
     p->addStateResidencyDataProvider(socSdp);
 }
