@@ -26,3 +26,7 @@ neverallow appdomain edgetpu_device:chr_file { open };
 # Allow EdgeTPU service access to its data files.
 allow edgetpu_server edgetpu_service_data_file:file create_file_perms;
 allow edgetpu_server edgetpu_service_data_file:dir rw_dir_perms;
+
+# Allow EdgeTPU service to access the Package Manager service.
+allow edgetpu_server package_native_service:service_manager find;
+binder_call(edgetpu_server, system_server);

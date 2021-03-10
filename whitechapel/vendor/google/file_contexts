@@ -397,3 +397,7 @@
 
 # vscaler-secure DMA-BUF heap
 /dev/dma_heap/vscaler-secure                                                   u:object_r:vscaler_heap_device:s0
+
+# video system DMA-BUF heap
+/dev/dma_heap/video_system                                               u:object_r:dmabuf_system_heap_device:s0
+/dev/dma_heap/video_system-uncached                                      u:object_r:dmabuf_system_heap_device:s0

@@ -1,10 +1,10 @@
 # Samsung S.LSI telephony
-user=system seinfo=platform name=com.samsung.slsi.telephony.silentlogging domain=vendor_telephony_app
-user=system seinfo=platform name=com.samsung.slsi.telephony.silentlogging:remote domain=vendor_telephony_app
-user=system seinfo=platform name=com.samsung.slsi.telephony.testmode domain=vendor_telephony_app
-user=system seinfo=platform name=com.samsung.slsi.telephony.uartswitch domain=vendor_telephony_app
-user=system seinfo=platform name=com.samsung.slsi.sysdebugmode domain=vendor_telephony_app
-user=system seinfo=platform name=com.samsung.slsi.telephony.networktestmode domain=vendor_telephony_app
+user=system seinfo=platform name=com.samsung.slsi.telephony.silentlogging domain=vendor_telephony_app levelFrom=all
+user=system seinfo=platform name=com.samsung.slsi.telephony.silentlogging:remote domain=vendor_telephony_app levelFrom=all
+user=system seinfo=platform name=com.samsung.slsi.telephony.testmode domain=vendor_telephony_app levelFrom=all
+user=system seinfo=platform name=com.samsung.slsi.telephony.uartswitch domain=vendor_telephony_app levelFrom=all
+user=system seinfo=platform name=com.samsung.slsi.sysdebugmode domain=vendor_telephony_app levelFrom=all
+user=system seinfo=platform name=com.samsung.slsi.telephony.networktestmode domain=vendor_telephony_app levelFrom=all
 
 # Samsung S.LSI IMS
 user=system seinfo=platform name=com.shannon.imsservice domain=vendor_ims_app
