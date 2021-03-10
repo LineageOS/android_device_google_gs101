@@ -365,10 +365,6 @@ PRODUCT_COPY_FILES += \
 
 # PowerStats HAL
 PRODUCT_PACKAGES += \
-	android.hardware.power.stats@1.0-service.gs101
-
-# PowerStats AIDL HAL
-PRODUCT_PACKAGES += \
 	android.hardware.power.stats-service.pixel
 
 # dumpstate HAL

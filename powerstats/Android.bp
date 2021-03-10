@@ -23,50 +23,11 @@ package {
 }
 
 cc_binary {
-    // TODO(b/167628903) : remove this
-    name: "android.hardware.power.stats@1.0-service.gs101",
-    header_libs: [
-        "device_kernel_headers",
-    ],
-    relative_install_path: "hw",
-    init_rc: ["android.hardware.power.stats@1.0-service.gs101.rc"],
-    vintf_fragments: ["android.hardware.power.stats@1.0-service.gs101.xml"],
-    srcs: [
-        "AocStateResidencyDataProvider.cpp",
-        "DvfsStateResidencyDataProvider.cpp",
-        "RailDataProvider.cpp",
-        "service.cpp",
-        "UfsStateResidencyDataProvider.cpp",
-    ],
-    cflags: [
-        "-Wall",
-        "-Werror",
-    ],
-    static_libs: [
-       "libpixelpowerstats",
-    ],
-    shared_libs: [
-        "android.hardware.power.stats@1.0",
-        "pixelpowerstats_provider_aidl_interface-cpp",
-        "libbase",
-        "libbinder",
-        "libcutils",
-        "libfmq",
-        "libhidlbase",
-        "liblog",
-        "libutils",
-    ],
-    vendor: true,
-}
-
-cc_binary {
     name: "android.hardware.power.stats-service.pixel",
     init_rc: ["android.hardware.power.stats-service.pixel.rc"],
     vintf_fragments: ["android.hardware.power.stats-service.pixel.xml"],
     srcs: [
-        "AocStateResidencyDataProviderAidl.cpp",
-        "DvfsStateResidencyDataProviderAidl.cpp",
-        "serviceaidl.cpp"
+        "*.cpp",
     ],
     cflags: [
         "-Wall",

@@ -13,8 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#define LOG_TAG "libpixelpowerstats"
-
 #include "DvfsStateResidencyDataProvider.h"
 
 #include <android-base/logging.h>
@@ -29,97 +27,90 @@ using android::base::Split;
 using android::base::StartsWith;
 using android::base::Trim;
 
+static const std::string nameSuffix = "-DVFS";
+
+namespace aidl {
 namespace android {
 namespace hardware {
-namespace google {
-namespace pixel {
-namespace powerstats {
+namespace power {
+namespace stats {
 
-DvfsStateResidencyDataProvider::DvfsStateResidencyDataProvider(std::string path, uint64_t clockRate)
-    : mPath(std::move(path)), mClockRate(clockRate) {}
+DvfsStateResidencyDataProvider::DvfsStateResidencyDataProvider(std::string path, uint64_t clockRate,
+        std::vector<Config> cfgs)
+    : mPath(std::move(path)), mClockRate(clockRate), mPowerEntities(std::move(cfgs)) {}
 
-void DvfsStateResidencyDataProvider::addEntity(
-        uint32_t id, std::string name, std::vector<std::pair<std::string, std::string>> states) {
-    mPowerEntities.push_back({id, name, states});
-}
-
-int32_t DvfsStateResidencyDataProvider::matchEntity(char *line) {
-    for (auto const &entity : mPowerEntities) {
-        if (entity.powerEntityName == Trim(std::string(line))) {
-            return entity.powerEntityId;
+int32_t DvfsStateResidencyDataProvider::matchEntity(char const *line) {
+    for (int32_t i = 0; i < mPowerEntities.size(); i++) {
+        if (mPowerEntities[i].powerEntityName == Trim(std::string(line))) {
+            return i;
         }
     }
     return -1;
 }
 
-int32_t DvfsStateResidencyDataProvider::matchState(char *line, int32_t entityId) {
-    uint32_t stateId = 0;
-    for (auto const &entity : mPowerEntities) {
-        if (entityId == entity.powerEntityId) {
-            for (auto const &state : entity.states) {
-                if (StartsWith(Trim(std::string(line)), state.second)) {
-                    return stateId;
-                }
-                stateId++;
-            }
-            return -1;
+int32_t DvfsStateResidencyDataProvider::matchState(char const *line, const Config& powerEntity) {
+    for (int32_t i = 0; i < powerEntity.states.size(); i++) {
+        if (StartsWith(Trim(std::string(line)), powerEntity.states[i].second)) {
+            return i;
         }
     }
     return -1;
 }
 
-bool DvfsStateResidencyDataProvider::parseState(char *line, uint64_t &duration, uint64_t &count) {
+bool DvfsStateResidencyDataProvider::parseState(char const *line, uint64_t *duration,
+        uint64_t *count) {
     std::vector<std::string> parts = Split(line, " ");
     if (parts.size() != 7) {
         return false;
     }
-    if (!ParseUint(Trim(parts[3]), &count)) {
+    if (!ParseUint(Trim(parts[3]), count)) {
         return false;
     }
-    if (!ParseUint(Trim(parts[6]), &duration)) {
+    if (!ParseUint(Trim(parts[6]), duration)) {
         return false;
     }
     return true;
 }
 
-bool DvfsStateResidencyDataProvider::getResults(
-        std::unordered_map<uint32_t, PowerEntityStateResidencyResult> &results) {
+bool DvfsStateResidencyDataProvider::getStateResidencies(
+        std::unordered_map<std::string, std::vector<StateResidency>> *residencies) {
     std::unique_ptr<FILE, decltype(&fclose)> fp(fopen(mPath.c_str(), "r"), fclose);
     if (!fp) {
-        PLOG(ERROR) << __func__ << ":Failed to open file " << mPath
-                    << " Error = " << strerror(errno);
+        PLOG(ERROR) << __func__ << ":Failed to open file " << mPath;
         return false;
     }
 
-    for (auto const &stateSpace : getStateSpaces()) {
-        PowerEntityStateResidencyResult result = {.powerEntityId = stateSpace.powerEntityId};
-        result.stateResidencyData.resize(stateSpace.states.size());
-        for (uint32_t i = 0; i < result.stateResidencyData.size(); i++) {
-            result.stateResidencyData[i].powerEntityStateId =
-                    stateSpace.states[i].powerEntityStateId;
+    for (const Config &powerEntity : mPowerEntities) {
+        std::vector<StateResidency> stateResidency(powerEntity.states.size());
+        for (int32_t i = 0; i < stateResidency.size(); i++) {
+            stateResidency[i].id = i;
         }
-        results.insert(std::make_pair(stateSpace.powerEntityId, result));
+        residencies->emplace(powerEntity.powerEntityName + nameSuffix, stateResidency);
     }
 
     size_t len = 0;
     char *line = nullptr;
 
-    int32_t temp = -1, entityId = -1, stateId = -1;
+    int32_t temp, powerEntityIndex, stateId = -1;
     uint64_t duration, count;
+    auto it = residencies->end();
 
     while (getline(&line, &len, fp.get()) != -1) {
         temp = matchEntity(line);
-        // Assign entityId only when a new valid entity is encountered.
+        // Assign new index only when a new valid entity is encountered.
         if (temp >= 0) {
-            entityId = temp;
+            powerEntityIndex = temp;
+            it = residencies->find(mPowerEntities[powerEntityIndex].powerEntityName + nameSuffix);
         }
-        if (entityId >= 0) {
-            stateId = matchState(line, entityId);
+
+        if (it != residencies->end()) {
+            stateId = matchState(line, mPowerEntities[powerEntityIndex]);
+
             if (stateId >= 0) {
-                if (parseState(line, duration, count)) {
-                    results[entityId].stateResidencyData[stateId].totalTimeInStateMs =
+                if (parseState(line, &duration, &count)) {
+                    it->second[stateId].totalTimeInStateMs =
                             duration / mClockRate;
-                    results[entityId].stateResidencyData[stateId].totalStateEntryCount = count;
+                    it->second[stateId].totalStateEntryCount = count;
                 } else {
                     LOG(ERROR) << "Failed to parse duration and count from [" << std::string(line)
                                << "]";
@@ -134,25 +125,25 @@ bool DvfsStateResidencyDataProvider::getResults(
     return true;
 }
 
-std::vector<PowerEntityStateSpace> DvfsStateResidencyDataProvider::getStateSpaces() {
-    std::vector<PowerEntityStateSpace> stateSpaces;
-    stateSpaces.reserve(mPowerEntities.size());
+std::unordered_map<std::string, std::vector<State>> DvfsStateResidencyDataProvider::getInfo() {
+    std::unordered_map<std::string, std::vector<State>> info;
     for (auto const &entity : mPowerEntities) {
-        PowerEntityStateSpace s = {.powerEntityId = entity.powerEntityId};
-        s.states.resize(entity.states.size());
-        uint32_t stateId = 0;
+        std::vector<State> stateInfo(entity.states.size());
+        int32_t stateId = 0;
         for (auto const &state : entity.states) {
-            s.states[stateId] = {.powerEntityStateId = stateId,
-                                 .powerEntityStateName = state.first};
+            stateInfo[stateId] = State{
+                .id = stateId,
+                .name = state.first
+            };
             stateId++;
         }
-        stateSpaces.emplace_back(s);
+        info.emplace(entity.powerEntityName + nameSuffix, stateInfo);
     }
-    return stateSpaces;
+    return info;
 }
 
-}  // namespace powerstats
-}  // namespace pixel
-}  // namespace google
+}  // namespace stats
+}  // namespace power
 }  // namespace hardware
 }  // namespace android
+}  // namespace aidl

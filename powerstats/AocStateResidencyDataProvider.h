@@ -13,35 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef HARDWARE_GOOGLE_PIXEL_POWERSTATS_AOCSTATERESIDENCYDATAPROVIDER_H
-#define HARDWARE_GOOGLE_PIXEL_POWERSTATS_AOCSTATERESIDENCYDATAPROVIDER_H
+#pragma once
 
-#include <pixelpowerstats/GenericStateResidencyDataProvider.h>
-#include <pixelpowerstats/PowerStats.h>
+#include <dataproviders/GenericStateResidencyDataProvider.h>
+#include <PowerStatsAidl.h>
 
+namespace aidl {
 namespace android {
 namespace hardware {
-namespace google {
-namespace pixel {
-namespace powerstats {
+namespace power {
+namespace stats {
 
-class AocStateResidencyDataProvider : public IStateResidencyDataProvider {
+class AocStateResidencyDataProvider : public PowerStats::IStateResidencyDataProvider {
   public:
-    AocStateResidencyDataProvider(std::vector<std::pair<uint32_t, std::string>> ids,
+    AocStateResidencyDataProvider(std::vector<std::pair<std::string, std::string>> ids,
                                   std::vector<std::pair<std::string, std::string>> states);
     ~AocStateResidencyDataProvider() = default;
-    bool getResults(
-            std::unordered_map<uint32_t, PowerEntityStateResidencyResult> &results) override;
-    std::vector<PowerEntityStateSpace> getStateSpaces() override;
+    bool getStateResidencies(
+        std::unordered_map<std::string, std::vector<StateResidency>> *residencies) override;
+    std::unordered_map<std::string, std::vector<State>> getInfo() override;
 
   private:
-    std::vector<std::unique_ptr<GenericStateResidencyDataProvider>> mProviders;
+    std::unordered_map<std::string /* entity name */,
+        std::vector<std::unique_ptr<GenericStateResidencyDataProvider>> /* providers */> mProviders;
 };
 
-}  // namespace powerstats
-}  // namespace pixel
-}  // namespace google
+}  // namespace stats
+}  // namespace power
 }  // namespace hardware
 }  // namespace android
-
-#endif  // HARDWARE_GOOGLE_PIXEL_POWERSTATS_AOCSTATERESIDENCYDATAPROVIDER_H
+}  // namespace aidl
