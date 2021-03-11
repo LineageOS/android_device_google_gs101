@@ -356,6 +356,7 @@
 
 # Vendor_kernel_modules
 /vendor/lib/modules/.*\.ko                                                    u:object_r:vendor_kernel_modules:s0
+/vendor_dlkm/lib/modules/.*\.ko                                               u:object_r:vendor_kernel_modules:s0
 
 # Display
 /vendor/lib(64)?/libion_google\.so                                               u:object_r:same_process_hal_file:s0
