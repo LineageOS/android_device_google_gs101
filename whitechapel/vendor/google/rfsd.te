@@ -30,3 +30,8 @@ allow rfsd radio_device:chr_file rw_file_perms;
 # Allow to set rild and modem property
 set_prop(rfsd, vendor_modem_prop)
 set_prop(rfsd, vendor_rild_prop)
+
+# Allow rfsd to access modem image file/dir
+allow rfsd modem_img_file:dir r_dir_perms;
+allow rfsd modem_img_file:file r_file_perms;
+allow rfsd modem_img_file:lnk_file r_file_perms;

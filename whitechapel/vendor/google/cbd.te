@@ -46,6 +46,7 @@ allow cbd modem_userdata_file:file create_file_perms;
 # Allow cbd to access modem image file/dir
 allow cbd modem_img_file:dir r_dir_perms;
 allow cbd modem_img_file:file r_file_perms;
+allow cbd modem_img_file:lnk_file r_file_perms;
 
 # Allow cbd to collect crash info
 allow cbd sscoredump_vendor_data_crashinfo_file:dir create_dir_perms;
