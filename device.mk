@@ -461,6 +461,16 @@ PRODUCT_PACKAGES += \
 	android.hardware.drm@1.4-service.widevine \
 	liboemcrypto \
 
+ORIOLE_PRODUCT := %oriole
+RAVEN_PRODUCT := %raven
+ifneq (,$(filter $(ORIOLE_PRODUCT), $(TARGET_PRODUCT)))
+        LOCAL_TARGET_PRODUCT := oriole
+else ifneq (,$(filter $(RAVEN_PRODUCT), $(TARGET_PRODUCT)))
+        LOCAL_TARGET_PRODUCT := raven
+else
+        LOCAL_TARGET_PRODUCT := slider
+endif
+
 SOONG_CONFIG_NAMESPACES += lyric
 SOONG_CONFIG_lyric += \
 	soc \
@@ -474,10 +484,13 @@ SOONG_CONFIG_google3a_config += \
 	soc \
 	gcam_awb \
 	ghawb_truetone \
+        target_device \
 
 SOONG_CONFIG_google3a_config_soc := gs101
 SOONG_CONFIG_google3a_config_gcam_awb := true
 SOONG_CONFIG_google3a_config_ghawb_truetone := true
+SOONG_CONFIG_google3a_config_target_device := $(LOCAL_TARGET_PRODUCT)
+
 
 SOONG_CONFIG_NAMESPACES += gch
 SOONG_CONFIG_gch += \
