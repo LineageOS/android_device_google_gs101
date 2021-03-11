@@ -258,7 +258,6 @@ on post-fs-data
     mkdir /data/vendor/misc/vpn 0771 root system
 
 # Permissions Camera
-    mkdir /data/camera 0777 root root
     mkdir /data/vendor/camera 0770 system camera
     chmod 0755 /sys/kernel/debug/tracing
     restorecon /sys/kernel/debug/tracing/trace_marker
