@@ -952,9 +952,6 @@ PRODUCT_PACKAGES += \
 	Tag \
 	android.hardware.nfc@1.2-service.st
 
-PRODUCT_COPY_FILES += \
-	device/google/gs101/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_PRODUCT)/etc/libnfc-nci.conf
-
 # SecureElement
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.se.omapi.ese.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.se.omapi.ese.xml \
