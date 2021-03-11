@@ -474,12 +474,10 @@ SOONG_CONFIG_google3a_config += \
 	soc \
 	gcam_awb \
 	ghawb_truetone \
-        target_device \
 
 SOONG_CONFIG_google3a_config_soc := gs101
 SOONG_CONFIG_google3a_config_gcam_awb := true
 SOONG_CONFIG_google3a_config_ghawb_truetone := true
-SOONG_CONFIG_google3a_config_target_device := $(TARGET_PRODUCT)
 
 SOONG_CONFIG_NAMESPACES += gch
 SOONG_CONFIG_gch += \
