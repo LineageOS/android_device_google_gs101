@@ -210,7 +210,6 @@ PRODUCT_COPY_FILES += \
 # Fstab files
 PRODUCT_COPY_FILES += \
 	device/google/gs101/conf/fstab.gs101:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.gs101 \
-	device/google/gs101/conf/fstab.gs101:$(TARGET_COPY_OUT_RECOVERY)/root/first_stage_ramdisk/fstab.gs101 \
 	device/google/gs101/conf/fstab.persist:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.persist \
 	device/google/gs101/conf/fstab.gs101:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.gs101
 
