@@ -10,3 +10,5 @@ dontaudit hal_power_stats_default sysfs:dir { open };
 dontaudit hal_power_stats_default sysfs:file { read };
 dontaudit hal_power_stats_default sysfs:file { open };
 dontaudit hal_power_stats_default sysfs:file { open };
+# b/182320246
+dontaudit hal_power_stats_default default_android_service:service_manager { add };
