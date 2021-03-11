@@ -1,7 +1,0 @@
-# b/172173484
-dontaudit mediacodec sysfs:file { getattr };
-dontaudit mediacodec sysfs:file { open };
-dontaudit mediacodec sysfs:file { read };
-userdebug_or_eng(`
-  permissive mediacodec;
-')
