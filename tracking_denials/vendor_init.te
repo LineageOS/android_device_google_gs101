@@ -2,8 +2,9 @@
 dontaudit vendor_init tmpfs:dir { add_name write };
 # b/176528557
 dontaudit vendor_init debugfs_trace_marker:file { getattr };
-# b/177186257
-dontaudit vendor_init system_data_file:dir { open ioctl read };
+userdebug_or_eng(`
+  permissive vendor_init;
+')
 # b/174443175
 dontaudit vendor_init vendor_power_prop:property_service { set };
 # b/177386448

@@ -107,7 +107,22 @@ genfscon proc /bluetooth/sleep/btwrite                                          
 genfscon proc /bluetooth/sleep/btwake                                                           u:object_r:proc_bluetooth_writable:s0
 
 # ODPM
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/6-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/name          u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/6-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/energy_value  u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/6-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/sampling_rate u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/6-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/enabled_rails u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-7/7-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/name          u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-7/7-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/energy_value  u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-7/7-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/sampling_rate u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-7/7-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/enabled_rails u:object_r:sysfs_odpm:s0
+
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/7-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/name          u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/7-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/energy_value  u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/7-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/sampling_rate u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/7-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/enabled_rails u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/8-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/name          u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/8-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/energy_value  u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/8-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/sampling_rate u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/8-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/enabled_rails u:object_r:sysfs_odpm:s0
 
 # Chosen

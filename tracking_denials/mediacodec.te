@@ -2,5 +2,6 @@
 dontaudit mediacodec sysfs:file { getattr };
 dontaudit mediacodec sysfs:file { open };
 dontaudit mediacodec sysfs:file { read };
-# b/176777184
-dontaudit mediacodec default_android_vndservice:service_manager add ;
+userdebug_or_eng(`
+  permissive mediacodec;
+')
