@@ -6,4 +6,12 @@ binder_call(hal_power_stats_default, hal_bluetooth_btlinux)
 
 allow hal_power_stats_default odpm_config_file:dir search;
 allow hal_power_stats_default odpm_config_file:file r_file_perms;
+allow hal_power_stats_default sysfs_odpm:dir search;
 allow hal_power_stats_default sysfs_odpm:file rw_file_perms;
+
+binder_call(hal_power_stats_default, citadeld)
+r_dir_file(hal_power_stats_default, sysfs_aoc)
+r_dir_file(hal_power_stats_default, sysfs_leds)
+r_dir_file(hal_power_stats_default, sysfs_acpm_stats)
+r_dir_file(hal_power_stats_default, sysfs_wifi)
+r_dir_file(hal_power_stats_default, sysfs_backlight)
