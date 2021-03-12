@@ -347,7 +347,10 @@ void DumpstateDevice::dumpPowerSection(int fd) {
                         "echo \"$regs\"; done"});
 
     /* Nvmem State */
-    RunCommandToFd(fd, "nvmem dump", {"/vendor/bin/sh", "-c", "xxd /sys/bus/nvmem/devices/4-00500/nvmem"});
+    RunCommandToFd(fd, "nvmem dump", {"/vendor/bin/sh", "-c",
+                        "for f in /sys/devices/platform/10970000.hsi2c/i2c-*/*-0050 ; do "
+                        "regs=`cat $f/eeprom | xxd`; echo $f: ;"
+                        "echo \"$regs\"; done"});
 
     DumpFileToFd(fd, "Charger Stats", "/sys/class/power_supply/battery/charge_details");
     RunCommandToFd(fd, "Google Charger", {"/vendor/bin/sh", "-c", "cd /sys/kernel/debug/google_charger/; "
