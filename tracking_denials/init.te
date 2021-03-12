@@ -17,3 +17,5 @@ dontaudit init device:chr_file { read write };
 # b/180963348
 dontaudit init overlayfs_file:chr_file { unlink };
 dontaudit init overlayfs_file:file { rename };
+# b/182524202
+dontaudit init mnt_vendor_file:dir { mounton };
