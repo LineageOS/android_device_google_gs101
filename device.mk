@@ -49,7 +49,7 @@ PRODUCT_SOONG_NAMESPACES += \
 	vendor/google_nos/host/android \
 	vendor/google_nos/test/system-test-harness
 
-DEVICE_USES_EXYNOS_GRALLOC_VERSION := 3
+DEVICE_USES_EXYNOS_GRALLOC_VERSION := 4
 
 ifeq ($(TARGET_PREBUILT_KERNEL),)
 LOCAL_KERNEL := $(TARGET_KERNEL_DIR)/Image.lz4
