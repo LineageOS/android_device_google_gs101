@@ -1,4 +1,0 @@
-# b/181914749
-dontaudit pixelstats_vendor servicemanager:binder { call };
-# b/181915066
-dontaudit pixelstats_vendor servicemanager:binder { call };
