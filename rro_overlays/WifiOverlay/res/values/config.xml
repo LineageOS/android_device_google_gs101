@@ -106,6 +106,9 @@
     <!-- Override channel utilization estimation with fixed value, disabled in brcm-based pixels -->
     <bool translatable="false" name="config_wifiChannelUtilizationOverrideEnabled">false</bool>
 
+    <!-- Enable adding minimum confirmation duration when sending network score to connectivity service. -->
+    <bool translatable="false" name="config_wifiMinConfirmationDurationSendNetworkScoreEnabled">true</bool>
+
     <!-- Enable concurrent STA + STA peer to peer + internet connectivity -->
     <bool translatable="false" name="config_wifiMultiStaLocalOnlyConcurrencyEnabled">true</bool>
 
