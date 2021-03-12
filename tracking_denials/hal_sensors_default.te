@@ -53,3 +53,7 @@ dontaudit hal_sensors_default device:dir { read };
 dontaudit hal_sensors_default device:dir { watch };
 dontaudit hal_sensors_default servicemanager:binder { transfer };
 dontaudit hal_sensors_default aoc_device:chr_file { open };
+# b/182523946
+dontaudit hal_sensors_default chre_socket:sock_file { write };
+dontaudit hal_sensors_default chre:unix_stream_socket { connectto };
+dontaudit hal_sensors_default chre:unix_stream_socket { connectto };
