@@ -1,4 +1,0 @@
-# b/177966433
-dontaudit hal_wifi_ext vendor_default_prop:property_service { set };
-dontaudit hal_wifi_ext grilservice_app:binder { call };
-dontaudit hal_wifi_ext grilservice_app:binder { call };
