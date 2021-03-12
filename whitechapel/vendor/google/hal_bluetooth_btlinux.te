@@ -4,6 +4,7 @@ allow hal_bluetooth_btlinux sysfs_bluetooth_writable:file rw_file_perms;
 allow hal_bluetooth_btlinux proc_bluetooth_writable:file rw_file_perms;
 allow hal_bluetooth_btlinux hci_attach_dev:chr_file rw_file_perms;
 allow hal_bluetooth_btlinux wb_coexistence_dev:chr_file rw_file_perms;
+binder_call(hal_bluetooth_btlinux, servicemanager)
 
 # power stats
 vndbinder_use(hal_bluetooth_btlinux)
