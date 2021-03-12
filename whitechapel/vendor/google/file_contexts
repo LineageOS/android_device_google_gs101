@@ -408,3 +408,10 @@
 # video system DMA-BUF heap
 /dev/dma_heap/video_system                                               u:object_r:dmabuf_system_heap_device:s0
 /dev/dma_heap/video_system-uncached                                      u:object_r:dmabuf_system_heap_device:s0
+
+# Video sysfs files
+/sys/devices/platform/mfc/video4linux/video6/name                              u:object_r:sysfs_video:s0
+/sys/devices/platform/mfc/video4linux/video7/name                              u:object_r:sysfs_video:s0
+
+# BigOcean
+/dev/bigocean                                                                  u:object_r:video_device:s0
