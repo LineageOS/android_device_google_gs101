@@ -8,6 +8,7 @@ allow init custom_ab_block_device:lnk_file relabelto;
 allow init boot_block_device:lnk_file relabelto;
 
 allow init modem_img_file:dir mounton;
+allow init mnt_vendor_file:dir mounton;
 allow init modem_img_file:filesystem { getattr mount relabelfrom };
 
 allow init persist_file:dir mounton;

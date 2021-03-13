@@ -7,10 +7,8 @@ dontaudit init sysfs:file { setattr };
 dontaudit init sysfs:file { write };
 # b/178979985
 dontaudit init device:chr_file { ioctl };
-dontaudit init modem_img_file:dir { mounton };
 dontaudit init device:chr_file { open };
 dontaudit init device:chr_file { read write };
-dontaudit init modem_img_file:dir { mounton };
 dontaudit init device:chr_file { ioctl };
 dontaudit init device:chr_file { open };
 dontaudit init device:chr_file { read write };
