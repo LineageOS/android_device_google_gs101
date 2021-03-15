@@ -1,2 +1,0 @@
-# b/182320300
-dontaudit hal_bluetooth_btlinux default_android_service:service_manager { find };
