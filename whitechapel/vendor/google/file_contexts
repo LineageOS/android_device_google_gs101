@@ -330,6 +330,10 @@
 # GRIL
 /vendor/bin/hw/vendor\.google\.radioext@1\.0-service                 u:object_r:hal_radioext_default_exec:s0
 
+# Uwb
+# R4
+/vendor/bin/hw/hardware\.qorvo\.uwb-service                          u:object_r:hal_uwb_default_exec:s0
+
 # Radio files.
 /data/vendor/radio(/.*)?                                                    u:object_r:radio_vendor_data_file:s0
 
