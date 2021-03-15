@@ -5,11 +5,6 @@ dontaudit vendor_init debugfs_trace_marker:file { getattr };
 userdebug_or_eng(`
   permissive vendor_init;
 ')
-# b/174443175
-dontaudit vendor_init vendor_power_prop:property_service { set };
-# b/177386448
-dontaudit vendor_init device:file { create };
-dontaudit vendor_init device:file { create };
 # b/178980032
 dontaudit vendor_init unlabeled:dir { setattr };
 dontaudit vendor_init unlabeled:dir { read };
