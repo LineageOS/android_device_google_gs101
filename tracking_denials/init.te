@@ -1,17 +1,3 @@
-# b/177966144
-dontaudit init sysfs:file { open };
-dontaudit init sysfs:file { setattr };
-dontaudit init sysfs:file { open };
-dontaudit init sysfs:file { write };
-dontaudit init sysfs:file { setattr };
-dontaudit init sysfs:file { write };
-# b/178979985
-dontaudit init device:chr_file { ioctl };
-dontaudit init device:chr_file { open };
-dontaudit init device:chr_file { read write };
-dontaudit init device:chr_file { ioctl };
-dontaudit init device:chr_file { open };
-dontaudit init device:chr_file { read write };
 # b/180963348
 dontaudit init overlayfs_file:chr_file { unlink };
 dontaudit init overlayfs_file:file { rename };
