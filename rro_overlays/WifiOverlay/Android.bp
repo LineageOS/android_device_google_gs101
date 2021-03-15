@@ -9,13 +9,6 @@ package {
     ],
 }
 
-override_runtime_resource_overlay {
-    name: "PixelWifiOverlayGs101",
-    base: "//device/google/gs101:WifiOverlay",
-    package_name: "com.google.android.wifi.resources.pixel",
-    target_package_name: "com.google.android.wifi.resources",
-}
-
 runtime_resource_overlay {
     name: "WifiOverlay",
     theme: "WifiOverlay",

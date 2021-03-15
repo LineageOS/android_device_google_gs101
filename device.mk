@@ -503,7 +503,6 @@ PRODUCT_PACKAGES += \
 	android.hardware.wifi@1.0-service \
 	wificond \
 	libwpa_client \
-	PixelWifiOverlayGs101 \
 	WifiOverlay \
 
 PRODUCT_PACKAGES_DEBUG += \
