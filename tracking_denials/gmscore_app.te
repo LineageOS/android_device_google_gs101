@@ -65,3 +65,6 @@ dontaudit gmscore_app bpf_progs_loaded_prop:file { getattr };
 dontaudit gmscore_app bpf_progs_loaded_prop:file { open };
 # b/180960879
 dontaudit gmscore_app property_type:file *;
+# b/182705863
+dontaudit gmscore_app modem_img_file:filesystem { getattr };
+dontaudit gmscore_app modem_img_file:filesystem { getattr };
