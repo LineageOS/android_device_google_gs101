@@ -1031,7 +1031,8 @@ SOONG_CONFIG_aoc_audio_board_platform := $(TARGET_BOARD_PLATFORM)
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.config.vc_call_vol_steps=7 \
 	ro.config.media_vol_steps=25 \
-	ro.audio.monitorRotation = true
+	ro.audio.monitorRotation = true \
+	ro.audio.offload_wakelock=false
 
 # vndservicemanager and vndservice no longer included in API 30+, however needed by vendor code.
 # See b/148807371 for reference
