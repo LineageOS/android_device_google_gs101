@@ -1,10 +1,4 @@
 # b/171760846
-dontaudit sced hwservicemanager:binder { call };
 dontaudit sced hidl_base_hwservice:hwservice_manager { add };
 dontaudit sced hal_vendor_oem_hwservice:hwservice_manager { add };
 dontaudit sced hal_vendor_oem_hwservice:hwservice_manager { find };
-dontaudit sced hwservicemanager_prop:file { read };
-dontaudit sced hwservicemanager_prop:file { open };
-dontaudit sced hwservicemanager:binder { transfer };
-dontaudit sced hwservicemanager_prop:file { map };
-dontaudit sced hwservicemanager_prop:file { getattr };
