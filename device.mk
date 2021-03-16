@@ -700,6 +700,9 @@ PRODUCT_PACKAGES += \
 	libExynosC2Vp9Dec \
 	libExynosC2Vp9Enc
 
+PRODUCT_PROPERTY_OVERRIDES += \
+       debug.c2.use_dmabufheaps=1
+
 # 2. OpenMAX IL
 PRODUCT_COPY_FILES += \
 	device/google/gs101/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
