@@ -32,3 +32,7 @@ add_service(hal_graphics_composer_default, vendor_displaycolor_service)
 
 add_service(hal_graphics_composer_default, hal_pixel_display_service)
 binder_use(hal_graphics_composer_default)
+get_prop(hal_graphics_composer_default, boot_status_prop);
+
+# allow HWC to access vendor log file
+allow hal_graphics_composer_default vendor_log_file:file create_file_perms;
