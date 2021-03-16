@@ -112,6 +112,9 @@
     <!-- Enable concurrent STA + STA peer to peer + internet connectivity -->
     <bool translatable="false" name="config_wifiMultiStaLocalOnlyConcurrencyEnabled">true</bool>
 
+    <!-- Enable concurrent STA + STA MBB support -->
+    <bool translatable="false" name="config_wifiMultiStaNetworkSwitchingMakeBeforeBreakEnabled">true</bool>
+
     <!-- Enable concurrent Bridged access point (AP) support -->
     <bool translatable="false" name="config_wifiBridgedSoftApSupported">true</bool>
 
