@@ -1,0 +1,3 @@
+# b/182954062
+dontaudit kernel kernel:perf_event { cpu };
+dontaudit kernel kernel:perf_event { cpu };
