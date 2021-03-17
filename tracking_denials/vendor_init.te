@@ -14,3 +14,5 @@ dontaudit vendor_init unlabeled:dir { open };
 dontaudit vendor_init unlabeled:dir { read };
 dontaudit vendor_init unlabeled:dir { setattr };
 dontaudit vendor_init unlabeled:dir { open };
+# b/182954248
+dontaudit vendor_init default_prop:file { read };
