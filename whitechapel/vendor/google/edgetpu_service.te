@@ -30,3 +30,7 @@ allow edgetpu_server edgetpu_service_data_file:dir rw_dir_perms;
 # Allow EdgeTPU service to access the Package Manager service.
 allow edgetpu_server package_native_service:service_manager find;
 binder_call(edgetpu_server, system_server);
+
+# Allow EdgeTPU service to access Android shared memory allocated
+# by the camera hal for on-device compilation.
+allow edgetpu_server hal_camera_default:fd use;
