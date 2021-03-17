@@ -1,0 +1,13 @@
+# b/182954169
+dontaudit hal_health_default sysfs:file { read };
+dontaudit hal_health_default sysfs:file { getattr };
+dontaudit hal_health_default sysfs:file { read };
+dontaudit hal_health_default sysfs:file { read };
+dontaudit hal_health_default sysfs:file { open };
+dontaudit hal_health_default sysfs:file { getattr };
+dontaudit hal_health_default sysfs:file { open };
+dontaudit hal_health_default sysfs:file { read };
+dontaudit hal_health_default sysfs:file { open };
+dontaudit hal_health_default sysfs:file { getattr };
+dontaudit hal_health_default sysfs:file { open };
+dontaudit hal_health_default sysfs:file { getattr };
