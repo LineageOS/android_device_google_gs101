@@ -1,35 +1,5 @@
-# ag/13067824
-dontaudit dumpstate fuse:dir r_dir_perms;
-# b/174618507
-dontaudit dumpstate default_android_service:service_manager { find };
-dontaudit dumpstate vold:binder { call };
-dontaudit dumpstate modem_userdata_file:dir { getattr };
-dontaudit dumpstate modem_efs_file:dir { getattr };
-dontaudit dumpstate vold:binder { call };
-dontaudit dumpstate modem_userdata_file:dir { getattr };
-dontaudit dumpstate hal_drm_clearkey:process { signal };
-dontaudit dumpstate hal_drm_clearkey:process { signal };
-dontaudit dumpstate modem_efs_file:dir { getattr };
-# b/177778645
-dontaudit dumpstate ramdump_vendor_mnt_file:filesystem { getattr };
-dontaudit dumpstate ramdump_vendor_mnt_file:filesystem { getattr };
-dontaudit dumpstate ramdump_vendor_mnt_file:dir { getattr };
-dontaudit dumpstate ramdump_vendor_mnt_file:dir { getattr };
-# b/177860804
-dontaudit dumpstate incident:process { sigkill };
-dontaudit dumpstate incident:process { signal };
-dontaudit dumpstate incident:process { sigkill };
-dontaudit dumpstate incident:process { signal };
 # b/179310854
-dontaudit dumpstate unlabeled:dir { getattr };
-dontaudit dumpstate unlabeled:dir { getattr };
-# b/180963249
-dontaudit dumpstate hal_neuralnetworks_armnn:process { signal };
-dontaudit dumpstate hal_neuralnetworks_armnn:process { signal };
-# b/181915316
-dontaudit dumpstate vendor_dmabuf_debugfs:file { read };
-dontaudit dumpstate vendor_dmabuf_debugfs:file { open };
-dontaudit dumpstate vendor_dmabuf_debugfs:file { getattr };
-dontaudit dumpstate vendor_dmabuf_debugfs:file { getattr };
-dontaudit dumpstate vendor_dmabuf_debugfs:file { read };
-dontaudit dumpstate vendor_dmabuf_debugfs:file { open };
+dontaudit dumpstate hal_neuralnetworks_armnn:process signal;
+dontaudit dumpstate hal_power_stats_vendor_service:service_manager find;
+dontaudit dumpstate vendor_dmabuf_debugfs:file { getattr open read };
+dontaudit dumpstate vold:binder call;
