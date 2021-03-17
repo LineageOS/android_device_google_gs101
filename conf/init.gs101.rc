@@ -275,6 +275,12 @@ on post-fs-data
     chown system system /dev/stmvl53l1_ranging
     chmod 0660 /dev/stmvl53l1_ranging
 
+    # Factory calibration files
+    chmod 0771 /mnt/vendor/persist/camera
+    chmod 0771 /mnt/vendor/persist/camera/OTP_calibration
+    chmod 0771 /mnt/vendor/persist/camera/pdaf_calibration_data
+    chmod 0771 /mnt/vendor/persist/camera/rear
+
 # Audio dump and debug
     mkdir /data/vendor/audio 0770 audio audio
 
