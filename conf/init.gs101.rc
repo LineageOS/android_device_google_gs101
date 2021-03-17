@@ -15,10 +15,6 @@ service vendor.charger /system/bin/charger
     file /proc/last_kmsg r
 
 on early-init
-    mkdir /mnt/vendor/efs 0771 radio system
-    mkdir /mnt/vendor/efs_backup 0771 radio system
-    mkdir /mnt/vendor/modem_userdata 0771 radio system
-    mkdir /mnt/vendor/persist 0771 system system
     mount debugfs /sys/kernel/debug /sys/kernel/debug
     mount_all /vendor/etc/fstab.persist --early
 
