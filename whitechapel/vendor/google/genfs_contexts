@@ -25,6 +25,7 @@ genfscon sysfs /devices/platform/10970000.hsi2c/i2c-5/5-003c/power_supply       
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-6/6-0069/power_supply       u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-6/6-0036/power_supply       u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-6/6-0057/power_supply       u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/10970000.hsi2c/i2c-5/5-0050/eeprom             u:object_r:sysfs_batteryinfo:s0
 
 #   O6
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-5/5-0025                    u:object_r:sysfs_batteryinfo:s0
@@ -34,6 +35,7 @@ genfscon sysfs /devices/platform/10970000.hsi2c/i2c-4/4-003c/power_supply       
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-5/5-0069/power_supply       u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-5/5-0036/power_supply       u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-5/5-0057/power_supply       u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/10970000.hsi2c/i2c-4/4-0050/eeprom             u:object_r:sysfs_batteryinfo:s0
 
 # Storage
 genfscon debugfs /f2fs                                u:object_r:debugfs_f2fs:s0
