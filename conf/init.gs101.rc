@@ -186,6 +186,9 @@ on init
     # Loading common kernel modules in background
     start insmod_sh_common
 
+    # Charge stats (write 0)
+    chown system system /sys/class/power_supply/battery/charge_stats
+
     # start watchdogd
     start watchdogd
 

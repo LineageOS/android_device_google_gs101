@@ -17,10 +17,13 @@
 #define LOG_TAG "pixelstats"
 
 #include <android-base/logging.h>
+#include <thread>
 
 #include <pixelstats/SysfsCollector.h>
+#include <pixelstats/UeventListener.h>
 
 using android::hardware::google::pixel::SysfsCollector;
+using android::hardware::google::pixel::UeventListener;
 
 #define UFSHC_PATH(filename) "/dev/sys/block/bootdevice/" #filename
 const struct SysfsCollector::SysfsPaths sysfs_paths = {
@@ -37,6 +40,10 @@ const struct SysfsCollector::SysfsPaths sysfs_paths = {
 
 int main() {
     LOG(INFO) << "starting PixelStats";
+
+    UeventListener ueventListener("");
+    std::thread listenThread(&UeventListener::ListenForever, &ueventListener);
+    listenThread.detach();
 
     SysfsCollector collector(sysfs_paths);
     collector.collect();  // This blocks forever.
