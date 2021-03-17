@@ -19,6 +19,7 @@
 #include <PowerStatsAidl.h>
 #include "AocStateResidencyDataProvider.h"
 #include "DvfsStateResidencyDataProvider.h"
+#include "UfsStateResidencyDataProvider.h"
 #include <dataproviders/DisplayStateResidencyDataProvider.h>
 #include <dataproviders/GenericStateResidencyDataProvider.h>
 #include <dataproviders/IioEnergyMeterDataProvider.h>
@@ -35,6 +36,7 @@
 using aidl::android::hardware::power::stats::AocStateResidencyDataProvider;
 using aidl::android::hardware::power::stats::DisplayStateResidencyDataProvider;
 using aidl::android::hardware::power::stats::DvfsStateResidencyDataProvider;
+using aidl::android::hardware::power::stats::UfsStateResidencyDataProvider;
 using aidl::android::hardware::power::stats::EnergyConsumerType;
 using aidl::android::hardware::power::stats::GenericStateResidencyDataProvider;
 using aidl::android::hardware::power::stats::IioEnergyMeterDataProvider;
@@ -506,6 +508,10 @@ void addWifi(std::shared_ptr<PowerStats> p) {
     p->addStateResidencyDataProvider(wifiSdp);
 }
 
+void addUfs(std::shared_ptr<PowerStats> p) {
+    p->addStateResidencyDataProvider(std::make_shared<UfsStateResidencyDataProvider>("/sys/bus/platform/devices/14700000.ufs/ufs_stats/"));
+}
+
 /**
  * Unlike other data providers, which source power entity state residency data from the kernel,
  * this data provider acts as a general-purpose channel for state residency data providers
@@ -544,6 +550,7 @@ int main() {
     addNFC(p);
     addPCIe(p);
     addWifi(p);
+    addUfs(p);
 
     const std::string instance = std::string() + PowerStats::descriptor + "/default";
     binder_status_t status = AServiceManager_addService(p->asBinder().get(), instance.c_str());
