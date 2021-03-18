@@ -1,2 +1,13 @@
 # b/174961422
 dontaudit hal_vibrator_default property_type:file * ;
+# b/182954060
+dontaudit hal_vibrator_default sysfs:file { getattr };
+dontaudit hal_vibrator_default sysfs:file { getattr };
+dontaudit hal_vibrator_default sysfs:file { getattr };
+dontaudit hal_vibrator_default sysfs:file { getattr };
+dontaudit hal_vibrator_default sysfs:file { getattr };
+dontaudit hal_vibrator_default sysfs:file { open };
+dontaudit hal_vibrator_default sysfs:file { read write };
+dontaudit hal_vibrator_default sysfs:file { open };
+dontaudit hal_vibrator_default sysfs:file { read write };
+dontaudit hal_vibrator_default sysfs:file { getattr };

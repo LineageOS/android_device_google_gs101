@@ -13,6 +13,13 @@ allow hal_camera_default sysfs_edgetpu:dir r_dir_perms;
 allow hal_camera_default sysfs_edgetpu:file r_file_perms;
 allow hal_camera_default sysfs_chip_id:file r_file_perms;
 
+# Allow the camera hal to access the EdgeTPU service and the
+# Android shared memory allocated by the EdgeTPU service for
+# on-device compilation.
+allow hal_camera_default edgetpu_server:fd use;
+allow hal_camera_default edgetpu_service:service_manager find;
+binder_call(hal_camera_default, edgetpu_server)
+
 allow hal_camera_default mnt_vendor_file:dir search;
 allow hal_camera_default persist_file:dir search;
 allow hal_camera_default persist_camera_file:dir search;
