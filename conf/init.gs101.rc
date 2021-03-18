@@ -93,11 +93,6 @@ on init
     mkdir /dev/socket/pdx/system/vr/sensors 0775 system system
 
     # Boot time 183626384
-    write /dev/cpuctl/top-app/cpu.uclamp.min 30
-    write /dev/cpuctl/top-app/cpu.uclamp.latency_sensitive 1
-    write /dev/cpuctl/foreground/cpu.uclamp.min 30
-    write /dev/cpuctl/foreground/cpu.uclamp.latency_sensitive 1
-
     write /sys/kernel/vendor_sched/ta_uclamp_min 308
     write /sys/kernel/vendor_sched/ta_prefer_idle 1
     write /sys/kernel/vendor_sched/fg_uclamp_min 308
@@ -123,8 +118,6 @@ on init
     chown system system /dev/cpuctl/camera-daemon/cpu.uclamp.latency_sensitive
     chown system system /dev/cpuctl/camera-daemon/cgroup.procs
 
-    write /dev/cpuctl/camera-daemon/cpu.uclamp.latency_sensitive 1
-    write /dev/cpuctl/camera-daemon/cpu.uclamp.min 1
     write /sys/kernel/vendor_sched/cam_prefer_idle 1
     write /sys/kernel/vendor_sched/cam_uclamp_min 10
 
@@ -202,7 +195,6 @@ on init
     start watchdogd
 
     # Add a boost for NNAPI HAL
-    write /dev/cpuctl/nnapi-hal/cpu.uclamp.min 15
     write /sys/kernel/vendor_sched/nnapi_uclamp_min 154
 
     # Add memlat governor settings
@@ -629,10 +621,9 @@ on property:sys.boot_completed=1
     setprop vendor.powerhal.init 1
 
     # Setup final cpu.uclamp
-    write /dev/cpuctl/top-app/cpu.uclamp.min 10
-    write /dev/cpuctl/foreground/cpu.uclamp.min 0
     write /sys/kernel/vendor_sched/ta_uclamp_min 103
     write /sys/kernel/vendor_sched/fg_uclamp_min 0
+    write /sys/kernel/vendor_sched/bg_uclamp_max 103
 
     # Setup cpu.shares to throttle background group at 5%
     write /dev/cpuctl/background/cpu.shares 1024
