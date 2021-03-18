@@ -1,0 +1,9 @@
+# b/182706078
+dontaudit edgetpu_server tmpfs:file { getattr };
+dontaudit edgetpu_server tmpfs:file { getattr };
+dontaudit edgetpu_server tmpfs:file { map };
+dontaudit edgetpu_server tmpfs:file { read write };
+dontaudit edgetpu_server hal_camera_default:fd { use };
+dontaudit edgetpu_server hal_camera_default:fd { use };
+dontaudit edgetpu_server tmpfs:file { read write };
+dontaudit edgetpu_server tmpfs:file { map };
