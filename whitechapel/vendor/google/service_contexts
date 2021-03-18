@@ -1,3 +1,4 @@
 # EdgeTPU service
-com.google.edgetpu.IEdgeTpuService/default  u:object_r:edgetpu_service:s0
-com.google.hardware.pixel.display.IDisplay/default                            u:object_r:hal_pixel_display_service:s0
+com.google.edgetpu.IEdgeTpuService/default                 u:object_r:edgetpu_service:s0
+com.google.hardware.pixel.display.IDisplay/default         u:object_r:hal_pixel_display_service:s0
+uwb                                                        u:object_r:uwb_service:s0
