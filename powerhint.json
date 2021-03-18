@@ -73,6 +73,15 @@
       "ResetOnInit": true
     },
     {
+      "Name": "MIFTargetLoad",
+      "Path": "/sys/class/devfreq/17000010.devfreq_mif/interactive/target_load",
+      "Values": [
+        "20 10 80",
+        "20 5 80"
+      ],
+      "ResetOnInit": true
+    },
+    {
       "Name": "TAUClampBoost",
       "Path": "/dev/cpuctl/top-app/cpu.uclamp.min",
       "Values": [
@@ -220,6 +229,12 @@
       "Value": "302000"
     },
     {
+      "PowerHint": "CAMERA_STREAMING_HIGH",
+      "Node": "MIFTargetLoad",
+      "Duration": 0,
+      "Value": "20 10 80"
+    },
+    {
       "PowerHint": "CAMERA_STREAMING_STANDARD",
       "Node": "CPUBigClusterMaxFreq",
       "Duration": 0,
@@ -227,9 +242,21 @@
     },
     {
       "PowerHint": "CAMERA_STREAMING_STANDARD",
+      "Node": "CPULittleClusterMaxFreq",
+      "Duration": 0,
+      "Value": "1401000"
+    },
+    {
+      "PowerHint": "CAMERA_STREAMING_STANDARD",
       "Node": "GPUMinFreq",
       "Duration": 0,
-      "Value": "471000"
+      "Value": "302000"
+    },
+    {
+      "PowerHint": "CAMERA_STREAMING_STANDARD",
+      "Node": "MIFTargetLoad",
+      "Duration": 0,
+      "Value": "20 10 80"
     },
     {
       "PowerHint": "FIXED_PERFORMANCE",
