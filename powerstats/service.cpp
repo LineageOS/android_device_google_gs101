@@ -58,7 +58,7 @@ void addAoC(std::shared_ptr<PowerStats> p) {
     };
     std::vector<std::pair<std::string, std::string>> coreStates = {
             {"DWN", "off"}, {"RET", "retention"}, {"WFI", "wfi"}};
-    p->addStateResidencyDataProvider(std::make_shared<AocStateResidencyDataProvider>(coreIds,
+    p->addStateResidencyDataProvider(std::make_unique<AocStateResidencyDataProvider>(coreIds,
             coreStates));
 
     // Add AoC voltage stats
@@ -70,7 +70,7 @@ void addAoC(std::shared_ptr<PowerStats> p) {
                                                                       {"UUD", "ultra_underdrive"},
                                                                       {"UD", "underdrive"}};
     p->addStateResidencyDataProvider(
-            std::make_shared<AocStateResidencyDataProvider>(voltageIds, voltageStates));
+            std::make_unique<AocStateResidencyDataProvider>(voltageIds, voltageStates));
 
     // Add AoC monitor mode
     std::vector<std::pair<std::string, std::string>> monitorIds = {
@@ -80,7 +80,7 @@ void addAoC(std::shared_ptr<PowerStats> p) {
             {"MON", "mode"},
     };
     p->addStateResidencyDataProvider(
-            std::make_shared<AocStateResidencyDataProvider>(monitorIds, monitorStates));
+            std::make_unique<AocStateResidencyDataProvider>(monitorIds, monitorStates));
 }
 
 void addDvfsStats(std::shared_ptr<PowerStats> p) {
@@ -172,7 +172,7 @@ void addDvfsStats(std::shared_ptr<PowerStats> p) {
         std::make_pair("1066MHz", "1066000000"),
     }});
 
-    p->addStateResidencyDataProvider(std::make_shared<DvfsStateResidencyDataProvider>(
+    p->addStateResidencyDataProvider(std::make_unique<DvfsStateResidencyDataProvider>(
             "/sys/devices/platform/acpm_stats/fvp_stats", NS_TO_MS, cfgs));
 }
 
@@ -240,10 +240,8 @@ void addSoC(std::shared_ptr<PowerStats> p) {
     cfgs.emplace_back(generateGenericStateResidencyConfigs(reqStateConfig, slcReqStateHeaders),
             "SLC-REQ", "SLC_REQ:");
 
-    auto socSdp = std::make_shared<GenericStateResidencyDataProvider>(
-            "/sys/devices/platform/acpm_stats/soc_stats", cfgs);
-
-    p->addStateResidencyDataProvider(socSdp);
+    p->addStateResidencyDataProvider(std::make_unique<GenericStateResidencyDataProvider>(
+            "/sys/devices/platform/acpm_stats/soc_stats", cfgs));
 }
 
 void setEnergyMeter(std::shared_ptr<PowerStats> p) {
@@ -266,11 +264,9 @@ void addDisplay(std::shared_ptr<PowerStats> p) {
         "HBM: 1440x3040@60",
         "HBM: 1440x3040@90"};
 
-    auto displaySdp =
-        std::make_shared<DisplayStateResidencyDataProvider>("Display",
+    p->addStateResidencyDataProvider(std::make_unique<DisplayStateResidencyDataProvider>("Display",
             "/sys/class/backlight/panel0-backlight/state",
-            states);
-    p->addStateResidencyDataProvider(displaySdp);
+            states));
 
     // Add display energy consumer
     /*
@@ -278,13 +274,11 @@ void addDisplay(std::shared_ptr<PowerStats> p) {
      * and include proper coefficients for display states. Must account for ALL devices built
      * using this source.
      */
-    auto displayConsumer = PowerStatsEnergyConsumer::createMeterAndEntityConsumer(p,
+    p->addEnergyConsumer(PowerStatsEnergyConsumer::createMeterAndEntityConsumer(p,
             EnergyConsumerType::DISPLAY, "display", {"PPVAR_VSYS_PWR_DISP"}, "Display",
             {{"LP: 1440x3040@30", 1},
              {"On: 1440x3040@60", 2},
-             {"On: 1440x3040@90", 3}});
-
-    p->addEnergyConsumer(displayConsumer);
+             {"On: 1440x3040@90", 3}}));
 }
 
 void addCPUclusters(std::shared_ptr<PowerStats> p) {
@@ -314,10 +308,8 @@ void addCPUclusters(std::shared_ptr<PowerStats> p) {
             name, name);
     }
 
-    auto cpuSdp = std::make_shared<GenericStateResidencyDataProvider>(
-            "/sys/devices/platform/acpm_stats/core_stats", cfgs);
-
-    p->addStateResidencyDataProvider(cpuSdp);
+    p->addStateResidencyDataProvider(std::make_unique<GenericStateResidencyDataProvider>(
+            "/sys/devices/platform/acpm_stats/core_stats", cfgs));
 
     p->addEnergyConsumer(PowerStatsEnergyConsumer::createMeterConsumer(p,
             EnergyConsumerType::CPU_CLUSTER, "CPUCL0", {"S4M_VDD_CPUCL0"}));
@@ -356,12 +348,10 @@ void addGPU(std::shared_ptr<PowerStats> p) {
             {"670000",  50}};
     }
 
-    auto gpuConsumer = PowerStatsEnergyConsumer::createMeterAndAttrConsumer(p,
+    p->addEnergyConsumer(PowerStatsEnergyConsumer::createMeterAndAttrConsumer(p,
             EnergyConsumerType::OTHER, "GPU", {"S2S_VDD_G3D"},
             {{UID_TIME_IN_STATE, "/sys/devices/platform/1c500000.mali/uid_time_in_state"}},
-            stateCoeffs);
-
-    p->addEnergyConsumer(gpuConsumer);
+            stateCoeffs));
 }
 
 void addMobileRadio(std::shared_ptr<PowerStats> p)
@@ -390,7 +380,7 @@ void addMobileRadio(std::shared_ptr<PowerStats> p)
     cfgs.emplace_back(generateGenericStateResidencyConfigs(powerStateConfig, powerStateHeaders),
             "MODEM", "");
 
-    p->addStateResidencyDataProvider(std::make_shared<GenericStateResidencyDataProvider>(
+    p->addStateResidencyDataProvider(std::make_unique<GenericStateResidencyDataProvider>(
             "/sys/devices/platform/cpif/modem/power_stats", cfgs));
 
     p->addEnergyConsumer(PowerStatsEnergyConsumer::createMeterConsumer(p,
@@ -422,10 +412,8 @@ void addNFC(std::shared_ptr<PowerStats> p) {
     cfgs.emplace_back(generateGenericStateResidencyConfigs(nfcStateConfig, nfcStateHeaders),
             "NFC", "NFC subsystem");
 
-    auto nfcSdp = std::make_shared<GenericStateResidencyDataProvider>(
-            "/sys/devices/platform/10960000.hsi2c/i2c-3/3-0008/power_stats", cfgs);
-
-    p->addStateResidencyDataProvider(nfcSdp);
+    p->addStateResidencyDataProvider(std::make_unique<GenericStateResidencyDataProvider>(
+            "/sys/devices/platform/10960000.hsi2c/i2c-3/3-0008/power_stats", cfgs));
 }
 
 void addPCIe(std::shared_ptr<PowerStats> p) {
@@ -448,18 +436,18 @@ void addPCIe(std::shared_ptr<PowerStats> p) {
         {generateGenericStateResidencyConfigs(pcieStateConfig, pcieStateHeaders), "PCIe-Modem",
                 "Version: 1"}
     };
-    auto pcieModemSdp = std::make_shared<GenericStateResidencyDataProvider>(
-            "/sys/devices/platform/11920000.pcie/power_stats", pcieModemCfgs);
-    p->addStateResidencyDataProvider(pcieModemSdp);
+
+    p->addStateResidencyDataProvider(std::make_unique<GenericStateResidencyDataProvider>(
+            "/sys/devices/platform/11920000.pcie/power_stats", pcieModemCfgs));
 
     // Add PCIe - WiFi
     const std::vector<GenericStateResidencyDataProvider::PowerEntityConfig> pcieWifiCfgs = {
         {generateGenericStateResidencyConfigs(pcieStateConfig, pcieStateHeaders),
             "PCIe-WiFi", "Version: 1"}
     };
-    auto pcieWifiSdp = std::make_shared<GenericStateResidencyDataProvider>(
-            "/sys/devices/platform/14520000.pcie/power_stats", pcieWifiCfgs);
-    p->addStateResidencyDataProvider(pcieWifiSdp);
+
+    p->addStateResidencyDataProvider(std::make_unique<GenericStateResidencyDataProvider>(
+            "/sys/devices/platform/14520000.pcie/power_stats", pcieWifiCfgs));
 }
 
 void addWifi(std::shared_ptr<PowerStats> p) {
@@ -503,13 +491,12 @@ void addWifi(std::shared_ptr<PowerStats> p) {
                 "WIFI-PCIE"}
     };
 
-    auto wifiSdp = std::make_shared<GenericStateResidencyDataProvider>("/sys/wifi/power_stats",
-            cfgs);
-    p->addStateResidencyDataProvider(wifiSdp);
+    p->addStateResidencyDataProvider(std::make_unique<GenericStateResidencyDataProvider>("/sys/wifi/power_stats",
+            cfgs));
 }
 
 void addUfs(std::shared_ptr<PowerStats> p) {
-    p->addStateResidencyDataProvider(std::make_shared<UfsStateResidencyDataProvider>("/sys/bus/platform/devices/14700000.ufs/ufs_stats/"));
+    p->addStateResidencyDataProvider(std::make_unique<UfsStateResidencyDataProvider>("/sys/bus/platform/devices/14700000.ufs/ufs_stats/"));
 }
 
 /**
@@ -519,13 +506,14 @@ void addUfs(std::shared_ptr<PowerStats> p) {
  * vendor service register callbacks to provide state residency data for their given pwoer entity.
  */
 void addPixelStateResidencyDataProvider(std::shared_ptr<PowerStats> p) {
-    std::shared_ptr<PixelStateResidencyDataProvider> pixelSdp =
-            ndk::SharedRefBase::make<PixelStateResidencyDataProvider>();
+
+    auto pixelSdp = std::make_unique<PixelStateResidencyDataProvider>();
 
     pixelSdp->addEntity("Bluetooth", {{0, "Idle"}, {1, "Active"}, {2, "Tx"}, {3, "Rx"}});
 
     pixelSdp->start();
-    p->addStateResidencyDataProvider(pixelSdp);
+
+    p->addStateResidencyDataProvider(std::move(pixelSdp));
 }
 
 int main() {
