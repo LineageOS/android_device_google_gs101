@@ -1,0 +1,7 @@
+# b/183055762
+dontaudit edgetpu_server tmpfs:file { read write };
+dontaudit edgetpu_server tmpfs:file { map };
+dontaudit edgetpu_server tmpfs:file { getattr };
+dontaudit edgetpu_server tmpfs:file { read write };
+dontaudit edgetpu_server tmpfs:file { map };
+dontaudit edgetpu_server tmpfs:file { getattr };
