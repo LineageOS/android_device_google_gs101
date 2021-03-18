@@ -1132,5 +1132,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	zygote.critical_window.minute=10
 
+# Suspend properties
+PRODUCT_PROPERTY_OVERRIDES += \
+    suspend.short_suspend_threshold_millis=5000
+
 # Project
 include hardware/google/pixel/common/pixel-common-device.mk
