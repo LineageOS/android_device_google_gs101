@@ -38,7 +38,7 @@ persist.vendor.modem.        u:object_r:vendor_modem_prop:s0
 vendor.modem.                u:object_r:vendor_modem_prop:s0
 vendor.sys.modem.            u:object_r:vendor_modem_prop:s0
 vendor.sys.exynos.modempath  u:object_r:vendor_modem_prop:s0
-persist.vendor.sys.modem.    u:object_r:vendor_persist_sys_modem_prop:s0
+persist.vendor.sys.modem.    u:object_r:vendor_modem_prop:s0
 
 # for cbd
 vendor.cbd.                  u:object_r:vendor_cbd_prop:s0
