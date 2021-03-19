@@ -16,6 +16,8 @@ userdebug_or_eng(`
   allow modem_diagnostic_app sysfs_chosen:dir r_dir_perms;
   allow modem_diagnostic_app sysfs_chosen:file r_file_perms;
 
+  allow modem_diagnostic_app vendor_fw_file:file r_file_perms;
+
   allow modem_diagnostic_app radio_vendor_data_file:dir r_dir_perms;
   allow modem_diagnostic_app radio_vendor_data_file:file r_file_perms;
 
@@ -24,6 +26,7 @@ userdebug_or_eng(`
 
   allow modem_diagnostic_app modem_img_file:dir r_dir_perms;
   allow modem_diagnostic_app modem_img_file:file r_file_perms;
+  allow modem_diagnostic_app modem_img_file:lnk_file r_file_perms;
 
   allow modem_diagnostic_app hal_vendor_oem_hwservice:hwservice_manager find;
 ')

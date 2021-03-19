@@ -221,3 +221,6 @@ genfscon debugfs /usb                                                           
 genfscon debugfs /google_charger                                                                          u:object_r:vendor_charger_debugfs:s0
 genfscon debugfs /gvotables                                                                               u:object_r:vendor_votable_debugfs:s0
 genfscon debugfs /google_battery                                                                          u:object_r:vendor_battery_debugfs:s0
+
+# tracefs
+genfscon tracefs /events/dmabuf_heap/dma_heap_stat                                                        u:object_r:debugfs_tracing:s0
