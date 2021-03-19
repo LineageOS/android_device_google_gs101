@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "android.hardware.power.stats-service.pixel"
-
 #include <PowerStatsAidl.h>
+#include <Gs101CommonDataProviders.h>
 #include "AocStateResidencyDataProvider.h"
 #include "DvfsStateResidencyDataProvider.h"
 #include "UfsStateResidencyDataProvider.h"
@@ -41,7 +40,6 @@ using aidl::android::hardware::power::stats::EnergyConsumerType;
 using aidl::android::hardware::power::stats::GenericStateResidencyDataProvider;
 using aidl::android::hardware::power::stats::IioEnergyMeterDataProvider;
 using aidl::android::hardware::power::stats::PixelStateResidencyDataProvider;
-using aidl::android::hardware::power::stats::PowerStats;
 using aidl::android::hardware::power::stats::PowerStatsEnergyConsumer;
 
 constexpr char kBootHwSoCRev[] = "ro.boot.hw.soc.rev";
@@ -575,14 +573,7 @@ void addPixelStateResidencyDataProvider(std::shared_ptr<PowerStats> p) {
     p->addStateResidencyDataProvider(std::move(pixelSdp));
 }
 
-int main() {
-    LOG(INFO) << "Pixel PowerStats HAL AIDL Service is starting.";
-
-    // single thread
-    ABinderProcess_setThreadPoolMaxThreadCount(0);
-
-    std::shared_ptr<PowerStats> p = ndk::SharedRefBase::make<PowerStats>();
-
+void addGs101CommonDataProviders(std::shared_ptr<PowerStats> p) {
     setEnergyMeter(p);
 
     addPixelStateResidencyDataProvider(p);
@@ -602,11 +593,4 @@ int main() {
     // TODO (b/181070764) (b/182941084):
     // Remove this when Wifi/BT energy consumption models are available or revert before ship
     addPlaceholderEnergyConsumers(p);
-
-    const std::string instance = std::string() + PowerStats::descriptor + "/default";
-    binder_status_t status = AServiceManager_addService(p->asBinder().get(), instance.c_str());
-    LOG_ALWAYS_FATAL_IF(status != STATUS_OK);
-
-    ABinderProcess_joinThreadPool();
-    return EXIT_FAILURE;  // should not reach
 }
