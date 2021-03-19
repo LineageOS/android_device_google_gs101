@@ -22,30 +22,17 @@ package {
     ],
 }
 
-cc_binary {
-    name: "android.hardware.power.stats-service.pixel",
-    init_rc: ["android.hardware.power.stats-service.pixel.rc"],
-    vintf_fragments: ["android.hardware.power.stats-service.pixel.xml"],
+cc_library {
+    name: "android.hardware.power.stats-impl.gs101",
+    vendor_available: true,
+    export_include_dirs: ["include"],
+    defaults: ["powerstats_pixel_defaults"],
+
     srcs: [
         "*.cpp",
     ],
-    cflags: [
-        "-Wall",
-        "-Werror",
-    ],
-    static_libs: [
+
+    shared_libs: [
         "android.hardware.power.stats-impl.pixel",
     ],
-    shared_libs: [
-        "libbase",
-        "libcutils",
-        "liblog",
-        "libutils",
-        "libbinder_ndk",
-        "pixel_stateresidency_provider_aidl_interface-ndk_platform",
-        "android.hardware.power.stats-V1-ndk_platform",
-    ],
-    relative_install_path: "hw",
-    vendor: true,
-    proprietary: true,
 }
