@@ -416,3 +416,6 @@
 
 # BigOcean
 /dev/bigocean                                                                  u:object_r:video_device:s0
+
+# Fingerprint
+/dev/goodix_fp                                                                 u:object_r:fingerprint_device:s0
