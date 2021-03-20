@@ -14,7 +14,6 @@
 # limitations under the License.
 
 include device/google/gs101/device-common.mk
-include device/google/gs101/fingerprint/udfps.mk
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.bluetooth.a2dp_offload.supported=true \
