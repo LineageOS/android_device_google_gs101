@@ -59,6 +59,7 @@ genfscon sysfs /devices/platform/14700000.ufs/ufs_stats                 u:object
 # Vibrator
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-4/4-005a            u:object_r:sysfs_vibrator:s0
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-4/4-0043            u:object_r:sysfs_vibrator:s0
+genfscon sysfs /devices/platform/10970000.hsi2c/i2c-5/5-0043            u:object_r:sysfs_vibrator:s0
 
 # System_suspend
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-5/5-0069/power_supply/main-charger/wakeup u:object_r:sysfs_wakeup:s0
@@ -132,6 +133,14 @@ genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/8-002f/s2mpg11-mete
 genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/8-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/energy_value  u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/8-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/sampling_rate u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/8-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/enabled_rails u:object_r:sysfs_odpm:s0
+
+# bcl sysfs files
+genfscon sysfs /devices/virtual/pmic/mitigation/triggered_stats                 u:object_r:sysfs_bcl:s0
+genfscon sysfs /devices/virtual/pmic/mitigation/mpmm_settings                   u:object_r:sysfs_bcl:s0
+genfscon sysfs /devices/virtual/pmic/mitigation/ppm_settings                    u:object_r:sysfs_bcl:s0
+genfscon sysfs /devices/virtual/pmic/mitigation/clk_ratio                       u:object_r:sysfs_bcl:s0
+genfscon sysfs /devices/virtual/pmic/mitigation/clk_stats                       u:object_r:sysfs_bcl:s0
+genfscon sysfs /devices/virtual/pmic/max77759-mitigation/triggered_stats        u:object_r:sysfs_bcl:s0
 
 # Chosen
 genfscon sysfs /firmware/devicetree/base/chosen                                u:object_r:sysfs_chosen:s0
