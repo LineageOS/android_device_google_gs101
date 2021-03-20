@@ -2,17 +2,5 @@
 dontaudit vendor_init tmpfs:dir { add_name write };
 # b/176528557
 dontaudit vendor_init debugfs_trace_marker:file { getattr };
-userdebug_or_eng(`
-  permissive vendor_init;
-')
-# b/178980032
-dontaudit vendor_init unlabeled:dir { setattr };
-dontaudit vendor_init unlabeled:dir { read };
-dontaudit vendor_init unlabeled:dir { search };
-dontaudit vendor_init unlabeled:dir { search };
-dontaudit vendor_init unlabeled:dir { open };
-dontaudit vendor_init unlabeled:dir { read };
-dontaudit vendor_init unlabeled:dir { setattr };
-dontaudit vendor_init unlabeled:dir { open };
 # b/182954248
 dontaudit vendor_init default_prop:file { read };
