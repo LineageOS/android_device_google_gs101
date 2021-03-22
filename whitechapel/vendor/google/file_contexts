@@ -304,6 +304,7 @@
 /dev/acd-model_data                 u:object_r:aoc_device:s0
 /dev/acd-debug                      u:object_r:aoc_device:s0
 /dev/acd-audio_tap[0-9]*            u:object_r:aoc_device:s0
+/dev/acd-audio_dcdoff_ref           u:object_r:aoc_device:s0
 
 # Trusty
 /vendor/bin/securedpud.slider        u:object_r:securedpud_slider_exec:s0
