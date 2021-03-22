@@ -1,0 +1,19 @@
+# b/183338483
+dontaudit flags_health_check aac_drc_prop:file { open };
+dontaudit flags_health_check adbd_config_prop:file { map };
+dontaudit flags_health_check adbd_config_prop:file { getattr };
+dontaudit flags_health_check adbd_config_prop:file { open };
+dontaudit flags_health_check ab_update_gki_prop:file { map };
+dontaudit flags_health_check ab_update_gki_prop:file { getattr };
+dontaudit flags_health_check aac_drc_prop:file { open };
+dontaudit flags_health_check aac_drc_prop:file { getattr };
+dontaudit flags_health_check aac_drc_prop:file { map };
+dontaudit flags_health_check ab_update_gki_prop:file { open };
+dontaudit flags_health_check ab_update_gki_prop:file { getattr };
+dontaudit flags_health_check ab_update_gki_prop:file { map };
+dontaudit flags_health_check adbd_config_prop:file { open };
+dontaudit flags_health_check adbd_config_prop:file { getattr };
+dontaudit flags_health_check adbd_config_prop:file { map };
+dontaudit flags_health_check ab_update_gki_prop:file { open };
+dontaudit flags_health_check aac_drc_prop:file { map };
+dontaudit flags_health_check aac_drc_prop:file { getattr };
