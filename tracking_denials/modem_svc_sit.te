@@ -1,0 +1,19 @@
+# b/183467321
+dontaudit modem_svc_sit mnt_vendor_file:dir { search };
+dontaudit modem_svc_sit modem_userdata_file:file { write open };
+dontaudit modem_svc_sit modem_userdata_file:file { create };
+dontaudit modem_svc_sit modem_userdata_file:dir { add_name };
+dontaudit modem_svc_sit modem_userdata_file:dir { getattr };
+dontaudit modem_svc_sit modem_userdata_file:dir { search };
+dontaudit modem_svc_sit modem_userdata_file:dir { write };
+dontaudit modem_svc_sit modem_userdata_file:dir { remove_name };
+dontaudit modem_svc_sit modem_userdata_file:file { unlink };
+dontaudit modem_svc_sit modem_userdata_file:dir { getattr };
+dontaudit modem_svc_sit modem_userdata_file:dir { add_name };
+dontaudit modem_svc_sit modem_userdata_file:file { create };
+dontaudit modem_svc_sit modem_userdata_file:file { write open };
+dontaudit modem_svc_sit modem_userdata_file:file { unlink };
+dontaudit modem_svc_sit modem_userdata_file:dir { remove_name };
+dontaudit modem_svc_sit modem_userdata_file:dir { write };
+dontaudit modem_svc_sit modem_userdata_file:dir { search };
+dontaudit modem_svc_sit mnt_vendor_file:dir { search };
