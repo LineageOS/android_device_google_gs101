@@ -99,9 +99,9 @@
 /dev/s5p-smem             0660   drm        drmrpc
 
 # cbd
-/dev/block/by-name/modem  0440   radio      radio
-/dev/block/by-name/modem_a  0440   radio      radio
-/dev/block/by-name/modem_b  0440   radio      radio
+/dev/block/by-name/modem    0640 root       radio
+/dev/block/by-name/modem_a  0640 root       radio
+/dev/block/by-name/modem_b  0640 root       radio
 
 # DM tools
 /dev/umts_dm0             0660   system      system
