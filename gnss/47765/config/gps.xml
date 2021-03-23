@@ -67,6 +67,7 @@
        GpsCarrierType="3,1,3,1,2,3,2,3,3,3,1,2,1,1,2,1,2,1,1,1,1,1,1,3,3,3,3,1,2,3,2,3"
        RfType="GL_RF_4776_BRCM"
        ExtL5Bias="17.6"
+       EnableFilteringForLTEB13="true"
 
        WarmStandbyTimeout1Seconds="10"
        WarmStandbyTimeout2Seconds="20"
