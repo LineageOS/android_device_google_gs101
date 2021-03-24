@@ -22,6 +22,7 @@ binder_call(rild, hal_audio_default)
 binder_call(rild, hal_secure_element_default)
 binder_call(rild, platform_app)
 binder_call(rild, modem_svc_sit)
+binder_call(rild, vendor_ims_app)
 
 # for hal service
 add_hwservice(rild, hal_exynos_rild_hwservice)
