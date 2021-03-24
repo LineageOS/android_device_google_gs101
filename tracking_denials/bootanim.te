@@ -1,5 +1,0 @@
-# b/180567480
-dontaudit bootanim traced_producer_socket:sock_file { write };
-dontaudit bootanim traced:unix_stream_socket { connectto };
-dontaudit bootanim traced:unix_stream_socket { connectto };
-dontaudit bootanim traced_producer_socket:sock_file { write };
