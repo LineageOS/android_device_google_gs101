@@ -577,6 +577,11 @@ on property:sys.boot_completed=1
     write /dev/sys/fs/by-name/userdata/data_io_flag 8
     write /dev/sys/fs/by-name/userdata/node_io_flag 8
 
+    # Permission for Pixelstats
+    chown system system /dev/sys/fs/by-name/userdata/compr_written_block
+    chown system system /dev/sys/fs/by-name/userdata/compr_saved_block
+    chown system system /dev/sys/fs/by-name/userdata/compr_new_inode
+
     # Block layer tuning: discard chunk size up to 128MB
     # Otherwise, contiguous discards can be merged
     write /sys/block/sda/queue/discard_max_bytes 134217728
