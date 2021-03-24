@@ -1,0 +1,7 @@
+# b/183560076
+dontaudit crash_dump proc_uptime:file { read };
+dontaudit crash_dump proc_uptime:file { open };
+dontaudit crash_dump proc_uptime:file { getattr };
+dontaudit crash_dump proc_uptime:file { getattr };
+dontaudit crash_dump proc_uptime:file { open };
+dontaudit crash_dump proc_uptime:file { read };
