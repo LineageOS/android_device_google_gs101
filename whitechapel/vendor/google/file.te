@@ -71,6 +71,9 @@ type sysfs_sscoredump_level, sysfs_type, fs_type;
 # WiFi
 type sysfs_wifi, sysfs_type, fs_type;
 
+# All files under /data/vendor/firmware/wifi
+type updated_wifi_firmware_data_file, file_type, data_file_type;
+
 # Widevine DRM
 type mediadrm_vendor_data_file, file_type, data_file_type;
 
