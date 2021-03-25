@@ -695,7 +695,8 @@ PRODUCT_PACKAGES += \
 	libExynosC2Vp9Enc
 
 PRODUCT_PROPERTY_OVERRIDES += \
-       debug.c2.use_dmabufheaps=1
+       debug.c2.use_dmabufheaps=1 \
+       media.c2.dmabuf.padding=512
 
 # 2. OpenMAX IL
 PRODUCT_COPY_FILES += \
