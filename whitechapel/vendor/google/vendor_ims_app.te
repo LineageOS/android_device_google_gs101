@@ -2,6 +2,7 @@ type vendor_ims_app, domain;
 app_domain(vendor_ims_app)
 
 allow vendor_ims_app app_api_service:service_manager find;
+allow vendor_ims_app audioserver_service:service_manager find;
 
 allow vendor_ims_app hal_exynos_rild_hwservice:hwservice_manager find;
 allow vendor_ims_app radio_service:service_manager find;
