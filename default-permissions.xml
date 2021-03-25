@@ -107,5 +107,17 @@
         <permission name="android.permission.ACCESS_FINE_LOCATION" fixed="true"/>
         <permission name="android.permission.ACCESS_BACKGROUND_LOCATION" fixed="true"/>
     </exception>
+
+    <exception package="com.google.android.apps.accessibility.voiceaccess">
+        <!-- Voice Access: A11y app to allow users to setup & control their devices with voice -->
+        <!-- Approved android bug for pregrant permissions: b/182307492 -->
+
+        <!-- Phone state to turn off Voice Access when user is in a phone call -->
+        <permission name="android.permission.READ_PHONE_STATE" fixed="false"/>
+
+        <!-- Microphone: To hear user's voice commands -->
+        <permission name="android.permission.RECORD_AUDIO" fixed="false"/>
+    </exception>
+
 </exceptions>
 
