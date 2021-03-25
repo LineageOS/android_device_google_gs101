@@ -4,6 +4,7 @@ get_prop(rild, vendor_persist_config_default_prop)
 get_prop(rild, vendor_ro_config_default_prop)
 set_prop(rild, vendor_sys_default_prop)
 
+get_prop(rild, sota_prop)
 get_prop(rild, system_boot_reason_prop)
 
 allow rild proc_net:file rw_file_perms;

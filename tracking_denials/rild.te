@@ -1,9 +1,0 @@
-# b/182320172
-dontaudit rild sota_prop:file { map };
-dontaudit rild sota_prop:file { getattr };
-dontaudit rild sota_prop:file { open };
-dontaudit rild sota_prop:file { read };
-dontaudit rild sota_prop:file { read };
-dontaudit rild sota_prop:file { open };
-dontaudit rild sota_prop:file { getattr };
-dontaudit rild sota_prop:file { map };
