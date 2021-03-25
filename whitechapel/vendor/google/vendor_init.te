@@ -1,7 +1,7 @@
 set_prop(vendor_init, vendor_device_prop)
 set_prop(vendor_init, vendor_modem_prop)
 set_prop(vendor_init, vendor_cbd_prop)
-get_prop(vendor_init, vendor_rild_prop)
+set_prop(vendor_init, vendor_rild_prop)
 set_prop(vendor_init, vendor_usb_config_prop)
 set_prop(vendor_init, vendor_sys_default_prop)
 
