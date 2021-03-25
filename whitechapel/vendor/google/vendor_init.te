@@ -4,6 +4,7 @@ set_prop(vendor_init, vendor_cbd_prop)
 set_prop(vendor_init, vendor_rild_prop)
 set_prop(vendor_init, vendor_usb_config_prop)
 set_prop(vendor_init, vendor_sys_default_prop)
+set_prop(vendor_init, vendor_ims_prop)
 
 allow vendor_init proc_dirty:file w_file_perms;
 allow vendor_init proc_sched:file write;
