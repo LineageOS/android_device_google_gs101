@@ -332,6 +332,10 @@
 # GRIL
 /vendor/bin/hw/vendor\.google\.radioext@1\.0-service                 u:object_r:hal_radioext_default_exec:s0
 
+# Uwb
+# R4
+/vendor/bin/hw/hardware\.qorvo\.uwb-service                          u:object_r:hal_uwb_default_exec:s0
+
 # Radio files.
 /data/vendor/radio(/.*)?                                                    u:object_r:radio_vendor_data_file:s0
 
@@ -411,6 +415,8 @@
 # video system DMA-BUF heap
 /dev/dma_heap/video_system                                               u:object_r:dmabuf_system_heap_device:s0
 /dev/dma_heap/video_system-uncached                                      u:object_r:dmabuf_system_heap_device:s0
+
+/dev/dma_heap/vstream-secure                                             u:object_r:dmabuf_system_secure_heap_device:s0
 
 # Video sysfs files
 /sys/devices/platform/mfc/video4linux/video6/name                              u:object_r:sysfs_video:s0
