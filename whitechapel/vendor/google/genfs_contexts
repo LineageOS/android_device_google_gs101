@@ -186,9 +186,6 @@ genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-6/6-0069/power_supply/main-c
 # OTA
 genfscon sysfs /devices/platform/14700000.ufs/pixel/boot_lun_enabled                                                     u:object_r:sysfs_ota:s0
 
-# subsystem-coredump
-genfscon sysfs /class/sscoredump/level                                                                  u:object_r:sscoredump_sysfs_level:s0
-
 # ACPM
 genfscon sysfs /devices/platform/acpm_stats                                                             u:object_r:sysfs_acpm_stats:s0
 
