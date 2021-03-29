@@ -5,3 +5,6 @@ dontaudit edgetpu_server tmpfs:file { getattr };
 dontaudit edgetpu_server tmpfs:file { read write };
 dontaudit edgetpu_server tmpfs:file { map };
 dontaudit edgetpu_server tmpfs:file { getattr };
+# b/183935416
+dontaudit edgetpu_server proc_version:file { read };
+dontaudit edgetpu_server proc_version:file { read };
