@@ -66,7 +66,6 @@ type sysfs_iommu, sysfs_type, fs_type;
 
 type sysfs_devicetree, sysfs_type, fs_type;
 type sysfs_mem, sysfs_type, fs_type;
-type sysfs_sscoredump_level, sysfs_type, fs_type;
 
 # WiFi
 type sysfs_wifi, sysfs_type, fs_type;
@@ -76,10 +75,6 @@ type updated_wifi_firmware_data_file, file_type, data_file_type;
 
 # Widevine DRM
 type mediadrm_vendor_data_file, file_type, data_file_type;
-
-# Subsystem coredump
-type sscoredump_vendor_data_coredump_file, file_type, data_file_type, mlstrustedobject;
-type sscoredump_vendor_data_crashinfo_file, file_type, data_file_type, mlstrustedobject;
 
 # Storage Health HAL
 type sysfs_scsi_devices_0000, sysfs_type, fs_type;
@@ -171,9 +166,6 @@ type sysfs_chosen, sysfs_type, fs_type;
 
 type sysfs_chip_id, sysfs_type, fs_type;
 type sysfs_spi, sysfs_type, fs_type;
-
-# subsystem-coredump
-type sscoredump_sysfs_level, sysfs_type, fs_type;
 
 # Battery
 type persist_battery_file, file_type, vendor_persist_type;
