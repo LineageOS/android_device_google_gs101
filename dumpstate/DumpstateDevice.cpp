@@ -502,6 +502,7 @@ void DumpstateDevice::dumpTouchSection(int fd) {
             RunCommandToFd(fd, "ITO Raw", {"/vendor/bin/sh", "-c", cmd});
         }
 
+        snprintf(cmd, sizeof(cmd), "%s", stm_cmd_path[i + 1]);
         if (!access(cmd, R_OK)) {
             snprintf(cmd, sizeof(cmd), "echo A0 00 > %s", stm_cmd_path[i + 1]);
             RunCommandToFd(fd, "Restore Bus Owner",
