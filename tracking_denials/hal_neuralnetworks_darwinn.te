@@ -9,3 +9,6 @@ dontaudit hal_neuralnetworks_darwinn tmpfs:file { map };
 dontaudit hal_neuralnetworks_darwinn tmpfs:file { read };
 dontaudit hal_neuralnetworks_darwinn tmpfs:file { read };
 dontaudit hal_neuralnetworks_darwinn tmpfs:file { read };
+# b/183935302
+dontaudit hal_neuralnetworks_darwinn proc_version:file { read };
+dontaudit hal_neuralnetworks_darwinn proc_version:file { read };

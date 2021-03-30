@@ -259,13 +259,6 @@
 /mnt/vendor/modem_userdata(/.*)?                              u:object_r:modem_userdata_file:s0
 /mnt/vendor/persist/modem(/.*)?                               u:object_r:persist_modem_file:s0
 
-
-# Subsystem coredump
-/vendor/bin/sscoredump                         u:object_r:sscoredump_exec:s0
-/data/vendor/ssrdump(/.*)?                     u:object_r:sscoredump_vendor_data_crashinfo_file:s0
-/data/vendor/ssrdump/coredump(/.*)?            u:object_r:sscoredump_vendor_data_coredump_file:s0
-/dev/sscd_.*                                   u:object_r:sscoredump_device:s0
-
 # Kernel modules related
 /vendor/bin/init\.insmod\.sh    u:object_r:init-insmod-sh_exec:s0
 
