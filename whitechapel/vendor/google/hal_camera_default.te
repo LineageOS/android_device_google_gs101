@@ -44,3 +44,9 @@ hal_client_domain(hal_camera_default, hal_graphics_composer)
 
 # grant access to Securea camera TA
 allow hal_camera_default tee_device:chr_file rw_file_perms;
+
+# For camera debugging
+userdebug_or_eng(`
+  allow hal_camera_default vendor_camera_data_file:dir create_dir_perms;
+  allow hal_camera_default vendor_camera_data_file:file create_file_perms;
+')
