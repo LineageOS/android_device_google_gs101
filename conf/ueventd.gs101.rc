@@ -197,3 +197,5 @@
 /dev/dma_heap/vscaler-secure           0444   system     graphics
 /dev/dma_heap/vstream-secure           0444   system     drmrpc
 /dev/dma_heap/sensor_direct_heap       0444   system     graphics
+/dev/dma_heap/aaudio_playback_heap     0444   system     audio
+/dev/dma_heap/aaudio_capture_heap      0444   system     audio
