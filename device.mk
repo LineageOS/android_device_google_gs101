@@ -190,10 +190,6 @@ endif
 PRODUCT_COPY_FILES += \
 	device/google/gs101/conf/init.system_ext.rc:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/init/init.system_ext.rc
 
-# Native libraries needed for applications under /system_ext
-PRODUCT_COPY_FILES += \
-	device/google/gs101/public.libraries-google.txt:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/public.libraries-google.txt
-
 # If AoC Daemon is not present on this build, load firmware at boot via rc
 ifeq ($(wildcard vendor/google/whitechapel/aoc/aocd),)
 PRODUCT_COPY_FILES += \
