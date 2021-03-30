@@ -365,6 +365,7 @@
 /vendor/lib(64)?/libdrm\.so                                                      u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/hw/gralloc\.gs101\.so                                           u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/hw/vulkan\.gs101\.so                                            u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/arm\.graphics-V1-ndk_platform\.so                               u:object_r:same_process_hal_file:s0
 
 # Touch
 /dev/touch_offload                                                               u:object_r:touch_offload_device:s0
