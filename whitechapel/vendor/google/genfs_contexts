@@ -186,9 +186,6 @@ genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-6/6-0069/power_supply/main-c
 # OTA
 genfscon sysfs /devices/platform/14700000.ufs/pixel/boot_lun_enabled                                                     u:object_r:sysfs_ota:s0
 
-# subsystem-coredump
-genfscon sysfs /class/sscoredump/level                                                                  u:object_r:sscoredump_sysfs_level:s0
-
 # ACPM
 genfscon sysfs /devices/platform/acpm_stats                                                             u:object_r:sysfs_acpm_stats:s0
 
@@ -238,3 +235,11 @@ genfscon debugfs /google_battery                                                
 
 # tracefs
 genfscon tracefs /events/dmabuf_heap/dma_heap_stat                                                        u:object_r:debugfs_tracing:s0
+
+# sscoredump (per device)
+genfscon sysfs /devices/platform/abrolhos/sscoredump/sscd_abrolhos/report_count                         u:object_r:sysfs_sscoredump_subsystem_report_count:s0
+genfscon sysfs /devices/platform/aoc/sscoredump/sscd_aoc/report_count                                   u:object_r:sysfs_sscoredump_subsystem_report_count:s0
+genfscon sysfs /devices/platform/bigocean/sscoredump/sscd_bigocean/report_count                         u:object_r:sysfs_sscoredump_subsystem_report_count:s0
+genfscon sysfs /devices/platform/debugcore/sscoredump/sscd_debugcore/report_count                       u:object_r:sysfs_sscoredump_subsystem_report_count:s0
+genfscon sysfs /devices/platform/mfc-core/sscoredump/sscd_mfc-core/report_count                         u:object_r:sysfs_sscoredump_subsystem_report_count:s0
+genfscon sysfs /devices/platform/wlan/sscoredump/sscd_wlan/report_count                                 u:object_r:sysfs_sscoredump_subsystem_report_count:s0

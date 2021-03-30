@@ -48,9 +48,6 @@ type vframe_heap_device, dmabuf_heap_device_type, dev_type;
 #vscaler-secure DMA-BUF heap
 type vscaler_heap_device, dmabuf_heap_device_type, dev_type;
 
-# subsystem-coredump
-type sscoredump_device, dev_type;
-
 # AOC device
 type aoc_device, dev_type;
 
