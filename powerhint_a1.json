@@ -65,6 +65,9 @@
       "Path": "/sys/devices/platform/1c500000.mali/scaling_min_freq",
       "Values": [
         "151000",
+        "302000",
+        "455000",
+        "572000",
         "670000"
       ],
       "DefaultIndex": 0,
@@ -114,6 +117,15 @@
         "1500"
       ],
       "ResetOnInit": true,
+      "Type": "Property"
+    },
+    {
+      "Name": "PowerHALRenderingState",
+      "Path": "vendor.powerhal.rendering",
+      "Values": [
+        "EXPENSIVE_RENDERING",
+        ""
+      ],
       "Type": "Property"
     }
   ],
@@ -291,6 +303,18 @@
       "Node": "LimitFlashCurrent",
       "Duration": 0,
       "Value": "1500"
+    },
+    {
+      "PowerHint": "EXPENSIVE_RENDERING",
+      "Node": "PowerHALRenderingState",
+      "Duration": 0,
+      "Value": "EXPENSIVE_RENDERING"
+    },
+    {
+      "PowerHint": "EXPENSIVE_RENDERING",
+      "Node": "GPUMinFreq",
+      "Duration": 0,
+      "Value": "455000"
     }
   ]
 }
