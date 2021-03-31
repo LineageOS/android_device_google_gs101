@@ -18,3 +18,7 @@ allow hal_neuralnetworks_darwinn hal_neuralnetworks_darwinn_data_file:dir rw_dir
 # add_hwservice() is granted by hal_server_domain + hal_neuralnetworks.te
 hwbinder_use(hal_neuralnetworks_darwinn)
 get_prop(hal_neuralnetworks_darwinn, hwservicemanager_prop)
+
+# Allow TPU HAL to read the kernel version.
+# This is done inside the InitGoogle.
+allow hal_neuralnetworks_darwinn proc_version:file r_file_perms;
