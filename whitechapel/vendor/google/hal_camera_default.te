@@ -58,3 +58,8 @@ binder_call(hal_camera_default, system_server);
 # Allow Binder calls to ECO service, needed by Entropy-Aware Filtering
 allow hal_camera_default eco_service:service_manager find;
 binder_call(hal_camera_default, mediacodec);
+
+# Allow camera HAL to query preferred camera frequencies from the radio HAL
+# extensions to avoid interference with cellular antennas.
+allow hal_camera_default hal_radioext_hwservice:hwservice_manager find;
+binder_call(hal_camera_default, hal_radioext_default);
