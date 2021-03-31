@@ -4,4 +4,5 @@ app_domain(exo_wirecutter_app)
 
 allow exo_wirecutter_app app_api_service:service_manager find;
 allow exo_wirecutter_app fwk_stats_hwservice:hwservice_manager find;
+allow exo_wirecutter_app gpu_device:dir search;
 binder_call(exo_wirecutter_app, statsd)
