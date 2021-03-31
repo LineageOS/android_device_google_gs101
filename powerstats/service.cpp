@@ -46,6 +46,65 @@ using aidl::android::hardware::power::stats::PowerStatsEnergyConsumer;
 
 constexpr char kBootHwSoCRev[] = "ro.boot.hw.soc.rev";
 
+// TODO (b/181070764) (b/182941084):
+// Remove this when Wifi/BT energy consumption models are available or revert before ship
+using aidl::android::hardware::power::stats::EnergyConsumerResult;
+using aidl::android::hardware::power::stats::Channel;
+using aidl::android::hardware::power::stats::EnergyMeasurement;
+class PlaceholderEnergyConsumer : public PowerStats::IEnergyConsumer {
+  public:
+    PlaceholderEnergyConsumer(std::shared_ptr<PowerStats> p, EnergyConsumerType type,
+            std::string name) : kType(type), kName(name), mPowerStats(p), mChannelId(-1) {
+        std::vector<Channel> channels;
+        mPowerStats->getEnergyMeterInfo(&channels);
+
+        for (const auto &c : channels) {
+            if (c.name == "VSYS_PWR_WLAN_BT") {
+                mChannelId = c.id;
+                break;
+            }
+        }
+    }
+    std::pair<EnergyConsumerType, std::string> getInfo() override { return {kType, kName}; }
+
+    std::optional<EnergyConsumerResult> getEnergyConsumed() override {
+        int64_t totalEnergyUWs = 0;
+        int64_t timestampMs = 0;
+        if (mChannelId != -1) {
+            std::vector<EnergyMeasurement> measurements;
+            if (mPowerStats->readEnergyMeter({mChannelId}, &measurements).isOk()) {
+                for (const auto &m : measurements) {
+                    totalEnergyUWs += m.energyUWs;
+                    timestampMs = m.timestampMs;
+                }
+            } else {
+                LOG(ERROR) << "Failed to read energy meter";
+                return {};
+            }
+        }
+
+        return EnergyConsumerResult{.timestampMs = timestampMs,
+                                .energyUWs = totalEnergyUWs>>1};
+    }
+
+    std::string getConsumerName() override {
+        return kName;
+    };
+
+  private:
+    const EnergyConsumerType kType;
+    const std::string kName;
+    std::shared_ptr<PowerStats> mPowerStats;
+    int32_t mChannelId;
+};
+
+void addPlaceholderEnergyConsumers(std::shared_ptr<PowerStats> p) {
+    p->addEnergyConsumer(
+            std::make_unique<PlaceholderEnergyConsumer>(p, EnergyConsumerType::WIFI, "Wifi"));
+    p->addEnergyConsumer(
+            std::make_unique<PlaceholderEnergyConsumer>(p, EnergyConsumerType::BLUETOOTH, "BT"));
+}
+
 void addAoC(std::shared_ptr<PowerStats> p) {
     std::string prefix = "/sys/devices/platform/19000000.aoc/control/";
 
@@ -539,6 +598,10 @@ int main() {
     addPCIe(p);
     addWifi(p);
     addUfs(p);
+
+    // TODO (b/181070764) (b/182941084):
+    // Remove this when Wifi/BT energy consumption models are available or revert before ship
+    addPlaceholderEnergyConsumers(p);
 
     const std::string instance = std::string() + PowerStats::descriptor + "/default";
     binder_status_t status = AServiceManager_addService(p->asBinder().get(), instance.c_str());
