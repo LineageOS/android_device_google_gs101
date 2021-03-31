@@ -179,6 +179,7 @@
 /dev/lwis-act0                                                          u:object_r:lwis_device:s0
 /dev/lwis-act1                                                          u:object_r:lwis_device:s0
 /dev/lwis-act-ak7377                                                    u:object_r:lwis_device:s0
+/dev/lwis-act-lc898129                                                  u:object_r:lwis_device:s0
 /dev/lwis-act-sem1215sa                                                 u:object_r:lwis_device:s0
 /dev/lwis-csi                                                           u:object_r:lwis_device:s0
 /dev/lwis-dpm                                                           u:object_r:lwis_device:s0
@@ -186,7 +187,10 @@
 /dev/lwis-eeprom1                                                       u:object_r:lwis_device:s0
 /dev/lwis-eeprom2                                                       u:object_r:lwis_device:s0
 /dev/lwis-eeprom-lc898128                                               u:object_r:lwis_device:s0
+/dev/lwis-eeprom-lc898129                                               u:object_r:lwis_device:s0
 /dev/lwis-eeprom-m24c64s                                                u:object_r:lwis_device:s0
+/dev/lwis-eeprom-m24c64s-imx355-inner                                   u:object_r:lwis_device:s0
+/dev/lwis-eeprom-m24c64s-imx355-outer                                   u:object_r:lwis_device:s0
 /dev/lwis-eeprom-m24c64x                                                u:object_r:lwis_device:s0
 /dev/lwis-eeprom-m24c64x-imx386                                         u:object_r:lwis_device:s0
 /dev/lwis-eeprom-m24c64x-imx663                                         u:object_r:lwis_device:s0
@@ -202,6 +206,7 @@
 /dev/lwis-itp                                                           u:object_r:lwis_device:s0
 /dev/lwis-mcsc                                                          u:object_r:lwis_device:s0
 /dev/lwis-ois-lc898128                                                  u:object_r:lwis_device:s0
+/dev/lwis-ois-lc898129                                                  u:object_r:lwis_device:s0
 /dev/lwis-ois-sem1215sa                                                 u:object_r:lwis_device:s0
 /dev/lwis-pdp                                                           u:object_r:lwis_device:s0
 /dev/lwis-scsc                                                          u:object_r:lwis_device:s0
@@ -210,6 +215,9 @@
 /dev/lwis-sensor2                                                       u:object_r:lwis_device:s0
 /dev/lwis-sensor-gn1                                                    u:object_r:lwis_device:s0
 /dev/lwis-sensor-imx355                                                 u:object_r:lwis_device:s0
+/dev/lwis-sensor-imx355-inner                                           u:object_r:lwis_device:s0
+/dev/lwis-sensor-imx355-outer                                           u:object_r:lwis_device:s0
+/dev/lwis-sensor-imx363                                                 u:object_r:lwis_device:s0
 /dev/lwis-sensor-imx386                                                 u:object_r:lwis_device:s0
 /dev/lwis-sensor-imx586                                                 u:object_r:lwis_device:s0
 /dev/lwis-sensor-imx663                                                 u:object_r:lwis_device:s0
