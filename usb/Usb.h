@@ -66,13 +66,8 @@ enum class HALVersion{
     V1_3
 };
 
-#ifdef OLDER_GADGET
 constexpr char kGadgetName[] = "11110000.dwc3";
 #define UDC_PATH "/sys/class/udc/11110000.dwc3/"
-#else
-constexpr char kGadgetName[] = "11110000.usb";
-#define UDC_PATH "/sys/class/udc/11110000.usb/"
-#endif
 
 #define ID_PATH UDC_PATH "device/id"
 #define VBUS_PATH UDC_PATH "device/b_sess"
