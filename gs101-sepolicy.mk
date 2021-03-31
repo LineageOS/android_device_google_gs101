@@ -24,3 +24,7 @@ BOARD_SEPOLICY_DIRS += device/google/gs101-sepolicy/display/gs101
 
 # Micro sensor framework (usf)
 BOARD_SEPOLICY_DIRS += device/google/gs101-sepolicy/usf
+
+# sscoredump
+BOARD_SEPOLICY_DIRS += hardware/google/pixel-sepolicy/sscoredump
+
