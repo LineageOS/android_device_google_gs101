@@ -243,3 +243,6 @@ genfscon sysfs /devices/platform/bigocean/sscoredump/sscd_bigocean/report_count 
 genfscon sysfs /devices/platform/debugcore/sscoredump/sscd_debugcore/report_count                       u:object_r:sysfs_sscoredump_subsystem_report_count:s0
 genfscon sysfs /devices/platform/mfc-core/sscoredump/sscd_mfc-core/report_count                         u:object_r:sysfs_sscoredump_subsystem_report_count:s0
 genfscon sysfs /devices/platform/wlan/sscoredump/sscd_wlan/report_count                                 u:object_r:sysfs_sscoredump_subsystem_report_count:s0
+
+# mediacodec
+genfscon sysfs /devices/platform/mfc/video4linux/video                                                  u:object_r:sysfs_video:s0
