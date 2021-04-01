@@ -12,6 +12,10 @@ allow vendor_init proc_dirty:file w_file_perms;
 allow vendor_init proc_sched:file write;
 allow vendor_init bootdevice_sysdev:file create_file_perms;
 
+userdebug_or_eng(`
+  set_prop(vendor_init, logpersistd_logging_prop)
+')
+
 # NFC vendor property
 set_prop(vendor_init, vendor_nfc_prop)
 # SecureElement vendor property
