@@ -79,7 +79,6 @@ endif
 # From system.property
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.arch=gs101 \
-	persist.demo.hdmirotationlock=false \
 	dev.usbsetting.embedded=on \
 	ro.debug_level=0x494d \
 	ro.telephony.default_network=27 \
