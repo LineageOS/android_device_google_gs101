@@ -92,3 +92,6 @@ vendor.battery.defender.                        u:object_r:vendor_battery_defend
 # WiFi
 vendor.wlan.driver.version                      u:object_r:vendor_wifi_version:s0
 vendor.wlan.firmware.version                    u:object_r:vendor_wifi_version:s0
+
+# Touchpanel
+vendor.mfgapi.touchpanel.permission             u:object_r:vendor_touchpanel_prop:s0
