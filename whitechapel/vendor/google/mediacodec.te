@@ -5,3 +5,4 @@ userdebug_or_eng(`
 add_service(mediacodec, eco_service)
 allow mediacodec hal_camera_default:binder call;
 allow mediacodec sysfs_video:file r_file_perms;
+allow mediacodec dmabuf_system_secure_heap_device:chr_file r_file_perms;

@@ -66,6 +66,7 @@ persist.vendor.sys.          u:object_r:vendor_persist_sys_default_prop:s0
 # for audio
 vendor.audio_hal.period_multiplier      u:object_r:vendor_audio_prop:s0
 vendor.audiodump.enable                 u:object_r:vendor_audio_prop:s0
+persist.vendor.audio.                   u:object_r:vendor_audio_prop:s0
 
 # for display
 ro.vendor.hwc.drm.device                u:object_r:vendor_display_prop:s0

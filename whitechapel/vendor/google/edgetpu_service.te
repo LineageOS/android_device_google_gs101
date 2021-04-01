@@ -34,3 +34,7 @@ binder_call(edgetpu_server, system_server);
 # Allow EdgeTPU service to access Android shared memory allocated
 # by the camera hal for on-device compilation.
 allow edgetpu_server hal_camera_default:fd use;
+
+# Allow EdgeTPU service to read the kernel version.
+# This is done inside the InitGoogle.
+allow edgetpu_server proc_version:file r_file_perms;
