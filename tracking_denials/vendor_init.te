@@ -1,7 +1,5 @@
 # b/176528557
 dontaudit vendor_init debugfs_trace_marker:file { getattr };
-# b/182954248
-dontaudit vendor_init default_prop:file { read };
 # b/183935443
 dontaudit vendor_init system_data_file:dir { write };
 dontaudit vendor_init system_data_file:dir { write };

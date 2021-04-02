@@ -389,6 +389,7 @@
 
 # Fingerprint
 /vendor/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.1-service\.goodix        u:object_r:hal_fingerprint_default_exec:s0
+/vendor/bin/hw/android\.hardware\.biometrics\.fingerprint-service\.goodix             u:object_r:hal_fingerprint_default_exec:s0
 /vendor/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.1-service\.fpc           u:object_r:hal_fingerprint_default_exec:s0
 
 # ECC List
@@ -427,10 +428,6 @@
 /dev/dma_heap/video_system-uncached                                      u:object_r:dmabuf_system_heap_device:s0
 
 /dev/dma_heap/vstream-secure                                             u:object_r:dmabuf_system_secure_heap_device:s0
-
-# Video sysfs files
-/sys/devices/platform/mfc/video4linux/video6/name                              u:object_r:sysfs_video:s0
-/sys/devices/platform/mfc/video4linux/video7/name                              u:object_r:sysfs_video:s0
 
 # BigOcean
 /dev/bigocean                                                                  u:object_r:video_device:s0
