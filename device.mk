@@ -648,6 +648,10 @@ PRODUCT_COPY_FILES += \
 	device/google/gs101/wifi/p2p_supplicant.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant.conf \
 	device/google/gs101/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf
 
+# WIFI COEX
+PRODUCT_COPY_FILES += \
+	device/google/gs101/wifi/coex_table.xml:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/coex_table.xml
+
 HOSTAPD := hostapd
 HOSTAPD += hostapd_cli
 PRODUCT_PACKAGES += $(HOSTAPD)
