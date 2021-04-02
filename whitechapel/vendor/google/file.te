@@ -173,6 +173,12 @@ type persist_battery_file, file_type, vendor_persist_type;
 # CPU
 type sysfs_cpu, sysfs_type, fs_type;
 
+# GPU
+type sysfs_gpu, sysfs_type, fs_type;
+
+# Fabric
+type sysfs_fabric, sysfs_type, fs_type;
+
 # Memory
 type sysfs_memory, sysfs_type, fs_type;
 
