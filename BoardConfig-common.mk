@@ -398,7 +398,6 @@ BOARD_VENDOR_RAMDISK_KERNEL_MODULES += \
 BUILD_BROKEN_USES_BUILD_COPY_HEADERS := true
 
 include device/google/gs101-sepolicy/gs101-sepolicy.mk
--include device/google/gs101/soong/pixel_soong_config.mk
 
 # Battery options
 BOARD_KERNEL_CMDLINE += at24.write_timeout=100

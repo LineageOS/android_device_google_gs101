@@ -70,12 +70,9 @@ using ::android::hardware::usb::gadget::V1_2::IUsbGadget;
 using ::android::hardware::usb::gadget::V1_2::GadgetFunction;
 using ::std::string;
 
-#ifdef OLDER_GADGET
 constexpr char kGadgetName[] = "11110000.dwc3";
+#ifndef UDC_PATH
 #define UDC_PATH "/sys/class/udc/11110000.dwc3/"
-#else
-constexpr char kGadgetName[] = "11110000.usb";
-#define UDC_PATH "/sys/class/udc/11110000.usb/"
 #endif
 static MonitorFfs monitorFfs(kGadgetName);
 
