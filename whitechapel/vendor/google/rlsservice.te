@@ -13,6 +13,9 @@ allow rlsservice persist_camera_file:dir search;
 allow rlsservice persist_camera_file:file r_file_perms;
 allow rlsservice mnt_vendor_file:dir search;
 
+# access device files
+allow rlsservice rls_device:chr_file rw_file_perms;
+
 binder_call(rlsservice, hal_sensors_default)
 binder_call(rlsservice, hal_camera_default)
 
