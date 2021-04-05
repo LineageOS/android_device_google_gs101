@@ -1,0 +1,3 @@
+# Allow gmscore to use UwbService APIs
+# TODO (b/183904955): remove
+allow gmscore_app uwb_service:service_manager find;

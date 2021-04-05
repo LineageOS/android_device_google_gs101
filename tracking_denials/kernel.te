@@ -3,5 +3,4 @@ dontaudit kernel kernel:perf_event { cpu };
 dontaudit kernel kernel:perf_event { cpu };
 userdebug_or_eng(`
   permissive kernel;
-  permissive hal_uwb_default;
 ')
