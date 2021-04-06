@@ -19,7 +19,6 @@
 #include "AocStateResidencyDataProvider.h"
 #include "DvfsStateResidencyDataProvider.h"
 #include "UfsStateResidencyDataProvider.h"
-#include <dataproviders/DisplayStateResidencyDataProvider.h>
 #include <dataproviders/GenericStateResidencyDataProvider.h>
 #include <dataproviders/IioEnergyMeterDataProvider.h>
 #include <dataproviders/PowerStatsEnergyConsumer.h>
@@ -33,7 +32,6 @@
 #include <log/log.h>
 
 using aidl::android::hardware::power::stats::AocStateResidencyDataProvider;
-using aidl::android::hardware::power::stats::DisplayStateResidencyDataProvider;
 using aidl::android::hardware::power::stats::DvfsStateResidencyDataProvider;
 using aidl::android::hardware::power::stats::UfsStateResidencyDataProvider;
 using aidl::android::hardware::power::stats::EnergyConsumerType;
@@ -306,38 +304,6 @@ void setEnergyMeter(std::shared_ptr<PowerStats> p) {
     p->setEnergyMeterDataProvider(std::make_unique<IioEnergyMeterDataProvider>(deviceNames, true));
 }
 
-void addDisplay(std::shared_ptr<PowerStats> p) {
-    // Add display residency stats
-
-    /*
-     * TODO(b/167216667): Add complete set of display states here. Must account
-     * for ALL devices built using this source
-     */
-    std::vector<std::string> states = {
-        "Off",
-        "LP: 1440x3040@30",
-        "On: 1440x3040@60",
-        "On: 1440x3040@90",
-        "HBM: 1440x3040@60",
-        "HBM: 1440x3040@90"};
-
-    p->addStateResidencyDataProvider(std::make_unique<DisplayStateResidencyDataProvider>("Display",
-            "/sys/class/backlight/panel0-backlight/state",
-            states));
-
-    // Add display energy consumer
-    /*
-     * TODO(b/167216667): Add correct display power model here. Must read from display rail
-     * and include proper coefficients for display states. Must account for ALL devices built
-     * using this source.
-     */
-    p->addEnergyConsumer(PowerStatsEnergyConsumer::createMeterAndEntityConsumer(p,
-            EnergyConsumerType::DISPLAY, "display", {"PPVAR_VSYS_PWR_DISP"}, "Display",
-            {{"LP: 1440x3040@30", 1},
-             {"On: 1440x3040@60", 2},
-             {"On: 1440x3040@90", 3}}));
-}
-
 void addCPUclusters(std::shared_ptr<PowerStats> p) {
     // A constant to represent the number of nanoseconds in one millisecond.
     const int NS_TO_MS = 1000000;
@@ -578,7 +544,6 @@ void addGs101CommonDataProviders(std::shared_ptr<PowerStats> p) {
 
     addPixelStateResidencyDataProvider(p);
     addAoC(p);
-    addDisplay(p);
     addDvfsStats(p);
     addSoC(p);
     addCPUclusters(p);
