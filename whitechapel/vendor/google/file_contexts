@@ -175,6 +175,7 @@
 /vendor/lib(64)?/lib_aion_buffer\.so                                    u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libGralloc4Wrapper\.so                                 u:object_r:same_process_hal_file:s0
 
+/dev/stmvl53l1_ranging                                                  u:object_r:rls_device:s0
 
 /dev/lwis-act0                                                          u:object_r:lwis_device:s0
 /dev/lwis-act1                                                          u:object_r:lwis_device:s0
