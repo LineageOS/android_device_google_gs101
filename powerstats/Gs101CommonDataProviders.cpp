@@ -494,6 +494,36 @@ void addMobileRadio(std::shared_ptr<PowerStats> p)
 
 void addGNSS(std::shared_ptr<PowerStats> p)
 {
+    // A constant to represent the number of microseconds in one millisecond.
+    const int US_TO_MS = 1000;
+
+    // gnss power_stats are reported in microseconds. The transform function
+    // converts microseconds to milliseconds.
+    std::function<uint64_t(uint64_t)> gnssUsToMs = [](uint64_t a) { return a / US_TO_MS; };
+
+    const GenericStateResidencyDataProvider::StateResidencyConfig gnssStateConfig = {
+        .entryCountSupported = true,
+        .entryCountPrefix = "count:",
+        .totalTimeSupported = true,
+        .totalTimePrefix = "duration_usec:",
+        .totalTimeTransform = gnssUsToMs,
+        .lastEntrySupported = true,
+        .lastEntryPrefix = "last_entry_timestamp_usec:",
+        .lastEntryTransform = gnssUsToMs,
+    };
+
+    const std::vector<std::pair<std::string, std::string>> gnssStateHeaders = {
+        std::make_pair("ON", "GPS_ON:"),
+        std::make_pair("OFF", "GPS_OFF:"),
+    };
+
+    std::vector<GenericStateResidencyDataProvider::PowerEntityConfig> cfgs;
+    cfgs.emplace_back(generateGenericStateResidencyConfigs(gnssStateConfig, gnssStateHeaders),
+            "GPS", "");
+
+    p->addStateResidencyDataProvider(std::make_unique<GenericStateResidencyDataProvider>(
+            "/dev/bbd_pwrstat", cfgs));
+
     p->addEnergyConsumer(PowerStatsEnergyConsumer::createMeterConsumer(p,
             EnergyConsumerType::GNSS, "GPS", {"L9S_GNSS_CORE"}));
 }
