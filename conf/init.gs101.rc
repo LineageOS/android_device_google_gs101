@@ -383,12 +383,6 @@ on boot
     chown wifi wifi /sys/module/bcmdhd/parameters/nvram_path
     chown wifi wifi /sys/module/bcmdhd/parameters/firmware_path
 
-on nonencrypted
-    mkdir /data/misc/mcRegistry 0775 system drmrpc
-
-on property:vold.decrypt=trigger_restart_framework
-    mkdir /data/misc/mcRegistry 0775 system drmrpc
-
 on property:persist.vendor.radio.no_modem_board=1
     setprop ro.radio.noril yes
 
