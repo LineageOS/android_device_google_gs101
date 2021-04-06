@@ -78,9 +78,7 @@ endif
 
 # From system.property
 PRODUCT_PROPERTY_OVERRIDES += \
-	ro.arch=gs101 \
 	dev.usbsetting.embedded=on \
-	ro.debug_level=0x494d \
 	ro.telephony.default_network=27 \
 	persist.vendor.ril.use.iccid_to_plmn=1 \
 	persist.vendor.ril.emergencynumber.mode=5
