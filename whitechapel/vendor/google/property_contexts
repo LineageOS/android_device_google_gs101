@@ -102,3 +102,9 @@ vendor.wlan.firmware.version                    u:object_r:vendor_wifi_version:s
 
 # Touchpanel
 vendor.mfgapi.touchpanel.permission             u:object_r:vendor_touchpanel_prop:s0
+
+# Tcpdump_logger
+persist.vendor.tcpdump.log.alwayson             u:object_r:vendor_tcpdump_log_prop:s0
+vendor.tcpdump.log.ondemand                     u:object_r:vendor_tcpdump_log_prop:s0
+vendor.tcpdump.log.alwayson                     u:object_r:vendor_tcpdump_log_prop:s0
+vendor.tcpdump.output.dir                       u:object_r:vendor_tcpdump_log_prop:s0

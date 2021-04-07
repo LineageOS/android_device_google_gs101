@@ -254,6 +254,10 @@
 # Modem logging
 /vendor/bin/modem_logging_control   u:object_r:modem_logging_control_exec:s0
 
+# TCP logging
+/vendor/bin/tcpdump_logger          u:object_r:tcpdump_logger_exec:s0
+/data/vendor/tcpdump_logger(/.*)?   u:object_r:tcpdump_vendor_data_file:s0
+
 # Audio logging
 /vendor/bin/aocdump                 u:object_r:aocdump_exec:s0
 
