@@ -298,11 +298,22 @@ void DumpstateDevice::dumpPowerSection(int fd) {
     DumpFileToFd(fd, "Power supply property gcpm", "/sys/class/power_supply/gcpm/uevent");
     DumpFileToFd(fd, "Power supply property gcpm_pps", "/sys/class/power_supply/gcpm_pps/uevent");
     DumpFileToFd(fd, "Power supply property main-charger", "/sys/class/power_supply/main-charger/uevent");
-    DumpFileToFd(fd, "Power supply property maxfg", "/sys/class/power_supply/maxfg/uevent");
     DumpFileToFd(fd, "Power supply property pca9486-mains", "/sys/class/power_supply/pca9468-mains/uevent");
     DumpFileToFd(fd, "Power supply property tcpm", "/sys/class/power_supply/tcpm-source-psy-5-0025/uevent");
     DumpFileToFd(fd, "Power supply property usb", "/sys/class/power_supply/usb/uevent");
     DumpFileToFd(fd, "Power supply property wireless", "/sys/class/power_supply/wireless/uevent");
+    if (!stat("/sys/class/power_supply/maxfg", &buffer)) {
+        DumpFileToFd(fd, "Power supply property maxfg", "/sys/class/power_supply/maxfg/uevent");
+        DumpFileToFd(fd, "m5_state", "/sys/class/power_supply/maxfg/m5_model_state");
+        DumpFileToFd(fd, "maxfg", "/dev/logbuffer_maxfg");
+    } else {
+        DumpFileToFd(fd, "Power supply property maxfg_base", "/sys/class/power_supply/maxfg_base/uevent");
+        DumpFileToFd(fd, "Power supply property maxfg_flip", "/sys/class/power_supply/maxfg_flip/uevent");
+        DumpFileToFd(fd, "m5_state", "/sys/class/power_supply/maxfg_base/m5_model_state");
+        DumpFileToFd(fd, "maxfg_base", "/dev/logbuffer_maxfg_base");
+        DumpFileToFd(fd, "maxfg_flip", "/dev/logbuffer_maxfg_flip");
+    }
+
 
     if (!stat("/sys/kernel/debug/tcpm", &buffer)) {
         RunCommandToFd(fd, "TCPM logs", {"/vendor/bin/sh", "-c", "cat /sys/kernel/debug/tcpm/*"});
@@ -318,12 +329,13 @@ void DumpstateDevice::dumpPowerSection(int fd) {
     DumpFileToFd(fd, "TTF", "/dev/logbuffer_ttf");
     DumpFileToFd(fd, "TTF details", "/sys/class/power_supply/battery/ttf_details");
     DumpFileToFd(fd, "TTF stats", "/sys/class/power_supply/battery/ttf_stats");
-    DumpFileToFd(fd, "batt_ce", "/dev/logbuffer_batt_ce");
     DumpFileToFd(fd, "maxq", "/dev/logbuffer_maxq");
+    DumpFileToFd(fd, "RTX", "/dev/logbuffer_rtx");
+    DumpFileToFd(fd, "WIRELESS", "/dev/logbuffer_wireless");
+
 
     RunCommandToFd(fd, "DC_registers dump", {"/vendor/bin/sh", "-c", "cat /d/regmap/*-0057-pca9468-mains/registers"});
 
-    DumpFileToFd(fd, "m5_state", "/sys/class/power_supply/maxfg/m5_model_state");
     RunCommandToFd(fd, "fg_model", {"/vendor/bin/sh", "-c",
                         "for f in /d/maxfg* ; do "
                         "regs=`cat $f/fg_model`; echo $f: ;"
