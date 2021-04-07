@@ -14,18 +14,7 @@
 # limitations under the License.
 
 # UWB - ultra wide band
-PRODUCT_PACKAGES_DEBUG += \
-	wpan-mcps \
-	test_data_transfer \
-	iwpan \
-	UwbService \
-	UwbFieldTest \
-	uwbservicectl \
-	hardware.qorvo.uwb \
-	hardware.qorvo.uwb-java \
-	hardware.qorvo.uwb-service \
-	haluwbctl \
-	$(NULL)
+$(call inherit-product-if-exists, vendor/qorvo/uwb/uwb.mk)
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.uwb.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.uwb.xml
