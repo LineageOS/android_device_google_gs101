@@ -8,4 +8,8 @@ allow init-insmod-sh vendor_toolbox_exec:file execute_no_trans;
 
 set_prop(init-insmod-sh, vendor_device_prop)
 
+userdebug_or_eng(`
+  allow init-insmod-sh vendor_regmap_debugfs:dir search;
+')
+
 dontaudit init-insmod-sh proc_cmdline:file r_file_perms;

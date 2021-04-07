@@ -1,4 +1,0 @@
-# b/182086611
-dontaudit init-insmod-sh vendor_regmap_debugfs:dir { search };
-dontaudit init-insmod-sh vendor_regmap_debugfs:dir { search };
-dontaudit init-insmod-sh vendor_regmap_debugfs:dir { search };
