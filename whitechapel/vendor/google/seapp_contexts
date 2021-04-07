@@ -43,3 +43,6 @@ user=radio isPrivApp=true seinfo=platform name=com.google.RilConfigService domai
 
 # CBRS setup app
 user=_app seinfo=platform name=com.google.googlecbrs domain=cbrs_setup_app type=app_data_file levelFrom=user
+
+# Domain for OFLBasicAgentApp to support NFC/eSIM fw upgrade
+user=_app isPrivApp=true  seinfo=platform name=com.thales.device.ofl.app.basicagent domain=ofl_app type=app_data_file levelFrom=user
