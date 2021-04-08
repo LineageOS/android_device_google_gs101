@@ -17,7 +17,7 @@
           {
             "FilePath": "/sys/kernel/vendor_sched/set_prefer_high_cap",
             "Value": "<pid>",
-            "LogFailures": false
+            "LogFailures": "false"
           }
         }
       ]
@@ -39,7 +39,7 @@
           {
             "FilePath": "/sys/kernel/vendor_sched/set_prefer_high_cap",
             "Value": "<pid>",
-            "LogFailures": false
+            "LogFailures": "false"
           }
         }
       ]
@@ -61,7 +61,7 @@
           {
             "FilePath": "/sys/kernel/vendor_sched/clear_prefer_high_cap",
             "Value": "<pid>",
-            "LogFailures": false
+            "LogFailures": "false"
           }
         }
       ]
@@ -83,7 +83,7 @@
           {
             "FilePath": "/sys/kernel/vendor_sched/clear_prefer_high_cap",
             "Value": "<pid>",
-            "LogFailures": false
+            "LogFailures": "false"
           }
         }
       ]
@@ -105,7 +105,7 @@
           {
             "FilePath": "/sys/kernel/vendor_sched/clear_prefer_high_cap",
             "Value": "<pid>",
-            "LogFailures": false
+            "LogFailures": "false"
           }
         }
       ]
@@ -127,7 +127,7 @@
           {
             "FilePath": "/sys/kernel/vendor_sched/clear_prefer_high_cap",
             "Value": "<pid>",
-            "LogFailures": false
+            "LogFailures": "false"
           }
         }
       ]
@@ -149,7 +149,7 @@
           {
             "FilePath": "/sys/kernel/vendor_sched/clear_prefer_high_cap",
             "Value": "<pid>",
-            "LogFailures": false
+            "LogFailures": "false"
           }
         }
       ]
