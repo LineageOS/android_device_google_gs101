@@ -120,9 +120,6 @@ allow modem_img_file self:filesystem associate;
 # Wireless
 type sysfs_wlc, sysfs_type, fs_type;
 
-# Kernel modules
-type vendor_kernel_modules, vendor_file_type, file_type;
-
 # Camera
 type persist_camera_file, file_type;
 type vendor_camera_tuning_file, vendor_file_type, file_type;

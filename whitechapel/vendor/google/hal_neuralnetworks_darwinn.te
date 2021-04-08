@@ -14,6 +14,9 @@ allow hal_neuralnetworks_darwinn vendor_configs_file:file r_file_perms;
 allow hal_neuralnetworks_darwinn hal_neuralnetworks_darwinn_data_file:file create_file_perms;
 allow hal_neuralnetworks_darwinn hal_neuralnetworks_darwinn_data_file:dir rw_dir_perms;
 
+# Allow DarwiNN service to access unix sockets for IPC.
+allow hal_neuralnetworks_darwinn hal_neuralnetworks_darwinn_data_file:sock_file { create unlink rw_file_perms };
+
 # Register to hwbinder service.
 # add_hwservice() is granted by hal_server_domain + hal_neuralnetworks.te
 hwbinder_use(hal_neuralnetworks_darwinn)
