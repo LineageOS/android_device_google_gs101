@@ -1,8 +1,0 @@
-# b/171267323
-dontaudit aocd device:dir r_dir_perms;
-# b/182218891
-dontaudit aocd property_socket:sock_file { write };
-dontaudit aocd init:unix_stream_socket { connectto };
-dontaudit aocd vendor_default_prop:property_service { set };
-dontaudit aocd property_socket:sock_file { write };
-dontaudit aocd init:unix_stream_socket { connectto };
