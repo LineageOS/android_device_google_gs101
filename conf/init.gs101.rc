@@ -396,6 +396,7 @@ on fs
     chown radio system /mnt/vendor/modem_userdata
 
     restorecon_recursive /mnt/vendor/persist
+    restorecon_recursive /mnt/vendor/persist/aoc
     restorecon_recursive /mnt/vendor/persist/audio
     restorecon_recursive /mnt/vendor/persist/sensors
     restorecon_recursive /mnt/vendor/persist/battery
