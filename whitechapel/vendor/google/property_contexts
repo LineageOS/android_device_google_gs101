@@ -67,6 +67,10 @@ persist.vendor.sys.          u:object_r:vendor_persist_sys_default_prop:s0
 vendor.audio_hal.period_multiplier      u:object_r:vendor_audio_prop:s0
 vendor.audiodump.enable                 u:object_r:vendor_audio_prop:s0
 persist.vendor.audio.                   u:object_r:vendor_audio_prop:s0
+vendor.audiodump.log.ondemand           u:object_r:vendor_audio_prop:s0
+vendor.audiodump.log.config             u:object_r:vendor_audio_prop:s0
+vendor.audiodump.output.dir             u:object_r:vendor_audio_prop:s0
+
 
 # for display
 ro.vendor.hwc.drm.device                u:object_r:vendor_display_prop:s0
@@ -92,9 +96,18 @@ persist.vendor.nfc.                             u:object_r:vendor_nfc_prop:s0
 # Battery
 vendor.battery.defender.                        u:object_r:vendor_battery_defender_prop:s0
 
+# AoC
+vendor.aoc.firmware.version                     u:object_r:vendor_aoc_prop:s0
+
 # WiFi
 vendor.wlan.driver.version                      u:object_r:vendor_wifi_version:s0
 vendor.wlan.firmware.version                    u:object_r:vendor_wifi_version:s0
 
 # Touchpanel
 vendor.mfgapi.touchpanel.permission             u:object_r:vendor_touchpanel_prop:s0
+
+# Tcpdump_logger
+persist.vendor.tcpdump.log.alwayson             u:object_r:vendor_tcpdump_log_prop:s0
+vendor.tcpdump.log.ondemand                     u:object_r:vendor_tcpdump_log_prop:s0
+vendor.tcpdump.log.alwayson                     u:object_r:vendor_tcpdump_log_prop:s0
+vendor.tcpdump.output.dir                       u:object_r:vendor_tcpdump_log_prop:s0

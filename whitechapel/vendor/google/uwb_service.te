@@ -1,0 +1,1 @@
+allow uwb_service hal_uwb_service:service_manager find;

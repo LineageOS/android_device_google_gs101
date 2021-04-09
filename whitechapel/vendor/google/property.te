@@ -33,6 +33,9 @@ system_public_prop(vendor_edgetpu_service_prop)
 # Battery defender
 vendor_internal_prop(vendor_battery_defender_prop)
 
+# AoC
+vendor_internal_prop(vendor_aoc_prop)
+
 # NFC
 vendor_internal_prop(vendor_nfc_prop)
 
@@ -41,3 +44,6 @@ vendor_internal_prop(vendor_wifi_version)
 
 # Touchpanel
 vendor_internal_prop(vendor_touchpanel_prop)
+
+# TCP logging
+vendor_internal_prop(vendor_tcpdump_log_prop)
