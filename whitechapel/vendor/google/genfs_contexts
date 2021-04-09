@@ -59,6 +59,7 @@ genfscon sysfs /devices/platform/14700000.ufs/ufs_stats                 u:object
 # Vibrator
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-4/4-005a            u:object_r:sysfs_vibrator:s0
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-4/4-0043            u:object_r:sysfs_vibrator:s0
+genfscon sysfs /devices/platform/10970000.hsi2c/i2c-5/5-0042            u:object_r:sysfs_vibrator:s0
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-5/5-0043            u:object_r:sysfs_vibrator:s0
 
 # System_suspend

@@ -96,7 +96,8 @@ type sysfs_aoc_firmware, sysfs_type, fs_type;
 type sysfs_aoc, sysfs_type, fs_type;
 
 # Audio
-type persist_audio_file, file_type , vendor_persist_type;
+type persist_audio_file, file_type, vendor_persist_type;
+type persist_aoc_file, file_type, vendor_persist_type;
 type audio_vendor_data_file, file_type, data_file_type;
 type aoc_audio_file, file_type, vendor_file_type;
 
@@ -116,6 +117,9 @@ type persist_modem_file, file_type, vendor_persist_type;
 
 type modem_img_file, contextmount_type, file_type, vendor_file_type;
 allow modem_img_file self:filesystem associate;
+
+# TCP logging
+type tcpdump_vendor_data_file, file_type, data_file_type, mlstrustedobject;
 
 # Wireless
 type sysfs_wlc, sysfs_type, fs_type;
