@@ -45,8 +45,9 @@ vendor.cbd.                  u:object_r:vendor_cbd_prop:s0
 persist.vendor.cbd.          u:object_r:vendor_cbd_prop:s0
 
 # for slog
-vendor.sys.silentlog.        u:object_r:vendor_slog_prop:s0
-vendor.sys.exynos.slog.      u:object_r:vendor_slog_prop:s0
+vendor.sys.silentlog.            u:object_r:vendor_slog_prop:s0
+vendor.sys.exynos.slog.          u:object_r:vendor_slog_prop:s0
+persist.vendor.sys.silentlog     u:object_r:vendor_slog_prop:s0
 
 # for dmd
 persist.vendor.sys.dm.       u:object_r:vendor_diag_prop:s0
