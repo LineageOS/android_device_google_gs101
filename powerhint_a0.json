@@ -57,9 +57,13 @@
       "Name": "TAUClampBoost",
       "Path": "/dev/cpuctl/top-app/cpu.uclamp.min",
       "Values": [
+        "0",
+        "40",
         "30",
+        "20",
         "10"
       ],
+      "DefaultIndex": 0,
       "ResetOnInit": true
     },
     {
@@ -102,6 +106,11 @@
   "Actions": [
     {
       "PowerHint": "INTERACTION",
+      "Type": "EndHint",
+      "Value": "DISABLE_TA_BOOST"
+    },
+    {
+      "PowerHint": "INTERACTION",
       "Node": "CPUBigClusterMinFreq",
       "Duration": 6000,
       "Value": "1197000"
@@ -114,9 +123,81 @@
     },
     {
       "PowerHint": "INTERACTION",
+      "Type": "DoHint",
+      "Value": "INTERACTION_120"
+    },
+    {
+      "PowerHint": "INTERACTION",
+      "Type": "DoHint",
+      "Value": "INTERACTION_90"
+    },
+    {
+      "PowerHint": "INTERACTION",
+      "Type": "DoHint",
+      "Value": "INTERACTION_60"
+    },
+    {
+      "PowerHint": "INTERACTION_120",
+      "Node": "TAUClampBoost",
+      "Duration": 6000,
+      "Value": "40"
+    },
+    {
+      "PowerHint": "INTERACTION_90",
       "Node": "TAUClampBoost",
       "Duration": 6000,
       "Value": "30"
+    },
+    {
+      "PowerHint": "INTERACTION_60",
+      "Node": "TAUClampBoost",
+      "Duration": 6000,
+      "Value": "20"
+    },
+    {
+      "PowerHint": "REFRESH_120FPS",
+      "Type": "MaskHint",
+      "Value": "INTERACTION_60"
+    },
+    {
+      "PowerHint": "REFRESH_120FPS",
+      "Type": "MaskHint",
+      "Value": "INTERACTION_90"
+    },
+    {
+      "PowerHint": "REFRESH_90FPS",
+      "Type": "MaskHint",
+      "Value": "INTERACTION_60"
+    },
+    {
+      "PowerHint": "REFRESH_90FPS",
+      "Type": "MaskHint",
+      "Value": "INTERACTION_120"
+    },
+    {
+      "PowerHint": "REFRESH_60FPS",
+      "Type": "MaskHint",
+      "Value": "INTERACTION_90"
+    },
+    {
+      "PowerHint": "REFRESH_60FPS",
+      "Type": "MaskHint",
+      "Value": "INTERACTION_120"
+    },
+    {
+      "PowerHint": "DISPLAY_IDLE",
+      "Type": "EndHint",
+      "Value": "INTERACTION_120"
+    },
+    {
+      "PowerHint": "DISPLAY_IDLE",
+      "Type": "EndHint",
+      "Value": "INTERACTION_90"
+    },
+    {
+      "PowerHint": "DISPLAY_IDLE",
+      "Type": "EndHint",
+      "Value": "INTERACTION_60"
     },
     {
       "PowerHint": "INTERACTION",
@@ -135,6 +216,11 @@
       "Node": "F2fsRecessModeEnable",
       "Duration": 0,
       "Value": "2"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Type": "EndHint",
+      "Value": "DISABLE_TA_BOOST"
     },
     {
       "PowerHint": "LAUNCH",
@@ -159,6 +245,12 @@
       "Node": "CPULittleClusterMinFreq",
       "Duration": 5000,
       "Value": "9999999"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "TAUClampBoost",
+      "Duration": 5000,
+      "Value": "30"
     },
     {
       "PowerHint": "LAUNCH",
@@ -261,6 +353,45 @@
       "Node": "GPUMinFreq",
       "Duration": 0,
       "Value": "455000"
+    },
+    {
+      "PowerHint": "REFRESH_120FPS",
+      "Node": "TAUClampBoost",
+      "Duration": 0,
+      "Value": "30"
+    },
+    {
+      "PowerHint": "REFRESH_90FPS",
+      "Node": "TAUClampBoost",
+      "Duration": 0,
+      "Value": "20"
+    },
+    {
+      "PowerHint": "REFRESH_60FPS",
+      "Node": "TAUClampBoost",
+      "Duration": 0,
+      "Value": "10"
+    },
+    {
+      "PowerHint": "DISABLE_TA_BOOST",
+      "Node": "TAUClampBoost",
+      "Duration": 0,
+      "Value": "0"
+    },
+    {
+      "PowerHint": "DISPLAY_IDLE",
+      "Type": "DoHint",
+      "Value": "DISABLE_TA_BOOST"
+    },
+    {
+      "PowerHint": "DISPLAY_IDLE",
+      "Type": "EndHint",
+      "Value": "DISPLAY_UPDATE_IMMINENT"
+    },
+    {
+      "PowerHint": "DISPLAY_UPDATE_IMMINENT",
+      "Type": "EndHint",
+      "Value": "DISABLE_TA_BOOST"
     }
   ]
 }
