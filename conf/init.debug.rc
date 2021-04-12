@@ -1,3 +1,9 @@
 on property:vendor.debug.ramdump.force_crash=true
     write /sys/kernel/pixel_debug/trigger "null"
 
+on property:power.battery_input.suspended=true
+   write /sys/kernel/debug/google_charger/input_suspend 1
+
+on property:power.battery_input.suspended=false
+   write /sys/kernel/debug/google_charger/input_suspend 0
+
