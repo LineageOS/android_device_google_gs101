@@ -401,3 +401,6 @@ include device/google/gs101-sepolicy/gs101-sepolicy.mk
 
 # Battery options
 BOARD_KERNEL_CMDLINE += at24.write_timeout=100
+
+# Enable larger logbuf
+BOARD_KERNEL_CMDLINE += log_buf_len=1024K
