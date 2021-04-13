@@ -99,6 +99,8 @@
 /dev/logbuffer_maxq            u:object_r:logbuffer_device:s0
 /dev/logbuffer_rtx             u:object_r:logbuffer_device:s0
 /dev/logbuffer_maxfg           u:object_r:logbuffer_device:s0
+/dev/logbuffer_maxfg_base      u:object_r:logbuffer_device:s0
+/dev/logbuffer_maxfg_flip      u:object_r:logbuffer_device:s0
 
 # DM tools device
 /dev/umts_dm0                  u:object_r:radio_device:s0
