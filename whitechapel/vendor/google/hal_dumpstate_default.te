@@ -88,7 +88,7 @@ userdebug_or_eng(`
 
 get_prop(hal_dumpstate_default, boottime_public_prop)
 get_prop(hal_dumpstate_default, vendor_gps_prop)
-get_prop(hal_dumpstate_default, vendor_modem_prop)
+set_prop(hal_dumpstate_default, vendor_modem_prop)
 get_prop(hal_dumpstate_default, vendor_rild_prop)
 
 userdebug_or_eng(`
