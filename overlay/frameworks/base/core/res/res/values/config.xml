@@ -260,6 +260,11 @@
          meanings. -->
     <integer name="config_defaultRingVibrationIntensity">3</integer>
 
+    <!-- Enables or disables haptic effect when the text insertion/selection handle is moved
+          manually by the user. Off by default, since the expected haptic feedback may not be
+          available on some devices. -->
+    <bool name="config_enableHapticTextHandle">true</bool>
+
     <!-- If the hardware supports specially marking packets that caused a wakeup of the
          main CPU, set this value to the mark used. -->
     <integer name="config_networkWakeupPacketMark">0x80000000</integer>
