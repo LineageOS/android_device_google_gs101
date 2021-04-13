@@ -271,6 +271,10 @@ on post-fs-data
     mkdir /data/vendor/hal_neuralnetworks_darwinn 0770 system system
     mkdir /data/vendor/hal_neuralnetworks_darwinn/checksum_cache 0770 system system
 
+on zygote-start
+    # For PixelLogger configuration file.
+    chmod 0771 /data/vendor/wifi
+
 on post-fs-data
     # Create the directories used by the Wireless subsystem
     mkdir /data/vendor/wifi 0771 wifi wifi
