@@ -1,11 +1,3 @@
 # b/180963348
 dontaudit init overlayfs_file:chr_file { unlink };
 dontaudit init overlayfs_file:file { rename };
-# b/182954138
-dontaudit init vendor_file:file { execute };
-dontaudit init vendor_file:file { execute };
-dontaudit init sysfs:file { setattr };
-dontaudit init sysfs:file { setattr };
-# b/185186743
-dontaudit init sysfs_scsi_devices_0000:file { write };
-dontaudit init sysfs_scsi_devices_0000:file { write };
