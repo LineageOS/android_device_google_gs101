@@ -11,3 +11,7 @@ allow chre sysfs_aoc_boottime:file r_file_perms;
 
 # Allow CHRE to create thread to watch AOC's device
 allow chre device:dir r_dir_perms;
+
+# Allow CHRE to use the USF low latency transport
+usf_low_latency_transport(chre)
+

@@ -26,6 +26,8 @@ genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-6/6-0069/power_supply       
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-6/6-0036/power_supply       u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-6/6-0057/power_supply       u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-5/5-0050/eeprom             u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/10970000.hsi2c/i2c-5/5-0061/power_supply       u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/10970000.hsi2c/i2c-5/5-0036/power_supply       u:object_r:sysfs_batteryinfo:s0
 
 #   O6
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-5/5-0025                    u:object_r:sysfs_batteryinfo:s0
@@ -78,6 +80,7 @@ genfscon sysfs /devices/platform/11110000.usb/wakeup/wakeup                     
 genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/6-001f/s2mpg10-rtc/wakeup/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /sys/devices/platform/10d50000.hsi2c/i2c-5/5-0036/power_supply/maxfg/wakeup    u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-5/5-0036/power_supply/maxfg/wakeup        u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-6/6-0036/power_supply/maxfg_base/wakeup   u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-5/5-0050/power_supply/tcpm-source-psy-5-0050/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10960000.hsi2c/i2c-3/3-0008/wakeup/wakeup                    u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/6-001f/wakeup/wakeup             u:object_r:sysfs_wakeup:s0
@@ -231,6 +234,8 @@ genfscon sysfs /devices/platform/14520000.pcie/power_stats                      
 # debugfs
 
 genfscon debugfs /maxfg                                                                                   u:object_r:vendor_maxfg_debugfs:s0
+genfscon debugfs /maxfg_base                                                                              u:object_r:vendor_maxfg_debugfs:s0
+genfscon debugfs /maxfg_flip                                                                              u:object_r:vendor_maxfg_debugfs:s0
 genfscon debugfs /dma_buf/bufinfo                                                                         u:object_r:vendor_dmabuf_debugfs:s0
 genfscon debugfs /dri/0/crtc-                                                                             u:object_r:vendor_dri_debugfs:s0
 genfscon debugfs /ion                                                                                     u:object_r:vendor_ion_debugfs:s0
