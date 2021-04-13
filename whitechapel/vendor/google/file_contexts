@@ -13,6 +13,7 @@
 /(vendor|system/vendor)/lib(64)?/libOpenCL\.so                                                  u:object_r:same_process_hal_file:s0
 /(vendor|system/vendor)/lib(64)?/libOpenCL-pixel\.so                                            u:object_r:same_process_hal_file:s0
 /(vendor|system/vendor)/lib(64)?/libdmabufheap\.so                                              u:object_r:same_process_hal_file:s0
+/(vendor|system/vendor)/lib(64)?/libgpudataproducer\.so                                         u:object_r:same_process_hal_file:s0
 
 /vendor/bin/usf_stats                                                                           u:object_r:vendor_usf_stats:s0
 /vendor/bin/dumpsys                                                                             u:object_r:vendor_dumpsys:s0
