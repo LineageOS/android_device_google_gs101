@@ -1,5 +1,0 @@
-# b/179310854
-dontaudit dumpstate hal_neuralnetworks_armnn:process signal;
-dontaudit dumpstate hal_power_stats_vendor_service:service_manager find;
-dontaudit dumpstate vendor_dmabuf_debugfs:file { getattr open read };
-dontaudit dumpstate vold:binder call;
