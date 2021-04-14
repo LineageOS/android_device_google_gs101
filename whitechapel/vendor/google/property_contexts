@@ -37,6 +37,7 @@ vendor.usb.            u:object_r:vendor_usb_config_prop:s0
 persist.vendor.modem.        u:object_r:vendor_modem_prop:s0
 vendor.modem.                u:object_r:vendor_modem_prop:s0
 vendor.sys.modem.            u:object_r:vendor_modem_prop:s0
+ro.vendor.sys.modem.         u:object_r:vendor_modem_prop:s0
 vendor.sys.exynos.modempath  u:object_r:vendor_modem_prop:s0
 persist.vendor.sys.modem.    u:object_r:vendor_modem_prop:s0
 
