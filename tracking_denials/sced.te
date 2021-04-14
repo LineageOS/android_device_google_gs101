@@ -1,4 +1,0 @@
-# b/171760846
-dontaudit sced hidl_base_hwservice:hwservice_manager { add };
-dontaudit sced hal_vendor_oem_hwservice:hwservice_manager { add };
-dontaudit sced hal_vendor_oem_hwservice:hwservice_manager { find };

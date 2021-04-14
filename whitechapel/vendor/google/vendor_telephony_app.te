@@ -16,3 +16,4 @@ allow vendor_telephony_app vendor_slog_file:file create_file_perms;
 allow vendor_telephony_app app_api_service:service_manager find;
 allow vendor_telephony_app hal_vendor_oem_hwservice:hwservice_manager find;
 binder_call(vendor_telephony_app, dmd)
+binder_call(vendor_telephony_app, sced)
