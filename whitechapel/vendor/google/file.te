@@ -188,3 +188,7 @@ type sysfs_bcmdhd, sysfs_type, fs_type;
 
 # Video
 type sysfs_video, sysfs_type, fs_type;
+
+# TODO(b/184768835): remove this once the bug is fixed
+# LHBM (Local High Brightness Mode)
+type sysfs_lhbm, sysfs_type, fs_type, mlstrustedobject;
