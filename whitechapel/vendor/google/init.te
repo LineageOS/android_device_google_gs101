@@ -17,3 +17,4 @@ allow init modem_userdata_file:dir mounton;
 allow init ram_device:blk_file w_file_perms;
 allow init per_boot_file:file ioctl;
 allowxperm init per_boot_file:file ioctl { F2FS_IOC_SET_PIN_FILE };
+allow init sysfs_scsi_devices_0000:file w_file_perms;
