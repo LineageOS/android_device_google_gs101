@@ -161,28 +161,10 @@ void addDvfsStats(std::shared_ptr<PowerStats> p) {
         std::make_pair("0KHz", "0"),
     }});
 
-    cfgs.push_back({"CL0", {
-        std::make_pair("2024KHz", "2024000"),
-        std::make_pair("1950KHz", "1950000"),
-        std::make_pair("1868KHz", "1868000"),
-        std::make_pair("1803KHz", "1803000"),
-        std::make_pair("1745KHz", "1745000"),
-        std::make_pair("1704KHz", "1704000"),
-        std::make_pair("1598KHz", "1598000"),
-        std::make_pair("1459KHz", "1459000"),
-        std::make_pair("1401KHz", "1401000"),
-        std::make_pair("1328KHz", "1328000"),
-        std::make_pair("1197KHz", "1197000"),
-        std::make_pair("1098KHz", "1098000"),
-        std::make_pair("930KHz", "930000"),
-        std::make_pair("889KHz", "889000"),
-        std::make_pair("738KHz", "738000"),
-        std::make_pair("574KHz", "574000"),
-        std::make_pair("300KHz", "300000"),
-        std::make_pair("0KHz", "0"),
-    }});
-
     cfgs.push_back({"CL1", {
+        std::make_pair("2466KHz", "2466000"),
+        std::make_pair("2393KHz", "2393000"),
+        std::make_pair("2348KHz", "2348000"),
         std::make_pair("2253KHz", "2253000"),
         std::make_pair("2130KHz", "2130000"),
         std::make_pair("1999KHz", "1999000"),
@@ -200,32 +182,132 @@ void addDvfsStats(std::shared_ptr<PowerStats> p) {
         std::make_pair("0KHz", "0"),
     }});
 
-    cfgs.push_back({"CL2", {
-        std::make_pair("2630KHz", "2630000"),
-        std::make_pair("2507KHz", "2507000"),
-        std::make_pair("2401KHz", "2401000"),
-        std::make_pair("2302KHz", "2302000"),
-        std::make_pair("2252KHz", "2252000"),
-        std::make_pair("2188KHz", "2188000"),
-        std::make_pair("2048KHz", "2048000"),
-        std::make_pair("1901KHz", "1901000"),
-        std::make_pair("1826KHz", "1826000"),
-        std::make_pair("1745KHz", "1745000"),
-        std::make_pair("1582KHz", "1582000"),
-        std::make_pair("1426KHz", "1426000"),
-        std::make_pair("1277KHz", "1277000"),
-        std::make_pair("1237KHz", "1237000"),
-        std::make_pair("1106KHz", "1106000"),
-        std::make_pair("984KHz", "984000"),
-        std::make_pair("851KHz", "851000"),
-        std::make_pair("848KHz", "848000"),
-        std::make_pair("500KHz", "500000"),
-        std::make_pair("0KHz", "0"),
-    }});
+    // B0/B1 chips have different DVFS operating points than A0/A1 SoC
+    const int socRev = android::base::GetIntProperty(kBootHwSoCRev, 0);
+    if (socRev >= 2) {
+        cfgs.push_back({"CL0", {
+            std::make_pair("2196KHz", "2196000"),
+            std::make_pair("2098KHz", "2098000"),
+            std::make_pair("2024KHz", "2024000"),
+            std::make_pair("1950KHz", "1950000"),
+            std::make_pair("1803KHz", "1803000"),
+            std::make_pair("1704KHz", "1704000"),
+            std::make_pair("1598KHz", "1598000"),
+            std::make_pair("1401KHz", "1401000"),
+            std::make_pair("1328KHz", "1328000"),
+            std::make_pair("1197KHz", "1197000"),
+            std::make_pair("1098KHz", "1098000"),
+            std::make_pair("930KHz", "930000"),
+            std::make_pair("738KHz", "738000"),
+            std::make_pair("574KHz", "574000"),
+            std::make_pair("300KHz", "300000"),
+            std::make_pair("0KHz", "0"),
+        }});
 
-    cfgs.push_back({"TPU", {
-        std::make_pair("1066MHz", "1066000000"),
-    }});
+        cfgs.push_back({"CL2", {
+            std::make_pair("3195KHz", "3195000"),
+            std::make_pair("3097KHz", "3097000"),
+            std::make_pair("2950KHz", "2950000"),
+            std::make_pair("2850KHz", "2850000"),
+            std::make_pair("2802KHz", "2802000"),
+            std::make_pair("2704KHz", "2704000"),
+            std::make_pair("2630KHz", "2630000"),
+            std::make_pair("2507KHz", "2507000"),
+            std::make_pair("2401KHz", "2401000"),
+            std::make_pair("2252KHz", "2252000"),
+            std::make_pair("2188KHz", "2188000"),
+            std::make_pair("2048KHz", "2048000"),
+            std::make_pair("1826KHz", "1826000"),
+            std::make_pair("1745KHz", "1745000"),
+            std::make_pair("1582KHz", "1582000"),
+            std::make_pair("1426KHz", "1426000"),
+            std::make_pair("1277KHz", "1277000"),
+            std::make_pair("1106KHz", "1106000"),
+            std::make_pair("984KHz", "984000"),
+            std::make_pair("851KHz", "851000"),
+            std::make_pair("500KHz", "500000"),
+            std::make_pair("0KHz", "0"),
+        }});
+
+        cfgs.push_back({"TPU", {
+            std::make_pair("1393KHz", "1393000"),
+            std::make_pair("1180KHz", "1180000"),
+            std::make_pair("1024KHz", "1024000"),
+            std::make_pair("967KHz", "967000"),
+            std::make_pair("836KHz", "836000"),
+            std::make_pair("627KHz", "627000"),
+            std::make_pair("455KHz", "455000"),
+            std::make_pair("226KHz", "226000"),
+            std::make_pair("RET_SLOW", "6"),
+            std::make_pair("S_OFF", "5"),
+            std::make_pair("S_SLOW", "4"),
+            std::make_pair("DS_FAST", "3"),
+            std::make_pair("DS_SLOW", "2"),
+            std::make_pair("DS_OFF", "1"),
+            std::make_pair("OFF", "0"),
+        }});
+    } else {
+        cfgs.push_back({"CL0", {
+            std::make_pair("2196KHz", "2196000"),
+            std::make_pair("2098KHz", "2098000"),
+            std::make_pair("2024KHz", "2024000"),
+            std::make_pair("1950KHz", "1950000"),
+            std::make_pair("1868KHz", "1868000"),
+            std::make_pair("1745KHz", "1745000"),
+            std::make_pair("1598KHz", "1598000"),
+            std::make_pair("1459KHz", "1459000"),
+            std::make_pair("1328KHz", "1328000"),
+            std::make_pair("1197KHz", "1197000"),
+            std::make_pair("1098KHz", "1098000"),
+            std::make_pair("889KHz", "889000"),
+            std::make_pair("738KHz", "738000"),
+            std::make_pair("574KHz", "574000"),
+            std::make_pair("300KHz", "300000"),
+            std::make_pair("0KHz", "0"),
+        }});
+
+        cfgs.push_back({"CL2", {
+            std::make_pair("3195KHz", "3195000"),
+            std::make_pair("3097KHz", "3097000"),
+            std::make_pair("2999KHz", "2999000"),
+            std::make_pair("2900KHz", "2900000"),
+            std::make_pair("2802KHz", "2802000"),
+            std::make_pair("2704KHz", "2704000"),
+            std::make_pair("2630KHz", "2630000"),
+            std::make_pair("2507KHz", "2507000"),
+            std::make_pair("2302KHz", "2302000"),
+            std::make_pair("2188KHz", "2188000"),
+            std::make_pair("2048KHz", "2048000"),
+            std::make_pair("1901KHz", "1901000"),
+            std::make_pair("1745KHz", "1745000"),
+            std::make_pair("1582KHz", "1582000"),
+            std::make_pair("1426KHz", "1426000"),
+            std::make_pair("1237KHz", "1237000"),
+            std::make_pair("1106KHz", "1106000"),
+            std::make_pair("984KHz", "984000"),
+            std::make_pair("848KHz", "848000"),
+            std::make_pair("500KHz", "500000"),
+            std::make_pair("0KHz", "0"),
+        }});
+
+        cfgs.push_back({"TPU", {
+            std::make_pair("1393KHz", "1393000"),
+            std::make_pair("1180KHz", "1180000"),
+            std::make_pair("1049KHz", "1049000"),
+            std::make_pair("967KHz", "967000"),
+            std::make_pair("721KHz", "721000"),
+            std::make_pair("648KHz", "648000"),
+            std::make_pair("455KHz", "455000"),
+            std::make_pair("250KHz", "250000"),
+            std::make_pair("RET_SLOW", "6"),
+            std::make_pair("S_OFF", "5"),
+            std::make_pair("S_SLOW", "4"),
+            std::make_pair("DS_FAST", "3"),
+            std::make_pair("DS_SLOW", "2"),
+            std::make_pair("DS_OFF", "1"),
+            std::make_pair("OFF", "0"),
+        }});
+    }
 
     p->addStateResidencyDataProvider(std::make_unique<DvfsStateResidencyDataProvider>(
             "/sys/devices/platform/acpm_stats/fvp_stats", NS_TO_MS, cfgs));
