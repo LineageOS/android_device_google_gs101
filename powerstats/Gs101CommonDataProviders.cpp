@@ -604,6 +604,39 @@ void addUfs(std::shared_ptr<PowerStats> p) {
     p->addStateResidencyDataProvider(std::make_unique<UfsStateResidencyDataProvider>("/sys/bus/platform/devices/14700000.ufs/ufs_stats/"));
 }
 
+void addPowerDomains(std::shared_ptr<PowerStats> p) {
+    // A constant to represent the number of nanoseconds in one millisecond.
+    const int NS_TO_MS = 1000000;
+
+    std::function<uint64_t(uint64_t)> acpmNsToMs = [](uint64_t a) { return a / NS_TO_MS; };
+    const GenericStateResidencyDataProvider::StateResidencyConfig cpuStateConfig = {
+            .entryCountSupported = true,
+            .entryCountPrefix = "on_count:",
+            .totalTimeSupported = true,
+            .totalTimePrefix = "total_on_time_ns:",
+            .totalTimeTransform = acpmNsToMs,
+            .lastEntrySupported = true,
+            .lastEntryPrefix = "last_on_time_ns:",
+            .lastEntryTransform = acpmNsToMs,
+    };
+
+    const std::vector<std::pair<std::string, std::string>> cpuStateHeaders = {
+            std::make_pair("ON", ""),
+    };
+
+    std::vector<GenericStateResidencyDataProvider::PowerEntityConfig> cfgs;
+    for (std::string name : {"pd-tpu", "pd-bo", "pd-tnr", "pd-gdc", "pd-mcsc", "pd-ipp",
+                                "pd-g3aa", "pd-dns", "pd-itp", "pd-pdp", "pd-csis",
+                                "pd-mfc", "pd-g2d", "pd-dpu", "pd-disp", "pd-hsi0",
+                                "pd-embedded_g3d", "pd-g3d", "pd-eh"}) {
+        cfgs.emplace_back(generateGenericStateResidencyConfigs(cpuStateConfig, cpuStateHeaders),
+            name, name + ":");
+    }
+
+    p->addStateResidencyDataProvider(std::make_unique<GenericStateResidencyDataProvider>(
+            "/sys/devices/platform/acpm_stats/pd_stats", cfgs));
+}
+
 /**
  * Unlike other data providers, which source power entity state residency data from the kernel,
  * this data provider acts as a general-purpose channel for state residency data providers
@@ -636,6 +669,7 @@ void addGs101CommonDataProviders(std::shared_ptr<PowerStats> p) {
     addPCIe(p);
     addWifi(p);
     addUfs(p);
+    addPowerDomains(p);
 
     // TODO (b/181070764) (b/182941084):
     // Remove this when Wifi/BT energy consumption models are available or revert before ship
