@@ -43,3 +43,6 @@ user=_app seinfo=platform name=com.google.googlecbrs domain=cbrs_setup_app type=
 
 # Domain for OFLBasicAgentApp to support NFC/eSIM fw upgrade
 user=_app isPrivApp=true  seinfo=platform name=com.thales.device.ofl.app.basicagent domain=ofl_app type=app_data_file levelFrom=user
+
+# Qorvo UWB system app
+user=system seinfo=platform name=com.qorvo.uwb domain=uwb_vendor_app type=uwb_vendor_data_file levelFrom=all
