@@ -74,7 +74,8 @@ constexpr char kGadgetName[] = "11110000.dwc3";
 #ifndef UDC_PATH
 #define UDC_PATH "/sys/class/udc/11110000.dwc3/"
 #endif
-static MonitorFfs monitorFfs(kGadgetName);
+constexpr char kExtconUsbState[] = "/sys/class/extcon/extcon0/cable.0/state";
+static MonitorFfs monitorFfs(kGadgetName, kExtconUsbState);
 
 #define SPEED_PATH UDC_PATH "current_speed"
 
