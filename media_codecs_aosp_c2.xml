@@ -137,8 +137,8 @@
         <MediaCodec name="c2.exynos.hevc.encoder" type="video/hevc" >
             <Limit name="size" min="64x64" max="3840x2160" />
             <Limit name="alignment" value="2x2" />
-            <Limit name="block-size" value="64x64" />
-            <Limit name="block-count" range="1-2025" />
+            <Limit name="block-size" value="32x32" />
+            <Limit name="block-count" range="1-8100" />
             <Limit name="blocks-per-second" min="1" max="979200" />
             <Limit name="bitrate" range="1-120000000" />
             <Limit name="performance-point-3840x2160" range="120" />
