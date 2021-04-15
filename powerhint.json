@@ -1,6 +1,15 @@
 {
   "Nodes": [
     {
+      "Name": "MemFreq",
+      "Path": "/sys/devices/platform/17000010.devfreq_mif/devfreq/17000010.devfreq_mif/min_freq",
+      "Values": [
+        "3172000",
+        "421000"
+      ],
+      "ResetOnInit": true
+    },
+    {
       "Name": "CPULittleClusterMaxFreq",
       "Path": "/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq",
       "Values": [
@@ -87,7 +96,8 @@
       "Path": "/dev/cpuctl/top-app/cpu.uclamp.min",
       "Values": [
         "0",
-		"24",
+	"54",
+	"24",
         "18",
         "12",
         "6"
@@ -249,12 +259,6 @@
     },
     {
       "PowerHint": "LAUNCH",
-      "Node": "CPUMidClusterMinFreq",
-      "Duration": 5000,
-      "Value": "9999999"
-    },
-    {
-      "PowerHint": "LAUNCH",
       "Type": "EndHint",
       "Value": "DISABLE_TA_BOOST"
     },
@@ -266,15 +270,15 @@
     },
     {
       "PowerHint": "LAUNCH",
-      "Node": "CPULittleClusterMinFreq",
+      "Node": "TAUClampBoost",
       "Duration": 5000,
-      "Value": "9999999"
+      "Value": "54"
     },
     {
       "PowerHint": "LAUNCH",
-      "Node": "TAUClampBoost",
+      "Node": "MemFreq",
       "Duration": 5000,
-      "Value": "18"
+      "Value": "3172000"
     },
     {
       "PowerHint": "DISPLAY_INACTIVE",
