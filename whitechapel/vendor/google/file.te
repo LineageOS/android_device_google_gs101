@@ -188,3 +188,10 @@ type sysfs_bcmdhd, sysfs_type, fs_type;
 
 # Video
 type sysfs_video, sysfs_type, fs_type;
+
+# TODO(b/184768835): remove this once the bug is fixed
+# LHBM (Local High Brightness Mode)
+type sysfs_lhbm, sysfs_type, fs_type, mlstrustedobject;
+
+# UWB vendor
+type uwb_vendor_data_file, file_type, data_file_type, app_data_file_type;
