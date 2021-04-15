@@ -323,7 +323,7 @@ void DumpstateDevice::dumpPowerSection(int fd) {
 
     DumpFileToFd(fd, "PD Engine", "/dev/logbuffer_usbpd");
     DumpFileToFd(fd, "PPS-google_cpm", "/dev/logbuffer_google,cpm");
-    RunCommandToFd(fd, "PPS-dc", {"/vendor/bin/sh", "-c", "cat /dev/logbuffer_*-0057"});
+    DumpFileToFd(fd, "PPS-dc", "/dev/logbuffer_pca9468_tcpm");
 
     DumpFileToFd(fd, "BMS", "/dev/logbuffer_ssoc");
     DumpFileToFd(fd, "TTF", "/dev/logbuffer_ttf");
