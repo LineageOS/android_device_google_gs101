@@ -7,8 +7,18 @@ binder_call(platform_app, hal_wlc)
 allow platform_app fwk_stats_hwservice:hwservice_manager find;
 allow platform_app nfc_service:service_manager find;
 
+allow platform_app fwk_stats_service:service_manager find;
+binder_use(platform_app)
+
 allow platform_app touch_context_service:service_manager find;
 binder_call(platform_app, twoshay)
 
 # Fingerprint (UDFPS) GHBM/LHBM toggle
 get_prop(platform_app, fingerprint_ghbm_prop)
+
+# TODO(b/184768835): remove this once the bug is fixed
+# Fingerprint (UDFPS) LHBM access
+userdebug_or_eng(`
+  allow platform_app sysfs_leds:dir search;
+  allow platform_app sysfs_lhbm:file rw_file_perms;
+')

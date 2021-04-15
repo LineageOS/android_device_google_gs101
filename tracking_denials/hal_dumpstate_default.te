@@ -1,13 +1,3 @@
-# b/181915591
-dontaudit hal_dumpstate_default aac_drc_prop:file { open };
-dontaudit hal_dumpstate_default sysfs:dir { read };
-dontaudit hal_dumpstate_default sysfs:dir { open };
-dontaudit hal_dumpstate_default aac_drc_prop:file { getattr };
-dontaudit hal_dumpstate_default aac_drc_prop:file { map };
-dontaudit hal_dumpstate_default aac_drc_prop:file { open };
-dontaudit hal_dumpstate_default aac_drc_prop:file { getattr };
-dontaudit hal_dumpstate_default aac_drc_prop:file { map };
-dontaudit hal_dumpstate_default ab_update_gki_prop:file { open };
-dontaudit hal_dumpstate_default ab_update_gki_prop:file { open };
+# b/182531832
 dontaudit hal_dumpstate_default sysfs:dir { read };
 dontaudit hal_dumpstate_default sysfs:dir { open };

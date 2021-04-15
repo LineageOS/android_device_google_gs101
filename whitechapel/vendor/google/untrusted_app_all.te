@@ -8,7 +8,3 @@ allow untrusted_app_all edgetpu_device:chr_file { getattr read write ioctl map }
 # Allows Exoplayer(and other applications) access to the vstream-secure DMA-BUF heap
 # for secure video playback
 allow untrusted_app_all dmabuf_system_secure_heap_device:chr_file r_file_perms;
-
-# Allows cts tests to test for UwbService presence
-# TODO (b/183904955): remove
-allow untrusted_app_all uwb_service:service_manager find;
