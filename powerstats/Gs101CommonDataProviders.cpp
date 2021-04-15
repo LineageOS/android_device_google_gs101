@@ -17,6 +17,7 @@
 #include <PowerStatsAidl.h>
 #include <Gs101CommonDataProviders.h>
 #include "AocStateResidencyDataProvider.h"
+#include "DevfreqStateResidencyDataProvider.h"
 #include "DvfsStateResidencyDataProvider.h"
 #include "UfsStateResidencyDataProvider.h"
 #include <dataproviders/GenericStateResidencyDataProvider.h>
@@ -32,6 +33,7 @@
 #include <log/log.h>
 
 using aidl::android::hardware::power::stats::AocStateResidencyDataProvider;
+using aidl::android::hardware::power::stats::DevfreqStateResidencyDataProvider;
 using aidl::android::hardware::power::stats::DvfsStateResidencyDataProvider;
 using aidl::android::hardware::power::stats::UfsStateResidencyDataProvider;
 using aidl::android::hardware::power::stats::EnergyConsumerType;
@@ -667,6 +669,11 @@ void addPowerDomains(std::shared_ptr<PowerStats> p) {
             "/sys/devices/platform/acpm_stats/pd_stats", cfgs));
 }
 
+void addDevfreq(std::shared_ptr<PowerStats> p) {
+    p->addStateResidencyDataProvider(std::make_unique<DevfreqStateResidencyDataProvider>(
+            "INT", "/sys/devices/platform/17000020.devfreq_int/devfreq/17000020.devfreq_int"));
+}
+
 /**
  * Unlike other data providers, which source power entity state residency data from the kernel,
  * this data provider acts as a general-purpose channel for state residency data providers
@@ -700,6 +707,7 @@ void addGs101CommonDataProviders(std::shared_ptr<PowerStats> p) {
     addWifi(p);
     addUfs(p);
     addPowerDomains(p);
+    addDevfreq(p);
 
     // TODO (b/181070764) (b/182941084):
     // Remove this when Wifi/BT energy consumption models are available or revert before ship
