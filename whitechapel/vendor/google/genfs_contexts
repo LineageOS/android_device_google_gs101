@@ -2,6 +2,7 @@
 genfscon sysfs /devices/platform/19000000.aoc/aoc_clock_and_kernel_boottime u:object_r:sysfs_aoc_boottime:s0
 genfscon sysfs /devices/platform/19000000.aoc/firmware                      u:object_r:sysfs_aoc_firmware:s0
 genfscon sysfs /devices/platform/19000000.aoc                               u:object_r:sysfs_aoc:s0
+genfscon sysfs /devices/platform/19000000.aoc/reset                         u:object_r:sysfs_aoc_reset:s0
 
 # WiFi
 genfscon sysfs /wifi                                                        u:object_r:sysfs_wifi:s0
