@@ -36,6 +36,8 @@ const struct SysfsCollector::SysfsPaths sysfs_paths = {
     .UFSLifetimeC = UFSHC_PATH(health_descriptor/life_time_estimation_c),
     .UFSHostResetPath = UFSHC_PATH(err_stats/dev_reset_count),
     .F2fsStatsPath = "/sys/fs/f2fs/",
+    .ImpedancePath = "/sys/devices/platform/audiometrics/speaker_impedance",
+    .CodecPath =     "/sys/devices/platform/audiometrics/codec_state",
 };
 
 int main() {
