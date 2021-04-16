@@ -981,7 +981,10 @@ PRODUCT_PACKAGES += \
 	audio.usb.default \
 	audio.a2dp.default \
 	audio.bluetooth.default \
-	audio.r_submix.default
+	audio.r_submix.default \
+	libamcsextfile \
+	audio_amcs_ext \
+
 
 #Audio Vendor libraries
 PRODUCT_PACKAGES += \
