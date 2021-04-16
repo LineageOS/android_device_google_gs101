@@ -851,7 +851,8 @@ PRODUCT_PACKAGES += \
 	libRSDriverArm32 \
 	libbccArm32 \
 	libmalicore32 \
-	libOpenCL32
+	libOpenCL32 \
+	vulkan.gs10132
 endif
 
 PRODUCT_PACKAGES += \
@@ -861,16 +862,10 @@ PRODUCT_PACKAGES += \
 	libbccArm \
 	libmalicore \
 	libOpenCL \
+	vulkan.gs101 \
 	whitelist \
 	libstagefright_hdcp \
 	libskia_opt
-
-ifneq (,$(realpath $(TOPDIR)vendor/arm/mali/valhall/Android.bp))
-# TODO: fix the prebuilts to properly define and install this target
-# rather than simply making a symlink
-PRODUCT_PACKAGES += \
-	vulkan.gs101
-endif
 
 ifeq ($(USE_SWIFTSHADER),true)
 PRODUCT_PACKAGES += \
