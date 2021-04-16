@@ -58,6 +58,9 @@ type sensor_vendor_data_file, file_type, data_file_type, mlstrustedobject;
 type sensors_cal_file, file_type;
 type sysfs_nanoapp_cmd, sysfs_type, fs_type;
 
+# Fingerprint
+type sysfs_fingerprint, sysfs_type, fs_type;
+
 # CHRE
 type chre_socket, file_type;
 
