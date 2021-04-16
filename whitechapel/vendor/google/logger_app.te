@@ -5,6 +5,7 @@ userdebug_or_eng(`
   allow logger_app vendor_gps_file:file create_file_perms;
   allow logger_app vendor_gps_file:dir create_dir_perms;
 
+  set_prop(logger_app, vendor_logger_prop)
   set_prop(logger_app, vendor_modem_prop)
   set_prop(logger_app, vendor_gps_prop)
   set_prop(logger_app, vendor_audio_prop)
