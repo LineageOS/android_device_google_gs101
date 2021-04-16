@@ -66,6 +66,9 @@ genfscon sysfs /devices/platform/10970000.hsi2c/i2c-4/4-0043            u:object
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-5/5-0042            u:object_r:sysfs_vibrator:s0
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-5/5-0043            u:object_r:sysfs_vibrator:s0
 
+# Fingerprint
+genfscon sysfs /devices/platform/odm/odm:fp_fpc1020                 u:object_r:sysfs_fingerprint:s0
+
 # System_suspend
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-5/5-0069/power_supply/main-charger/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/cpif/wakeup/wakeup                                           u:object_r:sysfs_wakeup:s0
