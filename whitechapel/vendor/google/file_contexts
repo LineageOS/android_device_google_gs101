@@ -80,6 +80,7 @@
 #
 /dev/gnss_ipc                  u:object_r:vendor_gnss_device:s0
 /dev/bbd_control               u:object_r:vendor_gnss_device:s0
+/dev/bbd_pwrstat               u:object_r:power_stats_device:s0
 /dev/ttyBCM                    u:object_r:vendor_gnss_device:s0
 /dev/nanohub                   u:object_r:vendor_nanohub_device:s0
 /dev/nanohub_comms             u:object_r:vendor_nanohub_device:s0
@@ -102,6 +103,7 @@
 /dev/logbuffer_maxfg           u:object_r:logbuffer_device:s0
 /dev/logbuffer_maxfg_base      u:object_r:logbuffer_device:s0
 /dev/logbuffer_maxfg_flip      u:object_r:logbuffer_device:s0
+/dev/logbuffer_pca9468_tcpm    u:object_r:logbuffer_device:s0
 
 # DM tools device
 /dev/umts_dm0                  u:object_r:radio_device:s0
@@ -650,11 +652,8 @@
 # vscaler-secure DMA-BUF heap
 /dev/dma_heap/vscaler-secure                                                   u:object_r:vscaler_heap_device:s0
 
-# video system DMA-BUF heap
-/dev/dma_heap/video_system                                               u:object_r:dmabuf_system_heap_device:s0
-/dev/dma_heap/video_system-uncached                                      u:object_r:dmabuf_system_heap_device:s0
-
-/dev/dma_heap/vstream-secure                                             u:object_r:dmabuf_system_secure_heap_device:s0
+# vstream-secure DMA-BUF heap
+/dev/dma_heap/vstream-secure                                                   u:object_r:dmabuf_system_secure_heap_device:s0
 
 # BigOcean
 /dev/bigocean                                                                  u:object_r:video_device:s0
