@@ -23,3 +23,6 @@ PRODUCT_COPY_FILES += \
 # Factory OTA
 -include vendor/google/factoryota/client/factoryota.mk
 
+# Set system properties identifying the chipset
+PRODUCT_VENDOR_PROPERTIES += ro.soc.manufacturer=Google
+PRODUCT_VENDOR_PROPERTIES += ro.soc.model=GS101
