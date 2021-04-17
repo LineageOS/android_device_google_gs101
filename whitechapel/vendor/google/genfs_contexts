@@ -2,6 +2,7 @@
 genfscon sysfs /devices/platform/19000000.aoc/aoc_clock_and_kernel_boottime u:object_r:sysfs_aoc_boottime:s0
 genfscon sysfs /devices/platform/19000000.aoc/firmware                      u:object_r:sysfs_aoc_firmware:s0
 genfscon sysfs /devices/platform/19000000.aoc                               u:object_r:sysfs_aoc:s0
+genfscon sysfs /devices/platform/19000000.aoc/reset                         u:object_r:sysfs_aoc_reset:s0
 
 # WiFi
 genfscon sysfs /wifi                                                        u:object_r:sysfs_wifi:s0
@@ -65,6 +66,9 @@ genfscon sysfs /devices/platform/10970000.hsi2c/i2c-4/4-0043            u:object
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-5/5-0042            u:object_r:sysfs_vibrator:s0
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-5/5-0043            u:object_r:sysfs_vibrator:s0
 
+# Fingerprint
+genfscon sysfs /devices/platform/odm/odm:fp_fpc1020                 u:object_r:sysfs_fingerprint:s0
+
 # System_suspend
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-5/5-0069/power_supply/main-charger/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/cpif/wakeup/wakeup                                           u:object_r:sysfs_wakeup:s0
@@ -96,7 +100,8 @@ genfscon proc  /fts_ext/driver_test                                             
 genfscon sysfs /devices/virtual/sec/tsp                                         u:object_r:sysfs_touch:s0
 
 # EdgeTPU
-genfscon sysfs /class/edgetpu                                                   u:object_r:sysfs_edgetpu:s0
+genfscon sysfs /devices/platform/1ce00000.abrolhos                              u:object_r:sysfs_edgetpu:s0
+genfscon sysfs /devices/platform/abrolhos                                       u:object_r:sysfs_edgetpu:s0
 
 # Vendor sched files
 genfscon sysfs /kernel/vendor_sched/clear_prefer_high_cap                      u:object_r:sysfs_vendor_sched:s0
