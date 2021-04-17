@@ -41,6 +41,10 @@ ro.vendor.sys.modem.         u:object_r:vendor_modem_prop:s0
 vendor.sys.exynos.modempath  u:object_r:vendor_modem_prop:s0
 persist.vendor.sys.modem.    u:object_r:vendor_modem_prop:s0
 
+# for logger app
+vendor.pixellogger.          u:object_r:vendor_logger_prop:s0
+persist.vendor.pixellogger.  u:object_r:vendor_logger_prop:s0
+
 # for cbd
 vendor.cbd.                  u:object_r:vendor_cbd_prop:s0
 persist.vendor.cbd.          u:object_r:vendor_cbd_prop:s0

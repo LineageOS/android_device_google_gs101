@@ -14,3 +14,4 @@ userdebug_or_eng(`
 ')
 
 get_prop(ssr_detector_app, vendor_ssrdump_prop)
+get_prop(ssr_detector_app, vendor_wifi_version)

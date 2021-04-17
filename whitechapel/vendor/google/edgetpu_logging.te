@@ -4,3 +4,7 @@ init_daemon_domain(edgetpu_logging)
 
 # The logging service accesses /dev/abrolhos
 allow edgetpu_logging edgetpu_device:chr_file rw_file_perms;
+
+# Allows the logging service to access /sys/class/edgetpu
+allow edgetpu_logging sysfs_edgetpu:dir search;
+allow edgetpu_logging sysfs_edgetpu:file r_file_perms;
