@@ -992,6 +992,7 @@ PRODUCT_PACKAGES += \
 	liboffloadeffect \
 	audio_waves_aoc \
 	audio_fortemedia_aoc \
+	audio_bluenote_aoc \
 	audio_usb_aoc \
 	audio_spk_35l41 \
 	audio.usb.default \
