@@ -201,6 +201,14 @@ on init
     # Add a boost for NNAPI HAL
     write /dev/cpuctl/nnapi-hal/cpu.uclamp.min 15
 
+    # Add memlat governor settings
+    write /sys/class/devfreq/gs_memlat_devfreq:devfreq_mif_cl0_memlat@17000010/polling_interval 10
+    write /sys/class/devfreq/gs_memlat_devfreq:devfreq_mif_cl1_memlat@17000010/polling_interval 10
+    write /sys/class/devfreq/gs_memlat_devfreq:devfreq_mif_cl2_memlat@17000010/polling_interval 10
+    write /sys/class/devfreq/gs_memlat_devfreq:devfreq_mif_cl0_memlat@17000010/mem_latency/ratio_ceil 400
+    write /sys/class/devfreq/gs_memlat_devfreq:devfreq_mif_cl1_memlat@17000010/mem_latency/ratio_ceil 400
+    write /sys/class/devfreq/gs_memlat_devfreq:devfreq_mif_cl2_memlat@17000010/mem_latency/ratio_ceil 800
+
 # For GKI kernel, no device specific modules
 on init
     setprop vendor.device.modules.ready 1
