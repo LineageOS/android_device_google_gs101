@@ -285,7 +285,7 @@ void DumpstateDevice::dumpPowerSection(int fd) {
                    "echo -n \"Now: \" && date"});
 
     RunCommandToFd(fd, "ACPM stats", {"/vendor/bin/sh", "-c",
-                   "for f in /sys/devices/platform/1742048c.acpm_stats/*_stats ; do "
+                   "for f in /sys/devices/platform/acpm_stats/*_stats ; do "
                    "echo \"\\n\\n$f\" ; cat $f ; "
                    "done"});
 
