@@ -133,9 +133,7 @@
 /(vendor|system/vendor)/bin/hw/gpsd            u:object_r:gpsd_exec:s0
 /(vendor|system/vendor)/bin/hw/lhd             u:object_r:lhd_exec:s0
 /(vendor|system/vendor)/bin/hw/rild_exynos     u:object_r:rild_exec:s0
-/(vendor|system/vendor)/bin/main_abox          u:object_r:abox_exec:s0
 /(vendor|system/vendor)/bin/rfsd               u:object_r:rfsd_exec:s0
-/(vendor|system/vendor)/bin/rpmbd              u:object_r:rpmbd_exec:s0
 /(vendor|system/vendor)/bin/sced               u:object_r:sced_exec:s0
 /(vendor|system/vendor)/bin/vcd                u:object_r:vcd_exec:s0
 /(vendor|system/vendor)/bin/bipchmgr           u:object_r:bipchmgr_exec:s0
@@ -153,7 +151,6 @@
 # Exynos Log Files
 #
 /data/vendor/log(/.*)?       u:object_r:vendor_log_file:s0
-/data/vendor/log/abox(/.*)?  u:object_r:vendor_abox_log_file:s0
 /data/vendor/log/cbd(/.*)?   u:object_r:vendor_cbd_log_file:s0
 /data/vendor/log/dmd(/.*)?   u:object_r:vendor_dmd_log_file:s0
 /data/vendor/log/rfsd(/.*)?  u:object_r:vendor_rfsd_log_file:s0
