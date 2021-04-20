@@ -1,7 +1,7 @@
 # ----------------------------
 # Add feature flags below
 # ----------------------------
-FPC_CONFIG_BUILD_VERSION=31
+FPC_CONFIG_BUILD_VERSION=33
 FPC_CONFIG_CAPACITIVE=1
 FPC_CONFIG_MAX_NR_TEMPLATES=5
 FPC_CONFIG_SENSE_TOUCH_CALIBRATION_PATH=/data/fpc/calibration_sense_touch.dat
