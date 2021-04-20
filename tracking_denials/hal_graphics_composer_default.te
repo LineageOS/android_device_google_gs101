@@ -1,0 +1,3 @@
+# b/185723492
+dontaudit hal_graphics_composer_default hal_dumpstate_default:fd { use };
+dontaudit hal_graphics_composer_default hal_dumpstate_default:fd { use };
