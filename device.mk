@@ -1086,6 +1086,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	android.hardware.neuralnetworks@1.3-service-darwinn
 
+# TPU NN AIDL HAL
+PRODUCT_PACKAGES += \
+	android.hardware.neuralnetworks@service-darwinn-aidl
+
 # TPU logging service
 PRODUCT_PACKAGES += \
 	android.hardware.edgetpu.logging@service-edgetpu-logging
