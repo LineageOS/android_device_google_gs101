@@ -169,6 +169,9 @@ on init
     # Charge stats (write 0)
     chown system system /sys/class/power_supply/battery/charge_stats
 
+    # Adaptive charge
+    chown system system /sys/class/power_supply/battery/charge_deadline
+
     # Power Stats HAL
     chown system system /dev/bbd_pwrstat
 
