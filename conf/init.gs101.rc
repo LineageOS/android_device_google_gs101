@@ -681,6 +681,7 @@ on post-fs-data
     start vendor.rebootescrow-citadel
     mkdir /data/vendor/ss 0770 root system
     mkdir /mnt/vendor/persist/ss 0770 root system
+    restorecon_recursive /mnt/vendor/persist/ss
     symlink /mnt/vendor/persist/ss /data/vendor/ss/persist
     chown root system /data/vendor/ss/persist
     chmod 0770 /data/vendor/ss/persist
