@@ -652,10 +652,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	device/google/gs101/wifi/coex_table.xml:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/coex_table.xml
 
-HOSTAPD := hostapd
-HOSTAPD += hostapd_cli
-PRODUCT_PACKAGES += $(HOSTAPD)
-
+PRODUCT_PACKAGES += hostapd
 PRODUCT_PACKAGES += wpa_supplicant
 PRODUCT_PACKAGES += wpa_supplicant.conf
 
@@ -663,6 +660,7 @@ WIFI_PRIV_CMD_UPDATE_MBO_CELL_STATUS := enabled
 
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += wpa_cli
+PRODUCT_PACKAGES += hostapd_cli
 endif
 
 ####################################
