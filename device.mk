@@ -586,9 +586,12 @@ TARGET_USES_VULKAN = true
 
 # hw composer HAL
 PRODUCT_PACKAGES += \
-	displaycolor_service \
 	libdisplaycolor \
 	hwcomposer.$(TARGET_BOARD_PLATFORM)
+
+ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+PRODUCT_PACKAGES += displaycolor_service
+endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
 	debug.sf.disable_backpressure=0 \
