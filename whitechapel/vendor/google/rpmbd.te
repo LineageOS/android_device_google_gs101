@@ -1,4 +1,0 @@
-type rpmbd, domain;
-type rpmbd_exec, vendor_file_type, exec_type, file_type;
-init_daemon_domain(rpmbd)
-
