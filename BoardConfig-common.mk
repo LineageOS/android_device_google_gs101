@@ -387,7 +387,8 @@ BOARD_VENDOR_RAMDISK_KERNEL_MODULES_FILTER += \
     $(TARGET_KERNEL_DIR)/stmvl53l1.ko \
     $(TARGET_KERNEL_DIR)/ftm5.ko \
     $(TARGET_KERNEL_DIR)/haptics-cs40l2x.ko \
-    $(TARGET_KERNEL_DIR)/sec_touch.ko
+    $(TARGET_KERNEL_DIR)/sec_touch.ko \
+    $(TARGET_KERNEL_DIR)/dw3000.ko
 
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES += \
     $(filter-out $(BOARD_VENDOR_RAMDISK_KERNEL_MODULES_FILTER), $(foreach module, $(notdir \
