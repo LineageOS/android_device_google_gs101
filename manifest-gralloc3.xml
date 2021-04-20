@@ -175,6 +175,13 @@
             <instance>default</instance>
         </interface>
     </hal>
+    <hal format="aidl">
+        <name>com.google.input</name>
+        <interface>
+            <name>ITouchContextService</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
     <hal format="hidl">
         <name>hardware.google.bluetooth.bt_channel_avoidance</name>
         <transport>hwbinder</transport>
