@@ -1,3 +1,0 @@
-# b/182531832
-dontaudit hal_dumpstate_default sysfs:dir { read };
-dontaudit hal_dumpstate_default sysfs:dir { open };
