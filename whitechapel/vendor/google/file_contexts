@@ -405,6 +405,7 @@
 /vendor_dlkm/lib/modules/bigocean\.ko                   u:object_r:vendor_kernel_modules:s0
 /vendor_dlkm/lib/modules/boot_device_spi\.ko            u:object_r:vendor_kernel_modules:s0
 /vendor_dlkm/lib/modules/clk_exynos\.ko                 u:object_r:vendor_kernel_modules:s0
+/vendor_dlkm/lib/modules/cl_dsp\.ko                     u:object_r:vendor_kernel_modules:s0
 /vendor_dlkm/lib/modules/cmupmucal\.ko                  u:object_r:vendor_kernel_modules:s0
 /vendor_dlkm/lib/modules/cpif\.ko                       u:object_r:vendor_kernel_modules:s0
 /vendor_dlkm/lib/modules/cp_thermal_zone\.ko            u:object_r:vendor_kernel_modules:s0
@@ -479,6 +480,7 @@
 /vendor_dlkm/lib/modules/i2c-acpm\.ko                   u:object_r:vendor_kernel_modules:s0
 /vendor_dlkm/lib/modules/i2c-dev\.ko                    u:object_r:vendor_kernel_modules:s0
 /vendor_dlkm/lib/modules/i2c-exynos5\.ko                u:object_r:vendor_kernel_modules:s0
+/vendor_dlkm/lib/modules/input-cs40l26-i2c\.ko          u:object_r:vendor_kernel_modules:s0
 /vendor_dlkm/lib/modules/ion_exynos_mod\.ko             u:object_r:vendor_kernel_modules:s0
 /vendor_dlkm/lib/modules/keycombo\.ko                   u:object_r:vendor_kernel_modules:s0
 /vendor_dlkm/lib/modules/keydebug\.ko                   u:object_r:vendor_kernel_modules:s0
