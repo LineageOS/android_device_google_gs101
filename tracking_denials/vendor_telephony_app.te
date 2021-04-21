@@ -1,4 +1,0 @@
-# b/185723694
-dontaudit vendor_telephony_app system_app_data_file:dir { getattr };
-dontaudit vendor_telephony_app system_app_data_file:dir { search };
-dontaudit vendor_telephony_app system_app_data_file:dir { search };
