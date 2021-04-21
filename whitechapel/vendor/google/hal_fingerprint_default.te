@@ -6,5 +6,6 @@ allow hal_fingerprint_default self:netlink_socket create_socket_perms_no_ioctl;
 allow hal_fingerprint_default dmabuf_system_heap_device:chr_file r_file_perms;
 allow hal_fingerprint_default sysfs_fingerprint:dir r_dir_perms;
 allow hal_fingerprint_default sysfs_fingerprint:file rw_file_perms;
+allow hal_fingerprint_default fwk_stats_service:service_manager find;
 get_prop(hal_fingerprint_default, fingerprint_ghbm_prop)
 add_hwservice(hal_fingerprint_default, hal_fingerprint_ext_hwservice)
