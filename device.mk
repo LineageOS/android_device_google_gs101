@@ -479,6 +479,10 @@ PRODUCT_PACKAGES += \
 	libwpa_client \
 	WifiOverlay \
 
+# Connectivity
+PRODUCT_PACKAGES += \
+        ConnectivityOverlay
+
 PRODUCT_PACKAGES_DEBUG += \
 	sg_write_buffer \
 	f2fs_io \
