@@ -530,29 +530,6 @@ void addGNSS(std::shared_ptr<PowerStats> p)
             EnergyConsumerType::GNSS, "GPS", {"L9S_GNSS_CORE"}));
 }
 
-void addNFC(std::shared_ptr<PowerStats> p) {
-    const GenericStateResidencyDataProvider::StateResidencyConfig nfcStateConfig = {
-        .entryCountSupported = true,
-        .entryCountPrefix = "Cumulative count:",
-        .totalTimeSupported = true,
-        .totalTimePrefix = "Cumulative duration msec:",
-        .lastEntrySupported = true,
-        .lastEntryPrefix = "Last entry timestamp msec:",
-    };
-    const std::vector<std::pair<std::string, std::string>> nfcStateHeaders = {
-        std::make_pair("IDLE", "Idle mode:"),
-        std::make_pair("ACTIVE", "Active mode:"),
-        std::make_pair("ACTIVE-RW", "Active Reader/Writer mode:"),
-    };
-
-    std::vector<GenericStateResidencyDataProvider::PowerEntityConfig> cfgs;
-    cfgs.emplace_back(generateGenericStateResidencyConfigs(nfcStateConfig, nfcStateHeaders),
-            "NFC", "NFC subsystem");
-
-    p->addStateResidencyDataProvider(std::make_unique<GenericStateResidencyDataProvider>(
-            "/sys/devices/platform/10960000.hsi2c/i2c-3/3-0008/power_stats", cfgs));
-}
-
 void addPCIe(std::shared_ptr<PowerStats> p) {
     // Add PCIe power entities for Modem and WiFi
     const GenericStateResidencyDataProvider::StateResidencyConfig pcieStateConfig = {
@@ -702,7 +679,6 @@ void addGs101CommonDataProviders(std::shared_ptr<PowerStats> p) {
     addGPU(p);
     addMobileRadio(p);
     addGNSS(p);
-    addNFC(p);
     addPCIe(p);
     addWifi(p);
     addUfs(p);
@@ -712,4 +688,27 @@ void addGs101CommonDataProviders(std::shared_ptr<PowerStats> p) {
     // TODO (b/181070764) (b/182941084):
     // Remove this when Wifi/BT energy consumption models are available or revert before ship
     addPlaceholderEnergyConsumers(p);
+}
+
+void addNFC(std::shared_ptr<PowerStats> p, const std::string& path) {
+    const GenericStateResidencyDataProvider::StateResidencyConfig nfcStateConfig = {
+        .entryCountSupported = true,
+        .entryCountPrefix = "Cumulative count:",
+        .totalTimeSupported = true,
+        .totalTimePrefix = "Cumulative duration msec:",
+        .lastEntrySupported = true,
+        .lastEntryPrefix = "Last entry timestamp msec:",
+    };
+    const std::vector<std::pair<std::string, std::string>> nfcStateHeaders = {
+        std::make_pair("IDLE", "Idle mode:"),
+        std::make_pair("ACTIVE", "Active mode:"),
+        std::make_pair("ACTIVE-RW", "Active Reader/Writer mode:"),
+    };
+
+    std::vector<GenericStateResidencyDataProvider::PowerEntityConfig> cfgs;
+    cfgs.emplace_back(generateGenericStateResidencyConfigs(nfcStateConfig, nfcStateHeaders),
+            "NFC", "NFC subsystem");
+
+    p->addStateResidencyDataProvider(std::make_unique<GenericStateResidencyDataProvider>(
+            path, cfgs));
 }
