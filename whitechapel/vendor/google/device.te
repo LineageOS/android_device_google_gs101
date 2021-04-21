@@ -56,3 +56,7 @@ type aoc_device, dev_type;
 
 # Fingerprint device
 type fingerprint_device, dev_type;
+
+# AMCS device
+type amcs_device, dev_type;
+
