@@ -154,3 +154,12 @@ dontaudit hal_dumpstate_default vendor_battery_debugfs:file r_file_perms;
 
 dontaudit hal_dumpstate_default vendor_votable_debugfs:dir r_dir_perms;
 dontaudit hal_dumpstate_default vendor_votable_debugfs:file r_file_perms;
+
+dontaudit hal_dumpstate_default mnt_vendor_file:dir r_dir_perms;
+dontaudit hal_dumpstate_default ramdump_vendor_mnt_file:dir search;
+dontaudit hal_dumpstate_default ramdump_vendor_mnt_file:file r_file_perms;
+
+dontaudit hal_dumpstate_default sysfs_bcl:dir r_dir_perms;
+dontaudit hal_dumpstate_default sysfs_bcl:file r_file_perms;
+
+dontaudit hal_dumpstate_default rootfs:dir r_dir_perms;
