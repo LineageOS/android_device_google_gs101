@@ -289,29 +289,6 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.sensor.stepcounter.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.stepcounter.xml \
 	frameworks/native/data/etc/android.hardware.sensor.stepdetector.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.stepdetector.xml
 
-# Sensor HAL
-#TARGET_USES_NANOHUB_SENSORHAL := true
-#NANOHUB_SENSORHAL_SENSORLIST := device/google/gs101/sensorhal/sensorlist.cpp
-
-#PRODUCT_PACKAGES += \
-	context_hub.default \
-	android.hardware.sensors@1.0-impl \
-	android.hardware.sensors@1.0-service \
-	sensors.gs101 \
-
-# sensor utilities
-#PRODUCT_PACKAGES += \
-	nanoapp_cmd
-
-# sensor utilities (only for userdebug and eng builds)
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
-#PRODUCT_PACKAGES += \
-	nanotool \
-	sensortest
-endif #filter TARGET_BUILD_VARIANT
-
-# Cannot reference variables defined in BoardConfig.mk
-#ifeq ($(BOARD_USES_EXYNOS_SENSORS_DUMMY), true)
 # Set USF sensor HAL to 2.0.
 USF_SENSOR_HAL_2_0 := true
 
@@ -325,7 +302,6 @@ else
 	android.hardware.sensors@1.0-service \
 	sensors.gs101
 endif
-#endif
 
 # USB HAL
 PRODUCT_PACKAGES += \

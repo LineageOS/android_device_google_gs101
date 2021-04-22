@@ -134,15 +134,6 @@
         <fqname>@1.2::IBootControl/default</fqname>
     </hal>
     <hal format="hidl">
-        <name>android.hardware.sensors</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>ISensors</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
         <name>android.hardware.neuralnetworks</name>
         <transport>hwbinder</transport>
         <version>1.2</version>
