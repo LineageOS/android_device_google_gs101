@@ -41,3 +41,6 @@ allow edgetpu_server proc_version:file r_file_perms;
 
 # Allow EdgeTPU service to read EdgeTPU service related system properties.
 get_prop(edgetpu_server, vendor_edgetpu_service_prop);
+
+# Allow EdgeTPU service to generate Perfetto traces.
+perfetto_producer(edgetpu_server);
