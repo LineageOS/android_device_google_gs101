@@ -1119,6 +1119,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     renderthread.skia.reduceopstasksplitting=true
 
+# Enable Incremental on the device
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.incremental.enable=true
+
 # Project
 include hardware/google/pixel/common/pixel-common-device.mk
 
