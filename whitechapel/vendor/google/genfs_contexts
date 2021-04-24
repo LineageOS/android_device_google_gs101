@@ -239,6 +239,7 @@ genfscon sysfs /module/bcmdhd4389                                               
 # Power Stats
 genfscon sysfs /devices/platform/cpif/modem/power_stats                                                 u:object_r:sysfs_power_stats:s0
 genfscon sysfs /devices/platform/10960000.hsi2c/i2c-3/3-0008/power_stats                                u:object_r:sysfs_power_stats:s0
+genfscon sysfs /devices/platform/10960000.hsi2c/i2c-4/4-0008/power_stats                                u:object_r:sysfs_power_stats:s0
 genfscon sysfs /devices/platform/11920000.pcie/power_stats                                              u:object_r:sysfs_power_stats:s0
 genfscon sysfs /devices/platform/14520000.pcie/power_stats                                              u:object_r:sysfs_power_stats:s0
 
