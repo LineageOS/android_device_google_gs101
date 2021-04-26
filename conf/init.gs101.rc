@@ -178,6 +178,9 @@ on init
     # start watchdogd
     start watchdogd
 
+    # Add a boost for NNAPI HAL
+    write /dev/cpuctl/nnapi-hal/cpu.uclamp.min 15
+
 # For GKI kernel, no device specific modules
 on init
     setprop vendor.device.modules.ready 1
