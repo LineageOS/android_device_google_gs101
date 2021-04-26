@@ -15,7 +15,6 @@ service vendor.charger /system/bin/charger
     file /proc/last_kmsg r
 
 on early-init
-    mount debugfs /sys/kernel/debug /sys/kernel/debug
     mount_all /vendor/etc/fstab.persist --early
 
 on init
