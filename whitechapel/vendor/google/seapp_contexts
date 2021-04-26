@@ -9,6 +9,8 @@ user=system seinfo=platform name=com.samsung.slsi.telephony.networktestmode doma
 # Samsung S.LSI IMS
 user=_app isPrivApp=true name=com.shannon.imsservice domain=vendor_ims_app levelFrom=all
 user=_app isPrivApp=true name=com.shannon.imsservice:remote domain=vendor_ims_app levelFrom=all
+user=_app isPrivApp=true name=com.shannon.rcsservice domain=vendor_rcs_app levelFrom=all
+user=_app isPrivApp=true name=com.shannon.rcsservice:remote domain=vendor_rcs_app levelFrom=all
 user=_app isPrivApp=true name=com.shannon.qualifiednetworksservice domain=vendor_ims_app levelFrom=all
 
 # coredump/ramdump
