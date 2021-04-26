@@ -15,4 +15,5 @@ userdebug_or_eng(`
   set_prop(logger_app, vendor_rild_prop)
   set_prop(logger_app, logpersistd_logging_prop)
   set_prop(logger_app, logd_prop)
+  set_prop(logger_app, vendor_usb_config_prop)
 ')
