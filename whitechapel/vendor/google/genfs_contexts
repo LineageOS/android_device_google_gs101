@@ -223,6 +223,19 @@ genfscon sysfs /devices/platform/17000080.devfreq_bo/devfreq/17000080.devfreq_bo
 genfscon sysfs /devices/platform/17000060.devfreq_tnr/devfreq/17000060.devfreq_tnr/time_in_state        u:object_r:sysfs_cpu:s0
 genfscon sysfs /devices/platform/17000070.devfreq_mfc/devfreq/17000070.devfreq_mfc/time_in_state        u:object_r:sysfs_cpu:s0
 
+# Devfreq directory
+genfscon sysfs /class/devfreq                                                                           u:object_r:sysfs_devfreq_dir:s0
+
+# Devfreq current frequency
+genfscon sysfs /devices/platform/17000010.devfreq_mif/devfreq/17000010.devfreq_mif/cur_freq             u:object_r:sysfs_devfreq_cur:s0
+genfscon sysfs /devices/platform/17000020.devfreq_int/devfreq/17000020.devfreq_int/cur_freq             u:object_r:sysfs_devfreq_cur:s0
+genfscon sysfs /devices/platform/17000030.devfreq_intcam/devfreq/17000030.devfreq_intcam/cur_freq       u:object_r:sysfs_devfreq_cur:s0
+genfscon sysfs /devices/platform/17000040.devfreq_disp/devfreq/17000040.devfreq_disp/cur_freq           u:object_r:sysfs_devfreq_cur:s0
+genfscon sysfs /devices/platform/17000050.devfreq_cam/devfreq/17000050.devfreq_cam/cur_freq             u:object_r:sysfs_devfreq_cur:s0
+genfscon sysfs /devices/platform/17000060.devfreq_tnr/devfreq/17000060.devfreq_tnr/cur_freq             u:object_r:sysfs_devfreq_cur:s0
+genfscon sysfs /devices/platform/17000070.devfreq_mfc/devfreq/17000070.devfreq_mfc/cur_freq             u:object_r:sysfs_devfreq_cur:s0
+genfscon sysfs /devices/platform/17000080.devfreq_bo/devfreq/17000080.devfreq_bo/cur_freq               u:object_r:sysfs_devfreq_cur:s0
+
 # Fabric
 genfscon sysfs /devices/platform/17000010.devfreq_mif/devfreq/17000010.devfreq_mif/interactive/target_load  u:object_r:sysfs_fabric:s0
 genfscon sysfs /devices/platform/17000010.devfreq_mif/devfreq/17000010.devfreq_mif/min_freq                 u:object_r:sysfs_fabric:s0
