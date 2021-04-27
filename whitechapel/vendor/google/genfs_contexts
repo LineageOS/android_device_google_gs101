@@ -197,6 +197,7 @@ genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/7-001f/s2mpg10-rtc/
 genfscon sysfs /devices/platform/10960000.hsi2c/i2c-4/4-0008/wakeup/wakeup                                               u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-5/5-0043/wakeup/wakeup                                               u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-6/6-0069/power_supply/main-charger/wakeup                            u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/sound-aoc/wakeup/wakeup                                                                 u:object_r:sysfs_wakeup:s0
 
 # OTA
 genfscon sysfs /devices/platform/14700000.ufs/pixel/boot_lun_enabled                                                     u:object_r:sysfs_ota:s0
