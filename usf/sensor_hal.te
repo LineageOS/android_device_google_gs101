@@ -37,6 +37,7 @@ binder_call(hal_sensors_default, system_server);
 
 # Allow access to the sysfs_aoc.
 allow hal_sensors_default sysfs_aoc:dir search;
+allow hal_sensors_default sysfs_aoc:file r_file_perms;
 
 # Allow use of the USF low latency transport.
 usf_low_latency_transport(hal_sensors_default)
