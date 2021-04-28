@@ -197,3 +197,6 @@ type sysfs_lhbm, sysfs_type, fs_type, mlstrustedobject;
 
 # UWB vendor
 type uwb_vendor_data_file, file_type, data_file_type, app_data_file_type;
+
+# PixelStats_vendor
+type sysfs_pixelstats, fs_type, sysfs_type;
