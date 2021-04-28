@@ -99,7 +99,7 @@
             <Feature name="adaptive-playback" />
         </MediaCodec>
         <MediaCodec name="c2.exynos.vp9.decoder" type="video/x-vnd.on2.vp9" >
-            <Limit name="size" min="64x64" max="3840x2160" />
+            <Limit name="size" min="64x64" max="3840x2176" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="64x64" />
             <Limit name="block-count" range="1-2025" />
@@ -110,7 +110,7 @@
             <Feature name="adaptive-playback" />
         </MediaCodec>
         <MediaCodec name="c2.exynos.vp9.decoder.secure" type="video/x-vnd.on2.vp9" >
-            <Limit name="size" min="64x64" max="3840x2160" />
+            <Limit name="size" min="64x64" max="3840x2176" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="64x64" />
             <Limit name="block-count" range="1-2025" />
@@ -135,7 +135,7 @@
             <Limit name="concurrent-instances" max="16" />
         </MediaCodec>
         <MediaCodec name="c2.exynos.hevc.encoder" type="video/hevc" >
-            <Limit name="size" min="64x64" max="3840x2160" />
+            <Limit name="size" min="64x64" max="3840x2176" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="32x32" />
             <Limit name="block-count" range="1-8100" />
@@ -175,7 +175,7 @@
             <Limit name="concurrent-instances" max="16" />
         </MediaCodec>
         <MediaCodec name="c2.exynos.vp9.encoder" type="video/x-vnd.on2.vp9" >
-            <Limit name="size" min="64x64" max="3840x2160" />
+            <Limit name="size" min="64x64" max="3840x2176" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="64x64" />
             <Limit name="block-count" range="1-2025" />
