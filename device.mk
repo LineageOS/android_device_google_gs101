@@ -193,10 +193,6 @@ PRODUCT_COPY_FILES += \
 	device/google/gs101/conf/init.debug.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.debug.rc
 endif
 
-# Init files for /system_ext
-PRODUCT_COPY_FILES += \
-	device/google/gs101/conf/init.system_ext.rc:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/init/init.system_ext.rc
-
 # If AoC Daemon is not present on this build, load firmware at boot via rc
 ifeq ($(wildcard vendor/google/whitechapel/aoc/aocd),)
 PRODUCT_COPY_FILES += \
@@ -1090,17 +1086,17 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	android.hardware.edgetpu.logging@service-edgetpu-logging
 
-# TPU HAL service
+# TPU application service
 PRODUCT_PACKAGES += \
 	vendor.google.edgetpu@1.0-service
+
+# TPU vendor service
+PRODUCT_PACKAGES += \
+	vendor.google.edgetpu_vendor_service@1.0-service
 
 # TPU HAL client library
 PRODUCT_PACKAGES += \
 	libedgetpu_client.google
-
-# TPU HAL client library vendor variant
-PRODUCT_PACKAGES += \
-	libedgetpu_client.google.vendor
 
 # Connectivity Thermal Power Manager
 PRODUCT_PACKAGES += \
