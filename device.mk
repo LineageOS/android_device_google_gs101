@@ -1072,7 +1072,7 @@ PRODUCT_PACKAGES += \
 
 # tetheroffload HAL
 PRODUCT_PACKAGES += \
-	vendor.samsung_slsi.hardware.tetheroffload@1.0-service
+	vendor.samsung_slsi.hardware.tetheroffload@1.1-service
 
 # pKVM
 ifeq ($(TARGET_PKVM_ENABLED),true)
