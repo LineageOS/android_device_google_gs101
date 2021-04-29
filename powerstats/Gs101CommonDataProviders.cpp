@@ -651,6 +651,21 @@ void addDevfreq(std::shared_ptr<PowerStats> p) {
             "INT", "/sys/devices/platform/17000020.devfreq_int/devfreq/17000020.devfreq_int"));
 }
 
+void addTPU(std::shared_ptr<PowerStats> p) {
+    std::map<std::string, int32_t> stateCoeffs;
+
+    stateCoeffs = {
+        {"500000",  10},
+        {"800000",  20},
+        {"1066000", 30},
+        {"1230000", 40}};
+
+    p->addEnergyConsumer(PowerStatsEnergyConsumer::createMeterAndAttrConsumer(p,
+            EnergyConsumerType::OTHER, "TPU", {"S10M_VDD_TPU"},
+            {{UID_TIME_IN_STATE, "/sys/class/edgetpu/abrolhos/device/tpu_usage"}},
+            stateCoeffs));
+}
+
 /**
  * Unlike other data providers, which source power entity state residency data from the kernel,
  * this data provider acts as a general-purpose channel for state residency data providers
@@ -684,6 +699,7 @@ void addGs101CommonDataProviders(std::shared_ptr<PowerStats> p) {
     addUfs(p);
     addPowerDomains(p);
     addDevfreq(p);
+    addTPU(p);
 
     // TODO (b/181070764) (b/182941084):
     // Remove this when Wifi/BT energy consumption models are available or revert before ship
