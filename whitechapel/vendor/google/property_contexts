@@ -82,7 +82,7 @@ vendor.audiodump.output.dir             u:object_r:vendor_audio_prop:s0
 ro.vendor.hwc.drm.device                u:object_r:vendor_display_prop:s0
 
 # for camera
-persist.camera.                      u:object_r:vendor_camera_prop:s0
+persist.vendor.camera.               u:object_r:vendor_camera_prop:s0
 vendor.camera.                       u:object_r:vendor_camera_prop:s0
 vendor.camera.debug.                 u:object_r:vendor_camera_debug_prop:s0
 vendor.camera.fatp.                  u:object_r:vendor_camera_fatp_prop:s0
