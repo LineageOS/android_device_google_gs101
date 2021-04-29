@@ -285,3 +285,12 @@ genfscon sysfs /devices/platform/wlan/sscoredump/sscd_wlan/report_count         
 
 # mediacodec
 genfscon sysfs /devices/platform/mfc/video4linux/video                                                  u:object_r:sysfs_video:s0
+
+# pixelstat_vendor
+genfscon sysfs /devices/platform/audiometrics/codec_state              u:object_r:sysfs_pixelstats:s0
+genfscon sysfs /devices/platform/audiometrics/hs_codec_state           u:object_r:sysfs_pixelstats:s0
+genfscon sysfs /devices/platform/audiometrics/speaker_impedance        u:object_r:sysfs_pixelstats:s0
+genfscon sysfs /devices/platform/audiometrics/speaker_excursion        u:object_r:sysfs_pixelstats:s0
+genfscon sysfs /devices/platform/audiometrics/speaker_heartbeat        u:object_r:sysfs_pixelstats:s0
+genfscon sysfs /devices/platform/audiometrics/speaker_temp             u:object_r:sysfs_pixelstats:s0
+
