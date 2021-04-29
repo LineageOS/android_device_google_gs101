@@ -64,6 +64,17 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 #Set IKE logs to verbose for WFC
 PRODUCT_PROPERTY_OVERRIDES += log.tag.IKE=VERBOSE
+
+#Set Shannon IMS logs to debug
+PRODUCT_PROPERTY_OVERRIDES += log.tag.SHANNON_IMS=DEBUG
+
+#Set Shannon QNS logs to debug
+PRODUCT_PROPERTY_OVERRIDES += log.tag.ShannonQNS=DEBUG
+PRODUCT_PROPERTY_OVERRIDES += log.tag.ShannonQNS-ims=DEBUG
+PRODUCT_PROPERTY_OVERRIDES += log.tag.ShannonQNS-emergency=DEBUG
+PRODUCT_PROPERTY_OVERRIDES += log.tag.ShannonQNS-mms=DEBUG
+PRODUCT_PROPERTY_OVERRIDES += log.tag.ShannonQNS-xcap=DEBUG
+PRODUCT_PROPERTY_OVERRIDES += log.tag.ShannonQNS-HC=DEBUG
 endif
 
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
