@@ -233,7 +233,7 @@ PRODUCT_PACKAGES += \
 
 # Contexthub HAL
 PRODUCT_PACKAGES += \
-	android.hardware.contexthub@1.2-service.small_fragments
+	android.hardware.contexthub@1.2-service.generic
 
 # CHRE tools
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
