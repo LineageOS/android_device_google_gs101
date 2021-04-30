@@ -7,8 +7,8 @@ user=system seinfo=platform name=com.samsung.slsi.sysdebugmode domain=vendor_tel
 user=system seinfo=platform name=com.samsung.slsi.telephony.networktestmode domain=vendor_telephony_app levelFrom=all
 
 # Samsung S.LSI IMS
-user=_app seinfo=platform isPrivApp=true name=com.shannon.imsservice domain=vendor_ims_app levelFrom=all
-user=_app seinfo=platform isPrivApp=true name=com.shannon.imsservice:remote domain=vendor_ims_app levelFrom=all
+user=_app isPrivApp=true name=com.shannon.imsservice domain=vendor_ims_app levelFrom=all
+user=_app isPrivApp=true name=com.shannon.imsservice:remote domain=vendor_ims_app levelFrom=all
 user=system seinfo=platform name=com.shannon.dataservice domain=vendor_ims_app
 user=system seinfo=platform name=com.shannon.networkservice domain=vendor_ims_app
 user=system seinfo=platform name=com.shannon.qualifiednetworksservice domain=vendor_ims_app
