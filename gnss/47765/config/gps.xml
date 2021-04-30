@@ -79,12 +79,12 @@
        RfPathLossDb_Ap_L5="3.5"
        RfPathLossDb_Cp_L5="3.5"
 
-       EnableNavic="true"
   />
 
   <gll_features
        EnableLowPowerPmm="true"
        EnableNicAutoSwitch="true"
+       EnableNavic="true"
   />
 
 </glgps>
