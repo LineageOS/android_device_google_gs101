@@ -249,7 +249,7 @@
 /dev/aoc                               u:object_r:aoc_device:s0
 
 # Contexthub
-/vendor/bin/hw/android\.hardware\.contexthub@1\.2-service\.small_fragments  u:object_r:hal_contexthub_default_exec:s0
+/vendor/bin/hw/android\.hardware\.contexthub@1\.2-service\.generic  u:object_r:hal_contexthub_default_exec:s0
 /(vendor|system/vendor)/bin/chre                                            u:object_r:chre_exec:s0
 /dev/socket/chre                                                            u:object_r:chre_socket:s0
 
