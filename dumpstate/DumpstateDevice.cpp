@@ -59,7 +59,7 @@ using android::os::dumpstate::RunCommandToFd;
 namespace android {
 namespace hardware {
 namespace dumpstate {
-namespace V1_0 {
+namespace V1_1 {
 namespace implementation {
 
 #define GPS_LOG_PREFIX "gl-"
@@ -70,6 +70,8 @@ namespace implementation {
 #define TCPDUMP_LOG_PREFIX "tcpdump"
 
 typedef std::chrono::time_point<std::chrono::steady_clock> timepoint_t;
+
+const char kVerboseLoggingProperty[] = "persist.dumpstate.verbose_logging.enabled";
 
 void DumpstateDevice::dumpLogs(int fd, std::string srcDir, std::string destDir, int maxFileNum,
                                const char *logPrefix) {
@@ -923,15 +925,36 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
 
 // Methods from ::android::hardware::dumpstate::V1_0::IDumpstateDevice follow.
 Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle &handle) {
+// Ignore return value, just return an empty status.
+    dumpstateBoard_1_1(handle, DumpstateMode::DEFAULT, 30 * 1000 /* timeoutMillis */);
+    return Void();
+}
+
+// Methods from ::android::hardware::dumpstate::V1_1::IDumpstateDevice follow.
+Return<DumpstateStatus> DumpstateDevice::dumpstateBoard_1_1(const hidl_handle& handle,
+                                                            const DumpstateMode mode,
+                                                            const uint64_t timeoutMillis) {
+    // Unused arguments.
+    (void) timeoutMillis;
+
     if (handle == nullptr || handle->numFds < 1) {
         ALOGE("no FDs\n");
-        return Void();
+        return DumpstateStatus::ILLEGAL_ARGUMENT;
     }
 
     int fd = handle->data[0];
     if (fd < 0) {
         ALOGE("invalid FD: %d\n", handle->data[0]);
-        return Void();
+        return DumpstateStatus::ILLEGAL_ARGUMENT;
+    }
+
+    if (mode == DumpstateMode::WEAR) {
+        // We aren't a Wear device.
+        ALOGE("Unsupported mode: %d\n", mode);
+        return DumpstateStatus::UNSUPPORTED_MODE;
+    } else if (mode < DumpstateMode::FULL || mode > DumpstateMode::PROTO) {
+        ALOGE("Invalid mode: %d\n", mode);
+        return DumpstateStatus::ILLEGAL_ARGUMENT;
     }
 
     dumpTextSection(fd, kAllSections);
@@ -963,7 +986,16 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle &handle) {
                  "/vendor/firmware/logstrs.bin"});
     }
 
+    return DumpstateStatus::OK;
+}
+
+Return<void> DumpstateDevice::setVerboseLoggingEnabled(const bool enable) {
+    ::android::base::SetProperty(kVerboseLoggingProperty, enable ? "true" : "false");
     return Void();
+}
+
+Return<bool> DumpstateDevice::getVerboseLoggingEnabled() {
+    return ::android::base::GetBoolProperty(kVerboseLoggingProperty, false);
 }
 
 // Since HALs that support the debug() interface are automatically invoked during
@@ -993,7 +1025,7 @@ Return<void> DumpstateDevice::debug(const hidl_handle &handle, const hidl_vec<hi
 
 
 }  // namespace implementation
-}  // namespace V1_0
+}  // namespace V1_1
 }  // namespace dumpstate
 }  // namespace hardware
 }  // namespace android
