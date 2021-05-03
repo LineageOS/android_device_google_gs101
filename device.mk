@@ -696,7 +696,8 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
        debug.c2.use_dmabufheaps=1 \
-       media.c2.dmabuf.padding=512
+       media.c2.dmabuf.padding=512 \
+       debug.stagefright.ccodec_delayed_params=1
 
 # 2. OpenMAX IL
 PRODUCT_COPY_FILES += \
