@@ -1,2 +1,4 @@
 # b/185723618
 dontaudit dumpstate hal_power_stats_vendor_service:service_manager { find };
+# b/187014717
+dontaudit dumpstate twoshay:binder call;
