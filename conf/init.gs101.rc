@@ -341,12 +341,6 @@ on early-boot
     chown system system /dev/sys/block/bootdevice/slowio_unmap_cnt
     chown system system /dev/sys/block/bootdevice/slowio_sync_cnt
 
-    # Permission to allow system processes to access gpu clocks
-    chown system system /sys/devices/platform/1c500000.mali/dvfs_min_lock
-    chmod 0660 /sys/devices/platform/1c500000.mali/dvfs_min_lock
-    chown system system /sys/devices/platform/1c500000.mali/scaling_min_freq
-    chmod 0660 /sys/devices/platform/1c500000.mali/scaling_min_freq
-
 on boot
 
     # Allow to access debugfs for system:system
