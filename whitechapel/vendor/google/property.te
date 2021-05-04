@@ -33,6 +33,9 @@ system_public_prop(vendor_edgetpu_service_prop)
 # Battery defender
 vendor_internal_prop(vendor_battery_defender_prop)
 
+# Battery profile for harness mode
+vendor_internal_prop(vendor_battery_profile_prop)
+
 # AoC
 vendor_internal_prop(vendor_aoc_prop)
 
