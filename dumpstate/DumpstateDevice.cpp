@@ -45,6 +45,10 @@
 
 #define UFS_BOOTDEVICE "ro.boot.bootdevice"
 
+#define TCPDUMP_LOG_DIRECTORY "/data/vendor/tcpdump_logger/logs"
+#define TCPDUMP_NUMBER_BUGREPORT "persist.vendor.tcpdump.log.br_num"
+#define TCPDUMP_PERSIST_PROPERTY "persist.vendor.tcpdump.log.alwayson"
+
 using android::os::dumpstate::CommandOptions;
 using android::os::dumpstate::DumpFileToFd;
 using android::os::dumpstate::PropertiesHelper;
@@ -61,6 +65,7 @@ namespace implementation {
 #define EXTENDED_LOG_PREFIX "extended_log_"
 #define RIL_LOG_PREFIX "rild.log."
 #define BUFSIZE 65536
+#define TCPDUMP_LOG_PREFIX "tcpdump"
 
 typedef std::chrono::time_point<std::chrono::steady_clock> timepoint_t;
 
@@ -793,6 +798,7 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
 {
     std::string modemLogDir = MODEM_LOG_DIRECTORY;
     std::string extendedLogDir = MODEM_EXTENDED_LOG_DIRECTORY;
+    std::string tcpdumpLogDir = TCPDUMP_LOG_DIRECTORY;
     static const std::string sectionName = "modem";
     auto startTime = startSection(fd, sectionName);
 
@@ -813,7 +819,12 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
     if (!PropertiesHelper::IsUserBuild()) {
         bool modemLogEnabled = android::base::GetBoolProperty(MODEM_LOGGING_PERSIST_PROPERTY, false);
         bool gpsLogEnabled = android::base::GetBoolProperty(GPS_LOGGING_STATUS_PROPERTY, false);
+        bool tcpdumpEnabled = android::base::GetBoolProperty(TCPDUMP_PERSIST_PROPERTY, false);
         int maxFileNum = android::base::GetIntProperty(MODEM_LOGGING_NUMBER_BUGREPORT_PROPERTY, 100);
+
+        if (tcpdumpEnabled) {
+            dumpLogs(fd, tcpdumpLogDir, modemLogAllDir, android::base::GetIntProperty(TCPDUMP_NUMBER_BUGREPORT, 5), TCPDUMP_LOG_PREFIX);
+        }
 
         if (modemLogEnabled) {
             bool modemLogStarted = android::base::GetBoolProperty(MODEM_LOGGING_STATUS_PROPERTY, false);
