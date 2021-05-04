@@ -49,6 +49,8 @@
 #define TCPDUMP_NUMBER_BUGREPORT "persist.vendor.tcpdump.log.br_num"
 #define TCPDUMP_PERSIST_PROPERTY "persist.vendor.tcpdump.log.alwayson"
 
+#define HW_REVISION "ro.boot.hardware.revision"
+
 using android::os::dumpstate::CommandOptions;
 using android::os::dumpstate::DumpFileToFd;
 using android::os::dumpstate::PropertiesHelper;
@@ -765,6 +767,17 @@ void DumpstateDevice::dumpSensorsUSFSection(int fd) {
     RunCommandToFd(fd, "USF statistics",
                    {"/vendor/bin/sh", "-c", "usf_stats get --all"},
                    options);
+    if (!PropertiesHelper::IsUserBuild()) {
+        // Not a user build, if this is also not a production device dump the USF registry.
+        std::string hwRev = android::base::GetProperty(HW_REVISION, "");
+        if (hwRev.find("PROTO") != std::string::npos ||
+            hwRev.find("EVT") != std::string::npos ||
+            hwRev.find("DVT") != std::string::npos) {
+            RunCommandToFd(fd, "USF Registry",
+                           {"/vendor/bin/sh", "-c", "usf_reg_edit save -"},
+                           options);
+        }
+    }
 }
 
 struct abl_log_header {
