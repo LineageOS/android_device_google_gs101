@@ -7,6 +7,20 @@
 ### ...                                                   ###
 #############################################################
 
+modules_dir=
+
+for f in /vendor/lib/modules/*/modules.dep /vendor/lib/modules/modules.dep; do
+  if [[ -f "$f" ]]; then
+    modules_dir="$(dirname "$f")"
+    break
+  fi
+done
+
+if [[ -z "${modules_dir}" ]]; then
+  echo "Unable to locate kernel modules directory" 2>&1
+  exit 1
+fi
+
 # imitates wait_for_file() in init
 wait_for_file()
 {
@@ -26,8 +40,8 @@ install_display_drivers()
   if [[ -z "$panel_drv" ]]; then
     panel_drv="panel-samsung-emul"
   fi
-  modprobe -d /vendor/lib/modules exynos-drm.ko
-  modprobe -d /vendor/lib/modules $panel_drv.ko
+  modprobe -d "${modules_dir}" exynos-drm.ko
+  modprobe -d "${modules_dir}" $panel_drv.ko
 }
 
 if [ $# -eq 1 ]; then
@@ -47,7 +61,7 @@ if [ -f $cfg_file ]; then
       "insmod") insmod $arg ;;
       "setprop") setprop $arg 1 ;;
       "enable") echo 1 > $arg ;;
-      "modprobe") modprobe -a -d /vendor/lib/modules $arg ;;
+      "modprobe") modprobe -a -d "${modules_dir}" $arg ;;
       "wait") wait_for_file $arg ;;
       "install_display_drivers") install_display_drivers ;;
     esac
