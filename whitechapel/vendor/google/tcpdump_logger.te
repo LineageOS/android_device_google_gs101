@@ -13,6 +13,8 @@ userdebug_or_eng(`
   allow tcpdump_logger tcpdump_vendor_data_file:file create_file_perms;
   allow tcpdump_logger radio_vendor_data_file:file create_file_perms;
   allow tcpdump_logger radio_vendor_data_file:dir create_dir_perms;
+  allow tcpdump_logger wifi_logging_data_file:file create_file_perms;
+  allow tcpdump_logger wifi_logging_data_file:dir create_dir_perms;
 
   set_prop(tcpdump_logger, vendor_tcpdump_log_prop)
 ')
