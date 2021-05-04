@@ -275,9 +275,11 @@ on post-fs-data
 # Audio dump and debug
     mkdir /data/vendor/audio 0770 audio audio
 
-    # Create the directories for Darwinn HAL.
+# Create the directories for Darwinn HAL.
     mkdir /data/vendor/hal_neuralnetworks_darwinn 0770 system system
     mkdir /data/vendor/hal_neuralnetworks_darwinn/checksum_cache 0770 system system
+    mkdir /data/vendor/edgetpu 0770 system system
+    mkdir /data/vendor/edgetpu/cache 0770 system system
 
 on zygote-start
     # For PixelLogger configuration file.
