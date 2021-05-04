@@ -382,7 +382,6 @@
 /vendor/bin/pixelstats-vendor           u:object_r:pixelstats_vendor_exec:s0
 
 # Vendor_kernel_modules
-/vendor/lib/modules/.*\.ko                                                    u:object_r:vendor_kernel_modules:s0
 /vendor_dlkm/lib/modules/.*\.ko                                               u:object_r:vendor_kernel_modules:s0
 
 # Display
