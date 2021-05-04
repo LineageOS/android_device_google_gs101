@@ -341,6 +341,7 @@ WIFI_FEATURE_IMU_DETECTION := true
 # Avoid Wifi reset on MAC Address change
 WIFI_AVOID_IFACE_RESET_MAC_CHANGE := true
 WIFI_FEATURE_HOSTAPD_11AX := true
+WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 
 # NeuralNetworks
 GPU_SOURCE_PRESENT := $(wildcard vendor/arm/mali/valhall)
