@@ -616,7 +616,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	persist.sys.sf.native_mode=2 \
 	persist.sys.sf.color_mode=9
 PRODUCT_COPY_FILES += \
-	device/google/gs101/display/display_adaptive_cal0.pb:$(TARGET_COPY_OUT_VENDOR)/etc/display_adaptive_cal0.pb
+	device/google/gs101/display/display_colordata_cal0.pb:$(TARGET_COPY_OUT_VENDOR)/etc/display_colordata_cal0.pb
 
 PRODUCT_PROPERTY_OVERRIDES += debug.renderengine.backend=skiaglthreaded
 
