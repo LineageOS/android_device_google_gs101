@@ -415,10 +415,9 @@ else
 		gralloc.$(TARGET_BOARD_PLATFORM)
 endif
 
-# HIDL memtrack
+# AIDL memtrack
 PRODUCT_PACKAGES += \
-	android.hardware.memtrack@1.0-impl \
-	android.hardware.memtrack@1.0-service
+	android.hardware.memtrack-service.example
 
 PRODUCT_PACKAGES += \
 	memtrack.$(TARGET_BOARD_PLATFORM) \
