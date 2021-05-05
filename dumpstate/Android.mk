@@ -16,11 +16,11 @@
 
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
-LOCAL_MODULE := android.hardware.dumpstate@1.0-service.gs101
+LOCAL_MODULE := android.hardware.dumpstate@1.1-service.gs101
 LOCAL_LICENSE_KINDS := SPDX-license-identifier-Apache-2.0
 LOCAL_LICENSE_CONDITIONS := notice
 LOCAL_NOTICE_FILE := $(LOCAL_PATH)/../NOTICE
-LOCAL_INIT_RC := android.hardware.dumpstate@1.0-service.gs101.rc
+LOCAL_INIT_RC := android.hardware.dumpstate@1.1-service.gs101.rc
 LOCAL_MODULE_RELATIVE_PATH := hw
 
 LOCAL_SRC_FILES := \
@@ -29,6 +29,7 @@ LOCAL_SRC_FILES := \
 
 LOCAL_SHARED_LIBRARIES := \
     android.hardware.dumpstate@1.0 \
+    android.hardware.dumpstate@1.1 \
     libbase \
     libcutils \
     libdumpstateutil \
