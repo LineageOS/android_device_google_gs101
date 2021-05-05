@@ -42,6 +42,11 @@ genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-5/5-0036/power_supply       
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-5/5-0057/power_supply       u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-4/4-0050/eeprom             u:object_r:sysfs_batteryinfo:s0
 
+genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-7/7-0025                    u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-7/7-0025/power_supply       u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-7/7-0069/power_supply       u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-7/7-0036/power_supply       u:object_r:sysfs_batteryinfo:s0
+
 # Storage
 genfscon debugfs /f2fs                                u:object_r:debugfs_f2fs:s0
 genfscon proc /fs/f2fs                                u:object_r:proc_f2fs:s0
@@ -199,6 +204,12 @@ genfscon sysfs /devices/platform/10960000.hsi2c/i2c-4/4-0008/wakeup/wakeup      
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-5/5-0043/wakeup/wakeup                                               u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-6/6-0069/power_supply/main-charger/wakeup                            u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/sound-aoc/wakeup/wakeup                                                                 u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-7/7-0025/power_supply/tcpm-source-psy-7-0025/wakeup                  u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-7/7-0025/wakeup/wakeup                                               u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-7/7-0025/power_supply/usb/wakeup                                     u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-7/7-0069/power_supply/dc/wakeup                                      u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-7/7-0069/power_supply/gcpm/wakeup                                    u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-7/7-0036/power_supply/maxfg/wakeup                                   u:object_r:sysfs_wakeup:s0
 
 # OTA
 genfscon sysfs /devices/platform/14700000.ufs/pixel/boot_lun_enabled                                                     u:object_r:sysfs_ota:s0
