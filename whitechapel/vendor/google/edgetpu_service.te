@@ -36,3 +36,6 @@ perfetto_producer(edgetpu_server);
 # Allow EdgeTPU service to connect to the EdgeTPU vendor version of the service.
 allow edgetpu_server edgetpu_vendor_service:service_manager find;
 binder_call(edgetpu_server, edgetpu_vendor_server);
+
+# Allow EdgeTPU service to log to stats service. (metrics)
+allow edgetpu_server fwk_stats_service:service_manager find;
