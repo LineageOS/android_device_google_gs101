@@ -48,6 +48,7 @@ type sysfs_acpm_stats, sysfs_type, fs_type;
 
 # Vendor tools
 type vendor_usf_stats, vendor_file_type, file_type;
+type vendor_usf_reg_edit, vendor_file_type, file_type;
 type vendor_dumpsys, vendor_file_type, file_type;
 
 # Sensors
@@ -131,11 +132,13 @@ type persist_camera_file, file_type;
 type vendor_camera_tuning_file, vendor_file_type, file_type;
 type vendor_camera_data_file, file_type, data_file_type;
 
-# EdgeTPU device (DarwiNN)
+# EdgeTPU hal data file
 type hal_neuralnetworks_darwinn_data_file, file_type, data_file_type;
 
-# EdgeTPU
-type edgetpu_service_data_file, file_type, data_file_type, core_data_file_type;
+# EdgeTPU vendor service data file
+type edgetpu_vendor_service_data_file, file_type, data_file_type;
+
+# EdgeTPU sysfs
 type sysfs_edgetpu, sysfs_type, fs_type;
 
 # Vendor sched files
