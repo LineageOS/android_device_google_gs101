@@ -170,7 +170,7 @@ DEVICE_MATRIX_FILE := \
 DEVICE_PACKAGE_OVERLAYS += device/google/gs101/overlay
 
 # This will be updated to 31 (Android S) for shipping
-PRODUCT_SHIPPING_API_LEVEL := 31
+PRODUCT_SHIPPING_API_LEVEL := 30
 
 # Temporarily disable the debugfs restriction on 31 (Android S)
 PRODUCT_SET_DEBUGFS_RESTRICTIONS := false
