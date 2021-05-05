@@ -340,6 +340,17 @@ void DumpstateDevice::dumpPowerSection(int fd) {
     DumpFileToFd(fd, "RTX", "/dev/logbuffer_rtx");
     DumpFileToFd(fd, "WIRELESS", "/dev/logbuffer_wireless");
 
+    RunCommandToFd(fd, "TRICKLE-DEFEND Config", {"/vendor/bin/sh", "-c",
+                        " cd /sys/devices/platform/google,battery/power_supply/battery/;"
+                        " for f in `ls bd_*` ; do echo \"$f: `cat $f`\" ; done"});
+
+    RunCommandToFd(fd, "DWELL-DEFEND Config", {"/vendor/bin/sh", "-c",
+                        " cd /sys/devices/platform/google,charger/;"
+                        " for f in `ls charge_s*` ; do echo \"$f: `cat $f`\" ; done"});
+
+    RunCommandToFd(fd, "TEMP-DEFEND Config", {"/vendor/bin/sh", "-c",
+                        " cd /sys/devices/platform/google,charger/;"
+                        " for f in `ls bd_*` ; do echo \"$f: `cat $f`\" ; done"});
 
     RunCommandToFd(fd, "DC_registers dump", {"/vendor/bin/sh", "-c", "cat /d/regmap/*-0057-pca9468-mains/registers"});
 
