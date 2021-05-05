@@ -793,6 +793,16 @@ void DumpstateDevice::dumpSensorsUSFSection(int fd) {
     }
 }
 
+// Gzip binary data and dump to fd in base64 format. Cmd to decode is also attached.
+void dumpGzippedFileInBase64ToFd(int fd, const char* title, const char* file_path) {
+    auto cmd = android::base::StringPrintf("echo 'base64 -d <<EOF | gunzip' ; "
+               "/vendor/bin/gzip < \"%s\" | /vendor/bin/base64 ; "
+               "echo 'EOF'", file_path);
+    RunCommandToFd(fd, title,
+                   {"/vendor/bin/sh", "-c", cmd.c_str()},
+                   CommandOptions::WithTimeout(10).Build());
+}
+
 struct abl_log_header {
     uint64_t i;
     uint64_t size;
@@ -810,9 +820,10 @@ void DumpstateDevice::dumpRamdumpSection(int fd) {
     } else {
         android::base::WriteStringToFd("*** Ramdump misc file: abl.log: File not found\n", fd);
     }
-    RunCommandToFd(fd, "Ramdump misc file: acpm.lst",
-                   {"/vendor/bin/base64", "/mnt/vendor/ramdump/acpm.lst"},
-                   CommandOptions::WithTimeout(2).Build());
+    dumpGzippedFileInBase64ToFd(
+        fd, "Ramdump misc file: acpm.lst (gzipped in base64)", "/mnt/vendor/ramdump/acpm.lst");
+    dumpGzippedFileInBase64ToFd(
+        fd, "Ramdump misc file: s2d.lst (gzipped in base64)", "/mnt/vendor/ramdump/s2d.lst");
 }
 
 // Dump items that don't fit well into any other section
