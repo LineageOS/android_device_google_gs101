@@ -20,9 +20,8 @@ allow hal_camera_default tee_device:chr_file rw_file_perms;
 allow hal_camera_default edgetpu_device:chr_file rw_file_perms;
 allow hal_camera_default sysfs_edgetpu:dir r_dir_perms;
 allow hal_camera_default sysfs_edgetpu:file r_file_perms;
-allow hal_camera_default edgetpu_server:fd use;
-allow hal_camera_default edgetpu_service:service_manager find;
-binder_call(hal_camera_default, edgetpu_server)
+allow hal_camera_default edgetpu_vendor_service:service_manager find;
+binder_call(hal_camera_default, edgetpu_vendor_server)
 
 # Allow access to data files used by the camera HAL
 allow hal_camera_default mnt_vendor_file:dir search;
