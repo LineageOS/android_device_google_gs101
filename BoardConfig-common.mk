@@ -408,6 +408,3 @@ BOARD_KERNEL_CMDLINE += at24.write_timeout=100
 
 # Enable larger logbuf
 BOARD_KERNEL_CMDLINE += log_buf_len=1024K
-
-# Temporarily ignore the vendor selinux context namespace problem for PRODUCT_SHIPPING_API_LEVEL 31
-BUILD_BROKEN_VENDOR_PROPERTY_NAMESPACE := true
