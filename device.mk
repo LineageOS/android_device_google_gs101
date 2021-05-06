@@ -987,7 +987,6 @@ PRODUCT_PACKAGES += \
 	libaoctuningdecoder \
 	libaoc_waves \
 	liboffloadeffect \
-	libdsp_aecns \
 	audio_waves_aoc \
 	audio_fortemedia_aoc \
 	audio_usb_aoc \
