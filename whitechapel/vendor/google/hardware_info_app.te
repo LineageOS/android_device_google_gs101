@@ -3,3 +3,7 @@ type hardware_info_app, domain;
 app_domain(hardware_info_app)
 
 allow hardware_info_app app_api_service:service_manager find;
+
+# Display
+allow hardware_info_app sysfs_display:dir search;
+allow hardware_info_app sysfs_display:file r_file_perms;
