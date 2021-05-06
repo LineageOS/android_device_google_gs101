@@ -448,3 +448,7 @@
 
 # Wifi Firmware config update
 /data/vendor/firmware/wifi(/.*)?                                               u:object_r:updated_wifi_firmware_data_file:s0
+
+# WLC FW update
+/vendor/bin/wlc_upt/p9412_mtp            u:object_r:vendor_wlc_fwupdata_file:s0
+/vendor/bin/wlc_upt/wlc_fw_update\.sh    u:object_r:wlcfwupdate_exec:s0
