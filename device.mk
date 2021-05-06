@@ -1096,6 +1096,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	libedgetpu_client.google
 
+# TPU metrics logger library
+PRODUCT_PACKAGES += \
+	libmetrics_logger
+
 # Connectivity Thermal Power Manager
 PRODUCT_PACKAGES += \
 	ConnectivityThermalPowerManager
