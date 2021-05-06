@@ -25,3 +25,8 @@ get_prop(hal_neuralnetworks_darwinn, hwservicemanager_prop)
 # Allow TPU HAL to read the kernel version.
 # This is done inside the InitGoogle.
 allow hal_neuralnetworks_darwinn proc_version:file r_file_perms;
+
+# Allow TPU NNAPI HAL to log to stats service. (metrics)
+allow hal_neuralnetworks_darwinn fwk_stats_service:service_manager find;
+binder_call(hal_neuralnetworks_darwinn, system_server);
+binder_use(hal_neuralnetworks_darwinn)
