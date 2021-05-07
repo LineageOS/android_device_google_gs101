@@ -282,9 +282,6 @@ TARGET_USES_LOGD := true
 #BOARD_USES_FMP_FSCRYPTO := true
 BOARD_USES_METADATA_PARTITION := true
 
-# SELinux Platform Private policy for gs101
-SYSTEM_EXT_PRIVATE_SEPOLICY_DIR := device/google/sepolicy/private
-
 # SKIA
 #BOARD_USES_SKIA_MULTITHREADING := true
 #BOARD_USES_FIMGAPI_V5X := true
