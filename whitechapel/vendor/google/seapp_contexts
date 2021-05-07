@@ -9,9 +9,7 @@ user=system seinfo=platform name=com.samsung.slsi.telephony.networktestmode doma
 # Samsung S.LSI IMS
 user=_app isPrivApp=true name=com.shannon.imsservice domain=vendor_ims_app levelFrom=all
 user=_app isPrivApp=true name=com.shannon.imsservice:remote domain=vendor_ims_app levelFrom=all
-user=system seinfo=platform name=com.shannon.dataservice domain=vendor_ims_app
-user=system seinfo=platform name=com.shannon.networkservice domain=vendor_ims_app
-user=system seinfo=platform name=com.shannon.qualifiednetworksservice domain=vendor_ims_app
+user=_app isPrivApp=true name=com.shannon.qualifiednetworksservice domain=vendor_ims_app levelFrom=all
 
 # coredump/ramdump
 user=system seinfo=platform name=com.google.SSRestartDetector domain=ssr_detector_app type=system_app_data_file levelFrom=user
