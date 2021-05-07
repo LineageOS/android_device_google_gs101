@@ -388,6 +388,7 @@ BOARD_VENDOR_RAMDISK_KERNEL_MODULES_FILTER += \
     $(TARGET_KERNEL_DIR)/stmvl53l1.ko \
     $(TARGET_KERNEL_DIR)/ftm5.ko \
     $(TARGET_KERNEL_DIR)/haptics-cs40l2x.ko \
+    $(TARGET_KERNEL_DIR)/snd_soc_cs40l2x.ko \
     $(TARGET_KERNEL_DIR)/sec_touch.ko \
     $(TARGET_KERNEL_DIR)/cl_dsp.ko \
     $(TARGET_KERNEL_DIR)/input-cs40l26-i2c.ko
