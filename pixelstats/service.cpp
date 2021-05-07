@@ -40,10 +40,12 @@ const struct SysfsCollector::SysfsPaths sysfs_paths = {
     .CodecPath =     "/sys/devices/platform/audiometrics/codec_state",
 };
 
+const char *const kAudioUevent = "/devices/virtual/amcs/amcs";
+
 int main() {
     LOG(INFO) << "starting PixelStats";
 
-    UeventListener ueventListener("");
+    UeventListener ueventListener(kAudioUevent);
     std::thread listenThread(&UeventListener::ListenForever, &ueventListener);
     listenThread.detach();
 
