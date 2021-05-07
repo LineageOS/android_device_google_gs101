@@ -334,7 +334,6 @@ genfscon debugfs /usb                                                           
 genfscon debugfs /google_charger                                                                          u:object_r:vendor_charger_debugfs:s0
 genfscon debugfs /gvotables                                                                               u:object_r:vendor_votable_debugfs:s0
 genfscon debugfs /google_battery                                                                          u:object_r:vendor_battery_debugfs:s0
-genfscon debugfs /sjtag                                                                                   u:object_r:vendor_sjtag_debugfs:s0
 
 # tracefs
 genfscon tracefs /events/dmabuf_heap/dma_heap_stat                                                        u:object_r:debugfs_tracing:s0
@@ -359,3 +358,7 @@ genfscon sysfs /devices/platform/audiometrics/speaker_heartbeat        u:object_
 genfscon sysfs /devices/platform/audiometrics/speaker_temp             u:object_r:sysfs_pixelstats:s0
 genfscon sysfs /devices/platform/audiometrics/mic_broken_degrade       u:object_r:sysfs_pixelstats:s0
 genfscon sysfs /devices/platform/audiometrics/codec_crashed_counter    u:object_r:sysfs_pixelstats:s0
+
+# SJTAG
+genfscon sysfs /devices/platform/sjtag_ap/interface                    u:object_r:sysfs_sjtag:s0
+genfscon sysfs /devices/platform/sjtag_gsa/interface                   u:object_r:sysfs_sjtag:s0

@@ -2,6 +2,6 @@ allow shell eco_service:service_manager find;
 
 # Allow access to the SJTAG kernel interface from the shell
 userdebug_or_eng(`
-  allow shell vendor_sjtag_debugfs:dir r_dir_perms;
-  allow shell vendor_sjtag_debugfs:file rw_file_perms;
+  allow shell sysfs_sjtag:dir r_dir_perms;
+  allow shell sysfs_sjtag:file rw_file_perms;
 ')
