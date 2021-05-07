@@ -322,6 +322,7 @@
 /vendor/bin/securedpud.slider        u:object_r:securedpud_slider_exec:s0
 /vendor/bin/storageproxyd            u:object_r:tee_exec:s0
 /vendor/bin/trusty_apploader         u:object_r:trusty_apploader_exec:s0
+/vendor/bin/trusty_metricsd\.gs101    u:object_r:trusty_metricsd_exec:s0
 /vendor/bin/hw/android\.hardware\.gatekeeper@1\.0-service\.trusty                u:object_r:hal_gatekeeper_default_exec:s0
 /vendor/bin/hw/android\.hardware\.keymaster@4\.0-service\.trusty                 u:object_r:hal_keymaster_default_exec:s0
 /vendor/bin/hw/android\.hardware\.confirmationui@1\.0-service\.trusty\.vendor    u:object_r:hal_confirmationui_default_exec:s0
@@ -448,3 +449,7 @@
 
 # Wifi Firmware config update
 /data/vendor/firmware/wifi(/.*)?                                               u:object_r:updated_wifi_firmware_data_file:s0
+
+# WLC FW update
+/vendor/bin/wlc_upt/p9412_mtp            u:object_r:vendor_wlc_fwupdata_file:s0
+/vendor/bin/wlc_upt/wlc_fw_update\.sh    u:object_r:wlcfwupdate_exec:s0

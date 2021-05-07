@@ -5,6 +5,7 @@ userdebug_or_eng(`
   allow logger_app vendor_gps_file:file create_file_perms;
   allow logger_app vendor_gps_file:dir create_dir_perms;
 
+  get_prop(logger_app, usb_control_prop)
   set_prop(logger_app, vendor_logger_prop)
   set_prop(logger_app, vendor_modem_prop)
   set_prop(logger_app, vendor_gps_prop)
@@ -17,4 +18,6 @@ userdebug_or_eng(`
   set_prop(logger_app, logd_prop)
   set_prop(logger_app, vendor_usb_config_prop)
   set_prop(logger_app, vendor_wifi_sniffer_prop)
+
+  dontaudit logger_app default_prop:file { read };
 ')
