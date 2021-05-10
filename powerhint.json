@@ -106,6 +106,15 @@
       "ResetOnInit": true
     },
     {
+      "Name": "CDLatencySensitive",
+      "Path": "/dev/cpuctl/camera-daemon/cpu.uclamp.latency_sensitive",
+      "Values": [
+        "0",
+        "1"
+      ],
+      "ResetOnInit": true
+    },
+    {
       "Name": "F2fsRecessModeEnable",
       "Path": "/dev/sys/fs/by-name/userdata/gc_urgent",
       "Values": [
@@ -120,6 +129,15 @@
       "Values": [
         "1",
         "0"
+      ],
+      "ResetOnInit": true
+    },
+    {
+      "Name": "HighCapacityStartCpu",
+      "Path": "/sys/kernel/vendor_sched/high_capacity_start_cpu",
+      "Values": [
+        "4",
+        "6"
       ],
       "ResetOnInit": true
     },
@@ -318,6 +336,18 @@
     },
     {
       "PowerHint": "CAMERA_STREAMING_HIGH",
+      "Node": "PreferHighCapEnable",
+      "Duration": 0,
+      "Value": "1"
+    },
+    {
+      "PowerHint": "CAMERA_STREAMING_HIGH",
+      "Node": "HighCapacityStartCpu",
+      "Duration": 0,
+      "Value": "4"
+    },
+    {
+      "PowerHint": "CAMERA_STREAMING_HIGH",
       "Node": "CPULittleClusterMaxFreq",
       "Duration": 0,
       "Value": "1401000"
@@ -333,6 +363,24 @@
       "Node": "MIFTargetLoad",
       "Duration": 0,
       "Value": "20 10 80"
+    },
+    {
+      "PowerHint": "CAMERA_STREAMING_STANDARD",
+      "Node": "PreferHighCapEnable",
+      "Duration": 0,
+      "Value": "1"
+    },
+    {
+      "PowerHint": "CAMERA_STREAMING_STANDARD",
+      "Node": "HighCapacityStartCpu",
+      "Duration": 0,
+      "Value": "4"
+    },
+    {
+      "PowerHint": "CAMERA_STREAMING_STANDARD",
+      "Node": "CDLatencySensitive",
+      "Duration": 0,
+      "Value": "0"
     },
     {
       "PowerHint": "CAMERA_STREAMING_STANDARD",
