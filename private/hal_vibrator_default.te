@@ -1,2 +1,0 @@
-# b/177176811
-dontaudit hal_vibrator adbd_prop:file *;
