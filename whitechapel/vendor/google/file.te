@@ -34,6 +34,7 @@ type vendor_maxfg_debugfs, fs_type, debugfs_type, sysfs_type;
 type vendor_charger_debugfs, fs_type, debugfs_type, sysfs_type;
 type vendor_votable_debugfs, fs_type, debugfs_type, sysfs_type;
 type vendor_battery_debugfs, fs_type, debugfs_type, sysfs_type;
+type vendor_sjtag_debugfs, fs_type, debugfs_type, sysfs_type;
 
 # Exynos sysfs
 type sysfs_exynos_bts, sysfs_type, fs_type;
