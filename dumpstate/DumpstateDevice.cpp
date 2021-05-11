@@ -245,6 +245,7 @@ DumpstateDevice::DumpstateDevice()
         { "sensors-usf", [this](int fd) { dumpSensorsUSFSection(fd); } },
         { "ramdump", [this](int fd) { dumpRamdumpSection(fd); } },
         { "misc", [this](int fd) { dumpMiscSection(fd); } },
+        { "gsc", [this](int fd) { dumpGscSection(fd); } },
     } {
 }
 
@@ -829,6 +830,12 @@ void DumpstateDevice::dumpRamdumpSection(int fd) {
 // Dump items that don't fit well into any other section
 void DumpstateDevice::dumpMiscSection(int fd) {
     RunCommandToFd(fd, "VENDOR PROPERTIES", {"/vendor/bin/getprop"});
+}
+
+// Dump items related to GSC
+void DumpstateDevice::dumpGscSection(int fd) {
+    RunCommandToFd(fd, "Citadel VERSION", {"vendor/bin/hw/citadel_updater", "-lv"});
+    RunCommandToFd(fd, "Citadel STATS", {"vendor/bin/hw/citadel_updater", "--stats"});
 }
 
 void DumpstateDevice::dumpModem(int fd, int fdModem)
