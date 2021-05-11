@@ -10,6 +10,15 @@
             "Controller": "cpu",
             "Path": "top-app"
           }
+        },
+        {
+          "Name": "WriteFile",
+          "Params":
+          {
+            "FilePath": "/sys/kernel/vendor_sched/set_prefer_high_cap",
+            "Value": "<pid>",
+            "LogFailures": "false"
+          }
         }
       ]
     },
