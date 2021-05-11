@@ -65,6 +65,9 @@ PRODUCT_PACKAGES += \
         FactoryOverlayLauncher3 \
         FactoryOverlayFrameworkRes
 
+# Disable DebugFS restrictions in factory builds
+PRODUCT_SET_DEBUGFS_RESTRICTIONS := false
+
 # PixelLogger for RF testing
 PRODUCT_PACKAGES_DEBUG += \
     PixelLogger \
