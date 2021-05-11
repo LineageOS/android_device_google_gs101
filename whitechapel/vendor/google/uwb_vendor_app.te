@@ -8,4 +8,5 @@ allow uwb_vendor_app app_api_service:service_manager find;
 allow uwb_vendor_app hal_uwb_service:service_manager find;
 allow uwb_vendor_app nfc_service:service_manager find;
 
-allow uwb_vendor_app uwb_vendor_data_file:dir { getattr search };
+allow uwb_vendor_app uwb_vendor_data_file:file create_file_perms;
+allow uwb_vendor_app uwb_vendor_data_file:dir create_dir_perms;
