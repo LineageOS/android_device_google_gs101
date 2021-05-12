@@ -309,6 +309,12 @@ PRODUCT_COPY_FILES += \
 # Add sensor HAL 2.1 product packages
 PRODUCT_PACKAGES += android.hardware.sensors@2.1-service.multihal
 
+# Debug property for sensor.
+ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+PRODUCT_PROPERTY_OVERRIDES += \
+	vendor.debug.sensor.hal.event_logger=true
+endif
+
 # USB HAL
 PRODUCT_PACKAGES += \
 	android.hardware.usb@1.3-service.gs101
