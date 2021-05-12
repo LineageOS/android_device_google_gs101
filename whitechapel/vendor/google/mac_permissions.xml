@@ -24,4 +24,7 @@
     <signer signature="@MDS" >
         <seinfo value="mds" />
     </signer>
+    <signer signature="@UWB" >
+        <seinfo value="uwb" />
+    </signer>
 </policy>
