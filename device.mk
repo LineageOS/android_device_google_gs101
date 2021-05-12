@@ -107,6 +107,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PRODUCT_PROPERTIES += \
 	persist.radio.reboot_on_modem_change=false
 
+# Enable Early Camping
+PRODUCT_PRODUCT_PROPERTIES += \
+	persist.vendor.ril.camp_on_earlier=1
+
 # Carrier configuration default location
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.vendor.radio.config.carrier_config_dir=/mnt/vendor/modem_img/images/default/confpack
