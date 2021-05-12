@@ -243,6 +243,7 @@ DumpstateDevice::DumpstateDevice()
         { "touch", [this](int fd) { dumpTouchSection(fd); } },
         { "display", [this](int fd) { dumpDisplaySection(fd); } },
         { "sensors-usf", [this](int fd) { dumpSensorsUSFSection(fd); } },
+        { "aoc", [this](int fd) { dumpAoCSection(fd); } },
         { "ramdump", [this](int fd) { dumpRamdumpSection(fd); } },
         { "misc", [this](int fd) { dumpMiscSection(fd); } },
         { "gsc", [this](int fd) { dumpGscSection(fd); } },
@@ -773,6 +774,13 @@ void DumpstateDevice::dumpDisplaySection(int fd) {
     DumpFileToFd(fd, "CRTC-1 event log", "/sys/kernel/debug/dri/0/crtc-1/event");
     RunCommandToFd(fd, "libdisplaycolor", {"/vendor/bin/dumpsys", "displaycolor", "-v"},
                    CommandOptions::WithTimeout(2).Build());
+}
+
+// Dump items related to AoC
+void DumpstateDevice::dumpAoCSection(int fd) {
+    DumpFileToFd(fd, "AoC Service Status", "/sys/devices/platform/19000000.aoc/services");
+    DumpFileToFd(fd, "AoC Restarts", "/sys/devices/platform/19000000.aoc/restart_count");
+    DumpFileToFd(fd, "AoC Coredumps", "/sys/devices/platform/19000000.aoc/coredump_count");
 }
 
 // Dump items related to sensors usf.
