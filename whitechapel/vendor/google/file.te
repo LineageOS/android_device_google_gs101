@@ -202,3 +202,6 @@ type sysfs_sjtag, fs_type, sysfs_type;
 userdebug_or_eng(`
     typeattribute sysfs_sjtag mlstrustedobject;
 ')
+
+# SecureElement
+type sysfs_st33spi, sysfs_type, fs_type;

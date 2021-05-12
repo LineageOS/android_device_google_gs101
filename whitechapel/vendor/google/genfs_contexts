@@ -320,3 +320,7 @@ genfscon sysfs /devices/platform/google,usbc_port_cooling_dev/trip_time         
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-6/i2c-max77759tcpc/extcon   u:object_r:sysfs_extcon:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-5/i2c-max77759tcpc/extcon   u:object_r:sysfs_extcon:s0
 
+# SecureElement
+genfscon sysfs /devices/platform/10950000.spi/spi_master/spi6/spi6.0/st33spi    u:object_r:sysfs_st33spi:s0
+genfscon sysfs /devices/platform/175c0000.spi/spi_master/spi15/spi15.0/st33spi  u:object_r:sysfs_st33spi:s0
+

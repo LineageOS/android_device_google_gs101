@@ -54,3 +54,7 @@ type battery_history_device, dev_type;
 # Raw HID device
 type hidraw_device, dev_type;
 
+# SecureElement SPI device
+type st54spi_device, dev_type;
+type st33spi_device, dev_type;
+
