@@ -124,9 +124,9 @@ USE_LASSEN_OEMHOOK := true
 # Use for GRIL
 USES_LASSEN_MODEM := true
 
-ifeq ($(USES_GOOGLE_DIALER_PARIS),true)
+ifeq ($(USES_GOOGLE_DIALER_CARRIER_SETTINGS),true)
 USE_GOOGLE_DIALER := true
-USE_GOOGLE_PARIS := true
+USE_GOOGLE_CARRIER_SETTINGS := true
 endif
 
 ifeq (,$(filter aosp_%,$(TARGET_PRODUCT)))
