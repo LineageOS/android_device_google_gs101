@@ -3,3 +3,7 @@ allow kernel vendor_fw_file:file r_file_perms;
 
 # ZRam
 allow kernel per_boot_file:file r_file_perms;
+
+# memlat needs permision to create/delete perf events when hotplug on/off
+allow kernel self:capability2 perfmon;
+allow kernel self:perf_event cpu;
