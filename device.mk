@@ -478,12 +478,9 @@ SOONG_CONFIG_google3a_config_target_device := $(LOCAL_TARGET_PRODUCT)
 
 
 SOONG_CONFIG_NAMESPACES += gch
-SOONG_CONFIG_gch += \
-	feature \
-	disable_lazy_hal
+SOONG_CONFIG_gch += feature
 # Disable Legacy common hal modules for whi
 SOONG_CONFIG_gch_feature := use_lyric_hal
-SOONG_CONFIG_gch_disable_lazy_hal := true
 
 # WiFi
 PRODUCT_PACKAGES += \
