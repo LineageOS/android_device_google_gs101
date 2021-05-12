@@ -53,3 +53,6 @@ vendor_internal_prop(vendor_touchpanel_prop)
 
 # TCP logging
 vendor_internal_prop(vendor_tcpdump_log_prop)
+
+# Fingerprint
+vendor_internal_prop(vendor_fingerprint_fake_prop)
