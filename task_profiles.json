@@ -8,14 +8,14 @@
           "Params":
           {
             "Controller": "cpu",
-            "Path": "top-app"
+            "Path": "system"
           }
         },
         {
           "Name": "WriteFile",
           "Params":
           {
-            "FilePath": "/sys/kernel/vendor_sched/set_prefer_high_cap",
+            "FilePath": "/sys/kernel/vendor_sched/set_task_group_ta",
             "Value": "<pid>",
             "LogFailures": "false"
           }
@@ -30,14 +30,14 @@
           "Params":
           {
             "Controller": "cpu",
-            "Path": "camera-daemon"
+            "Path": "system"
           }
         },
         {
           "Name": "WriteFile",
           "Params":
           {
-            "FilePath": "/sys/kernel/vendor_sched/set_prefer_high_cap",
+            "FilePath": "/sys/kernel/vendor_sched/set_task_group_cam",
             "Value": "<pid>",
             "LogFailures": "false"
           }
@@ -59,7 +59,7 @@
           "Name": "WriteFile",
           "Params":
           {
-            "FilePath": "/sys/kernel/vendor_sched/clear_prefer_high_cap",
+            "FilePath": "/sys/kernel/vendor_sched/set_task_group_bg",
             "Value": "<pid>",
             "LogFailures": "false"
           }
@@ -74,14 +74,14 @@
           "Params":
           {
             "Controller": "cpu",
-            "Path": ""
+            "Path": "system"
           }
         },
         {
           "Name": "WriteFile",
           "Params":
           {
-            "FilePath": "/sys/kernel/vendor_sched/clear_prefer_high_cap",
+            "FilePath": "/sys/kernel/vendor_sched/clear_group",
             "Value": "<pid>",
             "LogFailures": "false"
           }
@@ -96,14 +96,14 @@
           "Params":
           {
             "Controller": "cpu",
-            "Path": "foreground"
+            "Path": "system"
           }
         },
         {
           "Name": "WriteFile",
           "Params":
           {
-            "FilePath": "/sys/kernel/vendor_sched/clear_prefer_high_cap",
+            "FilePath": "/sys/kernel/vendor_sched/set_task_group_fg",
             "Value": "<pid>",
             "LogFailures": "false"
           }
@@ -118,14 +118,14 @@
           "Params":
           {
             "Controller": "cpu",
-            "Path": "rt"
+            "Path": "system"
           }
         },
         {
           "Name": "WriteFile",
           "Params":
           {
-            "FilePath": "/sys/kernel/vendor_sched/clear_prefer_high_cap",
+            "FilePath": "/sys/kernel/vendor_sched/set_task_group_ta",
             "Value": "<pid>",
             "LogFailures": "false"
           }
@@ -140,14 +140,36 @@
           "Params":
           {
             "Controller": "cpu",
-            "Path": "nnapi-hal"
+            "Path": "system"
           }
         },
         {
           "Name": "WriteFile",
           "Params":
           {
-            "FilePath": "/sys/kernel/vendor_sched/clear_prefer_high_cap",
+            "FilePath": "/sys/kernel/vendor_sched/set_task_group_nnapi",
+            "Value": "<pid>",
+            "LogFailures": "false"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "SystemBGPerformance",
+      "Actions": [
+        {
+          "Name": "JoinCgroup",
+          "Params":
+          {
+            "Controller": "cpu",
+            "Path": "system"
+          }
+        },
+        {
+          "Name": "WriteFile",
+          "Params":
+          {
+            "FilePath": "/sys/kernel/vendor_sched/set_task_group_sysbg",
             "Value": "<pid>",
             "LogFailures": "false"
           }
