@@ -120,3 +120,6 @@ persist.vendor.tcpdump.log.alwayson             u:object_r:vendor_tcpdump_log_pr
 vendor.tcpdump.log.ondemand                     u:object_r:vendor_tcpdump_log_prop:s0
 vendor.tcpdump.log.alwayson                     u:object_r:vendor_tcpdump_log_prop:s0
 vendor.tcpdump.output.dir                       u:object_r:vendor_tcpdump_log_prop:s0
+
+# Fingerprint
+vendor.fingerprint.disable.fake                 u:object_r:vendor_fingerprint_fake_prop:s0

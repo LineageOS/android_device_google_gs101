@@ -29,3 +29,8 @@ set_prop(vendor_init, vendor_secure_element_prop)
 get_prop(vendor_init, test_harness_prop)
 get_prop(vendor_init, vendor_battery_profile_prop)
 set_prop(vendor_init, vendor_battery_defender_prop)
+
+# Fingerprint property
+userdebug_or_eng(`
+  set_prop(vendor_init, vendor_fingerprint_fake_prop)
+')
