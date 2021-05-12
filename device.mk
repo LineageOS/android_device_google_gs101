@@ -457,19 +457,15 @@ else
 endif
 
 SOONG_CONFIG_NAMESPACES += lyric
-SOONG_CONFIG_lyric += \
-	soc \
-	feature \
-
-SOONG_CONFIG_lyric_soc := gs101
-SOONG_CONFIG_lyric_feature := true
+SOONG_CONFIG_lyric += use_lyric_camera_hal
+SOONG_CONFIG_lyric_use_lyric_camera_hal := true
 
 SOONG_CONFIG_NAMESPACES += google3a_config
 SOONG_CONFIG_google3a_config += \
 	soc \
 	gcam_awb \
 	ghawb_truetone \
-        target_device \
+	target_device
 
 SOONG_CONFIG_google3a_config_soc := gs101
 SOONG_CONFIG_google3a_config_gcam_awb := true
@@ -1156,4 +1152,3 @@ include hardware/google/pixel/PixelLogger/PixelLogger.mk
 
 # Battery Stats Viewer
 PRODUCT_PACKAGES_DEBUG += BatteryStatsViewer
-
