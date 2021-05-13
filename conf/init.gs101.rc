@@ -454,6 +454,9 @@ on fs
     restorecon_recursive /mnt/vendor/modem_userdata
     chown radio system /mnt/vendor/modem_userdata
 
+    # for cycle count backup
+    mkdir /mnt/vendor/persist/battery 0700 system system
+
     restorecon_recursive /mnt/vendor/persist
     restorecon_recursive /mnt/vendor/persist/aoc
     restorecon_recursive /mnt/vendor/persist/audio
@@ -736,12 +739,6 @@ on  property:persist.sys.test_harness=1 && property:persist.vendor.testing_batte
     setprop persist.vendor.charge.stop.level 100
     setprop persist.vendor.charge.start.level 0
     setprop vendor.battery.defender.disable 1
-
-on property:persist.vendor.charge.stop.level=*
-    write /sys/devices/platform/google,charger/charge_stop_level ${persist.vendor.charge.stop.level}
-
-on property:persist.vendor.charge.start.level=*
-    write /sys/devices/platform/google,charger/charge_start_level ${persist.vendor.charge.start.level}
 
 service insmod_sh_common /vendor/bin/init.insmod.sh /vendor/etc/init.insmod.gs101.cfg
     class main
