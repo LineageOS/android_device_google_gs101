@@ -18,4 +18,5 @@ allow hal_bluetooth_btlinux sscoredump_vendor_data_crashinfo_file:file create_fi
 userdebug_or_eng(`
   allow hal_bluetooth_btlinux sscoredump_vendor_data_coredump_file:dir create_dir_perms;
   allow hal_bluetooth_btlinux sscoredump_vendor_data_coredump_file:file create_file_perms;
+  allow hal_bluetooth_btlinux logbuffer_device:chr_file r_file_perms;
 ')
