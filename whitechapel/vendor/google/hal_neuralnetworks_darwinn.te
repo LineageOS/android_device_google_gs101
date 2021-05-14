@@ -30,3 +30,6 @@ allow hal_neuralnetworks_darwinn proc_version:file r_file_perms;
 allow hal_neuralnetworks_darwinn fwk_stats_service:service_manager find;
 binder_call(hal_neuralnetworks_darwinn, system_server);
 binder_use(hal_neuralnetworks_darwinn)
+
+# TPU NNAPI to register the service to service_manager.
+add_service(hal_neuralnetworks_darwinn, edgetpu_nnapi_service);

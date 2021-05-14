@@ -3,3 +3,4 @@ type uwb_vendor_service, service_manager_type, vendor_service;
 type touch_context_service, service_manager_type, vendor_service;
 type hal_uwb_service, service_manager_type, vendor_service;
 type edgetpu_vendor_service, service_manager_type, vendor_service;
+type edgetpu_nnapi_service, app_api_service, service_manager_type, vendor_service;
