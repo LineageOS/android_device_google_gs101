@@ -428,8 +428,8 @@ void DumpstateDevice::dumpTouchSection(int fd) {
     for (int i = 0; i < 4; i+=2) {
         snprintf(cmd, sizeof(cmd), "%s", stm_cmd_path[i + 1]);
         if (!access(cmd, R_OK)) {
-            snprintf(cmd, sizeof(cmd), "echo A0 01 > %s", stm_cmd_path[i + 1]);
-            RunCommandToFd(fd, "Force Set AP as Bus Owner",
+            snprintf(cmd, sizeof(cmd), "echo A0 01 01 > %s", stm_cmd_path[i + 1]);
+            RunCommandToFd(fd, "Force Set AP as Bus Owner with Bugreport Flag",
                            {"/vendor/bin/sh", "-c", cmd});
         }
 
@@ -539,7 +539,7 @@ void DumpstateDevice::dumpTouchSection(int fd) {
 
         snprintf(cmd, sizeof(cmd), "%s", stm_cmd_path[i + 1]);
         if (!access(cmd, R_OK)) {
-            snprintf(cmd, sizeof(cmd), "echo A0 00 > %s", stm_cmd_path[i + 1]);
+            snprintf(cmd, sizeof(cmd), "echo A0 00 01 > %s", stm_cmd_path[i + 1]);
             RunCommandToFd(fd, "Restore Bus Owner",
                            {"/vendor/bin/sh", "-c", cmd});
         }
