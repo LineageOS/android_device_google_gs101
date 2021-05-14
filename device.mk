@@ -306,19 +306,8 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.sensor.stepcounter.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.stepcounter.xml \
 	frameworks/native/data/etc/android.hardware.sensor.stepdetector.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.stepdetector.xml
 
-# Set USF sensor HAL to 2.0.
-USF_SENSOR_HAL_2_0 := true
-
-ifeq ($(USF_SENSOR_HAL_2_0),true)
-  # Add sensor HAL 2.0 product packages
-  PRODUCT_PACKAGES += android.hardware.sensors@2.0-service.multihal
-else
-  # Add sensor HAL 1.0 product packages.
-  PRODUCT_PACKAGES += \
-	android.hardware.sensors@1.0-impl \
-	android.hardware.sensors@1.0-service \
-	sensors.gs101
-endif
+# Add sensor HAL 2.1 product packages
+PRODUCT_PACKAGES += android.hardware.sensors@2.1-service.multihal
 
 # USB HAL
 PRODUCT_PACKAGES += \
