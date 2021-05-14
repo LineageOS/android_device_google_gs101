@@ -754,6 +754,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	securedpud.slider
 
+# Trusty Metrics Daemon
+PRODUCT_SOONG_NAMESPACES += \
+	vendor/google/trusty/common
+
+PRODUCT_PACKAGES += \
+	trusty_metricsd
+
 PRODUCT_PACKAGES += \
 	android.hardware.graphics.composer@2.4-impl \
 	android.hardware.graphics.composer@2.4-service
