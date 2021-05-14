@@ -2,6 +2,9 @@
 com.google.edgetpu.IEdgeTpuService/default                 u:object_r:edgetpu_service:s0
 com.google.edgetpu.IEdgeTpuVendorService/default           u:object_r:edgetpu_vendor_service:s0
 
+# TPU NNAPI Service
+android.hardware.neuralnetworks.IDevice/google-edgetpu	   u:object_r:edgetpu_nnapi_service:s0
+
 com.google.hardware.pixel.display.IDisplay/default         u:object_r:hal_pixel_display_service:s0
 com.google.input.ITouchContextService/default              u:object_r:touch_context_service:s0
 uwb_vendor                                                 u:object_r:uwb_vendor_service:s0
