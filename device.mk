@@ -118,7 +118,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # GPU profiling
 PRODUCT_PRODUCT_PROPERTIES += graphics.gpu.profiler.support=true
 PRODUCT_PACKAGES += \
-	android.hardware.neuralnetworks@1.2-service-armnn
+	android.hardware.neuralnetworks@1.3-service-armnn
 
 PRODUCT_PROPERTY_OVERRIDES += \
 	telephony.active_modems.max_count=2
