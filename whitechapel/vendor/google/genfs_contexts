@@ -87,17 +87,17 @@ genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-5/5-0050/power_supply/usb/wa
 genfscon sysfs /devices/platform/175b0000.serial/serial0/serial0-0/wakeup/wakeup              u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/google,battery/power_supply/battery/wakeup                   u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/gpio_keys/wakeup/wakeup                                      u:object_r:sysfs_wakeup:s0
-genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-7/7-002f/wakeup/wakeup             u:object_r:sysfs_wakeup:s0
-genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/6-001f/s2mpg10-rtc/rtc/rtc0/alarmtimer.1.auto/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-7/i2c-s2mpg11mfd/wakeup/wakeup             u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/i2c-s2mpg10mfd/s2mpg10-rtc/rtc/rtc0/alarmtimer.1.auto/wakeup/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10d40000.spi/spi_master/spi11/spi11.0/wakeup/wakeup          u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/11110000.usb/wakeup/wakeup                                   u:object_r:sysfs_wakeup:s0
-genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/6-001f/s2mpg10-rtc/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/i2c-s2mpg10mfd/s2mpg10-rtc/wakeup/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /sys/devices/platform/10d50000.hsi2c/i2c-5/5-0036/power_supply/maxfg/wakeup    u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-5/5-0036/power_supply/maxfg/wakeup        u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-6/6-0036/power_supply/maxfg_base/wakeup   u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-5/5-0050/power_supply/tcpm-source-psy-5-0050/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10960000.hsi2c/i2c-3/3-0008/wakeup/wakeup                    u:object_r:sysfs_wakeup:s0
-genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/6-001f/wakeup/wakeup             u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/i2c-s2mpg10mfd/wakeup/wakeup             u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/19000000.aoc/usb_control/wakeup/wakeup                       u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/11110000.usb/11110000.dwc3/wakeup/wakeup                     u:object_r:sysfs_wakeup:s0
 
@@ -189,23 +189,23 @@ genfscon proc /bluetooth/sleep/btwrite                                          
 genfscon proc /bluetooth/sleep/btwake                                                           u:object_r:proc_bluetooth_writable:s0
 
 # ODPM
-genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/6-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/name          u:object_r:sysfs_odpm:s0
-genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/6-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/energy_value  u:object_r:sysfs_odpm:s0
-genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/6-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/sampling_rate u:object_r:sysfs_odpm:s0
-genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/6-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/enabled_rails u:object_r:sysfs_odpm:s0
-genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-7/7-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/name          u:object_r:sysfs_odpm:s0
-genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-7/7-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/energy_value  u:object_r:sysfs_odpm:s0
-genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-7/7-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/sampling_rate u:object_r:sysfs_odpm:s0
-genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-7/7-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/enabled_rails u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device0/name          u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device0/energy_value  u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device0/sampling_rate u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device0/enabled_rails u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-7/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device1/name          u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-7/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device1/energy_value  u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-7/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device1/sampling_rate u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-7/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device1/enabled_rails u:object_r:sysfs_odpm:s0
 
-genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/7-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/name          u:object_r:sysfs_odpm:s0
-genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/7-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/energy_value  u:object_r:sysfs_odpm:s0
-genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/7-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/sampling_rate u:object_r:sysfs_odpm:s0
-genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/7-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/enabled_rails u:object_r:sysfs_odpm:s0
-genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/8-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/name          u:object_r:sysfs_odpm:s0
-genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/8-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/energy_value  u:object_r:sysfs_odpm:s0
-genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/8-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/sampling_rate u:object_r:sysfs_odpm:s0
-genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/8-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/enabled_rails u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device0/name          u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device0/energy_value  u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device0/sampling_rate u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device0/enabled_rails u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device1/name          u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device1/energy_value  u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device1/sampling_rate u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device1/enabled_rails u:object_r:sysfs_odpm:s0
 
 # bcl sysfs files
 genfscon sysfs /devices/virtual/pmic/mitigation/triggered_stats                 u:object_r:sysfs_bcl:s0
@@ -240,16 +240,16 @@ genfscon sysfs /devices/platform/google,cpm/power_supply/gcpm_pps/wakeup        
 genfscon sysfs /devices/platform/odm/odm:btbcm/wakeup/wakeup                                                             u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-5/i2c-p9412/wakeup/wakeup                                               u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-6/i2c-max77759tcpc/power_supply/tcpm-source-psy-i2c-max77759tcpc/wakeup                  u:object_r:sysfs_wakeup:s0
-genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/8-002f/wakeup/wakeup                                        u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/i2c-s2mpg11mfd/wakeup/wakeup                                        u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-5/i2c-p9412/power_supply/wireless/wakeup                                u:object_r:sysfs_wakeup:s0
-genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/7-001f/s2mpg10-rtc/rtc/rtc0/alarmtimer.1.auto/wakeup/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/i2c-s2mpg10mfd/s2mpg10-rtc/rtc/rtc0/alarmtimer.1.auto/wakeup/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-6/i2c-max77759tcpc/wakeup/wakeup                                               u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-6/6-0057/power_supply/pca9468-mains/wakeup                           u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-6/i2c-max77759tcpc/power_supply/usb/wakeup                                     u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-6/6-0069/power_supply/dc/wakeup                                      u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-6/6-0036/power_supply/maxfg/wakeup                                   u:object_r:sysfs_wakeup:s0
-genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/7-001f/wakeup/wakeup                                        u:object_r:sysfs_wakeup:s0
-genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/7-001f/s2mpg10-rtc/wakeup/wakeup                            u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/i2c-s2mpg10mfd/wakeup/wakeup                                        u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/i2c-s2mpg10mfd/s2mpg10-rtc/wakeup/wakeup                            u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10960000.hsi2c/i2c-4/4-0008/wakeup/wakeup                                               u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-5/i2c-cs40l25a/wakeup/wakeup                                               u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-6/6-0069/power_supply/main-charger/wakeup                            u:object_r:sysfs_wakeup:s0
