@@ -29,6 +29,24 @@ on init
     write /dev/sys/fs/by-name/userdata/data_io_flag 56
     write /dev/sys/fs/by-name/userdata/node_io_flag 56
 
+    chown system system /sys/kernel/vendor_sched/set_task_group_bg
+    chown system system /sys/kernel/vendor_sched/set_task_group_cam
+    chown system system /sys/kernel/vendor_sched/set_task_group_fg
+    chown system system /sys/kernel/vendor_sched/set_task_group_nnapi
+    chown system system /sys/kernel/vendor_sched/set_task_group_sys
+    chown system system /sys/kernel/vendor_sched/set_task_group_sysbg
+    chown system system /sys/kernel/vendor_sched/set_task_group_ta
+    chown system system /sys/kernel/vendor_sched/clear_group
+
+    chmod 0220 /sys/kernel/vendor_sched/set_task_group_bg
+    chmod 0220 /sys/kernel/vendor_sched/set_task_group_cam
+    chmod 0220 /sys/kernel/vendor_sched/set_task_group_fg
+    chmod 0220 /sys/kernel/vendor_sched/set_task_group_nnapi
+    chmod 0220 /sys/kernel/vendor_sched/set_task_group_sys
+    chmod 0220 /sys/kernel/vendor_sched/set_task_group_sysbg
+    chmod 0220 /sys/kernel/vendor_sched/set_task_group_ta
+    chmod 0220 /sys/kernel/vendor_sched/clear_group
+
     wait /dev/block/platform/${ro.boot.boot_devices}
     symlink /dev/block/platform/${ro.boot.boot_devices} /dev/block/bootdevice
 
