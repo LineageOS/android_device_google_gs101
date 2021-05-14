@@ -96,7 +96,7 @@ genfscon sysfs /sys/devices/platform/10d50000.hsi2c/i2c-5/5-0036/power_supply/ma
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-5/5-0036/power_supply/maxfg/wakeup        u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-6/6-0036/power_supply/maxfg_base/wakeup   u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-5/5-0050/power_supply/tcpm-source-psy-5-0050/wakeup u:object_r:sysfs_wakeup:s0
-genfscon sysfs /devices/platform/10960000.hsi2c/i2c-3/3-0008/wakeup/wakeup                    u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/10960000.hsi2c/i2c-3/i2c-st21nfc/wakeup/wakeup                    u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/i2c-s2mpg10mfd/wakeup/wakeup             u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/19000000.aoc/usb_control/wakeup/wakeup                       u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/11110000.usb/11110000.dwc3/wakeup/wakeup                     u:object_r:sysfs_wakeup:s0
@@ -250,7 +250,7 @@ genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-6/6-0069/power_supply/dc/wak
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-6/6-0036/power_supply/maxfg/wakeup                                   u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/i2c-s2mpg10mfd/wakeup/wakeup                                        u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/i2c-s2mpg10mfd/s2mpg10-rtc/wakeup/wakeup                            u:object_r:sysfs_wakeup:s0
-genfscon sysfs /devices/platform/10960000.hsi2c/i2c-4/4-0008/wakeup/wakeup                                               u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/10960000.hsi2c/i2c-4/i2c-st21nfc/wakeup/wakeup                                               u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-5/i2c-cs40l25a/wakeup/wakeup                                               u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-6/6-0069/power_supply/main-charger/wakeup                            u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/sound-aoc/wakeup/wakeup                                                                 u:object_r:sysfs_wakeup:s0
@@ -314,8 +314,8 @@ genfscon sysfs /module/bcmdhd4389                                               
 
 # Power Stats
 genfscon sysfs /devices/platform/cpif/modem/power_stats                                                 u:object_r:sysfs_power_stats:s0
-genfscon sysfs /devices/platform/10960000.hsi2c/i2c-3/3-0008/power_stats                                u:object_r:sysfs_power_stats:s0
-genfscon sysfs /devices/platform/10960000.hsi2c/i2c-4/4-0008/power_stats                                u:object_r:sysfs_power_stats:s0
+genfscon sysfs /devices/platform/10960000.hsi2c/i2c-3/i2c-st21nfc/power_stats                           u:object_r:sysfs_power_stats:s0
+genfscon sysfs /devices/platform/10960000.hsi2c/i2c-4/i2c-st21nfc/power_stats                           u:object_r:sysfs_power_stats:s0
 genfscon sysfs /devices/platform/11920000.pcie/power_stats                                              u:object_r:sysfs_power_stats:s0
 genfscon sysfs /devices/platform/14520000.pcie/power_stats                                              u:object_r:sysfs_power_stats:s0
 
