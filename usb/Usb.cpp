@@ -92,8 +92,8 @@ volatile bool destroyThread;
 std::string enabledPath;
 constexpr char kHsi2cPath[] = "/sys/devices/platform/10d50000.hsi2c";
 constexpr char kI2CPath[] = "/sys/devices/platform/10d50000.hsi2c/i2c-";
-constexpr char kContaminantDetectionPath[] = "-0025/contaminant_detection";
-constexpr char kStatusPath[] = "-0025/contaminant_detection_status";
+constexpr char kContaminantDetectionPath[] = "i2c-max77759tcpc/contaminant_detection";
+constexpr char kStatusPath[] = "i2c-max77759tcpc/contaminant_detection_status";
 constexpr char kTypecPath[] = "/sys/class/typec";
 constexpr char kDisableContatminantDetection[] = "vendor.usb.contaminantdisable";
 
@@ -176,14 +176,14 @@ Status queryMoistureDetectionStatus(hidl_vec<PortStatus> *currentPortStatus_1_2)
     (*currentPortStatus_1_2)[0].supportsEnableContaminantPresenceProtection = false;
 
     getContaminantDetectionNamesHelper(&path);
-    enabledPath = kI2CPath + path + "/" + path + kContaminantDetectionPath;
+    enabledPath = kI2CPath + path + "/" + kContaminantDetectionPath;
     if (readFile(enabledPath, &enabled)) {
         ALOGE("Failed to open moisture_detection_enabled");
         return Status::ERROR;
     }
 
     if (enabled == "1") {
-        DetectedPath = kI2CPath + path + "/" + path + kStatusPath;
+        DetectedPath = kI2CPath + path + "/" + kStatusPath;
         if (readFile(DetectedPath, &status)) {
             ALOGE("Failed to open moisture_detected");
             return Status::ERROR;
