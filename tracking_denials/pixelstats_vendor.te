@@ -3,3 +3,5 @@ dontaudit pixelstats_vendor sysfs_dma_heap:dir { search };
 dontaudit pixelstats_vendor sysfs_dma_heap:file { read };
 dontaudit pixelstats_vendor sysfs_dma_heap:file { open };
 dontaudit pixelstats_vendor sysfs_dma_heap:file { getattr };
+# b/188114896
+dontaudit pixelstats_vendor debugfs_mgm:dir read;

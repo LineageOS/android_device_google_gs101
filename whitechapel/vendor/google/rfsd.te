@@ -16,6 +16,8 @@ allow rfsd modem_efs_file:file create_file_perms;
 allow rfsd radio_vendor_data_file:dir r_dir_perms;
 allow rfsd radio_vendor_data_file:file r_file_perms;
 
+r_dir_file(rfsd, vendor_fw_file)
+
 # Allow to access rfsd log file/dir
 allow rfsd vendor_log_file:dir search;
 allow rfsd vendor_rfsd_log_file:dir create_dir_perms;
