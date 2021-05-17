@@ -25,6 +25,7 @@ type vendor_rpmbmock_data_file, file_type, data_file_type;
 # Exynos debugfs
 type vendor_ion_debugfs, fs_type, debugfs_type;
 type vendor_dmabuf_debugfs, fs_type, debugfs_type;
+type vendor_page_pinner_debugfs, fs_type, debugfs_type, sysfs_type;
 type vendor_mali_debugfs, fs_type, debugfs_type;
 type vendor_dri_debugfs, fs_type, debugfs_type;
 type vendor_pm_genpd_debugfs, fs_type, debugfs_type;
