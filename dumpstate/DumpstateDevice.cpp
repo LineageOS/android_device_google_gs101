@@ -311,7 +311,7 @@ void DumpstateDevice::dumpPowerSection(int fd) {
     DumpFileToFd(fd, "Power supply property gcpm_pps", "/sys/class/power_supply/gcpm_pps/uevent");
     DumpFileToFd(fd, "Power supply property main-charger", "/sys/class/power_supply/main-charger/uevent");
     DumpFileToFd(fd, "Power supply property pca9486-mains", "/sys/class/power_supply/pca9468-mains/uevent");
-    DumpFileToFd(fd, "Power supply property tcpm", "/sys/class/power_supply/tcpm-source-psy-5-0025/uevent");
+    DumpFileToFd(fd, "Power supply property tcpm", "/sys/class/power_supply/tcpm-source-psy-i2c-max77759tcpc/uevent");
     DumpFileToFd(fd, "Power supply property usb", "/sys/class/power_supply/usb/uevent");
     DumpFileToFd(fd, "Power supply property wireless", "/sys/class/power_supply/wireless/uevent");
     if (!stat("/sys/class/power_supply/maxfg", &buffer)) {
