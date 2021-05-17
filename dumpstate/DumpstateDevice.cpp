@@ -247,6 +247,7 @@ DumpstateDevice::DumpstateDevice()
         { "ramdump", [this](int fd) { dumpRamdumpSection(fd); } },
         { "misc", [this](int fd) { dumpMiscSection(fd); } },
         { "gsc", [this](int fd) { dumpGscSection(fd); } },
+        { "camera", [this](int fd) { dumpCameraSection(fd); } },
     } {
 }
 
@@ -846,6 +847,14 @@ void DumpstateDevice::dumpMiscSection(int fd) {
 void DumpstateDevice::dumpGscSection(int fd) {
     RunCommandToFd(fd, "Citadel VERSION", {"vendor/bin/hw/citadel_updater", "-lv"});
     RunCommandToFd(fd, "Citadel STATS", {"vendor/bin/hw/citadel_updater", "--stats"});
+}
+
+// Dump essential camera debugging logs
+void DumpstateDevice::dumpCameraSection(int fd) {
+    RunCommandToFd(fd, "Camera HAL Graph State Dump", {"/vendor/bin/sh", "-c",
+                       "for f in $(ls -t /data/vendor/camera/hal_graph_state*.txt |head -1); do "
+                       "echo $f ; cat $f ; done"},
+                       CommandOptions::WithTimeout(4).Build());
 }
 
 void DumpstateDevice::dumpModem(int fd, int fdModem)
