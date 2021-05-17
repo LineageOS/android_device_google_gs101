@@ -1,5 +1,5 @@
 # Allows applications to discover the EdgeTPU service.
-allow untrusted_app_all edgetpu_service:service_manager find;
+allow untrusted_app_all edgetpu_app_service:service_manager find;
 
 # Allows applications to access the EdgeTPU device, except open, which is guarded
 # by the EdgeTPU service.
