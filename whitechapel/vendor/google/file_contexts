@@ -328,7 +328,7 @@
 /vendor/bin/securedpud.slider        u:object_r:securedpud_slider_exec:s0
 /vendor/bin/storageproxyd            u:object_r:tee_exec:s0
 /vendor/bin/trusty_apploader         u:object_r:trusty_apploader_exec:s0
-/vendor/bin/trusty_metricsd\.gs101    u:object_r:trusty_metricsd_exec:s0
+/vendor/bin/trusty_metricsd          u:object_r:trusty_metricsd_exec:s0
 /vendor/bin/hw/android\.hardware\.gatekeeper@1\.0-service\.trusty                u:object_r:hal_gatekeeper_default_exec:s0
 /vendor/bin/hw/android\.hardware\.keymaster@4\.0-service\.trusty                 u:object_r:hal_keymaster_default_exec:s0
 /vendor/bin/hw/android\.hardware\.confirmationui@1\.0-service\.trusty\.vendor    u:object_r:hal_confirmationui_default_exec:s0
