@@ -22,8 +22,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # SecureElement
 PRODUCT_PACKAGES += \
-    android.hardware.secure_element@1.2-service-gto \
-    android.hardware.secure_element@1.2-service-gto-ese2
+    android.hardware.secure_element@1.2-service-gto
 
 PRODUCT_COPY_FILES += \
     device/google/gs101/nfc/libse-gto-hal.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libse-gto-hal.conf \
