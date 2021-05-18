@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2020 The Android Open-Source Project
+# Copyright (C) 2021 The Android Open-Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,9 +15,9 @@
 #
 
 PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.1-service.goodix \
-    GF_delmar_factory \
-    udfps_test
+    android.hardware.biometrics.fingerprint-service.goodix
 
+# Necessary to ignore the HIDL HAL configured in config_biometric_sensors.
+# Otherwise system_server would hang trying to load the missing HIDL HAL.
 PRODUCT_PROPERTY_OVERRIDES += \
-    gf.debug.dump_data=1
+	biometrics.fingerprint.hidl.disabled=true
