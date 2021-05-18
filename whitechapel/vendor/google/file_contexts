@@ -371,8 +371,8 @@
 /vendor/bin/hw/android\.hardware\.edgetpu\.logging@service-edgetpu-logging u:object_r:edgetpu_logging_exec:s0
 
 # EdgeTPU service binaries and libraries
-/system_ext/bin/hw/vendor\.google\.edgetpu@1\.0-service u:object_r:edgetpu_server_exec:s0
-/vendor/lib64/com\.google\.edgetpu-V1-ndk_platform\.so u:object_r:same_process_hal_file:s0
+/system_ext/bin/hw/vendor\.google\.edgetpu_app_service@1\.0-service u:object_r:edgetpu_app_server_exec:s0
+/vendor/lib64/com\.google\.edgetpu_app_service-V1-ndk_platform\.so u:object_r:same_process_hal_file:s0
 /vendor/lib64/libedgetpu_client\.google\.so u:object_r:same_process_hal_file:s0
 
 # EdgeTPU vendor service
