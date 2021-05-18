@@ -21,3 +21,7 @@ type hal_bluetooth_coexistence_hwservice, hwservice_manager_type, vendor_hwservi
 
 # Fingerprint
 type hal_fingerprint_ext_hwservice, hwservice_manager_type;
+
+# AudioMetric
+type hal_audiometricext_hwservice, hwservice_manager_type;
+
