@@ -1101,7 +1101,7 @@ PRODUCT_PACKAGES += \
 
 # TPU application service
 PRODUCT_PACKAGES += \
-	vendor.google.edgetpu@1.0-service
+	vendor.google.edgetpu_app_service@1.0-service
 
 # TPU vendor service
 PRODUCT_PACKAGES += \
