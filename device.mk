@@ -1070,10 +1070,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     suspend.short_suspend_backoff_enabled=true \
     suspend.max_sleep_time_millis=40000
 
-# (b/183612348): Enable skia reduceOpsTaskSplitting
-PRODUCT_PROPERTY_OVERRIDES += \
-    renderthread.skia.reduceopstasksplitting=true
-
 # Enable Incremental on the device
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.incremental.enable=true
