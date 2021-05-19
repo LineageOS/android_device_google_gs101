@@ -8,6 +8,8 @@ userdebug_or_eng(`
 
     allow aocdump radio_vendor_data_file:dir rw_dir_perms;
     allow aocdump radio_vendor_data_file:file create_file_perms;
+    allow aocdump wifi_logging_data_file:dir create_dir_perms;
+    allow aocdump wifi_logging_data_file:file create_file_perms;
     set_prop(aocdump, vendor_audio_prop);
     r_dir_file(aocdump, proc_asound)
 
