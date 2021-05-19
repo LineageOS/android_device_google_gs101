@@ -217,6 +217,7 @@ on init
     start watchdogd
 
     # Add a boost for NNAPI HAL
+    write /sys/kernel/vendor_sched/nnapi_prefer_idle 1
     write /sys/kernel/vendor_sched/nnapi_uclamp_min 154
 
     # Add memlat governor settings
