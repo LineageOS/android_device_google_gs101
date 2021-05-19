@@ -1040,6 +1040,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.audio.monitorRotation = true \
 	ro.audio.offload_wakelock=false
 
+ifeq (,$(filter aosp_%,$(TARGET_PRODUCT)))
+# IAudioMetricExt HIDL
+PRODUCT_PACKAGES += \
+    vendor.google.audiometricext@1.0-service-vendor
+endif
+
 # vndservicemanager and vndservice no longer included in API 30+, however needed by vendor code.
 # See b/148807371 for reference
 PRODUCT_PACKAGES += vndservicemanager
