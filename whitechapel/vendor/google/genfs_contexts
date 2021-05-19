@@ -304,7 +304,7 @@ genfscon sysfs /devices/platform/17000010.devfreq_mif/devfreq/17000010.devfreq_m
 genfscon sysfs /devices/platform/17000010.devfreq_mif/devfreq/17000010.devfreq_mif/min_freq                 u:object_r:sysfs_fabric:s0
 
 # GPU
-genfscon sysfs /devices/platform/1c500000.mali/scaling_min_freq                                         u:object_r:sysfs_gpu:s0
+genfscon sysfs /devices/platform/1c500000.mali/hint_min_freq                                            u:object_r:sysfs_gpu:s0
 
 # nvmem (Non Volatile Memory layer)
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-4/4-0050/4-00500/nvmem                              u:object_r:sysfs_memory:s0
@@ -327,6 +327,7 @@ genfscon debugfs /maxfg_flip                                                    
 genfscon debugfs /dma_buf/bufinfo                                                                         u:object_r:vendor_dmabuf_debugfs:s0
 genfscon debugfs /dri/0/crtc-                                                                             u:object_r:vendor_dri_debugfs:s0
 genfscon debugfs /ion                                                                                     u:object_r:vendor_ion_debugfs:s0
+genfscon debugfs /page_pinner                                                                             u:object_r:vendor_page_pinner_debugfs:s0
 genfscon debugfs /pm_genpd/pm_genpd_summary                                                               u:object_r:vendor_pm_genpd_debugfs:s0
 genfscon debugfs /regmap                                                                                  u:object_r:vendor_regmap_debugfs:s0
 genfscon debugfs /usb                                                                                     u:object_r:vendor_usb_debugfs:s0
