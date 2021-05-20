@@ -320,6 +320,10 @@
 /dev/acd-audio_dcdoff_ref           u:object_r:aoc_device:s0
 /dev/amcs                           u:object_r:amcs_device:s0
 
+# AudioMetric
+/(vendor|system/vendor)/bin/hw/vendor\.google\.audiometricext@1\.0-service-vendor     u:object_r:hal_audiometricext_default_exec:s0
+
+
 # Trusty
 /vendor/bin/securedpud.slider        u:object_r:securedpud_slider_exec:s0
 /vendor/bin/storageproxyd            u:object_r:tee_exec:s0
