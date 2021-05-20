@@ -320,11 +320,15 @@
 /dev/acd-audio_dcdoff_ref           u:object_r:aoc_device:s0
 /dev/amcs                           u:object_r:amcs_device:s0
 
+# AudioMetric
+/(vendor|system/vendor)/bin/hw/vendor\.google\.audiometricext@1\.0-service-vendor     u:object_r:hal_audiometricext_default_exec:s0
+
+
 # Trusty
 /vendor/bin/securedpud.slider        u:object_r:securedpud_slider_exec:s0
 /vendor/bin/storageproxyd            u:object_r:tee_exec:s0
 /vendor/bin/trusty_apploader         u:object_r:trusty_apploader_exec:s0
-/vendor/bin/trusty_metricsd\.gs101    u:object_r:trusty_metricsd_exec:s0
+/vendor/bin/trusty_metricsd          u:object_r:trusty_metricsd_exec:s0
 /vendor/bin/hw/android\.hardware\.gatekeeper@1\.0-service\.trusty                u:object_r:hal_gatekeeper_default_exec:s0
 /vendor/bin/hw/android\.hardware\.keymaster@4\.0-service\.trusty                 u:object_r:hal_keymaster_default_exec:s0
 /vendor/bin/hw/android\.hardware\.confirmationui@1\.0-service\.trusty\.vendor    u:object_r:hal_confirmationui_default_exec:s0
@@ -367,8 +371,8 @@
 /vendor/bin/hw/android\.hardware\.edgetpu\.logging@service-edgetpu-logging u:object_r:edgetpu_logging_exec:s0
 
 # EdgeTPU service binaries and libraries
-/system_ext/bin/hw/vendor\.google\.edgetpu@1\.0-service u:object_r:edgetpu_server_exec:s0
-/vendor/lib64/com\.google\.edgetpu-V1-ndk_platform\.so u:object_r:same_process_hal_file:s0
+/system_ext/bin/hw/vendor\.google\.edgetpu_app_service@1\.0-service u:object_r:edgetpu_app_server_exec:s0
+/vendor/lib64/com\.google\.edgetpu_app_service-V1-ndk_platform\.so u:object_r:same_process_hal_file:s0
 /vendor/lib64/libedgetpu_client\.google\.so u:object_r:same_process_hal_file:s0
 
 # EdgeTPU vendor service

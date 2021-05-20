@@ -1,5 +1,5 @@
 # EdgeTPU service
-com.google.edgetpu.IEdgeTpuService/default                 u:object_r:edgetpu_service:s0
+com.google.edgetpu.IEdgeTpuAppService/default              u:object_r:edgetpu_app_service:s0
 com.google.edgetpu.IEdgeTpuVendorService/default           u:object_r:edgetpu_vendor_service:s0
 
 # TPU NNAPI Service

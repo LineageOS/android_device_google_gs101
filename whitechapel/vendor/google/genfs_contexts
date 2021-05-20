@@ -357,4 +357,5 @@ genfscon sysfs /devices/platform/audiometrics/speaker_impedance        u:object_
 genfscon sysfs /devices/platform/audiometrics/speaker_excursion        u:object_r:sysfs_pixelstats:s0
 genfscon sysfs /devices/platform/audiometrics/speaker_heartbeat        u:object_r:sysfs_pixelstats:s0
 genfscon sysfs /devices/platform/audiometrics/speaker_temp             u:object_r:sysfs_pixelstats:s0
-
+genfscon sysfs /devices/platform/audiometrics/mic_broken_degrade       u:object_r:sysfs_pixelstats:s0
+genfscon sysfs /devices/platform/audiometrics/codec_crashed_counter    u:object_r:sysfs_pixelstats:s0
