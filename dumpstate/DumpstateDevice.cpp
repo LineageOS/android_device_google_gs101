@@ -401,8 +401,34 @@ void DumpstateDevice::dumpPowerSection(int fd) {
     DumpFileToFd(fd, "RTX", "/dev/logbuffer_rtx");
 
     RunCommandToFd(fd, "gvotables", {"/vendor/bin/sh", "-c", "cat /sys/kernel/debug/gvotables/*/status"});
-    DumpFileToFd(fd, "BCL", "/sys/devices/virtual/pmic/mitigation/triggered_stats");
-    DumpFileToFd(fd, "IF PMIC", "/sys/devices/virtual/pmic/max77759-mitigation/triggered_stats");
+    RunCommandToFd(fd, "Mitigation Stats", {"/vendor/bin/sh", "-c", "echo \"Source\\t\\tCount\\tSOC\\tTime\\tVoltage\"; "
+                        "for f in `ls /sys/devices/virtual/pmic/mitigation/last_triggered_count/*` ; "
+                        "do count=`cat $f`; "
+                        "a=${f/\\/sys\\/devices\\/virtual\\/pmic\\/mitigation\\/last_triggered_count\\//}; "
+                        "b=${f/last_triggered_count/last_triggered_capacity}; "
+                        "c=${f/last_triggered_count/last_triggered_timestamp/}; "
+                        "d=${f/last_triggered_count/last_triggered_voltage/}; "
+                        "cnt=`cat $f`; "
+                        "cap=`cat ${b/count/cap}`; "
+                        "ti=`cat ${c/count/time}`; "
+                        "volt=`cat ${d/count/volt}`; "
+                        "echo \"${a/_count/} "
+                        "\\t$cnt\\t$cap\\t$ti\\t$volt\" ; done"});
+    RunCommandToFd(fd, "Clock Divider Ratio", {"/vendor/bin/sh", "-c", "echo \"Source\\t\\tRatio\"; "
+                        "for f in `ls /sys/devices/virtual/pmic/mitigation/clock_ratio/*` ; "
+                        "do ratio=`cat $f`; "
+                        "a=${f/\\/sys\\/devices\\/virtual\\/pmic\\/mitigation\\/clock_ratio\\//}; "
+                        "echo \"${a/_ratio/} \\t$ratio\" ; done"});
+    RunCommandToFd(fd, "Clock Stats", {"/vendor/bin/sh", "-c", "echo \"Source\\t\\tStats\"; "
+                        "for f in `ls /sys/devices/virtual/pmic/mitigation/clock_stats/*` ; "
+                        "do stats=`cat $f`; "
+                        "a=${f/\\/sys\\/devices\\/virtual\\/pmic\\/mitigation\\/clock_stats\\//}; "
+                        "echo \"${a/_stats/} \\t$stats\" ; done"});
+    RunCommandToFd(fd, "Triggered Level", {"/vendor/bin/sh", "-c", "echo \"Source\\t\\tLevel\"; "
+                        "for f in `ls /sys/devices/virtual/pmic/mitigation/triggered_lvl/*` ; "
+                        "do lvl=`cat $f`; "
+                        "a=${f/\\/sys\\/devices\\/virtual\\/pmic\\/mitigation\\/triggered_lvl\\//}; "
+                        "echo \"${a/_lvl/} \\t$lvl\" ; done"});
 
 }
 
