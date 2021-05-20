@@ -364,6 +364,12 @@
       "Value": "103"
     },
     {
+      "PowerHint": "ADPF_DISABLE_TA_BOOST",
+      "Node": "TAUClampBoost",
+      "Duration": 0,
+      "Value": "0"
+    },
+    {
       "PowerHint": "DISABLE_TA_BOOST",
       "Node": "TAUClampBoost",
       "Duration": 0,
