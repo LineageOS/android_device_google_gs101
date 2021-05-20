@@ -471,9 +471,11 @@ SOONG_CONFIG_google3a_config_gcam_awb := true
 SOONG_CONFIG_google3a_config_ghawb_truetone := true
 SOONG_CONFIG_google3a_config_target_device := $(LOCAL_TARGET_PRODUCT)
 
+
 SOONG_CONFIG_NAMESPACES += gch
-SOONG_CONFIG_gch += hwl_library
-SOONG_CONFIG_gch_hwl_library := lyric
+SOONG_CONFIG_gch += feature
+# Disable Legacy common hal modules for whi
+SOONG_CONFIG_gch_feature := use_lyric_hal
 
 # WiFi
 PRODUCT_PACKAGES += \
