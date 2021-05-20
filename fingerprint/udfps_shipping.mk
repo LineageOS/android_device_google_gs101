@@ -16,8 +16,3 @@
 
 PRODUCT_PACKAGES += \
     android.hardware.biometrics.fingerprint-service.goodix
-
-# Necessary to ignore the HIDL HAL configured in config_biometric_sensors.
-# Otherwise system_server would hang trying to load the missing HIDL HAL.
-PRODUCT_PROPERTY_OVERRIDES += \
-	biometrics.fingerprint.hidl.disabled=true
