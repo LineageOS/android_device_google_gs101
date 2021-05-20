@@ -397,6 +397,7 @@ void DumpstateDevice::dumpPowerSection(int fd) {
     DumpFileToFd(fd, "WLC logs", "/dev/logbuffer_wireless");
     DumpFileToFd(fd, "WLC VER", "/sys/class/power_supply/wireless/device/version");
     DumpFileToFd(fd, "WLC STATUS", "/sys/class/power_supply/wireless/device/status");
+    DumpFileToFd(fd, "WLC FW Version", "/sys/class/power_supply/wireless/device/fw_rev");
     DumpFileToFd(fd, "RTX", "/dev/logbuffer_rtx");
 
     RunCommandToFd(fd, "gvotables", {"/vendor/bin/sh", "-c", "cat /sys/kernel/debug/gvotables/*/status"});
