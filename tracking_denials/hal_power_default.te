@@ -10,3 +10,5 @@ dontaudit hal_power_default sysfs:file { read };
 dontaudit hal_power_default sysfs:file { getattr };
 dontaudit hal_power_default sysfs:file { read };
 dontaudit hal_power_default sysfs:file { getattr };
+# b/188752940
+dontaudit hal_power_default hal_power_default:capability dac_read_search;
