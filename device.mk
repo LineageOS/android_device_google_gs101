@@ -383,6 +383,9 @@ PRODUCT_COPY_FILES += \
 	device/google/gs101/powerhint_a1.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint_a1.json
 -include hardware/google/pixel/power-libperfmgr/aidl/device.mk
 
+# IRQ rebalancing.
+include hardware/google/pixel/rebalance_interrupts/rebalance_interrupts.mk
+
 # PowerStats HAL
 PRODUCT_PACKAGES += \
 	android.hardware.power.stats-service.pixel
