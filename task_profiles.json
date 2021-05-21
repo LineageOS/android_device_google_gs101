@@ -81,7 +81,7 @@
           "Name": "WriteFile",
           "Params":
           {
-            "FilePath": "/sys/kernel/vendor_sched/clear_group",
+            "FilePath": "/sys/kernel/vendor_sched/set_task_group_sys",
             "Value": "<pid>",
             "LogFailures": "false"
           }
@@ -155,7 +155,7 @@
       ]
     },
     {
-      "Name": "SystemBGPerformance",
+      "Name": "ServicePerformance",
       "Actions": [
         {
           "Name": "JoinCgroup",
