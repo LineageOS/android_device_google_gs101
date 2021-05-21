@@ -29,3 +29,7 @@ hardware.google.bluetooth.sar::IBluetoothSar                          u:object_r
 
 # Fingerprint
 vendor.goodix.hardware.biometrics.fingerprint::IGoodixFingerprintDaemon  u:object_r:hal_fingerprint_ext_hwservice:s0
+
+#Audio
+vendor.google.audiometricext::IAudioMetricExt             u:object_r:hal_audiometricext_hwservice:s0
+

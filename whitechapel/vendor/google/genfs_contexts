@@ -208,12 +208,7 @@ genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/i2c-s2mpg11mfd/s2mp
 genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device1/enabled_rails u:object_r:sysfs_odpm:s0
 
 # bcl sysfs files
-genfscon sysfs /devices/virtual/pmic/mitigation/triggered_stats                 u:object_r:sysfs_bcl:s0
-genfscon sysfs /devices/virtual/pmic/mitigation/mpmm_settings                   u:object_r:sysfs_bcl:s0
-genfscon sysfs /devices/virtual/pmic/mitigation/ppm_settings                    u:object_r:sysfs_bcl:s0
-genfscon sysfs /devices/virtual/pmic/mitigation/clk_ratio                       u:object_r:sysfs_bcl:s0
-genfscon sysfs /devices/virtual/pmic/mitigation/clk_stats                       u:object_r:sysfs_bcl:s0
-genfscon sysfs /devices/virtual/pmic/max77759-mitigation/triggered_stats        u:object_r:sysfs_bcl:s0
+genfscon sysfs /devices/virtual/pmic/mitigation                                 u:object_r:sysfs_bcl:s0
 
 # Chosen
 genfscon sysfs /firmware/devicetree/base/chosen                                u:object_r:sysfs_chosen:s0
@@ -304,7 +299,7 @@ genfscon sysfs /devices/platform/17000010.devfreq_mif/devfreq/17000010.devfreq_m
 genfscon sysfs /devices/platform/17000010.devfreq_mif/devfreq/17000010.devfreq_mif/min_freq                 u:object_r:sysfs_fabric:s0
 
 # GPU
-genfscon sysfs /devices/platform/1c500000.mali/scaling_min_freq                                         u:object_r:sysfs_gpu:s0
+genfscon sysfs /devices/platform/1c500000.mali/hint_min_freq                                            u:object_r:sysfs_gpu:s0
 
 # nvmem (Non Volatile Memory layer)
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-4/4-0050/4-00500/nvmem                              u:object_r:sysfs_memory:s0
@@ -357,4 +352,5 @@ genfscon sysfs /devices/platform/audiometrics/speaker_impedance        u:object_
 genfscon sysfs /devices/platform/audiometrics/speaker_excursion        u:object_r:sysfs_pixelstats:s0
 genfscon sysfs /devices/platform/audiometrics/speaker_heartbeat        u:object_r:sysfs_pixelstats:s0
 genfscon sysfs /devices/platform/audiometrics/speaker_temp             u:object_r:sysfs_pixelstats:s0
-
+genfscon sysfs /devices/platform/audiometrics/mic_broken_degrade       u:object_r:sysfs_pixelstats:s0
+genfscon sysfs /devices/platform/audiometrics/codec_crashed_counter    u:object_r:sysfs_pixelstats:s0

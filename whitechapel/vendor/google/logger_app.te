@@ -4,6 +4,10 @@ userdebug_or_eng(`
   allow logger_app vendor_slog_file:file {r_file_perms unlink};
   allow logger_app vendor_gps_file:file create_file_perms;
   allow logger_app vendor_gps_file:dir create_dir_perms;
+  allow logger_app sysfs_sscoredump_level:file r_file_perms;
+  r_dir_file(logger_app, ramdump_vendor_data_file)
+  r_dir_file(logger_app, sscoredump_vendor_data_coredump_file)
+  r_dir_file(logger_app, sscoredump_vendor_data_crashinfo_file)
 
   get_prop(logger_app, usb_control_prop)
   set_prop(logger_app, vendor_logger_prop)
