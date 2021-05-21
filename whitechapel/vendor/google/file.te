@@ -35,7 +35,6 @@ type vendor_maxfg_debugfs, fs_type, debugfs_type;
 type vendor_charger_debugfs, fs_type, debugfs_type;
 type vendor_votable_debugfs, fs_type, debugfs_type;
 type vendor_battery_debugfs, fs_type, debugfs_type;
-type vendor_sjtag_debugfs, fs_type, debugfs_type;
 
 # Exynos sysfs
 type sysfs_exynos_bts, sysfs_type, fs_type;
@@ -208,3 +207,6 @@ type sysfs_pixelstats, fs_type, sysfs_type;
 
 # WLC FW
 type vendor_wlc_fwupdata_file, vendor_file_type, file_type;
+
+# SJTAG
+type sysfs_sjtag, fs_type, sysfs_type;
