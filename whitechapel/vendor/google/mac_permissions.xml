@@ -27,4 +27,7 @@
     <signer signature="@UWB" >
         <seinfo value="uwb" />
     </signer>
+    <signer signature="@EUICCSUPPORTPIXEL" >
+        <seinfo value="EuiccSupportPixel" />
+    </signer>
 </policy>
