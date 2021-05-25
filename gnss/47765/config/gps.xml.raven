@@ -75,10 +75,10 @@
 
        EnableGnssPropagateInStandby="true"
 
-       RfPathLossDb_Ap="3.5"
-       RfPathLossDb_Cp="3.5"
-       RfPathLossDb_Ap_L5="3.5"
-       RfPathLossDb_Cp_L5="3.5"
+       RfPathLossDb_Ap="4"
+       RfPathLossDb_Cp="4"
+       RfPathLossDb_Ap_L5="4"
+       RfPathLossDb_Cp_L5="4"
 
   />
 
