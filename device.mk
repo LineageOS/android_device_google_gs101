@@ -758,29 +758,8 @@ PRODUCT_PACKAGES += \
 	libopenvx-opencl
 endif
 
-GPS_CHIPSET := 47765
-
-PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/android.hardware.location.gps.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.location.gps.xml \
-	device/google/gs101/gnss/${GPS_CHIPSET}/config/gps.xml:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/gps.xml \
-	device/google/gs101/gnss/${GPS_CHIPSET}/config/lhd.conf:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/lhd.conf \
-	device/google/gs101/gnss/${GPS_CHIPSET}/config/scd.conf:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/scd.conf \
-	device/google/gs101/gnss/${GPS_CHIPSET}/config/gps.cer:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/gps.cer \
-	device/google/gs101/gnss/${GPS_CHIPSET}/firmware/SensorHub.patch:$(TARGET_COPY_OUT_VENDOR)/firmware/SensorHub.patch
-
-PRODUCT_SOONG_NAMESPACES += \
-	device/google/gs101/gnss/$(GPS_CHIPSET)
-
-PRODUCT_PACKAGES += \
-	android.hardware.gnss@2.1-impl-google \
-	gps.default \
-	flp.default \
-	gpsd \
-	lhd \
-	scd \
-	android.hardware.gnss@2.1-service-brcm
-PRODUCT_PACKAGES_DEBUG += \
-	init.gps_log.rc
+# GPS HAL
+include device/google/gs101/gnss/device-gnss.mk
 
 # Trusty (KM, GK, Storage)
 $(call inherit-product, system/core/trusty/trusty-storage.mk)
