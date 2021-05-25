@@ -804,6 +804,8 @@ void DumpstateDevice::dumpDisplaySection(int fd) {
     DumpFileToFd(fd, "CRTC-1 event log", "/sys/kernel/debug/dri/0/crtc-1/event");
     RunCommandToFd(fd, "libdisplaycolor", {"/vendor/bin/dumpsys", "displaycolor", "-v"},
                    CommandOptions::WithTimeout(2).Build());
+    DumpFileToFd(fd, "Primary panel extra info", "/sys/devices/platform/exynos-drm/primary-panel/panel_extinfo");
+    DumpFileToFd(fd, "secondary panel extra info", "/sys/devices/platform/exynos-drm/secondary-panel/panel_extinfo");
 }
 
 // Dump items related to AoC
