@@ -492,9 +492,6 @@ else
         LOCAL_TARGET_PRODUCT := slider
 endif
 
-SOONG_CONFIG_NAMESPACES += lyric
-SOONG_CONFIG_lyric += use_lyric_camera_hal
-SOONG_CONFIG_lyric_use_lyric_camera_hal := true
 
 SOONG_CONFIG_NAMESPACES += google3a_config
 SOONG_CONFIG_google3a_config += \
@@ -508,11 +505,25 @@ SOONG_CONFIG_google3a_config_gcam_awb := true
 SOONG_CONFIG_google3a_config_ghawb_truetone := true
 SOONG_CONFIG_google3a_config_target_device := $(LOCAL_TARGET_PRODUCT)
 
+# Determine if Lyric is in the tree, and only have GCH build against it
+# if it is. Cases when Lyric isn't going to be in the tree:
+#    - Non-pixel gs101 devices that exclude vendor/google/services/LyricCameraHAL/src (none as of now)
+#    - master-without-vendor and other types of AOSP builds (those won't built GCH either, but need this to actually start building)
+#
+# Builds that will have it are
+#    - Regular gs101 builds
+#    - PDK gs101 builds because they still have vendor/google/services/LyricCameraHAL/src
 
+ifneq ($(wildcard vendor/google/services/LyricCameraHAL/src),)
+SOONG_CONFIG_NAMESPACES += lyric
+SOONG_CONFIG_lyric += use_lyric_camera_hal
+SOONG_CONFIG_lyric_use_lyric_camera_hal := true
+
+# Camera HAL library selection
 SOONG_CONFIG_NAMESPACES += gch
-SOONG_CONFIG_gch += feature
-# Disable Legacy common hal modules for whi
-SOONG_CONFIG_gch_feature := use_lyric_hal
+SOONG_CONFIG_gch += hwl_library
+SOONG_CONFIG_gch_hwl_library := lyric
+endif
 
 # WiFi
 PRODUCT_PACKAGES += \
