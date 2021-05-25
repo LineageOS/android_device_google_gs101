@@ -7,3 +7,7 @@ allow hardware_info_app app_api_service:service_manager find;
 # Display
 allow hardware_info_app sysfs_display:dir search;
 allow hardware_info_app sysfs_display:file r_file_perms;
+
+# Audio
+allow hardware_info_app sysfs_pixelstats:dir search;
+allow hardware_info_app sysfs_pixelstats:file r_file_perms;
