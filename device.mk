@@ -105,7 +105,7 @@ PRODUCT_PRODUCT_PROPERTIES += \
 
 # Enable Early Camping
 PRODUCT_PRODUCT_PROPERTIES += \
-	persist.vendor.ril.camp_on_earlier=1
+	persist.vendor.ril.camp_on_earlier=0
 
 # Carrier configuration default location
 PRODUCT_PROPERTY_OVERRIDES += \
