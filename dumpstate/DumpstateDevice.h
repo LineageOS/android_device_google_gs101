@@ -60,9 +60,6 @@ struct DumpstateDevice : public IDumpstateDevice {
 
     std::vector<std::pair<std::string, std::function<void(int)>>> mTextSections;
 
-    void dumpLogs(int fd, std::string srcDir, std::string destDir, int maxFileNum,
-                  const char *logPrefix);
-
     void dumpTextSection(int fd, std::string const& sectionName);
 
     // Text sections that can be dumped individually on the command line in
@@ -84,11 +81,7 @@ struct DumpstateDevice : public IDumpstateDevice {
     void dumpGscSection(int fd);
     void dumpCameraSection(int fd);
     void dumpTrustySection(int fd);
-
-    // Hybrid and binary sections that require an additional file descriptor
-    void dumpModem(int fd, int fdModem);
-    void dumpRilLogs(int fd, std::string destDir);
-    void dumpGpsLogs(int fd, std::string destDir);
+    void dumpModemSection(int fd);
 };
 
 }  // namespace implementation
