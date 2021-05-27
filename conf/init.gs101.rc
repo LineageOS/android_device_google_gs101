@@ -801,3 +801,10 @@ on fs
 
     chown system system /sys/devices/platform/acpm_mfd_bus@17500000/i2c-7/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device0/enabled_rails
     chown system system /sys/devices/platform/acpm_mfd_bus@17510000/i2c-8/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device1/enabled_rails
+
+# BCL
+on property:vendor.thermal.link_ready=1
+    write /dev/thermal/tz-by-name/soc/policy user_space
+    chown system system /dev/thermal/tz-by-name/soc/mode
+    chown system system /dev/thermal/tz-by-name/soc/trip_point_0_temp
+    chown system system /dev/thermal/tz-by-name/soc/trip_point_0_hyst
