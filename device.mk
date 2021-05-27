@@ -396,16 +396,14 @@ PRODUCT_PACKAGES += \
 
 # AoC support
 PRODUCT_PACKAGES += \
-	aocd \
+	aocd
+
+# AoC debug support
+PRODUCT_PACKAGES_DEBUG += \
+	aocdump \
 	aocutil \
 	aoc_audio_cfg \
 	vp_util
-
-# AoC debug support
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
-PRODUCT_PACKAGES += \
-	aocdump
-endif
 
 #
 # Audio HALs
