@@ -144,6 +144,7 @@ type sysfs_edgetpu, sysfs_type, fs_type;
 
 # Vendor sched files
 type sysfs_vendor_sched, sysfs_type, fs_type;
+type proc_vendor_sched, proc_type, fs_type;
 
 # GPS
 type vendor_gps_file, file_type, data_file_type;
