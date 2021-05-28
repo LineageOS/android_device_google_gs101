@@ -68,7 +68,7 @@ static BatteryDefender battDefender(WLC_DIR "/present",
     "/sys/devices/platform/google,charger/charge_start_level",
     "/sys/devices/platform/google,charger/charge_stop_level");
 static BatteryThermalControl battThermalControl(
-    "dev/thermal/tz-by-name/soc/mode");
+    "/dev/thermal/tz-by-name/soc/mode");
 static BatteryMetricsLogger battMetricsLogger(kBatteryResistance, kBatteryOCV);
 static LowBatteryShutdownMetrics shutdownMetrics(kVoltageAvg);
 static DeviceHealth deviceHealth;
