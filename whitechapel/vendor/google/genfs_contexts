@@ -164,6 +164,8 @@ genfscon sysfs /kernel/vendor_sched/uclamp_threshold                           u
 genfscon sysfs /kernel/vendor_sched/uclamp_util_diff_stats                     u:object_r:sysfs_vendor_sched:s0
 genfscon sysfs /kernel/vendor_sched/util_threshold                             u:object_r:sysfs_vendor_sched:s0
 
+genfscon proc  /vendor_sched                                                   u:object_r:proc_vendor_sched:s0
+
 # GPS
 genfscon sysfs /devices/platform/10940000.spi/spi_master/spi5/spi5.0/nstandby   u:object_r:sysfs_gps:s0
 
