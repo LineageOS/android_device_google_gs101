@@ -31,4 +31,8 @@
         <!-- B y-intercept --> <item>-0.349361641294833436</item>
     </string-array>
 
+    <!-- List of comma separated package names for which we the system will not show crash, ANR,
+         etc. dialogs. -->
+    <string translatable="false" name="config_appsNotReportingCrashes">com.google.android.euicc</string>
+
 </resources>
