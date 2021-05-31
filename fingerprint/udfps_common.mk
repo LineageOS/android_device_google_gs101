@@ -17,6 +17,12 @@
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
 
+# Fingerprint manifest
+ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+DEVICE_MANIFEST_FILE += \
+    device/google/gs101/fingerprint/vendor.goodix.hardware.biometrics.fingerprint@2.1-service.xml
+endif
+
 # Include the Goodix AIDL HAL namespaces.
 PRODUCT_SOONG_NAMESPACES += vendor/goodix/udfps/g6_trusty
 PRODUCT_SOONG_NAMESPACES += vendor/goodix/udfps/g6_aidl_trusty
