@@ -808,3 +808,9 @@ on property:vendor.thermal.link_ready=1
     chown system system /dev/thermal/tz-by-name/soc/mode
     chown system system /dev/thermal/tz-by-name/soc/trip_point_0_temp
     chown system system /dev/thermal/tz-by-name/soc/trip_point_0_hyst
+
+# For Japan radio builds, always enforce camera shutter sound
+# Since this property is read by the audio server in system service,
+# it should be written by the system init.
+on property:ro.boot.hardware.radio.subtype=1
+    setprop audio.camerasound.force true
