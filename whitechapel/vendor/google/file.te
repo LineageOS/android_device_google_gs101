@@ -144,6 +144,9 @@ type sysfs_edgetpu, sysfs_type, fs_type;
 
 # Vendor sched files
 type sysfs_vendor_sched, sysfs_type, fs_type;
+userdebug_or_eng(`
+    typeattribute sysfs_vendor_sched mlstrustedobject;
+')
 type proc_vendor_sched, proc_type, fs_type;
 
 # GPS
@@ -211,3 +214,6 @@ type vendor_wlc_fwupdata_file, vendor_file_type, file_type;
 
 # SJTAG
 type sysfs_sjtag, fs_type, sysfs_type;
+userdebug_or_eng(`
+    typeattribute sysfs_sjtag mlstrustedobject;
+')
