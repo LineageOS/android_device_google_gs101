@@ -363,7 +363,10 @@ void DumpstateDevice::dumpPowerSection(int fd) {
                         " cd /sys/devices/platform/google,charger/;"
                         " for f in `ls bd_*` ; do echo \"$f: `cat $f`\" ; done"});
 
-    RunCommandToFd(fd, "DC_registers dump", {"/vendor/bin/sh", "-c", "cat /d/regmap/*-0057-pca9468-mains/registers"});
+    RunCommandToFd(fd, "DC_registers dump", {"/vendor/bin/sh", "-c",
+                        "for f in /d/regmap/*-0057-pca9468-mains ; do "
+                        "regs=`cat $f/registers`; echo $f: ;"
+                        "echo \"$regs\"; done"});
 
     RunCommandToFd(fd, "fg_model", {"/vendor/bin/sh", "-c",
                         "for f in /d/maxfg* ; do "
