@@ -728,6 +728,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
        media.c2.dmabuf.padding=512 \
        debug.stagefright.ccodec_delayed_params=1
 
+# Create input surface on the framework side
+PRODUCT_PROPERTY_OVERRIDES += \
+	debug.stagefright.c2inputsurface=-1 \
+
 # 2. OpenMAX IL
 PRODUCT_COPY_FILES += \
 	device/google/gs101/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
