@@ -1,6 +1,7 @@
 # For Exynos Properties
 vendor_internal_prop(vendor_prop)
 vendor_internal_prop(vendor_ims_prop)
+vendor_internal_prop(vendor_rcs_prop)
 vendor_internal_prop(vendor_rild_prop)
 vendor_internal_prop(vendor_slog_prop)
 vendor_internal_prop(sensors_prop)
