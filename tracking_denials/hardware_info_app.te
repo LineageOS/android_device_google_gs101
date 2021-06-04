@@ -1,12 +1,8 @@
 # b/181177926
-dontaudit hardware_info_app sysfs_scsi_devices_0000:file { getattr };
-dontaudit hardware_info_app sysfs_scsi_devices_0000:file { open };
 dontaudit hardware_info_app sysfs_batteryinfo:file { read };
 dontaudit hardware_info_app sysfs:file { read };
 dontaudit hardware_info_app sysfs:file { open };
 dontaudit hardware_info_app sysfs:file { getattr };
-dontaudit hardware_info_app sysfs_scsi_devices_0000:dir { search };
-dontaudit hardware_info_app sysfs_scsi_devices_0000:file { read };
 dontaudit hardware_info_app sysfs_batteryinfo:dir { search };
 # b/181914888
 dontaudit hardware_info_app sysfs_batteryinfo:file { open };
