@@ -45,9 +45,6 @@ type sensor_direct_heap_device, dmabuf_heap_device_type, dev_type;
 #faceauth DMA-BUF heaps
 type faceauth_heap_device, dmabuf_heap_device_type, dev_type;
 
-#vframe-secure DMA-BUF heap
-type vframe_heap_device, dmabuf_heap_device_type, dev_type;
-
 #vscaler-secure DMA-BUF heap
 type vscaler_heap_device, dmabuf_heap_device_type, dev_type;
 
