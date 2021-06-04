@@ -11,3 +11,7 @@ allow hardware_info_app sysfs_display:file r_file_perms;
 # Audio
 allow hardware_info_app sysfs_pixelstats:dir search;
 allow hardware_info_app sysfs_pixelstats:file r_file_perms;
+
+# Storage
+allow hardware_info_app sysfs_scsi_devices_0000:dir search;
+allow hardware_info_app sysfs_scsi_devices_0000:file r_file_perms;
