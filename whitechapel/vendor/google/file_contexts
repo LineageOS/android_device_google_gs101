@@ -440,7 +440,7 @@
 /dev/dma_heap/farawimg-secure                                                  u:object_r:faceauth_heap_device:s0
 
 # vframe-secure DMA-BUF heap
-/dev/dma_heap/vframe-secure                                                    u:object_r:vframe_heap_device:s0
+/dev/dma_heap/vframe-secure                                                    u:object_r:dmabuf_system_secure_heap_device:s0
 
 # vscaler-secure DMA-BUF heap
 /dev/dma_heap/vscaler-secure                                                   u:object_r:vscaler_heap_device:s0
