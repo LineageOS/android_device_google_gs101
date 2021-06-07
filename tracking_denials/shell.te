@@ -1,0 +1,2 @@
+# b/190336524
+dontaudit shell sysfs_vendor_sched:dir search;
