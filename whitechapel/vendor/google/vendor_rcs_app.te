@@ -8,9 +8,6 @@ allow vendor_rcs_app radio_service:service_manager find;
 allow vendor_rcs_app mediaserver_service:service_manager find;
 allow vendor_rcs_app cameraserver_service:service_manager find;
 
-allow vendor_rcs_app privapp_data_file:dir create_dir_perms;
-allow vendor_rcs_app privapp_data_file:file create_file_perms;
-
 allow vendor_rcs_app hal_exynos_rild_hwservice:hwservice_manager find;
 
 binder_call(vendor_rcs_app, rild)
