@@ -39,6 +39,7 @@
 #define MODEM_LOGGING_PROPERTY "vendor.sys.modem.logging.enable"
 #define MODEM_LOGGING_STATUS_PROPERTY "vendor.sys.modem.logging.status"
 #define MODEM_LOGGING_NUMBER_BUGREPORT_PROPERTY "persist.vendor.sys.modem.logging.br_num"
+#define MODEM_LOGGING_PATH_PROPERTY "vendor.sys.modem.logging.log_path"
 #define GPS_LOG_DIRECTORY "/data/vendor/gps/logs"
 #define GPS_LOG_NUMBER_PROPERTY "persist.vendor.gps.aol.log_num"
 #define GPS_LOGGING_STATUS_PROPERTY "vendor.gps.aol.enabled"
@@ -943,8 +944,10 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
             bool modemLogStarted = android::base::GetBoolProperty(MODEM_LOGGING_STATUS_PROPERTY, false);
 
             if (modemLogStarted) {
-                android::base::SetProperty(MODEM_LOGGING_PROPERTY, "false");
-                ALOGD("Stopping modem logging...\n");
+                if (android::base::GetProperty(MODEM_LOGGING_PATH_PROPERTY, "") == MODEM_LOG_DIRECTORY) {
+                    android::base::SetProperty(MODEM_LOGGING_PROPERTY, "false");
+                    ALOGD("Stopping modem logging...\n");
+                }
             } else {
                 ALOGD("modem logging is not running\n");
             }
