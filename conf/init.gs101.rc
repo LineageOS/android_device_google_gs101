@@ -816,9 +816,3 @@ on property:vendor.disable.bcl.control=1
 
 on property:vendor.disable.bcl.control=0
     write /sys/devices/virtual/pmic/mitigation/instruction/enable_mitigation 1
-
-# For Japan radio builds, always enforce camera shutter sound
-# Since this property is read by the audio server in system service,
-# it should be written by the system init.
-on property:ro.boot.hardware.radio.subtype=1
-    setprop audio.camerasound.force true
