@@ -1073,10 +1073,6 @@ PRODUCT_PROPERTY_OVERRIDES += persist.vendor.enable.thermal.genl=true
 PRODUCT_PACKAGES += \
 	edgetpu-abrolhos.fw
 
-# TPU NN HAL
-PRODUCT_PACKAGES += \
-	android.hardware.neuralnetworks@1.3-service-darwinn
-
 # TPU NN AIDL HAL
 PRODUCT_PACKAGES += \
 	android.hardware.neuralnetworks@service-darwinn-aidl
