@@ -145,11 +145,12 @@ PRODUCT_SOONG_NAMESPACES += \
 	vendor/arm/mali/valhall/libmali \
 	vendor/arm/mali/valhall/cinstr/production/gpu-hwc-reader
 
+include device/google/gs101/neuralnetwork/neuralnetwork.mk
+
 PRODUCT_PACKAGES += \
 	libGLES_mali \
 	vulkan.gs101 \
 	libOpenCL \
-	android.hardware.neuralnetworks@1.3-service-armnn \
 	libgpudataproducer
 
 ifeq ($(USE_SWIFTSHADER),true)
