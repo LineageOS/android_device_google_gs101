@@ -36,3 +36,7 @@ get_prop(hal_graphics_composer_default, boot_status_prop);
 
 # allow HWC to access vendor log file
 allow hal_graphics_composer_default vendor_log_file:file create_file_perms;
+
+# allow HWC to output to dumpstate via pipe fd
+allow hal_graphics_composer_default hal_dumpstate_default:fifo_file { append write };
+allow hal_graphics_composer_default hal_dumpstate_default:fd use;
