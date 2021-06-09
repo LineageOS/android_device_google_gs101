@@ -132,6 +132,7 @@ type sysfs_wlc, sysfs_type, fs_type;
 type persist_camera_file, file_type;
 type vendor_camera_tuning_file, vendor_file_type, file_type;
 type vendor_camera_data_file, file_type, data_file_type;
+type sysfs_camera, sysfs_type, fs_type;
 
 # EdgeTPU hal data file
 type hal_neuralnetworks_darwinn_data_file, file_type, data_file_type;
