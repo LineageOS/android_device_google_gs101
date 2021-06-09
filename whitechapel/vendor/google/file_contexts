@@ -345,7 +345,6 @@
 /vendor/bin/aocd   u:object_r:aocd_exec:s0
 
 # NeuralNetworks file contexts
-/vendor/bin/hw/android\.hardware\.neuralnetworks@1\.3-service-armnn   u:object_r:hal_neuralnetworks_armnn_exec:s0
 /vendor/bin/hw/android\.hardware\.neuralnetworks@service-darwinn-aidl u:object_r:hal_neuralnetworks_darwinn_exec:s0
 
 # GRIL
