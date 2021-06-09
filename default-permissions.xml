@@ -61,7 +61,7 @@
     </exception>
 
     <exception
-            package="com.google.android.apps.pixelmigrate">
+            package="com.google.android.apps.restore">
         <!-- External storage -->
         <permission name="android.permission.READ_EXTERNAL_STORAGE" fixed="false"/>
         <permission name="android.permission.WRITE_EXTERNAL_STORAGE" fixed="false"/>
