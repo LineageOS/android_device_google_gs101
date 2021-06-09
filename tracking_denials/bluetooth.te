@@ -1,0 +1,2 @@
+# b/190563916
+dontaudit bluetooth sysfs_vendor_sched:dir search;
