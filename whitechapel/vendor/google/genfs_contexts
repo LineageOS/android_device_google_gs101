@@ -314,3 +314,7 @@ genfscon sysfs /devices/platform/audiometrics/hwinfo_part_number       u:object_
 # SJTAG
 genfscon sysfs /devices/platform/sjtag_ap/interface                    u:object_r:sysfs_sjtag:s0
 genfscon sysfs /devices/platform/sjtag_gsa/interface                   u:object_r:sysfs_sjtag:s0
+
+# Camera
+genfscon sysfs /devices/platform/17000030.devfreq_intcam/devfreq/17000030.devfreq_intcam/min_freq       u:object_r:sysfs_camera:s0
+genfscon sysfs /devices/platform/17000060.devfreq_tnr/devfreq/17000060.devfreq_tnr/min_freq             u:object_r:sysfs_camera:s0
