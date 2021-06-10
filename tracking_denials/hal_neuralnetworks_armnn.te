@@ -1,33 +1,5 @@
-# b/171160755
-dontaudit hal_neuralnetworks_armnn traced:unix_stream_socket connectto ;
-dontaudit hal_neuralnetworks_armnn hal_neuralnetworks_hwservice:hwservice_manager add ;
-dontaudit hal_neuralnetworks_armnn hal_neuralnetworks_hwservice:hwservice_manager find ;
-dontaudit hal_neuralnetworks_armnn hwservicemanager:binder transfer ;
-dontaudit hal_neuralnetworks_armnn hwservicemanager:binder call ;
-dontaudit hal_neuralnetworks_armnn hwservicemanager_prop:file map ;
-dontaudit hal_neuralnetworks_armnn hwservicemanager_prop:file getattr ;
-dontaudit hal_neuralnetworks_armnn hwservicemanager_prop:file open ;
-dontaudit hal_neuralnetworks_armnn hwservicemanager_prop:file read ;
-dontaudit hal_neuralnetworks_armnn gpu_device:chr_file {read write} ;
-dontaudit hal_neuralnetworks_armnn gpu_device:chr_file open ;
-dontaudit hal_neuralnetworks_armnn gpu_device:chr_file getattr ;
-dontaudit hal_neuralnetworks_armnn gpu_device:chr_file ioctl ;
-dontaudit hal_neuralnetworks_armnn gpu_device:chr_file map ;
-dontaudit hal_neuralnetworks_armnn gpu_device:chr_file {read write} ;
-dontaudit hal_neuralnetworks_armnn traced_producer_socket:sock_file write ;
-dontaudit hal_neuralnetworks_armnn hidl_base_hwservice:hwservice_manager add ;
-# b/171670122
-dontaudit hal_neuralnetworks_armnn debugfs_tracing:file { read };
-dontaudit hal_neuralnetworks_armnn debugfs_tracing:file { open };
 # b/180550063
 dontaudit hal_neuralnetworks_armnn system_data_file:dir { search };
 dontaudit hal_neuralnetworks_armnn system_data_file:dir { search };
-# b/180858476
-dontaudit hal_neuralnetworks_armnn default_prop:file { read };
-dontaudit hal_neuralnetworks_armnn default_prop:file { read };
-dontaudit hal_neuralnetworks_armnn default_prop:file { open };
-dontaudit hal_neuralnetworks_armnn default_prop:file { getattr };
-dontaudit hal_neuralnetworks_armnn default_prop:file { map };
-dontaudit hal_neuralnetworks_armnn default_prop:file { open };
-dontaudit hal_neuralnetworks_armnn default_prop:file { getattr };
-dontaudit hal_neuralnetworks_armnn default_prop:file { map };
+# b/190563897
+dontaudit hal_neuralnetworks_armnn default_prop:file read;
