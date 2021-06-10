@@ -36,6 +36,7 @@ on init
     chown system system /sys/kernel/vendor_sched/set_task_group_sys
     chown system system /sys/kernel/vendor_sched/set_task_group_sysbg
     chown system system /sys/kernel/vendor_sched/set_task_group_ta
+    chown system system /sys/kernel/vendor_sched/set_task_group_rt
     chown system system /sys/kernel/vendor_sched/clear_group
 
     chmod 0220 /sys/kernel/vendor_sched/set_task_group_bg
@@ -45,6 +46,7 @@ on init
     chmod 0220 /sys/kernel/vendor_sched/set_task_group_sys
     chmod 0220 /sys/kernel/vendor_sched/set_task_group_sysbg
     chmod 0220 /sys/kernel/vendor_sched/set_task_group_ta
+    chmod 0220 /sys/kernel/vendor_sched/set_task_group_rt
     chmod 0220 /sys/kernel/vendor_sched/clear_group
 
     wait /dev/block/platform/${ro.boot.boot_devices}
@@ -141,7 +143,7 @@ on init
     chown system system /dev/cpuctl/camera-daemon/cgroup.procs
 
     write /sys/kernel/vendor_sched/cam_prefer_idle 1
-    write /sys/kernel/vendor_sched/cam_uclamp_min 10
+    write /sys/kernel/vendor_sched/cam_uclamp_min 1
 
     chown system system /dev/cpuset/cgroup.procs
 
@@ -655,6 +657,8 @@ on property:sys.boot_completed=1
     # cfs_rq clamp is using tg->uclamp setting
     # align it with the vendor_group setting
     write /dev/cpuctl/background/cpu.uclamp.max 10
+
+    write /sys/kernel/vendor_sched/bg_group_throttle 512
 
     # Setup cpu.shares to throttle background group at 5%
     write /dev/cpuctl/background/cpu.shares 1024
