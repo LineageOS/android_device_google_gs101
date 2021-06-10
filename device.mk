@@ -1073,33 +1073,7 @@ PRODUCT_PROPERTY_OVERRIDES += vendor.pktrouter=1
 include hardware/google/pixel/thermal/device.mk
 PRODUCT_PROPERTY_OVERRIDES += persist.vendor.enable.thermal.genl=true
 
-# TPU firmware
-PRODUCT_PACKAGES += \
-	edgetpu-abrolhos.fw
-
-# TPU NN AIDL HAL
-PRODUCT_PACKAGES += \
-	android.hardware.neuralnetworks@service-darwinn-aidl
-
-# TPU logging service
-PRODUCT_PACKAGES += \
-	android.hardware.edgetpu.logging@service-edgetpu-logging
-
-# TPU application service
-PRODUCT_PACKAGES += \
-	vendor.google.edgetpu_app_service@1.0-service
-
-# TPU vendor service
-PRODUCT_PACKAGES += \
-	vendor.google.edgetpu_vendor_service@1.0-service
-
-# TPU HAL client library
-PRODUCT_PACKAGES += \
-	libedgetpu_client.google
-
-# TPU metrics logger library
-PRODUCT_PACKAGES += \
-	libmetrics_logger
+include device/google/gs101/edgetpu/edgetpu.mk
 
 # Connectivity Thermal Power Manager
 PRODUCT_PACKAGES += \
