@@ -1,2 +1,0 @@
-# b/190337281
-dontaudit logger_app sysfs_vendor_sched:dir search;

@@ -2,5 +2,3 @@
 dontaudit untrusted_app vendor_camera_prop:file { read };
 dontaudit untrusted_app vendor_camera_prop:file { read };
 dontaudit untrusted_app vendor_camera_prop:file { read };
-# b/190337295
-dontaudit untrusted_app sysfs_vendor_sched:dir search;
