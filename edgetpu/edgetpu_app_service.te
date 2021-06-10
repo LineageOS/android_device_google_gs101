@@ -9,9 +9,6 @@ binder_use(edgetpu_app_server);
 # The server will serve a binder service.
 binder_service(edgetpu_app_server);
 
-# EdgeTPU binder service type declaration.
-type edgetpu_app_service, service_manager_type;
-
 # EdgeTPU server to register the service to service_manager.
 add_service(edgetpu_app_server, edgetpu_app_service);
 
