@@ -1,12 +1,12 @@
 # Factory build, use HIDL hal & extension so that we can use Test tool
-ifneq ( ,$(filter factory, $(TARGET_PRODUCT)))
+ifneq ( ,$(findstring factory, $(TARGET_PRODUCT)))
 include device/google/gs101/fingerprint/fpc1540/fingerprint_hidl_config_factory.mk
 PRODUCT_PACKAGES += \
     android.hardware.biometrics.fingerprint@2.1-service.fpc \
     fpc_tee_test\
     SensorTestTool \
-	ImageTool \
-	ImageCollection \
+    ImageTool \
+    ImageCollection \
 
 PRODUCT_PACKAGES += \
     com.fingerprints.extension.xml \
@@ -20,8 +20,8 @@ else
 include device/google/gs101/fingerprint/fpc1540/fingerprint_aidl_config.mk
 
 PRODUCT_PACKAGES += \
-	android.hardware.biometrics.fingerprint-service.fpc \
-	fingerprint.fpc \
+    android.hardware.biometrics.fingerprint-service.fpc \
+    fingerprint.fpc \
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
