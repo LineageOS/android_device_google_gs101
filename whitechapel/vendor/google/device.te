@@ -21,9 +21,6 @@ type tui_device, dev_type;
 # usbpd
 type logbuffer_device, dev_type;
 
-# EdgeTPU device (DarwiNN)
-type edgetpu_device, dev_type, mlstrustedobject;
-
 #cpuctl
 type cpuctl_device, dev_type;
 
