@@ -1,0 +1,2 @@
+# b/190672147
+dontaudit system_suspend sysfs:dir read;
