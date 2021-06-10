@@ -37,3 +37,6 @@ BOARD_SEPOLICY_DIRS += hardware/google/pixel-sepolicy/wifi_sniffer
 
 # Wifi Logger
 BOARD_SEPOLICY_DIRS += hardware/google/pixel-sepolicy/wifi_logger
+
+# Public
+PRODUCT_PUBLIC_SEPOLICY_DIRS += device/google/gs101-sepolicy/public
