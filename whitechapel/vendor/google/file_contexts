@@ -328,7 +328,6 @@
 /vendor/bin/securedpud.slider        u:object_r:securedpud_slider_exec:s0
 /vendor/bin/storageproxyd            u:object_r:tee_exec:s0
 /vendor/bin/trusty_apploader         u:object_r:trusty_apploader_exec:s0
-/vendor/bin/trusty_metricsd          u:object_r:trusty_metricsd_exec:s0
 /vendor/bin/hw/android\.hardware\.gatekeeper@1\.0-service\.trusty                u:object_r:hal_gatekeeper_default_exec:s0
 /vendor/bin/hw/android\.hardware\.keymaster@4\.0-service\.trusty                 u:object_r:hal_keymaster_default_exec:s0
 /vendor/bin/hw/android\.hardware\.security\.keymint-service\.trusty              u:object_r:hal_keymint_default_exec:s0
@@ -343,9 +342,6 @@
 
 # AoC file contexts.
 /vendor/bin/aocd   u:object_r:aocd_exec:s0
-
-# NeuralNetworks file contexts
-/vendor/bin/hw/android\.hardware\.neuralnetworks@service-darwinn-aidl u:object_r:hal_neuralnetworks_darwinn_exec:s0
 
 # GRIL
 /vendor/bin/hw/vendor\.google\.radioext@1\.0-service                 u:object_r:hal_radioext_default_exec:s0
@@ -362,28 +358,6 @@
 
 # Citadel StrongBox
 /dev/gsc0                                                                   u:object_r:citadel_device:s0
-
-# EdgeTPU device (DarwiNN)
-/dev/abrolhos                      u:object_r:edgetpu_device:s0
-
-# EdgeTPU logging service
-/vendor/bin/hw/android\.hardware\.edgetpu\.logging@service-edgetpu-logging u:object_r:edgetpu_logging_exec:s0
-
-# EdgeTPU service binaries and libraries
-/system_ext/bin/hw/vendor\.google\.edgetpu_app_service@1\.0-service u:object_r:edgetpu_app_server_exec:s0
-/vendor/lib64/com\.google\.edgetpu_app_service-V1-ndk_platform\.so u:object_r:same_process_hal_file:s0
-/vendor/lib64/libedgetpu_client\.google\.so u:object_r:same_process_hal_file:s0
-
-# EdgeTPU vendor service
-/vendor/bin/hw/vendor\.google\.edgetpu_vendor_service@1\.0-service u:object_r:edgetpu_vendor_server_exec:s0
-/vendor/lib64/com\.google\.edgetpu_vendor_service-V1-ndk_platform\.so u:object_r:same_process_hal_file:s0
-
-# EdgeTPU runtime libraries
-/vendor/lib64/libedgetpu_util\.so u:object_r:same_process_hal_file:s0
-
-# EdgeTPU data files
-/data/vendor/edgetpu(/.*)?                              u:object_r:edgetpu_vendor_service_data_file:s0
-/data/vendor/hal_neuralnetworks_darwinn(/.*)?           u:object_r:hal_neuralnetworks_darwinn_data_file:s0
 
 # Tetheroffload Service
 /dev/dit2                      u:object_r:vendor_toe_device:s0

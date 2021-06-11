@@ -109,10 +109,6 @@ genfscon proc  /fts/driver_test                                                 
 genfscon proc  /fts_ext/driver_test                                             u:object_r:proc_touch:s0
 genfscon sysfs /devices/virtual/sec/tsp                                         u:object_r:sysfs_touch:s0
 
-# EdgeTPU
-genfscon sysfs /devices/platform/1ce00000.abrolhos                              u:object_r:sysfs_edgetpu:s0
-genfscon sysfs /devices/platform/abrolhos                                       u:object_r:sysfs_edgetpu:s0
-
 # Vendor sched files
 genfscon sysfs /kernel/vendor_sched                                            u:object_r:sysfs_vendor_sched:s0
 genfscon proc  /vendor_sched                                                   u:object_r:proc_vendor_sched:s0
@@ -211,6 +207,7 @@ genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-7/i2c-max77759tcpc/power_sup
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-7/7-0069/power_supply/dc/wakeup                                      u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-7/7-0069/power_supply/gcpm/wakeup                                    u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-7/7-0036/power_supply/maxfg/wakeup                                   u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/google,usbc_port_cooling_dev/wakeup/wakeup                                              u:object_r:sysfs_wakeup:s0
 
 # OTA
 genfscon sysfs /devices/platform/14700000.ufs/pixel/boot_lun_enabled                                                     u:object_r:sysfs_ota:s0
