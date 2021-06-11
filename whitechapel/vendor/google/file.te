@@ -134,22 +134,6 @@ type vendor_camera_tuning_file, vendor_file_type, file_type;
 type vendor_camera_data_file, file_type, data_file_type;
 type sysfs_camera, sysfs_type, fs_type;
 
-# EdgeTPU hal data file
-type hal_neuralnetworks_darwinn_data_file, file_type, data_file_type;
-
-# EdgeTPU vendor service data file
-type edgetpu_vendor_service_data_file, file_type, data_file_type;
-
-# EdgeTPU sysfs
-type sysfs_edgetpu, sysfs_type, fs_type;
-
-# Vendor sched files
-type sysfs_vendor_sched, sysfs_type, fs_type;
-userdebug_or_eng(`
-    typeattribute sysfs_vendor_sched mlstrustedobject;
-')
-type proc_vendor_sched, proc_type, fs_type;
-
 # GPS
 type vendor_gps_file, file_type, data_file_type;
 userdebug_or_eng(`
