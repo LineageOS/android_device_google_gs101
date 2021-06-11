@@ -1,3 +1,0 @@
-# b/183935382
-dontaudit vendor_rcs_app default_prop:file { read };
-dontaudit vendor_rcs_app default_prop:file { read };
