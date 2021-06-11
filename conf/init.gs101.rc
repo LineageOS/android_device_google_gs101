@@ -664,6 +664,9 @@ on property:sys.boot_completed=1
 
     write /sys/kernel/vendor_sched/bg_group_throttle 512
 
+    # Skip little core for RT vendor_grp
+    write /sys/kernel/vendor_sched/rt_uclamp_min 125
+
     # Setup cpu.shares to throttle background group at 5%
     write /dev/cpuctl/background/cpu.shares 1024
     write /dev/cpuctl/system/cpu.shares 20480
