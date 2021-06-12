@@ -177,6 +177,7 @@
 /data/vendor/camera(/.*)?                                               u:object_r:vendor_camera_data_file:s0
 /vendor/lib(64)?/lib_aion_buffer\.so                                    u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libGralloc4Wrapper\.so                                 u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/pixel-power-ext-V1-ndk_platform\.so                    u:object_r:same_process_hal_file:s0
 
 /dev/stmvl53l1_ranging                                                  u:object_r:rls_device:s0
 
