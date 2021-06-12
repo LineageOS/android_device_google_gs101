@@ -12,3 +12,6 @@ userdebug_or_eng(`
   get_prop(hal_fingerprint_default, vendor_fingerprint_fake_prop)
 ')
 add_hwservice(hal_fingerprint_default, hal_fingerprint_ext_hwservice)
+
+# allow fingerprint to access power hal
+hal_client_domain(hal_fingerprint_default, hal_power);
