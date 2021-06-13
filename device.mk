@@ -1102,8 +1102,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	zygote.critical_window.minute=10
 
 # Suspend properties
+# (b/171433995): Enable short suspend backoffs and reduce max backoff time
 PRODUCT_PROPERTY_OVERRIDES += \
-    suspend.short_suspend_threshold_millis=5000
+    suspend.short_suspend_threshold_millis=2000 \
+    suspend.short_suspend_backoff_enabled=true \
+    suspend.max_sleep_time_millis=40000
 
 # (b/183612348): Enable skia reduceOpsTaskSplitting
 PRODUCT_PROPERTY_OVERRIDES += \
