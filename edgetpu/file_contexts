@@ -23,3 +23,5 @@
 # NeuralNetworks file contexts
 /vendor/bin/hw/android\.hardware\.neuralnetworks@service-darwinn-aidl u:object_r:hal_neuralnetworks_darwinn_exec:s0
 
+# EdgeTPU metrics logging service.
+/vendor/lib64/libmetrics_logger\.so u:object_r:same_process_hal_file:s0
