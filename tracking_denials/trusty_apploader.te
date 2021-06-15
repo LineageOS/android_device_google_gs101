@@ -1,3 +1,0 @@
-# b/182953825
-dontaudit trusty_apploader trusty_apploader:capability { dac_override };
-dontaudit trusty_apploader trusty_apploader:capability { dac_override };
