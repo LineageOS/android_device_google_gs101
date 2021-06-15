@@ -564,6 +564,12 @@ void DumpstateDevice::dumpTouchSection(int fd) {
                      stm_cmd_path[i + 1], stm_cmd_path[i + 1]);
             RunCommandToFd(fd, "Packaging Plant - Read 16 bytes from Address 0x00041FD8",
                            {"/vendor/bin/sh", "-c", cmd});
+
+            snprintf(cmd, sizeof(cmd),
+                     "echo 01 A4 06 C3 > %s; echo 02 A7 00 00 00 20 00 > %s && cat %s",
+                     stm_cmd_path[i + 1], stm_cmd_path[i + 1], stm_cmd_path[i + 1]);
+            RunCommandToFd(fd, "HDM debug information (32 bytes)",
+                           {"/vendor/bin/sh", "-c", cmd});
         }
 
         snprintf(cmd, sizeof(cmd), "%s/stm_fts_cmd", stm_cmd_path[i]);
