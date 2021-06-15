@@ -605,10 +605,11 @@ void addTPU(std::shared_ptr<PowerStats> p) {
     std::map<std::string, int32_t> stateCoeffs;
 
     stateCoeffs = {
-        {"500000",  10},
-        {"800000",  20},
-        {"1066000", 30},
-        {"1230000", 40}};
+        {"226000",  49.25},
+        {"500000",  73.80},
+        {"800000",  86.99},
+        {"1066000", 103.93},
+        {"1230000", 108.10}};
 
     p->addEnergyConsumer(PowerStatsEnergyConsumer::createMeterAndAttrConsumer(p,
             EnergyConsumerType::OTHER, "TPU", {"S10M_VDD_TPU"},
