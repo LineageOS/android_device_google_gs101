@@ -648,6 +648,13 @@ void DumpstateDevice::dumpTouchSection(int fd) {
                  lsi_spi_path, lsi_spi_path);
         RunCommandToFd(fd, "TYPE_DECODED_DATA", {"/vendor/bin/sh", "-c", cmd});
 
+        // TYPE_OFFSET_DATA_SEC
+        snprintf(cmd, sizeof(cmd),
+                 "echo %s > %s/cmd && cat %s/cmd_result",
+                 "run_rawdata_read_type,19",
+                 lsi_spi_path, lsi_spi_path);
+        RunCommandToFd(fd, "TYPE_OFFSET_DATA_SEC", {"/vendor/bin/sh", "-c", cmd});
+
         // TYPE_NOI_P2P_MIN
         snprintf(cmd, sizeof(cmd),
                  "echo %s > %s/cmd && cat %s/cmd_result",
