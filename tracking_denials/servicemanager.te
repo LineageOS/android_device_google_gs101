@@ -1,3 +1,0 @@
-# b/182086688
-dontaudit servicemanager hal_sensors_default:binder { call };
-dontaudit servicemanager hal_sensors_default:binder { call };
