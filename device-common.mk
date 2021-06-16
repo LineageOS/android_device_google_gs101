@@ -22,7 +22,7 @@ PRODUCT_COPY_FILES += \
 
 # Android Verified Boot
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.software.verified_boot.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/android.software.verified_boot.xml
+    frameworks/native/data/etc/android.software.verified_boot.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.verified_boot.xml
 
 # Factory OTA
 -include vendor/google/factoryota/client/factoryota.mk
