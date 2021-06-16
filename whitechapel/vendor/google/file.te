@@ -13,7 +13,6 @@ type vendor_rild_log_file, file_type, data_file_type;
 type vendor_sced_log_file, file_type, data_file_type;
 type vendor_slog_file, file_type, data_file_type, mlstrustedobject;
 type vendor_telephony_log_file, file_type, data_file_type;
-type vendor_vcd_log_file, file_type, data_file_type;
 
 # app data files
 type vendor_test_data_file, file_type, data_file_type;
