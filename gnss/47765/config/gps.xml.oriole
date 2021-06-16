@@ -54,7 +54,6 @@
        IgnoreInjectedSystemTime="true"
 
        AttributionAppPkgName="com.google.android.carrierlocation"
-       CpResetInvalidateSec="15"
 
        AssertEnabled="false"
   />
