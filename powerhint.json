@@ -107,14 +107,14 @@
       "Name": "TAUClampBoost",
       "Path": "/sys/kernel/vendor_sched/ta_uclamp_min",
       "Values": [
-        "1",
         "553",
+        "1",
         "246",
         "185",
         "123",
         "62"
       ],
-      "DefaultIndex": 0,
+      "DefaultIndex": 1,
       "ResetOnInit": true
     },
     {
