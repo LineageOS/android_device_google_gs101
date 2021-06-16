@@ -74,6 +74,3 @@ PRODUCT_SET_DEBUGFS_RESTRICTIONS := false
 # PixelLogger for RF testing
 PRODUCT_PACKAGES_DEBUG += \
     PixelLogger
-
-# Modem userdebug
-include device/google/gs101/modem/userdebug.mk
