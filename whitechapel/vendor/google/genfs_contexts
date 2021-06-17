@@ -4,6 +4,10 @@ genfscon sysfs /devices/platform/19000000.aoc/firmware                      u:ob
 genfscon sysfs /devices/platform/19000000.aoc                               u:object_r:sysfs_aoc:s0
 genfscon sysfs /devices/platform/19000000.aoc/reset                         u:object_r:sysfs_aoc_reset:s0
 
+genfscon sysfs /devices/platform/19000000.aoc/services                      u:object_r:sysfs_aoc_dumpstate:s0
+genfscon sysfs /devices/platform/19000000.aoc/restart_count                 u:object_r:sysfs_aoc_dumpstate:s0
+genfscon sysfs /devices/platform/19000000.aoc/coredump_count                u:object_r:sysfs_aoc_dumpstate:s0
+
 # WiFi
 genfscon sysfs /wifi                                                        u:object_r:sysfs_wifi:s0
 # Battery
