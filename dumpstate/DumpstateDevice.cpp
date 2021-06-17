@@ -334,11 +334,12 @@ void DumpstateDevice::dumpPowerSection(int fd) {
         DumpFileToFd(fd, "maxfg_flip", "/dev/logbuffer_maxfg_flip");
     }
 
-
-    if (!stat("/sys/kernel/debug/tcpm", &buffer)) {
-        RunCommandToFd(fd, "TCPM logs", {"/vendor/bin/sh", "-c", "cat /sys/kernel/debug/tcpm/*"});
-    } else {
-        RunCommandToFd(fd, "TCPM logs", {"/vendor/bin/sh", "-c", "cat /sys/kernel/debug/usb/tcpm*"});
+    if (!PropertiesHelper::IsUserBuild()) {
+        if (!stat("/sys/kernel/debug/tcpm", &buffer)) {
+            RunCommandToFd(fd, "TCPM logs", {"/vendor/bin/sh", "-c", "cat /sys/kernel/debug/tcpm/*"});
+        } else {
+            RunCommandToFd(fd, "TCPM logs", {"/vendor/bin/sh", "-c", "cat /sys/kernel/debug/usb/tcpm*"});
+        }
     }
 
     DumpFileToFd(fd, "PD Engine", "/dev/logbuffer_usbpd");
@@ -364,33 +365,35 @@ void DumpstateDevice::dumpPowerSection(int fd) {
     RunCommandToFd(fd, "TEMP-DEFEND Config", {"/vendor/bin/sh", "-c",
                         " cd /sys/devices/platform/google,charger/;"
                         " for f in `ls bd_*` ; do echo \"$f: `cat $f`\" ; done"});
+    if (!PropertiesHelper::IsUserBuild()) {
 
-    RunCommandToFd(fd, "DC_registers dump", {"/vendor/bin/sh", "-c",
+        RunCommandToFd(fd, "DC_registers dump", {"/vendor/bin/sh", "-c",
                         "for f in /d/regmap/*-0057-pca9468-mains ; do "
                         "regs=`cat $f/registers`; echo $f: ;"
                         "echo \"$regs\"; done"});
 
-    RunCommandToFd(fd, "fg_model", {"/vendor/bin/sh", "-c",
+        RunCommandToFd(fd, "fg_model", {"/vendor/bin/sh", "-c",
                         "for f in /d/maxfg* ; do "
                         "regs=`cat $f/fg_model`; echo $f: ;"
                         "echo \"$regs\"; done"});
 
-    RunCommandToFd(fd, "fg_alo_ver", {"/vendor/bin/sh", "-c",
+        RunCommandToFd(fd, "fg_alo_ver", {"/vendor/bin/sh", "-c",
                         "for f in /d/maxfg* ; do "
                         "regs=`cat $f/algo_ver`; echo $f: ;"
                         "echo \"$regs\"; done"});
 
-    RunCommandToFd(fd, "fg_model_ok", {"/vendor/bin/sh", "-c",
+        RunCommandToFd(fd, "fg_model_ok", {"/vendor/bin/sh", "-c",
                         "for f in /d/maxfg* ; do "
                         "regs=`cat $f/model_ok`; echo $f: ;"
                         "echo \"$regs\"; done"});
 
 
-    /* FG Registers */
-    RunCommandToFd(fd, "fg registers", {"/vendor/bin/sh", "-c",
+        /* FG Registers */
+        RunCommandToFd(fd, "fg registers", {"/vendor/bin/sh", "-c",
                         "for f in /d/regmap/*-0036 ; do "
                         "regs=`cat $f/registers`; echo $f: ;"
                         "echo \"$regs\"; done"});
+    }
 
     /* EEPROM State */
     if (!stat("/sys/devices/platform/10970000.hsi2c/i2c-4/4-0050/eeprom", &buffer)) {
@@ -400,10 +403,12 @@ void DumpstateDevice::dumpPowerSection(int fd) {
     }
 
     DumpFileToFd(fd, "Charger Stats", "/sys/class/power_supply/battery/charge_details");
-    RunCommandToFd(fd, "Google Charger", {"/vendor/bin/sh", "-c", "cd /sys/kernel/debug/google_charger/; "
+    if (!PropertiesHelper::IsUserBuild()) {
+        RunCommandToFd(fd, "Google Charger", {"/vendor/bin/sh", "-c", "cd /sys/kernel/debug/google_charger/; "
                         "for f in `ls pps_*` ; do echo \"$f: `cat $f`\" ; done"});
-    RunCommandToFd(fd, "Google Battery", {"/vendor/bin/sh", "-c", "cd /sys/kernel/debug/google_battery/; "
+        RunCommandToFd(fd, "Google Battery", {"/vendor/bin/sh", "-c", "cd /sys/kernel/debug/google_battery/; "
                         "for f in `ls ssoc_*` ; do echo \"$f: `cat $f`\" ; done"});
+    }
 
     DumpFileToFd(fd, "WLC logs", "/dev/logbuffer_wireless");
     DumpFileToFd(fd, "WLC VER", "/sys/class/power_supply/wireless/device/version");
@@ -411,7 +416,9 @@ void DumpstateDevice::dumpPowerSection(int fd) {
     DumpFileToFd(fd, "WLC FW Version", "/sys/class/power_supply/wireless/device/fw_rev");
     DumpFileToFd(fd, "RTX", "/dev/logbuffer_rtx");
 
-    RunCommandToFd(fd, "gvotables", {"/vendor/bin/sh", "-c", "cat /sys/kernel/debug/gvotables/*/status"});
+    if (!PropertiesHelper::IsUserBuild()) {
+        RunCommandToFd(fd, "gvotables", {"/vendor/bin/sh", "-c", "cat /sys/kernel/debug/gvotables/*/status"});
+    }
     RunCommandToFd(fd, "Mitigation Stats", {"/vendor/bin/sh", "-c", "echo \"Source\\t\\tCount\\tSOC\\tTime\\tVoltage\"; "
                         "for f in `ls /sys/devices/virtual/pmic/mitigation/last_triggered_count/*` ; "
                         "do count=`cat $f`; "
