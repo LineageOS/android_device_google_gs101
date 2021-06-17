@@ -136,7 +136,6 @@
 /(vendor|system/vendor)/bin/hw/rild_exynos     u:object_r:rild_exec:s0
 /(vendor|system/vendor)/bin/rfsd               u:object_r:rfsd_exec:s0
 /(vendor|system/vendor)/bin/sced               u:object_r:sced_exec:s0
-/(vendor|system/vendor)/bin/vcd                u:object_r:vcd_exec:s0
 /(vendor|system/vendor)/bin/bipchmgr           u:object_r:bipchmgr_exec:s0
 
 # WFC
@@ -160,7 +159,6 @@
 /data/vendor/log/sced(/.*)?  u:object_r:vendor_sced_log_file:s0
 /data/vendor/log/slog(/.*)?  u:object_r:vendor_slog_file:s0
 /data/vendor/slog(/.*)?      u:object_r:vendor_slog_file:s0
-/data/vendor/log/vcd(/.*)?   u:object_r:vendor_vcd_log_file:s0
 
 /persist/sensorcal\.json     u:object_r:sensors_cal_file:s0
 
@@ -335,7 +333,7 @@
 /vendor/bin/hw/android\.hardware\.confirmationui@1\.0-service\.trusty\.vendor    u:object_r:hal_confirmationui_default_exec:s0
 /dev/trusty-ipc-dev0                 u:object_r:tee_device:s0
 /data/vendor/ss(/.*)?                u:object_r:tee_data_file:s0
-/mnt/vendor/persist/ss(/.*)?         u:object_r:tee_data_file:s0
+/mnt/vendor/persist/ss(/.*)?         u:object_r:persist_ss_file:s0
 /dev/sg1                             u:object_r:sg_device:s0
 /dev/trusty-log0                     u:object_r:logbuffer_device:s0
 
