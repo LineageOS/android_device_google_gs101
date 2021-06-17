@@ -33,3 +33,6 @@ binder_use(hal_neuralnetworks_darwinn)
 
 # TPU NNAPI to register the service to service_manager.
 add_service(hal_neuralnetworks_darwinn, edgetpu_nnapi_service);
+
+# Allow TPU NNAPI HAL to read the overcommit_memory info.
+allow hal_neuralnetworks_darwinn proc_overcommit_memory:file r_file_perms;
