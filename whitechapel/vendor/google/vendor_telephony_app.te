@@ -19,4 +19,5 @@ userdebug_or_eng(`
 dontaudit vendor_telephony_app system_app_data_file:dir create_dir_perms;
 dontaudit vendor_telephony_app system_app_data_file:file create_file_perms;
 dontaudit vendor_telephony_app default_prop:file { getattr open read map };
+allow vendor_telephony_app selinuxfs:file { read open };
 ')
