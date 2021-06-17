@@ -39,6 +39,9 @@ allow hal_dumpstate_default sscoredump_vendor_data_crashinfo_file:file r_file_pe
 allow hal_dumpstate_default sysfs_acpm_stats:dir r_dir_perms;
 allow hal_dumpstate_default sysfs_acpm_stats:file r_file_perms;
 
+allow hal_dumpstate_default sysfs_aoc:dir r_dir_perms;
+allow hal_dumpstate_default sysfs_aoc_dumpstate:file r_file_perms;
+
 allow hal_dumpstate_default sysfs_spi:dir search;
 allow hal_dumpstate_default sysfs_spi:file rw_file_perms;
 

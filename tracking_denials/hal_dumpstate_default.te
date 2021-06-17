@@ -1,2 +1,0 @@
-# b/188752787
-dontaudit hal_dumpstate_default sysfs_aoc:dir search;
