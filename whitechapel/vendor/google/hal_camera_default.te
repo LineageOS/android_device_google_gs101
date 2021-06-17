@@ -75,3 +75,6 @@ binder_call(hal_camera_default, hal_radioext_default);
 
 # Allow camera HAL to connect to the stats service.
 allow hal_camera_default fwk_stats_service:service_manager find;
+
+# For observing apex file changes
+allow hal_camera_default apex_info_file:file r_file_perms;
