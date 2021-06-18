@@ -777,13 +777,7 @@ $(call inherit-product, system/core/trusty/trusty-base.mk)
 # Trusty unit test tool
 PRODUCT_PACKAGES_DEBUG += trusty-ut-ctrl
 
-# Trusty ConfirmationUI HAL
-PRODUCT_PACKAGES += \
-	android.hardware.confirmationui@1.0-service.trusty.vendor
-
-# Trusty Secure DPU Daemon
-PRODUCT_PACKAGES += \
-	securedpud.slider
+include device/google/gs101/confirmationui/confirmationui.mk
 
 include device/google/gs101/trusty_metricsd/trusty_metricsd.mk
 
