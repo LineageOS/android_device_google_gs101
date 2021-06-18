@@ -95,6 +95,7 @@
 /dev/scsc_h4_0                 u:object_r:radio_device:s0
 /dev/umts_boot0                u:object_r:radio_device:s0
 /dev/tui-driver                u:object_r:tui_device:s0
+/dev/logbuffer_tcpm            u:object_r:logbuffer_device:s0
 /dev/logbuffer_usbpd           u:object_r:logbuffer_device:s0
 /dev/logbuffer_ssoc            u:object_r:logbuffer_device:s0
 /dev/logbuffer_wireless        u:object_r:logbuffer_device:s0
