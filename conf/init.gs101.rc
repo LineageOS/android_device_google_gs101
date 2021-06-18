@@ -692,6 +692,8 @@ on property:sys.boot_completed=1
     chown system system /sys/class/power_supply/wireless/device/ccreset
     chown system system /sys/class/power_supply/wireless/device/status
     chown system system /sys/class/power_supply/wireless/device/version
+    chown system system /sys/class/power_supply/wireless/device/features
+    chown system system /sys/class/power_supply/wireless/device/authtype
 
     # AOC reset permission
     chown root system /sys/devices/platform/19000000.aoc/reset
