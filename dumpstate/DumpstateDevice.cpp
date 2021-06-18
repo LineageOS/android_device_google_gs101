@@ -334,7 +334,9 @@ void DumpstateDevice::dumpPowerSection(int fd) {
         DumpFileToFd(fd, "maxfg_flip", "/dev/logbuffer_maxfg_flip");
     }
 
-    if (!PropertiesHelper::IsUserBuild()) {
+    if (!stat("/dev/logbuffer_tcpm", &buffer)) {
+        DumpFileToFd(fd, "Logbuffer TCPM", "/dev/logbuffer_tcpm");
+    } else if (!PropertiesHelper::IsUserBuild()) {
         if (!stat("/sys/kernel/debug/tcpm", &buffer)) {
             RunCommandToFd(fd, "TCPM logs", {"/vendor/bin/sh", "-c", "cat /sys/kernel/debug/tcpm/*"});
         } else {
