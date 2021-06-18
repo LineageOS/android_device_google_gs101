@@ -1,0 +1,9 @@
+blocklist bcmdhd43752
+blocklist bcmdhd4389
+blocklist drv2624
+blocklist ftm5
+blocklist sec_touch
+blocklist snd-soc-cs35l41-i2c
+blocklist snd-soc-cs35l41-spi
+blocklist st33spi
+blocklist st54spi
