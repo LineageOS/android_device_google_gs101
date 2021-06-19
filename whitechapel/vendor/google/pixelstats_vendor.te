@@ -15,3 +15,6 @@ allow pixelstats_vendor fwk_stats_service:service_manager find;
 
 allow pixelstats_vendor sysfs_scsi_devices_0000:file rw_file_perms;
 allow pixelstats_vendor sysfs_pixelstats:file r_file_perms;
+
+allow pixelstats_vendor sysfs_wlc:dir search;
+allow pixelstats_vendor sysfs_wlc:file rw_file_perms;
