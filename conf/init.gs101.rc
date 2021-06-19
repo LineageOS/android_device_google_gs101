@@ -183,6 +183,9 @@ on init
     # Charge stats (write 0)
     chown system system /sys/class/power_supply/battery/charge_stats
 
+    # Wireless Charge stats (write 0)
+    chown system system /sys/class/power_supply/wireless/device/charge_stats
+
     # Adaptive charge
     chown system system /sys/class/power_supply/battery/charge_deadline
 
