@@ -94,7 +94,7 @@
 /dev/repeater                  u:object_r:video_device:s0
 /dev/scsc_h4_0                 u:object_r:radio_device:s0
 /dev/umts_boot0                u:object_r:radio_device:s0
-/dev/tui-driver                u:object_r:tui_device:s0
+/dev/logbuffer_tcpm            u:object_r:logbuffer_device:s0
 /dev/logbuffer_usbpd           u:object_r:logbuffer_device:s0
 /dev/logbuffer_ssoc            u:object_r:logbuffer_device:s0
 /dev/logbuffer_wireless        u:object_r:logbuffer_device:s0
@@ -324,13 +324,11 @@
 
 
 # Trusty
-/vendor/bin/securedpud.slider        u:object_r:securedpud_slider_exec:s0
 /vendor/bin/storageproxyd            u:object_r:tee_exec:s0
 /vendor/bin/trusty_apploader         u:object_r:trusty_apploader_exec:s0
 /vendor/bin/hw/android\.hardware\.gatekeeper@1\.0-service\.trusty                u:object_r:hal_gatekeeper_default_exec:s0
 /vendor/bin/hw/android\.hardware\.keymaster@4\.0-service\.trusty                 u:object_r:hal_keymaster_default_exec:s0
 /vendor/bin/hw/android\.hardware\.security\.keymint-service\.trusty              u:object_r:hal_keymint_default_exec:s0
-/vendor/bin/hw/android\.hardware\.confirmationui@1\.0-service\.trusty\.vendor    u:object_r:hal_confirmationui_default_exec:s0
 /dev/trusty-ipc-dev0                 u:object_r:tee_device:s0
 /data/vendor/ss(/.*)?                u:object_r:tee_data_file:s0
 /mnt/vendor/persist/ss(/.*)?         u:object_r:persist_ss_file:s0
