@@ -26,3 +26,5 @@ allow rlsservice aoc_device:chr_file rw_file_perms;
 # Allow use of the USF low latency transport
 usf_low_latency_transport(rlsservice)
 
+# For observing apex file changes
+allow rlsservice apex_info_file:file r_file_perms;
