@@ -480,6 +480,8 @@ on fs
     mkdir /mnt/vendor/persist/data/sfs 0700 system system
     mkdir /mnt/vendor/persist/data/tz 0700 system system
     mkdir /mnt/vendor/persist/touch 0770 system system
+    mkdir /mnt/vendor/persist/audio 0770 system system
+    chown media audio /mnt/vendor/persist/audio
 
 # Permissions for ION
     chmod 0660 /sys/class/ion_cma/ion_video_ext/isolated
