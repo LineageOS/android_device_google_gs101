@@ -118,6 +118,16 @@
       "ResetOnInit": true
     },
     {
+      "Name": "MLUclampBoost",
+      "Path": "/sys/kernel/vendor_sched/nnapi_uclamp_min",
+      "Values": [
+          "154",
+          "512"
+      ],
+      "DefaultIndex": 0,
+      "ResetOnInit": true
+    },
+    {
       "Name": "CDPreferIdle",
       "Path": "/sys/kernel/vendor_sched/cam_prefer_idle",
       "Values": [
@@ -849,6 +859,12 @@
       "Node": "CPUBigClusterMinFreq",
       "Duration": 1000,
       "Value": "9999999"
+    },
+    {
+      "PowerHint": "ML_ACC",
+      "Node": "MLUclampBoost",
+      "Duration": 2000,
+      "Value": "512"
     }
   ]
 }
