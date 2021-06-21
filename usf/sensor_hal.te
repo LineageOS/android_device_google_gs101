@@ -43,7 +43,7 @@ allow hal_sensors_default sysfs_aoc:file r_file_perms;
 usf_low_latency_transport(hal_sensors_default)
 
 # Allow sensor HAL to reset AOC.
-allow hal_sensors_default sysfs_aoc_reset:file w_file_perms;
+allow hal_sensors_default sysfs_aoc_reset:file rw_file_perms;
 
 #
 # Suez type enforcements.
