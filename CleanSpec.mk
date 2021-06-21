@@ -77,3 +77,9 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/vintf/manifest/android.h
 $(call add-clean-step, rm -f $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.power.stats@1.0-service.gs101)
 $(call add-clean-step, rm -f $(PRODUCT_OUT)/vendor/etc/init/android.hardware.power.stats@1.0-service.gs101.rc)
 $(call add-clean-step, rm -f $(PRODUCT_OUT)/vendor/etc/vintf/manifest/android.hardware.power.stats@1.0-service.gs101.xml)
+
+# Keymaster to KeyMint
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.keymaster@4.0-service.trusty)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/vendor/etc/init/android.hardware.keymaster@4.0-service.trusty.rc)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/vendor/etc/vintf/manifest/android.hardware.keymaster@4.0-service.trusty.xml)
+$(call add-clean-step, rm -f $(PRODUCT_OUT)/vendor/bin/hw/wait_for_strongbox)
