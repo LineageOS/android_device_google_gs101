@@ -16,6 +16,5 @@ FPC_CONFIG_DEBUG=1
 FPC_CONFIG_ENGINEERING=1
 FPC_CONFIG_PRODUCT_DEFAULT=FPC_PRODUCT_TYPE1541_S
 
-#
-# File included from device/<manufacture>/<>/<device>.mk
-# Packages to include into the build
+# Google configuration
+GOOGLE_CONFIG_FP_STATUS=1

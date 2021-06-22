@@ -7,6 +7,7 @@ PRODUCT_PACKAGES += \
     SensorTestTool \
     ImageTool \
     ImageCollection \
+    fp_test \
 
 PRODUCT_PACKAGES += \
     com.fingerprints.extension.xml \
