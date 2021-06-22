@@ -337,8 +337,9 @@ BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_bcmdhd
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 BOARD_HOSTAPD_DRIVER := NL80211
-# Wifi interface combination - {1 STA + 1 AP (bridged or single)} or {2 STA + 1 of (P2P or NAN)}
-WIFI_HAL_INTERFACE_COMBINATIONS := {{{STA}, 1}, {{AP}, 1}}, {{{STA}, 2}, {{P2P, NAN}, 1}}
+# Wifi interface combination - {1 STA + 1 AP (bridged or single)} or {1 STA + 1 P2P}
+# or {1 STA + 1 NAN} or {2 STA}
+WIFI_HAL_INTERFACE_COMBINATIONS := {{{STA}, 1}, {{P2P, NAN, AP}, 1}}, {{{STA}, 2}}
 WIFI_FEATURE_WIFI_EXT_HAL := true
 WIFI_FEATURE_IMU_DETECTION := true
 # Avoid Wifi reset on MAC Address change
