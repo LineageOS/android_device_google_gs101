@@ -1,0 +1,19 @@
+cc_binary {
+    srcs: [
+        "fp_test.cpp"
+    ],
+    include_dirs: [
+        "device/google/gs101/fingerprint/fpc1540/fp_tool"
+    ],
+    name: "fp_test",
+    shared_libs: [
+        "liblog",
+        "libdl",
+        "libutils",
+        "libcutils",
+        "libhidlbase",
+        "android.hardware.biometrics.fingerprint@2.1"
+    ],
+    proprietary:true,
+
+}
