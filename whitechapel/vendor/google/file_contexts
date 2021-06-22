@@ -123,7 +123,6 @@
 # GPU device
 /dev/mali0                     u:object_r:gpu_device:s0
 /dev/s5p-smem                  u:object_r:vendor_secmem_device:s0
-/dev/umts_wfc[01]                 u:object_r:pktrouter_device:s0
 
 #
 # Exynos Daemon Exec
@@ -137,9 +136,6 @@
 /(vendor|system/vendor)/bin/rfsd               u:object_r:rfsd_exec:s0
 /(vendor|system/vendor)/bin/sced               u:object_r:sced_exec:s0
 /(vendor|system/vendor)/bin/bipchmgr           u:object_r:bipchmgr_exec:s0
-
-# WFC
-/(vendor|system/vendor)/bin/wfc-pkt-router     u:object_r:pktrouter_exec:s0
 
 #
 # Exynos Data Files
