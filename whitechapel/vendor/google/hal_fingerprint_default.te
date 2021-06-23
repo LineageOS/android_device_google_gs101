@@ -15,3 +15,6 @@ add_hwservice(hal_fingerprint_default, hal_fingerprint_ext_hwservice)
 
 # allow fingerprint to access power hal
 hal_client_domain(hal_fingerprint_default, hal_power);
+
+# Allow access to the files of CDT information.
+r_dir_file(hal_fingerprint_default, sysfs_chosen)
