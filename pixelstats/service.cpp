@@ -17,35 +17,37 @@
 #define LOG_TAG "pixelstats"
 
 #include <android-base/logging.h>
-#include <thread>
-
 #include <pixelstats/SysfsCollector.h>
 #include <pixelstats/UeventListener.h>
+
+#include <thread>
 
 using android::hardware::google::pixel::SysfsCollector;
 using android::hardware::google::pixel::UeventListener;
 
 #define UFSHC_PATH(filename) "/dev/sys/block/bootdevice/" #filename
 const struct SysfsCollector::SysfsPaths sysfs_paths = {
-    .SlowioReadCntPath = UFSHC_PATH(slowio_read_cnt),
-    .SlowioWriteCntPath = UFSHC_PATH(slowio_write_cnt),
-    .SlowioUnmapCntPath = UFSHC_PATH(slowio_unmap_cnt),
-    .SlowioSyncCntPath = UFSHC_PATH(slowio_sync_cnt),
-    .UFSLifetimeA = UFSHC_PATH(health_descriptor/life_time_estimation_a),
-    .UFSLifetimeB = UFSHC_PATH(health_descriptor/life_time_estimation_b),
-    .UFSLifetimeC = UFSHC_PATH(health_descriptor/life_time_estimation_c),
-    .UFSHostResetPath = UFSHC_PATH(err_stats/dev_reset_count),
-    .F2fsStatsPath = "/sys/fs/f2fs/",
-    .ImpedancePath = "/sys/devices/platform/audiometrics/speaker_impedance",
-    .CodecPath =     "/sys/devices/platform/audiometrics/codec_state",
-};
+        .SlowioReadCntPath = UFSHC_PATH(slowio_read_cnt),
+        .SlowioWriteCntPath = UFSHC_PATH(slowio_write_cnt),
+        .SlowioUnmapCntPath = UFSHC_PATH(slowio_unmap_cnt),
+        .SlowioSyncCntPath = UFSHC_PATH(slowio_sync_cnt),
+        .CycleCountBinsPath = "/sys/class/power_supply/battery/cycle_counts",
+        .UFSLifetimeA = UFSHC_PATH(health_descriptor/life_time_estimation_a),
+        .UFSLifetimeB = UFSHC_PATH(health_descriptor/life_time_estimation_b),
+        .UFSLifetimeC = UFSHC_PATH(health_descriptor/life_time_estimation_c),
+        .UFSHostResetPath = UFSHC_PATH(err_stats/dev_reset_count),
+        .F2fsStatsPath = "/sys/fs/f2fs/",
+        .ImpedancePath = "/sys/devices/platform/audiometrics/speaker_impedance",
+        .CodecPath = "/sys/devices/platform/audiometrics/codec_state",
+        .EEPROMPath = "/dev/battery_history"};
 
 const char *const kAudioUevent = "/devices/virtual/amcs/amcs";
+const char *const kSSOCDetailsPath = "/sys/class/power_supply/battery/ssoc_details";
 
 int main() {
     LOG(INFO) << "starting PixelStats";
 
-    UeventListener ueventListener(kAudioUevent);
+    UeventListener ueventListener(kAudioUevent, kSSOCDetailsPath);
     std::thread listenThread(&UeventListener::ListenForever, &ueventListener);
     listenThread.detach();
 
