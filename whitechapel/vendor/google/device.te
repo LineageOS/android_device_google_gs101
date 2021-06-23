@@ -53,3 +53,5 @@ type fingerprint_device, dev_type;
 # AMCS device
 type amcs_device, dev_type;
 
+# Battery history
+type battery_history_device, dev_type;
