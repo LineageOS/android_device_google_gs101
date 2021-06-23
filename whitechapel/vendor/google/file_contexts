@@ -361,6 +361,9 @@
 # pixelstats binary
 /vendor/bin/pixelstats-vendor           u:object_r:pixelstats_vendor_exec:s0
 
+# battery history
+/dev/battery_history                                                                  u:object_r:battery_history_device:s0
+
 # Vendor_kernel_modules
 /vendor_dlkm/lib/modules/.*\.ko                                               u:object_r:vendor_kernel_modules:s0
 
