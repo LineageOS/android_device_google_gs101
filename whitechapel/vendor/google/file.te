@@ -11,7 +11,6 @@ type vendor_rfsd_log_file, file_type, data_file_type;
 type vendor_dump_log_file, file_type, data_file_type;
 type vendor_rild_log_file, file_type, data_file_type;
 type vendor_sced_log_file, file_type, data_file_type;
-type vendor_slog_file, file_type, data_file_type, mlstrustedobject;
 type vendor_telephony_log_file, file_type, data_file_type;
 
 # app data files
