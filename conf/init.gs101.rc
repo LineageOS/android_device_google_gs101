@@ -338,6 +338,9 @@ on post-fs-data
     mkdir /data/vendor/edgetpu 0770 system system
     mkdir /data/vendor/edgetpu/cache 0770 system system
 
+# Compatibility path for TPU
+    symlink /dev/abrolhos /dev/edgetpu
+
 on zygote-start
     # For PixelLogger configuration file.
     chmod 0771 /data/vendor/wifi
