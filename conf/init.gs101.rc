@@ -705,35 +705,6 @@ on property:sys.boot_completed=1
     chown root system /sys/devices/platform/19000000.aoc/reset
     chmod 0220 /sys/devices/platform/19000000.aoc/reset
 
-# IMS WiFi Calling
-    service charonservice /system/vendor/bin/charon
-    class main
-    user root
-    disabled
-    seclabel u:r:charonservice:s0
-
-on property:vendor.charon.exec=1
-    rm /data/vendor/misc/vpn/charon.pid
-    chmod 0666 /dev/tun
-    start charonservice
-
-on property:vendor.charon.exec=0
-    stop charonservice
-    rm /data/vendor/misc/vpn/charon.pid
-
-# IMS packet router daemon
-service pktrouter /system/vendor/bin/wfc-pkt-router
-    class main
-    user root
-    disabled
-    seclabel u:r:pktrouter:s0
-
-on property:vendor.pktrouter=1
-    start pktrouter
-
-on property:vendor.pktrouter=0
-    stop pktrouter
-
 # charger driver exposes now finer grain control, map demo mode to those properties
 # NOTE: demo mode can only be exit wiping data (which reset the persist properties)
 on property:sys.retaildemo.enabled=1
