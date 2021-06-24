@@ -24,6 +24,7 @@
 #include <android-base/unique_fd.h>
 #include <hidl/HidlBinderSupport.h>
 #include <log/log.h>
+#include <pthread.h>
 #include <sys/stat.h>
 
 #include "DumpstateDevice.h"
@@ -73,73 +74,7 @@ namespace implementation {
 
 typedef std::chrono::time_point<std::chrono::steady_clock> timepoint_t;
 
-const char kVerboseLoggingProperty[] = "persist.dumpstate.verbose_logging.enabled";
-
-void DumpstateDevice::dumpLogs(int fd, std::string srcDir, std::string destDir, int maxFileNum,
-                               const char *logPrefix) {
-    struct dirent **dirent_list = NULL;
-    int num_entries = scandir(srcDir.c_str(),
-                              &dirent_list,
-                              0,
-                              (int (*)(const struct dirent **, const struct dirent **)) alphasort);
-    if (!dirent_list) {
-        return;
-    } else if (num_entries <= 0) {
-        return;
-    }
-
-    int copiedFiles = 0;
-
-    for (int i = num_entries - 1; i >= 0; i--) {
-        ALOGD("Found %s\n", dirent_list[i]->d_name);
-
-        if (0 != strncmp(dirent_list[i]->d_name, logPrefix, strlen(logPrefix))) {
-            continue;
-        }
-
-        if ((copiedFiles >= maxFileNum) && (maxFileNum != -1)) {
-            ALOGD("Skipped %s\n", dirent_list[i]->d_name);
-            continue;
-        }
-
-        copiedFiles++;
-
-        CommandOptions options = CommandOptions::WithTimeout(120).Build();
-        std::string srcLogFile = srcDir + "/" + dirent_list[i]->d_name;
-        std::string destLogFile = destDir + "/" + dirent_list[i]->d_name;
-
-        std::string copyCmd = "/vendor/bin/cp " + srcLogFile + " " + destLogFile;
-
-        ALOGD("Copying %s to %s\n", srcLogFile.c_str(), destLogFile.c_str());
-        RunCommandToFd(fd, "CP DIAG LOGS", { "/vendor/bin/sh", "-c", copyCmd.c_str() }, options);
-    }
-
-    while (num_entries--) {
-        free(dirent_list[num_entries]);
-    }
-
-    free(dirent_list);
-}
-
-void DumpstateDevice::dumpRilLogs(int fd, std::string destDir) {
-    std::string rilLogDir =
-            android::base::GetProperty(RIL_LOG_DIRECTORY_PROPERTY, RIL_LOG_DIRECTORY);
-
-    int maxFileNum = android::base::GetIntProperty(RIL_LOG_NUMBER_PROPERTY, 50);
-
-    const std::string currentLogDir = rilLogDir + "/cur";
-    const std::string previousLogDir = rilLogDir + "/prev";
-    const std::string currentDestDir = destDir + "/cur";
-    const std::string previousDestDir = destDir + "/prev";
-
-    RunCommandToFd(fd, "MKDIR RIL CUR LOG", {"/vendor/bin/mkdir", "-p", currentDestDir.c_str()},
-                   CommandOptions::WithTimeout(2).Build());
-    RunCommandToFd(fd, "MKDIR RIL PREV LOG", {"/vendor/bin/mkdir", "-p", previousDestDir.c_str()},
-                   CommandOptions::WithTimeout(2).Build());
-
-    dumpLogs(fd, currentLogDir, currentDestDir, maxFileNum, RIL_LOG_PREFIX);
-    dumpLogs(fd, previousLogDir, previousDestDir, maxFileNum, RIL_LOG_PREFIX);
-}
+const char kVerboseLoggingProperty[] = "persist.vendor.verbose_logging_enabled";
 
 void copyFile(std::string srcFile, std::string destFile) {
     uint8_t buffer[BUFSIZE];
@@ -167,6 +102,70 @@ void copyFile(std::string srcFile, std::string destFile) {
     close(fdSrc);
 }
 
+void dumpLogs(int fd, std::string srcDir, std::string destDir, int maxFileNum,
+              const char *logPrefix) {
+    (void) fd;
+    struct dirent **dirent_list = NULL;
+    int num_entries = scandir(srcDir.c_str(),
+                              &dirent_list,
+                              0,
+                              (int (*)(const struct dirent **, const struct dirent **)) alphasort);
+    if (!dirent_list) {
+        return;
+    } else if (num_entries <= 0) {
+        return;
+    }
+
+    int copiedFiles = 0;
+
+    for (int i = num_entries - 1; i >= 0; i--) {
+        ALOGD("Found %s\n", dirent_list[i]->d_name);
+
+        if (0 != strncmp(dirent_list[i]->d_name, logPrefix, strlen(logPrefix))) {
+            continue;
+        }
+
+        if ((copiedFiles >= maxFileNum) && (maxFileNum != -1)) {
+            ALOGD("Skipped %s\n", dirent_list[i]->d_name);
+            continue;
+        }
+
+        copiedFiles++;
+
+        std::string srcLogFile = srcDir + "/" + dirent_list[i]->d_name;
+        std::string destLogFile = destDir + "/" + dirent_list[i]->d_name;
+        copyFile(srcLogFile, destLogFile);
+
+        ALOGD("Copying %s to %s\n", srcLogFile.c_str(), destLogFile.c_str());
+    }
+
+    while (num_entries--) {
+        free(dirent_list[num_entries]);
+    }
+
+    free(dirent_list);
+}
+
+void dumpRilLogs(int fd, std::string destDir) {
+    std::string rilLogDir =
+            android::base::GetProperty(RIL_LOG_DIRECTORY_PROPERTY, RIL_LOG_DIRECTORY);
+
+    int maxFileNum = android::base::GetIntProperty(RIL_LOG_NUMBER_PROPERTY, 50);
+
+    const std::string currentLogDir = rilLogDir + "/cur";
+    const std::string previousLogDir = rilLogDir + "/prev";
+    const std::string currentDestDir = destDir + "/cur";
+    const std::string previousDestDir = destDir + "/prev";
+
+    RunCommandToFd(fd, "MKDIR RIL CUR LOG", {"/vendor/bin/mkdir", "-p", currentDestDir.c_str()},
+                   CommandOptions::WithTimeout(2).Build());
+    RunCommandToFd(fd, "MKDIR RIL PREV LOG", {"/vendor/bin/mkdir", "-p", previousDestDir.c_str()},
+                   CommandOptions::WithTimeout(2).Build());
+
+    dumpLogs(fd, currentLogDir, currentDestDir, maxFileNum, RIL_LOG_PREFIX);
+    dumpLogs(fd, previousLogDir, previousDestDir, maxFileNum, RIL_LOG_PREFIX);
+}
+
 void dumpNetmgrLogs(std::string destDir) {
     const std::vector <std::string> netmgrLogs
         {
@@ -192,7 +191,7 @@ void dumpModemEFS(std::string destDir) {
     }
 }
 
-void DumpstateDevice::dumpGpsLogs(int fd, std::string destDir) {
+void dumpGpsLogs(int fd, std::string destDir) {
     const std::string gpsLogDir = GPS_LOG_DIRECTORY;
     const std::string gpsTmpLogDir = gpsLogDir + "/.tmp";
     const std::string gpsDestDir = destDir + "/gps";
@@ -256,6 +255,7 @@ DumpstateDevice::DumpstateDevice()
         { "gsc", [this](int fd) { dumpGscSection(fd); } },
         { "camera", [this](int fd) { dumpCameraSection(fd); } },
         { "trusty", [this](int fd) { dumpTrustySection(fd); } },
+        { "modem", [this](int fd) { dumpModemSection(fd); } },
     } {
 }
 
@@ -945,17 +945,8 @@ void DumpstateDevice::dumpTrustySection(int fd) {
     DumpFileToFd(fd, "Trusty TEE0 Logs", "/dev/trusty-log0");
 }
 
-void DumpstateDevice::dumpModem(int fd, int fdModem)
-{
-    std::string modemLogDir = MODEM_LOG_DIRECTORY;
-    std::string extendedLogDir = MODEM_EXTENDED_LOG_DIRECTORY;
-    std::string tcpdumpLogDir = TCPDUMP_LOG_DIRECTORY;
-    static const std::string sectionName = "modem";
-    auto startTime = startSection(fd, sectionName);
-
-    const std::string modemLogCombined = modemLogDir + "/modem_log_all.tar";
-    const std::string modemLogAllDir = modemLogDir + "/modem_log";
-
+// Dump items related to modem
+void DumpstateDevice::dumpModemSection(int fd) {
     DumpFileToFd(fd, "Modem Stat", "/data/vendor/modem_stat/debug.txt");
     RunCommandToFd(fd, "Modem SSR history", {"/vendor/bin/sh", "-c",
                        "for f in $(ls /data/vendor/ssrdump/crashinfo_modem*); do "
@@ -965,65 +956,81 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
                        "for f in $(ls /data/vendor/log/rfsd/rfslog_*); do "
                        "echo $f ; cat $f ; done"},
                        CommandOptions::WithTimeout(2).Build());
-    RunCommandToFd(fd, "MKDIR MODEM LOG", {"/vendor/bin/mkdir", "-p", modemLogAllDir.c_str()}, CommandOptions::WithTimeout(2).Build());
+}
 
-    if (!PropertiesHelper::IsUserBuild()) {
-        bool modemLogEnabled = android::base::GetBoolProperty(MODEM_LOGGING_PERSIST_PROPERTY, false);
-        bool gpsLogEnabled = android::base::GetBoolProperty(GPS_LOGGING_STATUS_PROPERTY, false);
-        bool tcpdumpEnabled = android::base::GetBoolProperty(TCPDUMP_PERSIST_PROPERTY, false);
+static void *dumpModemThread(void *data) {
+    std::string modemLogDir = MODEM_LOG_DIRECTORY;
+    std::string extendedLogDir = MODEM_EXTENDED_LOG_DIRECTORY;
+    std::string tcpdumpLogDir = TCPDUMP_LOG_DIRECTORY;
+    static const std::string sectionName = "modem";
+
+    const std::string modemLogCombined = modemLogDir + "/modem_log_all.tar";
+    const std::string modemLogAllDir = modemLogDir + "/modem_log";
+
+    long fdModem = (long)data;
+
+    ALOGD("dumpModemThread started\n");
+
+    RunCommandToFd(STDOUT_FILENO, "MKDIR MODEM LOG", {"/vendor/bin/mkdir", "-p", modemLogAllDir.c_str()}, CommandOptions::WithTimeout(2).Build());
+
+    bool modemLogEnabled = android::base::GetBoolProperty(MODEM_LOGGING_PERSIST_PROPERTY, false);
+    if (modemLogEnabled) {
+        bool modemLogStarted = android::base::GetBoolProperty(MODEM_LOGGING_STATUS_PROPERTY, false);
         int maxFileNum = android::base::GetIntProperty(MODEM_LOGGING_NUMBER_BUGREPORT_PROPERTY, 100);
 
-        if (tcpdumpEnabled) {
-            dumpLogs(fd, tcpdumpLogDir, modemLogAllDir, android::base::GetIntProperty(TCPDUMP_NUMBER_BUGREPORT, 5), TCPDUMP_LOG_PREFIX);
+        if (modemLogStarted) {
+            android::base::SetProperty(MODEM_LOGGING_PROPERTY, "false");
+            ALOGD("Stopping modem logging...\n");
+        } else {
+            ALOGD("modem logging is not running\n");
         }
 
-        if (modemLogEnabled) {
-            bool modemLogStarted = android::base::GetBoolProperty(MODEM_LOGGING_STATUS_PROPERTY, false);
-
-            if (modemLogStarted) {
-                if (android::base::GetProperty(MODEM_LOGGING_PATH_PROPERTY, "") == MODEM_LOG_DIRECTORY) {
-                    android::base::SetProperty(MODEM_LOGGING_PROPERTY, "false");
-                    ALOGD("Stopping modem logging...\n");
-                }
-            } else {
-                ALOGD("modem logging is not running\n");
-            }
-
-            for (int i = 0; i < 30; i++) {
-                if (!android::base::GetBoolProperty(MODEM_LOGGING_STATUS_PROPERTY, false)) {
-                    ALOGD("modem logging stopped\n");
-                    sleep(1);
-                    break;
-                }
+        for (int i = 0; i < 15; i++) {
+            if (!android::base::GetBoolProperty(MODEM_LOGGING_STATUS_PROPERTY, false)) {
+                ALOGD("modem logging stopped\n");
                 sleep(1);
+                break;
             }
+            sleep(1);
+        }
 
-            dumpLogs(fd, modemLogDir, modemLogAllDir, maxFileNum, MODEM_LOG_PREFIX);
+        dumpLogs(STDOUT_FILENO, modemLogDir, modemLogAllDir, maxFileNum, MODEM_LOG_PREFIX);
 
-            if (modemLogStarted) {
-                ALOGD("Restarting modem logging...\n");
-                android::base::SetProperty(MODEM_LOGGING_PROPERTY, "true");
-            }
+        if (modemLogStarted) {
+            ALOGD("Restarting modem logging...\n");
+            android::base::SetProperty(MODEM_LOGGING_PROPERTY, "true");
+        }
+    }
+
+    if (!PropertiesHelper::IsUserBuild()) {
+        bool gpsLogEnabled = android::base::GetBoolProperty(GPS_LOGGING_STATUS_PROPERTY, false);
+        bool tcpdumpEnabled = android::base::GetBoolProperty(TCPDUMP_PERSIST_PROPERTY, false);
+
+        if (tcpdumpEnabled) {
+            dumpLogs(STDOUT_FILENO, tcpdumpLogDir, modemLogAllDir, android::base::GetIntProperty(TCPDUMP_NUMBER_BUGREPORT, 5), TCPDUMP_LOG_PREFIX);
         }
 
         if (gpsLogEnabled) {
-            dumpGpsLogs(fd, modemLogAllDir);
+            dumpGpsLogs(STDOUT_FILENO, modemLogAllDir);
         } else {
             ALOGD("gps logging is not running\n");
         }
 
-        dumpLogs(fd, extendedLogDir, modemLogAllDir, maxFileNum, EXTENDED_LOG_PREFIX);
-        dumpRilLogs(fd, modemLogAllDir);
+        dumpLogs(STDOUT_FILENO, extendedLogDir, modemLogAllDir, 50, EXTENDED_LOG_PREFIX);
+        dumpRilLogs(STDOUT_FILENO, modemLogAllDir);
         dumpNetmgrLogs(modemLogAllDir);
         dumpModemEFS(modemLogAllDir);
     }
 
-    RunCommandToFd(fd, "TAR LOG", {"/vendor/bin/tar", "cvf", modemLogCombined.c_str(), "-C", modemLogAllDir.c_str(), "."}, CommandOptions::WithTimeout(120).Build());
-    RunCommandToFd(fd, "CHG PERM", {"/vendor/bin/chmod", "a+w", modemLogCombined.c_str()}, CommandOptions::WithTimeout(2).Build());
+    ALOGD("Going to compress logs\n");
+
+    RunCommandToFd(STDOUT_FILENO, "TAR LOG", {"/vendor/bin/tar", "cvf", modemLogCombined.c_str(), "-C", modemLogAllDir.c_str(), "."}, CommandOptions::WithTimeout(25).Build());
+    RunCommandToFd(STDOUT_FILENO, "CHG PERM", {"/vendor/bin/chmod", "a+w", modemLogCombined.c_str()}, CommandOptions::WithTimeout(2).Build());
 
     std::vector<uint8_t> buffer(65536);
     android::base::unique_fd fdLog(TEMP_FAILURE_RETRY(open(modemLogCombined.c_str(), O_RDONLY | O_CLOEXEC | O_NONBLOCK)));
 
+    ALOGD("Going to write to dumpstate board binary\n");
     if (fdLog >= 0) {
         while (1) {
             ssize_t bytes_read = TEMP_FAILURE_RETRY(read(fdLog, buffer.data(), buffer.size()));
@@ -1044,10 +1051,14 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
         }
     }
 
-    RunCommandToFd(fd, "RM MODEM DIR", { "/vendor/bin/rm", "-r", modemLogAllDir.c_str()}, CommandOptions::WithTimeout(2).Build());
-    RunCommandToFd(fd, "RM LOG", { "/vendor/bin/rm", modemLogCombined.c_str()}, CommandOptions::WithTimeout(2).Build());
+    ALOGD("Going to remove logs\n");
 
-    endSection(fd, sectionName, startTime);
+    RunCommandToFd(STDOUT_FILENO, "RM MODEM DIR", { "/vendor/bin/rm", "-r", modemLogAllDir.c_str()}, CommandOptions::WithTimeout(2).Build());
+    RunCommandToFd(STDOUT_FILENO, "RM LOG", { "/vendor/bin/rm", modemLogCombined.c_str()}, CommandOptions::WithTimeout(2).Build());
+
+    ALOGD("dumpModemThread finished\n");
+
+    return NULL;
 }
 
 // Methods from ::android::hardware::dumpstate::V1_0::IDumpstateDevice follow.
@@ -1084,13 +1095,25 @@ Return<DumpstateStatus> DumpstateDevice::dumpstateBoard_1_1(const hidl_handle& h
         return DumpstateStatus::ILLEGAL_ARGUMENT;
     }
 
+    // Create thread to collect modem related logs
+    pthread_t modemThreadHandle = 0;
+    if (getVerboseLoggingEnabled()) {
+        if (handle->numFds < 2) {
+            ALOGE("no FD for modem\n");
+        } else {
+            int fdModem = handle->data[1];
+            if (pthread_create(&modemThreadHandle, NULL, dumpModemThread, (void *)((long)fdModem)) != 0) {
+                ALOGE("could not create thread for dumpModem\n");
+            }
+        }
+    } else {
+        ALOGD("Verbose logging is not enabled\n");
+    }
+
     dumpTextSection(fd, kAllSections);
 
-    if (handle->numFds < 2) {
-        ALOGE("no FD for modem\n");
-    } else {
-        int fdModem = handle->data[1];
-        dumpModem(fd, fdModem);
+    if (modemThreadHandle) {
+        pthread_join(modemThreadHandle, NULL);
     }
 
     return DumpstateStatus::OK;
