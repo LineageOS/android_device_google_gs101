@@ -760,6 +760,16 @@ void DumpstateDevice::dumpMemorySection(int fd) {
     DumpFileToFd(fd, "dmabuf info", "/d/dma_buf/bufinfo");
     DumpFileToFd(fd, "Page Pinner - longterm pin", "/sys/kernel/debug/page_pinner/longterm_pinner");
     DumpFileToFd(fd, "Page Pinner - alloc_contig_failed", "/sys/kernel/debug/page_pinner/alloc_contig_failed");
+    RunCommandToFd(fd, "Pixel CMA stat", {"/vendor/bin/sh", "-c",
+                   "for d in $(ls -d /sys/kernel/pixel_stat/mm/cma/*); do "
+                       "if [ -f $d ]; then "
+                           "echo --- $d; cat $d; "
+                       "else "
+                           "for f in $(ls $d); do "
+                               "echo --- $d/$f; cat $d/$f; "
+                               "done; "
+                        "fi; "
+                        "done"});
 }
 
 static void DumpF2FS(int fd) {
