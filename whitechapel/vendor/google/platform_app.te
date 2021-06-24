@@ -19,9 +19,5 @@ binder_call(platform_app, twoshay)
 # Fingerprint (UDFPS) GHBM/LHBM toggle
 get_prop(platform_app, fingerprint_ghbm_prop)
 
-# TODO(b/184768835): remove this once the bug is fixed
-# Fingerprint (UDFPS) LHBM access
-userdebug_or_eng(`
-  allow platform_app sysfs_leds:dir search;
-  allow platform_app sysfs_lhbm:file rw_file_perms;
-')
+allow platform_app hal_pixel_display_service:service_manager find;
+binder_call(platform_app, hal_graphics_composer_default)
