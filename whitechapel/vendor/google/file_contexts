@@ -348,9 +348,6 @@
 # R4
 /vendor/bin/hw/hardware\.qorvo\.uwb-service                          u:object_r:hal_uwb_default_exec:s0
 
-# Radio files.
-/data/vendor/radio(/.*)?                                                    u:object_r:radio_vendor_data_file:s0
-
 # RILD files
 /data/vendor/rild(/.*)?                                                     u:object_r:rild_vendor_data_file:s0
 
@@ -363,6 +360,9 @@
 
 # pixelstats binary
 /vendor/bin/pixelstats-vendor           u:object_r:pixelstats_vendor_exec:s0
+
+# battery history
+/dev/battery_history                                                                  u:object_r:battery_history_device:s0
 
 # Vendor_kernel_modules
 /vendor_dlkm/lib/modules/.*\.ko                                               u:object_r:vendor_kernel_modules:s0
@@ -383,9 +383,6 @@
 /vendor/bin/hw/android\.hardware\.biometrics\.fingerprint-service\.goodix             u:object_r:hal_fingerprint_default_exec:s0
 /vendor/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.1-service\.fpc           u:object_r:hal_fingerprint_default_exec:s0
 /vendor/bin/hw/android\.hardware\.biometrics\.fingerprint-service\.fpc                u:object_r:hal_fingerprint_default_exec:s0
-
-# ECC List
-/vendor/bin/init\.radio\.sh     u:object_r:init_radio_exec:s0
 
 # Zram
 /data/per_boot(/.*)?                                                          u:object_r:per_boot_file:s0
