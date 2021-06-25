@@ -7,10 +7,6 @@ vendor.sys.rild_reset            u:object_r:vendor_rild_prop:s0
 vendor.ril.                      u:object_r:vendor_rild_prop:s0
 ro.vendor.build.svn              u:object_r:vendor_rild_prop:s0
 
-# for ims service
-vendor.charon.                u:object_r:vendor_ims_prop:s0
-vendor.pktrouter              u:object_r:vendor_ims_prop:s0
-
 # Ramdump
 persist.vendor.sys.crash_rcu    u:object_r:vendor_ramdump_prop:s0
 
@@ -44,6 +40,7 @@ persist.vendor.sys.modem.    u:object_r:vendor_modem_prop:s0
 # for logger app
 vendor.pixellogger.          u:object_r:vendor_logger_prop:s0
 persist.vendor.pixellogger.  u:object_r:vendor_logger_prop:s0
+persist.vendor.verbose_logging_enabled u:object_r:vendor_logger_prop:s0
 
 # for cbd
 vendor.cbd.                  u:object_r:vendor_cbd_prop:s0
