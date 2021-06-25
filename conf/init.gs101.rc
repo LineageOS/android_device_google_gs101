@@ -259,9 +259,6 @@ on init && property:ro.boot.hw.soc.rev=1
     write /sys/devices/platform/cpupm/cpupm/sicd 0
 
 on late-fs
-    # Wait for keymaster HALs
-    exec_start wait_for_keymaster
-
     # Start bootanimation class before mount
     class_start animation
 
