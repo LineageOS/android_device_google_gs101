@@ -76,6 +76,8 @@ PRODUCT_PROPERTY_OVERRIDES += log.tag.ShannonQNS-HC=DEBUG
 include device/google/gs101/modem/userdebug.mk
 endif
 
+include device/google/gs101/modem/user.mk
+
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 # b/36703476: Set default log size to 1M
 PRODUCT_PROPERTY_OVERRIDES += \
