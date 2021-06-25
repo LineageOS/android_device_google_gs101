@@ -124,10 +124,6 @@ genfscon sysfs /devices/platform/1c2d0000.drmdsim/1c2d0000.drmdsim.0/panel_extin
 genfscon sysfs /devices/platform/1c2c0000.drmdsim/hs_clock                         u:object_r:sysfs_display:s0
 genfscon sysfs /devices/platform/1c2d0000.drmdsim/hs_clock                         u:object_r:sysfs_display:s0
 
-# TODO(b/184768835): remove this once the bug is fixed
-# Display / LHBM (Local High Brightness Mode)
-genfscon sysfs /devices/platform/1c2c0000.drmdsim/1c2c0000.drmdsim.0/backlight/panel0-backlight/local_hbm_mode u:object_r:sysfs_lhbm:s0
-
 # Modem
 genfscon sysfs /devices/platform/cp-tm1/cp_temp                                u:object_r:sysfs_modem:s0
 
