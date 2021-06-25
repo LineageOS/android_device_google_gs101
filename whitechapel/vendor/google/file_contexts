@@ -128,7 +128,6 @@
 # Exynos Daemon Exec
 #
 /(vendor|system/vendor)/bin/cbd                u:object_r:cbd_exec:s0
-/(vendor|system/vendor)/bin/dmd                u:object_r:dmd_exec:s0
 /(vendor|system/vendor)/bin/hw/scd             u:object_r:scd_exec:s0
 /(vendor|system/vendor)/bin/hw/gpsd            u:object_r:gpsd_exec:s0
 /(vendor|system/vendor)/bin/hw/lhd             u:object_r:lhd_exec:s0
@@ -153,8 +152,6 @@
 /data/vendor/log/dump(/.*)?  u:object_r:vendor_dump_log_file:s0
 /data/vendor/log/rild(/.*)?  u:object_r:vendor_rild_log_file:s0
 /data/vendor/log/sced(/.*)?  u:object_r:vendor_sced_log_file:s0
-/data/vendor/log/slog(/.*)?  u:object_r:vendor_slog_file:s0
-/data/vendor/slog(/.*)?      u:object_r:vendor_slog_file:s0
 
 /persist/sensorcal\.json     u:object_r:sensors_cal_file:s0
 
