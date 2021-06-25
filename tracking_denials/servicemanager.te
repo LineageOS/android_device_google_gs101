@@ -1,0 +1,2 @@
+# b/192040144
+dontaudit servicemanager hal_fingerprint_default:binder call;
