@@ -913,18 +913,7 @@ void DumpstateDevice::dumpRamdumpSection(int fd) {
 // Dump items that don't fit well into any other section
 void DumpstateDevice::dumpMiscSection(int fd) {
     RunCommandToFd(fd, "VENDOR PROPERTIES", {"/vendor/bin/getprop"});
-    RunCommandToFd(fd, "Vendor task struct value", {"/vendor/bin/sh", "-c",
-                       "for i in ta fg sys sysbg bg cam nnapi; do "
-                       "echo $i:; "
-                       "for j in prefer_high_cap prefer_idle task_spreading uclamp_max uclamp_min; do "
-                       "echo $j: | tr '[\n]' ' '; "
-                       "cat /sys/kernel/vendor_sched/$i'_'$j; "
-                       "done; "
-                       "echo tasks:; "
-                       "cat /proc/vendor_sched/dump_task_group_$i | tr '[\n]' ' '; "
-                       "echo ''; "
-                       "echo ''; "
-                       "done"});
+    DumpFileToFd(fd, "VENDOR PROC DUMP", "/proc/vendor_sched/dump_task");
 }
 
 // Dump items related to GSC
