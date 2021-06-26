@@ -11,7 +11,6 @@ type vendor_rfsd_log_file, file_type, data_file_type;
 type vendor_dump_log_file, file_type, data_file_type;
 type vendor_rild_log_file, file_type, data_file_type;
 type vendor_sced_log_file, file_type, data_file_type;
-type vendor_slog_file, file_type, data_file_type, mlstrustedobject;
 type vendor_telephony_log_file, file_type, data_file_type;
 
 # app data files
@@ -180,10 +179,6 @@ type sysfs_bcmdhd, sysfs_type, fs_type;
 
 # Video
 type sysfs_video, sysfs_type, fs_type;
-
-# TODO(b/184768835): remove this once the bug is fixed
-# LHBM (Local High Brightness Mode)
-type sysfs_lhbm, sysfs_type, fs_type, mlstrustedobject;
 
 # UWB vendor
 type uwb_vendor_data_file, file_type, data_file_type, app_data_file_type;
