@@ -63,7 +63,6 @@ TARGET_RECOVERY_FSTAB := device/google/gs101/conf/fstab.gs101
 TARGET_RECOVERY_PIXEL_FORMAT := ABGR_8888
 TARGET_RECOVERY_UI_MARGIN_HEIGHT := 165
 TARGET_RECOVERY_UI_LIB := \
-	librecovery_ui_gs101 \
 	librecovery_ui_pixel \
 	libfstab
 
