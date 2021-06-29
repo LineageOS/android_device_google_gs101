@@ -1,14 +1,4 @@
-# b/181177926
-dontaudit hardware_info_app sysfs_batteryinfo:file { read };
-dontaudit hardware_info_app sysfs:file { read };
-dontaudit hardware_info_app sysfs:file { open };
-dontaudit hardware_info_app sysfs:file { getattr };
-dontaudit hardware_info_app sysfs_batteryinfo:dir { search };
 # b/181914888
-dontaudit hardware_info_app sysfs_batteryinfo:file { open };
-dontaudit hardware_info_app sysfs_batteryinfo:file { getattr };
 dontaudit hardware_info_app vendor_regmap_debugfs:dir { search };
 # b/181915166
-dontaudit hardware_info_app sysfs_batteryinfo:file { getattr };
-dontaudit hardware_info_app sysfs_batteryinfo:file { open };
 dontaudit hardware_info_app vendor_regmap_debugfs:dir { search };
