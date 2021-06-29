@@ -5,6 +5,7 @@ persist.vendor.radio.            u:object_r:vendor_rild_prop:s0
 vendor.radio.ril.                u:object_r:vendor_rild_prop:s0
 vendor.sys.rild_reset            u:object_r:vendor_rild_prop:s0
 vendor.ril.                      u:object_r:vendor_rild_prop:s0
+vendor.radio.                    u:object_r:vendor_rild_prop:s0
 ro.vendor.build.svn              u:object_r:vendor_rild_prop:s0
 
 # Ramdump
