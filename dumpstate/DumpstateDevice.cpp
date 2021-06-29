@@ -963,7 +963,7 @@ static void *dumpModemThread(void *data) {
     RunCommandToFd(STDOUT_FILENO, "MKDIR MODEM LOG", {"/vendor/bin/mkdir", "-p", modemLogAllDir.c_str()}, CommandOptions::WithTimeout(2).Build());
 
     bool modemLogEnabled = android::base::GetBoolProperty(MODEM_LOGGING_PERSIST_PROPERTY, false);
-    if (modemLogEnabled) {
+    if (modemLogEnabled && android::base::GetProperty(MODEM_LOGGING_PATH_PROPERTY, "") == MODEM_LOG_DIRECTORY) {
         bool modemLogStarted = android::base::GetBoolProperty(MODEM_LOGGING_STATUS_PROPERTY, false);
         int maxFileNum = android::base::GetIntProperty(MODEM_LOGGING_NUMBER_BUGREPORT_PROPERTY, 100);
 
