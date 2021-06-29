@@ -40,14 +40,14 @@ const struct SysfsCollector::SysfsPaths sysfs_paths = {
         .ImpedancePath = "/sys/devices/platform/audiometrics/speaker_impedance",
         .CodecPath = "/sys/devices/platform/audiometrics/codec_state",
         .EEPROMPath = "/dev/battery_history"};
-
-const char *const kAudioUevent = "/devices/virtual/amcs/amcs";
-const char *const kSSOCDetailsPath = "/sys/class/power_supply/battery/ssoc_details";
+const struct UeventListener::UeventPaths ueventPaths = {
+        .AudioUevent = "/devices/virtual/amcs/amcs",
+        .WirelessChargerPtmcPath = "/sys/class/power_supply/wireless/device/ptmc_id"};
 
 int main() {
     LOG(INFO) << "starting PixelStats";
 
-    UeventListener ueventListener(kAudioUevent, kSSOCDetailsPath);
+    UeventListener ueventListener(ueventPaths);
     std::thread listenThread(&UeventListener::ListenForever, &ueventListener);
     listenThread.detach();
 
