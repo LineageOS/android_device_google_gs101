@@ -1,4 +1,0 @@
-# b/181914888
-dontaudit hardware_info_app vendor_regmap_debugfs:dir { search };
-# b/181915166
-dontaudit hardware_info_app vendor_regmap_debugfs:dir { search };
