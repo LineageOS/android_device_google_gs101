@@ -463,10 +463,6 @@ else
 		gralloc.$(TARGET_BOARD_PLATFORM)
 endif
 
-# AIDL memtrack
-PRODUCT_PACKAGES += \
-	android.hardware.memtrack-service.example
-
 PRODUCT_PACKAGES += \
 	memtrack.$(TARGET_BOARD_PLATFORM) \
 	libion_exynos \
