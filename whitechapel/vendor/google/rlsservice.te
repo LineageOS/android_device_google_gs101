@@ -23,6 +23,10 @@ binder_call(rlsservice, hal_camera_default)
 allow rlsservice device:dir { read watch };
 allow rlsservice aoc_device:chr_file rw_file_perms;
 
+# Allow access to display backlight information
+allow rlsservice sysfs_leds:dir search;
+allow rlsservice sysfs_leds:file r_file_perms;
+
 # Allow use of the USF low latency transport
 usf_low_latency_transport(rlsservice)
 
