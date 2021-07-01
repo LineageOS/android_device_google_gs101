@@ -1,4 +1,2 @@
 # b/190337297
-dontaudit vendor_init vendor_maxfg_debugfs:file setattr;
 dontaudit vendor_init vendor_page_pinner_debugfs:file setattr;
-dontaudit vendor_init vendor_regmap_debugfs:file setattr;
