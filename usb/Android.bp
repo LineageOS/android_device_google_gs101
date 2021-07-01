@@ -36,6 +36,7 @@ cc_binary {
     cflags: ["-Wall", "-Werror"],
     shared_libs: [
         "libbase",
+        "libbinder",
         "libhidlbase",
         "liblog",
         "libutils",
@@ -47,8 +48,20 @@ cc_binary {
         "android.hardware.usb.gadget@1.0",
         "android.hardware.usb.gadget@1.1",
         "android.hardware.usb.gadget@1.2",
+        "android.hardware.thermal@1.0",
+        "android.hardware.thermal@2.0",
         "libcutils",
+        "android.frameworks.stats-V1-ndk_platform",
+        "pixelatoms-cpp",
+        "libbinder_ndk",
     ],
-    static_libs: ["libpixelusb"],
+    static_libs: [
+        "libpixelusb",
+        "libpixelstats",
+    ],
+    export_shared_lib_headers: [
+        "android.frameworks.stats-V1-ndk_platform",
+        "pixelatoms-cpp",
+    ],
     proprietary: true,
 }
