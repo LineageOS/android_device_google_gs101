@@ -190,4 +190,12 @@
            <instance>default</instance>
        </interface>
     </hal>
+    <hal format="aidl" optional="false">
+         <name>com.google.hardware.pixel.display</name>
+         <version>2</version>
+         <interface>
+             <name>IDisplay</name>
+             <instance>default</instance>
+         </interface>
+    </hal>
 </compatibility-matrix>
