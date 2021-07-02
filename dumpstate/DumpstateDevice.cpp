@@ -840,10 +840,12 @@ void DumpstateDevice::dumpDisplaySection(int fd) {
     DumpFileToFd(fd, "CRTC-0 underrun count", "/sys/kernel/debug/dri/0/crtc-0/underrun_cnt");
     DumpFileToFd(fd, "CRTC-0 crc count", "/sys/kernel/debug/dri/0/crtc-0/crc_cnt");
     DumpFileToFd(fd, "CRTC-0 ecc count", "/sys/kernel/debug/dri/0/crtc-0/ecc_cnt");
+    DumpFileToFd(fd, "CRTC-0 idma err count", "/sys/kernel/debug/dri/0/crtc-0/idma_err_cnt");
     DumpFileToFd(fd, "CRTC-0 event log", "/sys/kernel/debug/dri/0/crtc-0/event");
     DumpFileToFd(fd, "CRTC-1 underrun count", "/sys/kernel/debug/dri/0/crtc-1/underrun_cnt");
     DumpFileToFd(fd, "CRTC-1 crc count", "/sys/kernel/debug/dri/0/crtc-1/crc_cnt");
     DumpFileToFd(fd, "CRTC-1 ecc count", "/sys/kernel/debug/dri/0/crtc-1/ecc_cnt");
+    DumpFileToFd(fd, "CRTC-1 idma err count", "/sys/kernel/debug/dri/0/crtc-1/idma_err_cnt");
     DumpFileToFd(fd, "CRTC-1 event log", "/sys/kernel/debug/dri/0/crtc-1/event");
     RunCommandToFd(fd, "libdisplaycolor", {"/vendor/bin/dumpsys", "displaycolor", "-v"},
                    CommandOptions::WithTimeout(2).Build());
