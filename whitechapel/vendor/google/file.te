@@ -189,6 +189,9 @@ type sysfs_pixelstats, fs_type, sysfs_type;
 # WLC FW
 type vendor_wlc_fwupdata_file, vendor_file_type, file_type;
 
+#USB-C throttling stats
+type sysfs_usbc_throttling_stats, sysfs_type, fs_type;
+
 # SJTAG
 type sysfs_sjtag, fs_type, sysfs_type;
 userdebug_or_eng(`
