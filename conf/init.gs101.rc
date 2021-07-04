@@ -852,3 +852,8 @@ on property:vendor.disable.bcl.control=1
 
 on property:vendor.disable.bcl.control=0
     write /sys/devices/virtual/pmic/mitigation/instruction/enable_mitigation 1
+
+# UFS
+on property:ro.boot.mode=charger && property:init.svc.vendor.charger=running
+    # Enable UFS powersaving in Off Mode Charger
+    write /dev/sys/block/bootdevice/clkgate_enable 1
