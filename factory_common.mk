@@ -18,7 +18,8 @@ $(call inherit-product, device/google/gs101/aosp_common.mk)
 $(call inherit-product-if-exists, vendor/google_devices/gs101/factory/pixel/device-factory.mk)
 
 PRODUCT_PROPERTY_OVERRIDES += service.adb.root=1 \
-                              ro.vendor.factory=1
+                              ro.vendor.factory=1 \
+                              ro.adb.secure=0
 
 # Factory Libraries of Audio
 PRODUCT_PACKAGES += audioroute libaudioroutelite
