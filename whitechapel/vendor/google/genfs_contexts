@@ -246,6 +246,7 @@ genfscon sysfs /devices/platform/17000080.devfreq_bo/devfreq/17000080.devfreq_bo
 # Fabric
 genfscon sysfs /devices/platform/17000010.devfreq_mif/devfreq/17000010.devfreq_mif/interactive/target_load  u:object_r:sysfs_fabric:s0
 genfscon sysfs /devices/platform/17000010.devfreq_mif/devfreq/17000010.devfreq_mif/min_freq                 u:object_r:sysfs_fabric:s0
+genfscon sysfs /devices/platform/17000020.devfreq_int/devfreq/17000020.devfreq_int/min_freq                 u:object_r:sysfs_fabric:s0
 
 # GPU
 genfscon sysfs /devices/platform/1c500000.mali/hint_min_freq                                            u:object_r:sysfs_gpu:s0
