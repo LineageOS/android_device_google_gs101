@@ -18,3 +18,8 @@ allow init ram_device:blk_file w_file_perms;
 allow init per_boot_file:file ioctl;
 allowxperm init per_boot_file:file ioctl { F2FS_IOC_SET_PIN_FILE };
 allow init sysfs_scsi_devices_0000:file w_file_perms;
+
+userdebug_or_eng(`
+  allow init overlayfs_file:file { rename };
+  allow init overlayfs_file:chr_file { unlink };
+')
