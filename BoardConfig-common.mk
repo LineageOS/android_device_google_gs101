@@ -94,7 +94,6 @@ BOARD_EGL_CFG := device/google/gs101/conf/egl.cfg
 USE_OPENGL_RENDERER := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 BOARD_USES_EXYNOS5_COMMON_GRALLOC := true
-BOARD_USES_EXYNOS_GRALLOC_VERSION := $(DEVICE_USES_EXYNOS_GRALLOC_VERSION)
 BOARD_USES_ALIGN_RESTRICTION := false
 BOARD_USES_GRALLOC_ION_SYNC := true
 
@@ -102,7 +101,6 @@ BOARD_USES_GRALLOC_ION_SYNC := true
 BOARD_USES_SWIFTSHADER := false
 
 # Gralloc4
-ifeq ($(BOARD_USES_EXYNOS_GRALLOC_VERSION),4)
 SOONG_CONFIG_NAMESPACES += arm_gralloc
 SOONG_CONFIG_arm_gralloc := \
 	gralloc_arm_no_external_afbc \
@@ -126,18 +124,6 @@ SOONG_CONFIG_arm_gralloc_gralloc_init_afbc := true
 SOONG_CONFIG_arm_gralloc_dpu_support_1010102_afbc := true
 endif # ifeq ($(BOARD_USES_SWIFTSHADER),true)
 SOONG_CONFIG_arm_gralloc_gralloc_ion_sync_on_lock := $(BOARD_USES_GRALLOC_ION_SYNC)
-endif # ifeq ($(BOARD_USES_EXYNOS_GRALLOC_VERSION),4)
-
-# libVendorGraphicbuffer
-SOONG_CONFIG_NAMESPACES += vendorgraphicbuffer
-SOONG_CONFIG_vendorgraphicbuffer := \
-	gralloc_version
-
-ifeq ($(BOARD_USES_EXYNOS_GRALLOC_VERSION),4)
-SOONG_CONFIG_vendorgraphicbuffer_gralloc_version := four
-else
-SOONG_CONFIG_vendorgraphicbuffer_gralloc_version := three
-endif
 
 # Graphics
 #BOARD_USES_EXYNOS_DATASPACE_FEATURE := true
