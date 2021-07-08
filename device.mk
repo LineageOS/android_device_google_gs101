@@ -45,8 +45,6 @@ PRODUCT_SOONG_NAMESPACES += \
 	vendor/google_nos/host/android \
 	vendor/google_nos/test/system-test-harness
 
-DEVICE_USES_EXYNOS_GRALLOC_VERSION := 4
-
 ifeq ($(TARGET_PREBUILT_KERNEL),)
 LOCAL_KERNEL := $(TARGET_KERNEL_DIR)/Image.lz4
 else
@@ -192,13 +190,8 @@ PRODUCT_VENDOR_PROPERTIES += \
 # ####################
 
 # Device Manifest, Device Compatibility Matrix for Treble
-ifeq ($(DEVICE_USES_EXYNOS_GRALLOC_VERSION), 4)
-	DEVICE_MANIFEST_FILE := \
-		device/google/gs101/manifest$(LOCAL_64ONLY).xml
-else
-	DEVICE_MANIFEST_FILE := \
-		device/google/gs101/manifest$(LOCAL_64ONLY)-gralloc3.xml
-endif
+DEVICE_MANIFEST_FILE := \
+	device/google/gs101/manifest$(LOCAL_64ONLY).xml
 
 ifneq (,$(filter aosp_%,$(TARGET_PRODUCT)))
 DEVICE_MANIFEST_FILE += \
@@ -453,18 +446,10 @@ PRODUCT_PACKAGES += \
 	com.android.future.usb.accessory
 
 # for now include gralloc here. should come from hardware/google_devices/exynos5
-ifeq ($(DEVICE_USES_EXYNOS_GRALLOC_VERSION), 4)
-	PRODUCT_PACKAGES += \
-		android.hardware.graphics.mapper@4.0-impl \
-		android.hardware.graphics.allocator@4.0-service \
-		android.hardware.graphics.allocator@4.0-impl
-else
-	PRODUCT_PACKAGES += \
-		android.hardware.graphics.mapper@2.0-impl \
-		android.hardware.graphics.allocator@2.0-service \
-		android.hardware.graphics.allocator@2.0-impl \
-		gralloc.$(TARGET_BOARD_PLATFORM)
-endif
+PRODUCT_PACKAGES += \
+	android.hardware.graphics.mapper@4.0-impl \
+	android.hardware.graphics.allocator@4.0-service \
+	android.hardware.graphics.allocator@4.0-impl
 
 PRODUCT_PACKAGES += \
 	memtrack.$(TARGET_BOARD_PLATFORM) \
