@@ -345,16 +345,14 @@ void DumpstateDevice::dumpPowerSection(int fd) {
     }
 
     DumpFileToFd(fd, "PD Engine", "/dev/logbuffer_usbpd");
-    DumpFileToFd(fd, "PPS-google_cpm", "/dev/logbuffer_google,cpm");
-    DumpFileToFd(fd, "PPS-dc", "/dev/logbuffer_pca9468_tcpm");
+    DumpFileToFd(fd, "PPS-google_cpm", "/dev/logbuffer_cpm");
+    DumpFileToFd(fd, "PPS-dc", "/dev/logbuffer_pca9468");
 
     DumpFileToFd(fd, "BMS", "/dev/logbuffer_ssoc");
     DumpFileToFd(fd, "TTF", "/dev/logbuffer_ttf");
     DumpFileToFd(fd, "TTF details", "/sys/class/power_supply/battery/ttf_details");
     DumpFileToFd(fd, "TTF stats", "/sys/class/power_supply/battery/ttf_stats");
     DumpFileToFd(fd, "maxq", "/dev/logbuffer_maxq");
-    DumpFileToFd(fd, "RTX", "/dev/logbuffer_rtx");
-    DumpFileToFd(fd, "WIRELESS", "/dev/logbuffer_wireless");
 
     RunCommandToFd(fd, "TRICKLE-DEFEND Config", {"/vendor/bin/sh", "-c",
                         " cd /sys/devices/platform/google,battery/power_supply/battery/;"
