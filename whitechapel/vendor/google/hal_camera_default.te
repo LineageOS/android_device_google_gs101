@@ -45,6 +45,7 @@ tmpfs_domain(hal_camera_default);
 
 # Allow access to camera-related system properties
 set_prop(hal_camera_default, vendor_camera_prop);
+set_prop(hal_camera_default, log_tag_prop);
 get_prop(hal_camera_default, vendor_camera_debug_prop);
 userdebug_or_eng(`
   set_prop(hal_camera_default, vendor_camera_fatp_prop);
