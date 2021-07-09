@@ -210,7 +210,9 @@ void dumpCameraLogs(int fd, const std::string &destDir) {
     const std::string cameraDestDir = destDir + "/camera";
     RunCommandToFd(fd, "MKDIR CAMERA LOG", {"/vendor/bin/mkdir", "-p", cameraDestDir.c_str()},
                    CommandOptions::WithTimeout(2).Build());
-    dumpLogs(fd, kCameraLogDir, cameraDestDir, 1, "session-ended-");
+    // Attach 2 latest sessions (in case the user is running concurrent sessions).
+    dumpLogs(fd, kCameraLogDir, cameraDestDir, 2, "session-ended-");
+    dumpLogs(fd, kCameraLogDir, cameraDestDir, 2, "high-drop-rate-");
 }
 
 timepoint_t startSection(int fd, const std::string &sectionName) {
