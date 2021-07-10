@@ -12,3 +12,5 @@ genfscon sysfs /module/drm/parameters/vblankoffdelay                            
 
 genfscon sysfs /devices/platform/1c300000.drmdecon/dqe/atc                                     u:object_r:sysfs_display:s0
 genfscon sysfs /devices/platform/1c300000.drmdecon/early_wakeup                                u:object_r:sysfs_display:s0
+
+genfscon sysfs /devices/platform/exynos-drm/tui_status                                         u:object_r:sysfs_display:s0
