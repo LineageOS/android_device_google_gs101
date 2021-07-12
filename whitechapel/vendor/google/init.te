@@ -19,7 +19,6 @@ allow init per_boot_file:file ioctl;
 allowxperm init per_boot_file:file ioctl { F2FS_IOC_SET_PIN_FILE };
 allow init sysfs_scsi_devices_0000:file w_file_perms;
 
-userdebug_or_eng(`
-  allow init overlayfs_file:file { rename };
-  allow init overlayfs_file:chr_file { unlink };
-')
+# Workaround for b/193113005 that modem_img unlabeled after disable-verity
+dontaudit init overlayfs_file:file { rename };
+dontaudit init overlayfs_file:chr_file { unlink };
