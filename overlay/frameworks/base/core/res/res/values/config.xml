@@ -228,6 +228,7 @@
         <item>"/apex/com.android.media/javalib/updatable-media.jar"</item>
         <item>"/system/framework/framework.jar"</item>
         <item>"/system/framework/services.jar"</item>
+        <item>"/system/bin/surfaceflinger"</item>
         <item>"/system_ext/priv-app/SystemUIGoogle/SystemUIGoogle.apk"</item>
     </string-array>
 
