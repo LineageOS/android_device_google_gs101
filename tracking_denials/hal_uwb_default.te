@@ -1,2 +1,0 @@
-# b/192980495
-dontaudit hal_uwb_default hal_uwb_default:capability sys_nice;
