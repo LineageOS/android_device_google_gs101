@@ -13,6 +13,7 @@ genfscon sysfs /wifi                                                        u:ob
 # Battery
 genfscon sysfs /devices/platform/google,battery/power_supply/battery            u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/google,cpm/power_supply                        u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/google,cpm/                                    u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/google,charger                                 u:object_r:sysfs_batteryinfo:s0
 
 #   Slider
