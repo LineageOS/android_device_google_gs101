@@ -37,6 +37,8 @@ on init
     chown system system /sys/kernel/vendor_sched/set_task_group_sysbg
     chown system system /sys/kernel/vendor_sched/set_task_group_ta
     chown system system /sys/kernel/vendor_sched/set_task_group_rt
+    chown system system /sys/kernel/vendor_sched/set_task_group_sf
+    chown system system /sys/kernel/vendor_sched/set_task_group_dex2oat
     chown system system /sys/kernel/vendor_sched/clear_group
 
     chmod 0220 /sys/kernel/vendor_sched/set_task_group_bg
@@ -47,6 +49,8 @@ on init
     chmod 0220 /sys/kernel/vendor_sched/set_task_group_sysbg
     chmod 0220 /sys/kernel/vendor_sched/set_task_group_ta
     chmod 0220 /sys/kernel/vendor_sched/set_task_group_rt
+    chmod 0220 /sys/kernel/vendor_sched/set_task_group_sf
+    chmod 0220 /sys/kernel/vendor_sched/set_task_group_dex2oat
     chmod 0220 /sys/kernel/vendor_sched/clear_group
 
     wait /dev/block/platform/${ro.boot.boot_devices}
@@ -677,8 +681,11 @@ on property:sys.boot_completed=1
 
     write /sys/kernel/vendor_sched/bg_group_throttle 512
 
-    # Skip little core for RT vendor_grp
-    write /sys/kernel/vendor_sched/rt_uclamp_min 125
+    # Setup groups for SF (RT used for SF RE, SF used for SF main)
+    write /sys/kernel/vendor_sched/rt_uclamp_min 12
+    write /sys/kernel/vendor_sched/rt_prefer_idle 1
+    write /sys/kernel/vendor_sched/sf_uclamp_min 30
+    write /sys/kernel/vendor_sched/sf_prefer_idle 1
 
     # Setup cpu.shares to throttle background group at 5%
     write /dev/cpuctl/background/cpu.shares 1024

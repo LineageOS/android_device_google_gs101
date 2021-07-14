@@ -127,6 +127,15 @@
       "ResetOnInit": true
     },
     {
+      "Name": "SFUClampBoost",
+      "Path": "/sys/kernel/vendor_sched/sf_uclamp_min",
+      "Values": [
+        "65",
+        "30"
+      ],
+      "ResetOnInit": true
+    },
+    {
       "Name": "MLUclampBoost",
       "Path": "/sys/kernel/vendor_sched/nnapi_uclamp_min",
       "Values": [
@@ -330,6 +339,12 @@
       "PowerHint": "INTERACTION",
       "Type": "EndHint",
       "Value": "DISABLE_TA_BOOST"
+    },
+    {
+      "PowerHint": "INTERACTION",
+      "Node": "SFUClampBoost",
+      "Duration": 5000,
+      "Value": "65"
     },
     {
       "PowerHint": "DEVICE_IDLE",
