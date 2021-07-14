@@ -191,7 +191,7 @@
           "Name": "WriteFile",
           "Params":
           {
-            "FilePath": "/sys/kernel/vendor_sched/set_task_group_fg",
+            "FilePath": "/sys/kernel/vendor_sched/set_task_group_sf",
             "Value": "<pid>",
             "LogFailures": "false"
           }
