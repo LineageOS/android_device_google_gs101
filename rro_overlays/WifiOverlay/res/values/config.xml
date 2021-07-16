@@ -21,6 +21,9 @@
     <!-- Boolean indicating whether the wifi chipset has 5GHz frequency band support -->
     <bool translatable="false" name="config_wifi5ghzSupport">true</bool>
 
+    <!-- boolean indicating whether the WiFi chipset has 6GHz band support -->
+    <bool translatable="false" name ="config_wifi6ghzSupport">true</bool>
+
     <!-- Boolean indicating whether 802.11r Fast BSS Transition is enabled on this platform -->
     <bool translatable="false" name="config_wifi_fast_bss_transition_enabled">true</bool>
 
