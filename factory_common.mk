@@ -75,3 +75,7 @@ PRODUCT_SET_DEBUGFS_RESTRICTIONS := false
 # PixelLogger for RF testing
 PRODUCT_PACKAGES_DEBUG += \
     PixelLogger
+
+# Tool for installing Widevine keybox
+PRODUCT_PACKAGES_DEBUG += \
+    WvInstallKeybox

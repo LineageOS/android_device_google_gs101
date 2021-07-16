@@ -559,9 +559,6 @@ ifeq (,$(filter true, $(BOARD_WITHOUT_DTLS)))
 include hardware/google/pixel/dauntless/dauntless.mk
 endif
 
-PRODUCT_PACKAGES_DEBUG += \
-	WvInstallKeybox
-
 # Copy Camera HFD Setfiles
 #PRODUCT_COPY_FILES += \
 	device/google/gs101/firmware/camera/libhfd/default_configuration.hfd.cfg.json:$(TARGET_COPY_OUT_VENDOR)/firmware/default_configuration.hfd.cfg.json \
