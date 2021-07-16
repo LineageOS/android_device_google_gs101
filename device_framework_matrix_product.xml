@@ -1,4 +1,4 @@
-<compatibility-matrix version="1.0" type="framework" level="5">
+<compatibility-matrix version="1.0" type="framework" level="6">
     <hal format="hidl" optional="true">
         <name>android.hardware.radio</name>
         <version>1.2</version>
