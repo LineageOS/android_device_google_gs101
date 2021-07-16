@@ -5,8 +5,8 @@ allow hal_power_stats_default sysfs_scsi_devices_0000:file r_file_perms;
 binder_call(hal_power_stats_default, hal_bluetooth_btlinux)
 
 r_dir_file(hal_power_stats_default, sysfs_iio_devices)
-allow hal_power_stats_default odpm_config_file:dir search;
-allow hal_power_stats_default odpm_config_file:file r_file_perms;
+allow hal_power_stats_default powerstats_vendor_data_file:dir search;
+allow hal_power_stats_default powerstats_vendor_data_file:file r_file_perms;
 allow hal_power_stats_default sysfs_odpm:dir search;
 allow hal_power_stats_default sysfs_odpm:file rw_file_perms;
 
