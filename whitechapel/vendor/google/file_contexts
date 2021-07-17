@@ -353,7 +353,7 @@
 
 # Tetheroffload Service
 /dev/dit2                      u:object_r:vendor_toe_device:s0
-/vendor/bin/hw/vendor\.samsung_slsi\.hardware\.tetheroffload@1\.0-service     u:object_r:hal_tetheroffload_default_exec:s0
+/vendor/bin/hw/vendor\.samsung_slsi\.hardware\.tetheroffload@1\.[0-9]-service     u:object_r:hal_tetheroffload_default_exec:s0
 
 # pixelstats binary
 /vendor/bin/pixelstats-vendor           u:object_r:pixelstats_vendor_exec:s0
@@ -388,7 +388,7 @@
 /dev/cpuctl(/.*)?	                                                      u:object_r:cpuctl_device:s0
 
 # ODPM
-/data/vendor/powerstats(/.*)?                                              u:object_r:odpm_config_file:s0
+/data/vendor/powerstats(/.*)?                                              u:object_r:powerstats_vendor_data_file:s0
 
 # sensor direct DMA-BUF heap
 /dev/dma_heap/sensor_direct_heap                                               u:object_r:sensor_direct_heap_device:s0
