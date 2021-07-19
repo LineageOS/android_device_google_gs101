@@ -400,6 +400,9 @@ void addGPU(std::shared_ptr<PowerStats> p) {
             EnergyConsumerType::OTHER, "GPU", {"S2S_VDD_G3D"},
             {{UID_TIME_IN_STATE, "/sys/devices/platform/1c500000.mali/uid_time_in_state"}},
             stateCoeffs));
+
+    p->addStateResidencyDataProvider(std::make_unique<DevfreqStateResidencyDataProvider>("GPU",
+            "/sys/bus/platform/devices/1c500000.mali"));
 }
 
 void addMobileRadio(std::shared_ptr<PowerStats> p)
