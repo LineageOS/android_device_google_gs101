@@ -18,3 +18,7 @@ hal_client_domain(hal_fingerprint_default, hal_power);
 
 # Allow access to the files of CDT information.
 r_dir_file(hal_fingerprint_default, sysfs_chosen)
+
+# Allow fingerprint to access calibration blk device.
+allow hal_fingerprint_default mfg_data_block_device:blk_file { rw_file_perms };
+allow hal_fingerprint_default block_device:dir search;
