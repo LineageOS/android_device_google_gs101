@@ -5,5 +5,8 @@
        Log="JAVA"
        AssertEnabled="true"
   />
+  <gll
+       EnableOnChipStopNotification="true"
+  />
 </glgps>
 
