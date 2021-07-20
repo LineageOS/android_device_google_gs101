@@ -9,6 +9,7 @@ allow vendor_ims_app radio_service:service_manager find;
 
 allow vendor_ims_app mediaserver_service:service_manager find;
 allow vendor_ims_app cameraserver_service:service_manager find;
+allow vendor_ims_app mediametrics_service:service_manager find;
 
 binder_call(vendor_ims_app, rild)
 set_prop(vendor_ims_app, vendor_rild_prop)
