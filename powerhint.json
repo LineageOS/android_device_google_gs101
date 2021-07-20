@@ -155,15 +155,6 @@
       "ResetOnInit": true
     },
     {
-      "Name": "CDCpuset",
-      "Path": "/dev/cpuset/camera-daemon/cpus",
-      "Values": [
-        "4-7",
-        "0-7"
-      ],
-      "ResetOnInit": true
-    },
-    {
       "Name": "F2fsRecessModeEnable",
       "Path": "/dev/sys/fs/by-name/userdata/gc_urgent",
       "Values": [
@@ -428,12 +419,6 @@
       "Node": "CPULittleClusterMinFreq",
       "Duration": 1000,
       "Value": "9999999"
-    },
-    {
-      "PowerHint": "CAMERA_LAUNCH",
-      "Node": "CDCpuset",
-      "Duration": 1000,
-      "Value": "4-7"
     },
     {
       "PowerHint": "CAMERA_BACKEND_BOOST",
