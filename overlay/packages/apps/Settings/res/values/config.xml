@@ -17,4 +17,9 @@
 <resources>
     <!-- Whether to aggregate for network selection list-->
     <bool name="config_network_selection_list_aggregation_enabled">true</bool>
+
+    <!-- The switch preference's default value of connectivity helper call quality-->
+    <bool name="config_show_connectivity_helper_call_quality">true</bool>
+    <!-- The switch preference's default value of connectivity helper DeviceToDevice-->
+    <bool name="config_show_connectivity_helper_d2d">true</bool>
 </resources>
