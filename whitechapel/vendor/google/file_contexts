@@ -73,6 +73,7 @@
 /dev/block/platform/14700000\.ufs/by-name/vbmeta_[ab]         u:object_r:custom_ab_block_device:s0
 /dev/block/platform/14700000\.ufs/by-name/vbmeta_system_[ab]  u:object_r:custom_ab_block_device:s0
 /dev/block/platform/14700000\.ufs/by-name/vendor_boot_[ab]    u:object_r:custom_ab_block_device:s0
+/dev/block/platform/14700000\.ufs/by-name/mfg_data            u:object_r:mfg_data_block_device:s0
 /dev/block/sda                                                u:object_r:sda_block_device:s0
 /dev/sys/block/bootdevice(/.*)?                               u:object_r:bootdevice_sysdev:s0
 
@@ -105,6 +106,8 @@
 /dev/logbuffer_maxfg_base      u:object_r:logbuffer_device:s0
 /dev/logbuffer_maxfg_flip      u:object_r:logbuffer_device:s0
 /dev/logbuffer_pca9468_tcpm    u:object_r:logbuffer_device:s0
+/dev/logbuffer_pca9468         u:object_r:logbuffer_device:s0
+/dev/logbuffer_cpm             u:object_r:logbuffer_device:s0
 
 # DM tools device
 /dev/umts_dm0                  u:object_r:radio_device:s0
