@@ -611,7 +611,7 @@ void DumpstateDevice::dumpTouchSection(int fd) {
         // Enable: force touch active
         snprintf(cmd, sizeof(cmd),
                  "echo %s > %s/cmd && cat %s/cmd_result",
-                 "force_touch_active,1",
+                 "force_touch_active,2,1",
                  lsi_spi_path, lsi_spi_path);
         RunCommandToFd(fd, "Force Touch Active", {"/vendor/bin/sh", "-c", cmd});
 
@@ -696,7 +696,7 @@ void DumpstateDevice::dumpTouchSection(int fd) {
         // Disable: force touch active
         snprintf(cmd, sizeof(cmd),
                  "echo %s > %s/cmd && cat %s/cmd_result",
-                 "force_touch_active,0",
+                 "force_touch_active,2,0",
                  lsi_spi_path, lsi_spi_path);
         RunCommandToFd(fd, "Force Touch Active", {"/vendor/bin/sh", "-c", cmd});
     }
