@@ -37,7 +37,14 @@
 #include "Usb.h"
 #include "UsbGadget.h"
 
+#include <aidl/android/frameworks/stats/IStats.h>
+#include <pixelstats/StatsHelper.h>
+
+using aidl::android::frameworks::stats::IStats;
 using android::base::GetProperty;
+using android::hardware::google::pixel::getStatsService;
+using android::hardware::google::pixel::PixelAtoms::VendorUsbPortOverheat;
+using android::hardware::google::pixel::reportUsbPortOverheat;
 
 namespace android {
 namespace hardware {
@@ -96,6 +103,13 @@ constexpr char kContaminantDetectionPath[] = "i2c-max77759tcpc/contaminant_detec
 constexpr char kStatusPath[] = "i2c-max77759tcpc/contaminant_detection_status";
 constexpr char kTypecPath[] = "/sys/class/typec";
 constexpr char kDisableContatminantDetection[] = "vendor.usb.contaminantdisable";
+constexpr char kOverheatStatsPath[] = "/sys/devices/platform/google,usbc_port_cooling_dev/";
+constexpr char kOverheatStatsDev[] = "DRIVER=google,usbc_port_cooling_dev";
+constexpr char kThermalZoneForTrip[] = "VIRTUAL-USB-THROTTLING";
+constexpr char kThermalZoneForTempReadPrimary[] = "usb_pwr_therm2";
+constexpr char kThermalZoneForTempReadSecondary1[] = "usb_pwr_therm";
+constexpr char kThermalZoneForTempReadSecondary2[] = "qi_therm";
+constexpr int kSamplingIntervalSec = 5;
 
 int32_t readFile(const std::string &filename, std::string *contents) {
     FILE *fp;
@@ -327,7 +341,15 @@ Usb::Usb()
     : mLock(PTHREAD_MUTEX_INITIALIZER),
       mRoleSwitchLock(PTHREAD_MUTEX_INITIALIZER),
       mPartnerLock(PTHREAD_MUTEX_INITIALIZER),
-      mPartnerUp(false) {
+      mPartnerUp(false),
+      mOverheat(ZoneInfo(TemperatureType::USB_PORT, kThermalZoneForTrip,
+                         ThrottlingSeverity::CRITICAL),
+                {ZoneInfo(TemperatureType::UNKNOWN, kThermalZoneForTempReadPrimary,
+                          ThrottlingSeverity::NONE),
+                 ZoneInfo(TemperatureType::UNKNOWN, kThermalZoneForTempReadSecondary1,
+                          ThrottlingSeverity::NONE),
+                 ZoneInfo(TemperatureType::UNKNOWN, kThermalZoneForTempReadSecondary2,
+                          ThrottlingSeverity::NONE)}, kSamplingIntervalSec) {
     pthread_condattr_t attr;
     if (pthread_condattr_init(&attr)) {
         ALOGE("pthread_condattr_init failed: %s", strerror(errno));
@@ -525,7 +547,8 @@ bool canSwitchRoleHelper(const std::string &portName, PortRoleType /*type*/) {
  * The caller of this method would reconstruct the V1_0::PortStatus
  * object if required.
  */
-Status getPortStatusHelper(hidl_vec<PortStatus> *currentPortStatus_1_2, HALVersion version) {
+Status getPortStatusHelper(hidl_vec<PortStatus> *currentPortStatus_1_2, HALVersion version,
+                           android::hardware::usb::V1_3::implementation::Usb *usb) {
     std::unordered_map<std::string, bool> names;
     Status result = getTypeCPortNamesHelper(&names);
     int i = -1;
@@ -586,6 +609,12 @@ Status getPortStatusHelper(hidl_vec<PortStatus> *currentPortStatus_1_2, HALVersi
                 (*currentPortStatus_1_2)[i].status_1_1.status.currentMode = V1_0::PortMode::NONE;
             }
 
+            // Query temperature for the first connect
+            if (port.second && !usb->mPluggedTemperatureCelsius) {
+                usb->mOverheat.getCurrentTemperature(kThermalZoneForTempReadPrimary,
+                    &usb->mPluggedTemperatureCelsius);
+                ALOGV("USB Initial temperature: %f", usb->mPluggedTemperatureCelsius);
+            }
             ALOGI(
                 "%d:%s connected:%d canChangeMode:%d canChagedata:%d canChangePower:%d "
                 "supportedModes:%d",
@@ -612,16 +641,16 @@ void queryVersionHelper(android::hardware::usb::V1_3::implementation::Usb *usb,
     pthread_mutex_lock(&usb->mLock);
     if (usb->mCallback_1_0 != NULL) {
         if (callback_V1_2 != NULL) {
-            status = getPortStatusHelper(currentPortStatus_1_2, HALVersion::V1_2);
+            status = getPortStatusHelper(currentPortStatus_1_2, HALVersion::V1_2, usb);
             if (status == Status::SUCCESS)
                 queryMoistureDetectionStatus(currentPortStatus_1_2);
         } else if (callback_V1_1 != NULL) {
-            status = getPortStatusHelper(currentPortStatus_1_2, HALVersion::V1_1);
+            status = getPortStatusHelper(currentPortStatus_1_2, HALVersion::V1_1, usb);
             currentPortStatus_1_1.resize(currentPortStatus_1_2->size());
             for (unsigned long i = 0; i < currentPortStatus_1_2->size(); i++)
                 currentPortStatus_1_1[i] = (*currentPortStatus_1_2)[i].status_1_1;
         } else {
-            status = getPortStatusHelper(currentPortStatus_1_2, HALVersion::V1_0);
+            status = getPortStatusHelper(currentPortStatus_1_2, HALVersion::V1_0, usb);
             currentPortStatus.resize(currentPortStatus_1_2->size());
             for (unsigned long i = 0; i < currentPortStatus_1_2->size(); i++)
                 currentPortStatus[i] = (*currentPortStatus_1_2)[i].status_1_1.status;
@@ -673,6 +702,39 @@ Return<void> Usb::enableContaminantPresenceProtection(const hidl_string & /*port
     return Void();
 }
 
+void report_overheat_event(android::hardware::usb::V1_3::implementation::Usb *usb) {
+    VendorUsbPortOverheat overheat_info;
+    std::string contents;
+
+    overheat_info.set_plug_temperature_deci_c(usb->mPluggedTemperatureCelsius * 10);
+    overheat_info.set_max_temperature_deci_c(usb->mOverheat.getMaxOverheatTemperature() * 10);
+    if (ReadFileToString(std::string(kOverheatStatsPath) + "trip_time", &contents)) {
+        overheat_info.set_time_to_overheat_secs(stoi(contents));
+    } else {
+        ALOGE("Unable to read trip_time");
+        return;
+    }
+    if (ReadFileToString(std::string(kOverheatStatsPath) + "hysteresis_time", &contents)) {
+        overheat_info.set_time_to_hysteresis_secs(stoi(contents));
+    } else {
+        ALOGE("Unable to read hysteresis_time");
+        return;
+    }
+    if (ReadFileToString(std::string(kOverheatStatsPath) + "cleared_time", &contents)) {
+        overheat_info.set_time_to_inactive_secs(stoi(contents));
+    } else {
+        ALOGE("Unable to read cleared_time");
+        return;
+    }
+
+    const std::shared_ptr<IStats> stats_client = getStatsService();
+    if (!stats_client) {
+        ALOGE("Unable to get AIDL Stats service");
+    } else {
+        reportUsbPortOverheat(stats_client, overheat_info);
+    }
+}
+
 struct data {
     int uevent_fd;
     android::hardware::usb::V1_3::implementation::Usb *usb;
@@ -700,6 +762,10 @@ static void uevent_event(uint32_t /*epevents*/, struct data *payload) {
             payload->usb->mPartnerUp = true;
             pthread_cond_signal(&payload->usb->mPartnerCV);
             pthread_mutex_unlock(&payload->usb->mPartnerLock);
+            // Update Plugged temperature
+            payload->usb->mOverheat.getCurrentTemperature(kThermalZoneForTempReadPrimary,
+                    &payload->usb->mPluggedTemperatureCelsius);
+            ALOGI("Usb Plugged temp: %f", payload->usb->mPluggedTemperatureCelsius);
         } else if (!strncmp(cp, "DEVTYPE=typec_", strlen("DEVTYPE=typec_")) ||
                    !strncmp(cp, "DRIVER=max77759tcpc",
                             strlen("DRIVER=max77759tcpc"))) {
@@ -725,6 +791,9 @@ static void uevent_event(uint32_t /*epevents*/, struct data *payload) {
                 pthread_mutex_unlock(&payload->usb->mRoleSwitchLock);
             }
             break;
+        } else if (!strncmp(cp, kOverheatStatsDev, strlen(kOverheatStatsDev))) {
+            ALOGV("Overheat Cooling device suez update");
+            report_overheat_event(payload->usb);
         }
         /* advance to after the next \0 */
         while (*cp++) {
