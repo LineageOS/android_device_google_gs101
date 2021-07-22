@@ -37,13 +37,8 @@
        SuplMgpsCapable = "true"
 
        RtoEnable="true"
-       RtoConfig="gllto.glpals.com/rto/v1/latest/rto.dat"
-
        RtiEnable="true"
-       RtiConfig="gllto.glpals.com:80/rtistatus4.dat"
-
        HttpSyncLto="true"
-       LtoConfig="gllto2.glpals.com/4day/v5/latest/lto2.dat"
        LtoFileName="lto2.dat"
        LtoDir="/data/vendor/gps/"
        LtoSyncThresholdDays="1"
