@@ -26,8 +26,8 @@ binder_call(hal_camera_default, edgetpu_vendor_server)
 # Allow access to data files used by the camera HAL
 allow hal_camera_default mnt_vendor_file:dir search;
 allow hal_camera_default persist_file:dir search;
-allow hal_camera_default persist_camera_file:dir search;
-allow hal_camera_default persist_camera_file:file r_file_perms;
+allow hal_camera_default persist_camera_file:dir rw_dir_perms;
+allow hal_camera_default persist_camera_file:file create_file_perms;
 allow hal_camera_default vendor_camera_data_file:dir rw_dir_perms;
 allow hal_camera_default vendor_camera_data_file:file create_file_perms;
 allow hal_camera_default vendor_camera_tuning_file:dir r_dir_perms;
