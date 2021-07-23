@@ -45,6 +45,28 @@
       ]
     },
     {
+      "Name": "CameraServicePower",
+      "Actions": [
+        {
+          "Name": "JoinCgroup",
+          "Params":
+          {
+            "Controller": "cpu",
+            "Path": "system"
+          }
+        },
+        {
+          "Name": "WriteFile",
+          "Params":
+          {
+            "FilePath": "/sys/kernel/vendor_sched/set_task_group_cam_power",
+            "Value": "<pid>",
+            "LogFailures": "false"
+          }
+        }
+      ]
+    },
+    {
       "Name": "CameraServiceHighCapacity",
       "Actions": [
         {
