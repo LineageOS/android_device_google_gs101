@@ -72,6 +72,7 @@
 /dev/block/platform/14700000\.ufs/by-name/tzsw_[ab]           u:object_r:custom_ab_block_device:s0
 /dev/block/platform/14700000\.ufs/by-name/vbmeta_[ab]         u:object_r:custom_ab_block_device:s0
 /dev/block/platform/14700000\.ufs/by-name/vbmeta_system_[ab]  u:object_r:custom_ab_block_device:s0
+/dev/block/platform/14700000\.ufs/by-name/vbmeta_vendor_[ab]  u:object_r:custom_ab_block_device:s0
 /dev/block/platform/14700000\.ufs/by-name/vendor_boot_[ab]    u:object_r:custom_ab_block_device:s0
 /dev/block/platform/14700000\.ufs/by-name/mfg_data            u:object_r:mfg_data_block_device:s0
 /dev/block/sda                                                u:object_r:sda_block_device:s0
