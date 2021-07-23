@@ -124,6 +124,9 @@ type tcpdump_vendor_data_file, file_type, data_file_type, mlstrustedobject;
 # Wireless
 type sysfs_wlc, sysfs_type, fs_type;
 
+# Pca
+type sysfs_pca, sysfs_type, fs_type;
+
 # Camera
 type persist_camera_file, file_type;
 type vendor_camera_tuning_file, vendor_file_type, file_type;
