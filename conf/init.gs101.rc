@@ -214,6 +214,19 @@ on init
     # Wireless Charge stats (write 0)
     chown system system /sys/class/power_supply/wireless/device/charge_stats
 
+    # Permission for wireless charging
+    chown system system /sys/class/power_supply/wireless/capacity
+    chown system system /sys/class/power_supply/wireless/device/rtx
+    chown system system /sys/class/power_supply/wireless/device/rxdata
+    chown system system /sys/class/power_supply/wireless/device/txdata
+    chown system system /sys/class/power_supply/wireless/device/rxlen
+    chown system system /sys/class/power_supply/wireless/device/txlen
+    chown system system /sys/class/power_supply/wireless/device/ccreset
+    chown system system /sys/class/power_supply/wireless/device/status
+    chown system system /sys/class/power_supply/wireless/device/version
+    chown system system /sys/class/power_supply/wireless/device/features
+    chown system system /sys/class/power_supply/wireless/device/authtype
+
     # Adaptive charge
     chown system system /sys/class/power_supply/battery/charge_deadline
 
@@ -724,19 +737,6 @@ on property:sys.boot_completed=1
 
     # gvotables for dumpstate
     chown system system /sys/kernel/debug/gvotables
-
-    # Permission for wireless charging
-    chown system system /sys/class/power_supply/wireless/capacity
-    chown system system /sys/class/power_supply/wireless/device/rtx
-    chown system system /sys/class/power_supply/wireless/device/rxdata
-    chown system system /sys/class/power_supply/wireless/device/txdata
-    chown system system /sys/class/power_supply/wireless/device/rxlen
-    chown system system /sys/class/power_supply/wireless/device/txlen
-    chown system system /sys/class/power_supply/wireless/device/ccreset
-    chown system system /sys/class/power_supply/wireless/device/status
-    chown system system /sys/class/power_supply/wireless/device/version
-    chown system system /sys/class/power_supply/wireless/device/features
-    chown system system /sys/class/power_supply/wireless/device/authtype
 
     # AOC reset permission
     chown root system /sys/devices/platform/19000000.aoc/reset
