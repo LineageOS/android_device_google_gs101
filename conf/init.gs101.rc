@@ -125,6 +125,8 @@ on init
     write /sys/kernel/vendor_sched/ta_prefer_idle 1
     write /sys/kernel/vendor_sched/fg_uclamp_min 308
     write /sys/kernel/vendor_sched/fg_prefer_idle 1
+    write /sys/kernel/vendor_sched/sys_uclamp_min 308
+    write /sys/kernel/vendor_sched/sys_prefer_idle 1
 
     # governor setting
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor sched_pixel
@@ -353,6 +355,7 @@ on post-fs-data
 on zygote-start
     # For PixelLogger configuration file.
     chmod 0771 /data/vendor/wifi
+    write /sys/kernel/vendor_sched/sys_uclamp_min 0
 
 on post-fs-data
     # Create the directories used by the Wireless subsystem
@@ -678,6 +681,7 @@ on property:sys.boot_completed=1
     write /sys/kernel/vendor_sched/ta_uclamp_min 1
     write /sys/kernel/vendor_sched/fg_uclamp_min 0
     write /sys/kernel/vendor_sched/bg_uclamp_max 615
+    write /sys/kernel/vendor_sched/sys_prefer_idle 0
     # cfs_rq clamp is using tg->uclamp setting
     # align it with the vendor_group setting
     write /dev/cpuctl/background/cpu.uclamp.max 60
