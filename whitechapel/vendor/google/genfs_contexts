@@ -7,6 +7,12 @@ genfscon sysfs /devices/platform/19000000.aoc/reset                         u:ob
 genfscon sysfs /devices/platform/19000000.aoc/services                      u:object_r:sysfs_aoc_dumpstate:s0
 genfscon sysfs /devices/platform/19000000.aoc/restart_count                 u:object_r:sysfs_aoc_dumpstate:s0
 genfscon sysfs /devices/platform/19000000.aoc/coredump_count                u:object_r:sysfs_aoc_dumpstate:s0
+genfscon sysfs /devices/platform/19000000.aoc/control/ring_buffer_wakeup    u:object_r:sysfs_aoc_dumpstate:s0
+genfscon sysfs /devices/platform/19000000.aoc/control/host_ipc_wakeup       u:object_r:sysfs_aoc_dumpstate:s0
+genfscon sysfs /devices/platform/19000000.aoc/control/usf_wakeup            u:object_r:sysfs_aoc_dumpstate:s0
+genfscon sysfs /devices/platform/19000000.aoc/control/audio_wakeup          u:object_r:sysfs_aoc_dumpstate:s0
+genfscon sysfs /devices/platform/19000000.aoc/control/logging_wakeup        u:object_r:sysfs_aoc_dumpstate:s0
+genfscon sysfs /devices/platform/19000000.aoc/control/hotword_wakeup        u:object_r:sysfs_aoc_dumpstate:s0
 
 # WiFi
 genfscon sysfs /wifi                                                        u:object_r:sysfs_wifi:s0
@@ -26,6 +32,7 @@ genfscon sysfs /devices/platform/10970000.hsi2c/i2c-5/i2c-p9412/power_supply    
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-5/5-0050/eeprom             u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-5/5-0061/power_supply       u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-5/5-0036/power_supply       u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-6/6-0057/chg_stats          u:object_r:sysfs_pca:s0
 
 genfscon sysfs /devices/platform/10d30000.spi/spi_master/spi10/spi10.0/uwb/power_stats u:object_r:sysfs_power_stats:s0
 
@@ -33,6 +40,7 @@ genfscon sysfs /devices/platform/10d30000.spi/spi_master/spi10/spi10.0/uwb/power
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-4/i2c-p9412                    u:object_r:sysfs_wlc:s0
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-4/i2c-p9412/power_supply       u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-4/4-0050/eeprom             u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-5/5-0057/chg_stats          u:object_r:sysfs_pca:s0
 
 # Storage
 genfscon debugfs /f2fs                                u:object_r:debugfs_f2fs:s0
