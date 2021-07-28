@@ -27,6 +27,9 @@ allow hal_dumpstate_default vendor_rfsd_log_file:file r_file_perms;
 allow hal_dumpstate_default vendor_camera_data_file:dir r_dir_perms;
 allow hal_dumpstate_default vendor_camera_data_file:file r_file_perms;
 
+# camera prop access
+get_prop(hal_dumpstate_default, vendor_camera_debug_prop);
+
 allow hal_dumpstate_default vendor_log_file:dir search;
 
 allow hal_dumpstate_default vendor_usf_stats:file execute_no_trans;
