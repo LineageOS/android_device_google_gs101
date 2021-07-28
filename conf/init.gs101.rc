@@ -901,6 +901,8 @@ on charger
     mkdir /dev/thermal/tz-by-name 0750 system system
     mkdir /dev/thermal/cdev-by-name 0750 system system
     start vendor.thermal.symlinks
+    write /sys/kernel/vendor_sched/sys_uclamp_min 0
+    write /sys/kernel/vendor_sched/sys_prefer_idle 0
 
 # Launch thermal hal in off charging mode
 on charger && property:vendor.thermal.link_ready=1
