@@ -8,3 +8,6 @@ allow twoshay twoshay:capability sys_nice;
 
 binder_use(twoshay)
 add_service(twoshay, touch_context_service)
+
+# b/193224954
+dontaudit twoshay twoshay:capability dac_override;
