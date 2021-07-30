@@ -32,7 +32,6 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.camera.partial_result_count=1 \
     vendor.camera.debug.bypass_face_ssd_processor=1 \
-    vendor.camera.debug.csi_ebuf_enable=0 \
     vendor.camera.debug.enable_face_detection=0 \
     vendor.camera.debug.force_dpm_on=0 \
     vendor.camera.debug.force_eis_on=0 \
