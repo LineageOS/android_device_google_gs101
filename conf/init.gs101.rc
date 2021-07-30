@@ -305,6 +305,7 @@ on init && property:ro.boot.hw.soc.rev=1
 
 on late-fs
     # Start bootanimation class before mount
+    start bootanim
     class_start animation
 
     # Mount RW partitions which need run fsck
