@@ -1,3 +1,0 @@
-# Vendor sched files
-genfscon sysfs /kernel/vendor_sched                                            u:object_r:sysfs_vendor_sched:s0
-genfscon proc  /vendor_sched                                                   u:object_r:proc_vendor_sched:s0
