@@ -805,7 +805,6 @@ on post-fs-data
     symlink /mnt/vendor/persist/ss /data/vendor/ss/persist
     chown root system /data/vendor/ss/persist
     chmod 0770 /data/vendor/ss/persist
-    chown system system /dev/sg1
 
     start storageproxyd
 
