@@ -1,2 +1,0 @@
-# b/194241380
-dontaudit hal_neuralnetworks_darwinn sysfs:dir read;
