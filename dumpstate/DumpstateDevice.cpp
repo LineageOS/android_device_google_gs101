@@ -648,20 +648,6 @@ void DumpstateDevice::dumpTouchSection(int fd) {
                  lsi_spi_path, lsi_spi_path);
         RunCommandToFd(fd, "Self Strength", {"/vendor/bin/sh", "-c", cmd});
 
-        // Raw cap
-        snprintf(cmd, sizeof(cmd),
-                 "echo %s > %s/cmd && cat %s/cmd_result",
-                 "run_rawcap_read_all",
-                 lsi_spi_path, lsi_spi_path);
-        RunCommandToFd(fd, "Mutual Raw Cap", {"/vendor/bin/sh", "-c", cmd});
-
-        // Self raw cap
-        snprintf(cmd, sizeof(cmd),
-                 "echo %s > %s/cmd && cat %s/cmd_result",
-                 "run_self_rawcap_read_all",
-                 lsi_spi_path, lsi_spi_path);
-        RunCommandToFd(fd, "Self Raw Cap", {"/vendor/bin/sh", "-c", cmd});
-
         // TYPE_AMBIENT_DATA
         snprintf(cmd, sizeof(cmd),
                  "echo %s > %s/cmd && cat %s/cmd_result",
@@ -696,6 +682,27 @@ void DumpstateDevice::dumpTouchSection(int fd) {
                  "run_rawdata_read_type,31",
                  lsi_spi_path, lsi_spi_path);
         RunCommandToFd(fd, "TYPE_NOI_P2P_MAX", {"/vendor/bin/sh", "-c", cmd});
+
+        // Raw cap
+        snprintf(cmd, sizeof(cmd),
+                 "echo %s > %s/cmd && cat %s/cmd_result",
+                 "run_rawcap_read_all",
+                 lsi_spi_path, lsi_spi_path);
+        RunCommandToFd(fd, "Mutual Raw Cap", {"/vendor/bin/sh", "-c", cmd});
+
+        // Self raw cap
+        snprintf(cmd, sizeof(cmd),
+                 "echo %s > %s/cmd && cat %s/cmd_result",
+                 "run_self_rawcap_read_all",
+                 lsi_spi_path, lsi_spi_path);
+        RunCommandToFd(fd, "Self Raw Cap", {"/vendor/bin/sh", "-c", cmd});
+
+        // CM2
+        snprintf(cmd, sizeof(cmd),
+                 "echo %s > %s/cmd && cat %s/cmd_result",
+                 "run_rawcap_high_freq_read_all",
+                 lsi_spi_path, lsi_spi_path);
+        RunCommandToFd(fd, "CM2", {"/vendor/bin/sh", "-c", cmd});
 
         // Disable: force touch active
         snprintf(cmd, sizeof(cmd),
