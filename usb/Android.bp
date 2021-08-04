@@ -51,7 +51,7 @@ cc_binary {
         "android.hardware.thermal@1.0",
         "android.hardware.thermal@2.0",
         "libcutils",
-        "android.frameworks.stats-V1-ndk_platform",
+        "android.frameworks.stats-V1-ndk",
         "pixelatoms-cpp",
         "libbinder_ndk",
     ],
@@ -60,7 +60,7 @@ cc_binary {
         "libpixelstats",
     ],
     export_shared_lib_headers: [
-        "android.frameworks.stats-V1-ndk_platform",
+        "android.frameworks.stats-V1-ndk",
         "pixelatoms-cpp",
     ],
     proprietary: true,
