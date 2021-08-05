@@ -458,6 +458,11 @@ void DumpstateDevice::dumpPowerSection(int fd) {
                         "do lvl=`cat $f`; "
                         "a=${f/\\/sys\\/devices\\/virtual\\/pmic\\/mitigation\\/triggered_lvl\\//}; "
                         "echo \"${a/_lvl/} \\t$lvl\" ; done"});
+    RunCommandToFd(fd, "Instruction", {"/vendor/bin/sh", "-c",
+                        "for f in `ls /sys/devices/virtual/pmic/mitigation/instruction/*` ; "
+                        "do val=`cat $f` ; "
+                        "a=${f/\\/sys\\/devices\\/virtual\\/pmic\\/mitigation\\/instruction\\//}; "
+                        "echo \"$a=$val\" ; done"});
 
 }
 
