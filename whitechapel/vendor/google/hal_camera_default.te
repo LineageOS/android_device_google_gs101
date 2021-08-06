@@ -82,3 +82,7 @@ allow hal_camera_default apex_info_file:file r_file_perms;
 
 # Allow camera HAL to query current device clock frequencies.
 allow hal_camera_default sysfs_devfreq_cur:file r_file_perms;
+
+# allow camera HAL to read backlight of display
+allow hal_camera_default sysfs_leds:dir r_dir_perms;
+allow hal_camera_default sysfs_leds:file r_file_perms;
