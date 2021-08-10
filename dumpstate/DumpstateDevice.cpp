@@ -378,10 +378,8 @@ void DumpstateDevice::dumpPowerSection(int fd) {
                         " for f in `ls bd_*` ; do echo \"$f: `cat $f`\" ; done"});
     if (!PropertiesHelper::IsUserBuild()) {
 
-        RunCommandToFd(fd, "DC_registers dump", {"/vendor/bin/sh", "-c",
-                        "for f in /d/regmap/*-0057-pca9468-mains ; do "
-                        "regs=`cat $f/registers`; echo $f: ;"
-                        "echo \"$regs\"; done"});
+        DumpFileToFd(fd, "DC_registers dump", "/sys/class/power_supply/pca9468-mains/device/registers_dump");
+
 
         RunCommandToFd(fd, "fg_model", {"/vendor/bin/sh", "-c",
                         "for f in /d/maxfg* ; do "
@@ -401,7 +399,7 @@ void DumpstateDevice::dumpPowerSection(int fd) {
 
         /* FG Registers */
         RunCommandToFd(fd, "fg registers", {"/vendor/bin/sh", "-c",
-                        "for f in /d/regmap/*-0036 ; do "
+                        "for f in /d/maxfg* ; do "
                         "regs=`cat $f/registers`; echo $f: ;"
                         "echo \"$regs\"; done"});
     }
