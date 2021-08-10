@@ -344,6 +344,9 @@ void DumpstateDevice::dumpPowerSection(int fd) {
         DumpFileToFd(fd, "maxfg_base", "/dev/logbuffer_maxfg_base");
         DumpFileToFd(fd, "maxfg_flip", "/dev/logbuffer_maxfg_flip");
     }
+    if (!stat("/sys/class/power_supply/dock", &buffer)) {
+        DumpFileToFd(fd, "Power supply property dock", "/sys/class/power_supply/dock/uevent");
+    }
 
     if (!stat("/dev/logbuffer_tcpm", &buffer)) {
         DumpFileToFd(fd, "Logbuffer TCPM", "/dev/logbuffer_tcpm");
