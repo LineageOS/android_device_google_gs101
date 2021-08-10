@@ -767,7 +767,9 @@ PRODUCT_PACKAGES += \
 endif
 
 # GPS HAL
+ifeq (,$(filter tangor citron,$(subst _, ,$(TARGET_PRODUCT))))
 include device/google/gs101/gnss/device-gnss.mk
+endif
 
 # Trusty (KM, GK, Storage)
 $(call inherit-product, system/core/trusty/trusty-storage.mk)
