@@ -6,7 +6,7 @@
        AssertEnabled="true"
   />
   <gll
-       EnableOnChipStopNotification="true"
+       EnableOnChipStopNotification="false"
   />
 </glgps>
 
