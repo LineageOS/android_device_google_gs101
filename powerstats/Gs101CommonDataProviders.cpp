@@ -173,13 +173,10 @@ void addDvfsStats(std::shared_ptr<PowerStats> p) {
         }});
 
         cfgs.push_back({"TPU", {
-            std::make_pair("1393MHz", "1393000"),
-            std::make_pair("1180MHz", "1180000"),
-            std::make_pair("1024MHz", "1024000"),
-            std::make_pair("967MHz", "967000"),
-            std::make_pair("836MHz", "836000"),
-            std::make_pair("627MHz", "627000"),
-            std::make_pair("455MHz", "455000"),
+            std::make_pair("1230MHz", "1230000"),
+            std::make_pair("1066MHz", "1066000"),
+            std::make_pair("800MHz", "800000"),
+            std::make_pair("500MHz", "500000"),
             std::make_pair("226MHz", "226000"),
             std::make_pair("RET_SLOW", "6"),
             std::make_pair("S_OFF", "5"),
