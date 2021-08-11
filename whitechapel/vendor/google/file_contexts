@@ -173,7 +173,7 @@
 /data/vendor/camera(/.*)?                                               u:object_r:vendor_camera_data_file:s0
 /vendor/lib(64)?/lib_aion_buffer\.so                                    u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libGralloc4Wrapper\.so                                 u:object_r:same_process_hal_file:s0
-/vendor/lib(64)?/pixel-power-ext-V1-ndk_platform\.so                    u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/pixel-power-ext-V1-ndk\.so                             u:object_r:same_process_hal_file:s0
 
 /dev/stmvl53l1_ranging                                                  u:object_r:rls_device:s0
 
@@ -374,7 +374,7 @@
 /vendor/lib(64)?/libdrm\.so                                                      u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/hw/gralloc\.gs101\.so                                           u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/hw/vulkan\.gs101\.so                                            u:object_r:same_process_hal_file:s0
-/vendor/lib(64)?/arm\.graphics-V1-ndk_platform\.so                               u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/arm\.graphics-V1-ndk\.so                                        u:object_r:same_process_hal_file:s0
 
 # Touch
 /dev/touch_offload                                                               u:object_r:touch_offload_device:s0
@@ -431,6 +431,6 @@
 /vendor/bin/wlc_upt/wlc_fw_update\.sh    u:object_r:wlcfwupdate_exec:s0
 
 # Statsd service to support EdgeTPU metrics logging service.
-/vendor/lib64/android\.frameworks\.stats-V1-ndk_platform\.so u:object_r:same_process_hal_file:s0
+/vendor/lib64/android\.frameworks\.stats-V1-ndk\.so u:object_r:same_process_hal_file:s0
 /vendor/lib64/vendor-pixelatoms-cpp\.so u:object_r:same_process_hal_file:s0
 /vendor/lib64/libprotobuf-cpp-lite-3\.9\.1\.so u:object_r:same_process_hal_file:s0
