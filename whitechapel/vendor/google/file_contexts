@@ -111,6 +111,10 @@
 /dev/logbuffer_pca9468         u:object_r:logbuffer_device:s0
 /dev/logbuffer_cpm             u:object_r:logbuffer_device:s0
 
+/dev/logbuffer_maxfg_monitor        u:object_r:logbuffer_device:s0
+/dev/logbuffer_maxfg_base_monitor   u:object_r:logbuffer_device:s0
+/dev/logbuffer_maxfg_flip_monitor   u:object_r:logbuffer_device:s0
+
 # DM tools device
 /dev/umts_dm0                  u:object_r:radio_device:s0
 /dev/umts_router               u:object_r:radio_device:s0
