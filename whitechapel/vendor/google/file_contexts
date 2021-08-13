@@ -192,6 +192,8 @@
 /dev/lwis-eeprom-m24c64s                                                u:object_r:lwis_device:s0
 /dev/lwis-eeprom-m24c64s-imx355-inner                                   u:object_r:lwis_device:s0
 /dev/lwis-eeprom-m24c64s-imx355-outer                                   u:object_r:lwis_device:s0
+/dev/lwis-eeprom-m24c64s-rear                                           u:object_r:lwis_device:s0
+/dev/lwis-eeprom-m24c64s-front                                          u:object_r:lwis_device:s0
 /dev/lwis-eeprom-m24c64x                                                u:object_r:lwis_device:s0
 /dev/lwis-eeprom-m24c64x-imx386                                         u:object_r:lwis_device:s0
 /dev/lwis-eeprom-m24c64x-imx663                                         u:object_r:lwis_device:s0
@@ -218,6 +220,8 @@
 /dev/lwis-sensor-imx355                                                 u:object_r:lwis_device:s0
 /dev/lwis-sensor-imx355-inner                                           u:object_r:lwis_device:s0
 /dev/lwis-sensor-imx355-outer                                           u:object_r:lwis_device:s0
+/dev/lwis-sensor-imx355-rear                                            u:object_r:lwis_device:s0
+/dev/lwis-sensor-imx355-front                                           u:object_r:lwis_device:s0
 /dev/lwis-sensor-imx363                                                 u:object_r:lwis_device:s0
 /dev/lwis-sensor-imx386                                                 u:object_r:lwis_device:s0
 /dev/lwis-sensor-imx586                                                 u:object_r:lwis_device:s0
