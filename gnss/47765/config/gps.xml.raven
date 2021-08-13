@@ -65,14 +65,15 @@
        EnableFilteringForLTEB13="true"
 
        WarmStandbyTimeout1Seconds="10"
-       WarmStandbyTimeout2Seconds="20"
+       WarmStandbyTimeout2Seconds="15"
 
        EnableGnssPropagateInStandby="true"
 
-       RfPathLossDb_Ap="4"
-       RfPathLossDb_Cp="4"
+       RfPathLossDb_Ap="4.1"
+       RfPathLossDb_Cp="4.1"
        RfPathLossDb_Ap_L5="4"
        RfPathLossDb_Cp_L5="4"
+       OnChipGpsCarrierType="3,2,3,3,2,3,2,3,3,3,1,2,1,3,2,1,2,3,1,1,1,1,3,3,3,3,3,1,2,3,2,3"
 
   />
 
