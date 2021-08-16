@@ -1,1 +1,0 @@
-dontaudit untrusted_app sysfs_vendor_sched:dir search;
