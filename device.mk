@@ -28,7 +28,7 @@ POSTINSTALL_OPTIONAL_system=true
 
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 # STOPSHIP (b/187105270) hack: temp freeze to a lower security patch
-VENDOR_SECURITY_PATCH = 2021-09-05
+VENDOR_SECURITY_PATCH = 2021-09-06
 else
 # Set Vendor SPL to match platform
 VENDOR_SECURITY_PATCH = $(PLATFORM_SECURITY_PATCH)
