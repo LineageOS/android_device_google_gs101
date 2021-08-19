@@ -26,13 +26,8 @@ AB_OTA_POSTINSTALL_CONFIG += \
 	FILESYSTEM_TYPE_system=ext4 \
 POSTINSTALL_OPTIONAL_system=true
 
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
-# STOPSHIP (b/187105270) hack: temp freeze to a lower security patch
-VENDOR_SECURITY_PATCH = 2021-09-07
-else
 # Set Vendor SPL to match platform
 VENDOR_SECURITY_PATCH = $(PLATFORM_SECURITY_PATCH)
-endif
 
 # Set boot SPL
 BOOT_SECURITY_PATCH = $(PLATFORM_SECURITY_PATCH)
