@@ -11,3 +11,6 @@ add_service(twoshay, touch_context_service)
 
 # b/193224954
 dontaudit twoshay twoshay:capability dac_override;
+
+allow twoshay fwk_stats_service:service_manager find;
+binder_call(twoshay, stats_service_server)
