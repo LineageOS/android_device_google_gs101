@@ -26,9 +26,6 @@ type cpuctl_device, dev_type;
 # Bt Wifi Coexistence device
 type wb_coexistence_dev, dev_type;
 
-# Touch
-type touch_offload_device, dev_type;
-
 # LWIS (Lightweight Imaging Subsystem) devices, used by Lyric camera HAL
 type lwis_device, dev_type;
 
