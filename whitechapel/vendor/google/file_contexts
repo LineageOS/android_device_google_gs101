@@ -352,7 +352,7 @@
 
 # Uwb
 # R4
-/vendor/bin/hw/hardware\.qorvo\.uwb-service                          u:object_r:hal_uwb_default_exec:s0
+/vendor/bin/hw/hardware\.qorvo\.uwb-service                          u:object_r:hal_uwb_vendor_default_exec:s0
 
 # RILD files
 /data/vendor/rild(/.*)?                                                     u:object_r:rild_vendor_data_file:s0
