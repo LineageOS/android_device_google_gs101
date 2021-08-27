@@ -221,6 +221,11 @@ SOONG_CONFIG_aoc_audio_func += aosp_build
 SOONG_CONFIG_aoc_audio_func_aosp_build := true
 endif
 
+SOONG_CONFIG_NAMESPACES += haptics
+SOONG_CONFIG_haptics += \
+    actuator_model
+SOONG_CONFIG_haptics_actuator_model := $(ACTUATOR_MODEL)
+
 # Primary AudioHAL Configuration
 #BOARD_USE_COMMON_AUDIOHAL := true
 #BOARD_USE_CALLIOPE_AUDIOHAL := false
