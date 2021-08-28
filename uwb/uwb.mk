@@ -16,5 +16,15 @@
 # UWB - ultra wide band
 $(call inherit-product-if-exists, vendor/qorvo/uwb/uwb.mk)
 
+LOCAL_UWB_CAL_DIR=device/google/gs101/uwb/calibration
+
+ifneq (,$(filter raven, $(TARGET_PRODUCT)))
+PRODUCT_COPY_FILES += \
+    $(LOCAL_UWB_CAL_DIR)/UWB-calibration.conf.raven:$(TARGET_COPY_OUT_VENDOR)/etc/UWB-calibration.conf \
+    $(LOCAL_UWB_CAL_DIR)/UWB-calibration.conf.raven:$(TARGET_COPY_OUT_VENDOR)/etc/UWB-calibration-unknown.conf \
+    $(LOCAL_UWB_CAL_DIR)/UWB-calibration.conf.raven:$(TARGET_COPY_OUT_VENDOR)/etc/UWB-calibration-default.conf \
+    $(LOCAL_UWB_CAL_DIR)/UWB-calibration-jp.conf.raven:$(TARGET_COPY_OUT_VENDOR)/etc/UWB-calibration-jp.conf
+endif
+
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.uwb.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.uwb.xml
