@@ -124,5 +124,5 @@ on property:sys.usb.config=charger && property:sys.usb.configfs=1
 on property:vendor.usb.contaminantdisable=true
     exec /vendor/bin/hw/disable_contaminant_detection.sh
 
-on property:ro.bootmode=uwb
+on property:ro.bootmode=usbuwb
     setprop persist.vendor.usb.usbradio.config uwb_acm
