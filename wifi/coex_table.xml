@@ -305,6 +305,9 @@
         <wifiVictimMhz>50</wifiVictimMhz>
         <cellVictimMhz>50</cellVictimMhz>
       </neighborThresholds>
+      <defaultChannels>
+        <default2g>11</default2g>
+      </defaultChannels>
     </params>
   </entry>
 
@@ -316,6 +319,9 @@
         <wifiVictimMhz>50</wifiVictimMhz>
         <cellVictimMhz>50</cellVictimMhz>
       </neighborThresholds>
+      <defaultChannels>
+        <default2g>11</default2g>
+      </defaultChannels>
     </params>
   </entry>
 
