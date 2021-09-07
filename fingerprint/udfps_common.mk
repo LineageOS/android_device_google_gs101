@@ -28,6 +28,7 @@ ifeq ($(GOODIX_CONFIG_BUILD_VERSION), g6_trusty)
 PRODUCT_SOONG_NAMESPACES += vendor/goodix/udfps/g6_trusty
 PRODUCT_SOONG_NAMESPACES += vendor/goodix/udfps/g6_aidl_trusty
 else ifeq ($(GOODIX_CONFIG_BUILD_VERSION), g7_trusty)
+PRODUCT_SOONG_NAMESPACES += vendor/goodix/udfps/g7_trusty
 # TODO(b/196017212): support AIDL for g7 and remove the following package.
 PRODUCT_PACKAGES += \
     android.hardware.biometrics.fingerprint@2.1-service.goodix
