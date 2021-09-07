@@ -23,7 +23,23 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_UWB_CAL_DIR)/UWB-calibration.conf.raven:$(TARGET_COPY_OUT_VENDOR)/etc/UWB-calibration.conf \
     $(LOCAL_UWB_CAL_DIR)/UWB-calibration.conf.raven:$(TARGET_COPY_OUT_VENDOR)/etc/UWB-calibration-unknown.conf \
     $(LOCAL_UWB_CAL_DIR)/UWB-calibration.conf.raven:$(TARGET_COPY_OUT_VENDOR)/etc/UWB-calibration-default.conf \
-    $(LOCAL_UWB_CAL_DIR)/UWB-calibration-jp.conf.raven:$(TARGET_COPY_OUT_VENDOR)/etc/UWB-calibration-jp.conf
+    $(LOCAL_UWB_CAL_DIR)/UWB-calibration-jp.conf.r4:$(TARGET_COPY_OUT_VENDOR)/etc/UWB-calibration-jp.conf \
+    $(LOCAL_UWB_CAL_DIR)/UWB-calibration-ar.conf.r4:$(TARGET_COPY_OUT_VENDOR)/etc/UWB-calibration-ar.conf \
+    $(LOCAL_UWB_CAL_DIR)/UWB-calibration-am.conf.r4:$(TARGET_COPY_OUT_VENDOR)/etc/UWB-calibration-am.conf \
+    $(LOCAL_UWB_CAL_DIR)/UWB-calibration-az.conf.r4:$(TARGET_COPY_OUT_VENDOR)/etc/UWB-calibration-az.conf \
+    $(LOCAL_UWB_CAL_DIR)/UWB-calibration-by.conf.r4:$(TARGET_COPY_OUT_VENDOR)/etc/UWB-calibration-by.conf \
+    $(LOCAL_UWB_CAL_DIR)/UWB-calibration-id.conf.r4:$(TARGET_COPY_OUT_VENDOR)/etc/UWB-calibration-id.conf \
+    $(LOCAL_UWB_CAL_DIR)/UWB-calibration-kz.conf.r4:$(TARGET_COPY_OUT_VENDOR)/etc/UWB-calibration-kz.conf \
+    $(LOCAL_UWB_CAL_DIR)/UWB-calibration-kg.conf.r4:$(TARGET_COPY_OUT_VENDOR)/etc/UWB-calibration-kg.conf \
+    $(LOCAL_UWB_CAL_DIR)/UWB-calibration-np.conf.r4:$(TARGET_COPY_OUT_VENDOR)/etc/UWB-calibration-np.conf \
+    $(LOCAL_UWB_CAL_DIR)/UWB-calibration-pk.conf.r4:$(TARGET_COPY_OUT_VENDOR)/etc/UWB-calibration-pk.conf \
+    $(LOCAL_UWB_CAL_DIR)/UWB-calibration-py.conf.r4:$(TARGET_COPY_OUT_VENDOR)/etc/UWB-calibration-py.conf \
+    $(LOCAL_UWB_CAL_DIR)/UWB-calibration-ru.conf.r4:$(TARGET_COPY_OUT_VENDOR)/etc/UWB-calibration-ru.conf \
+    $(LOCAL_UWB_CAL_DIR)/UWB-calibration-sb.conf.r4:$(TARGET_COPY_OUT_VENDOR)/etc/UWB-calibration-sb.conf \
+    $(LOCAL_UWB_CAL_DIR)/UWB-calibration-tj.conf.r4:$(TARGET_COPY_OUT_VENDOR)/etc/UWB-calibration-tj.conf \
+    $(LOCAL_UWB_CAL_DIR)/UWB-calibration-tm.conf.r4:$(TARGET_COPY_OUT_VENDOR)/etc/UWB-calibration-tm.conf \
+    $(LOCAL_UWB_CAL_DIR)/UWB-calibration-ua.conf.r4:$(TARGET_COPY_OUT_VENDOR)/etc/UWB-calibration-ua.conf \
+    $(LOCAL_UWB_CAL_DIR)/UWB-calibration-uz.conf.r4:$(TARGET_COPY_OUT_VENDOR)/etc/UWB-calibration-uz.conf
 endif
 
 PRODUCT_COPY_FILES += \
