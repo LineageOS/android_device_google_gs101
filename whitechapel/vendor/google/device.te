@@ -1,18 +1,13 @@
 # Block Devices
 type efs_block_device, dev_type, bdev_type;
-type fat_block_device, dev_type, bdev_type;
 type modem_block_device, dev_type, bdev_type;
 type modem_userdata_block_device, dev_type, bdev_type;
 type persist_block_device, dev_type, bdev_type;
-type vendor_block_device, dev_type, bdev_type;
 type sda_block_device, dev_type, bdev_type;
 type mfg_data_block_device, dev_type, bdev_type;
 
 # Exynos devices
-type vendor_m2m1shot_device, dev_type;
 type vendor_gnss_device, dev_type;
-type vendor_nanohub_device, dev_type;
-type vendor_secmem_device, dev_type;
 type vendor_toe_device, dev_type;
 type custom_ab_block_device, dev_type, bdev_type;
 type devinfo_block_device, dev_type, bdev_type;
