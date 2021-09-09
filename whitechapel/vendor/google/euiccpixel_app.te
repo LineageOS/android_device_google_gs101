@@ -10,6 +10,7 @@ allow euiccpixel_app surfaceflinger_service:service_manager find;
 
 set_prop(euiccpixel_app, vendor_secure_element_prop)
 set_prop(euiccpixel_app, vendor_modem_prop)
+get_prop(euiccpixel_app, dck_prop)
 
 userdebug_or_eng(`
     net_domain(euiccpixel_app)
