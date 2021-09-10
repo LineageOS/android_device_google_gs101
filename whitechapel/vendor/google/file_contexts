@@ -42,13 +42,11 @@
 /dev/block/platform/14700000\.ufs/by-name/efs                 u:object_r:efs_block_device:s0
 /dev/block/platform/14700000\.ufs/by-name/efs_backup          u:object_r:efs_block_device:s0
 /dev/block/platform/14700000\.ufs/by-name/modem_userdata      u:object_r:modem_userdata_block_device:s0
-/dev/block/platform/14700000\.ufs/by-name/fat                 u:object_r:fat_block_device:s0
 /dev/block/platform/14700000\.ufs/by-name/modem_[ab]          u:object_r:modem_block_device:s0
 /dev/block/platform/14700000\.ufs/by-name/modem               u:object_r:modem_block_device:s0
 /dev/block/platform/14700000\.ufs/by-name/persist             u:object_r:persist_block_device:s0
 /dev/block/platform/14700000\.ufs/by-name/system              u:object_r:system_block_device:s0
 /dev/block/platform/14700000\.ufs/by-name/userdata            u:object_r:userdata_block_device:s0
-/dev/block/platform/14700000\.ufs/by-name/vendor              u:object_r:vendor_block_device:s0
 /dev/block/platform/14700000\.ufs/by-name/frp                 u:object_r:frp_block_device:s0
 /dev/block/platform/14700000\.ufs/by-name/misc                u:object_r:misc_block_device:s0
 /dev/block/platform/14700000\.ufs/by-name/devinfo             u:object_r:devinfo_block_device:s0
@@ -86,9 +84,6 @@
 /dev/bbd_control               u:object_r:vendor_gnss_device:s0
 /dev/bbd_pwrstat               u:object_r:power_stats_device:s0
 /dev/ttyBCM                    u:object_r:vendor_gnss_device:s0
-/dev/nanohub                   u:object_r:vendor_nanohub_device:s0
-/dev/nanohub_comms             u:object_r:vendor_nanohub_device:s0
-/dev/m2m1shot_scaler0          u:object_r:vendor_m2m1shot_device:s0
 /dev/radio0                    u:object_r:radio_device:s0
 /dev/dri/card0                 u:object_r:graphics_device:s0
 /dev/fimg2d                    u:object_r:graphics_device:s0
@@ -131,7 +126,6 @@
 
 # GPU device
 /dev/mali0                     u:object_r:gpu_device:s0
-/dev/s5p-smem                  u:object_r:vendor_secmem_device:s0
 
 #
 # Exynos Daemon Exec
