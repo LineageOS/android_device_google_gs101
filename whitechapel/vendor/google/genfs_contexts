@@ -315,3 +315,7 @@ genfscon sysfs /devices/platform/17000060.devfreq_tnr/devfreq/17000060.devfreq_t
 genfscon sysfs /devices/platform/google,usbc_port_cooling_dev/cleared_time      u:object_r:sysfs_usbc_throttling_stats:s0
 genfscon sysfs /devices/platform/google,usbc_port_cooling_dev/hysteresis_time   u:object_r:sysfs_usbc_throttling_stats:s0
 genfscon sysfs /devices/platform/google,usbc_port_cooling_dev/trip_time         u:object_r:sysfs_usbc_throttling_stats:s0
+
+# Extcon
+genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-6/i2c-max77759tcpc/extcon   u:object_r:sysfs_extcon:s0
+
