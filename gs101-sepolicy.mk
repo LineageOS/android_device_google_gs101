@@ -32,9 +32,6 @@ BOARD_SEPOLICY_DIRS += hardware/google/pixel-sepolicy/powerstats
 # sscoredump
 BOARD_SEPOLICY_DIRS += hardware/google/pixel-sepolicy/sscoredump
 
-# Sniffer Logger
-BOARD_SEPOLICY_DIRS += hardware/google/pixel-sepolicy/wifi_sniffer
-
 # Wifi Logger
 BOARD_SEPOLICY_DIRS += hardware/google/pixel-sepolicy/wifi_logger
 
