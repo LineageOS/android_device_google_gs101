@@ -869,7 +869,6 @@ $(call inherit-product-if-exists, vendor/samsung_slsi/telephony/shannon-ims/devi
 PRODUCT_PACKAGES += ShannonIms
 
 $(call inherit-product-if-exists, vendor/samsung_slsi/telephony/shannon-iwlan/device-vendor.mk)
-include device/google/gs101/telephony/pktrouter.mk
 
 #RCS Test Messaging App
 PRODUCT_PACKAGES_DEBUG += \
