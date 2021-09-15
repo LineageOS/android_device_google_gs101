@@ -5,16 +5,15 @@
        BaudRate="921600"
        GpioNStdbyPath="/sys/devices/platform/10940000.spi/spi_master/spi5/spi5.0/nstandby"
        CustGpioDelayMs="250"
-       LogEnabled="true"
+       LogEnabled="false"
        Log="JAVA"
-       SecondaryConfigPath="/data/vendor/gps/logs/gps2.xml"
        LogDirectory="/sdcard/gps/broadcom/storage/"
        CtrlPipe="/data/vendor/gps/glgpsctrl"
        NmeaOutName="/data/vendor/gps/nmea_out"
 
        acSuplServer="supl.google.com"
        SuplPort="7275"
-       SuplLogEnable="true"
+       SuplLogEnable="false"
        SuplLogFullName="/data/vendor/gps/suplflow.txt"
        tlsEnable="true"
 
@@ -51,7 +50,7 @@
 
        AttributionAppPkgName="com.google.android.carrierlocation"
 
-       AssertEnabled="true"
+       AssertEnabled="false"
   />
 
   <gll
