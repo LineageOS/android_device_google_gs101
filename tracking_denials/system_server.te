@@ -1,0 +1,2 @@
+# b/199987074
+dontaudit system_server sysfs_batteryinfo:dir read;
