@@ -318,4 +318,5 @@ genfscon sysfs /devices/platform/google,usbc_port_cooling_dev/trip_time         
 
 # Extcon
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-6/i2c-max77759tcpc/extcon   u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-5/i2c-max77759tcpc/extcon   u:object_r:sysfs_extcon:s0
 
