@@ -113,3 +113,4 @@ auto_sleep_margin=20000
 [HAL]antenna_pair_elevation=4
 [HAL]tx_antenna=0
 [HAL]minimum_system_offset_uwbtime0=200
+restricted_channels=0
