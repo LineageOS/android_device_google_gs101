@@ -358,6 +358,16 @@ void DumpstateDevice::dumpPowerSection(int fd) {
         }
     }
 
+    RunCommandToFd(fd, "TCPC", {"/vendor/bin/sh", "-c",
+		       "for f in /sys/devices/platform/10d50000.hsi2c/i2c-*/i2c-max77759tcpc;"
+		       "do echo \"registers:\"; cat $f/registers;"
+		       "echo \"frs:\"; cat $f/frs;"
+		       "echo \"auto_discharge:\"; cat $f/auto_discharge;"
+		       "echo \"bc12_enabled:\"; cat $f/bc12_enabled;"
+		       "echo \"cc_toggle_enable:\"; cat $f/cc_toggle_enable;"
+		       "echo \"contaminant_detection:\"; cat $f/contaminant_detection;"
+		       "echo \"contaminant_detection_status:\"; cat $f/contaminant_detection_status;  done"});
+
     DumpFileToFd(fd, "PD Engine", "/dev/logbuffer_usbpd");
     DumpFileToFd(fd, "PPS-google_cpm", "/dev/logbuffer_cpm");
     DumpFileToFd(fd, "PPS-dc", "/dev/logbuffer_pca9468");
