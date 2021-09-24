@@ -14,6 +14,7 @@ genfscon sysfs /devices/platform/19000000.aoc/control/audio_wakeup          u:ob
 genfscon sysfs /devices/platform/19000000.aoc/control/logging_wakeup        u:object_r:sysfs_aoc_dumpstate:s0
 genfscon sysfs /devices/platform/19000000.aoc/control/hotword_wakeup        u:object_r:sysfs_aoc_dumpstate:s0
 genfscon sysfs /devices/platform/19000000.aoc/control/memory_exception      u:object_r:sysfs_aoc_dumpstate:s0
+genfscon sysfs /devices/platform/19000000.aoc/control/memory_votes          u:object_r:sysfs_aoc_dumpstate:s0
 
 # WiFi
 genfscon sysfs /wifi                                                        u:object_r:sysfs_wifi:s0
