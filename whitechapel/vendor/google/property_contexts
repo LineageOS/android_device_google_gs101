@@ -104,3 +104,7 @@ vendor.tcpdump.output.dir                       u:object_r:vendor_tcpdump_log_pr
 
 # Fingerprint
 vendor.fingerprint.disable.fake                 u:object_r:vendor_fingerprint_fake_prop:s0
+
+# Dynamic sensor
+vendor.dynamic_sensor.                          u:object_r:vendor_dynamic_sensor_prop:s0
+
