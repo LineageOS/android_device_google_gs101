@@ -122,9 +122,9 @@
         "553",
         "1",
         "246",
-        "185",
-        "123",
-        "62"
+        "157",
+        "107",
+        "42"
       ],
       "DefaultIndex": 1,
       "ResetOnInit": true
@@ -973,19 +973,19 @@
       "PowerHint": "REFRESH_120FPS",
       "Node": "TAUClampBoost",
       "Duration": 0,
-      "Value": "185"
+      "Value": "157"
     },
     {
       "PowerHint": "REFRESH_90FPS",
       "Node": "TAUClampBoost",
       "Duration": 0,
-      "Value": "123"
+      "Value": "107"
     },
     {
       "PowerHint": "REFRESH_60FPS",
       "Node": "TAUClampBoost",
       "Duration": 0,
-      "Value": "62"
+      "Value": "42"
     },
     {
       "PowerHint": "ADPF_DISABLE_TA_BOOST",
