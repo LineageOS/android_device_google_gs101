@@ -209,3 +209,7 @@
 
 # Direct Charging
 /dev/logbuffer_pca9468_tcpm            0600   system     system
+
+# Raw HID devices
+/dev/hidraw*                           0660   system     system
+
