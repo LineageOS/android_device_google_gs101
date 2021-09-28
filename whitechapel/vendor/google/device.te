@@ -50,3 +50,7 @@ type amcs_device, dev_type;
 
 # Battery history
 type battery_history_device, dev_type;
+
+# Raw HID device
+type hidraw_device, dev_type;
+
