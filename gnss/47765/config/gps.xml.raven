@@ -7,7 +7,7 @@
        CustGpioDelayMs="250"
        LogEnabled="true"
        Log="JAVA"
-       SecondaryConfigPath="/data/vendor/gps/logs/gps_overlay.xml"
+       SecondaryConfigPath="/data/vendor/gps/overlay/gps_overlay.xml"
        LogDirectory="/sdcard/gps/broadcom/storage/"
        CtrlPipe="/data/vendor/gps/glgpsctrl"
        NmeaOutName="/data/vendor/gps/nmea_out"
