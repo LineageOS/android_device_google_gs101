@@ -1105,6 +1105,9 @@ include hardware/google/pixel/PixelLogger/PixelLogger.mk
 # Telephony
 include device/google/gs101/telephony/user.mk
 
+# Wifi ext
+include hardware/google/pixel/wifi_ext/device.mk
+
 # Battery Stats Viewer
 PRODUCT_PACKAGES_DEBUG += BatteryStatsViewer
 
