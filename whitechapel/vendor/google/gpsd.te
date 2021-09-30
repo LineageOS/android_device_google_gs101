@@ -23,3 +23,6 @@ allow gpsd hal_exynos_rild_hwservice:hwservice_manager find;
 # Allow gpsd to access sensor service
 binder_call(gpsd, system_server);
 allow gpsd fwk_sensor_hwservice:hwservice_manager find;
+
+# Allow gpsd to access pps gpio
+allow gpsd sysfs_gps_assert:file r_file_perms;

@@ -139,6 +139,7 @@ userdebug_or_eng(`
     typeattribute vendor_gps_file mlstrustedobject;
 ')
 type sysfs_gps, sysfs_type, fs_type;
+type sysfs_gps_assert, sysfs_type, fs_type;
 
 # Display
 type sysfs_display, sysfs_type, fs_type;
