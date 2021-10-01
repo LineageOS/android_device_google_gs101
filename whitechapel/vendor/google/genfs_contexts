@@ -110,6 +110,7 @@ genfscon sysfs /devices/virtual/sec/tsp                                         
 
 # GPS
 genfscon sysfs /devices/platform/10940000.spi/spi_master/spi5/spi5.0/nstandby   u:object_r:sysfs_gps:s0
+genfscon sysfs /devices/virtual/pps/pps0/assert_elapsed                         u:object_r:sysfs_gps_assert:s0
 
 # Display
 genfscon sysfs /devices/platform/1c2c0000.drmdsim/1c2c0000.drmdsim.0/gamma         u:object_r:sysfs_display:s0
@@ -319,4 +320,8 @@ genfscon sysfs /devices/platform/google,usbc_port_cooling_dev/trip_time         
 # Extcon
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-6/i2c-max77759tcpc/extcon   u:object_r:sysfs_extcon:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-5/i2c-max77759tcpc/extcon   u:object_r:sysfs_extcon:s0
+
+# SecureElement
+genfscon sysfs /devices/platform/10950000.spi/spi_master/spi6/spi6.0/st33spi    u:object_r:sysfs_st33spi:s0
+genfscon sysfs /devices/platform/175c0000.spi/spi_master/spi15/spi15.0/st33spi  u:object_r:sysfs_st33spi:s0
 

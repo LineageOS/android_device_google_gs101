@@ -287,13 +287,11 @@
 /data/nfc(/.*)?                                                                       u:object_r:nfc_data_file:s0
 
 # SecureElement
-/(vendor|system/vendor)/bin/hw/android\.hardware\.secure_element@1\.2-service\.st     u:object_r:hal_secure_element_default_exec:s0
-/(vendor|system/vendor)/bin/hw/android\.hardware\.secure_element@1\.2-service-gto     u:object_r:hal_secure_element_default_exec:s0
-/(vendor|system/vendor)/bin/hw/android\.hardware\.secure_element@1\.2-service-gto-ese2     u:object_r:hal_secure_element_default_exec:s0
-/dev/st54j_se                                                                         u:object_r:secure_element_device:s0
-/dev/st54spi                                                                          u:object_r:secure_element_device:s0
-/dev/st33spi                                                                          u:object_r:secure_element_device:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.secure_element@1\.2-service-gto     u:object_r:hal_secure_element_st54spi_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.secure_element@1\.2-service-gto-ese2    u:object_r:hal_secure_element_st33spi_exec:s0
 /(vendor|system/vendor)/bin/hw/android\.hardware\.secure_element@1\.2-uicc-service    u:object_r:hal_secure_element_default_exec:s0
+/dev/st54spi                                                                          u:object_r:st54spi_device:s0
+/dev/st33spi                                                                          u:object_r:st33spi_device:s0
 
 # Bluetooth
 /dev/wbrc                           u:object_r:wb_coexistence_dev:s0
@@ -379,10 +377,6 @@
 /vendor/lib(64)?/hw/gralloc\.gs101\.so                                           u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/hw/vulkan\.gs101\.so                                            u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/arm\.graphics-V1-ndk\.so                                        u:object_r:same_process_hal_file:s0
-
-# Touch
-/dev/touch_offload                                                               u:object_r:touch_offload_device:s0
-/vendor/bin/twoshay                                                              u:object_r:twoshay_exec:s0
 
 # Fingerprint
 /vendor/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.1-service\.goodix        u:object_r:hal_fingerprint_default_exec:s0
