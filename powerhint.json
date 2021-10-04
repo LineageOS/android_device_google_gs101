@@ -137,6 +137,7 @@
       "Name": "SFUClampBoost",
       "Path": "/sys/kernel/vendor_sched/sf_uclamp_min",
       "Values": [
+        "125",
         "65",
         "30"
       ],
@@ -385,6 +386,23 @@
       "Node": "F2fsRecessModeEnable",
       "Duration": 0,
       "Value": "2"
+    },
+    {
+      "PowerHint": "LAUNCH_120FPS",
+      "Node": "SFUClampBoost",
+      "Duration": 1000,
+      "Value": "125"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Type": "DoHint",
+      "Value": "LAUNCH_120FPS"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "SFUClampBoost",
+      "Duration": 5000,
+      "Value": "65"
     },
     {
       "PowerHint": "LAUNCH",
@@ -999,10 +1017,20 @@
       "Value": "107"
     },
     {
+      "PowerHint": "REFRESH_90FPS",
+      "Type": "MaskHint",
+      "Value": "LAUNCH_120FPS"
+    },
+    {
       "PowerHint": "REFRESH_60FPS",
       "Node": "TAUClampBoost",
       "Duration": 0,
       "Value": "42"
+    },
+    {
+      "PowerHint": "REFRESH_60FPS",
+      "Type": "MaskHint",
+      "Value": "LAUNCH_120FPS"
     },
     {
       "PowerHint": "ADPF_DISABLE_TA_BOOST",
