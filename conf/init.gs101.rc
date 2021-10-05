@@ -729,8 +729,8 @@ on property:sys.boot_completed=1
     write /sys/kernel/vendor_sched/sf_uclamp_min 30
     write /sys/kernel/vendor_sched/sf_prefer_idle 1
 
-    # Setup cpu.shares to throttle background group at 5%
-    write /dev/cpuctl/background/cpu.shares 1024
+    # Setup cpu.shares to throttle background group at 15%
+    write /dev/cpuctl/background/cpu.shares 4096
     write /dev/cpuctl/system/cpu.shares 20480
     # We only have system and background groups holding tasks and the groups below are empty
     write /dev/cpuctl/camera-daemon/cpu.shares 20480
