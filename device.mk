@@ -1070,6 +1070,7 @@ PRODUCT_PACKAGES += \
 # pKVM
 ifeq ($(TARGET_PKVM_ENABLED),true)
     $(call inherit-product, packages/modules/Virtualization/apex/product_packages.mk)
+    PRODUCT_BUILD_PVMFW_IMAGE := true
 endif
 
 # Enable watchdog timeout loop breaker.
