@@ -34,3 +34,8 @@ BOARD_SEPOLICY_DIRS += hardware/google/pixel-sepolicy/wifi_logger
 
 # Public
 PRODUCT_PUBLIC_SEPOLICY_DIRS += device/google/gs101-sepolicy/public
+
+# pKVM
+ifeq ($(TARGET_PKVM_ENABLED),true)
+BOARD_SEPOLICY_DIRS += device/google/gs101-sepolicy/pkvm
+endif
