@@ -372,11 +372,6 @@
   "Actions": [
     {
       "PowerHint": "INTERACTION",
-      "Type": "EndHint",
-      "Value": "DISABLE_TA_BOOST"
-    },
-    {
-      "PowerHint": "INTERACTION",
       "Node": "SFUClampBoost",
       "Duration": 5000,
       "Value": "65"
