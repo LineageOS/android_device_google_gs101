@@ -16,6 +16,5 @@ LIBFPC_NAME=libfpcmulti_debug.a
 FPC_CONFIG_DEBUG=1
 FPC_CONFIG_ENGINEERING=1
 
-#
-# File included from device/<manufacture>/<>/<device>.mk
-# Packages to include into the build
+# Google config
+GOOGLE_CONFIG_FP_STATUS=1
