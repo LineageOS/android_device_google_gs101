@@ -362,9 +362,6 @@
 /dev/dit2                      u:object_r:vendor_toe_device:s0
 /vendor/bin/hw/vendor\.samsung_slsi\.hardware\.tetheroffload@1\.[0-9]-service     u:object_r:hal_tetheroffload_default_exec:s0
 
-# pixelstats binary
-/vendor/bin/pixelstats-vendor           u:object_r:pixelstats_vendor_exec:s0
-
 # battery history
 /dev/battery_history                                                                  u:object_r:battery_history_device:s0
 
