@@ -223,7 +223,7 @@
           "Params":
           {
             "Controller": "cpu",
-            "Path": "system"
+            "Path": "system-background"
           }
         },
         {
