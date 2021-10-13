@@ -422,4 +422,10 @@ BOARD_KERNEL_CMDLINE += at24.write_timeout=100
 # Enable larger logbuf
 BOARD_KERNEL_CMDLINE += log_buf_len=1024K
 
+# Protected VM firmware
+BOARD_PREBUILT_PVMFWIMAGE := packages/modules/Virtualization/pvmfw/pvmfw.img
+BOARD_PVMFWIMAGE_PARTITION_SIZE := 0x00100000
+# TODO(ptosi): Delete this variable once AOSP starts using the other one
+BOARD_PVMFWIMG_PARTITION_SIZE = $(BOARD_PVMFWIMAGE_PARTITION_SIZE)
+
 -include vendor/google_devices/gs101/proprietary/BoardConfigVendor.mk
