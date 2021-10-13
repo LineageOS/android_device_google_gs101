@@ -720,12 +720,15 @@ on property:sys.boot_completed=1
     # Setup final cpu.uclamp
     write /sys/kernel/vendor_sched/ta_uclamp_min 1
     write /sys/kernel/vendor_sched/fg_uclamp_min 0
-    write /sys/kernel/vendor_sched/bg_uclamp_max 615
     write /sys/kernel/vendor_sched/sys_prefer_idle 0
     # cfs_rq clamp is using tg->uclamp setting
     # align it with the vendor_group setting
+    write /sys/kernel/vendor_sched/bg_uclamp_max 615
     write /dev/cpuctl/background/cpu.uclamp.max 60
     write /sys/kernel/vendor_sched/bg_group_throttle 615
+    write /sys/kernel/vendor_sched/sysbg_uclamp_max 615
+    write /dev/cpuctl/system-background/cpu.uclamp.max 60
+    write /sys/kernel/vendor_sched/sysbg_group_throttle 615
 
     # Setup groups for SF (RT used for SF RE, SF used for SF main)
     write /sys/kernel/vendor_sched/rt_uclamp_min 125
@@ -733,15 +736,15 @@ on property:sys.boot_completed=1
     write /sys/kernel/vendor_sched/sf_uclamp_min 30
     write /sys/kernel/vendor_sched/sf_prefer_idle 1
 
-    # Setup cpu.shares to throttle background group at 15%
-    write /dev/cpuctl/background/cpu.shares 4096
+    # Setup cpu.shares to throttle background groups (bg ~ 5% sysbg ~ 10%)
+    write /dev/cpuctl/background/cpu.shares 1024
+    write /dev/cpuctl/system-background/cpu.shares 2048
     write /dev/cpuctl/system/cpu.shares 20480
     # We only have system and background groups holding tasks and the groups below are empty
     write /dev/cpuctl/camera-daemon/cpu.shares 20480
     write /dev/cpuctl/foreground/cpu.shares 20480
     write /dev/cpuctl/nnapi-hal/cpu.shares 20480
     write /dev/cpuctl/rt/cpu.shares 20480
-    write /dev/cpuctl/system-background/cpu.shares 20480
     write /dev/cpuctl/top-app/cpu.shares 20480
 
     # gvotables for dumpstate
