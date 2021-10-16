@@ -10,6 +10,7 @@ allow exo_app mediaserver_service:service_manager find;
 allow exo_app radio_service:service_manager find;
 allow exo_app fwk_stats_service:service_manager find;
 allow exo_app mediametrics_service:service_manager find;
+allow exo_app virtual_device_service:service_manager find;
 allow exo_app gpu_device:dir search;
 
 allow exo_app uhid_device:chr_file rw_file_perms;
