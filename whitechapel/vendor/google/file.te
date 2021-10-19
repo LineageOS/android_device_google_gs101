@@ -78,7 +78,7 @@ type updated_wifi_firmware_data_file, file_type, data_file_type;
 type mediadrm_vendor_data_file, file_type, data_file_type;
 
 # Storage Health HAL
-type sysfs_scsi_devices_0000, sysfs_type, fs_type, sysfs_block_type;
+type sysfs_scsi_devices_0000, sysfs_type, fs_type;
 type debugfs_f2fs, debugfs_type, fs_type;
 type proc_f2fs, proc_type, fs_type;
 
