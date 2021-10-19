@@ -17,4 +17,4 @@
 $(call inherit-product-if-exists, vendor/qorvo/uwb/uwb.mk)
 
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.uwb.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.uwb.xml
+    frameworks/native/data/etc/android.hardware.uwb.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/android.hardware.uwb.xml
