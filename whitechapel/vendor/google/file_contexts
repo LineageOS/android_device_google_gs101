@@ -294,9 +294,7 @@
 /dev/st33spi                                                                          u:object_r:st33spi_device:s0
 
 # Bluetooth
-/dev/wbrc                           u:object_r:wb_coexistence_dev:s0
-/dev/ttySAC16                       u:object_r:hci_attach_dev:s0
-/dev/logbuffer_btlpm                  u:object_r:logbuffer_device:s0
+/dev/logbuffer_btlpm                u:object_r:logbuffer_device:s0
 /dev/logbuffer_tty16                u:object_r:logbuffer_device:s0
 
 # Audio
