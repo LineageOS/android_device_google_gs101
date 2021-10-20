@@ -969,6 +969,7 @@ void DumpstateDevice::dumpMiscSection(int fd) {
 void DumpstateDevice::dumpGscSection(int fd) {
     RunCommandToFd(fd, "Citadel VERSION", {"vendor/bin/hw/citadel_updater", "-lv"});
     RunCommandToFd(fd, "Citadel STATS", {"vendor/bin/hw/citadel_updater", "--stats"});
+    RunCommandToFd(fd, "GSC DEBUG DUMP", {"vendor/bin/hw/citadel_updater", "-D"});
 }
 
 // Dump essential camera debugging logs
