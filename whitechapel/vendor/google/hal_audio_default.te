@@ -23,6 +23,9 @@ allow hal_audio_default dmabuf_heap_device:chr_file r_file_perms;
 
 get_prop(hal_audio_default, vendor_audio_prop);
 
+hal_client_domain(hal_audio_default, hal_health);
+allow hal_audio_default fwk_sensor_hwservice:hwservice_manager find;
+
 userdebug_or_eng(`
     allow hal_audio_default self:unix_stream_socket create_stream_socket_perms;
     allow hal_audio_default audio_vendor_data_file:sock_file { create unlink };
