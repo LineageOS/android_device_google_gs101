@@ -26,7 +26,11 @@
         "9999999",
         "1098000",
         "1401000",
-        "1197000"
+        "930000",
+        "1197000",
+        "1328000",
+        "1598000",
+        "1803000"
       ],
       "DefaultIndex": 0,
       "ResetOnInit": true
@@ -48,8 +52,12 @@
         "9999999",
         "1024000",
         "1197000",
-        "1999000",
-        "1491000"
+        "1491000",
+        "910000",
+        "1328000",
+        "1663000",
+        "1836000",
+        "1999000"
       ],
       "DefaultIndex": 0,
       "ResetOnInit": true
@@ -71,7 +79,12 @@
         "9999999",
         "984000",
         "1426000",
-        "1826000"
+        "1826000",
+        "1277000",
+        "1582000",
+        "1745000",
+        "2048000",
+        "2401000"
       ],
       "DefaultIndex": 0,
       "ResetOnInit": true
@@ -918,6 +931,96 @@
       "Node": "CPULittleClusterMinFreq",
       "Duration": 0,
       "Value": "9999999"
+    },
+    {
+      "PowerHint": "LOW_POWER_LITTLE_CLUSTER_50",
+      "Node": "CPULittleClusterMaxFreq",
+      "Duration": 3600000,
+      "Value": "930000"
+    },
+    {
+      "PowerHint": "LOW_POWER_LITTLE_CLUSTER_60",
+      "Node": "CPULittleClusterMaxFreq",
+      "Duration": 3600000,
+      "Value": "1197000"
+    },
+    {
+      "PowerHint": "LOW_POWER_LITTLE_CLUSTER_70",
+      "Node": "CPULittleClusterMaxFreq",
+      "Duration": 3600000,
+      "Value": "1328000"
+    },
+    {
+      "PowerHint": "LOW_POWER_LITTLE_CLUSTER_80",
+      "Node": "CPULittleClusterMaxFreq",
+      "Duration": 3600000,
+      "Value": "1598000"
+    },
+    {
+      "PowerHint": "LOW_POWER_LITTLE_CLUSTER_90",
+      "Node": "CPULittleClusterMaxFreq",
+      "Duration": 3600000,
+      "Value": "1803000"
+    },
+    {
+      "PowerHint": "LOW_POWER_MID_CLUSTER_50",
+      "Node": "CPUMidClusterMaxFreq",
+      "Duration": 3600000,
+      "Value": "910000"
+    },
+    {
+      "PowerHint": "LOW_POWER_MID_CLUSTER_60",
+      "Node": "CPUMidClusterMaxFreq",
+      "Duration": 3600000,
+      "Value": "1328000"
+    },
+    {
+      "PowerHint": "LOW_POWER_MID_CLUSTER_70",
+      "Node": "CPUMidClusterMaxFreq",
+      "Duration": 3600000,
+      "Value": "1663000"
+    },
+    {
+      "PowerHint": "LOW_POWER_MID_CLUSTER_80",
+      "Node": "CPUMidClusterMaxFreq",
+      "Duration": 3600000,
+      "Value": "1836000"
+    },
+    {
+      "PowerHint": "LOW_POWER_MID_CLUSTER_90",
+      "Node": "CPUMidClusterMaxFreq",
+      "Duration": 3600000,
+      "Value": "1999000"
+    },
+    {
+      "PowerHint": "LOW_POWER_CPU_50",
+      "Node": "CPUBigClusterMaxFreq",
+      "Duration": 3600000,
+      "Value": "1277000"
+    },
+    {
+      "PowerHint": "LOW_POWER_CPU_60",
+      "Node": "CPUBigClusterMaxFreq",
+      "Duration": 3600000,
+      "Value": "1582000"
+    },
+    {
+      "PowerHint": "LOW_POWER_CPU_70",
+      "Node": "CPUBigClusterMaxFreq",
+      "Duration": 3600000,
+      "Value": "1745000"
+    },
+    {
+      "PowerHint": "LOW_POWER_CPU_80",
+      "Node": "CPUBigClusterMaxFreq",
+      "Duration": 3600000,
+      "Value": "2048000"
+    },
+    {
+      "PowerHint": "LOW_POWER_CPU_90",
+      "Node": "CPUBigClusterMaxFreq",
+      "Duration": 3600000,
+      "Value": "2401000"
     },
     {
       "PowerHint": "REFRESH_120FPS",
