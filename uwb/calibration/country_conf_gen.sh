@@ -15,25 +15,17 @@ while read line ; do
         country[count]=$(echo $line | cut -d ':' -f1)
         code[count]=$(echo $line | cut -d ':' -f2 | tr -d " ")
 
-        for var in ${project[@]}; do
             if [ "$header" = "restricted_channels=0x20" ]; then
-                echo "alternate_pulse_shape=0x01" > UWB-calibration-${code[$count]}.conf.$var
-                echo "$header" >> UWB-calibration-${code[$count]}.conf.$var
+                echo "alternate_pulse_shape=0x01" > UWB-calibration-${code[$count]}.conf
+                echo "$header" >> UWB-calibration-${code[$count]}.conf
             else
-            echo "$header" > UWB-calibration-${code[$count]}.conf.$var
+            echo "$header" > UWB-calibration-${code[$count]}.conf
             fi
-        done
     fi
 ((count++))
 done < uwb_country.conf
 
-for var in ${project[@]}; do
     echo "==============  $var  =============="
     for var2 in ${code[@]}; do
-        if [ "$var2" = "${code[-1]}" ]; then
-            echo "\$(LOCAL_UWB_CAL_DIR)/UWB-calibration-$var2.conf.$var:\$(TARGET_COPY_OUT_VENDOR)/etc/UWB-calibration-$var2.conf"
-        else
-            echo "\$(LOCAL_UWB_CAL_DIR)/UWB-calibration-$var2.conf.$var:\$(TARGET_COPY_OUT_VENDOR)/etc/UWB-calibration-$var2.conf \\"
-        fi
+            echo "\$(LOCAL_UWB_CAL_DIR)/UWB-calibration-$var2.conf:\$(TARGET_COPY_OUT_VENDOR)/etc/UWB-calibration-$var2.conf \\"
     done
-done
