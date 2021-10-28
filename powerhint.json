@@ -300,6 +300,15 @@
         "67000"
       ],
       "ResetOnInit": true
+    },
+    {
+      "Name": "GPUPowerPolicy",
+      "Path": "/sys/devices/platform/1c500000.mali/power_policy",
+      "Values": [
+        "always_on",
+        "adaptive"
+      ],
+      "ResetOnInit": true
     }
   ],
   "Actions": [
@@ -355,6 +364,12 @@
       "Node": "MemFreq",
       "Duration": 5000,
       "Value": "3172000"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "GPUPowerPolicy",
+      "Duration": 5000,
+      "Value": "always_on"
     },
     {
       "PowerHint": "DISPLAY_INACTIVE",
