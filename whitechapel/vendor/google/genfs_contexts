@@ -108,6 +108,17 @@ genfscon sysfs /devices/platform/10950000.spi/spi_master/spi6/spi6.0            
 genfscon proc  /fts/driver_test                                                 u:object_r:proc_touch:s0
 genfscon proc  /fts_ext/driver_test                                             u:object_r:proc_touch:s0
 genfscon sysfs /devices/virtual/sec/tsp                                         u:object_r:sysfs_touch:s0
+genfscon sysfs /devices/virtual/input/input2                                    u:object_r:sysfs_touch:s0
+genfscon sysfs /devices/virtual/input/input3                                    u:object_r:sysfs_touch:s0
+genfscon sysfs /devices/virtual/input/nvt_touch                                 u:object_r:sysfs_touch:s0
+genfscon proc  /nvt_baseline                                                    u:object_r:proc_touch:s0
+genfscon proc  /nvt_cc_uniformity                                               u:object_r:proc_touch:s0
+genfscon proc  /nvt_diff                                                        u:object_r:proc_touch:s0
+genfscon proc  /nvt_fw_version                                                  u:object_r:proc_touch:s0
+genfscon proc  /nvt_heatmap                                                     u:object_r:proc_touch:s0
+genfscon proc  /nvt_pen_diff                                                    u:object_r:proc_touch:s0
+genfscon proc  /nvt_raw                                                         u:object_r:proc_touch:s0
+genfscon proc  /nvt_selftest                                                    u:object_r:proc_touch:s0
 
 # GPS
 genfscon sysfs /devices/platform/10940000.spi/spi_master/spi5/spi5.0/nstandby   u:object_r:sysfs_gps:s0
