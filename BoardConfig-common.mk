@@ -19,11 +19,6 @@ include build/make/target/board/BoardConfigPixelCommon.mk
 # Should be uncommented after fixing vndk-sp violation is fixed.
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 
-# This prop, when set to 1, will prevent OTA tooling from generating a VABC OTA,
-# even if device actually supports it.
-# Remove this once P21 decides to use VABC OTA
-BOARD_DONT_USE_VABC_OTA := true
-
 # HACK : To fix up after bring up multimedia devices.
 TARGET_SOC := gs101
 
