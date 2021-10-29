@@ -261,6 +261,7 @@ genfscon sysfs /devices/platform/1c500000.mali/hint_min_freq                    
 genfscon sysfs /devices/platform/1c500000.mali/dma_buf_gpu_mem                                          u:object_r:sysfs_gpu:s0
 genfscon sysfs /devices/platform/1c500000.mali/total_gpu_mem                                            u:object_r:sysfs_gpu:s0
 genfscon sysfs /devices/platform/1c500000.mali/kprcs                                                    u:object_r:sysfs_gpu:s0
+genfscon sysfs /devices/platform/1c500000.mali/power_policy                                             u:object_r:sysfs_gpu:s0
 
 # nvmem (Non Volatile Memory layer)
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-4/4-0050/4-00500/nvmem                              u:object_r:sysfs_memory:s0
