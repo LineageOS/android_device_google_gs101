@@ -132,4 +132,7 @@
     <bool translatable="false" name="config_wifiDefaultCoexAlgorithmEnabled">true</bool>
     <!-- Whether to use the explicit vendor HAL API: IWifiStaIface.setRoamingState for disabling fw roaming. -->
     <bool translatable="false" name="config_wifiUseHalApiToDisableFwRoaming">true</bool>
+
+    <!-- Indicate the driver doesn't support NL80211 Reg changed event -->
+    <bool translatable="false" name="config_wifiDriverSupportedNl80211RegChangedEvent">false</bool>
 </resources>
