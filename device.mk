@@ -488,17 +488,6 @@ PRODUCT_PACKAGES += \
 	android.hardware.drm@1.4-service.widevine \
 	liboemcrypto \
 
-ORIOLE_PRODUCT := %oriole
-RAVEN_PRODUCT := %raven
-ifneq (,$(filter $(ORIOLE_PRODUCT), $(TARGET_PRODUCT)))
-        LOCAL_TARGET_PRODUCT := oriole
-else ifneq (,$(filter $(RAVEN_PRODUCT), $(TARGET_PRODUCT)))
-        LOCAL_TARGET_PRODUCT := raven
-else
-        LOCAL_TARGET_PRODUCT := slider
-endif
-
-
 SOONG_CONFIG_NAMESPACES += google3a_config
 SOONG_CONFIG_google3a_config += \
 	soc \
@@ -509,7 +498,6 @@ SOONG_CONFIG_google3a_config += \
 SOONG_CONFIG_google3a_config_soc := gs101
 SOONG_CONFIG_google3a_config_gcam_awb := true
 SOONG_CONFIG_google3a_config_ghawb_truetone := true
-SOONG_CONFIG_google3a_config_target_device := $(LOCAL_TARGET_PRODUCT)
 
 # Determine if Lyric is in the tree, and only have GCH build against it
 # if it is. Cases when Lyric isn't going to be in the tree:
@@ -522,8 +510,15 @@ SOONG_CONFIG_google3a_config_target_device := $(LOCAL_TARGET_PRODUCT)
 
 ifneq ($(wildcard vendor/google/services/LyricCameraHAL/src),)
 SOONG_CONFIG_NAMESPACES += lyric
-SOONG_CONFIG_lyric += use_lyric_camera_hal
+SOONG_CONFIG_lyric += \
+	use_lyric_camera_hal \
+	soc \
+	tuning_product
+
+SOONG_CONFIG_lyric_soc := gs101
 SOONG_CONFIG_lyric_use_lyric_camera_hal := true
+# SOONG_CONFIG_lyric_tuning_product is set in device-specific makefiles,
+# such as device/google/raviole/device-oriole.mk
 
 # Camera HAL library selection
 SOONG_CONFIG_NAMESPACES += gch
