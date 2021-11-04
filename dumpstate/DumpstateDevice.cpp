@@ -544,6 +544,12 @@ void DumpstateDevice::dumpTouchSection(int fd) {
 
         snprintf(cmd, sizeof(cmd), "%s", stm_cmd_path[i + 1]);
         if (!access(cmd, R_OK)) {
+            snprintf(cmd, sizeof(cmd),
+                     "echo 01 A4 06 C3 > %s; echo 02 A7 00 00 00 40 00 > %s && cat %s",
+                     stm_cmd_path[i + 1], stm_cmd_path[i + 1], stm_cmd_path[i + 1]);
+            RunCommandToFd(fd, "HDM debug information (32 bytes)",
+                           {"/vendor/bin/sh", "-c", cmd});
+
             snprintf(cmd, sizeof(cmd), "echo 23 00 > %s && cat %s",
                      stm_cmd_path[i + 1], stm_cmd_path[i + 1]);
             RunCommandToFd(fd, "Mutual Raw Data",
@@ -609,7 +615,7 @@ void DumpstateDevice::dumpTouchSection(int fd) {
                            {"/vendor/bin/sh", "-c", cmd});
 
             snprintf(cmd, sizeof(cmd),
-                     "echo 01 A4 06 C3 > %s; echo 02 A7 00 00 00 20 00 > %s && cat %s",
+                     "echo 01 A4 06 C3 > %s; echo 02 A7 00 00 00 40 00 > %s && cat %s",
                      stm_cmd_path[i + 1], stm_cmd_path[i + 1], stm_cmd_path[i + 1]);
             RunCommandToFd(fd, "HDM debug information (32 bytes)",
                            {"/vendor/bin/sh", "-c", cmd});
