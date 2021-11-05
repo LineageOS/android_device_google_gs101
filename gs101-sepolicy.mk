@@ -29,9 +29,6 @@ BOARD_SEPOLICY_DIRS += hardware/google/pixel-sepolicy/powerstats
 # sscoredump
 BOARD_SEPOLICY_DIRS += hardware/google/pixel-sepolicy/sscoredump
 
-# Wifi Logger
-BOARD_SEPOLICY_DIRS += hardware/google/pixel-sepolicy/wifi_logger
-
 # Public
 PRODUCT_PUBLIC_SEPOLICY_DIRS += device/google/gs101-sepolicy/public
 
