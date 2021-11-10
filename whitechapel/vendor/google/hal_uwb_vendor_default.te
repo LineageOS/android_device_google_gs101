@@ -6,3 +6,6 @@ add_service(hal_uwb_vendor_default, hal_uwb_vendor_service)
 
 hal_server_domain(hal_uwb_vendor_default, hal_uwb_vendor)
 binder_call(hal_uwb_vendor_default, uwb_vendor_app)
+
+allow hal_uwb_vendor_default uwb_data_vendor:dir create_dir_perms;
+allow hal_uwb_vendor_default uwb_data_vendor:file create_file_perms;
