@@ -25,7 +25,7 @@ else ifneq (,$(filter oriole, $(subst _, ,$(TARGET_PRODUCT))))
 	else
 		PRODUCT_COPY_FILES += device/google/gs101/gnss/47765/config/gps_user.xml.oriole:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/gps.xml
 	endif
-else
+else ifneq (,$(filter slider whitefin, $(subst _, ,$(TARGET_PRODUCT))))
 	ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 		PRODUCT_COPY_FILES += device/google/gs101/gnss/47765/config/gps.xml:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/gps.xml
 	else
