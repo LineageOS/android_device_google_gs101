@@ -60,6 +60,7 @@ persist.vendor.audio.                   u:object_r:vendor_audio_prop:s0
 vendor.audiodump.log.ondemand           u:object_r:vendor_audio_prop:s0
 vendor.audiodump.log.config             u:object_r:vendor_audio_prop:s0
 vendor.audiodump.output.dir             u:object_r:vendor_audio_prop:s0
+vendor.audiodump.encode.disable         u:object_r:vendor_audio_prop:s0
 
 
 # for display
