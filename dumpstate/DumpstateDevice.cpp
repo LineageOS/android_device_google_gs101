@@ -250,6 +250,7 @@ void endSection(int fd, const std::string &sectionName, timepoint_t startTime) {
 
 DumpstateDevice::DumpstateDevice()
   : mTextSections{
+        { "pre-touch", [this](int fd) { dumpPreTouchSection(fd); } },
         { "wlan", [this](int fd) { dumpWlanSection(fd); } },
         { "soc", [this](int fd) { dumpSocSection(fd); } },
         { "storage", [this](int fd) { dumpStorageSection(fd); } },
@@ -498,6 +499,40 @@ void DumpstateDevice::dumpThermalSection(int fd) {
 }
 
 // Dump items related to touch
+void DumpstateDevice::dumpPreTouchSection(int fd) {
+    const char nvt_spi_path[] = "/sys/devices/virtual/input/nvt_touch";
+    char cmd[256];
+
+    /* NVT touch */
+    if (!access(nvt_spi_path, R_OK)) {
+        snprintf(cmd, sizeof(cmd),
+                 "echo %s > %s/%s",
+                 "0x21",
+                 nvt_spi_path,
+                 "force_touch_active");
+        RunCommandToFd(fd, "Force Touch Active(Enable)", {"/vendor/bin/sh", "-c", cmd});
+
+        snprintf(cmd, sizeof(cmd), "/proc/nvt_fw_version");
+        if (!access(cmd, R_OK))
+            DumpFileToFd(fd, "FW version", cmd);
+
+        snprintf(cmd, sizeof(cmd), "/proc/nvt_diff");
+        if (!access(cmd, R_OK))
+            DumpFileToFd(fd, "Diff", cmd);
+
+        snprintf(cmd, sizeof(cmd), "%s/nvt_fw_history", nvt_spi_path);
+        if (!access(nvt_spi_path, R_OK))
+            DumpFileToFd(fd, "FW History", cmd);
+
+        snprintf(cmd, sizeof(cmd),
+                 "echo %s > %s/%s",
+                 "0x20",
+                 nvt_spi_path,
+                 "force_touch_active");
+        RunCommandToFd(fd, "Force Touch Active(Disable)", {"/vendor/bin/sh", "-c", cmd});
+    }
+}
+
 void DumpstateDevice::dumpTouchSection(int fd) {
     const char stm_cmd_path[4][50] = {"/sys/class/spi_master/spi11/spi11.0",
                                       "/proc/fts/driver_test",
