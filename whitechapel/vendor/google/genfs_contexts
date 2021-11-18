@@ -101,6 +101,7 @@ genfscon sysfs /devices/platform/19000000.aoc/usb_control/wakeup/wakeup         
 genfscon sysfs /devices/platform/11110000.usb/11110000.dwc3/wakeup/wakeup                     u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/19000000.aoc/com.google.usf/wakeup/wakeup                    u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/google,dock/power_supply/dock/wakeup                         u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/11110000.usb/11110000.dwc3/xhci-hcd-exynos.5.auto/wakeup/wakeup      u:object_r:sysfs_wakeup:s0
 
 # Touch
 genfscon sysfs /devices/platform/10d40000.spi/spi_master/spi11/spi11.0          u:object_r:sysfs_touch:s0
