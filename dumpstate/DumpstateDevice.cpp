@@ -516,6 +516,7 @@ void DumpstateDevice::dumpPreTouchSection(int fd) {
         if (!access(cmd, R_OK))
             DumpFileToFd(fd, "FW version", cmd);
 
+#if 0	/* b/193467774: remove this temporarily */
         snprintf(cmd, sizeof(cmd), "/proc/nvt_diff");
         if (!access(cmd, R_OK))
             DumpFileToFd(fd, "Diff", cmd);
@@ -523,6 +524,7 @@ void DumpstateDevice::dumpPreTouchSection(int fd) {
         snprintf(cmd, sizeof(cmd), "%s/nvt_fw_history", nvt_spi_path);
         if (!access(nvt_spi_path, R_OK))
             DumpFileToFd(fd, "FW History", cmd);
+#endif
 
         snprintf(cmd, sizeof(cmd),
                  "echo %s > %s/%s",
