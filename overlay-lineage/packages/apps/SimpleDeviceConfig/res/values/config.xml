@@ -21,10 +21,19 @@
         <item>connectivity_thermal_power_manager/sub6_approved_carrier_ids=1839,2126,2032,2146,1802,1849,1187,1,1788,1951,1952,1989,1404,2020,1403,1962,576,2021,1895,2008,1505,2,2101,2102,2103,2104,2419,28,718,1492,25,2147,2397,3,,1453,1454,1456,1993,2360,2361,32,27,1487,1958,2016,1345,1353,15,30,850,1894,2100,1581,2110,2109,1888,1881,1884,31,1707</item>
         <item>connectivity_thermal_power_manager/sub6_device_supported=true</item>
 
-        <!-- Live Captions (Pixel 2017 + OEM) -->
+        <!-- Live Caption (Pixel 2017 + OEM) -->
+        <item>device_personalization_services/Captions__enable_augmented_modality=true</item>
+        <item>device_personalization_services/Captions__enable_augmented_music=true</item>
+        <item>device_personalization_services/Captions__enable_clearcut_logging=true</item>
+        <item>device_personalization_services/Captions__enable_punctuations=true</item>
+        <item>device_personalization_services/Captions__enable_setting_page=false</item>
+        <item>device_personalization_services/Captions__enable_text_transform=true</item>
+        <item>device_personalization_services/Captions__enable_westworld_logging=false</item>
+        <item>device_personalization_services/Captions__enable_zero_day=false</item>
         <item>device_personalization_services/Captions__manifest_url_template=https://storage.googleapis.com/captions/%{NAMESPACE}_%{VERSION}_manifest.json</item>
         <item>device_personalization_services/Captions__model_version_v1=20190613</item>
         <item>device_personalization_services/Captions__model_version_v1_2=20200112</item>
+        <item>device_personalization_services/Captions__new_model_version_advanced=20210930</item>
         <item>device_personalization_services/Captions__speech_threshold=0.2</item>
         <item>device_personalization_services/Captions__surface_sound_events=true</item>
         <item>device_personalization_services/Captions__visibility_playing_duration_millis=5000</item>
