@@ -63,6 +63,7 @@ genfscon sysfs /devices/platform/14700000.ufs/hibern8_on_idle_enable    u:object
 genfscon sysfs /devices/platform/14700000.ufs/health_descriptor         u:object_r:sysfs_scsi_devices_0000:s0
 genfscon sysfs /devices/platform/14700000.ufs/host0/target0:0:0/0:0:0:  u:object_r:sysfs_scsi_devices_0000:s0
 genfscon sysfs /devices/platform/14700000.ufs/ufs_stats                 u:object_r:sysfs_scsi_devices_0000:s0
+genfscon sysfs /devices/platform/14700000.ufs/attributes/wb_avail_buf   u:object_r:sysfs_scsi_devices_0000:s0
 
 # Networking / Tethering
 genfscon sysfs /devices/platform/10d30000.spi/spi_master/spi10/spi10.0/ieee802154/phy0/net  u:object_r:sysfs_net:s0
