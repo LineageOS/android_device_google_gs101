@@ -65,6 +65,8 @@ struct Usb : public BnUsb {
             int64_t in_transactionId) override;
     ScopedAStatus enableUsbData(const string& in_portName, bool in_enable,
             int64_t in_transactionId) override;
+    ScopedAStatus limitPowerTransfer(const string& in_portName, bool in_limit,
+        int64_t in_transactionId) override;
 
     std::shared_ptr<::aidl::android::hardware::usb::IUsbCallback> mCallback;
     // Protects mCallback variable
@@ -84,7 +86,6 @@ struct Usb : public BnUsb {
     float mPluggedTemperatureCelsius;
     // Usb Data status
     bool mUsbDataEnabled;
-
   private:
     pthread_t mPoll;
 };

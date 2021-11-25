@@ -60,6 +60,8 @@ constexpr char kHsi2cPath[] = "/sys/devices/platform/10d50000.hsi2c";
 constexpr char kI2CPath[] = "/sys/devices/platform/10d50000.hsi2c/i2c-";
 constexpr char kContaminantDetectionPath[] = "i2c-max77759tcpc/contaminant_detection";
 constexpr char kStatusPath[] = "i2c-max77759tcpc/contaminant_detection_status";
+constexpr char kSinkLimitEnable[] = "i2c-max77759tcpc/usb_limit_sink_enable";
+constexpr char kSinkLimitCurrent[] = "i2c-max77759tcpc/usb_limit_sink_current";
 constexpr char kTypecPath[] = "/sys/class/typec";
 constexpr char kDisableContatminantDetection[] = "vendor.usb.contaminantdisable";
 constexpr char kOverheatStatsPath[] = "/sys/devices/platform/google,usbc_port_cooling_dev/";
@@ -130,7 +132,7 @@ ScopedAStatus Usb::enableUsbData(const string& in_portName, bool in_enable,
     return ScopedAStatus::ok();
 }
 
-Status getContaminantDetectionNamesHelper(string *name) {
+Status getI2cBusHelper(string *name) {
     DIR *dp;
 
     dp = opendir(kHsi2cPath);
@@ -163,7 +165,7 @@ Status queryMoistureDetectionStatus(std::vector<PortStatus> *currentPortStatus) 
     (*currentPortStatus)[0].supportsEnableContaminantPresenceDetection = true;
     (*currentPortStatus)[0].supportsEnableContaminantPresenceProtection = false;
 
-    getContaminantDetectionNamesHelper(&path);
+    getI2cBusHelper(&path);
     enabledPath = kI2CPath + path + "/" + kContaminantDetectionPath;
     if (!ReadFileToString(enabledPath, &enabled)) {
         ALOGE("Failed to open moisture_detection_enabled");
@@ -402,6 +404,61 @@ ScopedAStatus Usb::switchRole(const string& in_portName, const PortRole& in_role
     return ScopedAStatus::ok();
 }
 
+ScopedAStatus Usb::limitPowerTransfer(const string& in_portName, bool in_limit,
+        int64_t in_transactionId) {
+    bool success = false;
+    std::vector<PortStatus> currentPortStatus;
+    string path, limitEnablePath, currentLimitPath;
+
+    getI2cBusHelper(&path);
+    limitEnablePath = kI2CPath + path + "/" + kSinkLimitEnable;
+    currentLimitPath = kI2CPath + path + "/" + kSinkLimitCurrent;
+
+    if (in_limit) {
+        success = WriteStringToFile("0", currentLimitPath);
+        if (!success) {
+            ALOGE("Failed to set sink current limit");
+        }
+    }
+    success = WriteStringToFile(in_limit ? "1" : "0", limitEnablePath);
+    if (!success) {
+        ALOGE("Failed to %s sink current limit: %s", in_limit ? "enable" : "disable",
+              limitEnablePath.c_str());
+    }
+    ALOGI("limitPowerTransfer limit:%c opId:%ld", in_limit ? 'y' : 'n', in_transactionId);
+    pthread_mutex_lock(&mLock);
+    if (mCallback != NULL && in_transactionId >= 0) {
+        ScopedAStatus ret = mCallback->notifyLimitPowerTransferStatus(
+                in_portName, in_limit, success ? Status::SUCCESS : Status::ERROR, in_transactionId);
+        if (!ret.isOk())
+            ALOGE("limitPowerTransfer error %s", ret.getDescription().c_str());
+    } else {
+        ALOGE("Not notifying the userspace. Callback is not set");
+    }
+
+    pthread_mutex_unlock(&mLock);
+    queryVersionHelper(this, &currentPortStatus);
+
+    return ScopedAStatus::ok();
+}
+
+Status queryPowerTransferStatus(std::vector<PortStatus> *currentPortStatus) {
+    string limitedPath, enabled, path;
+
+    getI2cBusHelper(&path);
+    limitedPath = kI2CPath + path + "/" + kSinkLimitEnable;
+    if (!ReadFileToString(limitedPath, &enabled)) {
+        ALOGE("Failed to open limit_sink_enable");
+        return Status::ERROR;
+    }
+
+    enabled = Trim(enabled);
+    (*currentPortStatus)[0].powerTransferLimited = enabled == "1";
+
+    ALOGI("powerTransferLimited:%d", (*currentPortStatus)[0].powerTransferLimited ? 1 : 0);
+    return Status::SUCCESS;
+}
+
 Status getAccessoryConnected(const string &portName, string *accessory) {
     string filename = "/sys/class/typec/" + portName + "-partner/accessory_mode";
 
@@ -571,13 +628,14 @@ Status getPortStatusHelper(android::hardware::usb::Usb *usb,
             (*currentPortStatus)[i].usbDataEnabled = usb->mUsbDataEnabled;
 
             ALOGI("%d:%s connected:%d canChangeMode:%d canChagedata:%d canChangePower:%d "
-                "usbDataEnabled:%d",
+                  "usbDataEnabled:%d",
                 i, port.first.c_str(), port.second,
                 (*currentPortStatus)[i].canChangeMode,
                 (*currentPortStatus)[i].canChangeDataRole,
                 (*currentPortStatus)[i].canChangePowerRole,
                 (*currentPortStatus)[i].usbDataEnabled ? 1 : 0);
         }
+
         return Status::SUCCESS;
     }
 done:
@@ -590,6 +648,7 @@ void queryVersionHelper(android::hardware::usb::Usb *usb,
     pthread_mutex_lock(&usb->mLock);
     status = getPortStatusHelper(usb, currentPortStatus);
     queryMoistureDetectionStatus(currentPortStatus);
+    queryPowerTransferStatus(currentPortStatus);
     if (usb->mCallback != NULL) {
         ScopedAStatus ret = usb->mCallback->notifyPortStatusChange(*currentPortStatus,
             status);
