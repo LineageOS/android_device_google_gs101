@@ -7,3 +7,4 @@ userdebug_or_eng(`
 ')
 
 dontaudit shell sysfs_vendor_sched:dir search;
+dontaudit shell sysfs_vendor_sched:file write;
