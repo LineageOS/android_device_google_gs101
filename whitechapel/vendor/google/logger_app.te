@@ -25,4 +25,5 @@ userdebug_or_eng(`
 
   dontaudit logger_app default_prop:file { read };
   dontaudit logger_app sysfs_vendor_sched:dir search;
+  dontaudit logger_app sysfs_vendor_sched:file write;
 ')
