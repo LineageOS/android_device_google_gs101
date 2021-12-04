@@ -4,6 +4,9 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+# Manifests
+DEVICE_MANIFEST_FILE += device/google/gs101/manifest_radio.xml
+
 # Partitions
 AB_OTA_PARTITIONS += \
     vendor \
