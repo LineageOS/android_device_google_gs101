@@ -6,6 +6,9 @@
 
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 
+# Manifests
+DEVICE_MANIFEST_FILE += device/google/gs101/manifest_radio.xml
+
 # Partitions
 AB_OTA_PARTITIONS += \
     vendor \
