@@ -717,6 +717,8 @@ on property:sys.boot_completed=1
     write /sys/kernel/vendor_sched/dex2oat_uclamp_max 615
     write /dev/cpuctl/dex2oat/cpu.uclamp.max 60
     write /sys/kernel/vendor_sched/dex2oat_group_throttle 615
+    write /sys/kernel/vendor_sched/ota_uclamp_max 410
+    write /sys/kernel/vendor_sched/ota_group_throttle 410
 
     # Setup groups for SF (RT used for SF RE, SF used for SF main)
     write /sys/kernel/vendor_sched/rt_uclamp_min 125
