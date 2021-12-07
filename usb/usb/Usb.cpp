@@ -172,6 +172,31 @@ ScopedAStatus Usb::enableUsbDataWhileDocked(const string& in_portName,
     return ScopedAStatus::ok();
 }
 
+ScopedAStatus Usb::resetUsbPort(const std::string& in_portName, int64_t in_transactionId) {
+    bool result = true;
+    std::vector<PortStatus> currentPortStatus;
+
+    ALOGI("Userspace reset USB Port. opID:%ld", in_transactionId);
+
+    if (!WriteStringToFile("none", PULLUP_PATH)) {
+        ALOGI("Gadget cannot be pulled down");
+        result = false;
+    }
+
+    pthread_mutex_lock(&mLock);
+    if (mCallback != NULL) {
+        ::ndk::ScopedAStatus ret = mCallback->notifyResetUsbPortStatus(
+            in_portName, result ? Status::SUCCESS : Status::ERROR, in_transactionId);
+        if (!ret.isOk())
+            ALOGE("notifyTransactionStatus error %s", ret.getDescription().c_str());
+    } else {
+        ALOGE("Not notifying the userspace. Callback is not set");
+    }
+    pthread_mutex_unlock(&mLock);
+
+    return ::ndk::ScopedAStatus::ok();
+}
+
 Status getI2cBusHelper(string *name) {
     DIR *dp;
 
