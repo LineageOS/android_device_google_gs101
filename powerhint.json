@@ -506,6 +506,24 @@
       "Value": "4-7"
     },
     {
+      "PowerHint": "CAMERA_LAUNCH_EXTENDED",
+      "Node": "CPUBigClusterMaxFreq",
+      "Duration": 2000,
+      "Value": "9999999"
+    },
+    {
+      "PowerHint": "CAMERA_LAUNCH_EXTENDED",
+      "Node": "CPUMidClusterMaxFreq",
+      "Duration": 2000,
+      "Value": "9999999"
+    },
+    {
+      "PowerHint": "CAMERA_LAUNCH_EXTENDED",
+      "Node": "CPULittleClusterMaxFreq",
+      "Duration": 2000,
+      "Value": "9999999"
+    },
+    {
       "PowerHint": "CAMERA_THERMAL_CPU_THROTTLE",
       "Node": "CPUBigClusterMaxFreq",
       "Duration": 1000,
