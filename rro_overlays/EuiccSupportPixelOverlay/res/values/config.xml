@@ -28,7 +28,7 @@
     </string-array>
     <string-array name="config_state_request_intent_list">
         <item>intent:#Intent;action=com.google.android.gms.dck.action.SE_STATE_REQUEST;end</item>
-        <item>intent:#Intent;action=com.qorvo.action.SE_STATE_REQUEST;end</item>
+        <item>intent:#Intent;action=com.qorvo.uwb.action.SE_STATE_REQUEST;end</item>
     </string-array>
     <string-array name="config_state_request_permission_list">
         <item>com.google.android.gms.dck.permission.DIGITAL_KEY_PRIVILEGED</item>
