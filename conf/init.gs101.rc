@@ -785,6 +785,10 @@ on  property:persist.sys.test_harness=1 && property:persist.vendor.testing_batte
     setprop persist.vendor.charge.start.level 0
     setprop vendor.battery.defender.disable 1
 
+# ACA (Adaptice Charge Always On) persist properties
+on property:persist.vendor.adaptive.charge.soc=*
+    write /sys/class/power_supply/battery/charge_limit ${persist.vendor.adaptive.charge.soc}
+
 service insmod_sh_common /vendor/bin/init.insmod.sh /vendor/etc/init.insmod.gs101.cfg
     class main
     user root
