@@ -55,6 +55,10 @@ get_prop(hal_sensors_default, vendor_dynamic_sensor_prop)
 # Allow access to raw HID devices for dynamic sensors.
 allow hal_sensors_default hidraw_device:chr_file rw_file_perms;
 
+# Allow sensor HAL to access the display service HAL
+allow hal_sensors_default hal_pixel_display_service:service_manager find;
+binder_call(hal_sensors_default, hal_graphics_composer_default)
+
 #
 # Suez type enforcements.
 #
