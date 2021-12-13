@@ -16,6 +16,7 @@ service vendor.charger /system/bin/charger
 
 on early-init
     mount_all /vendor/etc/fstab.persist --early
+    mount_all /vendor/etc/fstab.modem --early
 
 on init
     # CPU0 cannot be offline
