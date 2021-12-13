@@ -74,7 +74,7 @@
           "Params":
           {
             "Controller": "cpu",
-            "Path": "dex2oat"
+            "Path": "system"
           }
         },
         {
@@ -135,7 +135,7 @@
           "Params":
           {
             "Controller": "cpu",
-            "Path": "background"
+            "Path": "system"
           }
         },
         {
@@ -245,7 +245,7 @@
           "Params":
           {
             "Controller": "cpu",
-            "Path": "system-background"
+            "Path": "system"
           }
         },
         {
