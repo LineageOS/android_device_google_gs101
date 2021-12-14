@@ -14,6 +14,7 @@ genfscon sysfs /devices/platform/19000000.aoc/control/audio_wakeup          u:ob
 genfscon sysfs /devices/platform/19000000.aoc/control/logging_wakeup        u:object_r:sysfs_aoc_dumpstate:s0
 genfscon sysfs /devices/platform/19000000.aoc/control/hotword_wakeup        u:object_r:sysfs_aoc_dumpstate:s0
 genfscon sysfs /devices/platform/19000000.aoc/control/memory_exception      u:object_r:sysfs_aoc_dumpstate:s0
+genfscon sysfs /devices/platform/19000000.aoc/control/memory_votes          u:object_r:sysfs_aoc_dumpstate:s0
 
 # WiFi
 genfscon sysfs /wifi                                                        u:object_r:sysfs_wifi:s0
@@ -108,6 +109,7 @@ genfscon sysfs /devices/virtual/sec/tsp                                         
 
 # GPS
 genfscon sysfs /devices/platform/10940000.spi/spi_master/spi5/spi5.0/nstandby   u:object_r:sysfs_gps:s0
+genfscon sysfs /devices/virtual/pps/pps0/assert_elapsed                         u:object_r:sysfs_gps_assert:s0
 
 # Display
 genfscon sysfs /devices/platform/1c2c0000.drmdsim/1c2c0000.drmdsim.0/gamma         u:object_r:sysfs_display:s0
@@ -149,7 +151,13 @@ genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/i2c-s2mpg11mfd/s2mp
 genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device1/enabled_rails u:object_r:sysfs_odpm:s0
 
 # bcl sysfs files
-genfscon sysfs /devices/virtual/pmic/mitigation                                 u:object_r:sysfs_bcl:s0
+genfscon sysfs /devices/virtual/pmic/mitigation                                        u:object_r:sysfs_bcl:s0
+genfscon sysfs /devices/virtual/pmic/mitigation/clock_ratio/tpu_heavy_clk_ratio        u:object_r:sysfs_bcl:s0
+genfscon sysfs /devices/virtual/pmic/mitigation/clock_ratio/gpu_heavy_clk_ratio        u:object_r:sysfs_bcl:s0
+genfscon sysfs /devices/virtual/pmic/mitigation/clock_ratio/cpu2_heavy_clk_ratio       u:object_r:sysfs_bcl:s0
+genfscon sysfs /devices/virtual/pmic/mitigation/clock_ratio/cpu2_light_clk_ratio       u:object_r:sysfs_bcl:s0
+genfscon sysfs /devices/virtual/pmic/mitigation/clock_ratio/tpu_light_clk_ratio        u:object_r:sysfs_bcl:s0
+genfscon sysfs /devices/virtual/pmic/mitigation/clock_ratio/gpu_light_clk_ratio        u:object_r:sysfs_bcl:s0
 
 # Chosen
 genfscon sysfs /firmware/devicetree/base/chosen                                u:object_r:sysfs_chosen:s0

@@ -139,6 +139,7 @@ userdebug_or_eng(`
     typeattribute vendor_gps_file mlstrustedobject;
 ')
 type sysfs_gps, sysfs_type, fs_type;
+type sysfs_gps_assert, sysfs_type, fs_type;
 
 # Display
 type sysfs_display, sysfs_type, fs_type;
@@ -185,6 +186,8 @@ type sysfs_video, sysfs_type, fs_type;
 
 # UWB vendor
 type uwb_vendor_data_file, file_type, data_file_type, app_data_file_type;
+type persist_uwb_file, file_type, vendor_persist_type;
+type uwb_data_vendor, file_type, data_file_type;
 
 # PixelStats_vendor
 type sysfs_pixelstats, fs_type, sysfs_type;

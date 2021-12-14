@@ -111,6 +111,10 @@
 /dev/logbuffer_pca9468         u:object_r:logbuffer_device:s0
 /dev/logbuffer_cpm             u:object_r:logbuffer_device:s0
 
+/dev/logbuffer_maxfg_monitor        u:object_r:logbuffer_device:s0
+/dev/logbuffer_maxfg_base_monitor   u:object_r:logbuffer_device:s0
+/dev/logbuffer_maxfg_flip_monitor   u:object_r:logbuffer_device:s0
+
 # DM tools device
 /dev/umts_dm0                  u:object_r:radio_device:s0
 /dev/umts_router               u:object_r:radio_device:s0
@@ -349,6 +353,9 @@
 # Uwb
 # R4
 /vendor/bin/hw/hardware\.qorvo\.uwb-service                          u:object_r:hal_uwb_vendor_default_exec:s0
+/vendor/bin/init\.uwb\.calib\.sh                                     u:object_r:vendor_uwb_init_exec:s0
+/mnt/vendor/persist/uwb(/.*)?                                        u:object_r:persist_uwb_file:s0
+/data/vendor/uwb(/.*)?                                               u:object_r:uwb_data_vendor:s0
 
 # RILD files
 /data/vendor/rild(/.*)?                                                     u:object_r:rild_vendor_data_file:s0
