@@ -1,3 +1,4 @@
+get_prop(vendor_init, gesture_prop)
 set_prop(vendor_init, vendor_camera_prop)
 set_prop(vendor_init, vendor_device_prop)
 set_prop(vendor_init, vendor_modem_prop)
