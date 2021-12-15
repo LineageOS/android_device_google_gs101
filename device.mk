@@ -251,6 +251,10 @@ PRODUCT_PACKAGES += \
 	fstab.gs101-fips.vendor_ramdisk
 PRODUCT_COPY_FILES += \
 	device/google/gs101/conf/fstab.persist:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.persist
+ifneq ($(BOARD_WITHOUT_RADIO),true)
+PRODUCT_COPY_FILES += \
+	device/google/gs101/conf/fstab.modem:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.modem
+endif
 
 # Shell scripts
 PRODUCT_COPY_FILES += \
@@ -342,7 +346,7 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml
 
 # Sensors
-ifneq (,$(filter citron tangor, $(TARGET_PRODUCT)))
+ifneq (,$(findstring tangor, $(TARGET_PRODUCT)))
 PRODUCT_COPY_FILES += \
         frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.accelerometer.xml \
         frameworks/native/data/etc/android.hardware.sensor.compass.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.compass.xml \
