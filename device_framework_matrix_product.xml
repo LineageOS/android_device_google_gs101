@@ -57,13 +57,6 @@
         </interface>
     </hal>
     <hal format="aidl" optional="true">
-      <name>com.google.face.debug</name>
-        <interface>
-            <name>IDebugHost</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="aidl" optional="true">
       <name>com.google.edgetpu</name>
         <interface>
             <name>IEdgeTpuVendorService</name>
