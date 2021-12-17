@@ -381,3 +381,5 @@ BOARD_KERNEL_CMDLINE += log_buf_len=1024K
 BOARD_PVMFWIMAGE_PARTITION_SIZE := 0x00100000
 
 -include vendor/google_devices/gs101/proprietary/BoardConfigVendor.mk
+
+include device/google/gs101/BoardConfigLineage.mk
