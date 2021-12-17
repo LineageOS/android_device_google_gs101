@@ -20,6 +20,4 @@ FPC_CONFIG_GOOGLE_CUSTOMIZE=1
 GOOGLE_CONFIG_PERFORMANCE=1
 
 # Enable Suez
-SOONG_CONFIG_NAMESPACES += fp_hal_feature
-SOONG_CONFIG_fp_hal_feature += biometric_suez_support
-SOONG_CONFIG_fp_hal_feature_biometric_suez_support := true
+$(call soong_config_set,fp_hal_feature,biometric_suez_support,true)

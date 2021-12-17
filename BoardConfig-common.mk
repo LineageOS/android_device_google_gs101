@@ -99,6 +99,9 @@ endif
 ifneq ($(PRODUCT_BUILD_VBMETA_IMAGE),false)
 AB_OTA_PARTITIONS += vbmeta
 endif
+ifneq ($(PRODUCT_BUILD_PVMFW_IMAGE),false)
+AB_OTA_PARTITIONS += pvmfw
+endif
 
 # EMULATOR common modules
 BOARD_EMULATOR_COMMON_MODULES := liblight
@@ -116,29 +119,20 @@ BOARD_USES_GRALLOC_ION_SYNC := true
 BOARD_USES_SWIFTSHADER := false
 
 # Gralloc4
-SOONG_CONFIG_NAMESPACES += arm_gralloc
-SOONG_CONFIG_arm_gralloc := \
-	gralloc_arm_no_external_afbc \
-	mali_gpu_support_afbc_basic \
-	mali_gpu_support_afbc_wideblk \
-	gralloc_init_afbc \
-	gralloc_ion_sync_on_lock \
-	dpu_support_1010102_afbc
-
 ifeq ($(BOARD_USES_SWIFTSHADER),true)
-SOONG_CONFIG_arm_gralloc_gralloc_arm_no_external_afbc := true
-SOONG_CONFIG_arm_gralloc_mali_gpu_support_afbc_basic := false
-SOONG_CONFIG_arm_gralloc_mali_gpu_support_afbc_wideblk := false
-SOONG_CONFIG_arm_gralloc_gralloc_init_afbc := false
-SOONG_CONFIG_arm_gralloc_dpu_support_1010102_afbc := false
+$(call soong_config_set,arm_gralloc,gralloc_arm_no_external_afbc,true)
+$(call soong_config_set,arm_gralloc,mali_gpu_support_afbc_basic,false)
+$(call soong_config_set,arm_gralloc,mali_gpu_support_afbc_wideblk,false)
+$(call soong_config_set,arm_gralloc,gralloc_init_afbc,false)
+$(call soong_config_set,arm_gralloc,dpu_support_1010102_afbc,false)
 else
-SOONG_CONFIG_arm_gralloc_gralloc_arm_no_external_afbc := false
-SOONG_CONFIG_arm_gralloc_mali_gpu_support_afbc_basic := true
-SOONG_CONFIG_arm_gralloc_mali_gpu_support_afbc_wideblk := true
-SOONG_CONFIG_arm_gralloc_gralloc_init_afbc := true
-SOONG_CONFIG_arm_gralloc_dpu_support_1010102_afbc := true
+$(call soong_config_set,arm_gralloc,gralloc_arm_no_external_afbc,false)
+$(call soong_config_set,arm_gralloc,mali_gpu_support_afbc_basic,true)
+$(call soong_config_set,arm_gralloc,mali_gpu_support_afbc_wideblk,true)
+$(call soong_config_set,arm_gralloc,gralloc_init_afbc,true)
+$(call soong_config_set,arm_gralloc,dpu_support_1010102_afbc,true)
 endif # ifeq ($(BOARD_USES_SWIFTSHADER),true)
-SOONG_CONFIG_arm_gralloc_gralloc_ion_sync_on_lock := $(BOARD_USES_GRALLOC_ION_SYNC)
+$(call soong_config_set,arm_gralloc,gralloc_ion_sync_on_lock,$(BOARD_USES_GRALLOC_ION_SYNC))
 
 # Graphics
 #BOARD_USES_EXYNOS_DATASPACE_FEATURE := true
@@ -202,34 +196,19 @@ BOARD_SUPER_PARTITION_ERROR_LIMIT := 8006926336
 #
 BOARD_USES_GENERIC_AUDIO := true
 
-SOONG_CONFIG_NAMESPACES += aoc_audio_func
-
-SOONG_CONFIG_aoc_audio_func += \
-    ext_hidl
-
-SOONG_CONFIG_aoc_audio_func_ext_hidl := true
+$(call soong_config_set,aoc_audio_func,ext_hidl,true)
 
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
-SOONG_CONFIG_aoc_audio_func += \
-    dump_usecase_data \
-    hal_socket_control \
-    record_tunning_keys
-
-SOONG_CONFIG_aoc_audio_func_dump_usecase_data := true
-SOONG_CONFIG_aoc_audio_func_hal_socket_control := true
-SOONG_CONFIG_aoc_audio_func_record_tunning_keys := true
+$(call soong_config_set,aoc_audio_func,dump_usecase_data,true)
+$(call soong_config_set,aoc_audio_func,hal_socket_control,true)
+$(call soong_config_set,aoc_audio_func,record_tunning_keys,true)
 endif
 
 ifneq (,$(filter aosp_%,$(TARGET_PRODUCT)))
-SOONG_CONFIG_aoc_audio_func += aosp_build
-
-SOONG_CONFIG_aoc_audio_func_aosp_build := true
+$(call soong_config_set,aoc_audio_func,aosp_build,true)
 endif
 
-SOONG_CONFIG_NAMESPACES += haptics
-SOONG_CONFIG_haptics += \
-    actuator_model
-SOONG_CONFIG_haptics_actuator_model := $(ACTUATOR_MODEL)
+$(call soong_config_set,haptics,actuator_model,$(ACTUATOR_MODEL))
 
 # Primary AudioHAL Configuration
 #BOARD_USE_COMMON_AUDIOHAL := true
