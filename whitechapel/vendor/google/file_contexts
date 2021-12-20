@@ -66,6 +66,7 @@
 /dev/block/platform/14700000\.ufs/by-name/ldfw_[ab]           u:object_r:custom_ab_block_device:s0
 /dev/block/platform/14700000\.ufs/by-name/metadata            u:object_r:metadata_block_device:s0
 /dev/block/platform/14700000\.ufs/by-name/pbl_[ab]            u:object_r:custom_ab_block_device:s0
+/dev/block/platform/14700000\.ufs/by-name/pvmfw_[ab]          u:object_r:custom_ab_block_device:s0
 /dev/block/platform/14700000\.ufs/by-name/reclaim_[ab]        u:object_r:custom_ab_block_device:s0
 /dev/block/platform/14700000\.ufs/by-name/super               u:object_r:super_block_device:s0
 /dev/block/platform/14700000\.ufs/by-name/tzsw_[ab]           u:object_r:custom_ab_block_device:s0
