@@ -27,6 +27,7 @@
 soong_namespace {
     imports: [
         "device/google/gs101",
+        "device/google/gs101/conf",
     ],
 }
 
@@ -39,25 +40,30 @@ package {
     default_applicable_licenses: ["device_google_gs101_license"],
 }
 
-filegroup {
-    name: "gs101_srcs",
-    srcs: ["fstab.gs101.in"],
-}
-
 genrule {
     name: "gen_fstab.gs101",
-    srcs: ["fstab.gs101.in"],
+    srcs: [
+        "fstab.gs101.in*",
+        ":gs101_srcs",
+        ],
     out: ["fstab.gs101"],
     cmd: "sed -e s/@fileencryption@/::inlinecrypt_optimized+wrappedkey_v0/" +
-        " -e s/@metadata_encryption@/:wrappedkey_v0/ $(in) > $(out)",
+        " -e s/@metadata_encryption@/:wrappedkey_v0/" +
+        " -e /modem/d " +
+        " -e /efs/d $(in) > $(out)",
 }
 
 genrule {
     name: "gen_fstab.gs101-fips",
-    srcs: ["fstab.gs101.in"],
+    srcs: [
+        "fstab.gs101.in*",
+        ":gs101_srcs",
+        ],
     out: ["fstab.gs101-fips"],
     cmd: "sed -e s/@fileencryption@/aes-256-xts/" +
-        " -e s/@metadata_encryption@/aes-256-xts/ $(in) > $(out)",
+        " -e s/@metadata_encryption@/aes-256-xts/" +
+        " -e /modem/d " +
+        " -e /efs/d $(in) > $(out)",
 }
 
 prebuilt_etc {
