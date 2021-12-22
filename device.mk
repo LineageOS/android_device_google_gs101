@@ -980,11 +980,7 @@ PRODUCT_SOONG_NAMESPACES += \
 
 $(call soong_config_set,aoc_audio_board,platform,$(TARGET_BOARD_PLATFORM))
 
-SOONG_CONFIG_NAMESPACES += android_hardware_audio
-SOONG_CONFIG_android_hardware_audio += \
-	run_64bit
-
-SOONG_CONFIG_android_hardware_audio_run_64bit := true
+$(call soong_config_set,android_hardware_audio,run_64bit,true)
 
 # Audio properties
 PRODUCT_PROPERTY_OVERRIDES += \
