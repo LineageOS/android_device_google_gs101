@@ -42,6 +42,7 @@ PRODUCT_SOONG_NAMESPACES += \
 	hardware/google/interfaces \
 	hardware/google/pixel \
 	device/google/gs101 \
+	device/google/gs101/powerstats \
 	vendor/google/whitechapel/tools \
 	vendor/broadcom/bluetooth \
 	vendor/google/camera \
