@@ -6,4 +6,4 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	securedpud.slider
 
-BOARD_VENDOR_SEPOLICY_DIRS += device/google/gs101-sepolicy/confirmationui/
+BOARD_VENDOR_SEPOLICY_DIRS += device/google/gs101/sepolicy/confirmationui/
