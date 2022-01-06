@@ -1,18 +1,18 @@
 # sepolicy that are shared among devices using whitechapel
-BOARD_SEPOLICY_DIRS += device/google/gs101-sepolicy/whitechapel/vendor/google
+BOARD_SEPOLICY_DIRS += device/google/gs101/sepolicy/whitechapel/vendor/google
 
 # unresolved SELinux error log with bug tracking
-BOARD_SEPOLICY_DIRS += device/google/gs101-sepolicy/tracking_denials
+BOARD_SEPOLICY_DIRS += device/google/gs101/sepolicy/tracking_denials
 
-PRODUCT_PRIVATE_SEPOLICY_DIRS += device/google/gs101-sepolicy/private
+PRODUCT_PRIVATE_SEPOLICY_DIRS += device/google/gs101/sepolicy/private
 
 # Display
-BOARD_SEPOLICY_DIRS += device/google/gs101-sepolicy/display/common
-BOARD_SEPOLICY_DIRS += device/google/gs101-sepolicy/display/gs101
+BOARD_SEPOLICY_DIRS += device/google/gs101/sepolicy/display/common
+BOARD_SEPOLICY_DIRS += device/google/gs101/sepolicy/display/gs101
 
 # system_ext
-SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += device/google/gs101-sepolicy/system_ext/public
-SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += device/google/gs101-sepolicy/system_ext/private
+SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += device/google/gs101/sepolicy/system_ext/public
+SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += device/google/gs101/sepolicy/system_ext/private
 
 #
 # Pixel-wide
@@ -21,12 +21,12 @@ SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += device/google/gs101-sepolicy/system_ext/priv
 BOARD_SEPOLICY_DIRS += hardware/google/pixel-sepolicy/powerstats
 
 # Public
-PRODUCT_PUBLIC_SEPOLICY_DIRS += device/google/gs101-sepolicy/public
+PRODUCT_PUBLIC_SEPOLICY_DIRS += device/google/gs101/sepolicy/public
 
 # pKVM
 ifeq ($(TARGET_PKVM_ENABLED),true)
-BOARD_SEPOLICY_DIRS += device/google/gs101-sepolicy/pkvm
+BOARD_SEPOLICY_DIRS += device/google/gs101/sepolicy/pkvm
 endif
 
 # Health HAL
-BOARD_SEPOLICY_DIRS += device/google/gs101-sepolicy/health
+BOARD_SEPOLICY_DIRS += device/google/gs101/sepolicy/health
