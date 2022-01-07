@@ -83,3 +83,9 @@ $(call add-clean-step, rm -f $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.keyma
 $(call add-clean-step, rm -f $(PRODUCT_OUT)/vendor/etc/init/android.hardware.keymaster@4.0-service.trusty.rc)
 $(call add-clean-step, rm -f $(PRODUCT_OUT)/vendor/etc/vintf/manifest/android.hardware.keymaster@4.0-service.trusty.xml)
 $(call add-clean-step, rm -f $(PRODUCT_OUT)/vendor/bin/hw/wait_for_strongbox)
+
+# Health HAL to AIDL
+$(call add-clean-step, find $(PRODUCT_OUT)/system -type f -name "*charger*" -print0 | xargs -0 rm -f)
+$(call add-clean-step, find $(PRODUCT_OUT)/vendor -type f -name "*health@*" -print0 | xargs -0 rm -f)
+$(call add-clean-step, find $(PRODUCT_OUT)/recovery/root -type f -name "*charger*" -print0 | xargs -0 rm -f)
+$(call add-clean-step, find $(PRODUCT_OUT)/recovery/root -type f -name "*health@*" -print0 | xargs -0 rm -f)

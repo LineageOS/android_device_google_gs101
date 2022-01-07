@@ -34,6 +34,14 @@ VENDOR_SECURITY_PATCH = $(PLATFORM_SECURITY_PATCH)
 # Set boot SPL
 BOOT_SECURITY_PATCH = $(PLATFORM_SECURITY_PATCH)
 
+# TODO(b/207450311): Remove this flag once implemented
+USE_PIXEL_GRALLOC := false
+ifeq ($(USE_PIXEL_GRALLOC),true)
+	PRODUCT_SOONG_NAMESPACES += hardware/google/gchips/GrallocHAL
+else
+	PRODUCT_SOONG_NAMESPACES += hardware/google/gchips/gralloc4
+endif
+
 PRODUCT_SOONG_NAMESPACES += \
 	hardware/google/av \
 	hardware/google/gchips \
@@ -925,8 +933,8 @@ PRODUCT_PACKAGES_DEBUG += \
 	$(NULL)
 
 PRODUCT_PACKAGES += \
-	android.hardware.health@2.1-impl-gs101 \
-	android.hardware.health@2.1-service
+	android.hardware.health-service.gs101 \
+	android.hardware.health-service.gs101_recovery \
 
 # Audio
 # Audio HAL Server & Default Implementations
