@@ -89,6 +89,28 @@
       ]
     },
     {
+      "Name": "OtaPerformance",
+      "Actions": [
+        {
+          "Name": "JoinCgroup",
+          "Params":
+          {
+            "Controller": "cpu",
+            "Path": "dex2oat"
+          }
+        },
+        {
+          "Name": "WriteFile",
+          "Params":
+          {
+            "FilePath": "/sys/kernel/vendor_sched/set_task_group_ota",
+            "Value": "<pid>",
+            "LogFailures": "false"
+          }
+        }
+      ]
+    },
+    {
       "Name": "CameraServiceHighCapacity",
       "Actions": [
         {
@@ -337,6 +359,10 @@
     {
       "Name": "Dex2OatBootComplete",
       "Profiles": [ "Dex2oatPerformance", "ProcessCapacityNormal", "LowIoPriority", "TimerSlackHigh" ]
+    },
+    {
+      "Name": "OtaProfiles",
+      "Profiles": [ "OtaPerformance", "ProcessCapacityNormal", "LowIoPriority", "TimerSlackHigh" ]
     }
   ]
 }
