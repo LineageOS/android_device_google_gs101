@@ -99,6 +99,14 @@
       "ResetOnInit": true
     },
     {
+      "Name": "DisplayWakeup",
+      "Path": "/sys/devices/platform/1c300000.drmdecon/early_wakeup",
+      "Values": [
+        "1",
+        "0"
+      ]
+    },
+    {
       "Name": "CPUUtilThreshold",
       "Path": "/sys/kernel/vendor_sched/util_threshold",
       "Values": [
@@ -242,14 +250,6 @@
         "6"
       ],
       "ResetOnInit": true
-    },
-    {
-      "Name": "DisplayWakeup",
-      "Path": "/sys/devices/platform/1c300000.drmdecon/early_wakeup",
-      "Values": [
-        "1",
-        "0"
-      ]
     },
     {
       "Name": "LimitFlashCurrent",
