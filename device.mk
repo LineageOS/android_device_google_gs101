@@ -564,7 +564,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
 
 # Titan-M
-ifneq (,$(BOARD_HAS_DTLS))
+ifeq (,$(filter true, $(BOARD_WITHOUT_DTLS)))
 include hardware/google/pixel/dauntless/dauntless.mk
 endif
 
