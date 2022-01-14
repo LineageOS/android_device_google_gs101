@@ -18,7 +18,7 @@ include device/google/gs-common/device.mk
 
 TARGET_BOARD_PLATFORM := gs101
 
-ifneq (,$(filter %_64,$(TARGET_PRODUCT)))
+ifneq (,$(filter %tangor %_64,$(TARGET_PRODUCT)))
 LOCAL_64ONLY := _64
 endif
 
@@ -564,7 +564,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
 
 # Titan-M
-ifeq (,$(filter true, $(BOARD_WITHOUT_DTLS)))
+ifneq (,$(BOARD_HAS_DTLS))
 include hardware/google/pixel/dauntless/dauntless.mk
 endif
 
@@ -899,7 +899,7 @@ ifneq ($(BOARD_WITHOUT_RADIO),true)
 $(call inherit-product-if-exists, vendor/samsung_slsi/telephony/$(BOARD_USES_SHARED_VENDOR_TELEPHONY)/common/device-vendor.mk)
 endif
 
-ifeq (,$(filter %_64,$(TARGET_PRODUCT)))
+ifeq (,$(filter %tangor %_64,$(TARGET_PRODUCT)))
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 else
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
