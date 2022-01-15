@@ -1,0 +1,2 @@
+dontaudit mediaprovider_app sysfs_vendor_sched:dir search;
+
