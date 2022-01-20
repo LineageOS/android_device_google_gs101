@@ -138,7 +138,6 @@
         "107",
         "42"
       ],
-      "DefaultIndex": 1,
       "ResetOnInit": true
     },
     {
@@ -1122,7 +1121,7 @@
       "PowerHint": "BOOST_60HZ",
       "Node": "TAUClampBoost",
       "Duration": 200,
-      "Value": "43"
+      "Value": "108"
     },
     {
       "PowerHint": "REFRESH_120FPS",
