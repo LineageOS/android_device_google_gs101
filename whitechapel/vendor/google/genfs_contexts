@@ -322,3 +322,13 @@ genfscon sysfs /devices/platform/17000060.devfreq_tnr/devfreq/17000060.devfreq_t
 genfscon sysfs /devices/platform/google,usbc_port_cooling_dev/cleared_time      u:object_r:sysfs_usbc_throttling_stats:s0
 genfscon sysfs /devices/platform/google,usbc_port_cooling_dev/hysteresis_time   u:object_r:sysfs_usbc_throttling_stats:s0
 genfscon sysfs /devices/platform/google,usbc_port_cooling_dev/trip_time         u:object_r:sysfs_usbc_throttling_stats:s0
+
+# Coresight ETM
+genfscon sysfs /devices/platform/25840000.etm    u:object_r:sysfs_devices_cs_etm:s0
+genfscon sysfs /devices/platform/25940000.etm    u:object_r:sysfs_devices_cs_etm:s0
+genfscon sysfs /devices/platform/25a40000.etm    u:object_r:sysfs_devices_cs_etm:s0
+genfscon sysfs /devices/platform/25b40000.etm    u:object_r:sysfs_devices_cs_etm:s0
+genfscon sysfs /devices/platform/25c40000.etm    u:object_r:sysfs_devices_cs_etm:s0
+genfscon sysfs /devices/platform/25d40000.etm    u:object_r:sysfs_devices_cs_etm:s0
+genfscon sysfs /devices/platform/25e40000.etm    u:object_r:sysfs_devices_cs_etm:s0
+genfscon sysfs /devices/platform/25f40000.etm    u:object_r:sysfs_devices_cs_etm:s0
