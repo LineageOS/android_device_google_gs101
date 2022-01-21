@@ -488,18 +488,10 @@ else
         LOCAL_TARGET_PRODUCT := slider
 endif
 
-
-SOONG_CONFIG_NAMESPACES += google3a_config
-SOONG_CONFIG_google3a_config += \
-	soc \
-	gcam_awb \
-	ghawb_truetone \
-	target_device
-
-SOONG_CONFIG_google3a_config_soc := gs101
-SOONG_CONFIG_google3a_config_gcam_awb := true
-SOONG_CONFIG_google3a_config_ghawb_truetone := true
-SOONG_CONFIG_google3a_config_target_device := $(LOCAL_TARGET_PRODUCT)
+$(call soong_config_set,google3a_config,soc,gs101)
+$(call soong_config_set,google3a_config,gcam_awb,true)
+$(call soong_config_set,google3a_config,ghawb_truetone,true)
+$(call soong_config_set,google3a_config,target_device,$(LOCAL_TARGET_PRODUCT))
 
 # Determine if Lyric is in the tree, and only have GCH build against it
 # if it is. Cases when Lyric isn't going to be in the tree:
@@ -511,14 +503,9 @@ SOONG_CONFIG_google3a_config_target_device := $(LOCAL_TARGET_PRODUCT)
 #    - PDK gs101 builds because they still have vendor/google/services/LyricCameraHAL/src
 
 ifneq ($(wildcard vendor/google/services/LyricCameraHAL/src),)
-SOONG_CONFIG_NAMESPACES += lyric
-SOONG_CONFIG_lyric += use_lyric_camera_hal
-SOONG_CONFIG_lyric_use_lyric_camera_hal := true
-
+$(call soong_config_set,lyric,use_lyric_camera_hal,true)
 # Camera HAL library selection
-SOONG_CONFIG_NAMESPACES += gch
-SOONG_CONFIG_gch += hwl_library
-SOONG_CONFIG_gch_hwl_library := lyric
+$(call soong_config_set,gch,hwl_library,lyric)
 endif
 
 # WiFi
@@ -694,9 +681,7 @@ endif
 ## VIDEO
 ####################################
 
-SOONG_CONFIG_NAMESPACES += bigo
-SOONG_CONFIG_bigo += soc
-SOONG_CONFIG_bigo_soc := gs101
+$(call soong_config_set,bigo,soc,gs101)
 
 # MFC firmware
 PRODUCT_COPY_FILES += \
@@ -1007,11 +992,7 @@ PRODUCT_SOONG_NAMESPACES += \
 	vendor/google/whitechapel/audio/hal \
 	vendor/google/whitechapel/audio/interfaces
 
-SOONG_CONFIG_NAMESPACES += aoc_audio_board
-SOONG_CONFIG_aoc_audio_board += \
-	platform
-
-SOONG_CONFIG_aoc_audio_board_platform := $(TARGET_BOARD_PLATFORM)
+$(call soong_config_set,aoc_audio_board,platform,$(TARGET_BOARD_PLATFORM))
 
 # Audio properties
 PRODUCT_PROPERTY_OVERRIDES += \
