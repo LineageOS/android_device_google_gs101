@@ -322,6 +322,14 @@ genfscon sysfs /devices/platform/google,usbc_port_cooling_dev/cleared_time      
 genfscon sysfs /devices/platform/google,usbc_port_cooling_dev/hysteresis_time   u:object_r:sysfs_usbc_throttling_stats:s0
 genfscon sysfs /devices/platform/google,usbc_port_cooling_dev/trip_time         u:object_r:sysfs_usbc_throttling_stats:s0
 
+# Thermal
+genfscon sysfs /devices/platform/100a0000.LITTLE                          u:object_r:sysfs_thermal:s0
+genfscon sysfs /devices/platform/100a0000.MID                             u:object_r:sysfs_thermal:s0
+genfscon sysfs /devices/platform/100a0000.BIG                             u:object_r:sysfs_thermal:s0
+genfscon sysfs /devices/platform/100b0000.G3D                             u:object_r:sysfs_thermal:s0
+genfscon sysfs /devices/platform/100b0000.ISP                             u:object_r:sysfs_thermal:s0
+genfscon sysfs /devices/platform/100b0000.TPU                             u:object_r:sysfs_thermal:s0
+
 # Coresight ETM
 genfscon sysfs /devices/platform/25840000.etm    u:object_r:sysfs_devices_cs_etm:s0
 genfscon sysfs /devices/platform/25940000.etm    u:object_r:sysfs_devices_cs_etm:s0
