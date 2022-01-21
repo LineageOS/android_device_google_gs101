@@ -169,9 +169,13 @@ include device/google/gs101/neuralnetwork/neuralnetwork.mk
 
 PRODUCT_PACKAGES += \
 	libGLES_mali \
-	vulkan.gs101 \
+	vulkan.mali \
 	libOpenCL \
 	libgpudataproducer
+
+PRODUCT_VENDOR_PROPERTIES += \
+	ro.hardware.vulkan=mali
+
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	debug.mali.disable_backend_affinity=true
 
