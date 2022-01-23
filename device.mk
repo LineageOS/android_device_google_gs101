@@ -394,7 +394,9 @@ endif
 
 # USB HAL
 PRODUCT_PACKAGES += \
-	android.hardware.usb@1.3-service.gs101
+	android.hardware.usb-service.gs101
+PRODUCT_PACKAGES += \
+	android.hardware.usb.gadget-service.gs101
 
 # MIDI feature
 PRODUCT_COPY_FILES += \
