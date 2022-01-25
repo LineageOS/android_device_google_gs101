@@ -117,6 +117,10 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.vendor.radio.config.carrier_config_dir=/mnt/vendor/modem_img/images/default/confpack
 
+# Hearing Aid Audio Support Using Bluetooth LE
+PRODUCT_PRODUCT_PROPERTIES += \
+	bluetooth.profile.asha.central=true
+
 
 PRODUCT_PROPERTY_OVERRIDES += \
 	telephony.active_modems.max_count=2
