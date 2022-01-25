@@ -353,6 +353,14 @@ genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-5/i2c-max77759tcpc/extcon   
 genfscon sysfs /devices/platform/10950000.spi/spi_master/spi6/spi6.0/st33spi    u:object_r:sysfs_st33spi:s0
 genfscon sysfs /devices/platform/175c0000.spi/spi_master/spi15/spi15.0/st33spi  u:object_r:sysfs_st33spi:s0
 
+# Thermal
+genfscon sysfs /devices/platform/100a0000.LITTLE                          u:object_r:sysfs_thermal:s0
+genfscon sysfs /devices/platform/100a0000.MID                             u:object_r:sysfs_thermal:s0
+genfscon sysfs /devices/platform/100a0000.BIG                             u:object_r:sysfs_thermal:s0
+genfscon sysfs /devices/platform/100b0000.G3D                             u:object_r:sysfs_thermal:s0
+genfscon sysfs /devices/platform/100b0000.ISP                             u:object_r:sysfs_thermal:s0
+genfscon sysfs /devices/platform/100b0000.TPU                             u:object_r:sysfs_thermal:s0
+
 # Coresight ETM
 genfscon sysfs /devices/platform/25840000.etm    u:object_r:sysfs_devices_cs_etm:s0
 genfscon sysfs /devices/platform/25940000.etm    u:object_r:sysfs_devices_cs_etm:s0
