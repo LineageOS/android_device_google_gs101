@@ -1026,6 +1026,12 @@ PRODUCT_SOONG_NAMESPACES += \
 
 $(call soong_config_set,aoc_audio_board,platform,$(TARGET_BOARD_PLATFORM))
 
+## AoC soong
+PRODUCT_SOONG_NAMESPACES += \
+        vendor/google/whitechapel/aoc
+
+$(call soong_config_set,aoc,target_soc,$(TARGET_BOARD_PLATFORM))
+
 $(call soong_config_set,android_hardware_audio,run_64bit,true)
 
 # Audio properties
