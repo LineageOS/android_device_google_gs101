@@ -20,7 +20,7 @@ kLockoutComment="This bug is auto created by fingerprint HAL to track fingerprin
 kLatencyComment="This bug is auto created by fingerprint HAL to track fingerprint latency"
 
 # BetterBug assign & CC owner
-kBugAssign='fps-triage@google.com'
+kBugAssign='udfps_data_study@google.com'
 kCcGroup='eddielan@google.com'
 kComponentId='817555'
 
