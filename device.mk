@@ -18,7 +18,7 @@ include device/google/gs-common/device.mk
 
 TARGET_BOARD_PLATFORM := gs101
 
-ifneq (,$(filter %tangor %_64,$(TARGET_PRODUCT)))
+ifneq (,$(filter %tangor tangor% %_64,$(TARGET_PRODUCT)))
 LOCAL_64ONLY := _64
 endif
 
@@ -897,7 +897,7 @@ ifneq ($(BOARD_WITHOUT_RADIO),true)
 $(call inherit-product-if-exists, vendor/samsung_slsi/telephony/$(BOARD_USES_SHARED_VENDOR_TELEPHONY)/common/device-vendor.mk)
 endif
 
-ifeq (,$(filter %tangor %_64,$(TARGET_PRODUCT)))
+ifeq (,$(filter %tangor tangor% %_64,$(TARGET_PRODUCT)))
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 else
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)

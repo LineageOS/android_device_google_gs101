@@ -17,7 +17,7 @@
 #
 # All components inherited here go to system image
 #
-ifeq (,$(filter %tangor %_64,$(TARGET_PRODUCT)))
+ifeq (,$(filter %tangor tangor% %_64,$(TARGET_PRODUCT)))
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 else
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
