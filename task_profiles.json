@@ -4,14 +4,6 @@
       "Name": "MaxPerformance",
       "Actions": [
         {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "cpu",
-            "Path": "system"
-          }
-        },
-        {
           "Name": "WriteFile",
           "Params":
           {
@@ -25,14 +17,6 @@
     {
       "Name": "CameraServicePerformance",
       "Actions": [
-        {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "cpu",
-            "Path": "system"
-          }
-        },
         {
           "Name": "WriteFile",
           "Params":
@@ -48,14 +32,6 @@
       "Name": "CameraServicePower",
       "Actions": [
         {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "cpu",
-            "Path": "system"
-          }
-        },
-        {
           "Name": "WriteFile",
           "Params":
           {
@@ -69,14 +45,6 @@
     {
       "Name": "Dex2oatPerformance",
       "Actions": [
-        {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "cpu",
-            "Path": "dex2oat"
-          }
-        },
         {
           "Name": "WriteFile",
           "Params":
@@ -153,14 +121,6 @@
       "Name": "HighEnergySaving",
       "Actions": [
         {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "cpu",
-            "Path": "background"
-          }
-        },
-        {
           "Name": "WriteFile",
           "Params":
           {
@@ -174,14 +134,6 @@
     {
       "Name": "NormalPerformance",
       "Actions": [
-        {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "cpu",
-            "Path": "system"
-          }
-        },
         {
           "Name": "WriteFile",
           "Params":
@@ -197,14 +149,6 @@
       "Name": "HighPerformance",
       "Actions": [
         {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "cpu",
-            "Path": "system"
-          }
-        },
-        {
           "Name": "WriteFile",
           "Params":
           {
@@ -218,14 +162,6 @@
     {
       "Name": "RealtimePerformance",
       "Actions": [
-        {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "cpu",
-            "Path": "system"
-          }
-        },
         {
           "Name": "WriteFile",
           "Params":
@@ -241,14 +177,6 @@
       "Name": "NNApiHALPerformance",
       "Actions": [
         {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "cpu",
-            "Path": "system"
-          }
-        },
-        {
           "Name": "WriteFile",
           "Params":
           {
@@ -262,14 +190,6 @@
     {
       "Name": "ServicePerformance",
       "Actions": [
-        {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "cpu",
-            "Path": "system-background"
-          }
-        },
         {
           "Name": "WriteFile",
           "Params":
