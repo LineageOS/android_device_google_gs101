@@ -160,10 +160,7 @@ USE_SWIFTSHADER := false
 TARGET_USES_VULKAN = true
 
 PRODUCT_SOONG_NAMESPACES += \
-	vendor/arm/mali/valhall \
-	vendor/arm/mali/valhall/cl \
-	vendor/arm/mali/valhall/libmali \
-	vendor/arm/mali/valhall/cinstr/production/gpu-hwc-reader
+	vendor/arm/mali/valhall
 
 include device/google/gs101/neuralnetwork/neuralnetwork.mk
 
