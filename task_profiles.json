@@ -60,14 +60,6 @@
       "Name": "OtaPerformance",
       "Actions": [
         {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "cpu",
-            "Path": "dex2oat"
-          }
-        },
-        {
           "Name": "WriteFile",
           "Params":
           {
@@ -282,7 +274,7 @@
     },
     {
       "Name": "OtaProfiles",
-      "Profiles": [ "OtaPerformance", "ProcessCapacityNormal", "LowIoPriority", "TimerSlackHigh" ]
+      "Profiles": [ "OtaPerformance", "ServiceCapacityLow", "LowIoPriority", "TimerSlackHigh" ]
     }
   ]
 }
