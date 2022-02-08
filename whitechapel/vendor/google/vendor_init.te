@@ -11,7 +11,6 @@ set_prop(vendor_init, vendor_ssrdump_prop)
 set_prop(vendor_init, vendor_ro_config_default_prop)
 get_prop(vendor_init, vendor_touchpanel_prop)
 set_prop(vendor_init, vendor_tcpdump_log_prop)
-set_prop(vendor_init, vendor_thermal_prop)
 set_prop(vendor_init, vendor_logger_prop)
 
 allow vendor_init proc_dirty:file w_file_perms;
