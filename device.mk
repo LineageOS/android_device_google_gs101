@@ -48,11 +48,7 @@ PRODUCT_SOONG_NAMESPACES += \
 	vendor/google_nos/host/android \
 	vendor/google_nos/test/system-test-harness
 
-ifeq ($(TARGET_PREBUILT_KERNEL),)
 LOCAL_KERNEL := $(TARGET_KERNEL_DIR)/Image.lz4
-else
-LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-endif
 
 # OEM Unlock reporting
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -220,9 +216,6 @@ DEVICE_MATRIX_FILE := \
 
 DEVICE_PACKAGE_OVERLAYS += device/google/gs101/overlay
 
-# This device is shipped with 31 (Android S)
-PRODUCT_SHIPPING_API_LEVEL := 31
-
 # Enforce the Product interface
 PRODUCT_PRODUCT_VNDK_VERSION := current
 PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE := true
@@ -231,7 +224,7 @@ PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE := true
 PRODUCT_COPY_FILES += \
 	$(LOCAL_KERNEL):kernel \
 	device/google/gs101/conf/init.gs101.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.gs101.usb.rc \
-	device/google/gs101/conf/ueventd.gs101.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc
+	device/google/gs101/conf/ueventd.gs101.rc:$(TARGET_COPY_OUT_VENDOR)/etc/ueventd.rc
 
 PRODUCT_COPY_FILES += \
 	device/google/gs101/conf/init.gs101.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.gs101.rc
@@ -255,10 +248,13 @@ PRODUCT_COPY_FILES += \
 	device/google/gs101/conf/init.recovery.device.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.gs101.rc
 
 # Fstab files
+PRODUCT_PACKAGES += \
+	fstab.gs101 \
+	fstab.gs101.vendor_ramdisk \
+	fstab.gs101-fips \
+	fstab.gs101-fips.vendor_ramdisk
 PRODUCT_COPY_FILES += \
-	device/google/gs101/conf/fstab.gs101:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.gs101 \
-	device/google/gs101/conf/fstab.persist:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.persist \
-	device/google/gs101/conf/fstab.gs101:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.gs101
+	device/google/gs101/conf/fstab.persist:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.persist
 
 # Shell scripts
 PRODUCT_COPY_FILES += \
@@ -386,14 +382,10 @@ endif
 
 # Power HAL
 PRODUCT_COPY_FILES += \
-	device/google/gs101/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
-
-PRODUCT_COPY_FILES += \
 	device/google/gs101/task_profiles.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
-
+# Legacy HW
 PRODUCT_COPY_FILES += \
 	device/google/gs101/powerhint_a0.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint_a0.json
-
 PRODUCT_COPY_FILES += \
 	device/google/gs101/powerhint_a1.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint_a1.json
 -include hardware/google/pixel/power-libperfmgr/aidl/device.mk
@@ -483,20 +475,11 @@ PRODUCT_PACKAGES += \
 	android.hardware.drm@1.4-service.widevine \
 	liboemcrypto \
 
-ORIOLE_PRODUCT := %oriole
-RAVEN_PRODUCT := %raven
-ifneq (,$(filter $(ORIOLE_PRODUCT), $(TARGET_PRODUCT)))
-        LOCAL_TARGET_PRODUCT := oriole
-else ifneq (,$(filter $(RAVEN_PRODUCT), $(TARGET_PRODUCT)))
-        LOCAL_TARGET_PRODUCT := raven
-else
-        LOCAL_TARGET_PRODUCT := slider
-endif
+
 
 $(call soong_config_set,google3a_config,soc,gs101)
 $(call soong_config_set,google3a_config,gcam_awb,true)
 $(call soong_config_set,google3a_config,ghawb_truetone,true)
-$(call soong_config_set,google3a_config,target_device,$(LOCAL_TARGET_PRODUCT))
 
 # Determine if Lyric is in the tree, and only have GCH build against it
 # if it is. Cases when Lyric isn't going to be in the tree:
@@ -508,7 +491,11 @@ $(call soong_config_set,google3a_config,target_device,$(LOCAL_TARGET_PRODUCT))
 #    - PDK gs101 builds because they still have vendor/google/services/LyricCameraHAL/src
 
 ifneq ($(wildcard vendor/google/services/LyricCameraHAL/src),)
+$(call soong_config_set,lyric,soc,gs101)
 $(call soong_config_set,lyric,use_lyric_camera_hal,true)
+# lyric::tuning_product is set in device-specific makefiles,
+# such as device/google/raviole/device-oriole.mk
+
 # Camera HAL library selection
 $(call soong_config_set,gch,hwl_library,lyric)
 endif
@@ -877,7 +864,6 @@ USE_RADIO_HAL_1_6 := true
 
 ifneq ($(BOARD_WITHOUT_RADIO),true)
 $(call inherit-product-if-exists, vendor/samsung_slsi/telephony/common/device-vendor.mk)
-PRODUCT_COPY_FILES += frameworks/native/data/etc/android.hardware.telephony.cdma.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.cdma.xml
 endif
 
 ifeq (,$(filter %_64,$(TARGET_PRODUCT)))
@@ -916,25 +902,6 @@ PRODUCT_PACKAGES_DEBUG += \
 	diag-vibrator-cs40l25a \
 	diag-vibrator-drv2624 \
 	$(NULL)
-
-# NFC
-PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/android.hardware.nfc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.xml \
-	frameworks/native/data/etc/android.hardware.nfc.hce.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.hce.xml \
-	frameworks/native/data/etc/android.hardware.nfc.hcef.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.hcef.xml \
-	frameworks/native/data/etc/com.nxp.mifare.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.nxp.mifare.xml \
-	frameworks/native/data/etc/android.hardware.nfc.uicc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.uicc.xml \
-	frameworks/native/data/etc/android.hardware.nfc.ese.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.ese.xml
-
-PRODUCT_PACKAGES += \
-	NfcNci \
-	Tag \
-	android.hardware.nfc@1.2-service.st
-
-# SecureElement
-PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/android.hardware.se.omapi.ese.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.se.omapi.ese.xml \
-	frameworks/native/data/etc/android.hardware.se.omapi.uicc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.se.omapi.uicc.xml
 
 PRODUCT_PACKAGES += \
 	android.hardware.health@2.1-impl-gs101 \
@@ -1084,10 +1051,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     suspend.short_suspend_threshold_millis=2000 \
     suspend.short_suspend_backoff_enabled=true \
     suspend.max_sleep_time_millis=40000
-
-# (b/183612348): Enable skia reduceOpsTaskSplitting
-PRODUCT_PROPERTY_OVERRIDES += \
-    renderthread.skia.reduceopstasksplitting=true
 
 # Enable Incremental on the device
 PRODUCT_PROPERTY_OVERRIDES += \

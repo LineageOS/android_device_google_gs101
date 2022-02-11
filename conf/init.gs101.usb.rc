@@ -68,6 +68,9 @@ on early-boot
     # etr_miu function
     mkdir /config/usb_gadget/g1/functions/etr_miu.gs11
 
+    # acm function for uwb
+    mkdir /config/usb_gadget/g1/functions/acm.uwb0
+
     setprop vendor.usb.functions.ready 1
 
 on boot
@@ -120,3 +123,6 @@ on property:sys.usb.config=charger && property:sys.usb.configfs=1
 
 on property:vendor.usb.contaminantdisable=true
     exec /vendor/bin/hw/disable_contaminant_detection.sh
+
+on property:ro.bootmode=usbuwb
+    setprop persist.vendor.usb.usbradio.config uwb_acm

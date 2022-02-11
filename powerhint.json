@@ -47,6 +47,7 @@
       "Values": [
         "9999999",
         "1024000",
+        "1197000",
         "1999000",
         "1491000"
       ],
@@ -69,6 +70,7 @@
       "Values": [
         "9999999",
         "984000",
+        "1426000",
         "1826000"
       ],
       "DefaultIndex": 0,
@@ -97,6 +99,14 @@
       "ResetOnInit": true
     },
     {
+      "Name": "DisplayWakeup",
+      "Path": "/sys/devices/platform/1c300000.drmdecon/early_wakeup",
+      "Values": [
+        "1",
+        "0"
+      ]
+    },
+    {
       "Name": "CPUUtilThreshold",
       "Path": "/sys/kernel/vendor_sched/util_threshold",
       "Values": [
@@ -120,11 +130,13 @@
       "Path": "/sys/kernel/vendor_sched/ta_uclamp_min",
       "Values": [
         "553",
+        "158",
+        "108",
+        "43",
         "1",
-        "246",
-        "185",
-        "123",
-        "62"
+        "157",
+        "107",
+        "42"
       ],
       "DefaultIndex": 1,
       "ResetOnInit": true
@@ -133,6 +145,7 @@
       "Name": "SFUClampBoost",
       "Path": "/sys/kernel/vendor_sched/sf_uclamp_min",
       "Values": [
+        "125",
         "65",
         "30"
       ],
@@ -239,14 +252,6 @@
       "ResetOnInit": true
     },
     {
-      "Name": "DisplayWakeup",
-      "Path": "/sys/devices/platform/1c300000.drmdecon/early_wakeup",
-      "Values": [
-        "1",
-        "0"
-      ]
-    },
-    {
       "Name": "LimitFlashCurrent",
       "Path": "vendor.camera.max_flash_current",
       "Values": [
@@ -280,6 +285,15 @@
       "Values": [
         "664000",
         "67000"
+      ],
+      "ResetOnInit": true
+    },
+    {
+      "Name": "GPUPowerPolicy",
+      "Path": "/sys/devices/platform/1c500000.mali/power_policy",
+      "Values": [
+        "always_on",
+        "adaptive"
       ],
       "ResetOnInit": true
     },
@@ -367,11 +381,6 @@
   "Actions": [
     {
       "PowerHint": "INTERACTION",
-      "Type": "EndHint",
-      "Value": "DISABLE_TA_BOOST"
-    },
-    {
-      "PowerHint": "INTERACTION",
       "Node": "SFUClampBoost",
       "Duration": 5000,
       "Value": "65"
@@ -383,15 +392,27 @@
       "Value": "2"
     },
     {
+      "PowerHint": "LAUNCH_120FPS",
+      "Node": "SFUClampBoost",
+      "Duration": 1000,
+      "Value": "125"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Type": "DoHint",
+      "Value": "LAUNCH_120FPS"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "SFUClampBoost",
+      "Duration": 5000,
+      "Value": "65"
+    },
+    {
       "PowerHint": "LAUNCH",
       "Node": "CPUMidClusterMaxFreq",
       "Duration": 5000,
       "Value": "9999999"
-    },
-    {
-      "PowerHint": "LAUNCH",
-      "Type": "EndHint",
-      "Value": "DISABLE_TA_BOOST"
     },
     {
       "PowerHint": "LAUNCH",
@@ -410,6 +431,12 @@
       "Node": "MemFreq",
       "Duration": 5000,
       "Value": "3172000"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "GPUPowerPolicy",
+      "Duration": 5000,
+      "Value": "always_on"
     },
     {
       "PowerHint": "DISPLAY_INACTIVE",
@@ -466,22 +493,58 @@
       "Value": "4-7"
     },
     {
-      "PowerHint": "CAMERA_CPU_THROTTLE",
+      "PowerHint": "CAMERA_LAUNCH_EXTENDED",
+      "Node": "CPUBigClusterMaxFreq",
+      "Duration": 2000,
+      "Value": "9999999"
+    },
+    {
+      "PowerHint": "CAMERA_LAUNCH_EXTENDED",
+      "Node": "CPUMidClusterMaxFreq",
+      "Duration": 2000,
+      "Value": "9999999"
+    },
+    {
+      "PowerHint": "CAMERA_LAUNCH_EXTENDED",
+      "Node": "CPULittleClusterMaxFreq",
+      "Duration": 2000,
+      "Value": "9999999"
+    },
+    {
+      "PowerHint": "CAMERA_THERMAL_CPU_THROTTLE",
       "Node": "CPUBigClusterMaxFreq",
       "Duration": 1000,
       "Value": "984000"
     },
     {
-      "PowerHint": "CAMERA_CPU_THROTTLE",
+      "PowerHint": "CAMERA_THERMAL_CPU_THROTTLE",
       "Node": "CPUMidClusterMaxFreq",
       "Duration": 1000,
       "Value": "1024000"
     },
     {
-      "PowerHint": "CAMERA_CPU_THROTTLE",
+      "PowerHint": "CAMERA_THERMAL_CPU_THROTTLE",
       "Node": "CPULittleClusterMaxFreq",
       "Duration": 1000,
       "Value": "1098000"
+    },
+    {
+      "PowerHint": "CAMERA_CAPTURE_CPU_THROTTLE",
+      "Node": "CPUBigClusterMaxFreq",
+      "Duration": 1000,
+      "Value": "1426000"
+    },
+    {
+      "PowerHint": "CAMERA_CAPTURE_CPU_THROTTLE",
+      "Node": "CPUMidClusterMaxFreq",
+      "Duration": 1000,
+      "Value": "1197000"
+    },
+    {
+      "PowerHint": "CAMERA_CAPTURE_CPU_THROTTLE",
+      "Node": "CPULittleClusterMaxFreq",
+      "Duration": 1000,
+      "Value": "1401000"
     },
     {
       "PowerHint": "CAMERA_SHOT",
@@ -973,19 +1036,29 @@
       "PowerHint": "REFRESH_120FPS",
       "Node": "TAUClampBoost",
       "Duration": 0,
-      "Value": "185"
+      "Value": "157"
     },
     {
       "PowerHint": "REFRESH_90FPS",
       "Node": "TAUClampBoost",
       "Duration": 0,
-      "Value": "123"
+      "Value": "107"
+    },
+    {
+      "PowerHint": "REFRESH_90FPS",
+      "Type": "MaskHint",
+      "Value": "LAUNCH_120FPS"
     },
     {
       "PowerHint": "REFRESH_60FPS",
       "Node": "TAUClampBoost",
       "Duration": 0,
-      "Value": "62"
+      "Value": "42"
+    },
+    {
+      "PowerHint": "REFRESH_60FPS",
+      "Type": "MaskHint",
+      "Value": "LAUNCH_120FPS"
     },
     {
       "PowerHint": "ADPF_DISABLE_TA_BOOST",
@@ -994,15 +1067,98 @@
       "Value": "1"
     },
     {
-      "PowerHint": "DISABLE_TA_BOOST",
+      "PowerHint": "ADPF_DISABLE_TA_BOOST",
+      "Type": "MaskHint",
+      "Value": "BOOST_DISPLAY"
+    },
+    {
+      "PowerHint": "ADPF_DISABLE_TA_BOOST",
+      "Type": "EndHint",
+      "Value": "BOOST_120HZ"
+    },
+    {
+      "PowerHint": "ADPF_DISABLE_TA_BOOST",
+      "Type": "EndHint",
+      "Value": "BOOST_90HZ"
+    },
+    {
+      "PowerHint": "ADPF_DISABLE_TA_BOOST",
+      "Type": "EndHint",
+      "Value": "BOOST_60HZ"
+    },
+    {
+      "PowerHint": "BOOST_DISPLAY",
+      "Type": "DoHint",
+      "Value": "BOOST_120HZ"
+    },
+    {
+      "PowerHint": "BOOST_DISPLAY",
+      "Type": "DoHint",
+      "Value": "BOOST_90HZ"
+    },
+    {
+      "PowerHint": "BOOST_DISPLAY",
+      "Type": "DoHint",
+      "Value": "BOOST_60HZ"
+    },
+    {
+      "PowerHint": "INTERACTION",
+      "Type": "DoHint",
+      "Value": "BOOST_DISPLAY"
+    },
+    {
+      "PowerHint": "BOOST_120HZ",
       "Node": "TAUClampBoost",
-      "Duration": 0,
-      "Value": "1"
+      "Duration": 200,
+      "Value": "158"
+    },
+    {
+      "PowerHint": "BOOST_90HZ",
+      "Node": "TAUClampBoost",
+      "Duration": 200,
+      "Value": "108"
+    },
+    {
+      "PowerHint": "BOOST_60HZ",
+      "Node": "TAUClampBoost",
+      "Duration": 200,
+      "Value": "43"
+    },
+    {
+      "PowerHint": "REFRESH_120FPS",
+      "Type": "MaskHint",
+      "Value": "BOOST_60HZ"
+    },
+    {
+      "PowerHint": "REFRESH_120FPS",
+      "Type": "MaskHint",
+      "Value": "BOOST_90HZ"
+    },
+    {
+      "PowerHint": "REFRESH_90FPS",
+      "Type": "MaskHint",
+      "Value": "BOOST_60HZ"
+    },
+    {
+      "PowerHint": "REFRESH_90FPS",
+      "Type": "MaskHint",
+      "Value": "BOOST_120HZ"
+    },
+    {
+      "PowerHint": "REFRESH_60FPS",
+      "Type": "MaskHint",
+      "Value": "BOOST_90HZ"
+    },
+    {
+      "PowerHint": "REFRESH_60FPS",
+      "Type": "MaskHint",
+      "Value": "BOOST_120HZ"
     },
     {
       "PowerHint": "DISPLAY_IDLE",
-      "Type": "DoHint",
-      "Value": "DISABLE_TA_BOOST"
+      "Node": "TAUClampBoost",
+      "Duration": 0,
+      "Value": "1"
     },
     {
       "PowerHint": "DISPLAY_IDLE",
@@ -1012,18 +1168,33 @@
     {
       "PowerHint": "DISPLAY_IDLE",
       "Type": "EndHint",
-      "Value": "DISPLAY_UPDATE_IMMINENT"
+      "Value": "BOOST_120HZ"
     },
     {
-      "PowerHint": "DISPLAY_UPDATE_IMMINENT",
+      "PowerHint": "DISPLAY_IDLE",
       "Type": "EndHint",
-      "Value": "DISABLE_TA_BOOST"
+      "Value": "BOOST_90HZ"
+    },
+    {
+      "PowerHint": "DISPLAY_IDLE",
+      "Type": "EndHint",
+      "Value": "BOOST_60HZ"
+    },
+    {
+      "PowerHint": "DISPLAY_IDLE",
+      "Type": "EndHint",
+      "Value": "DISPLAY_UPDATE_IMMINENT"
     },
     {
       "PowerHint": "DISPLAY_UPDATE_IMMINENT",
       "Node": "DisplayWakeup",
       "Duration": 50,
       "Value": "1"
+    },
+    {
+      "PowerHint": "DISPLAY_UPDATE_IMMINENT",
+      "Type": "DoHint",
+      "Value": "BOOST_DISPLAY"
     },
     {
       "PowerHint": "THERMAL_FLASH_LED_REDUCE_CRITICAL",

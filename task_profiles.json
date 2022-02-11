@@ -67,6 +67,28 @@
       ]
     },
     {
+      "Name": "Dex2oatPerformance",
+      "Actions": [
+        {
+          "Name": "JoinCgroup",
+          "Params":
+          {
+            "Controller": "cpu",
+            "Path": "system"
+          }
+        },
+        {
+          "Name": "WriteFile",
+          "Params":
+          {
+            "FilePath": "/sys/kernel/vendor_sched/set_task_group_dex2oat",
+            "Value": "<pid>",
+            "LogFailures": "false"
+          }
+        }
+      ]
+    },
+    {
       "Name": "CameraServiceHighCapacity",
       "Actions": [
         {
@@ -113,7 +135,7 @@
           "Params":
           {
             "Controller": "cpu",
-            "Path": "background"
+            "Path": "system"
           }
         },
         {
@@ -308,6 +330,13 @@
           }
         }
       ]
+    }
+  ],
+
+  "AggregateProfiles": [
+    {
+      "Name": "Dex2OatBootComplete",
+      "Profiles": [ "Dex2oatPerformance", "ProcessCapacityNormal", "LowIoPriority", "TimerSlackHigh" ]
     }
   ]
 }

@@ -195,7 +195,7 @@ void dumpGpsLogs(int fd, std::string destDir) {
     const std::string gpsLogDir = GPS_LOG_DIRECTORY;
     const std::string gpsTmpLogDir = gpsLogDir + "/.tmp";
     const std::string gpsDestDir = destDir + "/gps";
-    int maxFileNum = android::base::GetIntProperty(GPS_LOG_NUMBER_PROPERTY, 30);
+    int maxFileNum = android::base::GetIntProperty(GPS_LOG_NUMBER_PROPERTY, 20);
 
     RunCommandToFd(fd, "MKDIR GPS LOG", {"/vendor/bin/mkdir", "-p", gpsDestDir.c_str()},
                    CommandOptions::WithTimeout(2).Build());
@@ -337,12 +337,15 @@ void DumpstateDevice::dumpPowerSection(int fd) {
         DumpFileToFd(fd, "Power supply property maxfg", "/sys/class/power_supply/maxfg/uevent");
         DumpFileToFd(fd, "m5_state", "/sys/class/power_supply/maxfg/m5_model_state");
         DumpFileToFd(fd, "maxfg", "/dev/logbuffer_maxfg");
+        DumpFileToFd(fd, "maxfg", "/dev/logbuffer_maxfg_monitor");
     } else {
         DumpFileToFd(fd, "Power supply property maxfg_base", "/sys/class/power_supply/maxfg_base/uevent");
         DumpFileToFd(fd, "Power supply property maxfg_flip", "/sys/class/power_supply/maxfg_flip/uevent");
         DumpFileToFd(fd, "m5_state", "/sys/class/power_supply/maxfg_base/m5_model_state");
         DumpFileToFd(fd, "maxfg_base", "/dev/logbuffer_maxfg_base");
         DumpFileToFd(fd, "maxfg_flip", "/dev/logbuffer_maxfg_flip");
+        DumpFileToFd(fd, "maxfg_base", "/dev/logbuffer_maxfg_base_monitor");
+        DumpFileToFd(fd, "maxfg_flip", "/dev/logbuffer_maxfg_flip_monitor");
     }
 
     if (!stat("/dev/logbuffer_tcpm", &buffer)) {
@@ -354,6 +357,16 @@ void DumpstateDevice::dumpPowerSection(int fd) {
             RunCommandToFd(fd, "TCPM logs", {"/vendor/bin/sh", "-c", "cat /sys/kernel/debug/usb/tcpm*"});
         }
     }
+
+    RunCommandToFd(fd, "TCPC", {"/vendor/bin/sh", "-c",
+		       "for f in /sys/devices/platform/10d50000.hsi2c/i2c-*/i2c-max77759tcpc;"
+		       "do echo \"registers:\"; cat $f/registers;"
+		       "echo \"frs:\"; cat $f/frs;"
+		       "echo \"auto_discharge:\"; cat $f/auto_discharge;"
+		       "echo \"bc12_enabled:\"; cat $f/bc12_enabled;"
+		       "echo \"cc_toggle_enable:\"; cat $f/cc_toggle_enable;"
+		       "echo \"contaminant_detection:\"; cat $f/contaminant_detection;"
+		       "echo \"contaminant_detection_status:\"; cat $f/contaminant_detection_status;  done"});
 
     DumpFileToFd(fd, "PD Engine", "/dev/logbuffer_usbpd");
     DumpFileToFd(fd, "PPS-google_cpm", "/dev/logbuffer_cpm");
@@ -378,10 +391,8 @@ void DumpstateDevice::dumpPowerSection(int fd) {
                         " for f in `ls bd_*` ; do echo \"$f: `cat $f`\" ; done"});
     if (!PropertiesHelper::IsUserBuild()) {
 
-        RunCommandToFd(fd, "DC_registers dump", {"/vendor/bin/sh", "-c",
-                        "for f in /d/regmap/*-0057-pca9468-mains ; do "
-                        "regs=`cat $f/registers`; echo $f: ;"
-                        "echo \"$regs\"; done"});
+        DumpFileToFd(fd, "DC_registers dump", "/sys/class/power_supply/pca9468-mains/device/registers_dump");
+
 
         RunCommandToFd(fd, "fg_model", {"/vendor/bin/sh", "-c",
                         "for f in /d/maxfg* ; do "
@@ -401,7 +412,7 @@ void DumpstateDevice::dumpPowerSection(int fd) {
 
         /* FG Registers */
         RunCommandToFd(fd, "fg registers", {"/vendor/bin/sh", "-c",
-                        "for f in /d/regmap/*-0036 ; do "
+                        "for f in /d/maxfg* ; do "
                         "regs=`cat $f/registers`; echo $f: ;"
                         "echo \"$regs\"; done"});
     }
@@ -480,6 +491,12 @@ void DumpstateDevice::dumpThermalSection(int fd) {
                    "for f in /sys/class/thermal/cooling* ; do "
                        "type=`cat $f/type` ; state2power_table=`cat $f/state2power_table` ; echo \"$type: $state2power_table\" ; "
                        "done"});
+    DumpFileToFd(fd, "TMU state:", "/sys/module/gs101_thermal/parameters/tmu_reg_dump_state");
+    DumpFileToFd(fd, "TMU current temperature:", "/sys/module/gs101_thermal/parameters/tmu_reg_dump_current_temp");
+    DumpFileToFd(fd, "TMU_TOP rise thresholds:", "/sys/module/gs101_thermal/parameters/tmu_top_reg_dump_rise_thres");
+    DumpFileToFd(fd, "TMU_TOP fall thresholds:", "/sys/module/gs101_thermal/parameters/tmu_top_reg_dump_fall_thres");
+    DumpFileToFd(fd, "TMU_SUB rise thresholds:", "/sys/module/gs101_thermal/parameters/tmu_sub_reg_dump_rise_thres");
+    DumpFileToFd(fd, "TMU_SUB fall thresholds:", "/sys/module/gs101_thermal/parameters/tmu_sub_reg_dump_fall_thres");
 }
 
 // Dump items related to touch
@@ -529,6 +546,12 @@ void DumpstateDevice::dumpTouchSection(int fd) {
 
         snprintf(cmd, sizeof(cmd), "%s", stm_cmd_path[i + 1]);
         if (!access(cmd, R_OK)) {
+            snprintf(cmd, sizeof(cmd),
+                     "echo 01 A4 06 C3 > %s; echo 02 A7 00 00 00 40 00 > %s && cat %s",
+                     stm_cmd_path[i + 1], stm_cmd_path[i + 1], stm_cmd_path[i + 1]);
+            RunCommandToFd(fd, "HDM debug information (32 bytes)",
+                           {"/vendor/bin/sh", "-c", cmd});
+
             snprintf(cmd, sizeof(cmd), "echo 23 00 > %s && cat %s",
                      stm_cmd_path[i + 1], stm_cmd_path[i + 1]);
             RunCommandToFd(fd, "Mutual Raw Data",
@@ -594,7 +617,7 @@ void DumpstateDevice::dumpTouchSection(int fd) {
                            {"/vendor/bin/sh", "-c", cmd});
 
             snprintf(cmd, sizeof(cmd),
-                     "echo 01 A4 06 C3 > %s; echo 02 A7 00 00 00 20 00 > %s && cat %s",
+                     "echo 01 A4 06 C3 > %s; echo 02 A7 00 00 00 40 00 > %s && cat %s",
                      stm_cmd_path[i + 1], stm_cmd_path[i + 1], stm_cmd_path[i + 1]);
             RunCommandToFd(fd, "HDM debug information (32 bytes)",
                            {"/vendor/bin/sh", "-c", cmd});
@@ -890,6 +913,7 @@ void DumpstateDevice::dumpAoCSection(int fd) {
     DumpFileToFd(fd, "AoC logging wake", "/sys/devices/platform/19000000.aoc/control/logging_wakeup");
     DumpFileToFd(fd, "AoC hotword wake", "/sys/devices/platform/19000000.aoc/control/hotword_wakeup");
     DumpFileToFd(fd, "AoC memory exception wake", "/sys/devices/platform/19000000.aoc/control/memory_exception");
+    DumpFileToFd(fd, "AoC memory votes", "/sys/devices/platform/19000000.aoc/control/memory_votes");
 }
 
 // Dump items related to sensors usf.
