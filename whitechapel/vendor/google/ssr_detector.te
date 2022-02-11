@@ -11,7 +11,6 @@ allow ssr_detector_app sscoredump_vendor_data_crashinfo_file:file r_file_perms;
 userdebug_or_eng(`
   allow ssr_detector_app sscoredump_vendor_data_coredump_file:dir r_dir_perms;
   allow ssr_detector_app sscoredump_vendor_data_coredump_file:file r_file_perms;
-  get_prop(ssr_detector_app, vendor_aoc_prop)
   allow ssr_detector_app sysfs_sjtag:dir r_dir_perms;
   allow ssr_detector_app sysfs_sjtag:file rw_file_perms;
   allow ssr_detector_app sysfs_vendor_sched:dir search;
@@ -21,3 +20,4 @@ userdebug_or_eng(`
 
 get_prop(ssr_detector_app, vendor_ssrdump_prop)
 get_prop(ssr_detector_app, vendor_wifi_version)
+get_prop(ssr_detector_app, vendor_aoc_prop)
