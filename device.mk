@@ -129,7 +129,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Hearing Aid Audio Support Using Bluetooth LE
 PRODUCT_PRODUCT_PROPERTIES += \
-	bluetooth.profile.asha.central=true
+	bluetooth.profile.asha.central.enabled=true
 
 
 PRODUCT_PROPERTY_OVERRIDES += \
