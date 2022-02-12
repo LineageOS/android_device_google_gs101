@@ -129,7 +129,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Hearing Aid Audio Support Using Bluetooth LE
 PRODUCT_PRODUCT_PROPERTIES += \
-	bluetooth.profile.asha.central=true
+	bluetooth.profile.asha.central.enabled=true
 
 
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -160,18 +160,19 @@ USE_SWIFTSHADER := false
 TARGET_USES_VULKAN = true
 
 PRODUCT_SOONG_NAMESPACES += \
-	vendor/arm/mali/valhall \
-	vendor/arm/mali/valhall/cl \
-	vendor/arm/mali/valhall/libmali \
-	vendor/arm/mali/valhall/cinstr/production/gpu-hwc-reader
+	vendor/arm/mali/valhall
 
 include device/google/gs101/neuralnetwork/neuralnetwork.mk
 
 PRODUCT_PACKAGES += \
 	libGLES_mali \
-	vulkan.gs101 \
+	vulkan.mali \
 	libOpenCL \
 	libgpudataproducer
+
+PRODUCT_VENDOR_PROPERTIES += \
+	ro.hardware.vulkan=mali
+
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	debug.mali.disable_backend_affinity=true
 
