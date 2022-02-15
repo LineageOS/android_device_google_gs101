@@ -51,11 +51,11 @@
        AttributionAppPkgName="com.google.android.carrierlocation"
 
        AssertEnabled="false"
-       PpsDevice="/sys/class/pps/pps0/assert_elapsed"
+       CpLppeCancelDbhOnAgnssProvideLoc="true"
+       CpLppeUseAgnssLocForEmptyDbh="true"
   />
 
   <gll
-       PpsEnable="true"
        LogPriMask="LOG_INFO"
        LogFacMask="LOG_NMEA | LOG_GLLIOS | LOG_GLLAPI"
        FrqPlan="FRQ_PLAN_26MHZ_2PPM_49_152MHZ_300PPB"

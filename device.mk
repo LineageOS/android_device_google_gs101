@@ -14,9 +14,11 @@
 # limitations under the License.
 #
 
+include device/google/gs-common/device.mk
+
 TARGET_BOARD_PLATFORM := gs101
 
-ifneq (,$(filter %_64,$(TARGET_PRODUCT)))
+ifneq (,$(filter %tangor tangor% %_64,$(TARGET_PRODUCT)))
 LOCAL_64ONLY := _64
 endif
 
@@ -32,6 +34,14 @@ VENDOR_SECURITY_PATCH = $(PLATFORM_SECURITY_PATCH)
 # Set boot SPL
 BOOT_SECURITY_PATCH = $(PLATFORM_SECURITY_PATCH)
 
+# TODO(b/207450311): Remove this flag once implemented
+USE_PIXEL_GRALLOC := false
+ifeq ($(USE_PIXEL_GRALLOC),true)
+	PRODUCT_SOONG_NAMESPACES += hardware/google/gchips/GrallocHAL
+else
+	PRODUCT_SOONG_NAMESPACES += hardware/google/gchips/gralloc4
+endif
+
 PRODUCT_SOONG_NAMESPACES += \
 	hardware/google/av \
 	hardware/google/gchips \
@@ -40,6 +50,7 @@ PRODUCT_SOONG_NAMESPACES += \
 	hardware/google/interfaces \
 	hardware/google/pixel \
 	device/google/gs101 \
+	device/google/gs101/powerstats \
 	vendor/google/whitechapel/tools \
 	vendor/broadcom/bluetooth \
 	vendor/google/camera \
@@ -53,6 +64,10 @@ LOCAL_KERNEL := $(TARGET_KERNEL_DIR)/Image.lz4
 # OEM Unlock reporting
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	ro.oem_unlock_supported=1
+
+# Include vendor telephony soong namespace
+PRODUCT_SOONG_NAMESPACES += \
+	vendor/samsung_slsi/telephony/$(BOARD_USES_SHARED_VENDOR_TELEPHONY)
 
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 #Set IKE logs to verbose for WFC
@@ -87,7 +102,6 @@ endif
 
 # From system.property
 PRODUCT_PROPERTY_OVERRIDES += \
-	dev.usbsetting.embedded=on \
 	ro.telephony.default_network=27 \
 	persist.vendor.ril.use.iccid_to_plmn=1 \
 	persist.vendor.ril.emergencynumber.mode=5
@@ -112,6 +126,10 @@ PRODUCT_PRODUCT_PROPERTIES += \
 # Carrier configuration default location
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.vendor.radio.config.carrier_config_dir=/mnt/vendor/modem_img/images/default/confpack
+
+# Hearing Aid Audio Support Using Bluetooth LE
+PRODUCT_PRODUCT_PROPERTIES += \
+	bluetooth.profile.asha.central.enabled=true
 
 
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -142,18 +160,19 @@ USE_SWIFTSHADER := false
 TARGET_USES_VULKAN = true
 
 PRODUCT_SOONG_NAMESPACES += \
-	vendor/arm/mali/valhall \
-	vendor/arm/mali/valhall/cl \
-	vendor/arm/mali/valhall/libmali \
-	vendor/arm/mali/valhall/cinstr/production/gpu-hwc-reader
+	vendor/arm/mali/valhall
 
 include device/google/gs101/neuralnetwork/neuralnetwork.mk
 
 PRODUCT_PACKAGES += \
 	libGLES_mali \
-	vulkan.gs101 \
+	vulkan.mali \
 	libOpenCL \
 	libgpudataproducer
+
+PRODUCT_VENDOR_PROPERTIES += \
+	ro.hardware.vulkan=mali
+
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	debug.mali.disable_backend_affinity=true
 
@@ -243,6 +262,12 @@ endif
 PRODUCT_COPY_FILES += \
 	device/google/gs101/conf/init.recovery.device.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.gs101.rc
 
+ifneq ($(BOARD_WITHOUT_RADIO),true)
+PRODUCT_SOONG_NAMESPACES += device/google/gs101/conf
+else
+PRODUCT_SOONG_NAMESPACES += device/google/gs101/conf/nomodem
+endif
+
 # Fstab files
 PRODUCT_PACKAGES += \
 	fstab.gs101 \
@@ -251,10 +276,6 @@ PRODUCT_PACKAGES += \
 	fstab.gs101-fips.vendor_ramdisk
 PRODUCT_COPY_FILES += \
 	device/google/gs101/conf/fstab.persist:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.persist
-ifneq ($(BOARD_WITHOUT_RADIO),true)
-PRODUCT_COPY_FILES += \
-	device/google/gs101/conf/fstab.modem:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.modem
-endif
 
 # Shell scripts
 PRODUCT_COPY_FILES += \
@@ -378,7 +399,9 @@ endif
 
 # USB HAL
 PRODUCT_PACKAGES += \
-	android.hardware.usb@1.3-service.gs101
+	android.hardware.usb-service.gs101
+PRODUCT_PACKAGES += \
+	android.hardware.usb.gadget-service.gs101
 
 # MIDI feature
 PRODUCT_COPY_FILES += \
@@ -392,14 +415,10 @@ endif
 
 # Power HAL
 PRODUCT_COPY_FILES += \
-	device/google/gs101/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
-
-PRODUCT_COPY_FILES += \
 	device/google/gs101/task_profiles.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
-
+# Legacy HW
 PRODUCT_COPY_FILES += \
 	device/google/gs101/powerhint_a0.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint_a0.json
-
 PRODUCT_COPY_FILES += \
 	device/google/gs101/powerhint_a1.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint_a1.json
 -include hardware/google/pixel/power-libperfmgr/aidl/device.mk
@@ -489,16 +508,11 @@ PRODUCT_PACKAGES += \
 	android.hardware.drm@1.4-service.widevine \
 	liboemcrypto \
 
-SOONG_CONFIG_NAMESPACES += google3a_config
-SOONG_CONFIG_google3a_config += \
-	soc \
-	gcam_awb \
-	ghawb_truetone \
-	target_device
 
-SOONG_CONFIG_google3a_config_soc := gs101
-SOONG_CONFIG_google3a_config_gcam_awb := true
-SOONG_CONFIG_google3a_config_ghawb_truetone := true
+
+$(call soong_config_set,google3a_config,soc,gs101)
+$(call soong_config_set,google3a_config,gcam_awb,true)
+$(call soong_config_set,google3a_config,ghawb_truetone,true)
 
 # Determine if Lyric is in the tree, and only have GCH build against it
 # if it is. Cases when Lyric isn't going to be in the tree:
@@ -510,21 +524,13 @@ SOONG_CONFIG_google3a_config_ghawb_truetone := true
 #    - PDK gs101 builds because they still have vendor/google/services/LyricCameraHAL/src
 
 ifneq ($(wildcard vendor/google/services/LyricCameraHAL/src),)
-SOONG_CONFIG_NAMESPACES += lyric
-SOONG_CONFIG_lyric += \
-	use_lyric_camera_hal \
-	soc \
-	tuning_product
-
-SOONG_CONFIG_lyric_soc := gs101
-SOONG_CONFIG_lyric_use_lyric_camera_hal := true
-# SOONG_CONFIG_lyric_tuning_product is set in device-specific makefiles,
+$(call soong_config_set,lyric,soc,gs101)
+$(call soong_config_set,lyric,use_lyric_camera_hal,true)
+# lyric::tuning_product is set in device-specific makefiles,
 # such as device/google/raviole/device-oriole.mk
 
 # Camera HAL library selection
-SOONG_CONFIG_NAMESPACES += gch
-SOONG_CONFIG_gch += hwl_library
-SOONG_CONFIG_gch_hwl_library := lyric
+$(call soong_config_set,gch,hwl_library,lyric)
 endif
 
 # WiFi
@@ -556,7 +562,7 @@ PRODUCT_PACKAGES += \
 # Enable project quotas and casefolding for emulated storage without sdcardfs
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression_with_xor.mk)
 # Enforce generic ramdisk allow list
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
 
@@ -581,8 +587,13 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.usb.host.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.host.xml \
 	frameworks/native/data/etc/android.hardware.usb.accessory.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.accessory.xml
 
+# (See b/211840489)
+ifneq ($(DISABLE_CAMERA_FS_AF),true)
 PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.flash-autofocus.xml \
+	frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.flash-autofocus.xml
+endif
+
+PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.camera.front.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.front.xml \
 	frameworks/native/data/etc/android.hardware.camera.concurrent.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.concurrent.xml \
 	frameworks/native/data/etc/android.hardware.camera.full.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.full.xml\
@@ -700,9 +711,7 @@ endif
 ## VIDEO
 ####################################
 
-SOONG_CONFIG_NAMESPACES += bigo
-SOONG_CONFIG_bigo += soc
-SOONG_CONFIG_bigo_soc := gs101
+$(call soong_config_set,bigo,soc,gs101)
 
 # MFC firmware
 PRODUCT_COPY_FILES += \
@@ -860,11 +869,11 @@ PRODUCT_PACKAGES += \
 	vts.bin
 
 # This will be called only if IMSService is building with source code for dev branches.
-$(call inherit-product-if-exists, vendor/samsung_slsi/telephony/shannon-ims/device-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung_slsi/telephony/$(BOARD_USES_SHARED_VENDOR_TELEPHONY)/shannon-ims/device-vendor.mk)
 
 PRODUCT_PACKAGES += ShannonIms
 
-$(call inherit-product-if-exists, vendor/samsung_slsi/telephony/shannon-iwlan/device-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung_slsi/telephony/$(BOARD_USES_SHARED_VENDOR_TELEPHONY)/shannon-iwlan/device-vendor.mk)
 
 #RCS Test Messaging App
 PRODUCT_PACKAGES_DEBUG += \
@@ -890,10 +899,10 @@ USE_RADIO_HAL_1_6 := true
 #$(call inherit-product, vendor/google_devices/gs101/proprietary/device-vendor.mk)
 
 ifneq ($(BOARD_WITHOUT_RADIO),true)
-$(call inherit-product-if-exists, vendor/samsung_slsi/telephony/common/device-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung_slsi/telephony/$(BOARD_USES_SHARED_VENDOR_TELEPHONY)/common/device-vendor.mk)
 endif
 
-ifeq (,$(filter %_64,$(TARGET_PRODUCT)))
+ifeq (,$(filter %tangor tangor% %_64,$(TARGET_PRODUCT)))
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 else
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
@@ -917,6 +926,27 @@ PRODUCT_PACKAGES += modem_svc_sit
 # modem logging binary/configs
 PRODUCT_PACKAGES += modem_logging_control
 
+# modem logging configs
+PRODUCT_COPY_FILES += \
+	device/google/gs101/radio/config/logging.conf:$(TARGET_COPY_OUT_VENDOR)/etc/modem/logging.conf \
+	device/google/gs101/radio/config/default.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/modem/default.cfg \
+	device/google/gs101/radio/config/default.nprf:$(TARGET_COPY_OUT_VENDOR)/etc/modem/default.nprf \
+	device/google/gs101/radio/config/default_metrics.xml:$(TARGET_COPY_OUT_VENDOR)/etc/modem/default_metrics.xml \
+	device/google/gs101/radio/config/teamfood_default.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/modem/teamfood_default.cfg \
+	device/google/gs101/radio/config/teamfood_default.nprf:$(TARGET_COPY_OUT_VENDOR)/etc/modem/teamfood_default.nprf \
+	device/google/gs101/radio/config/teamfood_default_metrics.xml:$(TARGET_COPY_OUT_VENDOR)/etc/modem/teamfood_default_metrics.xml \
+	device/google/gs101/radio/config/default_stability.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/modem/default_stability.cfg \
+	device/google/gs101/radio/config/default_stability.nprf:$(TARGET_COPY_OUT_VENDOR)/etc/modem/default_stability.nprf \
+	device/google/gs101/radio/config/default_NAS_RRC.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/modem/default_NAS_RRC.cfg \
+	device/google/gs101/radio/config/default_NAS_RRC.nprf:$(TARGET_COPY_OUT_VENDOR)/etc/modem/default_NAS_RRC.nprf \
+	device/google/gs101/radio/config/default_network.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/modem/default_network.cfg \
+	device/google/gs101/radio/config/default_network.nprf:$(TARGET_COPY_OUT_VENDOR)/etc/modem/default_network.nprf \
+	device/google/gs101/radio/config/Pixel_Default.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/modem/Pixel_Default.cfg \
+	device/google/gs101/radio/config/Pixel_Default.nprf:$(TARGET_COPY_OUT_VENDOR)/etc/modem/Pixel_Default.nprf \
+	device/google/gs101/radio/config/Pixel_Default_metrics.xml:$(TARGET_COPY_OUT_VENDOR)/etc/modem/Pixel_Default_metrics.xml \
+	device/google/gs101/radio/config/Pixel_stability.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/modem/Pixel_stability.cfg \
+	device/google/gs101/radio/config/Pixel_stability.nprf:$(TARGET_COPY_OUT_VENDOR)/etc/modem/Pixel_stability.nprf
+
 PRODUCT_COPY_FILES += \
 	device/google/gs101/radio/gnss_blanking.csv:$(TARGET_COPY_OUT_VENDOR)/etc/modem/gnss_blanking.csv
 
@@ -931,14 +961,14 @@ PRODUCT_PACKAGES_DEBUG += \
 	$(NULL)
 
 PRODUCT_PACKAGES += \
-	android.hardware.health@2.1-impl-gs101 \
-	android.hardware.health@2.1-service
+	android.hardware.health-service.gs101 \
+	android.hardware.health-service.gs101_recovery \
 
 # Audio
 # Audio HAL Server & Default Implementations
 PRODUCT_PACKAGES += \
 	android.hardware.audio.service \
-	android.hardware.audio@7.0-impl \
+	android.hardware.audio@7.1-impl \
 	android.hardware.audio.effect@7.0-impl \
 	android.hardware.bluetooth.audio@2.1-impl \
 	android.hardware.soundtrigger@2.3-impl \
@@ -991,17 +1021,15 @@ PRODUCT_SOONG_NAMESPACES += \
 	vendor/google/whitechapel/audio/hal \
 	vendor/google/whitechapel/audio/interfaces
 
-SOONG_CONFIG_NAMESPACES += aoc_audio_board
-SOONG_CONFIG_aoc_audio_board += \
-	platform
+$(call soong_config_set,aoc_audio_board,platform,$(TARGET_BOARD_PLATFORM))
 
-SOONG_CONFIG_aoc_audio_board_platform := $(TARGET_BOARD_PLATFORM)
+## AoC soong
+PRODUCT_SOONG_NAMESPACES += \
+        vendor/google/whitechapel/aoc
 
-SOONG_CONFIG_NAMESPACES += android_hardware_audio
-SOONG_CONFIG_android_hardware_audio += \
-	run_64bit
+$(call soong_config_set,aoc,target_soc,$(TARGET_BOARD_PLATFORM))
 
-SOONG_CONFIG_android_hardware_audio_run_64bit := true
+$(call soong_config_set,android_hardware_audio,run_64bit,true)
 
 # Audio properties
 PRODUCT_PROPERTY_OVERRIDES += \

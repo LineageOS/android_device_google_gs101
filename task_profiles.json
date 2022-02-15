@@ -4,14 +4,6 @@
       "Name": "MaxPerformance",
       "Actions": [
         {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "cpu",
-            "Path": "system"
-          }
-        },
-        {
           "Name": "WriteFile",
           "Params":
           {
@@ -25,14 +17,6 @@
     {
       "Name": "CameraServicePerformance",
       "Actions": [
-        {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "cpu",
-            "Path": "system"
-          }
-        },
         {
           "Name": "WriteFile",
           "Params":
@@ -48,14 +32,6 @@
       "Name": "CameraServicePower",
       "Actions": [
         {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "cpu",
-            "Path": "system"
-          }
-        },
-        {
           "Name": "WriteFile",
           "Params":
           {
@@ -70,18 +46,24 @@
       "Name": "Dex2oatPerformance",
       "Actions": [
         {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "cpu",
-            "Path": "system"
-          }
-        },
-        {
           "Name": "WriteFile",
           "Params":
           {
             "FilePath": "/sys/kernel/vendor_sched/set_task_group_dex2oat",
+            "Value": "<pid>",
+            "LogFailures": "false"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "OtaPerformance",
+      "Actions": [
+        {
+          "Name": "WriteFile",
+          "Params":
+          {
+            "FilePath": "/sys/kernel/vendor_sched/set_task_group_ota",
             "Value": "<pid>",
             "LogFailures": "false"
           }
@@ -131,14 +113,6 @@
       "Name": "HighEnergySaving",
       "Actions": [
         {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "cpu",
-            "Path": "system"
-          }
-        },
-        {
           "Name": "WriteFile",
           "Params":
           {
@@ -152,14 +126,6 @@
     {
       "Name": "NormalPerformance",
       "Actions": [
-        {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "cpu",
-            "Path": "system"
-          }
-        },
         {
           "Name": "WriteFile",
           "Params":
@@ -175,14 +141,6 @@
       "Name": "HighPerformance",
       "Actions": [
         {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "cpu",
-            "Path": "system"
-          }
-        },
-        {
           "Name": "WriteFile",
           "Params":
           {
@@ -196,14 +154,6 @@
     {
       "Name": "RealtimePerformance",
       "Actions": [
-        {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "cpu",
-            "Path": "system"
-          }
-        },
         {
           "Name": "WriteFile",
           "Params":
@@ -219,14 +169,6 @@
       "Name": "NNApiHALPerformance",
       "Actions": [
         {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "cpu",
-            "Path": "system"
-          }
-        },
-        {
           "Name": "WriteFile",
           "Params":
           {
@@ -240,14 +182,6 @@
     {
       "Name": "ServicePerformance",
       "Actions": [
-        {
-          "Name": "JoinCgroup",
-          "Params":
-          {
-            "Controller": "cpu",
-            "Path": "system"
-          }
-        },
         {
           "Name": "WriteFile",
           "Params":
@@ -337,6 +271,10 @@
     {
       "Name": "Dex2OatBootComplete",
       "Profiles": [ "Dex2oatPerformance", "ProcessCapacityNormal", "LowIoPriority", "TimerSlackHigh" ]
+    },
+    {
+      "Name": "OtaProfiles",
+      "Profiles": [ "OtaPerformance", "ServiceCapacityLow", "LowIoPriority", "TimerSlackHigh" ]
     }
   ]
 }

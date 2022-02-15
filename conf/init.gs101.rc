@@ -3,20 +3,8 @@ import android.hardware.drm@1.2-service.widevine.rc
 import init.exynos.sensorhub.rc
 import /vendor/etc/init/hw/init.aoc.rc
 
-service vendor.charger /system/bin/charger
-    class charger
-    seclabel u:r:charger:s0
-    user system
-    group system wakelock input
-    capabilities SYS_BOOT
-    file /dev/kmsg w
-    file /sys/fs/pstore/console-ramoops-0 r
-    file /sys/fs/pstore/console-ramoops r
-    file /proc/last_kmsg r
-
 on early-init
     mount_all /vendor/etc/fstab.persist --early
-    mount_all /vendor/etc/fstab.modem --early
 
 on init
     # CPU0 cannot be offline
@@ -94,7 +82,7 @@ on init
     write /proc/sys/net/core/optmem_max 20480
     write /proc/sys/net/core/netdev_max_backlog 10000
     write /proc/sys/net/ipv4/tcp_rmem "2097152 4194304 8388608"
-    write /proc/sys/net/ipv4/tcp_wmem "262144 524288 1048576"
+    write /proc/sys/net/ipv4/tcp_wmem "262144 524288 8388608"
     write /proc/sys/net/ipv4/tcp_mem "44259 59012 88518"
     write /proc/sys/net/ipv4/udp_mem "88518 118025 177036"
 
@@ -242,6 +230,8 @@ on init
     chown system system /sys/devices/platform/google,battery/power_supply/battery/bd_clear
     chown system system /sys/devices/platform/google,battery/power_supply/battery/health_safety_margin
     chown system system /sys/devices/platform/google,battery/power_supply/battery/aacr_state
+    chown system system /sys/devices/platform/google,battery/power_supply/battery/aacr_cycle_max
+    chown system system /sys/devices/platform/google,battery/power_supply/battery/aacr_cycle_grace
     chown system system /sys/devices/platform/google,charger/bd_drainto_soc
     chown system system /sys/devices/platform/google,charger/bd_recharge_soc
     chown system system /sys/devices/platform/google,charger/bd_recharge_voltage
@@ -521,6 +511,7 @@ on fs
     restorecon_recursive /mnt/vendor/persist/audio
     restorecon_recursive /mnt/vendor/persist/sensors
     restorecon_recursive /mnt/vendor/persist/battery
+    restorecon_recursive /mnt/vendor/persist/modem
     # Set up display-related directories and permissions
     # Add restorecon_recursive command to make sure the restorecon label is persist_display_file.
     restorecon_recursive /mnt/vendor/persist/display
@@ -544,27 +535,27 @@ on fs
     chown system system /sys/devices/platform/exynos-drm/primary-panel/min_vrefresh
     chown system system /sys/devices/platform/exynos-drm/primary-panel/idle_delay_ms
     chown system system /sys/module/drm/parameters/vblankoffdelay
-    chown system system /sys/class/dqe/atc/ambient_light
-    chown system system /sys/class/dqe/atc/st
-    chown system system /sys/class/dqe/atc/en
-    chown system system /sys/class/dqe/atc/lt
-    chown system system /sys/class/dqe/atc/ns
-    chown system system /sys/class/dqe/atc/dither
-    chown system system /sys/class/dqe/atc/pl_w1
-    chown system system /sys/class/dqe/atc/pl_w2
-    chown system system /sys/class/dqe/atc/ctmode
-    chown system system /sys/class/dqe/atc/pp_en
-    chown system system /sys/class/dqe/atc/upgrade_on
-    chown system system /sys/class/dqe/atc/tdr_max
-    chown system system /sys/class/dqe/atc/tdr_min
-    chown system system /sys/class/dqe/atc/back_light
-    chown system system /sys/class/dqe/atc/dstep
-    chown system system /sys/class/dqe/atc/scale_mode
-    chown system system /sys/class/dqe/atc/threshold_1
-    chown system system /sys/class/dqe/atc/threshold_2
-    chown system system /sys/class/dqe/atc/threshold_3
-    chown system system /sys/class/dqe/atc/gain_limit
-    chown system system /sys/class/dqe/atc/lt_calc_ab_shift
+    chown system system /sys/class/dqe0/atc/ambient_light
+    chown system system /sys/class/dqe0/atc/st
+    chown system system /sys/class/dqe0/atc/en
+    chown system system /sys/class/dqe0/atc/lt
+    chown system system /sys/class/dqe0/atc/ns
+    chown system system /sys/class/dqe0/atc/dither
+    chown system system /sys/class/dqe0/atc/pl_w1
+    chown system system /sys/class/dqe0/atc/pl_w2
+    chown system system /sys/class/dqe0/atc/ctmode
+    chown system system /sys/class/dqe0/atc/pp_en
+    chown system system /sys/class/dqe0/atc/upgrade_on
+    chown system system /sys/class/dqe0/atc/tdr_max
+    chown system system /sys/class/dqe0/atc/tdr_min
+    chown system system /sys/class/dqe0/atc/back_light
+    chown system system /sys/class/dqe0/atc/dstep
+    chown system system /sys/class/dqe0/atc/scale_mode
+    chown system system /sys/class/dqe0/atc/threshold_1
+    chown system system /sys/class/dqe0/atc/threshold_2
+    chown system system /sys/class/dqe0/atc/threshold_3
+    chown system system /sys/class/dqe0/atc/gain_limit
+    chown system system /sys/class/dqe0/atc/lt_calc_ab_shift
     chown system system /sys/devices/platform/1c300000.drmdecon/early_wakeup
     chmod 0220 /sys/devices/platform/1c300000.drmdecon/early_wakeup
     chown system system /sys/devices/platform/1c302000.drmdecon/early_wakeup
@@ -594,11 +585,7 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     -O/data/vendor/wifi/wpa/sockets -puse_p2p_group_interface=1p2p_device=1 \
     -m/vendor/etc/wifi/p2p_supplicant.conf \
     -g@android:wpa_wlan0 -dd
-    interface android.hardware.wifi.supplicant@1.0::ISupplicant default
-    interface android.hardware.wifi.supplicant@1.1::ISupplicant default
-    interface android.hardware.wifi.supplicant@1.2::ISupplicant default
-    interface android.hardware.wifi.supplicant@1.3::ISupplicant default
-    interface android.hardware.wifi.supplicant@1.4::ISupplicant default
+    interface aidl android.hardware.wifi.supplicant.ISupplicant/default
     socket wpa_wlan0 dgram 660 wifi wifi
     class main
     disabled
@@ -731,6 +718,8 @@ on property:sys.boot_completed=1
     write /sys/kernel/vendor_sched/dex2oat_uclamp_max 615
     write /dev/cpuctl/dex2oat/cpu.uclamp.max 60
     write /sys/kernel/vendor_sched/dex2oat_group_throttle 615
+    write /sys/kernel/vendor_sched/ota_uclamp_max 410
+    write /sys/kernel/vendor_sched/ota_group_throttle 410
 
     # Setup groups for SF (RT used for SF RE, SF used for SF main)
     write /sys/kernel/vendor_sched/rt_uclamp_min 125
@@ -756,12 +745,6 @@ on property:sys.boot_completed=1
     # AOC reset permission
     chown root system /sys/devices/platform/19000000.aoc/reset
     chmod 0220 /sys/devices/platform/19000000.aoc/reset
-
-# charger driver exposes now finer grain control, map demo mode to those properties
-# NOTE: demo mode can only be exit wiping data (which reset the persist properties)
-on property:sys.retaildemo.enabled=1
-    setprop persist.vendor.charge.stop.level 35
-    setprop persist.vendor.charge.start.level 30
 
 # Test Harness Mode default battery profile.
 on  property:persist.sys.test_harness=1 && property:persist.vendor.testing_battery_profile=0
