@@ -73,7 +73,8 @@ vendor.camera.debug.                 u:object_r:vendor_camera_debug_prop:s0
 vendor.camera.fatp.                  u:object_r:vendor_camera_fatp_prop:s0
 
 # for gps
-vendor.gps                   u:object_r:vendor_gps_prop:s0
+vendor.gps.                      u:object_r:vendor_gps_prop:s0
+persist.vendor.gps.              u:object_r:vendor_gps_prop:s0
 
 # SecureElement
 persist.vendor.se.                              u:object_r:vendor_secure_element_prop:s0
