@@ -162,6 +162,8 @@ TARGET_USES_VULKAN = true
 PRODUCT_SOONG_NAMESPACES += \
 	vendor/arm/mali/valhall
 
+$(call soong_config_set,pixel_mali,soc,$(TARGET_BOARD_PLATFORM))
+
 include device/google/gs101/neuralnetwork/neuralnetwork.mk
 
 PRODUCT_PACKAGES += \
