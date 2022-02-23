@@ -5,3 +5,4 @@ allow system_app hal_wlc_hwservice:hwservice_manager find;
 binder_call(system_app, hal_wlc)
 
 allow system_app fwk_stats_hwservice:hwservice_manager find;
+allow system_app hal_exynos_rild_hwservice:hwservice_manager find;
