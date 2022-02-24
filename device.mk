@@ -500,8 +500,8 @@ PRODUCT_PACKAGES += \
 
 # WideVine modules
 PRODUCT_PACKAGES += \
-	android.hardware.drm@1.4-service.clearkey \
-	android.hardware.drm@1.4-service.widevine \
+	android.hardware.drm-service.clearkey \
+	android.hardware.drm-service.widevine \
 	liboemcrypto \
 
 
@@ -829,6 +829,10 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 # Use FUSE passthrough
 PRODUCT_PRODUCT_PROPERTIES += \
 	persist.sys.fuse.passthrough.enable=true
+
+# Use FUSE BPF
+PRODUCT_PRODUCT_PROPERTIES += \
+	persist.sys.fuse.bpf.enable=true
 
 # Use /product/etc/fstab.postinstall to mount system_other
 PRODUCT_PRODUCT_PROPERTIES += \
