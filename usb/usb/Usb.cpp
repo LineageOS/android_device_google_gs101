@@ -62,6 +62,7 @@ constexpr char kI2CPath[] = "/sys/devices/platform/10d50000.hsi2c/i2c-";
 constexpr char kContaminantDetectionPath[] = "i2c-max77759tcpc/contaminant_detection";
 constexpr char kStatusPath[] = "i2c-max77759tcpc/contaminant_detection_status";
 constexpr char kSinkLimitEnable[] = "i2c-max77759tcpc/usb_limit_sink_enable";
+constexpr char kSourceLimitEnable[] = "i2c-max77759tcpc/usb_limit_source_enable";
 constexpr char kSinkLimitCurrent[] = "i2c-max77759tcpc/usb_limit_sink_current";
 constexpr char kTypecPath[] = "/sys/class/typec";
 constexpr char kDisableContatminantDetection[] = "vendor.usb.contaminantdisable";
@@ -471,30 +472,40 @@ ScopedAStatus Usb::switchRole(const string& in_portName, const PortRole& in_role
 
 ScopedAStatus Usb::limitPowerTransfer(const string& in_portName, bool in_limit,
         int64_t in_transactionId) {
-    bool success = false;
+    bool sessionFail = false, success;
     std::vector<PortStatus> currentPortStatus;
-    string path, limitEnablePath, currentLimitPath;
+    string path, sinkLimitEnablePath, currentLimitPath, sourceLimitEnablePath;
 
     getI2cBusHelper(&path);
-    limitEnablePath = kI2CPath + path + "/" + kSinkLimitEnable;
+    sinkLimitEnablePath = kI2CPath + path + "/" + kSinkLimitEnable;
+    sourceLimitEnablePath = kI2CPath + path + "/" + kSourceLimitEnable;
     currentLimitPath = kI2CPath + path + "/" + kSinkLimitCurrent;
 
+    pthread_mutex_lock(&mLock);
     if (in_limit) {
         success = WriteStringToFile("0", currentLimitPath);
         if (!success) {
             ALOGE("Failed to set sink current limit");
+            sessionFail = true;
         }
     }
-    success = WriteStringToFile(in_limit ? "1" : "0", limitEnablePath);
+    success = WriteStringToFile(in_limit ? "1" : "0", sinkLimitEnablePath);
     if (!success) {
         ALOGE("Failed to %s sink current limit: %s", in_limit ? "enable" : "disable",
-              limitEnablePath.c_str());
+              sinkLimitEnablePath.c_str());
+        sessionFail = true;
+    }
+    success = WriteStringToFile(in_limit ? "1" : "0", sourceLimitEnablePath);
+    if (!success) {
+        ALOGE("Failed to %s source current limit: %s", in_limit ? "enable" : "disable",
+              sourceLimitEnablePath.c_str());
+              sessionFail = true;
     }
     ALOGI("limitPowerTransfer limit:%c opId:%ld", in_limit ? 'y' : 'n', in_transactionId);
-    pthread_mutex_lock(&mLock);
     if (mCallback != NULL && in_transactionId >= 0) {
         ScopedAStatus ret = mCallback->notifyLimitPowerTransferStatus(
-                in_portName, in_limit, success ? Status::SUCCESS : Status::ERROR, in_transactionId);
+                in_portName, in_limit, sessionFail ? Status::ERROR : Status::SUCCESS,
+                in_transactionId);
         if (!ret.isOk())
             ALOGE("limitPowerTransfer error %s", ret.getDescription().c_str());
     } else {
