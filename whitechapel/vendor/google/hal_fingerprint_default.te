@@ -8,9 +8,7 @@ allow hal_fingerprint_default sysfs_fingerprint:dir r_dir_perms;
 allow hal_fingerprint_default sysfs_fingerprint:file rw_file_perms;
 allow hal_fingerprint_default fwk_stats_service:service_manager find;
 get_prop(hal_fingerprint_default, fingerprint_ghbm_prop)
-userdebug_or_eng(`
-  get_prop(hal_fingerprint_default, vendor_fingerprint_fake_prop)
-')
+set_prop(hal_fingerprint_default, vendor_fingerprint_prop)
 add_hwservice(hal_fingerprint_default, hal_fingerprint_ext_hwservice)
 
 # allow fingerprint to access power hal
