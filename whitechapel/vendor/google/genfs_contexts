@@ -71,9 +71,9 @@ genfscon sysfs /devices/platform/11110000.usb/11110000.dwc3/gadget/net          
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-4/4-0043            u:object_r:sysfs_vibrator:s0
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-5/5-0043            u:object_r:sysfs_vibrator:s0
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-4/4-005a            u:object_r:sysfs_vibrator:s0
-genfscon sysfs /devices/platform/10970000.hsi2c/i2c-4/i2c-cs40l25a            u:object_r:sysfs_vibrator:s0
-genfscon sysfs /devices/platform/10970000.hsi2c/i2c-5/5-0042            u:object_r:sysfs_vibrator:s0
-genfscon sysfs /devices/platform/10970000.hsi2c/i2c-5/i2c-cs40l25a            u:object_r:sysfs_vibrator:s0
+genfscon sysfs /devices/platform/10970000.hsi2c/i2c-4/i2c-cs40l25a      u:object_r:sysfs_vibrator:s0
+genfscon sysfs /devices/platform/10970000.hsi2c/i2c-5/i2c-cs40l25a-dual u:object_r:sysfs_vibrator:s0
+genfscon sysfs /devices/platform/10970000.hsi2c/i2c-5/i2c-cs40l25a      u:object_r:sysfs_vibrator:s0
 
 # Fingerprint
 genfscon sysfs /devices/platform/odm/odm:fp_fpc1020                 u:object_r:sysfs_fingerprint:s0
@@ -101,6 +101,8 @@ genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/i2c-s2mpg10mfd/wake
 genfscon sysfs /devices/platform/19000000.aoc/usb_control/wakeup/wakeup                       u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/11110000.usb/11110000.dwc3/wakeup/wakeup                     u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/19000000.aoc/com.google.usf/wakeup/wakeup                    u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/11110000.usb/11110000.dwc3/xhci-hcd-exynos.5.auto/wakeup/wakeup      u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/11110000.usb/11110000.dwc3/xhci-hcd-exynos.4.auto/wakeup/wakeup      u:object_r:sysfs_wakeup:s0
 
 # Touch
 genfscon sysfs /devices/platform/10d40000.spi/spi_master/spi11/spi11.0          u:object_r:sysfs_touch:s0
@@ -114,14 +116,16 @@ genfscon sysfs /devices/platform/10940000.spi/spi_master/spi5/spi5.0/nstandby   
 genfscon sysfs /devices/virtual/pps/pps0/assert_elapsed                         u:object_r:sysfs_gps_assert:s0
 
 # Display
-genfscon sysfs /devices/platform/1c2c0000.drmdsim/1c2c0000.drmdsim.0/gamma                          u:object_r:sysfs_display:s0
-genfscon sysfs /devices/platform/1c2d0000.drmdsim/1c2d0000.drmdsim.0/gamma                          u:object_r:sysfs_display:s0
-genfscon sysfs /devices/platform/1c2c0000.drmdsim/1c2c0000.drmdsim.0/panel_extinfo                  u:object_r:sysfs_display:s0
-genfscon sysfs /devices/platform/1c2d0000.drmdsim/1c2d0000.drmdsim.0/panel_extinfo                  u:object_r:sysfs_display:s0
-genfscon sysfs /devices/platform/1c2c0000.drmdsim/1c2c0000.drmdsim.0/panel_need_handle_idle_exit    u:object_r:sysfs_display:s0
-genfscon sysfs /devices/platform/1c2d0000.drmdsim/1c2d0000.drmdsim.0/panel_need_handle_idle_exit    u:object_r:sysfs_display:s0
-genfscon sysfs /devices/platform/1c2c0000.drmdsim/hs_clock                                          u:object_r:sysfs_display:s0
-genfscon sysfs /devices/platform/1c2d0000.drmdsim/hs_clock                                          u:object_r:sysfs_display:s0
+genfscon sysfs /devices/platform/1c2c0000.drmdsim/1c2c0000.drmdsim.0/gamma         u:object_r:sysfs_display:s0
+genfscon sysfs /devices/platform/1c2d0000.drmdsim/1c2d0000.drmdsim.0/gamma         u:object_r:sysfs_display:s0
+genfscon sysfs /devices/platform/1c2c0000.drmdsim/1c2c0000.drmdsim.0/min_vrefresh  u:object_r:sysfs_display:s0
+genfscon sysfs /devices/platform/1c2d0000.drmdsim/1c2d0000.drmdsim.0/min_vrefresh  u:object_r:sysfs_display:s0
+genfscon sysfs /devices/platform/1c2c0000.drmdsim/1c2c0000.drmdsim.0/idle_delay_ms u:object_r:sysfs_display:s0
+genfscon sysfs /devices/platform/1c2d0000.drmdsim/1c2d0000.drmdsim.0/idle_delay_ms u:object_r:sysfs_display:s0
+genfscon sysfs /devices/platform/1c2c0000.drmdsim/1c2c0000.drmdsim.0/panel_extinfo u:object_r:sysfs_display:s0
+genfscon sysfs /devices/platform/1c2d0000.drmdsim/1c2d0000.drmdsim.0/panel_extinfo u:object_r:sysfs_display:s0
+genfscon sysfs /devices/platform/1c2c0000.drmdsim/hs_clock                         u:object_r:sysfs_display:s0
+genfscon sysfs /devices/platform/1c2d0000.drmdsim/hs_clock                         u:object_r:sysfs_display:s0
 
 # Modem
 genfscon sysfs /devices/platform/cp-tm1/cp_temp                                u:object_r:sysfs_modem:s0
@@ -260,6 +264,7 @@ genfscon sysfs /devices/platform/1c500000.mali/hint_min_freq                    
 genfscon sysfs /devices/platform/1c500000.mali/dma_buf_gpu_mem                                          u:object_r:sysfs_gpu:s0
 genfscon sysfs /devices/platform/1c500000.mali/total_gpu_mem                                            u:object_r:sysfs_gpu:s0
 genfscon sysfs /devices/platform/1c500000.mali/kprcs                                                    u:object_r:sysfs_gpu:s0
+genfscon sysfs /devices/platform/1c500000.mali/power_policy                                             u:object_r:sysfs_gpu:s0
 
 # nvmem (Non Volatile Memory layer)
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-4/4-0050/4-00500/nvmem                              u:object_r:sysfs_memory:s0
@@ -322,6 +327,14 @@ genfscon sysfs /devices/platform/sjtag_gsa/interface                   u:object_
 # Camera
 genfscon sysfs /devices/platform/17000030.devfreq_intcam/devfreq/17000030.devfreq_intcam/min_freq       u:object_r:sysfs_camera:s0
 genfscon sysfs /devices/platform/17000060.devfreq_tnr/devfreq/17000060.devfreq_tnr/min_freq             u:object_r:sysfs_camera:s0
+
+# thermal sysfs files
+genfscon sysfs /module/gs101_thermal/parameters/tmu_reg_dump_state            u:object_r:sysfs_thermal:s0
+genfscon sysfs /module/gs101_thermal/parameters/tmu_reg_dump_current_temp     u:object_r:sysfs_thermal:s0
+genfscon sysfs /module/gs101_thermal/parameters/tmu_top_reg_dump_rise_thres   u:object_r:sysfs_thermal:s0
+genfscon sysfs /module/gs101_thermal/parameters/tmu_top_reg_dump_fall_thres   u:object_r:sysfs_thermal:s0
+genfscon sysfs /module/gs101_thermal/parameters/tmu_sub_reg_dump_rise_thres   u:object_r:sysfs_thermal:s0
+genfscon sysfs /module/gs101_thermal/parameters/tmu_sub_reg_dump_fall_thres   u:object_r:sysfs_thermal:s0
 
 # USB-C throttling stats
 genfscon sysfs /devices/platform/google,usbc_port_cooling_dev/cleared_time      u:object_r:sysfs_usbc_throttling_stats:s0
