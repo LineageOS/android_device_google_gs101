@@ -19,11 +19,6 @@ include build/make/target/board/BoardConfigPixelCommon.mk
 # Should be uncommented after fixing vndk-sp violation is fixed.
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 
-# This prop, when set to 1, will prevent OTA tooling from generating a VABC OTA,
-# even if device actually supports it.
-# Remove this once P21 decides to use VABC OTA
-BOARD_DONT_USE_VABC_OTA := true
-
 # HACK : To fix up after bring up multimedia devices.
 TARGET_SOC := gs101
 
@@ -50,17 +45,18 @@ BOARD_KERNEL_CMDLINE += dyndbg=\"func alloc_contig_dump_pages +p\"
 BOARD_KERNEL_CMDLINE += earlycon=exynos4210,0x10A00000 console=ttySAC0,115200 androidboot.console=ttySAC0 printk.devkmsg=on
 BOARD_KERNEL_CMDLINE += cma_sysfs.experimental=Y
 BOARD_KERNEL_CMDLINE += stack_depot_disable=off page_pinner=on
+BOARD_KERNEL_CMDLINE += swiotlb=noforce
 BOARD_BOOTCONFIG += androidboot.boot_devices=14700000.ufs
 
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
-ifeq (,$(TARGET_PREBUILT_KERNEL))
-TARGET_NO_KERNEL := true
 ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
-BOARD_PREBUILT_BOOTIMAGE := $(TARGET_KERNEL_DIR)/boot.img
+BOARD_PREBUILT_BOOTIMAGE := $(wildcard $(TARGET_KERNEL_DIR)/boot.img)
 else
-BOARD_PREBUILT_BOOTIMAGE := $(TARGET_KERNEL_DIR)/boot-user.img
+BOARD_PREBUILT_BOOTIMAGE := $(wildcard $(TARGET_KERNEL_DIR)/boot-user.img)
 endif
+ifneq (,$(BOARD_PREBUILT_BOOTIMAGE))
+TARGET_NO_KERNEL := true
 else
 TARGET_NO_KERNEL := false
 endif
@@ -68,7 +64,17 @@ BOARD_USES_GENERIC_KERNEL_IMAGE := true
 BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT := true
 BOARD_MOVE_GSI_AVB_KEYS_TO_VENDOR_BOOT := true
 TARGET_RECOVERY_WIPE := device/google/gs101/conf/recovery.wipe
-TARGET_RECOVERY_FSTAB := device/google/gs101/conf/fstab.gs101
+
+# This is the fstab file that will be included in the recovery image.  Note that
+# recovery doesn't care about the encryption settings, so it doesn't matter
+# whether we use the normal or the fips fstab here.
+#
+# Since this is a generated file, it's necessary to use intermediates-dir-for in
+# order to refer to it correctly.  And since intermediates-dir-for isn't defined
+# yet when this file is included, it's necessary to use a deferred variable
+# assignment ( = ) rather than an immediate variable assignment ( := ).
+TARGET_RECOVERY_FSTAB = $(call intermediates-dir-for,ETC,fstab.gs101)/fstab.gs101
+
 TARGET_RECOVERY_PIXEL_FORMAT := ABGR_8888
 TARGET_RECOVERY_UI_MARGIN_HEIGHT := 165
 TARGET_RECOVERY_UI_LIB := \
@@ -199,6 +205,8 @@ ifneq (,$(filter aosp_%,$(TARGET_PRODUCT)))
 $(call soong_config_set,aoc_audio_func,aosp_build,true)
 endif
 
+$(call soong_config_set,haptics,actuator_model,$(ACTUATOR_MODEL))
+
 # Primary AudioHAL Configuration
 #BOARD_USE_COMMON_AUDIOHAL := true
 #BOARD_USE_CALLIOPE_AUDIOHAL := false
@@ -300,8 +308,6 @@ ENABLE_VENDOR_RIL_SERVICE := true
 # TODO(b/123695868): Remove the need for this
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := \
 	build/make/target/board/mainline_arm64/bluetooth
-
-TARGET_BOARD_KERNEL_HEADERS := $(TARGET_KERNEL_DIR)/kernel-headers
 
 #VNDK
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true

@@ -41,6 +41,9 @@ const struct SysfsCollector::SysfsPaths sysfs_paths = {
         .CodecPath = "/sys/devices/platform/audiometrics/codec_state",
         .EEPROMPath = "/dev/battery_history",
         .MitigationPath = "/sys/devices/virtual/pmic/mitigation",
+        .SpeakerTemperaturePath = "/sys/devices/platform/audiometrics/speaker_temp",
+        .SpeakerExcursionPath = "/sys/devices/platform/audiometrics/speaker_excursion",
+        .SpeakerHeartBeatPath = "/sys/devices/platform/audiometrics/speaker_heartbeat",
         .UFSErrStatsPath = {
             UFS_ERR_PATH(pa_err_count),
             UFS_ERR_PATH(dl_err_count),
@@ -51,9 +54,11 @@ const struct SysfsCollector::SysfsPaths sysfs_paths = {
             UFS_ERR_PATH(auto_hibern8_err_count)
         }
 };
+
 const struct UeventListener::UeventPaths ueventPaths = {
         .AudioUevent = "/devices/virtual/amcs/amcs",
-        .WirelessChargerPtmcPath = "/sys/class/power_supply/wireless/device/ptmc_id"};
+        .WirelessChargerPtmcPath = "/sys/class/power_supply/wireless/device/ptmc_id",
+        .TypeCPartnerUevent = "PRODUCT_TYPE="};
 
 int main() {
     LOG(INFO) << "starting PixelStats";

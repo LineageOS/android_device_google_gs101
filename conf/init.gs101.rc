@@ -82,10 +82,6 @@ on init
     # Property used by NFC for sku specific configurations
     setprop ro.boot.product.hardware.sku ${ro.boot.hardware.sku}
 
-    # NFC streset tool name
-    setprop persist.vendor.nfc.streset libstreset21
-    setprop persist.vendor.se.streset libstreset21
-
     # Support legacy paths
     symlink /data/app /factory
 
@@ -121,11 +117,11 @@ on init
     mkdir /dev/socket/pdx/system/vr/sensors 0775 system system
 
     # Boot time 183626384
-    write /sys/kernel/vendor_sched/ta_uclamp_min 308
+    write /sys/kernel/vendor_sched/ta_uclamp_min 1024
     write /sys/kernel/vendor_sched/ta_prefer_idle 1
-    write /sys/kernel/vendor_sched/fg_uclamp_min 308
+    write /sys/kernel/vendor_sched/fg_uclamp_min 1024
     write /sys/kernel/vendor_sched/fg_prefer_idle 1
-    write /sys/kernel/vendor_sched/sys_uclamp_min 308
+    write /sys/kernel/vendor_sched/sys_uclamp_min 1024
     write /sys/kernel/vendor_sched/sys_prefer_idle 1
 
     # governor setting
@@ -182,6 +178,9 @@ on init
     chown system system /dev/logbuffer_maxfg
     chown system system /dev/logbuffer_maxfg_base
     chown system system /dev/logbuffer_maxfg_flip
+    chown system system /dev/logbuffer_maxfg_monitor
+    chown system system /dev/logbuffer_maxfg_base_monitor
+    chown system system /dev/logbuffer_maxfg_flip_monitor
     chown system system /dev/logbuffer_maxq
     chown system system /dev/logbuffer_google,cpm
     chown system system /dev/logbuffer_rtx
@@ -241,6 +240,9 @@ on init
     chown system system /sys/devices/platform/google,battery/power_supply/battery/bd_trickle_reset_sec
     chown system system /sys/devices/platform/google,battery/power_supply/battery/bd_clear
     chown system system /sys/devices/platform/google,battery/power_supply/battery/health_safety_margin
+    chown system system /sys/devices/platform/google,battery/power_supply/battery/aacr_state
+    chown system system /sys/devices/platform/google,battery/power_supply/battery/aacr_cycle_max
+    chown system system /sys/devices/platform/google,battery/power_supply/battery/aacr_cycle_grace
     chown system system /sys/devices/platform/google,charger/bd_drainto_soc
     chown system system /sys/devices/platform/google,charger/bd_recharge_soc
     chown system system /sys/devices/platform/google,charger/bd_recharge_voltage
@@ -281,10 +283,10 @@ on init
     write /sys/class/devfreq/gs_memlat_devfreq:devfreq_mif_cpu1_memlat@17000010/mem_latency/ratio_ceil 400
     write /sys/class/devfreq/gs_memlat_devfreq:devfreq_mif_cpu2_memlat@17000010/mem_latency/ratio_ceil 400
     write /sys/class/devfreq/gs_memlat_devfreq:devfreq_mif_cpu3_memlat@17000010/mem_latency/ratio_ceil 400
-    write /sys/class/devfreq/gs_memlat_devfreq:devfreq_mif_cpu4_memlat@17000010/mem_latency/ratio_ceil 400
-    write /sys/class/devfreq/gs_memlat_devfreq:devfreq_mif_cpu5_memlat@17000010/mem_latency/ratio_ceil 400
-    write /sys/class/devfreq/gs_memlat_devfreq:devfreq_mif_cpu6_memlat@17000010/mem_latency/ratio_ceil 800
-    write /sys/class/devfreq/gs_memlat_devfreq:devfreq_mif_cpu7_memlat@17000010/mem_latency/ratio_ceil 800
+    write /sys/class/devfreq/gs_memlat_devfreq:devfreq_mif_cpu4_memlat@17000010/mem_latency/ratio_ceil 2700
+    write /sys/class/devfreq/gs_memlat_devfreq:devfreq_mif_cpu5_memlat@17000010/mem_latency/ratio_ceil 2700
+    write /sys/class/devfreq/gs_memlat_devfreq:devfreq_mif_cpu6_memlat@17000010/mem_latency/ratio_ceil 3200
+    write /sys/class/devfreq/gs_memlat_devfreq:devfreq_mif_cpu7_memlat@17000010/mem_latency/ratio_ceil 3200
 
 # For GKI kernel, no device specific modules
 on init
@@ -310,7 +312,7 @@ on late-fs
     class_start animation
 
     # Mount RW partitions which need run fsck
-    mount_all /vendor/etc/fstab.gs101 --late
+    mount_all --late
 
 on post-fs-data
     # Log data folder
@@ -504,7 +506,7 @@ on property:persist.vendor.radio.no_modem_board=1
     setprop ro.radio.noril yes
 
 on fs
-    mount_all /vendor/etc/fstab.gs101 --early
+    mount_all --early
     restorecon_recursive /mnt/vendor/efs
     chown radio system /mnt/vendor/efs
     restorecon_recursive /mnt/vendor/efs_backup
@@ -540,6 +542,8 @@ on fs
     chown system system /sys/class/backlight/panel0-backlight/hbm_mode
     chown system system /sys/class/backlight/panel0-backlight/local_hbm_mode
     chown system system /sys/devices/platform/exynos-drm/primary-panel/gamma
+    chown system system /sys/devices/platform/exynos-drm/primary-panel/min_vrefresh
+    chown system system /sys/devices/platform/exynos-drm/primary-panel/idle_delay_ms
     chown system system /sys/module/drm/parameters/vblankoffdelay
     chown system system /sys/class/dqe/atc/ambient_light
     chown system system /sys/class/dqe/atc/st
@@ -684,6 +688,8 @@ on property:sys.boot_completed=1
     chown system system /dev/sys/fs/by-name/userdata/compr_written_block
     chown system system /dev/sys/fs/by-name/userdata/compr_saved_block
     chown system system /dev/sys/fs/by-name/userdata/compr_new_inode
+    chown system system /dev/sys/fs/by-name/userdata/gc_segment_mode
+    chown system system /dev/sys/fs/by-name/userdata/gc_reclaimed_segments
 
     # Block layer tuning: discard chunk size up to 128MB
     # Otherwise, contiguous discards can be merged
@@ -712,12 +718,18 @@ on property:sys.boot_completed=1
     # Setup final cpu.uclamp
     write /sys/kernel/vendor_sched/ta_uclamp_min 1
     write /sys/kernel/vendor_sched/fg_uclamp_min 0
-    write /sys/kernel/vendor_sched/bg_uclamp_max 615
     write /sys/kernel/vendor_sched/sys_prefer_idle 0
     # cfs_rq clamp is using tg->uclamp setting
     # align it with the vendor_group setting
-    write /dev/cpuctl/background/cpu.uclamp.max 60
-    write /sys/kernel/vendor_sched/bg_group_throttle 615
+    write /sys/kernel/vendor_sched/bg_uclamp_max 512
+    write /dev/cpuctl/background/cpu.uclamp.max 50
+    write /sys/kernel/vendor_sched/bg_group_throttle 512
+    write /sys/kernel/vendor_sched/sysbg_uclamp_max 512
+    write /dev/cpuctl/system-background/cpu.uclamp.max 50
+    write /sys/kernel/vendor_sched/sysbg_group_throttle 512
+    write /sys/kernel/vendor_sched/dex2oat_uclamp_max 615
+    write /dev/cpuctl/dex2oat/cpu.uclamp.max 60
+    write /sys/kernel/vendor_sched/dex2oat_group_throttle 615
 
     # Setup groups for SF (RT used for SF RE, SF used for SF main)
     write /sys/kernel/vendor_sched/rt_uclamp_min 125
@@ -725,15 +737,16 @@ on property:sys.boot_completed=1
     write /sys/kernel/vendor_sched/sf_uclamp_min 30
     write /sys/kernel/vendor_sched/sf_prefer_idle 1
 
-    # Setup cpu.shares to throttle background group at 5%
+    # Setup cpu.shares to throttle background groups (bg ~ 5% sysbg ~ 5% dex2oat ~2.5%)
     write /dev/cpuctl/background/cpu.shares 1024
+    write /dev/cpuctl/system-background/cpu.shares 1024
+    write /dev/cpuctl/dex2oat/cpu.shares 512
     write /dev/cpuctl/system/cpu.shares 20480
     # We only have system and background groups holding tasks and the groups below are empty
     write /dev/cpuctl/camera-daemon/cpu.shares 20480
     write /dev/cpuctl/foreground/cpu.shares 20480
     write /dev/cpuctl/nnapi-hal/cpu.shares 20480
     write /dev/cpuctl/rt/cpu.shares 20480
-    write /dev/cpuctl/system-background/cpu.shares 20480
     write /dev/cpuctl/top-app/cpu.shares 20480
 
     # gvotables for dumpstate
@@ -771,6 +784,10 @@ on  property:persist.sys.test_harness=1 && property:persist.vendor.testing_batte
     setprop persist.vendor.charge.stop.level 100
     setprop persist.vendor.charge.start.level 0
     setprop vendor.battery.defender.disable 1
+
+# ACA (Adaptice Charge Always On) persist properties
+on property:persist.vendor.adaptive.charge.soc=*
+    write /sys/class/power_supply/battery/charge_limit ${persist.vendor.adaptive.charge.soc}
 
 service insmod_sh_common /vendor/bin/init.insmod.sh /vendor/etc/init.insmod.gs101.cfg
     class main
@@ -850,9 +867,13 @@ on property:vendor.thermal.link_ready=1
     write /dev/thermal/tz-by-name/soft_ocp_gpu/policy user_space
     write /dev/thermal/tz-by-name/soc/policy user_space
     write /dev/thermal/tz-by-name/batoilo/policy user_space
+    write /sys/devices/virtual/pmic/mitigation/triggered_lvl/smpl_lvl 3100
     write /sys/devices/virtual/pmic/mitigation/triggered_lvl/soft_ocp_cpu2_lvl 9000
     write /sys/devices/virtual/pmic/mitigation/triggered_lvl/soft_ocp_gpu_lvl 9000
     write /sys/devices/virtual/pmic/mitigation/triggered_lvl/soft_ocp_tpu_lvl 8500
+    write /sys/devices/virtual/pmic/mitigation/clock_div/tpu_clk_div 0x201
+    write /sys/devices/virtual/pmic/mitigation/clock_div/gpu_clk_div 0x801
+    write /sys/devices/virtual/pmic/mitigation/clock_div/cpu2_clk_div 0x801
     chown system system /dev/thermal/tz-by-name/soc/mode
     chown system system /dev/thermal/tz-by-name/batoilo/trip_point_0_temp
     chown system system /dev/thermal/tz-by-name/batoilo/trip_point_0_hyst

@@ -5,9 +5,9 @@
        BaudRate="921600"
        GpioNStdbyPath="/sys/devices/platform/10940000.spi/spi_master/spi5/spi5.0/nstandby"
        CustGpioDelayMs="250"
-       LogEnabled="false"
+       LogEnabled="true"
        Log="JAVA"
-       SecondaryConfigPath="/vendor/etc/gnss/gps2.xml"
+       SecondaryConfigPath="/data/vendor/gps/overlay/gps_overlay.xml"
        LogDirectory="/sdcard/gps/broadcom/storage/"
        CtrlPipe="/data/vendor/gps/glgpsctrl"
        NmeaOutName="/data/vendor/gps/nmea_out"
@@ -51,7 +51,9 @@
 
        AttributionAppPkgName="com.google.android.carrierlocation"
 
-       AssertEnabled="false"
+       AssertEnabled="true"
+       CpLppeCancelDbhOnAgnssProvideLoc="true"
+       CpLppeUseAgnssLocForEmptyDbh="true"
   />
 
   <gll
@@ -75,10 +77,11 @@
        RfPathLossDb_Cp_L5="4"
        OnChipGpsCarrierType="3,2,3,3,2,3,2,3,3,3,1,2,1,3,2,1,2,3,1,1,1,1,3,3,3,3,3,1,2,3,2,3"
 
+       EnableOnChipStopNotification="2"
+       PowerMode="3"
   />
 
   <gll_features
-       EnableLowPowerPmm="true"
        EnableNicAutoSwitch="true"
        EnableNavic="true"
   />
