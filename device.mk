@@ -831,6 +831,10 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 PRODUCT_PRODUCT_PROPERTIES += \
 	persist.sys.fuse.passthrough.enable=true
 
+# Force disable of FUSE BPF
+PRODUCT_PRODUCT_PROPERTIES += \
+	persist.sys.fuse.bpf.enable=false
+
 # Use /product/etc/fstab.postinstall to mount system_other
 PRODUCT_PRODUCT_PROPERTIES += \
 	ro.postinstall.fstab.prefix=/product
