@@ -8,7 +8,7 @@ fi
 OUTPUT_CALIB="$2"
 if [ ! -f "$OUTPUT_CALIB" ]; then
     touch $OUTPUT_CALIB
-    chmod 0600 $OUTPUT_CALIB
+    chmod 0644 $OUTPUT_CALIB
     file="$1"
     while IFS=, read -r f1 f2
     do
