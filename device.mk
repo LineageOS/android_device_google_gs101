@@ -17,8 +17,9 @@
 include device/google/gs-common/device.mk
 
 TARGET_BOARD_PLATFORM := gs101
+DEVICE_IS_64BIT_ONLY ?= $(if $(filter %_64,$(TARGET_PRODUCT)), true, false)
 
-ifneq (,$(filter %tangor tangor% %_64,$(TARGET_PRODUCT)))
+ifeq ($(DEVICE_IS_64BIT_ONLY),true)
 LOCAL_64ONLY := _64
 endif
 
@@ -903,10 +904,10 @@ ifneq ($(BOARD_WITHOUT_RADIO),true)
 $(call inherit-product-if-exists, vendor/samsung_slsi/telephony/$(BOARD_USES_SHARED_VENDOR_TELEPHONY)/common/device-vendor.mk)
 endif
 
-ifeq (,$(filter %tangor tangor% %_64,$(TARGET_PRODUCT)))
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-else
+ifeq ($(DEVICE_IS_64BIT_ONLY),true)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
+else
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 endif
 #$(call inherit-product, hardware/google_devices/exynos5/exynos5.mk)
 #$(call inherit-product-if-exists, hardware/google_devices/gs101/gs101.mk)
