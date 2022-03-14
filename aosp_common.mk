@@ -17,7 +17,7 @@
 #
 # All components inherited here go to system image
 #
-DEVICE_IS_64BIT_ONLY ?= $(if $(filter %_64,$(TARGET_PRODUCT)), true, false)
+DEVICE_IS_64BIT_ONLY ?= $(if $(filter %_64,$(TARGET_PRODUCT)),true,false)
 
 ifeq ($(DEVICE_IS_64BIT_ONLY),true)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
