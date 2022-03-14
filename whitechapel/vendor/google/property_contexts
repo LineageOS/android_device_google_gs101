@@ -111,3 +111,5 @@ vendor.gf.                                      u:object_r:vendor_fingerprint_pr
 # Dynamic sensor
 vendor.dynamic_sensor.                          u:object_r:vendor_dynamic_sensor_prop:s0
 
+# uwb
+ro.vendor.uwb.calibration.                      u:object_r:vendor_uwb_calibration_prop:s0 exact string
