@@ -2,8 +2,6 @@ type uwb_vendor_app, domain;
 
 app_domain(uwb_vendor_app)
 
-add_service(uwb_vendor_app, uwb_vendor_service)
-
 not_recovery(`
 hal_client_domain(uwb_vendor_app, hal_uwb_vendor)
 
