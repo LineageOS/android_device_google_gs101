@@ -1,4 +1,5 @@
 allow charger_vendor mnt_vendor_file:dir search;
+allow charger_vendor sysfs_batteryinfo:file w_file_perms;
 allow charger_vendor persist_file:dir search;
 allow charger_vendor persist_battery_file:dir search;
 allow charger_vendor persist_battery_file:file rw_file_perms;
