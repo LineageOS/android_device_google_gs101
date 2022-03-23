@@ -660,8 +660,8 @@ on property:vendor.device.modules.ready=1
     chown system system /sys/devices/virtual/sec/tsp/cmd
     chown system system /sys/devices/virtual/sec/tsp/cmd_result
     chown system system /sys/devices/virtual/sec/tsp/status
-    chown system system /sys/devices/virtual/input/nvt_touch/force_touch_active
-    chown system system /sys/devices/virtual/input/nvt_touch/nvt_dttw_mode
+    chown system system /sys/class/spi_master/spi11/spi11.0/input/nvt_touch/force_touch_active
+    chown system system /sys/class/spi_master/spi11/spi11.0/input/nvt_touch/nvt_dttw_mode
     # Allow access to touch
     chown system input /dev/touch_offload
     chmod 660 /dev/touch_offload

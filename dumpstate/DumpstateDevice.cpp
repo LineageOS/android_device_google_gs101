@@ -517,7 +517,7 @@ void DumpstateDevice::dumpThermalSection(int fd) {
 
 // Dump items related to touch
 void DumpstateDevice::dumpPreTouchSection(int fd) {
-    const char nvt_spi_path[] = "/sys/devices/virtual/input/nvt_touch";
+    const char nvt_spi_path[] = "/sys/class/spi_master/spi11/spi11.0/input/nvt_touch";
     char cmd[256];
 
     /* NVT touch */
