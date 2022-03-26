@@ -996,7 +996,6 @@ PRODUCT_PACKAGES += \
 	audio_spk_35l41 \
 	audio.usb.default \
 	audio.usbv2.default \
-	audio.a2dp.default \
 	audio.bluetooth.default \
 	audio.r_submix.default \
 	libamcsextfile \
