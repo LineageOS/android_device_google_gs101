@@ -988,9 +988,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.audio.monitorRotation = true \
 	ro.audio.offload_wakelock=false
 
-# DO NOT SUBMIT declare use of spatial audio
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.audio.spatializer_enabled=true
+# declare use of spatial audio
+# PRODUCT_PROPERTY_OVERRIDES += \
+#	ro.audio.spatializer_enabled=true
 
 ifeq (,$(filter aosp_%,$(TARGET_PRODUCT)))
 # IAudioMetricExt HIDL
