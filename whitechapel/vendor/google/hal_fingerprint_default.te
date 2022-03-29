@@ -24,3 +24,5 @@ allow hal_fingerprint_default block_device:dir search;
 # Allow fingerprint to access fwk_sensor_hwservice
 allow hal_fingerprint_default fwk_sensor_hwservice:hwservice_manager find;
 
+# Allow fingerprint to read sysfs_display
+allow hal_fingerprint_default sysfs_display:file r_file_perms;
