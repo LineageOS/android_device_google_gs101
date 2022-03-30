@@ -383,6 +383,7 @@ void DumpstateDevice::dumpPowerSection(int fd) {
     DumpFileToFd(fd, "TTF details", "/sys/class/power_supply/battery/ttf_details");
     DumpFileToFd(fd, "TTF stats", "/sys/class/power_supply/battery/ttf_stats");
     DumpFileToFd(fd, "maxq", "/dev/logbuffer_maxq");
+    DumpFileToFd(fd, "aacr_state", "/sys/class/power_supply/battery/aacr_state");
 
     RunCommandToFd(fd, "TRICKLE-DEFEND Config", {"/vendor/bin/sh", "-c",
                         " cd /sys/devices/platform/google,battery/power_supply/battery/;"
@@ -398,6 +399,7 @@ void DumpstateDevice::dumpPowerSection(int fd) {
     if (!PropertiesHelper::IsUserBuild()) {
 
         DumpFileToFd(fd, "DC_registers dump", "/sys/class/power_supply/pca9468-mains/device/registers_dump");
+        DumpFileToFd(fd, "Charging table dump", "/d/google_battery/chg_raw_profile");
 
 
         RunCommandToFd(fd, "fg_model", {"/vendor/bin/sh", "-c",
@@ -966,15 +968,21 @@ void DumpstateDevice::dumpAoCSection(int fd) {
     DumpFileToFd(fd, "AoC hotword wake", "/sys/devices/platform/19000000.aoc/control/hotword_wakeup");
     DumpFileToFd(fd, "AoC memory exception wake", "/sys/devices/platform/19000000.aoc/control/memory_exception");
     DumpFileToFd(fd, "AoC memory votes", "/sys/devices/platform/19000000.aoc/control/memory_votes");
-    RunCommandToFd(fd, "AoC Heap Stats (A32)",  {"/vendor/bin/sh", "-c", "echo 'dbg heap -c 1' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug"},  CommandOptions::WithTimeout(1).Build());
-    RunCommandToFd(fd, "AoC Heap Stats (F1)",   {"/vendor/bin/sh", "-c", "echo 'dbg heap -c 2' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug"},  CommandOptions::WithTimeout(1).Build());
-    RunCommandToFd(fd, "AoC Heap Stats (HF0)",  {"/vendor/bin/sh", "-c", "echo 'dbg heap -c 3' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug"},  CommandOptions::WithTimeout(1).Build());
-    RunCommandToFd(fd, "AoC Heap Stats (HF1)",  {"/vendor/bin/sh", "-c", "echo 'dbg heap -c 4' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug"},  CommandOptions::WithTimeout(1).Build());
-    RunCommandToFd(fd, "AoC Tasks Stats (A32)", {"/vendor/bin/sh", "-c", "echo 'dbg tasks -c 1' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug"}, CommandOptions::WithTimeout(1).Build());
-    RunCommandToFd(fd, "AoC Tasks Stats (F1)",  {"/vendor/bin/sh", "-c", "echo 'dbg tasks -c 2' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug"}, CommandOptions::WithTimeout(1).Build());
-    RunCommandToFd(fd, "AoC Tasks Stats (HF0)", {"/vendor/bin/sh", "-c", "echo 'dbg tasks -c 3' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug"}, CommandOptions::WithTimeout(1).Build());
-    RunCommandToFd(fd, "AoC Tasks Stats (HF1)", {"/vendor/bin/sh", "-c", "echo 'dbg tasks -c 4' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug"}, CommandOptions::WithTimeout(1).Build());
-    RunCommandToFd(fd, "AoC MIF Stats",         {"/vendor/bin/sh", "-c", "echo 'mif details' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug"},    CommandOptions::WithTimeout(1).Build());
+    RunCommandToFd(fd, "AoC Heap Stats (A32)",
+      {"/vendor/bin/sh", "-c", "echo 'dbg heap -c 1' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug"},
+      CommandOptions::WithTimeout(1).Build());
+    RunCommandToFd(fd, "AoC Heap Stats (F1)",
+      {"/vendor/bin/sh", "-c", "echo 'dbg heap -c 2' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug"},
+      CommandOptions::WithTimeout(1).Build());
+    RunCommandToFd(fd, "AoC Heap Stats (HF0)",
+      {"/vendor/bin/sh", "-c", "echo 'dbg heap -c 3' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug"},
+      CommandOptions::WithTimeout(1).Build());
+    RunCommandToFd(fd, "AoC Heap Stats (HF1)",
+      {"/vendor/bin/sh", "-c", "echo 'dbg heap -c 4' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug"},
+      CommandOptions::WithTimeout(1).Build());
+    RunCommandToFd(fd, "AoC MIF Stats",
+      {"/vendor/bin/sh", "-c", "echo 'mif details' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug"},
+      CommandOptions::WithTimeout(1).Build());
 }
 
 // Dump items related to sensors usf.
