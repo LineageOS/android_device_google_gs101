@@ -79,6 +79,23 @@ void addAoC(std::shared_ptr<PowerStats> p) {
     };
     p->addStateResidencyDataProvider(
             std::make_unique<AocStateResidencyDataProvider>(monitorIds, monitorStates));
+
+    // Add AoC restart count
+    const GenericStateResidencyDataProvider::StateResidencyConfig restartCountConfig = {
+            .entryCountSupported = true,
+            .entryCountPrefix = "",
+            .totalTimeSupported = false,
+            .lastEntrySupported = false,
+    };
+    const std::vector<std::pair<std::string, std::string>> restartCountHeaders = {
+            std::make_pair("RESTART", ""),
+    };
+    std::vector<GenericStateResidencyDataProvider::PowerEntityConfig> cfgs;
+    cfgs.emplace_back(
+            generateGenericStateResidencyConfigs(restartCountConfig, restartCountHeaders),
+            "AoC-Count", "");
+    p->addStateResidencyDataProvider(std::make_unique<GenericStateResidencyDataProvider>(
+            "/sys/devices/platform/19000000.aoc/restart_count", cfgs));
 }
 
 void addDvfsStats(std::shared_ptr<PowerStats> p) {
@@ -611,6 +628,10 @@ void addDevfreq(std::shared_ptr<PowerStats> p) {
     p->addStateResidencyDataProvider(std::make_unique<DevfreqStateResidencyDataProvider>(
             "MFC",
             "/sys/devices/platform/17000070.devfreq_mfc/devfreq/17000070.devfreq_mfc"));
+
+    p->addStateResidencyDataProvider(std::make_unique<DevfreqStateResidencyDataProvider>(
+            "BO",
+            "/sys/devices/platform/17000080.devfreq_bo/devfreq/17000080.devfreq_bo"));
 }
 
 void addTPU(std::shared_ptr<PowerStats> p) {
