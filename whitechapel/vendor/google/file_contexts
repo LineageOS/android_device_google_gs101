@@ -347,7 +347,7 @@
 
 # Uwb
 # R4
-/vendor/bin/hw/hardware\.qorvo\.uwb-service                          u:object_r:hal_uwb_vendor_default_exec:s0
+/vendor/bin/hw/android\.hardware\.qorvo\.uwb\.service                u:object_r:hal_uwb_vendor_default_exec:s0
 /vendor/bin/init\.uwb\.calib\.sh                                     u:object_r:vendor_uwb_init_exec:s0
 /mnt/vendor/persist/uwb(/.*)?                                        u:object_r:persist_uwb_file:s0
 /data/vendor/uwb(/.*)?                                               u:object_r:uwb_data_vendor:s0
