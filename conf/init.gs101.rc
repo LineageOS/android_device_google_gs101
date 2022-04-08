@@ -212,6 +212,9 @@ on init
     chown system system /sys/class/power_supply/maxfg_base/m5_model_state
 
     # Dump eeprom
+    chown system system /sys/devices/platform/10970000.hsi2c/i2c-8/8-0050/eeprom
+    chown system system /sys/devices/platform/10970000.hsi2c/i2c-7/7-0050/eeprom
+    chown system system /sys/devices/platform/10970000.hsi2c/i2c-6/6-0050/eeprom
     chown system system /sys/devices/platform/10970000.hsi2c/i2c-5/5-0050/eeprom
     chown system system /sys/devices/platform/10970000.hsi2c/i2c-4/4-0050/eeprom
     chown system system /dev/battery_history
@@ -855,6 +858,9 @@ on post-fs-data
 
 # ODPM
 on fs
+    chown system system /sys/devices/platform/acpm_mfd_bus@17500000/i2c-0/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device1/enabled_rails
+    chown system system /sys/devices/platform/acpm_mfd_bus@17510000/i2c-1/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device0/enabled_rails
+
     chown system system /sys/devices/platform/acpm_mfd_bus@17500000/i2c-6/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device0/enabled_rails
     chown system system /sys/devices/platform/acpm_mfd_bus@17510000/i2c-7/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device1/enabled_rails
 
