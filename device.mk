@@ -1019,8 +1019,7 @@ PRODUCT_PACKAGES += \
 	audio.r_submix.default \
 	libamcsextfile \
 	audio_amcs_ext \
-	libspatialaudio \
-	librondo
+
 
 #Audio Vendor libraries
 PRODUCT_PACKAGES += \
