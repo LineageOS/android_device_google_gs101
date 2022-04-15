@@ -130,6 +130,7 @@ genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-3/i2c-max77759tcpc/power_sup
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-3/i2c-max77759tcpc/power_supply/usb/wakeup                              u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-3/i2c-max77759tcpc/wakeup                                               u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-4/4-0036/power_supply/maxfg/wakeup                                      u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-4/4-0057/power_supply/pca9468-mains/wakeup                              u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-4/4-0069/power_supply/dc/wakeup                                         u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-4/4-0069/power_supply/main-charger/wakeup                               u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-4/i2c-max77759tcpc/power_supply/tcpm-source-psy-i2c-max77759tcpc/wakeup u:object_r:sysfs_wakeup:s0
@@ -440,6 +441,8 @@ genfscon sysfs /devices/platform/google,usbc_port_cooling_dev/hysteresis_time   
 genfscon sysfs /devices/platform/google,usbc_port_cooling_dev/trip_time         u:object_r:sysfs_usbc_throttling_stats:s0
 
 # Extcon
+genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-3/i2c-max77759tcpc/extcon   u:object_r:sysfs_extcon:s0
+genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-4/i2c-max77759tcpc/extcon   u:object_r:sysfs_extcon:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-5/i2c-max77759tcpc/extcon   u:object_r:sysfs_extcon:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-6/i2c-max77759tcpc/extcon   u:object_r:sysfs_extcon:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-7/i2c-max77759tcpc/extcon   u:object_r:sysfs_extcon:s0
