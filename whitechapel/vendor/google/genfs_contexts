@@ -30,6 +30,13 @@ genfscon sysfs /devices/platform/10d50000.hsi2c                                 
 genfscon sysfs /devices/platform/10d10000.hsi2c/i2c-7/i2c-p9412                 u:object_r:sysfs_wlc:s0
 genfscon sysfs /devices/platform/10d10000.hsi2c/i2c-7/i2c-p9412/power_supply    u:object_r:sysfs_batteryinfo:s0
 
+
+genfscon sysfs /devices/platform/10970000.hsi2c/i2c-2/i2c-p9412                                 u:object_r:sysfs_wlc:s0
+genfscon sysfs /devices/platform/10970000.hsi2c/i2c-2/i2c-p9412/power_supply                    u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/10970000.hsi2c/i2c-2/2-0050/eeprom                             u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/10970000.hsi2c/i2c-3/i2c-p9412                                 u:object_r:sysfs_wlc:s0
+genfscon sysfs /devices/platform/10970000.hsi2c/i2c-3/i2c-p9412/power_supply                    u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/10970000.hsi2c/i2c-3/3-0050/eeprom                             u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-4/i2c-p9412                                 u:object_r:sysfs_wlc:s0
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-4/i2c-p9412/power_supply                    u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-4/4-0050/eeprom                             u:object_r:sysfs_batteryinfo:s0
