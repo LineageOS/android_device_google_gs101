@@ -203,3 +203,6 @@ userdebug_or_eng(`
 
 # SecureElement
 type sysfs_st33spi, sysfs_type, fs_type;
+
+# Trusty
+type sysfs_trusty, sysfs_type, fs_type;
