@@ -1,6 +1,7 @@
 type hal_camera_default_tmpfs, file_type;
 
 allow hal_camera_default self:global_capability_class_set sys_nice;
+allow hal_camera_default kernel:process setsched;
 
 binder_use(hal_camera_default);
 vndbinder_use(hal_camera_default);
