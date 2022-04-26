@@ -25,7 +25,7 @@
         </interface>
     </hal>
     <hal format="hidl" optional="true">
-        <name>com.fingerprints35.extension</name>
+        <name>com.fingerprints42.extension</name>
         <version>1.0</version>
         <interface>
             <name>IFingerprintAuthenticator</name>
