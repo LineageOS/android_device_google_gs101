@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 The Android Open Source Project
+ * Copyright (C) 2021 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,8 @@
 #pragma once
 
 #include <android-base/file.h>
-#include <android/hardware/usb/1.3/IUsb.h>
-#include <android/hardware/usb/1.2/types.h>
-#include <android/hardware/usb/1.2/IUsbCallback.h>
-#include <hidl/Status.h>
+#include <aidl/android/hardware/usb/BnUsb.h>
+#include <aidl/android/hardware/usb/BnUsbCallback.h>
 #include <pixelusb/UsbOverheatEvent.h>
 #include <utils/Log.h>
 
@@ -31,46 +29,23 @@
 // structures created and uvent fired.
 #define PORT_TYPE_TIMEOUT 8
 
+namespace aidl {
 namespace android {
 namespace hardware {
 namespace usb {
-namespace V1_3 {
-namespace implementation {
 
-using ::android::base::WriteStringToFile;
+using ::aidl::android::hardware::usb::IUsbCallback;
+using ::aidl::android::hardware::usb::PortRole;
 using ::android::base::ReadFileToString;
-using ::android::hardware::hidl_array;
-using ::android::hardware::hidl_memory;
-using ::android::hardware::hidl_string;
-using ::android::hardware::hidl_vec;
-using ::android::hardware::Return;
-using ::android::hardware::Void;
+using ::android::base::WriteStringToFile;
 using ::android::hardware::google::pixel::usb::UsbOverheatEvent;
 using ::android::hardware::google::pixel::usb::ZoneInfo;
 using ::android::hardware::thermal::V2_0::TemperatureType;
 using ::android::hardware::thermal::V2_0::ThrottlingSeverity;
-using ::android::hardware::usb::V1_0::PortRole;
-using ::android::hardware::usb::V1_0::PortRoleType;
-using ::android::hardware::usb::V1_0::PortDataRole;
-using ::android::hardware::usb::V1_0::PortPowerRole;
-using ::android::hardware::usb::V1_0::PortRole;
-using ::android::hardware::usb::V1_0::PortRoleType;
-using ::android::hardware::usb::V1_0::Status;
-using ::android::hardware::usb::V1_3::IUsb;
-using ::android::hardware::usb::V1_2::IUsbCallback;
-using ::android::hardware::usb::V1_2::PortStatus;
-using ::android::hardware::usb::V1_1::PortMode_1_1;
-using ::android::hardware::usb::V1_1::PortStatus_1_1;
-using ::android::hidl::base::V1_0::DebugInfo;
-using ::android::hidl::base::V1_0::IBase;
 using ::android::sp;
-
-enum class HALVersion{
-    V1_0,
-    V1_1,
-    V1_2,
-    V1_3
-};
+using ::ndk::ScopedAStatus;
+using ::std::shared_ptr;
+using ::std::string;
 
 constexpr char kGadgetName[] = "11110000.dwc3";
 #define NEW_UDC_PATH "/sys/devices/platform/11110000.usb/"
@@ -79,17 +54,19 @@ constexpr char kGadgetName[] = "11110000.dwc3";
 #define VBUS_PATH NEW_UDC_PATH "dwc3_exynos_otg_b_sess"
 #define USB_DATA_PATH NEW_UDC_PATH "usb_data_enabled"
 
-struct Usb : public IUsb {
+struct Usb : public BnUsb {
     Usb();
 
-    Return<void> switchRole(const hidl_string &portName, const PortRole &role) override;
-    Return<void> setCallback(const sp<V1_0::IUsbCallback>& callback) override;
-    Return<void> queryPortStatus() override;
-    Return<void> enableContaminantPresenceDetection(const hidl_string &portName, bool enable);
-    Return<void> enableContaminantPresenceProtection(const hidl_string &portName, bool enable);
-    Return<bool> enableUsbDataSignal(bool enable) override;
+    ScopedAStatus enableContaminantPresenceDetection(const std::string& in_portName,
+            bool in_enable, int64_t in_transactionId) override;
+    ScopedAStatus queryPortStatus(int64_t in_transactionId) override;
+    ScopedAStatus setCallback(const shared_ptr<IUsbCallback>& in_callback) override;
+    ScopedAStatus switchRole(const string& in_portName, const PortRole& in_role,
+            int64_t in_transactionId) override;
+    ScopedAStatus enableUsbData(const string& in_portName, bool in_enable,
+            int64_t in_transactionId) override;
 
-    sp<V1_0::IUsbCallback> mCallback_1_0;
+    std::shared_ptr<::aidl::android::hardware::usb::IUsbCallback> mCallback;
     // Protects mCallback variable
     pthread_mutex_t mLock;
     // Protects roleSwitch operation
@@ -105,13 +82,14 @@ struct Usb : public IUsb {
     UsbOverheatEvent mOverheat;
     // Temperature when connected
     float mPluggedTemperatureCelsius;
+    // Usb Data status
+    bool mUsbDataEnabled;
 
   private:
     pthread_t mPoll;
 };
 
-}  // namespace implementation
-}  // namespace V1_3
-}  // namespace usb
-}  // namespace hardware
-}  // namespace android
+} // namespace usb
+} // namespace hardware
+} // namespace android
+} // aidl
