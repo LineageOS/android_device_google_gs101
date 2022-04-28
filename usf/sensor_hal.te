@@ -49,6 +49,9 @@ allow hal_sensors_default sysfs_aoc_reset:file rw_file_perms;
 # Allow sensor HAL to read AoC dumpstate.
 allow hal_sensors_default sysfs_aoc_dumpstate:file r_file_perms;
 
+# Allow access for AoC properties.
+get_prop(hal_sensors_default, vendor_aoc_prop)
+
 # Allow access for dynamic sensor properties.
 get_prop(hal_sensors_default, vendor_dynamic_sensor_prop)
 
