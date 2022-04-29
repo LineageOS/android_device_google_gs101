@@ -26,3 +26,6 @@ allow hal_fingerprint_default fwk_sensor_hwservice:hwservice_manager find;
 
 # Allow fingerprint to read sysfs_display
 allow hal_fingerprint_default sysfs_display:file r_file_perms;
+
+# Allow fingerprint to access trusty sysfs
+allow hal_fingerprint_default sysfs_trusty:file rw_file_perms;
