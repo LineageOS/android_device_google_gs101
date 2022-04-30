@@ -39,4 +39,4 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_UWB_CAL_DIR)/init.uwb.calib.xtal.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.uwb.calib.sh \
 
 PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.uwb.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/android.hardware.uwb.xml
+    frameworks/native/data/etc/android.hardware.uwb.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.uwb.xml
