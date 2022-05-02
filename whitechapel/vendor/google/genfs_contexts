@@ -267,40 +267,72 @@ genfscon sysfs /devices/platform/175b0000.serial/serial0/serial0-0/bluetooth/hci
 
 # ODPM
 genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device0/name          u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/6-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/name                  u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device0/energy_value  u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/6-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/energy_value          u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device0/sampling_rate u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/6-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/sampling_rate         u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device0/enabled_rails u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-6/6-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/enabled_rails         u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-7/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device1/name          u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-7/7-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/name                  u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-7/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device1/energy_value  u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-7/7-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/energy_value          u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-7/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device1/sampling_rate u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-7/7-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/sampling_rate         u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-7/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device1/enabled_rails u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-7/7-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/enabled_rails         u:object_r:sysfs_odpm:s0
 
 genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device0/name          u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/7-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/name                  u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device0/energy_value  u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/7-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/energy_value          u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device0/sampling_rate u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/7-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/sampling_rate         u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device0/enabled_rails u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-7/7-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/enabled_rails         u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device1/name          u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/8-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/name                  u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device1/energy_value  u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/8-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/energy_value          u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device1/sampling_rate u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/8-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/sampling_rate         u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device1/enabled_rails u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-8/8-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/enabled_rails         u:object_r:sysfs_odpm:s0
 
 genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-0/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device0/name          u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-0/0-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/name                  u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-0/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device0/energy_value  u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-0/0-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/energy_value          u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-0/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device0/sampling_rate u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-0/0-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/sampling_rate         u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-0/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device0/enabled_rails u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-0/0-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/enabled_rails         u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-1/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device1/name          u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-1/1-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/name                  u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-1/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device1/energy_value  u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-1/1-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/energy_value          u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-1/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device1/sampling_rate u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-1/1-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/sampling_rate         u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-1/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device1/enabled_rails u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-1/1-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/enabled_rails         u:object_r:sysfs_odpm:s0
 
 genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-0/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device1/name          u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-0/0-001f/s2mpg10-meter/s2mpg10-odpm/iio:device1/name                  u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-0/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device1/energy_value  u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-0/0-001f/s2mpg10-meter/s2mpg10-odpm/iio:device1/energy_value          u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-0/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device1/sampling_rate u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-0/0-001f/s2mpg10-meter/s2mpg10-odpm/iio:device1/sampling_rate         u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-0/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device1/enabled_rails u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-0/0-001f/s2mpg10-meter/s2mpg10-odpm/iio:device1/enabled_rails         u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-1/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device0/name          u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-1/1-002f/s2mpg11-meter/s2mpg11-odpm/iio:device0/name                  u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-1/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device0/energy_value  u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-1/1-002f/s2mpg11-meter/s2mpg11-odpm/iio:device0/energy_value          u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-1/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device0/sampling_rate u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-1/1-002f/s2mpg11-meter/s2mpg11-odpm/iio:device0/sampling_rate         u:object_r:sysfs_odpm:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-1/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device0/enabled_rails u:object_r:sysfs_odpm:s0
+genfscon sysfs /devices/platform/acpm_mfd_bus@17510000/i2c-1/1-002f/s2mpg11-meter/s2mpg11-odpm/iio:device0/enabled_rails         u:object_r:sysfs_odpm:s0
 
 # bcl sysfs files
 genfscon sysfs /devices/virtual/pmic/mitigation                                        u:object_r:sysfs_bcl:s0
