@@ -405,6 +405,8 @@ genfscon debugfs /pm_genpd/pm_genpd_summary                                     
 genfscon debugfs /regmap                                                                                  u:object_r:vendor_regmap_debugfs:s0
 genfscon debugfs /usb                                                                                     u:object_r:vendor_usb_debugfs:s0
 genfscon debugfs /google_charger                                                                          u:object_r:vendor_charger_debugfs:s0
+genfscon debugfs /max77759_chg                                                                            u:object_r:vendor_charger_debugfs:s0
+genfscon debugfs /max77729_pmic                                                                           u:object_r:vendor_charger_debugfs:s0
 genfscon debugfs /gvotables                                                                               u:object_r:vendor_votable_debugfs:s0
 genfscon debugfs /google_battery                                                                          u:object_r:vendor_battery_debugfs:s0
 
