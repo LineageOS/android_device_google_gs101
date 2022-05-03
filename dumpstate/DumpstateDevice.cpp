@@ -399,6 +399,8 @@ void DumpstateDevice::dumpPowerSection(int fd) {
     if (!PropertiesHelper::IsUserBuild()) {
 
         DumpFileToFd(fd, "DC_registers dump", "/sys/class/power_supply/pca9468-mains/device/registers_dump");
+        DumpFileToFd(fd, "max77759_chg registers dump", "/d/max77759_chg/registers");
+        DumpFileToFd(fd, "max77729_pmic registers dump", "/d/max77729_pmic/registers");
         DumpFileToFd(fd, "Charging table dump", "/d/google_battery/chg_raw_profile");
 
 
