@@ -12,3 +12,10 @@ set_prop(hal_usb_gadget_impl, vendor_usb_config_prop)
 allow hal_usb_gadget_impl sysfs_batteryinfo:dir r_dir_perms;
 allow hal_usb_gadget_impl sysfs_batteryinfo:file rw_file_perms;
 allow hal_usb_gadget_impl sysfs_extcon:dir search;
+
+# parser the number of dwc3 irq
+allow hal_usb_gadget_impl proc_interrupts:file r_file_perms;
+
+# change irq to other cores
+allow hal_usb_gadget_impl proc_irq:dir r_dir_perms;
+allow hal_usb_gadget_impl proc_irq:file w_file_perms;
