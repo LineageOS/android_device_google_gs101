@@ -420,8 +420,8 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.sensor.stepdetector.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.stepdetector.xml
 endif
 
-# Add sensor HAL 2.1 product packages
-PRODUCT_PACKAGES += android.hardware.sensors@2.1-service.multihal
+# Add sensor HAL AIDL product packages
+PRODUCT_PACKAGES += android.hardware.sensors-service.multihal
 
 # USB HAL
 PRODUCT_PACKAGES += \
