@@ -188,11 +188,11 @@ genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-8/i2c-max77759tcpc/power_sup
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-8/i2c-max77759tcpc/wakeup                                               u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/11110000.usb/11110000.dwc3/wakeup                                                          u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/11110000.usb/11110000.dwc3/xhci-hcd-exynos.4.auto/wakeup                                   u:object_r:sysfs_wakeup:s0
-genfscon sysfs /devices/platform/11110000.usb/11110000.dwc3/xhci-hcd-exynos.4.auto/usb2/wakeup                              u:object_r:sysfs_wakeup:s0
-genfscon sysfs /devices/platform/11110000.usb/11110000.dwc3/xhci-hcd-exynos.4.auto/usb3/wakeup                              u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/11110000.usb/11110000.dwc3/xhci-hcd-exynos.4.auto/usb2                                     u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/11110000.usb/11110000.dwc3/xhci-hcd-exynos.4.auto/usb3                                     u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/11110000.usb/11110000.dwc3/xhci-hcd-exynos.5.auto/wakeup                                   u:object_r:sysfs_wakeup:s0
-genfscon sysfs /devices/platform/11110000.usb/11110000.dwc3/xhci-hcd-exynos.5.auto/usb2/wakeup                              u:object_r:sysfs_wakeup:s0
-genfscon sysfs /devices/platform/11110000.usb/11110000.dwc3/xhci-hcd-exynos.5.auto/usb3/wakeup                              u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/11110000.usb/11110000.dwc3/xhci-hcd-exynos.5.auto/usb2                                     u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/11110000.usb/11110000.dwc3/xhci-hcd-exynos.5.auto/usb3                                     u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/11110000.usb/wakeup                                                                        u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/14520000.pcie/pci0000:00/0000:00:00.0/0000:01:00.0/wakeup                                  u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/14520000.pcie/pci0001:00/0001:00:00.0/0001:01:00.0/wakeup                                  u:object_r:sysfs_wakeup:s0
@@ -405,6 +405,8 @@ genfscon debugfs /pm_genpd/pm_genpd_summary                                     
 genfscon debugfs /regmap                                                                                  u:object_r:vendor_regmap_debugfs:s0
 genfscon debugfs /usb                                                                                     u:object_r:vendor_usb_debugfs:s0
 genfscon debugfs /google_charger                                                                          u:object_r:vendor_charger_debugfs:s0
+genfscon debugfs /max77759_chg                                                                            u:object_r:vendor_charger_debugfs:s0
+genfscon debugfs /max77729_pmic                                                                           u:object_r:vendor_charger_debugfs:s0
 genfscon debugfs /gvotables                                                                               u:object_r:vendor_votable_debugfs:s0
 genfscon debugfs /google_battery                                                                          u:object_r:vendor_battery_debugfs:s0
 
