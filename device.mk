@@ -278,7 +278,6 @@ PRODUCT_COPY_FILES += \
 # Shell scripts
 PRODUCT_COPY_FILES += \
 	device/google/gs101/init.insmod.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.insmod.sh \
-	device/google/gs101/set_usb_irq.sh:$(TARGET_COPY_OUT_VENDOR)/bin/hw/set_usb_irq.sh \
 	device/google/gs101/disable_contaminant_detection.sh:$(TARGET_COPY_OUT_VENDOR)/bin/hw/disable_contaminant_detection.sh
 
 # insmod files
