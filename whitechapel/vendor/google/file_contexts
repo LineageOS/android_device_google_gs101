@@ -280,7 +280,6 @@
 /vendor/bin/init\.insmod\.sh    u:object_r:init-insmod-sh_exec:s0
 
 # USB
-/vendor/bin/hw/set_usb_irq\.sh                    u:object_r:set-usb-irq-sh_exec:s0
 /vendor/bin/hw/disable_contaminant_detection\.sh  u:object_r:disable-contaminant-detection-sh_exec:s0
 
 # NFC
