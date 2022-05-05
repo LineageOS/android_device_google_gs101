@@ -24,6 +24,7 @@ DEVICE_MANIFEST_FILE += \
 endif
 
 # Include the Goodix AIDL HAL namespaces.
+PRODUCT_SOONG_NAMESPACES += vendor/goodix/udfps/fp_utils
 ifeq ($(GOODIX_CONFIG_BUILD_VERSION), g6_trusty)
 PRODUCT_SOONG_NAMESPACES += vendor/goodix/udfps/g6_trusty
 PRODUCT_SOONG_NAMESPACES += vendor/goodix/udfps/g6_aidl_trusty
