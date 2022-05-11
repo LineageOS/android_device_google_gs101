@@ -21,5 +21,9 @@ userdebug_or_eng(`
     # Access to directly upgrade firmware on st33spi_device used for engineering devices
     typeattribute st33spi_device mlstrustedobject;
     allow euiccpixel_app st33spi_device:chr_file rw_file_perms;
+
+    allow euiccpixel_app sysfs_st33spi:dir search;
+    allow euiccpixel_app sysfs_st33spi:file rw_file_perms;
+    allow euiccpixel_app sysfs_touch:dir search;
 ')
 
