@@ -203,6 +203,9 @@ userdebug_or_eng(`
 
 # SecureElement
 type sysfs_st33spi, sysfs_type, fs_type;
+userdebug_or_eng(`
+    typeattribute sysfs_st33spi mlstrustedobject;
+')
 
 # Trusty
 type sysfs_trusty, sysfs_type, fs_type;
