@@ -1,5 +1,7 @@
 userdebug_or_eng(`
   set_prop(mediacodec, vendor_codec2_debug_prop)
+  allow mediacodec vendor_media_data_file:dir rw_dir_perms;
+  allow mediacodec vendor_media_data_file:file create_file_perms;
 ')
 
 add_service(mediacodec, eco_service)
