@@ -101,6 +101,7 @@
 /dev/umts_boot0                u:object_r:radio_device:s0
 /dev/logbuffer_tcpm            u:object_r:logbuffer_device:s0
 /dev/logbuffer_usbpd           u:object_r:logbuffer_device:s0
+/dev/logbuffer_pogo_transport  u:object_r:logbuffer_device:s0
 /dev/logbuffer_ssoc            u:object_r:logbuffer_device:s0
 /dev/logbuffer_wireless        u:object_r:logbuffer_device:s0
 /dev/logbuffer_ttf             u:object_r:logbuffer_device:s0
