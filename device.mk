@@ -126,7 +126,7 @@ PRODUCT_PRODUCT_PROPERTIES += \
 
 # Carrier configuration default location
 PRODUCT_PROPERTY_OVERRIDES += \
-	persist.vendor.radio.config.carrier_config_dir=/mnt/vendor/modem_img/images/default/confpack
+	persist.vendor.radio.config.carrier_config_dir=/vendor/firmware/carrierconfig
 
 # Set the Bluetooth Class of Device
 # Service Field: 0x5A -> 90
