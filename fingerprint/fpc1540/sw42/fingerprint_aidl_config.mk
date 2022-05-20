@@ -17,3 +17,12 @@ LIBFPC_NAME=libfpcmulti_debug.a
 FPC_CONFIG_DEBUG=1
 FPC_CONFIG_ENGINEERING=1
 FPC_CONFIG_GOOGLE_RELEASE=1
+FPC_CONFIG_TRUSTY_CLEAN_TA=1
+
+GOOGLE_CONFIG_PERFORMANCE=1
+
+# Enable Suez
+$(call soong_config_set,fp_hal_feature,biometric_suez_support,true)
+
+# Must add below method to each project's device.mk to show sensorLocation
+#$(call soong_config_set,fp_hal_feature,pixel_product, project_XX)
