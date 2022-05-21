@@ -125,7 +125,7 @@ PRODUCT_PRODUCT_PROPERTIES += \
 
 # Carrier configuration default location
 PRODUCT_PROPERTY_OVERRIDES += \
-	persist.vendor.radio.config.carrier_config_dir=/mnt/vendor/modem_img/images/default/confpack
+	persist.vendor.radio.config.carrier_config_dir=/vendor/firmware/carrierconfig
 
 # Set the Bluetooth Class of Device
 # Service Field: 0x5A -> 90
@@ -1191,8 +1191,8 @@ PRODUCT_PACKAGES_DEBUG += BatteryStatsViewer
 DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE := device/google/gs101/device_framework_matrix_product.xml
 
 # Preopt SystemUI
-PRODUCT_DEXPREOPT_SPEED_APPS += \
-    SystemUIGoogle
+PRODUCT_DEXPREOPT_SPEED_APPS += SystemUIGoogle  # For internal
+PRODUCT_DEXPREOPT_SPEED_APPS += SystemUI  # For AOSP
 
 # Compile SystemUI on device with `speed`.
 PRODUCT_PROPERTY_OVERRIDES += \
