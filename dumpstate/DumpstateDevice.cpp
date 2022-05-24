@@ -375,6 +375,7 @@ void DumpstateDevice::dumpPowerSection(int fd) {
 		       "echo \"contaminant_detection_status:\"; cat $f/contaminant_detection_status;  done"});
 
     DumpFileToFd(fd, "PD Engine", "/dev/logbuffer_usbpd");
+    DumpFileToFd(fd, "POGO Transport", "/dev/logbuffer_pogo_transport");
     DumpFileToFd(fd, "PPS-google_cpm", "/dev/logbuffer_cpm");
     DumpFileToFd(fd, "PPS-dc", "/dev/logbuffer_pca9468");
 
@@ -960,6 +961,10 @@ void DumpstateDevice::dumpDisplaySection(int fd) {
                    CommandOptions::WithTimeout(2).Build());
     DumpFileToFd(fd, "Primary panel extra info", "/sys/devices/platform/exynos-drm/primary-panel/panel_extinfo");
     DumpFileToFd(fd, "secondary panel extra info", "/sys/devices/platform/exynos-drm/secondary-panel/panel_extinfo");
+    RunCommandToFd(fd, "HWC logs", {"/vendor/bin/sh", "-c",
+                   "for f in $(ls /data/vendor/log/hwc/*hwc_*); do "
+                   "echo $f ; cat $f ; done"},
+                   CommandOptions::WithTimeout(2).Build());
 }
 
 // Dump items related to AoC
