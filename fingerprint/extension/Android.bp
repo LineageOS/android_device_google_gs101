@@ -1,0 +1,6 @@
+sh_binary {
+    name: "fingerprint.extension.sh",
+    init_rc: ["init.fingerprint.extension.rc"],
+    src: "fingerprint.extension.sh",
+    system_ext_specific: true,
+}
