@@ -378,14 +378,10 @@ endif
 
 # Power HAL
 PRODUCT_COPY_FILES += \
-	device/google/gs101/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
-
-PRODUCT_COPY_FILES += \
 	device/google/gs101/task_profiles.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
-
+# Legacy HW
 PRODUCT_COPY_FILES += \
 	device/google/gs101/powerhint_a0.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint_a0.json
-
 PRODUCT_COPY_FILES += \
 	device/google/gs101/powerhint_a1.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint_a1.json
 -include hardware/google/pixel/power-libperfmgr/aidl/device.mk
@@ -990,6 +986,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.config.media_vol_steps=25 \
 	ro.audio.monitorRotation = true \
 	ro.audio.offload_wakelock=false
+
+# declare use of spatial audio
+# PRODUCT_PROPERTY_OVERRIDES += \
+#	ro.audio.spatializer_enabled=true
 
 ifeq (,$(filter aosp_%,$(TARGET_PRODUCT)))
 # IAudioMetricExt HIDL

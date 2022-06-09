@@ -525,6 +525,7 @@ on fs
     restorecon_recursive /mnt/vendor/persist/audio
     restorecon_recursive /mnt/vendor/persist/sensors
     restorecon_recursive /mnt/vendor/persist/battery
+    restorecon_recursive /mnt/vendor/persist/modem
     # Set up display-related directories and permissions
     # Add restorecon_recursive command to make sure the restorecon label is persist_display_file.
     restorecon_recursive /mnt/vendor/persist/display
@@ -857,6 +858,11 @@ on post-fs-data
 
 on property:vendor.thermal.link_ready=1
     # BCL
+    write /sys/devices/virtual/pmic/mitigation/clock_ratio/tpu_light_clk_ratio 0xfff041c5
+    write /sys/devices/virtual/pmic/mitigation/clock_ratio/cpu2_light_clk_ratio 0xfff041c5
+    write /sys/devices/virtual/pmic/mitigation/clock_ratio/gpu_heavy_clk_ratio 0xfff04385
+    write /sys/devices/virtual/pmic/mitigation/clock_ratio/tpu_heavy_clk_ratio 0xfff041c3
+    write /sys/devices/virtual/pmic/mitigation/clock_ratio/cpu2_heavy_clk_ratio 0xfff041c3
     write /dev/thermal/tz-by-name/smpl_gm/policy user_space
     write /dev/thermal/tz-by-name/vdroop1/policy user_space
     write /dev/thermal/tz-by-name/vdroop2/policy user_space
