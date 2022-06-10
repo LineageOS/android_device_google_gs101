@@ -1116,10 +1116,6 @@ PRODUCT_PACKAGES += \
 	update_engine_sideload \
 	update_verifier
 
-# tetheroffload HAL
-PRODUCT_PACKAGES += \
-	vendor.samsung_slsi.hardware.tetheroffload@1.1-service
-
 # pKVM
 $(call inherit-product, packages/modules/Virtualization/apex/product_packages.mk)
 PRODUCT_BUILD_PVMFW_IMAGE := true
