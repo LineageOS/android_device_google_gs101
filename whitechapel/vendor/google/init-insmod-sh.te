@@ -17,3 +17,4 @@ userdebug_or_eng(`
 ')
 
 dontaudit init-insmod-sh proc_cmdline:file r_file_perms;
+dontaudit init-insmod-sh self:key write;
