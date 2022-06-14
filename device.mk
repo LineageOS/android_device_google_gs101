@@ -964,7 +964,8 @@ PRODUCT_PACKAGES += \
 	audio.r_submix.default \
 	libamcsextfile \
 	audio_amcs_ext \
-
+	libspatialaudio \
+	librondo
 
 #Audio Vendor libraries
 PRODUCT_PACKAGES += \
@@ -996,6 +997,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.config.media_vol_steps=25 \
 	ro.audio.monitorRotation = true \
 	ro.audio.offload_wakelock=false
+
+# declare use of spatial audio
+# PRODUCT_PROPERTY_OVERRIDES += \
+#	ro.audio.spatializer_enabled=true
 
 ifeq (,$(filter aosp_%,$(TARGET_PRODUCT)))
 # IAudioMetricExt HIDL
