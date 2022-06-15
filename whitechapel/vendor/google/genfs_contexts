@@ -373,3 +373,6 @@ genfscon sysfs /devices/platform/25c40000.etm    u:object_r:sysfs_devices_cs_etm
 genfscon sysfs /devices/platform/25d40000.etm    u:object_r:sysfs_devices_cs_etm:s0
 genfscon sysfs /devices/platform/25e40000.etm    u:object_r:sysfs_devices_cs_etm:s0
 genfscon sysfs /devices/platform/25f40000.etm    u:object_r:sysfs_devices_cs_etm:s0
+
+# BootControl
+genfscon sysfs /kernel/boot_control/blow_ar      u:object_r:sysfs_bootctl:s0

@@ -200,3 +200,6 @@ type sysfs_sjtag, fs_type, sysfs_type;
 userdebug_or_eng(`
     typeattribute sysfs_sjtag mlstrustedobject;
 ')
+
+# BootControl
+type sysfs_bootctl, sysfs_type, fs_type;
