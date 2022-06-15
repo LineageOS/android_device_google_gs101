@@ -297,6 +297,8 @@ on init
     chown system system /sys/devices/platform/google,charger/charge_start_level
     chown system system /sys/devices/platform/google,charger/charge_stop_level
     chown system system /sys/devices/platform/google,cpm/dc_ctl
+    # Important to include dd_state as it's used in battery defender in charger mode
+    chown system system /sys/devices/platform/google,charger/dd_state
 
     # Power Stats HAL
     chown system system /dev/bbd_pwrstat
@@ -1008,6 +1010,8 @@ on property:vendor.disable.bcl.control=0
 on property:ro.boot.mode=charger && property:init.svc.vendor.charger=running
     # Enable UFS powersaving in Off Mode Charger
     write /dev/sys/block/bootdevice/clkgate_enable 1
+    # Disable dock-defend in Off Mode Charger
+    write /sys/devices/platform/google,charger/dd_state -1
 
 # Cpuset experiment
 on property:persist.device_config.vendor_system_native.top-app_cpuset=*
