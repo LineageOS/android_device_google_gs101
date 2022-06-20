@@ -989,18 +989,9 @@ on property:vendor.thermal.link_ready=1
     chown system system /dev/thermal/cdev-by-name/wlc_fcc/cur_state
     chown system system /dev/thermal/cdev-by-name/usbc-port/cur_state
 
-# Create thermal symlink in off charging mode
 on charger
-    mkdir /dev/thermal 0750 system system
-    mkdir /dev/thermal/tz-by-name 0750 system system
-    mkdir /dev/thermal/cdev-by-name 0750 system system
-    start vendor.thermal.symlinks
     write /proc/vendor_sched/sys_uclamp_min 0
     write /proc/vendor_sched/sys_prefer_idle 0
-
-# Launch thermal hal in off charging mode
-on charger && property:vendor.thermal.link_ready=1
-    start vendor.thermal-hal-2-0
 
 on property:vendor.disable.bcl.control=1
     write /sys/devices/virtual/pmic/mitigation/instruction/enable_mitigation 0
