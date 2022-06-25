@@ -25,6 +25,7 @@
 using android::hardware::google::pixel::SysfsCollector;
 using android::hardware::google::pixel::UeventListener;
 
+#define BLOCK_STATS_LENGTH 17
 #define UFSHC_PATH(filename) "/dev/sys/block/bootdevice/" #filename
 #define UFS_ERR_PATH(err_type) UFSHC_PATH(err_stats/) #err_type
 const struct SysfsCollector::SysfsPaths sysfs_paths = {
