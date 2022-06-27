@@ -32,7 +32,9 @@ TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_VARIANT := cortex-a55
 TARGET_CPU_VARIANT_RUNTIME := cortex-a55
 
-ifeq (,$(filter %_64,$(TARGET_PRODUCT)))
+DEVICE_IS_64BIT_ONLY ?= $(if $(filter %_64,$(TARGET_PRODUCT)),true,false)
+
+ifneq ($(DEVICE_IS_64BIT_ONLY),true)
 TARGET_2ND_ARCH := arm
 TARGET_2ND_ARCH_VARIANT := armv8-a
 TARGET_2ND_CPU_ABI := armeabi-v7a
@@ -44,7 +46,6 @@ endif
 BOARD_KERNEL_CMDLINE += dyndbg=\"func alloc_contig_dump_pages +p\"
 BOARD_KERNEL_CMDLINE += earlycon=exynos4210,0x10A00000 console=ttySAC0,115200 androidboot.console=ttySAC0 printk.devkmsg=on
 BOARD_KERNEL_CMDLINE += cma_sysfs.experimental=Y
-BOARD_KERNEL_CMDLINE += stack_depot_disable=off page_pinner=on
 BOARD_KERNEL_CMDLINE += swiotlb=noforce
 BOARD_BOOTCONFIG += androidboot.boot_devices=14700000.ufs
 
@@ -183,6 +184,9 @@ BOARD_GOOGLE_DYNAMIC_PARTITIONS_PARTITION_LIST := \
 # Set error limit to BOARD_SUPER_PARTITON_SIZE - 500MB
 BOARD_SUPER_PARTITION_ERROR_LIMIT := 8006926336
 
+# Testing related defines
+BOARD_PERFSETUP_SCRIPT := platform_testing/scripts/perf-setup/r4o6-setup.sh
+
 #
 # AUDIO & VOICE
 #
@@ -311,22 +315,6 @@ BOARD_VNDK_VERSION := current
 # H/W align restriction of MM IPs
 BOARD_EXYNOS_S10B_FORMAT_ALIGN := 64
 
-# WiFi
-BOARD_WLAN_DEVICE := bcmdhd
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
-BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_bcmdhd
-WPA_SUPPLICANT_VERSION := VER_0_8_X
-BOARD_WPA_SUPPLICANT_DRIVER := NL80211
-BOARD_HOSTAPD_DRIVER := NL80211
-# Wifi interface combination - {1 STA + 1 AP (bridged or single)} or {1 STA + 1 P2P}
-# or {1 STA + 1 NAN} or {2 STA}
-WIFI_HAL_INTERFACE_COMBINATIONS := {{{STA}, 1}, {{P2P, NAN, AP}, 1}}, {{{STA}, 2}}
-WIFI_FEATURE_WIFI_EXT_HAL := true
-WIFI_FEATURE_IMU_DETECTION := true
-# Avoid Wifi reset on MAC Address change
-WIFI_AVOID_IFACE_RESET_MAC_CHANGE := true
-WIFI_FEATURE_HOSTAPD_11AX := true
-
 # NeuralNetworks
 GPU_SOURCE_PRESENT := $(wildcard vendor/arm/mali/valhall)
 GPU_PREBUILD_PRESENT := $(wildcard vendor/google_devices/gs101/prebuilts/gpu/libs)
@@ -361,10 +349,10 @@ BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 # Vendor ramdisk image for kernel development
 BOARD_BUILD_VENDOR_RAMDISK_IMAGE := true
 
-BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := device/google/gs101/vendor_dlkm.blocklist
-
 KERNEL_MODULE_DIR := $(TARGET_KERNEL_DIR)
 KERNEL_MODULES := $(wildcard $(KERNEL_MODULE_DIR)/*.ko)
+
+BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := $(KERNEL_MODULE_DIR)/vendor_dlkm.modules.blocklist
 
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(strip $(shell cat $(KERNEL_MODULE_DIR)/vendor_boot.modules.load))
 ifndef BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD
@@ -388,5 +376,8 @@ BOARD_KERNEL_CMDLINE += at24.write_timeout=100
 
 # Enable larger logbuf
 BOARD_KERNEL_CMDLINE += log_buf_len=1024K
+
+# Protected VM firmware
+BOARD_PVMFWIMAGE_PARTITION_SIZE := 0x00100000
 
 -include vendor/google_devices/gs101/proprietary/BoardConfigVendor.mk

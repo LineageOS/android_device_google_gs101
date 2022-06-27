@@ -21,3 +21,6 @@ GOOGLE_CONFIG_PERFORMANCE=1
 
 # Enable Suez
 $(call soong_config_set,fp_hal_feature,biometric_suez_support,true)
+
+# Must add below method to each project's device.mk to show sensorLocation
+#$(call soong_config_set,fp_hal_feature,pixel_product, project_XX)

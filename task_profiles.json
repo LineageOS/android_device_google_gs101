@@ -7,7 +7,8 @@
           "Name": "WriteFile",
           "Params":
           {
-            "FilePath": "/sys/kernel/vendor_sched/set_task_group_ta",
+            "FilePath": "/proc/vendor_sched/set_task_group_ta",
+            "ProcFilePath": "/proc/vendor_sched/set_proc_group_ta",
             "Value": "<pid>",
             "LogFailures": "false"
           }
@@ -21,7 +22,8 @@
           "Name": "WriteFile",
           "Params":
           {
-            "FilePath": "/sys/kernel/vendor_sched/set_task_group_cam",
+            "FilePath": "/proc/vendor_sched/set_task_group_cam",
+            "ProcFilePath": "/proc/vendor_sched/set_proc_group_cam",
             "Value": "<pid>",
             "LogFailures": "false"
           }
@@ -35,7 +37,8 @@
           "Name": "WriteFile",
           "Params":
           {
-            "FilePath": "/sys/kernel/vendor_sched/set_task_group_cam_power",
+            "FilePath": "/proc/vendor_sched/set_task_group_cam_power",
+            "ProcFilePath": "/proc/vendor_sched/set_proc_group_cam_power",
             "Value": "<pid>",
             "LogFailures": "false"
           }
@@ -49,7 +52,23 @@
           "Name": "WriteFile",
           "Params":
           {
-            "FilePath": "/sys/kernel/vendor_sched/set_task_group_dex2oat",
+            "FilePath": "/proc/vendor_sched/set_task_group_dex2oat",
+            "ProcFilePath": "/proc/vendor_sched/set_proc_group_dex2oat",
+            "Value": "<pid>",
+            "LogFailures": "false"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "OtaPerformance",
+      "Actions": [
+        {
+          "Name": "WriteFile",
+          "Params":
+          {
+            "FilePath": "/proc/vendor_sched/set_task_group_ota",
+            "ProcFilePath": "/proc/vendor_sched/set_proc_group_ota",
             "Value": "<pid>",
             "LogFailures": "false"
           }
@@ -102,7 +121,8 @@
           "Name": "WriteFile",
           "Params":
           {
-            "FilePath": "/sys/kernel/vendor_sched/set_task_group_bg",
+            "FilePath": "/proc/vendor_sched/set_task_group_bg",
+            "ProcFilePath": "/proc/vendor_sched/set_proc_group_bg",
             "Value": "<pid>",
             "LogFailures": "false"
           }
@@ -116,7 +136,8 @@
           "Name": "WriteFile",
           "Params":
           {
-            "FilePath": "/sys/kernel/vendor_sched/set_task_group_sys",
+            "FilePath": "/proc/vendor_sched/set_task_group_sys",
+            "ProcFilePath": "/proc/vendor_sched/set_proc_group_sys",
             "Value": "<pid>",
             "LogFailures": "false"
           }
@@ -130,7 +151,8 @@
           "Name": "WriteFile",
           "Params":
           {
-            "FilePath": "/sys/kernel/vendor_sched/set_task_group_fg",
+            "FilePath": "/proc/vendor_sched/set_task_group_fg",
+            "ProcFilePath": "/proc/vendor_sched/set_proc_group_fg",
             "Value": "<pid>",
             "LogFailures": "false"
           }
@@ -144,7 +166,8 @@
           "Name": "WriteFile",
           "Params":
           {
-            "FilePath": "/sys/kernel/vendor_sched/set_task_group_ta",
+            "FilePath": "/proc/vendor_sched/set_task_group_ta",
+            "ProcFilePath": "/proc/vendor_sched/set_proc_group_ta",
             "Value": "<pid>",
             "LogFailures": "false"
           }
@@ -158,7 +181,8 @@
           "Name": "WriteFile",
           "Params":
           {
-            "FilePath": "/sys/kernel/vendor_sched/set_task_group_nnapi",
+            "FilePath": "/proc/vendor_sched/set_task_group_nnapi",
+            "ProcFilePath": "/proc/vendor_sched/set_proc_group_nnapi",
             "Value": "<pid>",
             "LogFailures": "false"
           }
@@ -172,7 +196,8 @@
           "Name": "WriteFile",
           "Params":
           {
-            "FilePath": "/sys/kernel/vendor_sched/set_task_group_sysbg",
+            "FilePath": "/proc/vendor_sched/set_task_group_sysbg",
+            "ProcFilePath": "/proc/vendor_sched/set_proc_group_sysbg",
             "Value": "<pid>",
             "LogFailures": "false"
           }
@@ -194,7 +219,8 @@
           "Name": "WriteFile",
           "Params":
           {
-            "FilePath": "/sys/kernel/vendor_sched/set_task_group_sf",
+            "FilePath": "/proc/vendor_sched/set_task_group_sf",
+            "ProcFilePath": "/proc/vendor_sched/set_proc_group_sf",
             "Value": "<pid>",
             "LogFailures": "false"
           }
@@ -216,7 +242,8 @@
           "Name": "WriteFile",
           "Params":
           {
-            "FilePath": "/sys/kernel/vendor_sched/set_task_group_rt",
+            "FilePath": "/proc/vendor_sched/set_task_group_rt",
+            "ProcFilePath": "/proc/vendor_sched/set_proc_group_rt",
             "Value": "<pid>",
             "LogFailures": "false"
           }
@@ -230,7 +257,7 @@
           "Name": "WriteFile",
           "Params":
           {
-            "FilePath": "/sys/kernel/vendor_sched/uclamp_fork_reset_set",
+            "FilePath": "/proc/vendor_sched/uclamp_fork_reset_set",
             "Value": "<pid>",
             "LogFailures": "false"
           }
@@ -244,7 +271,7 @@
           "Name": "WriteFile",
           "Params":
           {
-            "FilePath": "/sys/kernel/vendor_sched/uclamp_fork_reset_clear",
+            "FilePath": "/proc/vendor_sched/uclamp_fork_reset_clear",
             "Value": "<pid>",
             "LogFailures": "false"
           }
@@ -257,6 +284,10 @@
     {
       "Name": "Dex2OatBootComplete",
       "Profiles": [ "Dex2oatPerformance", "ProcessCapacityNormal", "LowIoPriority", "TimerSlackHigh" ]
+    },
+    {
+      "Name": "OtaProfiles",
+      "Profiles": [ "OtaPerformance", "ServiceCapacityLow", "LowIoPriority", "TimerSlackHigh" ]
     }
   ]
 }

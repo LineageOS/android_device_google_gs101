@@ -20,6 +20,7 @@
 #include <android-base/properties.h>
 #include <android-base/strings.h>
 #include <assert.h>
+#include <cstring>
 #include <dirent.h>
 #include <pthread.h>
 #include <stdio.h>
@@ -60,6 +61,9 @@ constexpr char kHsi2cPath[] = "/sys/devices/platform/10d50000.hsi2c";
 constexpr char kI2CPath[] = "/sys/devices/platform/10d50000.hsi2c/i2c-";
 constexpr char kContaminantDetectionPath[] = "i2c-max77759tcpc/contaminant_detection";
 constexpr char kStatusPath[] = "i2c-max77759tcpc/contaminant_detection_status";
+constexpr char kSinkLimitEnable[] = "i2c-max77759tcpc/usb_limit_sink_enable";
+constexpr char kSourceLimitEnable[] = "i2c-max77759tcpc/usb_limit_source_enable";
+constexpr char kSinkLimitCurrent[] = "i2c-max77759tcpc/usb_limit_sink_current";
 constexpr char kTypecPath[] = "/sys/class/typec";
 constexpr char kDisableContatminantDetection[] = "vendor.usb.contaminantdisable";
 constexpr char kOverheatStatsPath[] = "/sys/devices/platform/google,usbc_port_cooling_dev/";
@@ -68,6 +72,9 @@ constexpr char kThermalZoneForTrip[] = "VIRTUAL-USB-THROTTLING";
 constexpr char kThermalZoneForTempReadPrimary[] = "usb_pwr_therm2";
 constexpr char kThermalZoneForTempReadSecondary1[] = "usb_pwr_therm";
 constexpr char kThermalZoneForTempReadSecondary2[] = "qi_therm";
+constexpr char kPogoUsbActive[] = "/sys/devices/platform/google,pogo/pogo_usb_active";
+constexpr char KPogoMoveDataToUsb[] = "/sys/devices/platform/google,pogo/move_data_to_usb";
+constexpr char kPowerSupplyUsbType[] = "/sys/class/power_supply/usb/usb_type";
 constexpr int kSamplingIntervalSec = 5;
 void queryVersionHelper(android::hardware::usb::Usb *usb,
                         std::vector<PortStatus> *currentPortStatus);
@@ -76,21 +83,39 @@ ScopedAStatus Usb::enableUsbData(const string& in_portName, bool in_enable,
         int64_t in_transactionId) {
     bool result = true;
     std::vector<PortStatus> currentPortStatus;
+    string pullup;
 
     ALOGI("Userspace turn %s USB data signaling. opID:%ld", in_enable ? "on" : "off",
             in_transactionId);
 
     if (in_enable) {
-        if (!WriteStringToFile("1", USB_DATA_PATH)) {
-            ALOGE("Not able to turn on usb connection notification");
-            result = false;
-        }
+        if (!mUsbDataEnabled) {
+            if (ReadFileToString(PULLUP_PATH, &pullup)) {
+                pullup = Trim(pullup);
+                if (pullup != kGadgetName) {
+                    if (!WriteStringToFile(kGadgetName, PULLUP_PATH)) {
+                        ALOGE("Gadget cannot be pulled up");
+                        result = false;
+                    }
+                }
+            }
 
-        if (!WriteStringToFile(kGadgetName, PULLUP_PATH)) {
-            ALOGE("Gadget cannot be pulled up");
-            result = false;
+            if (!WriteStringToFile("1", USB_DATA_PATH)) {
+                ALOGE("Not able to turn on usb connection notification");
+                result = false;
+            }
         }
     } else {
+        if (ReadFileToString(PULLUP_PATH, &pullup)) {
+            pullup = Trim(pullup);
+            if (pullup == kGadgetName) {
+                if (!WriteStringToFile("none", PULLUP_PATH)) {
+                    ALOGE("Gadget cannot be pulled down");
+                    result = false;
+                }
+            }
+        }
+
         if (!WriteStringToFile("1", ID_PATH)) {
             ALOGE("Not able to turn off host mode");
             result = false;
@@ -103,11 +128,6 @@ ScopedAStatus Usb::enableUsbData(const string& in_portName, bool in_enable,
 
         if (!WriteStringToFile("0", USB_DATA_PATH)) {
             ALOGE("Not able to turn on usb connection notification");
-            result = false;
-        }
-
-        if (!WriteStringToFile("none", PULLUP_PATH)) {
-            ALOGE("Gadget cannot be pulled down");
             result = false;
         }
     }
@@ -130,7 +150,66 @@ ScopedAStatus Usb::enableUsbData(const string& in_portName, bool in_enable,
     return ScopedAStatus::ok();
 }
 
-Status getContaminantDetectionNamesHelper(string *name) {
+ScopedAStatus Usb::enableUsbDataWhileDocked(const string& in_portName,
+        int64_t in_transactionId) {
+    bool success = true;
+    bool notSupported = true;
+    std::vector<PortStatus> currentPortStatus;
+
+    ALOGI("Userspace enableUsbDataWhileDocked  opID:%ld", in_transactionId);
+
+    int flags = O_RDONLY;
+    ::android::base::unique_fd fd(TEMP_FAILURE_RETRY(open(KPogoMoveDataToUsb, flags)));
+    if (fd != -1) {
+        notSupported = false;
+        success = WriteStringToFile("1", KPogoMoveDataToUsb);
+        if (!success) {
+            ALOGE("Write to move_data_to_usb failed");
+        }
+    }
+
+    pthread_mutex_lock(&mLock);
+    if (mCallback != NULL) {
+        ScopedAStatus ret = mCallback->notifyEnableUsbDataWhileDockedStatus(
+                in_portName, notSupported ? Status::NOT_SUPPORTED :
+                success ? Status::SUCCESS : Status::ERROR, in_transactionId);
+        if (!ret.isOk())
+            ALOGE("notifyEnableUsbDataStatus error %s", ret.getDescription().c_str());
+    } else {
+        ALOGE("Not notifying the userspace. Callback is not set");
+    }
+    pthread_mutex_unlock(&mLock);
+    queryVersionHelper(this, &currentPortStatus);
+
+    return ScopedAStatus::ok();
+}
+
+ScopedAStatus Usb::resetUsbPort(const std::string& in_portName, int64_t in_transactionId) {
+    bool result = true;
+    std::vector<PortStatus> currentPortStatus;
+
+    ALOGI("Userspace reset USB Port. opID:%ld", in_transactionId);
+
+    if (!WriteStringToFile("none", PULLUP_PATH)) {
+        ALOGI("Gadget cannot be pulled down");
+        result = false;
+    }
+
+    pthread_mutex_lock(&mLock);
+    if (mCallback != NULL) {
+        ::ndk::ScopedAStatus ret = mCallback->notifyResetUsbPortStatus(
+            in_portName, result ? Status::SUCCESS : Status::ERROR, in_transactionId);
+        if (!ret.isOk())
+            ALOGE("notifyTransactionStatus error %s", ret.getDescription().c_str());
+    } else {
+        ALOGE("Not notifying the userspace. Callback is not set");
+    }
+    pthread_mutex_unlock(&mLock);
+
+    return ::ndk::ScopedAStatus::ok();
+}
+
+Status getI2cBusHelper(string *name) {
     DIR *dp;
 
     dp = opendir(kHsi2cPath);
@@ -163,7 +242,7 @@ Status queryMoistureDetectionStatus(std::vector<PortStatus> *currentPortStatus) 
     (*currentPortStatus)[0].supportsEnableContaminantPresenceDetection = true;
     (*currentPortStatus)[0].supportsEnableContaminantPresenceProtection = false;
 
-    getContaminantDetectionNamesHelper(&path);
+    getI2cBusHelper(&path);
     enabledPath = kI2CPath + path + "/" + kContaminantDetectionPath;
     if (!ReadFileToString(enabledPath, &enabled)) {
         ALOGE("Failed to open moisture_detection_enabled");
@@ -402,6 +481,71 @@ ScopedAStatus Usb::switchRole(const string& in_portName, const PortRole& in_role
     return ScopedAStatus::ok();
 }
 
+ScopedAStatus Usb::limitPowerTransfer(const string& in_portName, bool in_limit,
+        int64_t in_transactionId) {
+    bool sessionFail = false, success;
+    std::vector<PortStatus> currentPortStatus;
+    string path, sinkLimitEnablePath, currentLimitPath, sourceLimitEnablePath;
+
+    getI2cBusHelper(&path);
+    sinkLimitEnablePath = kI2CPath + path + "/" + kSinkLimitEnable;
+    sourceLimitEnablePath = kI2CPath + path + "/" + kSourceLimitEnable;
+    currentLimitPath = kI2CPath + path + "/" + kSinkLimitCurrent;
+
+    pthread_mutex_lock(&mLock);
+    if (in_limit) {
+        success = WriteStringToFile("0", currentLimitPath);
+        if (!success) {
+            ALOGE("Failed to set sink current limit");
+            sessionFail = true;
+        }
+    }
+    success = WriteStringToFile(in_limit ? "1" : "0", sinkLimitEnablePath);
+    if (!success) {
+        ALOGE("Failed to %s sink current limit: %s", in_limit ? "enable" : "disable",
+              sinkLimitEnablePath.c_str());
+        sessionFail = true;
+    }
+    success = WriteStringToFile(in_limit ? "1" : "0", sourceLimitEnablePath);
+    if (!success) {
+        ALOGE("Failed to %s source current limit: %s", in_limit ? "enable" : "disable",
+              sourceLimitEnablePath.c_str());
+              sessionFail = true;
+    }
+    ALOGI("limitPowerTransfer limit:%c opId:%ld", in_limit ? 'y' : 'n', in_transactionId);
+    if (mCallback != NULL && in_transactionId >= 0) {
+        ScopedAStatus ret = mCallback->notifyLimitPowerTransferStatus(
+                in_portName, in_limit, sessionFail ? Status::ERROR : Status::SUCCESS,
+                in_transactionId);
+        if (!ret.isOk())
+            ALOGE("limitPowerTransfer error %s", ret.getDescription().c_str());
+    } else {
+        ALOGE("Not notifying the userspace. Callback is not set");
+    }
+
+    pthread_mutex_unlock(&mLock);
+    queryVersionHelper(this, &currentPortStatus);
+
+    return ScopedAStatus::ok();
+}
+
+Status queryPowerTransferStatus(std::vector<PortStatus> *currentPortStatus) {
+    string limitedPath, enabled, path;
+
+    getI2cBusHelper(&path);
+    limitedPath = kI2CPath + path + "/" + kSinkLimitEnable;
+    if (!ReadFileToString(limitedPath, &enabled)) {
+        ALOGE("Failed to open limit_sink_enable");
+        return Status::ERROR;
+    }
+
+    enabled = Trim(enabled);
+    (*currentPortStatus)[0].powerTransferLimited = enabled == "1";
+
+    ALOGI("powerTransferLimited:%d", (*currentPortStatus)[0].powerTransferLimited ? 1 : 0);
+    return Status::SUCCESS;
+}
+
 Status getAccessoryConnected(const string &portName, string *accessory) {
     string filename = "/sys/class/typec/" + portName + "-partner/accessory_mode";
 
@@ -568,16 +712,50 @@ Status getPortStatusHelper(android::hardware::usb::Usb *usb,
                 port.second ? canSwitchRoleHelper(port.first) : false;
 
             (*currentPortStatus)[i].supportedModes.push_back(PortMode::DRP);
-            (*currentPortStatus)[i].usbDataEnabled = usb->mUsbDataEnabled;
+
+            bool dataEnabled = true;
+            string pogoUsbActive = "0";
+            if (ReadFileToString(string(kPogoUsbActive), &pogoUsbActive) &&
+                stoi(Trim(pogoUsbActive)) == 1) {
+                (*currentPortStatus)[i].usbDataStatus.push_back(UsbDataStatus::DISABLED_DOCK);
+                dataEnabled = false;
+            }
+            if (!usb->mUsbDataEnabled) {
+                (*currentPortStatus)[i].usbDataStatus.push_back(UsbDataStatus::DISABLED_FORCE);
+                dataEnabled = false;
+            }
+            if (dataEnabled) {
+                (*currentPortStatus)[i].usbDataStatus.push_back(UsbDataStatus::ENABLED);
+            }
+
+            // When connected return powerBrickStatus
+            if (port.second) {
+                string usbType;
+                if (ReadFileToString(string(kPowerSupplyUsbType), &usbType)) {
+                    if (strstr(usbType.c_str(), "[D")) {
+                        (*currentPortStatus)[i].powerBrickStatus = PowerBrickStatus::CONNECTED;
+                    } else if (strstr(usbType.c_str(), "[U")) {
+                        (*currentPortStatus)[i].powerBrickStatus = PowerBrickStatus::UNKNOWN;
+                    } else {
+                        (*currentPortStatus)[i].powerBrickStatus =
+                                PowerBrickStatus::NOT_CONNECTED;
+                    }
+                } else {
+                    ALOGE("Error while reading usb_type");
+                }
+            } else {
+                (*currentPortStatus)[i].powerBrickStatus = PowerBrickStatus::NOT_CONNECTED;
+            }
 
             ALOGI("%d:%s connected:%d canChangeMode:%d canChagedata:%d canChangePower:%d "
-                "usbDataEnabled:%d",
+                  "usbDataEnabled:%d",
                 i, port.first.c_str(), port.second,
                 (*currentPortStatus)[i].canChangeMode,
                 (*currentPortStatus)[i].canChangeDataRole,
                 (*currentPortStatus)[i].canChangePowerRole,
-                (*currentPortStatus)[i].usbDataEnabled ? 1 : 0);
+                dataEnabled ? 1 : 0);
         }
+
         return Status::SUCCESS;
     }
 done:
@@ -590,6 +768,7 @@ void queryVersionHelper(android::hardware::usb::Usb *usb,
     pthread_mutex_lock(&usb->mLock);
     status = getPortStatusHelper(usb, currentPortStatus);
     queryMoistureDetectionStatus(currentPortStatus);
+    queryPowerTransferStatus(currentPortStatus);
     if (usb->mCallback != NULL) {
         ScopedAStatus ret = usb->mCallback->notifyPortStatusChange(*currentPortStatus,
             status);
@@ -642,7 +821,6 @@ ScopedAStatus Usb::enableContaminantPresenceDetection(const string& in_portName,
     queryVersionHelper(this, &currentPortStatus);
     return ScopedAStatus::ok();
 }
-
 
 void report_overheat_event(android::hardware::usb::Usb *usb) {
     VendorUsbPortOverheat overheat_info;
@@ -706,7 +884,11 @@ static void uevent_event(uint32_t /*epevents*/, struct data *payload) {
             pthread_mutex_unlock(&payload->usb->mPartnerLock);
         } else if (!strncmp(cp, "DEVTYPE=typec_", strlen("DEVTYPE=typec_")) ||
                    !strncmp(cp, "DRIVER=max77759tcpc",
-                            strlen("DRIVER=max77759tcpc"))) {
+                            strlen("DRIVER=max77759tcpc")) ||
+                   !strncmp(cp, "DRIVER=pogo-transport",
+                            strlen("DRIVER=pogo-transport")) ||
+                   !strncmp(cp, "POWER_SUPPLY_NAME=usb",
+                            strlen("POWER_SUPPLY_NAME=usb"))) {
             std::vector<PortStatus> currentPortStatus;
             queryVersionHelper(payload->usb, &currentPortStatus);
 
