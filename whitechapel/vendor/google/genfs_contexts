@@ -495,12 +495,7 @@ genfscon sysfs /devices/platform/17000030.devfreq_intcam/devfreq/17000030.devfre
 genfscon sysfs /devices/platform/17000060.devfreq_tnr/devfreq/17000060.devfreq_tnr/min_freq             u:object_r:sysfs_camera:s0
 
 # thermal sysfs files
-genfscon sysfs /module/gs101_thermal/parameters/tmu_reg_dump_state            u:object_r:sysfs_thermal:s0
-genfscon sysfs /module/gs101_thermal/parameters/tmu_reg_dump_current_temp     u:object_r:sysfs_thermal:s0
-genfscon sysfs /module/gs101_thermal/parameters/tmu_top_reg_dump_rise_thres   u:object_r:sysfs_thermal:s0
-genfscon sysfs /module/gs101_thermal/parameters/tmu_top_reg_dump_fall_thres   u:object_r:sysfs_thermal:s0
-genfscon sysfs /module/gs101_thermal/parameters/tmu_sub_reg_dump_rise_thres   u:object_r:sysfs_thermal:s0
-genfscon sysfs /module/gs101_thermal/parameters/tmu_sub_reg_dump_fall_thres   u:object_r:sysfs_thermal:s0
+genfscon sysfs /module/gs101_thermal/parameters            u:object_r:sysfs_thermal:s0
 
 # USB-C throttling stats
 genfscon sysfs /devices/platform/google,usbc_port_cooling_dev/cleared_time      u:object_r:sysfs_usbc_throttling_stats:s0
