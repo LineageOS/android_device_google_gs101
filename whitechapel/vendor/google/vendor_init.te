@@ -1,3 +1,4 @@
+get_prop(vendor_init, gesture_prop)
 set_prop(vendor_init, vendor_camera_prop)
 set_prop(vendor_init, vendor_device_prop)
 set_prop(vendor_init, vendor_modem_prop)
@@ -17,6 +18,7 @@ allow vendor_init proc_dirty:file w_file_perms;
 allow vendor_init proc_sched:file write;
 allow vendor_init bootdevice_sysdev:file create_file_perms;
 allow vendor_init block_device:lnk_file setattr;
+allow vendor_init sysfs_st33spi:file w_file_perms;
 
 userdebug_or_eng(`
   set_prop(vendor_init, logpersistd_logging_prop)
@@ -32,6 +34,4 @@ get_prop(vendor_init, vendor_battery_profile_prop)
 set_prop(vendor_init, vendor_battery_defender_prop)
 
 # Fingerprint property
-userdebug_or_eng(`
-  set_prop(vendor_init, vendor_fingerprint_fake_prop)
-')
+set_prop(vendor_init, vendor_fingerprint_prop)
