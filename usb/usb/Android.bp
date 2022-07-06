@@ -44,6 +44,7 @@ cc_binary {
         "android.hardware.thermal@2.0",
         "android.hardware.usb.gadget@1.0",
         "android.hardware.usb-V2-ndk",
+        "android.hardware.usb.gadget-V1-ndk",
         "libcutils",
         "android.frameworks.stats-V1-ndk",
         "pixelatoms-cpp",
