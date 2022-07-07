@@ -1,3 +1,5 @@
 hal_drm_default default_prop file b/232714489
 dumpstate hal_input_processor_default process b/238143262
 hal_googlebattery dumpstate fd b/238143381
+dumpstate app_zygote process b/238263438
+incidentd debugfs_wakeup_sources file b/238263568
