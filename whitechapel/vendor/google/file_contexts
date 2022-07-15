@@ -225,6 +225,7 @@
 /dev/lwis-sensor-imx355-front                                           u:object_r:lwis_device:s0
 /dev/lwis-sensor-imx363                                                 u:object_r:lwis_device:s0
 /dev/lwis-sensor-imx386                                                 u:object_r:lwis_device:s0
+/dev/lwis-sensor-imx471                                                 u:object_r:lwis_device:s0
 /dev/lwis-sensor-imx586                                                 u:object_r:lwis_device:s0
 /dev/lwis-sensor-imx663                                                 u:object_r:lwis_device:s0
 /dev/lwis-slc                                                           u:object_r:lwis_device:s0
