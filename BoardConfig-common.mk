@@ -50,16 +50,7 @@ BOARD_BOOTCONFIG += androidboot.boot_devices=14700000.ufs
 
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
-ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
-BOARD_PREBUILT_BOOTIMAGE := $(wildcard $(TARGET_KERNEL_DIR)/boot.img)
-else
-BOARD_PREBUILT_BOOTIMAGE := $(wildcard $(TARGET_KERNEL_DIR)/boot-user.img)
-endif
-ifneq (,$(BOARD_PREBUILT_BOOTIMAGE))
-TARGET_NO_KERNEL := true
-else
 TARGET_NO_KERNEL := false
-endif
 BOARD_USES_GENERIC_KERNEL_IMAGE := true
 BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT := true
 BOARD_MOVE_GSI_AVB_KEYS_TO_VENDOR_BOOT := true
@@ -282,6 +273,7 @@ BOARD_USES_SCALER_M2M1SHOT := true
 # Device Tree
 BOARD_USES_DT := true
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+TARGET_KERNEL_DIR := device/google/raviole-kernel
 BOARD_PREBUILT_DTBIMAGE_DIR := $(TARGET_KERNEL_DIR)
 BOARD_PREBUILT_DTBOIMAGE := $(BOARD_PREBUILT_DTBIMAGE_DIR)/dtbo.img
 
@@ -394,13 +386,11 @@ BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := device/google/gs101/vendor_dlkm.bl
 
 KERNEL_MODULE_DIR := $(TARGET_KERNEL_DIR)
 KERNEL_MODULES := $(wildcard $(KERNEL_MODULE_DIR)/*.ko)
-
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(strip $(shell cat $(KERNEL_MODULE_DIR)/vendor_boot.modules.load))
 ifndef BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD
 $(error vendor_boot.modules.load not found or empty)
 endif
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES := $(addprefix $(KERNEL_MODULE_DIR)/, $(notdir $(BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD)))
-
 BOARD_VENDOR_KERNEL_MODULES_LOAD := $(strip $(shell cat $(KERNEL_MODULE_DIR)/vendor_dlkm.modules.load))
 ifndef BOARD_VENDOR_KERNEL_MODULES_LOAD
 $(error vendor_dlkm.modules.load not found or empty)
