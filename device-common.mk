@@ -18,9 +18,11 @@
 include device/google/gs101/device.mk
 include device/google/gs101/tts/voice_packs.mk
 
+ifneq ($(BOARD_WITHOUT_RADIO),true)
 # Telephony
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.carrierlock.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.carrierlock.xml
+endif
 
 # Android Verified Boot
 PRODUCT_COPY_FILES += \
