@@ -857,7 +857,7 @@ PRODUCT_PRODUCT_PROPERTIES += \
 
 # Use FUSE BPF
 PRODUCT_PRODUCT_PROPERTIES += \
-	ro.fuse.bpf.enabled=false
+	ro.fuse.bpf.enabled=true
 
 # Use /product/etc/fstab.postinstall to mount system_other
 PRODUCT_PRODUCT_PROPERTIES += \
