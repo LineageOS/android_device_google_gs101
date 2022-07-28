@@ -1,7 +1,11 @@
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.location.gps.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.location.gps.xml \
-	device/google/gs101/gnss/47765/config/gps.cer:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/gps.cer \
+	device/google/gs101/gnss/47765/config/gps.cer:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/gps.cer
+
+ifneq (,$(filter oriole raven, $(subst _, ,$(TARGET_PRODUCT))))
+PRODUCT_COPY_FILES += \
 	device/google/gs101/gnss/47765/firmware/SensorHub.patch:$(TARGET_COPY_OUT_VENDOR)/firmware/SensorHub.patch
+endif
 
 ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
 	PRODUCT_COPY_FILES += \
