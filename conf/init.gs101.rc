@@ -254,6 +254,9 @@ on init
     # Thermal Charge stats (write 0)
     chown system system /sys/devices/platform/google,charger/thermal_stats
 
+    # Google Charger stats (write 0)
+    chown system system /sys/devices/platform/google,charger/charge_stats
+
     # Permission for wireless charging
     chown system system /sys/class/power_supply/wireless/capacity
     chown system system /sys/class/power_supply/wireless/device/rtx
