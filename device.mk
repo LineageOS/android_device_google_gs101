@@ -59,9 +59,11 @@ LOCAL_KERNEL := $(TARGET_KERNEL_DIR)/Image.lz4
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	ro.oem_unlock_supported=1
 
+ifneq ($(BOARD_WITHOUT_RADIO),true)
 # Include vendor telephony soong namespace
 PRODUCT_SOONG_NAMESPACES += \
 	vendor/samsung_slsi/telephony/$(BOARD_USES_SHARED_VENDOR_TELEPHONY)
+endif
 
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 #Set IKE logs to verbose for WFC
@@ -891,6 +893,7 @@ PRODUCT_PACKAGES += \
 	calliope_iva.bin \
 	vts.bin
 
+ifneq ($(BOARD_WITHOUT_RADIO),true)
 # This will be called only if IMSService is building with source code for dev branches.
 $(call inherit-product-if-exists, vendor/samsung_slsi/telephony/$(BOARD_USES_SHARED_VENDOR_TELEPHONY)/shannon-ims/device-vendor.mk)
 
@@ -903,6 +906,7 @@ PRODUCT_PACKAGES_DEBUG += \
 	TestRcsApp
 
 PRODUCT_PACKAGES += ShannonRcs
+endif
 
 # Boot Control HAL
 PRODUCT_PACKAGES += \
@@ -1157,8 +1161,10 @@ include hardware/google/pixel/common/pixel-common-device.mk
 # Pixel Logger
 include hardware/google/pixel/PixelLogger/PixelLogger.mk
 
+ifneq ($(BOARD_WITHOUT_RADIO),true)
 # Telephony
 include device/google/gs101/telephony/user.mk
+endif
 
 # Wifi ext
 include hardware/google/pixel/wifi_ext/device.mk
