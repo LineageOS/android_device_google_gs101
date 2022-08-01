@@ -23,3 +23,6 @@ allow chre hal_wifi_ext_hwservice:hwservice_manager find;
 allow chre fwk_stats_service:service_manager find;
 binder_call(chre, stats_service_server)
 
+# Allow CHRE to use WakeLock
+wakelock_use(chre)
+
