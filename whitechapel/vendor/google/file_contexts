@@ -319,6 +319,8 @@
 /dev/acd-debug                      u:object_r:aoc_device:s0
 /dev/acd-audio_tap[0-9]*            u:object_r:aoc_device:s0
 /dev/acd-audio_dcdoff_ref           u:object_r:aoc_device:s0
+/dev/acd-audio_ap_offload_rx        u:object_r:aoc_device:s0
+/dev/acd-audio_ap_offload_tx        u:object_r:aoc_device:s0
 /dev/amcs                           u:object_r:amcs_device:s0
 
 # AudioMetric
