@@ -398,6 +398,10 @@ genfscon sysfs /devices/platform/17000080.devfreq_bo/devfreq/17000080.devfreq_bo
 genfscon sysfs /devices/platform/17000060.devfreq_tnr/devfreq/17000060.devfreq_tnr/time_in_state        u:object_r:sysfs_cpu:s0
 genfscon sysfs /devices/platform/17000070.devfreq_mfc/devfreq/17000070.devfreq_mfc/time_in_state        u:object_r:sysfs_cpu:s0
 
+genfscon sysfs /devices/system/chip-id/unique_id                                                        u:object_r:sysfs_soc:s0
+genfscon sysfs /devices/soc0/machine                                                                    u:object_r:sysfs_soc:s0
+genfscon sysfs /devices/soc0/revision                                                                   u:object_r:sysfs_soc:s0
+
 # Devfreq directory
 genfscon sysfs /class/devfreq                                                                           u:object_r:sysfs_devfreq_dir:s0
 
