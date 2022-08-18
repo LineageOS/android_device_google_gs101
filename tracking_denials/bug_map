@@ -6,13 +6,4 @@ dumpstate incident process b/238571420
 hal_drm_default default_prop file b/232714489
 hal_power_default hal_power_default capability b/240632824
 incidentd debugfs_wakeup_sources file b/238263568
-init app_data_file dir b/241172337
-init app_data_file dir b/241172490
-init gsi_data_file file b/241172337
-init gsi_data_file file b/241172391
-init gsi_data_file file b/241172490
-init privapp_data_file dir b/241172337
-init privapp_data_file dir b/241172490
-init system_app_data_file dir b/241172337
-init system_app_data_file dir b/241172490
 su modem_img_file filesystem b/238825802
