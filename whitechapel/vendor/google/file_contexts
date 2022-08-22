@@ -248,6 +248,7 @@
 # Sensors
 /data/vendor/sensor(/.*)?              u:object_r:sensor_vendor_data_file:s0
 /dev/acd-com.google.usf                u:object_r:aoc_device:s0
+/dev/acd-com.google.usf.non_wake_up    u:object_r:aoc_device:s0
 /dev/acd-logging                       u:object_r:aoc_device:s0
 /dev/aoc                               u:object_r:aoc_device:s0
 
