@@ -35,6 +35,10 @@ allow hal_dumpstate_default vendor_log_file:dir search;
 allow hal_dumpstate_default vendor_usf_stats:file execute_no_trans;
 allow hal_dumpstate_default vendor_usf_reg_edit:file execute_no_trans;
 allow hal_dumpstate_default vendor_dumpsys:file execute_no_trans;
+userdebug_or_eng(`
+  allow hal_dumpstate_default sensor_debug_data_file:dir r_dir_perms;
+  allow hal_dumpstate_default sensor_debug_data_file:file r_file_perms;
+')
 
 allow hal_dumpstate_default sscoredump_vendor_data_crashinfo_file:dir r_dir_perms;
 allow hal_dumpstate_default sscoredump_vendor_data_crashinfo_file:file r_file_perms;
