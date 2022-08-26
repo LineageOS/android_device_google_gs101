@@ -380,4 +380,4 @@ BOARD_KERNEL_CMDLINE += log_buf_len=1024K
 # Protected VM firmware
 BOARD_PVMFWIMAGE_PARTITION_SIZE := 0x00100000
 
--include vendor/google_devices/gs-common/proprietary/BoardConfigVendor.mk
+-include vendor/google_devices/gs101/proprietary/BoardConfigVendor.mk
