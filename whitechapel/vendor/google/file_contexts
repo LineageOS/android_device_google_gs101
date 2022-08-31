@@ -358,9 +358,6 @@
 # RILD files
 /data/vendor/rild(/.*)?                                                     u:object_r:rild_vendor_data_file:s0
 
-# Citadel StrongBox
-/dev/gsc0                                                                   u:object_r:citadel_device:s0
-
 # Tetheroffload Service
 /dev/dit2                      u:object_r:vendor_toe_device:s0
 /vendor/bin/hw/vendor\.samsung_slsi\.hardware\.tetheroffload@1\.[0-9]-service     u:object_r:hal_tetheroffload_default_exec:s0
