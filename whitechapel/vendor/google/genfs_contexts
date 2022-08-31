@@ -490,6 +490,7 @@ genfscon sysfs /devices/platform/audiometrics/speaker_temp             u:object_
 genfscon sysfs /devices/platform/audiometrics/mic_broken_degrade       u:object_r:sysfs_pixelstats:s0
 genfscon sysfs /devices/platform/audiometrics/codec_crashed_counter    u:object_r:sysfs_pixelstats:s0
 genfscon sysfs /devices/platform/audiometrics/hwinfo_part_number       u:object_r:sysfs_pixelstats:s0
+genfscon sysfs /devices/platform/audiometrics/ams_rate_read_once       u:object_r:sysfs_pixelstats:s0
 
 # SJTAG
 genfscon sysfs /devices/platform/sjtag_ap/interface                    u:object_r:sysfs_sjtag:s0
