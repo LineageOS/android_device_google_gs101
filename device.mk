@@ -579,6 +579,10 @@ PRODUCT_PACKAGES += \
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/compression_with_xor.mk)
+
+# Enable usage of io_uring in fastbootd
+PRODUCT_VENDOR_PROPERTIES += sys.usb.ffs.io_uring_enabled=true
+
 # Enforce generic ramdisk allow list
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
 
