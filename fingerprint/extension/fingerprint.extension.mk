@@ -6,5 +6,5 @@ SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += hardware/google/pixel-sepolicy/fingerprint-ex
 SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += hardware/google/pixel-sepolicy/fingerprint-extension/system_ext/private/
 PRODUCT_PACKAGES += \
     fps_ext_bug_lib \
-    fingerprint.extension.sh
+    fingerprint.extension
 endif

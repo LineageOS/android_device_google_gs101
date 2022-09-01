@@ -8,7 +8,7 @@ package {
 }
 
 sh_binary {
-    name: "fingerprint.extension.sh",
+    name: "fingerprint.extension",
     init_rc: ["init.fingerprint.extension.rc"],
     src: "fingerprint.extension.sh",
     system_ext_specific: true,
