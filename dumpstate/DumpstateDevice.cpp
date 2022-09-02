@@ -266,7 +266,7 @@ DumpstateDevice::DumpstateDevice()
         { "aoc", [this](int fd) { dumpAoCSection(fd); } },
         { "ramdump", [this](int fd) { dumpRamdumpSection(fd); } },
         { "misc", [this](int fd) { dumpMiscSection(fd); } },
-        { "gsc", [this](int fd) { dumpGscSection(fd); } },
+        { "dump", [this](int fd) { dumpSection(fd); } },
         { "camera", [this](int fd) { dumpCameraSection(fd); } },
         { "trusty", [this](int fd) { dumpTrustySection(fd); } },
         { "modem", [this](int fd) { dumpModemSection(fd); } },
@@ -1056,11 +1056,9 @@ void DumpstateDevice::dumpMiscSection(int fd) {
     DumpFileToFd(fd, "VENDOR PROC DUMP", "/proc/vendor_sched/dump_task");
 }
 
-// Dump items related to GSC
-void DumpstateDevice::dumpGscSection(int fd) {
-    RunCommandToFd(fd, "Citadel VERSION", {"vendor/bin/hw/citadel_updater", "-lv"});
-    RunCommandToFd(fd, "Citadel STATS", {"vendor/bin/hw/citadel_updater", "--stats"});
-    RunCommandToFd(fd, "GSC DEBUG DUMP", {"vendor/bin/hw/citadel_updater", "-D"});
+// Dump scripts under vendor/bin/dump
+void DumpstateDevice::dumpSection(int fd) {
+    RunCommandToFd(fd, "dump", {"/vendor/bin/dump/dump_gsc.sh"});
 }
 
 // Dump essential camera debugging logs
