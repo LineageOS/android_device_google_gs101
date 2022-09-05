@@ -280,7 +280,8 @@
 /mnt/vendor/persist/modem(/.*)?                               u:object_r:persist_modem_file:s0
 
 # Kernel modules related
-/vendor/bin/init\.insmod\.sh    u:object_r:init-insmod-sh_exec:s0
+/vendor/bin/insmod\.sh          u:object_r:init-insmod-sh_exec:s0
+/vendor/bin/init\.display\.sh   u:object_r:init-display-sh_exec:s0
 
 # USB
 /vendor/bin/hw/disable_contaminant_detection\.sh  u:object_r:disable-contaminant-detection-sh_exec:s0
