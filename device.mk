@@ -587,6 +587,9 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
 # Titan-M
 ifeq (,$(filter true, $(BOARD_WITHOUT_DTLS)))
 include device/google/gs-common/dauntless/gsc.mk
+else
+# include dauntless sepolicy to avoid compile error on devices without dauntless
+BOARD_VENDOR_SEPOLICY_DIRS += device/google/gs-common/dauntless/sepolicy
 endif
 
 # Copy Camera HFD Setfiles
