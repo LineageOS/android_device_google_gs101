@@ -280,7 +280,6 @@
 /mnt/vendor/persist/modem(/.*)?                               u:object_r:persist_modem_file:s0
 
 # Kernel modules related
-/vendor/bin/insmod\.sh          u:object_r:init-insmod-sh_exec:s0
 /vendor/bin/init\.display\.sh   u:object_r:init-display-sh_exec:s0
 
 # USB
@@ -366,9 +365,6 @@
 
 # battery history
 /dev/battery_history                                                                  u:object_r:battery_history_device:s0
-
-# Vendor_kernel_modules
-/vendor_dlkm/lib/modules/.*\.ko                                               u:object_r:vendor_kernel_modules:s0
 
 # Display
 /vendor/lib(64)?/libion_google\.so                                               u:object_r:same_process_hal_file:s0

@@ -15,12 +15,6 @@ persist.vendor.sys.crash_rcu    u:object_r:vendor_ramdump_prop:s0
 vendor.debug.ssrdump.           u:object_r:vendor_ssrdump_prop:s0
 persist.vendor.sys.ssr.         u:object_r:vendor_ssrdump_prop:s0
 
-# Kernel modules related
-vendor.common.modules.ready     u:object_r:vendor_device_prop:s0
-vendor.device.modules.ready     u:object_r:vendor_device_prop:s0
-vendor.all.modules.ready        u:object_r:vendor_device_prop:s0
-vendor.all.devices.ready        u:object_r:vendor_device_prop:s0
-
 # for codec2
 vendor.debug.c2.level       u:object_r:vendor_codec2_debug_prop:s0
 vendor.debug.c2.dump        u:object_r:vendor_codec2_debug_prop:s0
