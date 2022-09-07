@@ -65,6 +65,7 @@ vendor.audiodump.encode.disable         u:object_r:vendor_audio_prop:s0
 
 # for display
 ro.vendor.hwc.drm.device                u:object_r:vendor_display_prop:s0
+persist.vendor.display.                 u:object_r:vendor_display_prop:s0
 
 # for camera
 persist.vendor.camera.               u:object_r:vendor_camera_prop:s0
