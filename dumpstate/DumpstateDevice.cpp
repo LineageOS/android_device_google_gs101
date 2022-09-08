@@ -976,7 +976,8 @@ void DumpstateDevice::dumpAoCSection(int fd) {
     DumpFileToFd(fd, "AoC logging wake", "/sys/devices/platform/19000000.aoc/control/logging_wakeup");
     DumpFileToFd(fd, "AoC hotword wake", "/sys/devices/platform/19000000.aoc/control/hotword_wakeup");
     DumpFileToFd(fd, "AoC memory exception wake", "/sys/devices/platform/19000000.aoc/control/memory_exception");
-    DumpFileToFd(fd, "AoC memory votes", "/sys/devices/platform/19000000.aoc/control/memory_votes");
+    DumpFileToFd(fd, "AoC memory votes", "/sys/devices/platform/19000000.aoc/control/memory_votes_a32");
+    DumpFileToFd(fd, "AoC memory votes", "/sys/devices/platform/19000000.aoc/control/memory_votes_ff1");
     RunCommandToFd(fd, "AoC Heap Stats (A32)",
       {"/vendor/bin/sh", "-c", "echo 'dbg heap -c 1' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug"},
       CommandOptions::WithTimeout(1).Build());
@@ -988,9 +989,6 @@ void DumpstateDevice::dumpAoCSection(int fd) {
       CommandOptions::WithTimeout(1).Build());
     RunCommandToFd(fd, "AoC Heap Stats (HF1)",
       {"/vendor/bin/sh", "-c", "echo 'dbg heap -c 4' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug"},
-      CommandOptions::WithTimeout(1).Build());
-    RunCommandToFd(fd, "AoC MIF Stats",
-      {"/vendor/bin/sh", "-c", "echo 'mif details' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug"},
       CommandOptions::WithTimeout(1).Build());
 }
 
