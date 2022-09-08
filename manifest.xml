@@ -67,15 +67,6 @@
         </interface>
     </hal>
     <hal format="hidl">
-        <name>android.hardware.bluetooth</name>
-        <transport>hwbinder</transport>
-        <version>1.1</version>
-        <interface>
-            <name>IBluetoothHci</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
         <name>android.hardware.boot</name>
         <transport>hwbinder</transport>
         <fqname>@1.2::IBootControl/default</fqname>
@@ -94,42 +85,6 @@
         <name>com.google.input</name>
         <interface>
             <name>ITouchContextService</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>hardware.google.bluetooth.bt_channel_avoidance</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IBTChannelAvoidance</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>hardware.google.bluetooth.ext</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IBluetoothExt</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>hardware.google.bluetooth.sar</name>
-        <transport>hwbinder</transport>
-        <version>1.1</version>
-        <interface>
-            <name>IBluetoothSar</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>hardware.google.bluetooth.ccc</name>
-        <transport>hwbinder</transport>
-        <version>1.1</version>
-        <interface>
-            <name>IBluetoothCcc</name>
             <instance>default</instance>
         </interface>
     </hal>
