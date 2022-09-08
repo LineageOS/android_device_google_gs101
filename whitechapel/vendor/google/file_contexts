@@ -154,6 +154,7 @@
 /data/vendor/log(/.*)?       u:object_r:vendor_log_file:s0
 /data/vendor/log/cbd(/.*)?   u:object_r:vendor_cbd_log_file:s0
 /data/vendor/log/dmd(/.*)?   u:object_r:vendor_dmd_log_file:s0
+/data/vendor/log/hwc(/.*)?   u:object_r:vendor_hwc_log_file:s0
 /data/vendor/log/rfsd(/.*)?  u:object_r:vendor_rfsd_log_file:s0
 /data/vendor/log/dump(/.*)?  u:object_r:vendor_dump_log_file:s0
 /data/vendor/log/rild(/.*)?  u:object_r:vendor_rild_log_file:s0

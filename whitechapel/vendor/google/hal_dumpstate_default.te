@@ -20,6 +20,9 @@ allow hal_dumpstate_default shell_data_file:file getattr;
 allow hal_dumpstate_default radio_vendor_data_file:dir create_dir_perms;
 allow hal_dumpstate_default radio_vendor_data_file:file create_file_perms;
 
+allow hal_dumpstate_default vendor_hwc_log_file:dir r_dir_perms;
+allow hal_dumpstate_default vendor_hwc_log_file:file r_file_perms;
+
 allow hal_dumpstate_default vendor_rfsd_log_file:dir r_dir_perms;
 allow hal_dumpstate_default vendor_rfsd_log_file:file r_file_perms;
 
