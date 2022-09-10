@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb6e037c_0802e32f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 8980
+      },
+      "writtenOn": "2022-09-10T11:15:53Z",
+      "side": 1,
+      "message": "Please add this back.",
+      "revId": "d3b8a1da49d0b420dac2e6097e6aa6515ef92c7c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1ac0fad_5db2310e",
+        "filename": "BoardConfigLineage.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 8980
+      },
+      "writtenOn": "2022-09-10T11:15:53Z",
+      "side": 1,
+      "message": "Missing,you had it in your previous Lineage19.1 commit, not building without this for me.\n\nTARGET_KERNEL_CROSS_COMPILE_PREFIX :\u003d aarch64-linux-gnu-",
+      "revId": "d3b8a1da49d0b420dac2e6097e6aa6515ef92c7c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
