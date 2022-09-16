@@ -266,7 +266,6 @@ DumpstateDevice::DumpstateDevice()
         { "aoc", [this](int fd) { dumpAoCSection(fd); } },
         { "ramdump", [this](int fd) { dumpRamdumpSection(fd); } },
         { "misc", [this](int fd) { dumpMiscSection(fd); } },
-        { "dump", [this](int fd) { dumpSection(fd); } },
         { "camera", [this](int fd) { dumpCameraSection(fd); } },
         { "trusty", [this](int fd) { dumpTrustySection(fd); } },
         { "modem", [this](int fd) { dumpModemSection(fd); } },
@@ -288,6 +287,24 @@ void DumpstateDevice::dumpTextSection(int fd, const std::string &sectionName) {
                 return;
             }
         }
+    }
+
+    // Execute all programs under vendor/bin/dump/
+    std::unique_ptr<DIR, decltype(&closedir)> dir(opendir("/vendor/bin/dump"), closedir);
+    if (!dir) {
+      ALOGE("Fail To Open Dir vendor/bin/dump/");
+    } else {
+      dirent *entry;
+      while ((entry = readdir(dir.get())) != nullptr) {
+        // Skip '.', '..'
+        if (entry->d_name[0] == '.') {
+          continue;
+        }
+        std::string bin(entry->d_name);
+        auto startTime = startSection(fd, "/vendor/bin/dump/"+bin);
+        RunCommandToFd(fd, "/vendor/bin/dump/"+bin, {"/vendor/bin/dump/"+bin});
+        endSection(fd, "/vendor/bin/dump/"+bin, startTime);
+      }
     }
 
     if (dumpAll) {
@@ -1060,11 +1077,6 @@ void DumpstateDevice::dumpRamdumpSection(int fd) {
 void DumpstateDevice::dumpMiscSection(int fd) {
     RunCommandToFd(fd, "VENDOR PROPERTIES", {"/vendor/bin/getprop"});
     DumpFileToFd(fd, "VENDOR PROC DUMP", "/proc/vendor_sched/dump_task");
-}
-
-// Dump scripts under vendor/bin/dump
-void DumpstateDevice::dumpSection(int fd) {
-    RunCommandToFd(fd, "dump", {"/vendor/bin/dump/dump_gsc.sh"});
 }
 
 // Dump essential camera debugging logs
