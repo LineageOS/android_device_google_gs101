@@ -29,4 +29,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	libmetrics_logger
 
+# TPU DBA AIDL HAL service
+PRODUCT_PACKAGES += \
+	com.google.edgetpu.dba-service
+
+# TPU DBA HAL C API library
+PRODUCT_PACKAGES += \
+	libedgetpu_dba_hal
+
 BOARD_VENDOR_SEPOLICY_DIRS += device/google/gs101-sepolicy/edgetpu/
