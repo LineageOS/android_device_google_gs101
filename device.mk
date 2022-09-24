@@ -45,6 +45,7 @@ PRODUCT_SOONG_NAMESPACES += \
 	hardware/google/pixel \
 	device/google/gs101 \
 	device/google/gs101/powerstats \
+	system/chre/host/hal_generic \
 	vendor/google/whitechapel/tools \
 	vendor/google/camera \
 	vendor/google/interfaces \
