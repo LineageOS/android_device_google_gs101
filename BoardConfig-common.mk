@@ -148,11 +148,6 @@ BOARD_USES_METADATA_PARTITION := true
 # exynos RIL
 ENABLE_VENDOR_RIL_SERVICE := true
 
-# Bluetooth defines
-# TODO(b/123695868): Remove the need for this
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := \
-	build/make/target/board/mainline_arm64/bluetooth
-
 # Boot.img
 BOARD_RAMDISK_USE_LZ4     := true
 BOARD_BOOT_HEADER_VERSION := 4
