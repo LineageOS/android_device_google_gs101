@@ -33,6 +33,24 @@
       "message": "Missing,you had it in your previous Lineage19.1 commit, not building without this for me.\n\nTARGET_KERNEL_CROSS_COMPILE_PREFIX :\u003d aarch64-linux-gnu-",
       "revId": "d3b8a1da49d0b420dac2e6097e6aa6515ef92c7c",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b991801a_38677e15",
+        "filename": "BoardConfigLineage.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2022-10-01T16:26:18Z",
+      "side": 1,
+      "message": "Not needed with the required vendor/lineage changes",
+      "parentUuid": "c1ac0fad_5db2310e",
+      "revId": "d3b8a1da49d0b420dac2e6097e6aa6515ef92c7c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
