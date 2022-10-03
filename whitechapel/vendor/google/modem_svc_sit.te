@@ -27,3 +27,6 @@ get_prop(modem_svc_sit, vendor_rild_prop)
 # hwservice permission
 allow modem_svc_sit hal_exynos_rild_hwservice:hwservice_manager find;
 get_prop(modem_svc_sit, hwservicemanager_prop)
+
+# logging property
+get_prop(modem_svc_sit, vendor_logger_prop)
