@@ -257,6 +257,10 @@ on init
     # Google Charger stats (write 0)
     chown system system /sys/devices/platform/google,charger/charge_stats
 
+    # Permission for wireless charging fan
+    chown system system /sys/devices/platform/google,charger/thermal_dc_fan_alarm
+    chown system system /sys/devices/platform/google,cpm/thermal_mdis_fan_alarm
+
     # Permission for wireless charging
     chown system system /sys/class/power_supply/wireless/capacity
     chown system system /sys/class/power_supply/wireless/device/rtx
@@ -651,6 +655,8 @@ service gnss_service /vendor/bin/hw/android.hardware.gnss@2.1-service-brcm
     class hal
     user gps
     group system gps radio
+    ioprio be 0
+    priority -1
 
 # disable gps service if no gps h/w
 on property:vendor.ril.cbd.svc=0
@@ -971,6 +977,18 @@ on property:vendor.thermal.link_ready=1
 on charger
     write /proc/vendor_sched/sys_uclamp_min 0
     write /proc/vendor_sched/sys_prefer_idle 0
+
+    # Use charger thermal config
+    setprop vendor.thermal.config "thermal_info_config_charge.json"
+
+    # Wait for insmod_sh to finish all common modules
+    wait_for_prop vendor.common.modules.ready 1
+
+    # Create thermal symlink in off charging mode
+    mkdir /dev/thermal 0750 system system
+    mkdir /dev/thermal/tz-by-name 0750 system system
+    mkdir /dev/thermal/cdev-by-name 0750 system system
+    start vendor.thermal.symlinks
 
 on property:vendor.disable.bcl.control=1
     write /sys/devices/virtual/pmic/mitigation/instruction/enable_mitigation 0
