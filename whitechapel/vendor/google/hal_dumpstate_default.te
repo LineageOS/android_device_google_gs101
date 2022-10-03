@@ -103,8 +103,6 @@ allow hal_dumpstate_default proc_vendor_sched:file r_file_perms;
 
 userdebug_or_eng(`
   allow hal_dumpstate_default mnt_vendor_file:dir search;
-  allow hal_dumpstate_default ramdump_vendor_mnt_file:dir search;
-  allow hal_dumpstate_default ramdump_vendor_mnt_file:file r_file_perms;
 ')
 
 get_prop(hal_dumpstate_default, vendor_gps_prop)
@@ -193,8 +191,6 @@ dontaudit hal_dumpstate_default vendor_votable_debugfs:dir r_dir_perms;
 dontaudit hal_dumpstate_default vendor_votable_debugfs:file r_file_perms;
 
 dontaudit hal_dumpstate_default mnt_vendor_file:dir r_dir_perms;
-dontaudit hal_dumpstate_default ramdump_vendor_mnt_file:dir search;
-dontaudit hal_dumpstate_default ramdump_vendor_mnt_file:file r_file_perms;
 
 dontaudit hal_dumpstate_default sysfs_bcl:dir r_dir_perms;
 dontaudit hal_dumpstate_default sysfs_bcl:file r_file_perms;
