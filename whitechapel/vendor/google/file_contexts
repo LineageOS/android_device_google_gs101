@@ -339,7 +339,6 @@
 /data/vendor/ss(/.*)?                u:object_r:tee_data_file:s0
 /mnt/vendor/persist/ss(/.*)?         u:object_r:persist_ss_file:s0
 /dev/sg1                             u:object_r:sg_device:s0
-/dev/trusty-log0                     u:object_r:logbuffer_device:s0
 
 # Battery
 /mnt/vendor/persist/battery(/.*)?    u:object_r:persist_battery_file:s0
