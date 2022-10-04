@@ -87,7 +87,6 @@ allow hal_dumpstate_default proc_touch:file rw_file_perms;
 allow hal_dumpstate_default sysfs_batteryinfo:dir search;
 allow hal_dumpstate_default sysfs_batteryinfo:dir r_dir_perms;
 allow hal_dumpstate_default sysfs_batteryinfo:file r_file_perms;
-allow hal_dumpstate_default sysfs_chip_id:file r_file_perms;
 
 allow hal_dumpstate_default vendor_toolbox_exec:file execute_no_trans;
 allow hal_dumpstate_default vendor_shell_exec:file execute_no_trans;
