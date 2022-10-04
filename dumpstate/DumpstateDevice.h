@@ -73,7 +73,6 @@ struct DumpstateDevice : public IDumpstateDevice {
     void dumpDisplaySection(int fd);
     void dumpSensorsUSFSection(int fd);
     void dumpAoCSection(int fd);
-    void dumpRamdumpSection(int fd);
     void dumpMiscSection(int fd);
     void dumpCameraSection(int fd);
     void dumpTrustySection(int fd);
