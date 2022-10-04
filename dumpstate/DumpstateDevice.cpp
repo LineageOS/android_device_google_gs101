@@ -262,7 +262,6 @@ DumpstateDevice::DumpstateDevice()
         { "aoc", [this](int fd) { dumpAoCSection(fd); } },
         { "misc", [this](int fd) { dumpMiscSection(fd); } },
         { "camera", [this](int fd) { dumpCameraSection(fd); } },
-        { "trusty", [this](int fd) { dumpTrustySection(fd); } },
     } {
 }
 
@@ -972,10 +971,6 @@ void DumpstateDevice::dumpCameraSection(int fd) {
                        "for f in $(ls -t /data/vendor/camera/hal_graph_state*.txt |head -1); do "
                        "echo $f ; cat $f ; done"},
                        CommandOptions::WithTimeout(4).Build());
-}
-
-void DumpstateDevice::dumpTrustySection(int fd) {
-    DumpFileToFd(fd, "Trusty TEE0 Logs", "/dev/trusty-log0");
 }
 
 static void *dumpModemThread(void *data) {
