@@ -740,10 +740,6 @@ endif
 
 $(call soong_config_set,bigo,soc,gs101)
 
-# MFC firmware
-PRODUCT_COPY_FILES += \
-	device/google/gs101/firmware/mfc/mfc_fw.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/mfc_fw.bin
-
 # 1. Codec 2.0
 # exynos service
 PRODUCT_SOONG_NAMESPACES += vendor/samsung_slsi/codec2
