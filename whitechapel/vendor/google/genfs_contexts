@@ -370,13 +370,6 @@ genfscon sysfs /devices/virtual/pmic/mitigation/clock_ratio/gpu_light_clk_ratio 
 # Chosen
 genfscon sysfs /firmware/devicetree/base/chosen                                u:object_r:sysfs_chosen:s0
 
-genfscon sysfs /devices/system/chip-id/ap_hw_tune_str  u:object_r:sysfs_chip_id:s0
-genfscon sysfs /devices/system/chip-id/evt_ver         u:object_r:sysfs_chip_id:s0
-genfscon sysfs /devices/system/chip-id/lot_id          u:object_r:sysfs_chip_id:s0
-genfscon sysfs /devices/system/chip-id/product_id      u:object_r:sysfs_chip_id:s0
-genfscon sysfs /devices/system/chip-id/revision        u:object_r:sysfs_chip_id:s0
-genfscon sysfs /devices/system/chip-id/raw_str         u:object_r:sysfs_chip_id:s0
-
 # OTA
 genfscon sysfs /devices/platform/14700000.ufs/pixel/boot_lun_enabled                                                     u:object_r:sysfs_ota:s0
 
