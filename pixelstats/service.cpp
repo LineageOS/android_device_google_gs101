@@ -25,6 +25,7 @@
 using android::hardware::google::pixel::SysfsCollector;
 using android::hardware::google::pixel::UeventListener;
 
+#define BLOCK_STATS_LENGTH 17
 #define UFSHC_PATH(filename) "/dev/sys/block/bootdevice/" #filename
 #define UFS_ERR_PATH(err_type) UFSHC_PATH(err_stats/) #err_type
 const struct SysfsCollector::SysfsPaths sysfs_paths = {
@@ -52,7 +53,8 @@ const struct SysfsCollector::SysfsPaths sysfs_paths = {
             UFS_ERR_PATH(dme_err_count),
             UFS_ERR_PATH(fatal_err_count),
             UFS_ERR_PATH(auto_hibern8_err_count)
-        }
+        },
+        .AmsRatePath = "/sys/devices/platform/audiometrics/ams_rate_read_once",
 };
 
 const struct UeventListener::UeventPaths ueventPaths = {
