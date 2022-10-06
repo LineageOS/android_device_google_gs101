@@ -251,7 +251,6 @@ DumpstateDevice::DumpstateDevice()
   : mTextSections{
         { "pre-touch", [this](int fd) { dumpPreTouchSection(fd); } },
         { "wlan", [this](int fd) { dumpWlanSection(fd); } },
-        { "soc", [this](int fd) { dumpSocSection(fd); } },
         { "memory", [this](int fd) { dumpMemorySection(fd); } },
         { "Devfreq", [this](int fd) { dumpDevfreqSection(fd); } },
         { "cpu", [this](int fd) { dumpCpuSection(fd); } },
@@ -817,16 +816,6 @@ void DumpstateDevice::dumpTouchSection(int fd) {
                  lsi_spi_path, lsi_spi_path);
         RunCommandToFd(fd, "Force Touch Active", {"/vendor/bin/sh", "-c", cmd});
     }
-}
-
-// Dump items related to SoC
-void DumpstateDevice::dumpSocSection(int fd) {
-    DumpFileToFd(fd, "AP HW TUNE", "/sys/devices/system/chip-id/ap_hw_tune_str");
-    DumpFileToFd(fd, "EVT VERSION", "/sys/devices/system/chip-id/evt_ver");
-    DumpFileToFd(fd, "LOT ID", "/sys/devices/system/chip-id/lot_id");
-    DumpFileToFd(fd, "PRODUCT ID", "/sys/devices/system/chip-id/product_id");
-    DumpFileToFd(fd, "REVISION", "/sys/devices/system/chip-id/revision");
-    DumpFileToFd(fd, "RAW STR", "/sys/devices/system/chip-id/raw_str");
 }
 
 // Dump items related to CPUs

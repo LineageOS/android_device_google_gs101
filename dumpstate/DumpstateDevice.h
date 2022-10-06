@@ -66,7 +66,6 @@ struct DumpstateDevice : public IDumpstateDevice {
     void dumpThermalSection(int fd);
     void dumpPreTouchSection(int fd);
     void dumpTouchSection(int fd);
-    void dumpSocSection(int fd);
     void dumpCpuSection(int fd);
     void dumpDevfreqSection(int fd);
     void dumpMemorySection(int fd);
