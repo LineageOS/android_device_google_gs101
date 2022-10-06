@@ -47,3 +47,7 @@ allow hal_neuralnetworks_darwinn sysfs_edgetpu:file r_file_perms;
 # Allows the NNAPI HAL to access the edgetpu_app_service
 allow hal_neuralnetworks_darwinn edgetpu_app_service:service_manager find;
 binder_call(hal_neuralnetworks_darwinn, edgetpu_app_server);
+
+# Allow NNAPI HAL to send trace packets to Perfetto with SELinux enabled
+# under userdebug builds.
+userdebug_or_eng(`perfetto_producer(hal_neuralnetworks_darwinn)')

@@ -285,7 +285,7 @@
 /vendor/bin/hw/disable_contaminant_detection\.sh  u:object_r:disable-contaminant-detection-sh_exec:s0
 
 # NFC
-/(vendor|system/vendor)/bin/hw/android\.hardware\.nfc@1\.2-service\.st                u:object_r:hal_nfc_default_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.nfc-service\.st                     u:object_r:hal_nfc_default_exec:s0
 /dev/st21nfc                                                                          u:object_r:nfc_device:s0
 /data/nfc(/.*)?                                                                       u:object_r:nfc_data_file:s0
 
@@ -319,6 +319,8 @@
 /dev/acd-debug                      u:object_r:aoc_device:s0
 /dev/acd-audio_tap[0-9]*            u:object_r:aoc_device:s0
 /dev/acd-audio_dcdoff_ref           u:object_r:aoc_device:s0
+/dev/acd-audio_ap_offload_rx        u:object_r:aoc_device:s0
+/dev/acd-audio_ap_offload_tx        u:object_r:aoc_device:s0
 /dev/amcs                           u:object_r:amcs_device:s0
 
 # AudioMetric
@@ -434,3 +436,5 @@
 # Raw HID device
 /dev/hidraw[0-9]*                        u:object_r:hidraw_device:s0
 
+# Radio files.
+/data/vendor/radio(/.*)?                                                    u:object_r:radio_vendor_data_file:s0
