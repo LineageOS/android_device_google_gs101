@@ -263,7 +263,6 @@ DumpstateDevice::DumpstateDevice()
         { "misc", [this](int fd) { dumpMiscSection(fd); } },
         { "camera", [this](int fd) { dumpCameraSection(fd); } },
         { "trusty", [this](int fd) { dumpTrustySection(fd); } },
-        { "modem", [this](int fd) { dumpModemSection(fd); } },
     } {
 }
 
@@ -977,19 +976,6 @@ void DumpstateDevice::dumpCameraSection(int fd) {
 
 void DumpstateDevice::dumpTrustySection(int fd) {
     DumpFileToFd(fd, "Trusty TEE0 Logs", "/dev/trusty-log0");
-}
-
-// Dump items related to modem
-void DumpstateDevice::dumpModemSection(int fd) {
-    DumpFileToFd(fd, "Modem Stat", "/data/vendor/modem_stat/debug.txt");
-    RunCommandToFd(fd, "Modem SSR history", {"/vendor/bin/sh", "-c",
-                       "for f in $(ls /data/vendor/ssrdump/crashinfo_modem*); do "
-                       "echo $f ; cat $f ; done"},
-                       CommandOptions::WithTimeout(2).Build());
-    RunCommandToFd(fd, "RFSD error log", {"/vendor/bin/sh", "-c",
-                       "for f in $(ls /data/vendor/log/rfsd/rfslog_*); do "
-                       "echo $f ; cat $f ; done"},
-                       CommandOptions::WithTimeout(2).Build());
 }
 
 static void *dumpModemThread(void *data) {
