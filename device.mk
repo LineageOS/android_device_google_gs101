@@ -1005,7 +1005,7 @@ PRODUCT_PACKAGES += \
 	android.hardware.audio.effect@7.0-impl \
 	android.hardware.bluetooth.audio-impl \
 	android.hardware.soundtrigger@2.3-impl \
-	vendor.google.whitechapel.audio.audioext@3.0-impl
+	vendor.google.whitechapel.audio.audioext@4.0-impl
 
 #Audio HAL libraries
 PRODUCT_PACKAGES += \
