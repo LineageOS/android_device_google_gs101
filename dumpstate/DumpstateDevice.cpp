@@ -259,7 +259,6 @@ DumpstateDevice::DumpstateDevice()
         { "touch", [this](int fd) { dumpTouchSection(fd); } },
         { "display", [this](int fd) { dumpDisplaySection(fd); } },
         { "sensors-usf", [this](int fd) { dumpSensorsUSFSection(fd); } },
-        { "aoc", [this](int fd) { dumpAoCSection(fd); } },
         { "misc", [this](int fd) { dumpMiscSection(fd); } },
         { "camera", [this](int fd) { dumpCameraSection(fd); } },
     } {
@@ -907,34 +906,6 @@ void DumpstateDevice::dumpDisplaySection(int fd) {
                            "echo $f ; cat $f ; done"},
                            CommandOptions::WithTimeout(2).Build());
     }
-}
-
-// Dump items related to AoC
-void DumpstateDevice::dumpAoCSection(int fd) {
-    DumpFileToFd(fd, "AoC Service Status", "/sys/devices/platform/19000000.aoc/services");
-    DumpFileToFd(fd, "AoC Restarts", "/sys/devices/platform/19000000.aoc/restart_count");
-    DumpFileToFd(fd, "AoC Coredumps", "/sys/devices/platform/19000000.aoc/coredump_count");
-    DumpFileToFd(fd, "AoC ring buf wake", "/sys/devices/platform/19000000.aoc/control/ring_buffer_wakeup");
-    DumpFileToFd(fd, "AoC host ipc wake", "/sys/devices/platform/19000000.aoc/control/host_ipc_wakeup");
-    DumpFileToFd(fd, "AoC usf wake", "/sys/devices/platform/19000000.aoc/control/usf_wakeup");
-    DumpFileToFd(fd, "AoC audio wake", "/sys/devices/platform/19000000.aoc/control/audio_wakeup");
-    DumpFileToFd(fd, "AoC logging wake", "/sys/devices/platform/19000000.aoc/control/logging_wakeup");
-    DumpFileToFd(fd, "AoC hotword wake", "/sys/devices/platform/19000000.aoc/control/hotword_wakeup");
-    DumpFileToFd(fd, "AoC memory exception wake", "/sys/devices/platform/19000000.aoc/control/memory_exception");
-    DumpFileToFd(fd, "AoC memory votes", "/sys/devices/platform/19000000.aoc/control/memory_votes_a32");
-    DumpFileToFd(fd, "AoC memory votes", "/sys/devices/platform/19000000.aoc/control/memory_votes_ff1");
-    RunCommandToFd(fd, "AoC Heap Stats (A32)",
-      {"/vendor/bin/sh", "-c", "echo 'dbg heap -c 1' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug"},
-      CommandOptions::WithTimeout(1).Build());
-    RunCommandToFd(fd, "AoC Heap Stats (F1)",
-      {"/vendor/bin/sh", "-c", "echo 'dbg heap -c 2' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug"},
-      CommandOptions::WithTimeout(1).Build());
-    RunCommandToFd(fd, "AoC Heap Stats (HF0)",
-      {"/vendor/bin/sh", "-c", "echo 'dbg heap -c 3' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug"},
-      CommandOptions::WithTimeout(1).Build());
-    RunCommandToFd(fd, "AoC Heap Stats (HF1)",
-      {"/vendor/bin/sh", "-c", "echo 'dbg heap -c 4' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug"},
-      CommandOptions::WithTimeout(1).Build());
 }
 
 // Dump items related to sensors usf.
