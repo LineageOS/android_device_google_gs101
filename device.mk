@@ -19,6 +19,7 @@ include device/google/gs-common/gs_watchdogd/watchdog.mk
 include device/google/gs-common/ramdump/ramdump.mk
 include device/google/gs-common/soc/soc.mk
 include device/google/gs-common/modem/modem.mk
+include device/google/gs-common/aoc/aoc.mk
 
 TARGET_BOARD_PLATFORM := gs101
 DEVICE_IS_64BIT_ONLY ?= $(if $(filter %_64,$(TARGET_PRODUCT)),true,false)
@@ -744,10 +745,6 @@ endif
 ####################################
 
 $(call soong_config_set,bigo,soc,gs101)
-
-# MFC firmware
-PRODUCT_COPY_FILES += \
-	device/google/gs101/firmware/mfc/mfc_fw.bin:$(TARGET_COPY_OUT_VENDOR)/firmware/mfc_fw.bin
 
 # 1. Codec 2.0
 # exynos service
