@@ -104,3 +104,6 @@ dontaudit hal_camera_default system_data_file:dir { search };
 # google3 prebuilts attempt to connect to the wrong trace socket, ignore them.
 dontaudit hal_camera_default traced:unix_stream_socket { connectto };
 dontaudit hal_camera_default traced_producer_socket:sock_file { write };
+
+# Allow access to always-on compute device node
+allow hal_camera_default aoc_device:chr_file rw_file_perms;
