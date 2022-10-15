@@ -22,12 +22,11 @@
 #include <android-base/stringprintf.h>
 #include <android-base/properties.h>
 #include <android-base/unique_fd.h>
-#include <hidl/HidlBinderSupport.h>
 #include <log/log.h>
 #include <pthread.h>
 #include <sys/stat.h>
 
-#include "DumpstateDevice.h"
+#include "Dumpstate.h"
 
 #include "DumpstateUtil.h"
 
@@ -56,11 +55,10 @@ using android::os::dumpstate::DumpFileToFd;
 using android::os::dumpstate::PropertiesHelper;
 using android::os::dumpstate::RunCommandToFd;
 
+namespace aidl {
 namespace android {
 namespace hardware {
 namespace dumpstate {
-namespace V1_1 {
-namespace implementation {
 
 #define GPS_LOG_PREFIX "gl-"
 #define GPS_MCU_LOG_PREFIX "esw-"
@@ -146,9 +144,9 @@ void dumpLogs(int fd, std::string srcDir, std::string destDir, int maxFileNum,
 
 void dumpRilLogs(int fd, std::string destDir) {
     std::string rilLogDir =
-            android::base::GetProperty(RIL_LOG_DIRECTORY_PROPERTY, RIL_LOG_DIRECTORY);
+            ::android::base::GetProperty(RIL_LOG_DIRECTORY_PROPERTY, RIL_LOG_DIRECTORY);
 
-    int maxFileNum = android::base::GetIntProperty(RIL_LOG_NUMBER_PROPERTY, 50);
+    int maxFileNum = ::android::base::GetIntProperty(RIL_LOG_NUMBER_PROPERTY, 50);
 
     const std::string currentLogDir = rilLogDir + "/cur";
     const std::string previousLogDir = rilLogDir + "/prev";
@@ -193,7 +191,7 @@ void dumpGpsLogs(int fd, std::string destDir) {
     const std::string gpsLogDir = GPS_LOG_DIRECTORY;
     const std::string gpsTmpLogDir = gpsLogDir + "/.tmp";
     const std::string gpsDestDir = destDir + "/gps";
-    int maxFileNum = android::base::GetIntProperty(GPS_LOG_NUMBER_PROPERTY, 20);
+    int maxFileNum = ::android::base::GetIntProperty(GPS_LOG_NUMBER_PROPERTY, 20);
 
     RunCommandToFd(fd, "MKDIR GPS LOG", {"/vendor/bin/mkdir", "-p", gpsDestDir.c_str()},
                    CommandOptions::WithTimeout(2).Build());
@@ -217,7 +215,7 @@ void dumpCameraLogs(int fd, const std::string &destDir) {
 }
 
 timepoint_t startSection(int fd, const std::string &sectionName) {
-    android::base::WriteStringToFd(
+    ::android::base::WriteStringToFd(
             "\n"
             "------ Section start: " + sectionName + " ------\n"
             "\n", fd);
@@ -229,7 +227,7 @@ void endSection(int fd, const std::string &sectionName, timepoint_t startTime) {
     auto elapsedMsec = std::chrono::duration_cast<std::chrono::milliseconds>
             (endTime - startTime).count();
 
-    android::base::WriteStringToFd(
+    ::android::base::WriteStringToFd(
             "\n"
             "------ Section end: " + sectionName + " ------\n"
             "Elapsed msec: " + std::to_string(elapsedMsec) + "\n"
@@ -241,13 +239,13 @@ void endSection(int fd, const std::string &sectionName, timepoint_t startTime) {
 // related to each other - for instance, for a Foo peripheral - please add them
 // to a new dump function and include it in this table so it can be accessed from the
 // command line, e.g.:
-//   lshal debug android.hardware.dumpstate@1.0::IDumpstateDevice/default foo
+//   dumpsys android.hardware.dumpstate.IDumpstateDevice/default foo
 //
 // However, if your addition generates attachments and/or binary data for the
 // bugreport (i.e. if it requires two file descriptors to execute), it must not be
 // added to this table and should instead be added to dumpstateBoard() below.
 
-DumpstateDevice::DumpstateDevice()
+Dumpstate::Dumpstate()
   : mTextSections{
         { "pre-touch", [this](int fd) { dumpPreTouchSection(fd); } },
         { "wlan", [this](int fd) { dumpWlanSection(fd); } },
@@ -264,9 +262,9 @@ DumpstateDevice::DumpstateDevice()
     } {
 }
 
-// Dump data requested by an argument to the "debug" HAL interface, or help info
+// Dump data requested by an argument to the "dump" interface, or help info
 // if the specified section is not supported.
-void DumpstateDevice::dumpTextSection(int fd, const std::string &sectionName) {
+void Dumpstate::dumpTextSection(int fd, const std::string &sectionName) {
     bool dumpAll = (sectionName == kAllSections);
 
     for (const auto &section : mTextSections) {
@@ -304,23 +302,23 @@ void DumpstateDevice::dumpTextSection(int fd, const std::string &sectionName) {
     }
 
     // An unsupported section was requested on the command line
-    android::base::WriteStringToFd("Unrecognized text section: " + sectionName + "\n", fd);
-    android::base::WriteStringToFd("Try \"" + kAllSections + "\" or one of the following:", fd);
+    ::android::base::WriteStringToFd("Unrecognized text section: " + sectionName + "\n", fd);
+    ::android::base::WriteStringToFd("Try \"" + kAllSections + "\" or one of the following:", fd);
     for (const auto &section : mTextSections) {
-        android::base::WriteStringToFd(" " + section.first, fd);
+        ::android::base::WriteStringToFd(" " + section.first, fd);
     }
-    android::base::WriteStringToFd("\nNote: sections with attachments (e.g. modem) are"
+    ::android::base::WriteStringToFd("\nNote: sections with attachments (e.g. modem) are"
                                    "not avalable from the command line.\n", fd);
 }
 
 // Dump items related to wlan
-void DumpstateDevice::dumpWlanSection(int fd) {
+void Dumpstate::dumpWlanSection(int fd) {
     RunCommandToFd(fd, "WLAN Debug Dump", {"/vendor/bin/sh", "-c",
                    "cat /sys/wifi/dump_start"});
 }
 
 // Dump items related to power and battery
-void DumpstateDevice::dumpPowerSection(int fd) {
+void Dumpstate::dumpPowerSection(int fd) {
     struct stat buffer;
 
     RunCommandToFd(fd, "Power Stats Times", {"/vendor/bin/sh", "-c",
@@ -505,7 +503,7 @@ void DumpstateDevice::dumpPowerSection(int fd) {
 }
 
 // Dump items related to thermal
-void DumpstateDevice::dumpThermalSection(int fd) {
+void Dumpstate::dumpThermalSection(int fd) {
     RunCommandToFd(fd, "Temperatures", {"/vendor/bin/sh", "-c",
                    "for f in /sys/class/thermal/thermal* ; do "
                        "type=`cat $f/type` ; temp=`cat $f/temp` ; echo \"$type: $temp\" ; "
@@ -537,7 +535,7 @@ void DumpstateDevice::dumpThermalSection(int fd) {
 }
 
 // Dump items related to touch
-void DumpstateDevice::dumpPreTouchSection(int fd) {
+void Dumpstate::dumpPreTouchSection(int fd) {
     const char nvt_spi_path[] = "/sys/class/spi_master/spi11/spi11.0/input/nvt_touch";
     char cmd[256];
 
@@ -573,7 +571,7 @@ void DumpstateDevice::dumpPreTouchSection(int fd) {
     }
 }
 
-void DumpstateDevice::dumpTouchSection(int fd) {
+void Dumpstate::dumpTouchSection(int fd) {
     const char stm_cmd_path[4][50] = {"/sys/class/spi_master/spi11/spi11.0",
                                       "/proc/fts/driver_test",
                                       "/sys/class/spi_master/spi6/spi6.0",
@@ -816,7 +814,7 @@ void DumpstateDevice::dumpTouchSection(int fd) {
 }
 
 // Dump items related to CPUs
-void DumpstateDevice::dumpCpuSection(int fd) {
+void Dumpstate::dumpCpuSection(int fd) {
     DumpFileToFd(fd, "CPU present", "/sys/devices/system/cpu/present");
     DumpFileToFd(fd, "CPU online", "/sys/devices/system/cpu/online");
     RunCommandToFd(fd, "CPU time-in-state", {"/vendor/bin/sh", "-c",
@@ -836,7 +834,7 @@ void DumpstateDevice::dumpCpuSection(int fd) {
 }
 
 // Dump items related to Devfreq & BTS
-void DumpstateDevice::dumpDevfreqSection(int fd) {
+void Dumpstate::dumpDevfreqSection(int fd) {
     DumpFileToFd(fd, "MIF DVFS",
                  "/sys/devices/platform/17000010.devfreq_mif/devfreq/17000010.devfreq_mif/time_in_state");
     DumpFileToFd(fd, "INT DVFS",
@@ -857,7 +855,7 @@ void DumpstateDevice::dumpDevfreqSection(int fd) {
 }
 
 // Dump items related to memory
-void DumpstateDevice::dumpMemorySection(int fd) {
+void Dumpstate::dumpMemorySection(int fd) {
     RunCommandToFd(fd, "ION HEAPS", {"/vendor/bin/sh", "-c",
                    "for d in $(ls -d /d/ion/*); do "
                        "if [ -f $d ]; then "
@@ -883,7 +881,7 @@ void DumpstateDevice::dumpMemorySection(int fd) {
 }
 
 // Dump items related to display
-void DumpstateDevice::dumpDisplaySection(int fd) {
+void Dumpstate::dumpDisplaySection(int fd) {
     DumpFileToFd(fd, "CRTC-0 underrun count", "/sys/kernel/debug/dri/0/crtc-0/underrun_cnt");
     DumpFileToFd(fd, "CRTC-0 crc count", "/sys/kernel/debug/dri/0/crtc-0/crc_cnt");
     DumpFileToFd(fd, "CRTC-0 ecc count", "/sys/kernel/debug/dri/0/crtc-0/ecc_cnt");
@@ -909,14 +907,14 @@ void DumpstateDevice::dumpDisplaySection(int fd) {
 }
 
 // Dump items related to sensors usf.
-void DumpstateDevice::dumpSensorsUSFSection(int fd) {
+void Dumpstate::dumpSensorsUSFSection(int fd) {
     CommandOptions options = CommandOptions::WithTimeout(2).Build();
     RunCommandToFd(fd, "USF statistics",
                    {"/vendor/bin/sh", "-c", "usf_stats get --all"},
                    options);
     if (!PropertiesHelper::IsUserBuild()) {
         // Not a user build, if this is also not a production device dump the USF registry.
-        std::string hwRev = android::base::GetProperty(HW_REVISION, "");
+        std::string hwRev = ::android::base::GetProperty(HW_REVISION, "");
         if (hwRev.find("PROTO") != std::string::npos ||
             hwRev.find("EVT") != std::string::npos ||
             hwRev.find("DVT") != std::string::npos) {
@@ -931,13 +929,13 @@ void DumpstateDevice::dumpSensorsUSFSection(int fd) {
 }
 
 // Dump items that don't fit well into any other section
-void DumpstateDevice::dumpMiscSection(int fd) {
+void Dumpstate::dumpMiscSection(int fd) {
     RunCommandToFd(fd, "VENDOR PROPERTIES", {"/vendor/bin/getprop"});
     DumpFileToFd(fd, "VENDOR PROC DUMP", "/proc/vendor_sched/dump_task");
 }
 
 // Dump essential camera debugging logs
-void DumpstateDevice::dumpCameraSection(int fd) {
+void Dumpstate::dumpCameraSection(int fd) {
     RunCommandToFd(fd, "Camera HAL Graph State Dump", {"/vendor/bin/sh", "-c",
                        "for f in $(ls -t /data/vendor/camera/hal_graph_state*.txt |head -1); do "
                        "echo $f ; cat $f ; done"},
@@ -959,20 +957,20 @@ static void *dumpModemThread(void *data) {
 
     RunCommandToFd(STDOUT_FILENO, "MKDIR MODEM LOG", {"/vendor/bin/mkdir", "-p", modemLogAllDir.c_str()}, CommandOptions::WithTimeout(2).Build());
 
-    bool modemLogEnabled = android::base::GetBoolProperty(MODEM_LOGGING_PERSIST_PROPERTY, false);
-    if (modemLogEnabled && android::base::GetProperty(MODEM_LOGGING_PATH_PROPERTY, "") == MODEM_LOG_DIRECTORY) {
-        bool modemLogStarted = android::base::GetBoolProperty(MODEM_LOGGING_STATUS_PROPERTY, false);
-        int maxFileNum = android::base::GetIntProperty(MODEM_LOGGING_NUMBER_BUGREPORT_PROPERTY, 100);
+    bool modemLogEnabled = ::android::base::GetBoolProperty(MODEM_LOGGING_PERSIST_PROPERTY, false);
+    if (modemLogEnabled && ::android::base::GetProperty(MODEM_LOGGING_PATH_PROPERTY, "") == MODEM_LOG_DIRECTORY) {
+        bool modemLogStarted = ::android::base::GetBoolProperty(MODEM_LOGGING_STATUS_PROPERTY, false);
+        int maxFileNum = ::android::base::GetIntProperty(MODEM_LOGGING_NUMBER_BUGREPORT_PROPERTY, 100);
 
         if (modemLogStarted) {
-            android::base::SetProperty(MODEM_LOGGING_PROPERTY, "false");
+            ::android::base::SetProperty(MODEM_LOGGING_PROPERTY, "false");
             ALOGD("Stopping modem logging...\n");
         } else {
             ALOGD("modem logging is not running\n");
         }
 
         for (int i = 0; i < 15; i++) {
-            if (!android::base::GetBoolProperty(MODEM_LOGGING_STATUS_PROPERTY, false)) {
+            if (!::android::base::GetBoolProperty(MODEM_LOGGING_STATUS_PROPERTY, false)) {
                 ALOGD("modem logging stopped\n");
                 sleep(1);
                 break;
@@ -984,18 +982,18 @@ static void *dumpModemThread(void *data) {
 
         if (modemLogStarted) {
             ALOGD("Restarting modem logging...\n");
-            android::base::SetProperty(MODEM_LOGGING_PROPERTY, "true");
+            ::android::base::SetProperty(MODEM_LOGGING_PROPERTY, "true");
         }
     }
 
     if (!PropertiesHelper::IsUserBuild()) {
-        bool gpsLogEnabled = android::base::GetBoolProperty(GPS_LOGGING_STATUS_PROPERTY, false);
-        bool tcpdumpEnabled = android::base::GetBoolProperty(TCPDUMP_PERSIST_PROPERTY, false);
-        bool cameraLogsEnabled = android::base::GetBoolProperty(
+        bool gpsLogEnabled = ::android::base::GetBoolProperty(GPS_LOGGING_STATUS_PROPERTY, false);
+        bool tcpdumpEnabled = ::android::base::GetBoolProperty(TCPDUMP_PERSIST_PROPERTY, false);
+        bool cameraLogsEnabled = ::android::base::GetBoolProperty(
                 "vendor.camera.debug.camera_performance_analyzer.attach_to_bugreport", true);
 
         if (tcpdumpEnabled) {
-            dumpLogs(STDOUT_FILENO, tcpdumpLogDir, modemLogAllDir, android::base::GetIntProperty(TCPDUMP_NUMBER_BUGREPORT, 5), TCPDUMP_LOG_PREFIX);
+            dumpLogs(STDOUT_FILENO, tcpdumpLogDir, modemLogAllDir, ::android::base::GetIntProperty(TCPDUMP_NUMBER_BUGREPORT, 5), TCPDUMP_LOG_PREFIX);
         }
 
         if (gpsLogEnabled) {
@@ -1020,7 +1018,7 @@ static void *dumpModemThread(void *data) {
     RunCommandToFd(STDOUT_FILENO, "CHG PERM", {"/vendor/bin/chmod", "a+w", modemLogCombined.c_str()}, CommandOptions::WithTimeout(2).Build());
 
     std::vector<uint8_t> buffer(65536);
-    android::base::unique_fd fdLog(TEMP_FAILURE_RETRY(open(modemLogCombined.c_str(), O_RDONLY | O_CLOEXEC | O_NONBLOCK)));
+    ::android::base::unique_fd fdLog(TEMP_FAILURE_RETRY(open(modemLogCombined.c_str(), O_RDONLY | O_CLOEXEC | O_NONBLOCK)));
 
     ALOGD("Going to write to dumpstate board binary\n");
     if (fdLog >= 0) {
@@ -1053,53 +1051,47 @@ static void *dumpModemThread(void *data) {
     return NULL;
 }
 
-// Methods from ::android::hardware::dumpstate::V1_0::IDumpstateDevice follow.
-Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle &handle) {
-// Ignore return value, just return an empty status.
-    dumpstateBoard_1_1(handle, DumpstateMode::DEFAULT, 30 * 1000 /* timeoutMillis */);
-    return Void();
-}
-
-// Methods from ::android::hardware::dumpstate::V1_1::IDumpstateDevice follow.
-Return<DumpstateStatus> DumpstateDevice::dumpstateBoard_1_1(const hidl_handle& handle,
-                                                            const DumpstateMode mode,
-                                                            const uint64_t timeoutMillis) {
+ndk::ScopedAStatus Dumpstate::dumpstateBoard(const std::vector<::ndk::ScopedFileDescriptor>& in_fds,
+                                             IDumpstateDevice::DumpstateMode in_mode,
+                                             int64_t in_timeoutMillis) {
     // Unused arguments.
-    (void) timeoutMillis;
+    (void) in_timeoutMillis;
 
-    if (handle == nullptr || handle->numFds < 1) {
+    if (in_fds.size() < 1) {
         ALOGE("no FDs\n");
-        return DumpstateStatus::ILLEGAL_ARGUMENT;
+        return ndk::ScopedAStatus::fromExceptionCodeWithMessage(EX_ILLEGAL_ARGUMENT,
+                                                                "No file descriptor");
     }
 
-    int fd = handle->data[0];
+    int fd = in_fds[0].get();
     if (fd < 0) {
-        ALOGE("invalid FD: %d\n", handle->data[0]);
-        return DumpstateStatus::ILLEGAL_ARGUMENT;
+        ALOGE("invalid FD: %d\n", fd);
+        return ndk::ScopedAStatus::fromExceptionCodeWithMessage(EX_ILLEGAL_ARGUMENT,
+                                                                "Invalid file descriptor");
     }
 
-    if (mode == DumpstateMode::WEAR) {
+    if (in_mode == IDumpstateDevice::DumpstateMode::WEAR) {
         // We aren't a Wear device.
-        ALOGE("Unsupported mode: %d\n", mode);
-        return DumpstateStatus::UNSUPPORTED_MODE;
-    } else if (mode < DumpstateMode::FULL || mode > DumpstateMode::PROTO) {
-        ALOGE("Invalid mode: %d\n", mode);
-        return DumpstateStatus::ILLEGAL_ARGUMENT;
+        ALOGE("Unsupported mode: %d\n", in_mode);
+        return ndk::ScopedAStatus::fromServiceSpecificErrorWithMessage(ERROR_UNSUPPORTED_MODE,
+                                                                       "Unsupported mode");
+    } else if (in_mode < IDumpstateDevice::DumpstateMode::FULL || in_mode > IDumpstateDevice::DumpstateMode::PROTO) {
+        ALOGE("Invalid mode: %d\n", in_mode);
+        return ndk::ScopedAStatus::fromExceptionCodeWithMessage(EX_ILLEGAL_ARGUMENT,
+                                                                "Invalid mode");
     }
 
     // Create thread to collect modem related logs
+    bool VerboseLogging;
+    getVerboseLoggingEnabled(&VerboseLogging);
     pthread_t modemThreadHandle = 0;
-    if (getVerboseLoggingEnabled()) {
-        if (handle->numFds < 2) {
-            ALOGE("no FD for modem\n");
-        } else {
-            int fdModem = handle->data[1];
-            if (pthread_create(&modemThreadHandle, NULL, dumpModemThread, (void *)((long)fdModem)) != 0) {
-                ALOGE("could not create thread for dumpModem\n");
-            }
+    if (VerboseLogging && in_fds.size() > 1) {
+        int fdModem = in_fds[1].get();
+        if (pthread_create(&modemThreadHandle, NULL, dumpModemThread, (void *)((long)fdModem)) != 0) {
+            ALOGE("could not create thread for dumpModem\n");
         }
     } else {
-        ALOGD("Verbose logging is not enabled\n");
+        ALOGD("Verbose logging is not enabled or no fd for modem.\n");
     }
 
     dumpTextSection(fd, kAllSections);
@@ -1108,46 +1100,40 @@ Return<DumpstateStatus> DumpstateDevice::dumpstateBoard_1_1(const hidl_handle& h
         pthread_join(modemThreadHandle, NULL);
     }
 
-    return DumpstateStatus::OK;
+    return ndk::ScopedAStatus::ok();
 }
 
-Return<void> DumpstateDevice::setVerboseLoggingEnabled(const bool enable) {
-    ::android::base::SetProperty(kVerboseLoggingProperty, enable ? "true" : "false");
-    return Void();
+ndk::ScopedAStatus Dumpstate::setVerboseLoggingEnabled(bool in_enable) {
+    ::android::base::SetProperty(kVerboseLoggingProperty, in_enable ? "true" : "false");
+    return ndk::ScopedAStatus::ok();
 }
 
-Return<bool> DumpstateDevice::getVerboseLoggingEnabled() {
-    return ::android::base::GetBoolProperty(kVerboseLoggingProperty, false);
+ndk::ScopedAStatus Dumpstate::getVerboseLoggingEnabled(bool* _aidl_return) {
+    *_aidl_return = ::android::base::GetBoolProperty(kVerboseLoggingProperty, false);
+    return ndk::ScopedAStatus::ok();
 }
 
-// Since HALs that support the debug() interface are automatically invoked during
+// Since AIDLs that support the dump() interface are automatically invoked during
 // bugreport generation and we don't want to generate a second copy of the same
 // data that will go into dumpstate_board.txt, this function will only do
 // something if it is called with an option, e.g.
-//   lshal debug android.hardware.dumpstate@1.0::IDumpstateDevice/default all
+//   dumpsys android.hardware.dumpstate.IDumpstateDevice/default all
 //
 // Also, note that sections which generate attachments and/or binary data when
-// included in a bugreport are not available through the debug() interface.
-Return<void> DumpstateDevice::debug(const hidl_handle &handle, const hidl_vec<hidl_string> &args) {
-    // Exit when dump is completed since this is a lazy HAL.
-    addPostCommandTask([]() {
-        exit(0);
-    });
+// included in a bugreport are not available through the dump() interface.
+binder_status_t Dumpstate::dump(int fd, const char** args, uint32_t numArgs) {
 
-    if (handle == nullptr || handle->numFds < 1 || args.size() != 1) {
-        return Void();
+    if (numArgs != 1) {
+        return STATUS_OK;
     }
 
-    int fd = handle->data[0];
     dumpTextSection(fd, static_cast<std::string>(args[0]));
 
     fsync(fd);
-    return Void();
+    return STATUS_OK;
 }
 
-
-}  // namespace implementation
-}  // namespace V1_1
 }  // namespace dumpstate
 }  // namespace hardware
 }  // namespace android
+}  // namespace aidl

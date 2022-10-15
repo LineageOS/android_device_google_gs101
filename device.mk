@@ -452,7 +452,7 @@ PRODUCT_PACKAGES += \
 
 # dumpstate HAL
 PRODUCT_PACKAGES += \
-	android.hardware.dumpstate@1.1-service.gs101
+	android.hardware.dumpstate-service.gs101
 
 # AoC support
 PRODUCT_PACKAGES += \
