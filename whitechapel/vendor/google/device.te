@@ -7,7 +7,6 @@ type sda_block_device, dev_type;
 type mfg_data_block_device, dev_type;
 
 # Exynos devices
-type vendor_gnss_device, dev_type;
 type vendor_toe_device, dev_type;
 type custom_ab_block_device, dev_type;
 type devinfo_block_device, dev_type;
@@ -43,3 +42,5 @@ type hidraw_device, dev_type;
 type st54spi_device, dev_type;
 type st33spi_device, dev_type;
 
+# GPS
+type vendor_gnss_device, dev_type;
