@@ -276,15 +276,6 @@ PRODUCT_COPY_FILES += \
 	device/google/gs101/conf/init.debug.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.debug.rc
 endif
 
-# If AoC Daemon is not present on this build, load firmware at boot via rc
-ifeq ($(wildcard vendor/google/whitechapel/aoc/aocd),)
-PRODUCT_COPY_FILES += \
-	device/google/gs101/conf/init.aoc.nodaemon.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.aoc.rc
-else
-PRODUCT_COPY_FILES += \
-	device/google/gs101/conf/init.aoc.daemon.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.aoc.rc
-endif
-
 # Recovery files
 PRODUCT_COPY_FILES += \
 	device/google/gs101/conf/init.recovery.device.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.gs101.rc
@@ -453,17 +444,6 @@ PRODUCT_PACKAGES += \
 # dumpstate HAL
 PRODUCT_PACKAGES += \
 	android.hardware.dumpstate-service.gs101
-
-# AoC support
-PRODUCT_PACKAGES += \
-	aocd
-
-# AoC debug support
-PRODUCT_PACKAGES_DEBUG += \
-	aocdump \
-	aocutil \
-	aoc_audio_cfg \
-	vp_util
 
 #
 # Audio HALs
@@ -1074,12 +1054,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # declare use of spatial audio
 # PRODUCT_PROPERTY_OVERRIDES += \
 #	ro.audio.spatializer_enabled=true
-
-ifeq (,$(filter aosp_%,$(TARGET_PRODUCT)))
-# IAudioMetricExt HIDL
-PRODUCT_PACKAGES += \
-    vendor.google.audiometricext@1.0-service-vendor
-endif
 
 # vndservicemanager and vndservice no longer included in API 30+, however needed by vendor code.
 # See b/148807371 for reference
