@@ -35,6 +35,6 @@ PRODUCT_PACKAGES += \
 
 # TPU DBA HAL C API library
 PRODUCT_PACKAGES += \
-	libedgetpu_dba_hal
+	libedgetpu_dba_hal.google
 
 BOARD_VENDOR_SEPOLICY_DIRS += device/google/gs101-sepolicy/edgetpu/
