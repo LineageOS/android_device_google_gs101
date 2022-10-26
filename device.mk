@@ -646,6 +646,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	debug.hwc.winupdate=1
 
 # hw composer HAL
+$(call soong_config_set,google_displaycolor,displaycolor_platform,gs101)
 PRODUCT_PACKAGES += \
 	libdisplaycolor \
 	hwcomposer.$(TARGET_BOARD_PLATFORM)
