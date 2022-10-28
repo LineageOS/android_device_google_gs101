@@ -24,9 +24,6 @@
 # HALs
 #
 /(vendor|system/vendor)/bin/hw/android\.hardware\.boot@1\.[0-2]-service-gs101                   u:object_r:hal_bootctl_default_exec:s0
-/(vendor|system/vendor)/bin/hw/android\.hardware\.gnss@1\.1-service-brcm                        u:object_r:hal_gnss_default_exec:s0
-/(vendor|system/vendor)/bin/hw/android\.hardware\.gnss@2\.0-service-brcm                        u:object_r:hal_gnss_default_exec:s0
-/(vendor|system/vendor)/bin/hw/android\.hardware\.gnss@[0-9]\.[0-9]-service-brcm                u:object_r:hal_gnss_default_exec:s0
 /(vendor|system/vendor)/bin/hw/android\.hardware\.dumpstate-service\.gs101                      u:object_r:hal_dumpstate_default_exec:s0
 /(vendor|system/vendor)/bin/hw/android\.hardware\.power\.stats@1\.0-service\.gs101              u:object_r:hal_power_stats_default_exec:s0
 /(vendor|system/vendor)/bin/hw/android\.hardware\.memtrack-service\.pixel                       u:object_r:hal_memtrack_default_exec:s0
@@ -83,9 +80,7 @@
 # Exynos Devices
 #
 /dev/gnss_ipc                  u:object_r:vendor_gnss_device:s0
-/dev/bbd_control               u:object_r:vendor_gnss_device:s0
 /dev/bbd_pwrstat               u:object_r:power_stats_device:s0
-/dev/ttyBCM                    u:object_r:vendor_gnss_device:s0
 /dev/radio0                    u:object_r:radio_device:s0
 /dev/dri/card0                 u:object_r:graphics_device:s0
 /dev/fimg2d                    u:object_r:graphics_device:s0
@@ -134,19 +129,10 @@
 # Exynos Daemon Exec
 #
 /(vendor|system/vendor)/bin/cbd                u:object_r:cbd_exec:s0
-/(vendor|system/vendor)/bin/hw/scd             u:object_r:scd_exec:s0
-/(vendor|system/vendor)/bin/hw/gpsd            u:object_r:gpsd_exec:s0
-/(vendor|system/vendor)/bin/hw/lhd             u:object_r:lhd_exec:s0
 /(vendor|system/vendor)/bin/hw/rild_exynos     u:object_r:rild_exec:s0
 /(vendor|system/vendor)/bin/rfsd               u:object_r:rfsd_exec:s0
 /(vendor|system/vendor)/bin/sced               u:object_r:sced_exec:s0
 /(vendor|system/vendor)/bin/bipchmgr           u:object_r:bipchmgr_exec:s0
-
-#
-# Exynos Data Files
-#
-# gnss/gps data/log files
-/data/vendor/gps(/.*)?       u:object_r:vendor_gps_file:s0
 
 #
 # Exynos Log Files
