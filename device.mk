@@ -791,11 +791,21 @@ PRODUCT_PACKAGES += \
 	libopenvx-opencl
 endif
 
-# GPS HAL
+# Location
 ifeq (,$(filter tangor citron,$(subst _, ,$(TARGET_PRODUCT))))
-include device/google/gs101/gnss/device-gnss.mk
+include device/google/gs-common/gps/brcm/device.mk
+PRODUCT_COPY_FILES += \
+	device/google/gs101/location/gps.cer:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/gps.cer
+ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+        PRODUCT_COPY_FILES += \
+                device/google/gs101/location/lhd.conf:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/lhd.conf \
+                device/google/gs101/location/scd.conf:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/scd.conf
+else
+        PRODUCT_COPY_FILES += \
+                device/google/gs101/location/lhd_user.conf:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/lhd.conf \
+                device/google/gs101/location/scd_user.conf:$(TARGET_COPY_OUT_VENDOR)/etc/gnss/scd.conf
 endif
-
+endif
 # Trusty (KM, GK, Storage)
 $(call inherit-product, system/core/trusty/trusty-storage.mk)
 $(call inherit-product, system/core/trusty/trusty-base.mk)
