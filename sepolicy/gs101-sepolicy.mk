@@ -1,3 +1,6 @@
+# ConnectivityThermalPowerManager
+BOARD_SEPOLICY_DIRS += hardware/google/pixel-sepolicy/connectivity_thermal_power_manager
+
 # sepolicy that are shared among devices using whitechapel
 BOARD_SEPOLICY_DIRS += device/google/gs101/sepolicy/whitechapel/vendor/google
 
