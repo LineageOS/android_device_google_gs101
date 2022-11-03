@@ -252,7 +252,6 @@ void endSection(int fd, const std::string &sectionName, timepoint_t startTime) {
 DumpstateDevice::DumpstateDevice()
   : mTextSections{
         { "pre-touch", [this](int fd) { dumpPreTouchSection(fd); } },
-        { "wlan", [this](int fd) { dumpWlanSection(fd); } },
         { "soc", [this](int fd) { dumpSocSection(fd); } },
         { "storage", [this](int fd) { dumpStorageSection(fd); } },
         { "memory", [this](int fd) { dumpMemorySection(fd); } },
@@ -302,12 +301,6 @@ void DumpstateDevice::dumpTextSection(int fd, const std::string &sectionName) {
     }
     android::base::WriteStringToFd("\nNote: sections with attachments (e.g. modem) are"
                                    "not avalable from the command line.\n", fd);
-}
-
-// Dump items related to wlan
-void DumpstateDevice::dumpWlanSection(int fd) {
-    RunCommandToFd(fd, "WLAN Debug Dump", {"/vendor/bin/sh", "-c",
-                   "cat /sys/wifi/dump_start"});
 }
 
 // Dump items related to power and battery
