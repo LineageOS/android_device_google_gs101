@@ -108,6 +108,7 @@
 /dev/logbuffer_pca9468_tcpm    u:object_r:logbuffer_device:s0
 /dev/logbuffer_pca9468         u:object_r:logbuffer_device:s0
 /dev/logbuffer_cpm             u:object_r:logbuffer_device:s0
+/dev/logbuffer_bd              u:object_r:logbuffer_device:s0
 
 /dev/logbuffer_maxfg_monitor        u:object_r:logbuffer_device:s0
 /dev/logbuffer_maxfg_base_monitor   u:object_r:logbuffer_device:s0
