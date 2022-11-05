@@ -26,6 +26,7 @@
         <!-- <item>device_personalization_services/Captions__enable=false</item> -->
         <item>device_personalization_services/Captions__enable_augmented_modality=true</item>
         <item>device_personalization_services/Captions__enable_augmented_modality_input=true</item>
+        <item>device_personalization_services/Captions__enable_augmented_modality_language_detection=true</item>
         <item>device_personalization_services/Captions__enable_augmented_music=true</item>
         <!-- <item>device_personalization_services/Captions__enable_clearcut_logging=true</item> -->
         <item>device_personalization_services/Captions__enable_language_detection=true</item>
@@ -46,7 +47,7 @@
         <item>device_personalization_services/Captions__visibility_stopped_duration_millis=1500</item>
 
         <!-- Now Playing (Pixel 2017) -->
-        <item>device_personalization_services/NowPlaying__ambient_music_index_manifest_17_09_02=220:https://storage.googleapis.com/music-iq-db/updatable_ytm_db/20220717-030030/manifest.json</item>
+        <item>device_personalization_services/NowPlaying__ambient_music_index_manifest_17_09_02=232:https://storage.googleapis.com/music-iq-db/updatable_ytm_db/20221030-040107/manifest.json</item>
         <item>device_personalization_services/NowPlaying__ambient_music_on_demand_enabled=true</item>
         <item>device_personalization_services/NowPlaying__ambient_music_on_demand_music_confidence=0.48</item>
         <item>device_personalization_services/NowPlaying__cloud_api_allowed=true</item>
@@ -84,6 +85,8 @@
         <item>device_personalization_services/Translate__copy_to_translate_enabled=true</item>
         <item>device_personalization_services/Translate__differentiate_simplified_and_traditional_chinese=true</item>
         <item>device_personalization_services/Translate__disable_translate_without_system_animation=false</item>
+        <item>device_personalization_services/Translate__interpreter_source_languages=de,en,ja,es,fr,it</item>
+        <item>device_personalization_services/Translate__interpreter_target_languages=de,en,ja,es,fr,it</item>
         <item>device_personalization_services/Translate__replace_auto_translate_copied_text_enabled=true</item>
         <item>device_personalization_services/Translate__text_to_text_language_list=vi,ja,fa,ro,nl,mr,mt,ar,ms,it,eo,is,et,es,iw,zh,uk,af,id,ur,mk,cy,hi,el,be,pt,lt,hr,lv,hu,ht,te,de,bg,th,bn,tl,pl,tr,kn,sv,gl,ko,sw,cs,da,ta,gu,ka,sl,ca,sk,ga,sq,no,fi,ru,fr,en,zh_Hant</item>
         <item>device_personalization_services/Translate__translation_service_enabled=true</item>
