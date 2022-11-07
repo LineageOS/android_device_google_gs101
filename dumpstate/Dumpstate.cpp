@@ -549,7 +549,6 @@ void Dumpstate::dumpTouchSection(int fd) {
                                       "/proc/fts/driver_test",
                                       "/sys/class/spi_master/spi6/spi6.0",
                                       "/proc/fts_ext/driver_test"};
-    const char lsi_spi_path[] = "/sys/devices/virtual/sec/tsp";
     char cmd[256];
 
     for (int i = 0; i < 4; i+=2) {
@@ -684,106 +683,6 @@ void Dumpstate::dumpTouchSection(int fd) {
         }
     }
 
-    if (!access(lsi_spi_path, R_OK)) {
-        // Enable: force touch active
-        snprintf(cmd, sizeof(cmd),
-                 "echo %s > %s/cmd && cat %s/cmd_result",
-                 "force_touch_active,2,1",
-                 lsi_spi_path, lsi_spi_path);
-        RunCommandToFd(fd, "Force Touch Active", {"/vendor/bin/sh", "-c", cmd});
-
-        // Firmware info
-        snprintf(cmd, sizeof(cmd), "%s/fw_version", lsi_spi_path);
-        DumpFileToFd(fd, "LSI firmware version", cmd);
-
-        // Touch status
-        snprintf(cmd, sizeof(cmd), "%s/status", lsi_spi_path);
-        DumpFileToFd(fd, "LSI touch status", cmd);
-
-        // Calibration info
-        snprintf(cmd, sizeof(cmd),
-                 "echo %s > %s/cmd && cat %s/cmd_result",
-                 "get_mis_cal_info",
-                 lsi_spi_path, lsi_spi_path);
-        RunCommandToFd(fd, "Calibration info", {"/vendor/bin/sh", "-c", cmd});
-
-        // Mutual strength
-        snprintf(cmd, sizeof(cmd),
-                 "echo %s > %s/cmd && cat %s/cmd_result",
-                 "run_delta_read_all",
-                 lsi_spi_path, lsi_spi_path);
-        RunCommandToFd(fd, "Mutual Strength", {"/vendor/bin/sh", "-c", cmd});
-
-        // Self strength
-        snprintf(cmd, sizeof(cmd),
-                 "echo %s > %s/cmd && cat %s/cmd_result",
-                 "run_self_delta_read_all",
-                 lsi_spi_path, lsi_spi_path);
-        RunCommandToFd(fd, "Self Strength", {"/vendor/bin/sh", "-c", cmd});
-
-        // TYPE_AMBIENT_DATA
-        snprintf(cmd, sizeof(cmd),
-                 "echo %s > %s/cmd && cat %s/cmd_result",
-                 "run_rawdata_read_type,3",
-                 lsi_spi_path, lsi_spi_path);
-        RunCommandToFd(fd, "TYPE_AMBIENT_DATA", {"/vendor/bin/sh", "-c", cmd});
-
-        // TYPE_DECODED_DATA
-        snprintf(cmd, sizeof(cmd),
-                 "echo %s > %s/cmd && cat %s/cmd_result",
-                 "run_rawdata_read_type,5",
-                 lsi_spi_path, lsi_spi_path);
-        RunCommandToFd(fd, "TYPE_DECODED_DATA", {"/vendor/bin/sh", "-c", cmd});
-
-        // TYPE_OFFSET_DATA_SEC
-        snprintf(cmd, sizeof(cmd),
-                 "echo %s > %s/cmd && cat %s/cmd_result",
-                 "run_rawdata_read_type,19",
-                 lsi_spi_path, lsi_spi_path);
-        RunCommandToFd(fd, "TYPE_OFFSET_DATA_SEC", {"/vendor/bin/sh", "-c", cmd});
-
-        // TYPE_NOI_P2P_MIN
-        snprintf(cmd, sizeof(cmd),
-                 "echo %s > %s/cmd && cat %s/cmd_result",
-                 "run_rawdata_read_type,30",
-                 lsi_spi_path, lsi_spi_path);
-        RunCommandToFd(fd, "TYPE_NOI_P2P_MIN", {"/vendor/bin/sh", "-c", cmd});
-
-        // TYPE_NOI_P2P_MAX
-        snprintf(cmd, sizeof(cmd),
-                 "echo %s > %s/cmd && cat %s/cmd_result",
-                 "run_rawdata_read_type,31",
-                 lsi_spi_path, lsi_spi_path);
-        RunCommandToFd(fd, "TYPE_NOI_P2P_MAX", {"/vendor/bin/sh", "-c", cmd});
-
-        // Raw cap
-        snprintf(cmd, sizeof(cmd),
-                 "echo %s > %s/cmd && cat %s/cmd_result",
-                 "run_rawcap_read_all",
-                 lsi_spi_path, lsi_spi_path);
-        RunCommandToFd(fd, "Mutual Raw Cap", {"/vendor/bin/sh", "-c", cmd});
-
-        // Self raw cap
-        snprintf(cmd, sizeof(cmd),
-                 "echo %s > %s/cmd && cat %s/cmd_result",
-                 "run_self_rawcap_read_all",
-                 lsi_spi_path, lsi_spi_path);
-        RunCommandToFd(fd, "Self Raw Cap", {"/vendor/bin/sh", "-c", cmd});
-
-        // CM2
-        snprintf(cmd, sizeof(cmd),
-                 "echo %s > %s/cmd && cat %s/cmd_result",
-                 "run_rawcap_high_freq_read_all",
-                 lsi_spi_path, lsi_spi_path);
-        RunCommandToFd(fd, "CM2", {"/vendor/bin/sh", "-c", cmd});
-
-        // Disable: force touch active
-        snprintf(cmd, sizeof(cmd),
-                 "echo %s > %s/cmd && cat %s/cmd_result",
-                 "force_touch_active,2,0",
-                 lsi_spi_path, lsi_spi_path);
-        RunCommandToFd(fd, "Force Touch Active", {"/vendor/bin/sh", "-c", cmd});
-    }
 }
 
 // Dump items related to CPUs
