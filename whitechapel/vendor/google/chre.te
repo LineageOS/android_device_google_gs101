@@ -27,3 +27,5 @@ binder_call(chre, stats_service_server)
 # Allow CHRE to use WakeLock
 wakelock_use(chre)
 
+# Allow CHRE to block suspend, which is required to use EPOLLWAKEUP.
+allow chre self:global_capability2_class_set block_suspend;
