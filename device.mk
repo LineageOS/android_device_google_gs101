@@ -1100,7 +1100,17 @@ PRODUCT_PACKAGES += \
 include hardware/google/pixel/thermal/device.mk
 PRODUCT_PROPERTY_OVERRIDES += persist.vendor.enable.thermal.genl=true
 
-include device/google/gs101/edgetpu/edgetpu.mk
+# EdgeTPU
+include device/google/gs-common/edgetpu/edgetpu.mk
+# Config variables for TPU chip on device.
+$(call soong_config_set,edgetpu_config,chip,abrolhos)
+# TPU firmware
+PRODUCT_PACKAGES += edgetpu-abrolhos.fw
+# TPU DBA AIDL HAL service
+PRODUCT_PACKAGES += com.google.edgetpu.dba-service
+# TPU DBA HAL C API library
+PRODUCT_PACKAGES += libedgetpu_dba_hal.google
+
 
 # Connectivity Thermal Power Manager
 PRODUCT_PACKAGES += \
