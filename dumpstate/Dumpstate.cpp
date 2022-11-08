@@ -15,6 +15,7 @@
  */
 
 #define LOG_TAG "dumpstate_device"
+#define ATRACE_TAG ATRACE_TAG_ALWAYS
 
 #include <inttypes.h>
 
@@ -22,6 +23,7 @@
 #include <android-base/stringprintf.h>
 #include <android-base/properties.h>
 #include <android-base/unique_fd.h>
+#include <cutils/trace.h>
 #include <log/log.h>
 #include <pthread.h>
 #include <sys/stat.h>
@@ -215,6 +217,7 @@ void dumpCameraLogs(int fd, const std::string &destDir) {
 }
 
 timepoint_t startSection(int fd, const std::string &sectionName) {
+    ATRACE_BEGIN(sectionName.c_str());
     ::android::base::WriteStringToFd(
             "\n"
             "------ Section start: " + sectionName + " ------\n"
@@ -223,6 +226,7 @@ timepoint_t startSection(int fd, const std::string &sectionName) {
 }
 
 void endSection(int fd, const std::string &sectionName, timepoint_t startTime) {
+    ATRACE_END();
     auto endTime = std::chrono::steady_clock::now();
     auto elapsedMsec = std::chrono::duration_cast<std::chrono::milliseconds>
             (endTime - startTime).count();
@@ -946,6 +950,7 @@ void Dumpstate::dumpCameraSection(int fd) {
 }
 
 static void *dumpModemThread(void *data) {
+    ATRACE_ASYNC_BEGIN("dumpModemThread", 0);
     std::string modemLogDir = MODEM_LOG_DIRECTORY;
     std::string extendedLogDir = MODEM_EXTENDED_LOG_DIRECTORY;
     std::string tcpdumpLogDir = TCPDUMP_LOG_DIRECTORY;
@@ -1051,12 +1056,14 @@ static void *dumpModemThread(void *data) {
 
     ALOGD("dumpModemThread finished\n");
 
+    ATRACE_ASYNC_END("dumpModemThread", 0);
     return NULL;
 }
 
 ndk::ScopedAStatus Dumpstate::dumpstateBoard(const std::vector<::ndk::ScopedFileDescriptor>& in_fds,
                                              IDumpstateDevice::DumpstateMode in_mode,
                                              int64_t in_timeoutMillis) {
+    ATRACE_BEGIN("dumpstateBoard");
     // Unused arguments.
     (void) in_timeoutMillis;
 
@@ -1103,6 +1110,7 @@ ndk::ScopedAStatus Dumpstate::dumpstateBoard(const std::vector<::ndk::ScopedFile
         pthread_join(modemThreadHandle, NULL);
     }
 
+    ATRACE_END();
     return ndk::ScopedAStatus::ok();
 }
 
