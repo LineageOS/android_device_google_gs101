@@ -23,3 +23,5 @@ allow chre hal_wifi_ext_hwservice:hwservice_manager find;
 allow chre fwk_stats_service:service_manager find;
 binder_call(chre, stats_service_server)
 
+# Allow CHRE to block suspend, which is required to use EPOLLWAKEUP.
+allow chre self:global_capability2_class_set block_suspend;
