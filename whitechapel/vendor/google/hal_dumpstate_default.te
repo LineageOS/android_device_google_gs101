@@ -33,13 +33,7 @@ get_prop(hal_dumpstate_default, vendor_camera_debug_prop);
 
 allow hal_dumpstate_default vendor_log_file:dir search;
 
-allow hal_dumpstate_default vendor_usf_stats:file execute_no_trans;
-allow hal_dumpstate_default vendor_usf_reg_edit:file execute_no_trans;
 allow hal_dumpstate_default vendor_dumpsys:file execute_no_trans;
-userdebug_or_eng(`
-  allow hal_dumpstate_default sensor_debug_data_file:dir r_dir_perms;
-  allow hal_dumpstate_default sensor_debug_data_file:file r_file_perms;
-')
 
 allow hal_dumpstate_default sysfs_acpm_stats:dir r_dir_perms;
 allow hal_dumpstate_default sysfs_acpm_stats:file r_file_perms;
@@ -47,9 +41,7 @@ allow hal_dumpstate_default sysfs_acpm_stats:file r_file_perms;
 allow hal_dumpstate_default sysfs_spi:dir search;
 allow hal_dumpstate_default sysfs_spi:file rw_file_perms;
 
-allow hal_dumpstate_default device:dir r_dir_perms;
 allow hal_dumpstate_default logbuffer_device:chr_file r_file_perms;
-allow hal_dumpstate_default aoc_device:chr_file rw_file_perms;
 
 allow hal_dumpstate_default sysfs_wifi:dir search;
 allow hal_dumpstate_default sysfs_wifi:file r_file_perms;
