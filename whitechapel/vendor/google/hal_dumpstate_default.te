@@ -51,10 +51,6 @@ allow hal_dumpstate_default sysfs_touch:dir r_dir_perms;
 allow hal_dumpstate_default sysfs_touch:file rw_file_perms;
 allow hal_dumpstate_default proc_touch:file rw_file_perms;
 
-allow hal_dumpstate_default sysfs_thermal:dir r_dir_perms;
-allow hal_dumpstate_default sysfs_thermal:file r_file_perms;
-allow hal_dumpstate_default sysfs_thermal:lnk_file read;
-
 # Modem logs
 allow hal_dumpstate_default modem_efs_file:dir search;
 allow hal_dumpstate_default modem_efs_file:file r_file_perms;
