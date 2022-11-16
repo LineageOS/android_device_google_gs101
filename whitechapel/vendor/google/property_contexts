@@ -48,6 +48,7 @@ persist.vendor.sys.          u:object_r:vendor_persist_sys_default_prop:s0
 
 # for display
 ro.vendor.hwc.drm.device                u:object_r:vendor_display_prop:s0
+persist.vendor.display.                 u:object_r:vendor_display_prop:s0
 
 # for camera
 persist.vendor.camera.               u:object_r:vendor_camera_prop:s0
