@@ -213,6 +213,9 @@ type sysfs_trusty, sysfs_type, fs_type;
 # BootControl
 type sysfs_bootctl, sysfs_type, fs_type;
 
+#vendor-metrics
+type sysfs_vendor_metrics, fs_type, sysfs_type;
+
 # Radio
 type radio_vendor_data_file, file_type, data_file_type;
 userdebug_or_eng(`
