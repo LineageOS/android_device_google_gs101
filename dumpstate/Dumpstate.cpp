@@ -256,7 +256,6 @@ Dumpstate::Dumpstate()
         { "Devfreq", [this](int fd) { dumpDevfreqSection(fd); } },
         { "cpu", [this](int fd) { dumpCpuSection(fd); } },
         { "power", [this](int fd) { dumpPowerSection(fd); } },
-        { "thermal", [this](int fd) { dumpThermalSection(fd); } },
         { "touch", [this](int fd) { dumpTouchSection(fd); } },
         { "display", [this](int fd) { dumpDisplaySection(fd); } },
         { "misc", [this](int fd) { dumpMiscSection(fd); } },
@@ -508,38 +507,6 @@ void Dumpstate::dumpPowerSection(int fd) {
 
 }
 
-// Dump items related to thermal
-void Dumpstate::dumpThermalSection(int fd) {
-    RunCommandToFd(fd, "Temperatures", {"/vendor/bin/sh", "-c",
-                   "for f in /sys/class/thermal/thermal* ; do "
-                       "type=`cat $f/type` ; temp=`cat $f/temp` ; echo \"$type: $temp\" ; "
-                       "done"});
-    RunCommandToFd(fd, "Cooling Device Current State", {"/vendor/bin/sh", "-c",
-                   "for f in /sys/class/thermal/cooling* ; do "
-                       "type=`cat $f/type` ; temp=`cat $f/cur_state` ; echo \"$type: $temp\" ; "
-                       "done"});
-    RunCommandToFd(fd, "Cooling Device User Vote State", {"/vendor/bin/sh", "-c",
-                   "for f in /sys/class/thermal/cooling* ; do "
-                   "if [ ! -f $f/user_vote ]; then continue; fi; "
-                   "type=`cat $f/type` ; temp=`cat $f/user_vote` ; echo \"$type: $temp\" ; "
-                   "done"});
-    RunCommandToFd(fd, "Cooling Device Time in State", {"/vendor/bin/sh", "-c", "for f in /sys/class/thermal/cooling* ; "
-                   "do type=`cat $f/type` ; temp=`cat $f/stats/time_in_state_ms` ; echo \"$type:\n$temp\" ; done"});
-    RunCommandToFd(fd, "Cooling Device Trans Table", {"/vendor/bin/sh", "-c", "for f in /sys/class/thermal/cooling* ; "
-                   "do type=`cat $f/type` ; temp=`cat $f/stats/trans_table` ; echo \"$type:\n$temp\" ; done"});
-    RunCommandToFd(fd, "Cooling Device State2Power Table", {"/vendor/bin/sh", "-c",
-                   "for f in /sys/class/thermal/cooling* ; do "
-                   "if [ ! -f $f/state2power_table ]; then continue; fi; "
-                   "type=`cat $f/type` ; state2power_table=`cat $f/state2power_table` ; echo \"$type: $state2power_table\" ; "
-                   "done"});
-    DumpFileToFd(fd, "TMU state:", "/sys/module/gs101_thermal/parameters/tmu_reg_dump_state");
-    DumpFileToFd(fd, "TMU current temperature:", "/sys/module/gs101_thermal/parameters/tmu_reg_dump_current_temp");
-    DumpFileToFd(fd, "TMU_TOP rise thresholds:", "/sys/module/gs101_thermal/parameters/tmu_top_reg_dump_rise_thres");
-    DumpFileToFd(fd, "TMU_TOP fall thresholds:", "/sys/module/gs101_thermal/parameters/tmu_top_reg_dump_fall_thres");
-    DumpFileToFd(fd, "TMU_SUB rise thresholds:", "/sys/module/gs101_thermal/parameters/tmu_sub_reg_dump_rise_thres");
-    DumpFileToFd(fd, "TMU_SUB fall thresholds:", "/sys/module/gs101_thermal/parameters/tmu_sub_reg_dump_fall_thres");
-}
-
 // Dump items related to touch
 void Dumpstate::dumpPreTouchSection(int fd) {
     const char nvt_spi_path[] = "/sys/class/spi_master/spi11/spi11.0/input/nvt_touch";
@@ -582,7 +549,6 @@ void Dumpstate::dumpTouchSection(int fd) {
                                       "/proc/fts/driver_test",
                                       "/sys/class/spi_master/spi6/spi6.0",
                                       "/proc/fts_ext/driver_test"};
-    const char lsi_spi_path[] = "/sys/devices/virtual/sec/tsp";
     char cmd[256];
 
     for (int i = 0; i < 4; i+=2) {
@@ -717,106 +683,6 @@ void Dumpstate::dumpTouchSection(int fd) {
         }
     }
 
-    if (!access(lsi_spi_path, R_OK)) {
-        // Enable: force touch active
-        snprintf(cmd, sizeof(cmd),
-                 "echo %s > %s/cmd && cat %s/cmd_result",
-                 "force_touch_active,2,1",
-                 lsi_spi_path, lsi_spi_path);
-        RunCommandToFd(fd, "Force Touch Active", {"/vendor/bin/sh", "-c", cmd});
-
-        // Firmware info
-        snprintf(cmd, sizeof(cmd), "%s/fw_version", lsi_spi_path);
-        DumpFileToFd(fd, "LSI firmware version", cmd);
-
-        // Touch status
-        snprintf(cmd, sizeof(cmd), "%s/status", lsi_spi_path);
-        DumpFileToFd(fd, "LSI touch status", cmd);
-
-        // Calibration info
-        snprintf(cmd, sizeof(cmd),
-                 "echo %s > %s/cmd && cat %s/cmd_result",
-                 "get_mis_cal_info",
-                 lsi_spi_path, lsi_spi_path);
-        RunCommandToFd(fd, "Calibration info", {"/vendor/bin/sh", "-c", cmd});
-
-        // Mutual strength
-        snprintf(cmd, sizeof(cmd),
-                 "echo %s > %s/cmd && cat %s/cmd_result",
-                 "run_delta_read_all",
-                 lsi_spi_path, lsi_spi_path);
-        RunCommandToFd(fd, "Mutual Strength", {"/vendor/bin/sh", "-c", cmd});
-
-        // Self strength
-        snprintf(cmd, sizeof(cmd),
-                 "echo %s > %s/cmd && cat %s/cmd_result",
-                 "run_self_delta_read_all",
-                 lsi_spi_path, lsi_spi_path);
-        RunCommandToFd(fd, "Self Strength", {"/vendor/bin/sh", "-c", cmd});
-
-        // TYPE_AMBIENT_DATA
-        snprintf(cmd, sizeof(cmd),
-                 "echo %s > %s/cmd && cat %s/cmd_result",
-                 "run_rawdata_read_type,3",
-                 lsi_spi_path, lsi_spi_path);
-        RunCommandToFd(fd, "TYPE_AMBIENT_DATA", {"/vendor/bin/sh", "-c", cmd});
-
-        // TYPE_DECODED_DATA
-        snprintf(cmd, sizeof(cmd),
-                 "echo %s > %s/cmd && cat %s/cmd_result",
-                 "run_rawdata_read_type,5",
-                 lsi_spi_path, lsi_spi_path);
-        RunCommandToFd(fd, "TYPE_DECODED_DATA", {"/vendor/bin/sh", "-c", cmd});
-
-        // TYPE_OFFSET_DATA_SEC
-        snprintf(cmd, sizeof(cmd),
-                 "echo %s > %s/cmd && cat %s/cmd_result",
-                 "run_rawdata_read_type,19",
-                 lsi_spi_path, lsi_spi_path);
-        RunCommandToFd(fd, "TYPE_OFFSET_DATA_SEC", {"/vendor/bin/sh", "-c", cmd});
-
-        // TYPE_NOI_P2P_MIN
-        snprintf(cmd, sizeof(cmd),
-                 "echo %s > %s/cmd && cat %s/cmd_result",
-                 "run_rawdata_read_type,30",
-                 lsi_spi_path, lsi_spi_path);
-        RunCommandToFd(fd, "TYPE_NOI_P2P_MIN", {"/vendor/bin/sh", "-c", cmd});
-
-        // TYPE_NOI_P2P_MAX
-        snprintf(cmd, sizeof(cmd),
-                 "echo %s > %s/cmd && cat %s/cmd_result",
-                 "run_rawdata_read_type,31",
-                 lsi_spi_path, lsi_spi_path);
-        RunCommandToFd(fd, "TYPE_NOI_P2P_MAX", {"/vendor/bin/sh", "-c", cmd});
-
-        // Raw cap
-        snprintf(cmd, sizeof(cmd),
-                 "echo %s > %s/cmd && cat %s/cmd_result",
-                 "run_rawcap_read_all",
-                 lsi_spi_path, lsi_spi_path);
-        RunCommandToFd(fd, "Mutual Raw Cap", {"/vendor/bin/sh", "-c", cmd});
-
-        // Self raw cap
-        snprintf(cmd, sizeof(cmd),
-                 "echo %s > %s/cmd && cat %s/cmd_result",
-                 "run_self_rawcap_read_all",
-                 lsi_spi_path, lsi_spi_path);
-        RunCommandToFd(fd, "Self Raw Cap", {"/vendor/bin/sh", "-c", cmd});
-
-        // CM2
-        snprintf(cmd, sizeof(cmd),
-                 "echo %s > %s/cmd && cat %s/cmd_result",
-                 "run_rawcap_high_freq_read_all",
-                 lsi_spi_path, lsi_spi_path);
-        RunCommandToFd(fd, "CM2", {"/vendor/bin/sh", "-c", cmd});
-
-        // Disable: force touch active
-        snprintf(cmd, sizeof(cmd),
-                 "echo %s > %s/cmd && cat %s/cmd_result",
-                 "force_touch_active,2,0",
-                 lsi_spi_path, lsi_spi_path);
-        RunCommandToFd(fd, "Force Touch Active", {"/vendor/bin/sh", "-c", cmd});
-    }
 }
 
 // Dump items related to CPUs
