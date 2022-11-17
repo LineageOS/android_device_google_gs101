@@ -352,7 +352,6 @@ genfscon sysfs /devices/platform/10d40000.spi/spi_master/spi11/spi11.0          
 genfscon sysfs /devices/platform/10950000.spi/spi_master/spi6/spi6.0            u:object_r:sysfs_touch:s0
 genfscon proc  /fts/driver_test                                                 u:object_r:proc_touch:s0
 genfscon proc  /fts_ext/driver_test                                             u:object_r:proc_touch:s0
-genfscon sysfs /devices/virtual/sec/tsp                                         u:object_r:sysfs_touch:s0
 genfscon sysfs /devices/virtual/input/input2                                    u:object_r:sysfs_touch:s0
 genfscon sysfs /devices/virtual/input/input3                                    u:object_r:sysfs_touch:s0
 genfscon sysfs /devices/virtual/input/nvt_touch                                 u:object_r:sysfs_touch:s0
@@ -708,9 +707,6 @@ genfscon sysfs /devices/platform/sjtag_gsa/interface                   u:object_
 # Camera
 genfscon sysfs /devices/platform/17000030.devfreq_intcam/devfreq/17000030.devfreq_intcam/min_freq       u:object_r:sysfs_camera:s0
 genfscon sysfs /devices/platform/17000060.devfreq_tnr/devfreq/17000060.devfreq_tnr/min_freq             u:object_r:sysfs_camera:s0
-
-# thermal sysfs files
-genfscon sysfs /module/gs101_thermal/parameters            u:object_r:sysfs_thermal:s0
 
 # USB-C throttling stats
 genfscon sysfs /devices/platform/google,usbc_port_cooling_dev/cleared_time      u:object_r:sysfs_usbc_throttling_stats:s0

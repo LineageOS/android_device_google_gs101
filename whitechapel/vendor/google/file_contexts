@@ -230,11 +230,6 @@
 /vendor/bin/hw/google\.hardware\.media\.c2@1\.0-service                 u:object_r:mediacodec_exec:s0
 /data/vendor/media(/.*)?                                                u:object_r:vendor_media_data_file:s0
 
-# thermal sysfs files
-/sys/class/thermal(/.*)?               u:object_r:sysfs_thermal:s0
-/sys/devices/virtual/thermal(/.*)?     u:object_r:sysfs_thermal:s0
-
-
 # IMS VoWiFi
 /data/vendor/misc(/.*)?                u:object_r:vendor_misc_data_file:s0
 /data/vendor/VoWiFi(/.*)?              u:object_r:vendor_ims_data_file:s0
