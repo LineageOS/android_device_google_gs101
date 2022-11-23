@@ -1110,8 +1110,8 @@ $(call soong_config_set,edgetpu_config,chip,abrolhos)
 PRODUCT_PACKAGES += edgetpu-abrolhos.fw
 # TPU DBA AIDL HAL service
 PRODUCT_PACKAGES += com.google.edgetpu.dba-service
-# TPU DBA HAL C API library
-PRODUCT_PACKAGES += libedgetpu_dba_hal.google
+# TPU DBA C API library
+PRODUCT_PACKAGES += libedgetpu_dba.google
 
 
 # Connectivity Thermal Power Manager
