@@ -23,6 +23,10 @@ allow pixelstats_vendor fwk_sensor_hwservice:hwservice_manager find;
 # Batery history
 allow pixelstats_vendor battery_history_device:chr_file r_file_perms;
 
+#vendor-metrics
+r_dir_file(pixelstats_vendor, sysfs_vendor_metrics)
+allow pixelstats_vendor sysfs_vendor_metrics:lnk_file r_file_perms;
+
 # BCL
 allow pixelstats_vendor sysfs_bcl:dir search;
 allow pixelstats_vendor sysfs_bcl:file r_file_perms;
