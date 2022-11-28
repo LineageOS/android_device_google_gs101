@@ -48,8 +48,6 @@ class Dumpstate : public BnDumpstateDevice {
     // Text sections that can be dumped individually on the command line in
     // addition to being included in full dumps
     void dumpPowerSection(int fd);
-    void dumpPreTouchSection(int fd);
-    void dumpTouchSection(int fd);
     void dumpCpuSection(int fd);
     void dumpDevfreqSection(int fd);
     void dumpMemorySection(int fd);
