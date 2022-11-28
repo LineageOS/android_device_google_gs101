@@ -347,23 +347,6 @@ genfscon sysfs /devices/platform/gpio_keys/wakeup                               
 genfscon sysfs /devices/platform/odm/odm:btbcm/wakeup                                                                       u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/sound-aoc/wakeup                                                                           u:object_r:sysfs_wakeup:s0
 
-# Touch
-genfscon sysfs /devices/platform/10d40000.spi/spi_master/spi11/spi11.0          u:object_r:sysfs_touch:s0
-genfscon sysfs /devices/platform/10950000.spi/spi_master/spi6/spi6.0            u:object_r:sysfs_touch:s0
-genfscon proc  /fts/driver_test                                                 u:object_r:proc_touch:s0
-genfscon proc  /fts_ext/driver_test                                             u:object_r:proc_touch:s0
-genfscon sysfs /devices/virtual/input/input2                                    u:object_r:sysfs_touch:s0
-genfscon sysfs /devices/virtual/input/input3                                    u:object_r:sysfs_touch:s0
-genfscon sysfs /devices/virtual/input/nvt_touch                                 u:object_r:sysfs_touch:s0
-genfscon proc  /nvt_baseline                                                    u:object_r:proc_touch:s0
-genfscon proc  /nvt_cc_uniformity                                               u:object_r:proc_touch:s0
-genfscon proc  /nvt_diff                                                        u:object_r:proc_touch:s0
-genfscon proc  /nvt_fw_version                                                  u:object_r:proc_touch:s0
-genfscon proc  /nvt_heatmap                                                     u:object_r:proc_touch:s0
-genfscon proc  /nvt_pen_diff                                                    u:object_r:proc_touch:s0
-genfscon proc  /nvt_raw                                                         u:object_r:proc_touch:s0
-genfscon proc  /nvt_selftest                                                    u:object_r:proc_touch:s0
-
 # Input
 genfscon sysfs /devices/platform/11110000.usb/11110000.dwc3/xhci-hcd-exynos.4.auto/usb2/2-1 	u:object_r:sysfs_uhid:s0
 genfscon sysfs /devices/platform/11110000.usb/11110000.dwc3/xhci-hcd-exynos.5.auto/usb2/2-1 	u:object_r:sysfs_uhid:s0
