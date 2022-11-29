@@ -84,10 +84,6 @@ type bootdevice_sysdev, dev_type;
 # ZRam
 type per_boot_file, file_type, data_file_type, core_data_file_type;
 
-# Touch
-type proc_touch, proc_type, fs_type, mlstrustedobject;
-type sysfs_touch, sysfs_type, fs_type;
-
 # RILD
 type rild_vendor_data_file, file_type, data_file_type;
 
