@@ -21,6 +21,7 @@ include device/google/gs-common/soc/soc.mk
 include device/google/gs-common/modem/modem.mk
 include device/google/gs-common/aoc/aoc.mk
 include device/google/gs-common/thermal/thermal.mk
+include device/google/gs-common/pixel_metrics/pixel_metrics.mk
 
 TARGET_BOARD_PLATFORM := gs101
 DEVICE_IS_64BIT_ONLY ?= $(if $(filter %_64,$(TARGET_PRODUCT)),true,false)
@@ -1109,8 +1110,8 @@ $(call soong_config_set,edgetpu_config,chip,abrolhos)
 PRODUCT_PACKAGES += edgetpu-abrolhos.fw
 # TPU DBA AIDL HAL service
 PRODUCT_PACKAGES += com.google.edgetpu.dba-service
-# TPU DBA HAL C API library
-PRODUCT_PACKAGES += libedgetpu_dba_hal.google
+# TPU DBA C API library
+PRODUCT_PACKAGES += libedgetpu_dba.google
 
 
 # Connectivity Thermal Power Manager
