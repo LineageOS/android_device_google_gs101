@@ -46,11 +46,6 @@ allow hal_dumpstate_default logbuffer_device:chr_file r_file_perms;
 allow hal_dumpstate_default sysfs_wifi:dir search;
 allow hal_dumpstate_default sysfs_wifi:file r_file_perms;
 
-# Touch sysfs interface
-allow hal_dumpstate_default sysfs_touch:dir r_dir_perms;
-allow hal_dumpstate_default sysfs_touch:file rw_file_perms;
-allow hal_dumpstate_default proc_touch:file rw_file_perms;
-
 # Modem logs
 allow hal_dumpstate_default modem_efs_file:dir search;
 allow hal_dumpstate_default modem_efs_file:file r_file_perms;
@@ -60,7 +55,6 @@ allow hal_dumpstate_default block_device:dir r_dir_perms;
 
 allow hal_dumpstate_default proc_f2fs:dir r_dir_perms;
 allow hal_dumpstate_default proc_f2fs:file r_file_perms;
-allow hal_dumpstate_default proc_touch:file rw_file_perms;
 
 allow hal_dumpstate_default sysfs_batteryinfo:dir search;
 allow hal_dumpstate_default sysfs_batteryinfo:dir r_dir_perms;
