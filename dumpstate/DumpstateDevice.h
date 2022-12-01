@@ -79,6 +79,7 @@ struct DumpstateDevice : public IDumpstateDevice {
     void dumpCameraSection(int fd);
     void dumpTrustySection(int fd);
     void dumpModemSection(int fd);
+    void dumpPerfMetricsSection(int fd);
 };
 
 }  // namespace implementation
