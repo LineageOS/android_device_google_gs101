@@ -551,6 +551,11 @@ genfscon sysfs /devices/platform/100b0000.G3D                             u:obje
 genfscon sysfs /devices/platform/100b0000.ISP                             u:object_r:sysfs_thermal:s0
 genfscon sysfs /devices/platform/100b0000.TPU                             u:object_r:sysfs_thermal:s0
 
+#vendor-metrics
+genfscon sysfs /kernel/metrics/temp_residency/temp_residency_all/stats    u:object_r:sysfs_vendor_metrics:s0
+genfscon sysfs /kernel/metrics/resume_latency/resume_latency_metrics      u:object_r:sysfs_vendor_metrics:s0
+genfscon sysfs /kernel/metrics/irq/long_irq_metrics                       u:object_r:sysfs_vendor_metrics:s0
+
 # Trusty
 genfscon sysfs /module/trusty_virtio/parameters/use_high_wq               u:object_r:sysfs_trusty:s0
 genfscon sysfs /module/trusty_core/parameters/use_high_wq                 u:object_r:sysfs_trusty:s0
