@@ -270,6 +270,7 @@ DumpstateDevice::DumpstateDevice()
         { "camera", [this](int fd) { dumpCameraSection(fd); } },
         { "trusty", [this](int fd) { dumpTrustySection(fd); } },
         { "modem", [this](int fd) { dumpModemSection(fd); } },
+        { "perf-metrics", [this](int fd) { dumpPerfMetricsSection(fd); } },
     } {
 }
 
@@ -520,6 +521,7 @@ void DumpstateDevice::dumpThermalSection(int fd) {
     DumpFileToFd(fd, "TMU_TOP fall thresholds:", "/sys/module/gs101_thermal/parameters/tmu_top_reg_dump_fall_thres");
     DumpFileToFd(fd, "TMU_SUB rise thresholds:", "/sys/module/gs101_thermal/parameters/tmu_sub_reg_dump_rise_thres");
     DumpFileToFd(fd, "TMU_SUB fall thresholds:", "/sys/module/gs101_thermal/parameters/tmu_sub_reg_dump_fall_thres");
+    DumpFileToFd(fd, "Temperature Residency Metrics:", "/sys/kernel/metrics/temp_residency/temp_residency_all/stats");
 }
 
 // Dump items related to touch
@@ -1189,6 +1191,11 @@ static void *dumpModemThread(void *data) {
     ALOGD("dumpModemThread finished\n");
 
     return NULL;
+}
+
+void DumpstateDevice::dumpPerfMetricsSection(int fd) {
+    DumpFileToFd(fd, "Long running IRQ metrics", "/sys/kernel/metrics/irq/long_irq_metrics");
+    DumpFileToFd(fd, "Resume latency metrics", "/sys/kernel/metrics/resume_latency/resume_latency_metrics");
 }
 
 // Methods from ::android::hardware::dumpstate::V1_0::IDumpstateDevice follow.
