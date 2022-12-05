@@ -369,6 +369,9 @@ genfscon sysfs /devices/platform/1c2c0000.drmdsim/1c2c0000.drmdsim.0/panel_need_
 genfscon sysfs /devices/platform/1c2d0000.drmdsim/1c2d0000.drmdsim.0/panel_need_handle_idle_exit    u:object_r:sysfs_display:s0
 genfscon sysfs /devices/platform/1c2c0000.drmdsim/hs_clock                                          u:object_r:sysfs_display:s0
 genfscon sysfs /devices/platform/1c2d0000.drmdsim/hs_clock                                          u:object_r:sysfs_display:s0
+genfscon sysfs /devices/platform/1c300000.drmdecon/counters                                         u:object_r:sysfs_display:s0
+genfscon sysfs /devices/platform/1c301000.drmdecon/counters                                         u:object_r:sysfs_display:s0
+genfscon sysfs /devices/platform/1c302000.drmdecon/counters                                         u:object_r:sysfs_display:s0
 
 # Modem
 genfscon sysfs /devices/platform/cp-tm1/cp_temp                                u:object_r:sysfs_modem:s0
