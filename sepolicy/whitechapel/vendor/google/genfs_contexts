@@ -14,7 +14,8 @@ genfscon sysfs /devices/platform/19000000.aoc/control/audio_wakeup          u:ob
 genfscon sysfs /devices/platform/19000000.aoc/control/logging_wakeup        u:object_r:sysfs_aoc_dumpstate:s0
 genfscon sysfs /devices/platform/19000000.aoc/control/hotword_wakeup        u:object_r:sysfs_aoc_dumpstate:s0
 genfscon sysfs /devices/platform/19000000.aoc/control/memory_exception      u:object_r:sysfs_aoc_dumpstate:s0
-genfscon sysfs /devices/platform/19000000.aoc/control/memory_votes          u:object_r:sysfs_aoc_dumpstate:s0
+genfscon sysfs /devices/platform/19000000.aoc/control/memory_votes_a32      u:object_r:sysfs_aoc_dumpstate:s0
+genfscon sysfs /devices/platform/19000000.aoc/control/memory_votes_ff1      u:object_r:sysfs_aoc_dumpstate:s0
 
 # WiFi
 genfscon sysfs /wifi                                                        u:object_r:sysfs_wifi:s0
@@ -205,6 +206,7 @@ genfscon sysfs /devices/platform/14520000.pcie/pci0000:00/0000:00:00.0/0000:01:0
 genfscon sysfs /devices/platform/14520000.pcie/pci0001:00/0001:00:00.0/0001:01:00.0/wakeup                                  u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/175b0000.serial/serial0/serial0-0/wakeup                                                   u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/19000000.aoc/com.google.usf/wakeup                                                         u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/19000000.aoc/com.google.usf.non_wake_up/wakeup                                             u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/19000000.aoc/usb_control/wakeup                                                            u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-0/i2c-s2mpg10mfd/s2mpg10-rtc/rtc/rtc0/alarmtimer.1.auto/wakeup   u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/acpm_mfd_bus@17500000/i2c-0/i2c-s2mpg10mfd/s2mpg10-rtc/wakeup                              u:object_r:sysfs_wakeup:s0
@@ -485,6 +487,7 @@ genfscon sysfs /devices/platform/audiometrics/speaker_temp             u:object_
 genfscon sysfs /devices/platform/audiometrics/mic_broken_degrade       u:object_r:sysfs_pixelstats:s0
 genfscon sysfs /devices/platform/audiometrics/codec_crashed_counter    u:object_r:sysfs_pixelstats:s0
 genfscon sysfs /devices/platform/audiometrics/hwinfo_part_number       u:object_r:sysfs_pixelstats:s0
+genfscon sysfs /devices/platform/audiometrics/ams_rate_read_once       u:object_r:sysfs_pixelstats:s0
 
 # SJTAG
 genfscon sysfs /devices/platform/sjtag_ap/interface                    u:object_r:sysfs_sjtag:s0

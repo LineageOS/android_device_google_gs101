@@ -18,3 +18,8 @@ usf_low_latency_transport(chre)
 # Allow CHRE to talk to the WiFi HAL
 allow chre hal_wifi_ext:binder { call transfer };
 allow chre hal_wifi_ext_hwservice:hwservice_manager find;
+
+# Allow CHRE host to talk to stats service
+allow chre fwk_stats_service:service_manager find;
+binder_call(chre, stats_service_server)
+
