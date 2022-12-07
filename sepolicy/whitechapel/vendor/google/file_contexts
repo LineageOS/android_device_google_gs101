@@ -226,6 +226,7 @@
 
 # VIDEO
 /vendor/bin/hw/google\.hardware\.media\.c2@1\.0-service                 u:object_r:mediacodec_exec:s0
+/vendor/bin/hw/vendor\.dolby\.media\.c2@1\.0-service                    u:object_r:mediacodec_exec:s0
 
 # IMS VoWiFi
 /data/vendor/misc(/.*)?                u:object_r:vendor_misc_data_file:s0
