@@ -15,6 +15,6 @@
      limitations under the License.
 -->
 <resources>
-    <!-- Udfps HBM provider class name -->
-    <string name="config_udfpsHbmProviderComponent">com.android.systemui.biometrics.PixelUdfpsHbmProvider</string>
+    <!-- Udfps display mode provider class name -->
+    <string name="config_udfpsDisplayModeProviderComponent">com.android.systemui.biometrics.PixelUdfpsDisplayModeProvider</string>
 </resources>
