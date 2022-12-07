@@ -234,6 +234,7 @@
 # VIDEO
 /vendor/bin/hw/samsung\.hardware\.media\.c2@1\.0-service                u:object_r:mediacodec_exec:s0
 /vendor/bin/hw/google\.hardware\.media\.c2@1\.0-service                 u:object_r:mediacodec_exec:s0
+/vendor/bin/hw/vendor\.dolby\.media\.c2@1\.0-service                    u:object_r:mediacodec_exec:s0
 /data/vendor/media(/.*)?                                                u:object_r:vendor_media_data_file:s0
 
 # thermal sysfs files
