@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "android.hardware.usb.gadget.aidl-service"
+#define LOG_TAG "android.hardware.usb.gadget@1.2-service.gs101"
 
 #include "UsbGadget.h"
 #include <dirent.h>
@@ -26,13 +26,12 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include <aidl/android/frameworks/stats/IStats.h>
-
-namespace aidl {
 namespace android {
 namespace hardware {
 namespace usb {
 namespace gadget {
+namespace V1_2 {
+namespace implementation {
 
 string enabledPath;
 constexpr char kHsi2cPath[] = "/sys/devices/platform/10d50000.hsi2c";
@@ -47,7 +46,7 @@ UsbGadget::UsbGadget() : mGadgetIrqPath("") {
     }
 }
 
-Status UsbGadget::getUsbGadgetIrqPath() {
+V1_0::Status UsbGadget::getUsbGadgetIrqPath() {
     std::string irqs;
     size_t read_pos = 0;
     size_t found_pos = 0;
@@ -94,20 +93,17 @@ void currentFunctionsAppliedCallback(bool functionsApplied, void *payload) {
     gadget->mCurrentUsbFunctionsApplied = functionsApplied;
 }
 
-ScopedAStatus UsbGadget::getCurrentUsbFunctions(const shared_ptr<IUsbGadgetCallback> &callback,
-        int64_t in_transactionId) {
-    ScopedAStatus ret = callback->getCurrentUsbFunctionsCb(
+Return<void> UsbGadget::getCurrentUsbFunctions(const sp<V1_0::IUsbGadgetCallback> &callback) {
+    Return<void> ret = callback->getCurrentUsbFunctionsCb(
         mCurrentUsbFunctions,
-        mCurrentUsbFunctionsApplied ? Status::FUNCTIONS_APPLIED : Status::FUNCTIONS_NOT_APPLIED,
-        in_transactionId);
+        mCurrentUsbFunctionsApplied ? Status::FUNCTIONS_APPLIED : Status::FUNCTIONS_NOT_APPLIED);
     if (!ret.isOk())
-        ALOGE("Call to getCurrentUsbFunctionsCb failed %s", ret.getDescription().c_str());
+        ALOGE("Call to getCurrentUsbFunctionsCb failed %s", ret.description().c_str());
 
-    return ScopedAStatus::ok();
+    return Void();
 }
 
-ScopedAStatus UsbGadget::getUsbSpeed(const shared_ptr<IUsbGadgetCallback> &callback,
-        int64_t in_transactionId) {
+Return<void> UsbGadget::getUsbSpeed(const sp<V1_2::IUsbGadgetCallback> &callback) {
     std::string current_speed;
     if (ReadFileToString(SPEED_PATH, &current_speed)) {
         current_speed = Trim(current_speed);
@@ -125,26 +121,25 @@ ScopedAStatus UsbGadget::getUsbSpeed(const shared_ptr<IUsbGadgetCallback> &callb
         else if (current_speed == "UNKNOWN")
             mUsbSpeed = UsbSpeed::UNKNOWN;
         else
-            mUsbSpeed = UsbSpeed::UNKNOWN;
+            mUsbSpeed = UsbSpeed::RESERVED_SPEED;
     } else {
         ALOGE("Fail to read current speed");
         mUsbSpeed = UsbSpeed::UNKNOWN;
     }
 
     if (callback) {
-        ScopedAStatus ret = callback->getUsbSpeedCb(mUsbSpeed, in_transactionId);
+        Return<void> ret = callback->getUsbSpeedCb(mUsbSpeed);
 
         if (!ret.isOk())
-            ALOGE("Call to getUsbSpeedCb failed %s", ret.getDescription().c_str());
+            ALOGE("Call to getUsbSpeedCb failed %s", ret.description().c_str());
     }
 
-    return ScopedAStatus::ok();
+    return Void();
 }
 
-Status UsbGadget::tearDownGadget() {
-    if (Status(resetGadget()) != Status::SUCCESS){
+V1_0::Status UsbGadget::tearDownGadget() {
+    if (resetGadget() != Status::SUCCESS)
         return Status::ERROR;
-    }
 
     if (monitorFfs.isMonitorRunning()) {
         monitorFfs.reset();
@@ -154,152 +149,139 @@ Status UsbGadget::tearDownGadget() {
     return Status::SUCCESS;
 }
 
-static Status validateAndSetVidPid(uint64_t functions) {
-    Status ret = Status::SUCCESS;
+static V1_0::Status validateAndSetVidPid(uint64_t functions) {
+    V1_0::Status ret = Status::SUCCESS;
     std::string vendorFunctions = getVendorFunctions();
 
     switch (functions) {
-        case GadgetFunction::MTP:
+        case static_cast<uint64_t>(GadgetFunction::MTP):
             if (!(vendorFunctions == "user" || vendorFunctions == "")) {
                 ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
                 ret = Status::CONFIGURATION_NOT_SUPPORTED;
             } else {
-                ret = Status(setVidPid("0x18d1", "0x4ee1"));
+                ret = setVidPid("0x18d1", "0x4ee1");
             }
             break;
-        case GadgetFunction::ADB |
-                GadgetFunction::MTP:
+        case GadgetFunction::ADB | GadgetFunction::MTP:
             if (!(vendorFunctions == "user" || vendorFunctions == "")) {
                 ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
                 ret = Status::CONFIGURATION_NOT_SUPPORTED;
             } else {
-                ret = Status(setVidPid("0x18d1", "0x4ee2"));
+                ret = setVidPid("0x18d1", "0x4ee2");
             }
             break;
-        case GadgetFunction::RNDIS:
-        case GadgetFunction::RNDIS |
-                GadgetFunction::NCM:
+        case static_cast<uint64_t>(GadgetFunction::RNDIS):
+        case GadgetFunction::RNDIS | GadgetFunction::NCM:
             if (!(vendorFunctions == "user" || vendorFunctions == "")) {
                 ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
                 ret = Status::CONFIGURATION_NOT_SUPPORTED;
             } else {
-                ret = Status(setVidPid("0x18d1", "0x4ee3"));
+                ret = setVidPid("0x18d1", "0x4ee3");
             }
             break;
-        case GadgetFunction::ADB |
-                GadgetFunction::RNDIS:
-        case GadgetFunction::ADB |
-                GadgetFunction::RNDIS |
-                GadgetFunction::NCM:
+        case GadgetFunction::ADB | GadgetFunction::RNDIS:
+        case GadgetFunction::ADB | GadgetFunction::RNDIS | GadgetFunction::NCM:
             if (vendorFunctions == "dm") {
-                ret = Status(setVidPid("0x04e8", "0x6862"));
+                ret = setVidPid("0x04e8", "0x6862");
             } else {
                 if (!(vendorFunctions == "user" || vendorFunctions == "")) {
                     ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
                     ret = Status::CONFIGURATION_NOT_SUPPORTED;
                 } else {
-                    ret = Status(setVidPid("0x18d1", "0x4ee4"));
+                    ret = setVidPid("0x18d1", "0x4ee4");
                 }
             }
             break;
-        case GadgetFunction::PTP:
+        case static_cast<uint64_t>(GadgetFunction::PTP):
             if (!(vendorFunctions == "user" || vendorFunctions == "")) {
                 ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
                 ret = Status::CONFIGURATION_NOT_SUPPORTED;
             } else {
-                ret = Status(setVidPid("0x18d1", "0x4ee5"));
+                ret = setVidPid("0x18d1", "0x4ee5");
             }
             break;
-        case GadgetFunction::ADB |
-                GadgetFunction::PTP:
+        case GadgetFunction::ADB | GadgetFunction::PTP:
             if (!(vendorFunctions == "user" || vendorFunctions == "")) {
                 ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
                 ret = Status::CONFIGURATION_NOT_SUPPORTED;
             } else {
-                ret = Status(setVidPid("0x18d1", "0x4ee6"));
+                ret = setVidPid("0x18d1", "0x4ee6");
             }
             break;
-        case GadgetFunction::ADB:
+        case static_cast<uint64_t>(GadgetFunction::ADB):
             if (vendorFunctions == "dm") {
-                ret = Status(setVidPid("0x04e8", "0x6862"));
+                ret = setVidPid("0x04e8", "0x6862");
             } else if (vendorFunctions == "etr_miu") {
-                ret = Status(setVidPid("0x18d1", "0x4ee2"));
+                ret = setVidPid("0x18d1", "0x4ee2");
             } else if (vendorFunctions == "uwb_acm"){
-                ret = Status(setVidPid("0x18d1", "0x4ee2"));
+                ret = setVidPid("0x18d1", "0x4ee2");
             } else {
                 if (!(vendorFunctions == "user" || vendorFunctions == "")) {
                     ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
                     ret = Status::CONFIGURATION_NOT_SUPPORTED;
                 } else {
-                    ret = Status(setVidPid("0x18d1", "0x4ee7"));
+                    ret = setVidPid("0x18d1", "0x4ee7");
                 }
             }
             break;
-        case GadgetFunction::MIDI:
+        case static_cast<uint64_t>(GadgetFunction::MIDI):
             if (!(vendorFunctions == "user" || vendorFunctions == "")) {
                 ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
                 ret = Status::CONFIGURATION_NOT_SUPPORTED;
             } else {
-                ret = Status(setVidPid("0x18d1", "0x4ee8"));
+                ret = setVidPid("0x18d1", "0x4ee8");
             }
             break;
-        case GadgetFunction::ADB |
-                GadgetFunction::MIDI:
+        case GadgetFunction::ADB | GadgetFunction::MIDI:
             if (!(vendorFunctions == "user" || vendorFunctions == "")) {
                 ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
                 ret = Status::CONFIGURATION_NOT_SUPPORTED;
             } else {
-                ret = Status(setVidPid("0x18d1", "0x4ee9"));
+                ret = setVidPid("0x18d1", "0x4ee9");
             }
             break;
-        case GadgetFunction::ACCESSORY:
+        case static_cast<uint64_t>(GadgetFunction::ACCESSORY):
             if (!(vendorFunctions == "user" || vendorFunctions == ""))
                 ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
-            ret = Status(setVidPid("0x18d1", "0x2d00"));
+            ret = setVidPid("0x18d1", "0x2d00");
             break;
-        case GadgetFunction::ADB |
-                 GadgetFunction::ACCESSORY:
+        case GadgetFunction::ADB | GadgetFunction::ACCESSORY:
             if (!(vendorFunctions == "user" || vendorFunctions == ""))
                 ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
-            ret = Status(setVidPid("0x18d1", "0x2d01"));
+            ret = setVidPid("0x18d1", "0x2d01");
             break;
-        case GadgetFunction::AUDIO_SOURCE:
+        case static_cast<uint64_t>(GadgetFunction::AUDIO_SOURCE):
             if (!(vendorFunctions == "user" || vendorFunctions == ""))
                 ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
-            ret = Status(setVidPid("0x18d1", "0x2d02"));
+            ret = setVidPid("0x18d1", "0x2d02");
             break;
-        case GadgetFunction::ADB |
-                GadgetFunction::AUDIO_SOURCE:
+        case GadgetFunction::ADB | GadgetFunction::AUDIO_SOURCE:
             if (!(vendorFunctions == "user" || vendorFunctions == ""))
                 ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
-            ret = Status(setVidPid("0x18d1", "0x2d03"));
+            ret = setVidPid("0x18d1", "0x2d03");
             break;
-        case GadgetFunction::ACCESSORY |
-                GadgetFunction::AUDIO_SOURCE:
+        case GadgetFunction::ACCESSORY | GadgetFunction::AUDIO_SOURCE:
             if (!(vendorFunctions == "user" || vendorFunctions == ""))
                 ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
-            ret = Status(setVidPid("0x18d1", "0x2d04"));
+            ret = setVidPid("0x18d1", "0x2d04");
             break;
-        case GadgetFunction::ADB |
-                GadgetFunction::ACCESSORY |
-                GadgetFunction::AUDIO_SOURCE:
+        case GadgetFunction::ADB | GadgetFunction::ACCESSORY | GadgetFunction::AUDIO_SOURCE:
             if (!(vendorFunctions == "user" || vendorFunctions == ""))
                 ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
-            ret = Status(setVidPid("0x18d1", "0x2d05"));
+            ret = setVidPid("0x18d1", "0x2d05");
             break;
-        case GadgetFunction::NCM:
+        case static_cast<uint64_t>(GadgetFunction::NCM):
             if (!(vendorFunctions == "user" || vendorFunctions == ""))
                 ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
-            ret = Status(setVidPid("0x18d1", "0x4eeb"));
+            ret = setVidPid("0x18d1", "0x4eeb");
             break;
-        case GadgetFunction::ADB |
-                GadgetFunction::NCM:
+        case GadgetFunction::ADB | GadgetFunction::NCM:
             if (vendorFunctions == "dm") {
-                ret = Status(setVidPid("0x04e8", "0x6862"));
+                ret = setVidPid("0x04e8", "0x6862");
             } else {
                 if (!(vendorFunctions == "user" || vendorFunctions == ""))
                     ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
-                ret = Status(setVidPid("0x18d1", "0x4eec"));
+                ret = setVidPid("0x18d1", "0x4eec");
             }
             break;
         default:
@@ -309,33 +291,31 @@ static Status validateAndSetVidPid(uint64_t functions) {
     return ret;
 }
 
-ScopedAStatus UsbGadget::reset() {
+Return<Status> UsbGadget::reset() {
     ALOGI("USB Gadget reset");
 
     if (!WriteStringToFile("none", PULLUP_PATH)) {
         ALOGI("Gadget cannot be pulled down");
-        return ScopedAStatus::fromServiceSpecificErrorWithMessage(
-                -1, "Gadget cannot be pulled down");
+        return Status::ERROR;
     }
 
     usleep(kDisconnectWaitUs);
 
     if (!WriteStringToFile(kGadgetName, PULLUP_PATH)) {
         ALOGI("Gadget cannot be pulled up");
-        return ScopedAStatus::fromServiceSpecificErrorWithMessage(
-                -1, "Gadget cannot be pulled up");
+        return Status::ERROR;
     }
 
-    return ScopedAStatus::ok();
+    return Status::SUCCESS;
 }
 
-Status UsbGadget::setupFunctions(long functions,
-        const shared_ptr<IUsbGadgetCallback> &callback, uint64_t timeout,
-        int64_t in_transactionId) {
+V1_0::Status UsbGadget::setupFunctions(uint64_t functions,
+                                       const sp<V1_0::IUsbGadgetCallback> &callback,
+                                       uint64_t timeout) {
     bool ffsEnabled = false;
     int i = 0;
 
-    if (Status(addGenericAndroidFunctions(&monitorFfs, functions, &ffsEnabled, &i)) !=
+    if (addGenericAndroidFunctions(&monitorFfs, functions, &ffsEnabled, &i) !=
         Status::SUCCESS)
         return Status::ERROR;
 
@@ -345,7 +325,7 @@ Status UsbGadget::setupFunctions(long functions,
         ALOGI("enable usbradio debug functions");
         if ((functions & GadgetFunction::RNDIS) != 0) {
             if (linkFunction("acm.gs6", i++))
-                return Status::ERROR;
+	        return Status::ERROR;
             if (linkFunction("dm.gs7", i++))
                 return Status::ERROR;
         } else {
@@ -353,7 +333,7 @@ Status UsbGadget::setupFunctions(long functions,
                 return Status::ERROR;
             if (linkFunction("acm.gs6", i++))
                 return Status::ERROR;
-        }
+	}
     } else if (vendorFunctions == "etr_miu") {
         ALOGI("enable etr_miu functions");
         if (linkFunction("etr_miu.gs11", i++))
@@ -366,7 +346,7 @@ Status UsbGadget::setupFunctions(long functions,
 
     if ((functions & GadgetFunction::ADB) != 0) {
         ffsEnabled = true;
-        if (Status(addAdb(&monitorFfs, &i)) != Status::SUCCESS)
+        if (addAdb(&monitorFfs, &i) != Status::SUCCESS)
             return Status::ERROR;
     }
 
@@ -382,7 +362,7 @@ Status UsbGadget::setupFunctions(long functions,
             return Status::ERROR;
         mCurrentUsbFunctionsApplied = true;
         if (callback)
-            callback->setCurrentUsbFunctionsCb(functions, Status::SUCCESS, in_transactionId);
+            callback->setCurrentUsbFunctionsCb(functions, Status::SUCCESS);
         return Status::SUCCESS;
     }
 
@@ -397,13 +377,12 @@ Status UsbGadget::setupFunctions(long functions,
 
     if (callback) {
         bool pullup = monitorFfs.waitForPullUp(timeout);
-        ScopedAStatus ret = callback->setCurrentUsbFunctionsCb(
-            functions, pullup ? Status::SUCCESS : Status::ERROR, in_transactionId);
-        if (!ret.isOk()) {
-            ALOGE("setCurrentUsbFunctionsCb error %s", ret.getDescription().c_str());
-            return Status::ERROR;
-        }
+        Return<void> ret = callback->setCurrentUsbFunctionsCb(
+            functions, pullup ? Status::SUCCESS : Status::ERROR);
+        if (!ret.isOk())
+            ALOGE("setCurrentUsbFunctionsCb error %s", ret.description().c_str());
     }
+
     return Status::SUCCESS;
 }
 
@@ -430,10 +409,9 @@ Status getI2cBusHelper(string *name) {
     return Status::ERROR;
 }
 
-ScopedAStatus UsbGadget::setCurrentUsbFunctions(long functions,
-                                               const shared_ptr<IUsbGadgetCallback> &callback,
-                                               int64_t timeout,
-                                               int64_t in_transactionId) {
+Return<void> UsbGadget::setCurrentUsbFunctions(uint64_t functions,
+                                               const sp<V1_0::IUsbGadgetCallback> &callback,
+                                               uint64_t timeout) {
     std::unique_lock<std::mutex> lk(mLockSetCurrentFunction);
     std::string current_usb_power_operation_mode, current_usb_type;
     std::string usb_limit_sink_enable;
@@ -452,7 +430,7 @@ ScopedAStatus UsbGadget::setCurrentUsbFunctions(long functions,
         getUsbGadgetIrqPath();
 
     // Unlink the gadget and stop the monitor if running.
-    Status status = tearDownGadget();
+    V1_0::Status status = tearDownGadget();
     if (status != Status::SUCCESS) {
         goto error;
     }
@@ -462,15 +440,13 @@ ScopedAStatus UsbGadget::setCurrentUsbFunctions(long functions,
     // Leave the gadget pulled down to give time for the host to sense disconnect.
     usleep(kDisconnectWaitUs);
 
-    if (functions == GadgetFunction::NONE) {
+    if (functions == static_cast<uint64_t>(GadgetFunction::NONE)) {
         if (callback == NULL)
-            return ScopedAStatus::fromServiceSpecificErrorWithMessage(
-                -1, "callback == NULL");
-        ScopedAStatus ret = callback->setCurrentUsbFunctionsCb(functions, Status::SUCCESS, in_transactionId);
+            return Void();
+        Return<void> ret = callback->setCurrentUsbFunctionsCb(functions, Status::SUCCESS);
         if (!ret.isOk())
-            ALOGE("Error while calling setCurrentUsbFunctionsCb %s", ret.getDescription().c_str());
-        return ScopedAStatus::fromServiceSpecificErrorWithMessage(
-                -1, "Error while calling setCurrentUsbFunctionsCb");
+            ALOGE("Error while calling setCurrentUsbFunctionsCb %s", ret.description().c_str());
+        return Void();
     }
 
     status = validateAndSetVidPid(functions);
@@ -479,7 +455,7 @@ ScopedAStatus UsbGadget::setCurrentUsbFunctions(long functions,
         goto error;
     }
 
-    status = setupFunctions(functions, callback, timeout, in_transactionId);
+    status = setupFunctions(functions, callback, timeout);
     if (status != Status::SUCCESS) {
         goto error;
     }
@@ -519,23 +495,20 @@ ScopedAStatus UsbGadget::setCurrentUsbFunctions(long functions,
     }
 
     ALOGI("Usb Gadget setcurrent functions called successfully");
-    return ScopedAStatus::fromServiceSpecificErrorWithMessage(
-                -1, "Usb Gadget setcurrent functions called successfully");
-
+    return Void();
 
 error:
     ALOGI("Usb Gadget setcurrent functions failed");
     if (callback == NULL)
-        return ScopedAStatus::fromServiceSpecificErrorWithMessage(
-                -1, "Usb Gadget setcurrent functions failed");
-    ScopedAStatus ret = callback->setCurrentUsbFunctionsCb(functions, status, in_transactionId);
+        return Void();
+    Return<void> ret = callback->setCurrentUsbFunctionsCb(functions, status);
     if (!ret.isOk())
-        ALOGE("Error while calling setCurrentUsbFunctionsCb %s", ret.getDescription().c_str());
-    return ScopedAStatus::fromServiceSpecificErrorWithMessage(
-                -1, "Error while calling setCurrentUsbFunctionsCb");
+        ALOGE("Error while calling setCurrentUsbFunctionsCb %s", ret.description().c_str());
+    return Void();
 }
+}  // namespace implementation
+}  // namespace V1_2
 }  // namespace gadget
 }  // namespace usb
 }  // namespace hardware
 }  // namespace android
-}  // aidl

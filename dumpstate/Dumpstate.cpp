@@ -34,7 +34,7 @@
 
 #define MODEM_LOG_DIRECTORY "/data/vendor/radio/logs/always-on"
 #define MODEM_EXTENDED_LOG_DIRECTORY "/data/vendor/radio/extended_logs"
-#define MODEM_LOG_MASK_HISTORY_DIRECTORY "/data/vendor/radio/logs/mask_history"
+#define MODEM_LOG_HISTORY_DIRECTORY "/data/vendor/radio/logs/history"
 #define RIL_LOG_DIRECTORY "/data/vendor/radio"
 #define RIL_LOG_DIRECTORY_PROPERTY "persist.vendor.ril.log.base_dir"
 #define RIL_LOG_NUMBER_PROPERTY "persist.vendor.ril.log.num_file"
@@ -617,7 +617,7 @@ static void *dumpModemThread(void *data) {
     ATRACE_ASYNC_BEGIN("dumpModemThread", 0);
     std::string modemLogDir = MODEM_LOG_DIRECTORY;
     std::string extendedLogDir = MODEM_EXTENDED_LOG_DIRECTORY;
-    std::string modemLogMaskHistoryDir = MODEM_LOG_MASK_HISTORY_DIRECTORY;
+    std::string modemLogHistoryDir = MODEM_LOG_HISTORY_DIRECTORY;
     std::string tcpdumpLogDir = TCPDUMP_LOG_DIRECTORY;
     static const std::string sectionName = "modem";
 
@@ -680,7 +680,7 @@ static void *dumpModemThread(void *data) {
         }
 
         dumpLogs(STDOUT_FILENO, extendedLogDir, modemLogAllDir, 50, EXTENDED_LOG_PREFIX);
-        dumpLogs(STDOUT_FILENO, modemLogMaskHistoryDir, modemLogAllDir, 1, "LoggingMask");
+        dumpLogs(STDOUT_FILENO, modemLogHistoryDir, modemLogAllDir, 2, "Logging");
         dumpRilLogs(STDOUT_FILENO, modemLogAllDir);
         dumpNetmgrLogs(modemLogAllDir);
         dumpModemEFS(modemLogAllDir);
