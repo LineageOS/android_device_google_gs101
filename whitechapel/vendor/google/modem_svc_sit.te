@@ -30,3 +30,6 @@ get_prop(modem_svc_sit, hwservicemanager_prop)
 
 # logging property
 get_prop(modem_svc_sit, vendor_logger_prop)
+
+# Modem property
+set_prop(modem_svc_sit, vendor_modem_prop)
