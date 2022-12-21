@@ -101,9 +101,6 @@ allow modem_img_file self:filesystem associate;
 # TCP logging
 type tcpdump_vendor_data_file, file_type, data_file_type, mlstrustedobject;
 
-# Wireless
-type sysfs_wlc, sysfs_type, fs_type;
-
 # Pca
 type sysfs_pca, sysfs_type, fs_type;
 
