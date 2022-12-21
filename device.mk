@@ -1138,9 +1138,9 @@ PRODUCT_PACKAGES += \
 	update_verifier
 
 # pKVM
-$(call inherit-product, packages/modules/Virtualization/apex/product_packages.mk)
-PRODUCT_BUILD_PVMFW_IMAGE := true
 ifeq ($(TARGET_PKVM_ENABLED),true)
+    $(call inherit-product, packages/modules/Virtualization/apex/product_packages.mk)
+    PRODUCT_BUILD_PVMFW_IMAGE := true
     PRODUCT_PACKAGES += pkvm_enabler
 else
     PRODUCT_COPY_FILES += \
