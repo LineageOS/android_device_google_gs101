@@ -16,6 +16,23 @@
       "message": "Signs.\n\n",
       "revId": "dcbd18bf76cb2acdbf1ef48dba112ad9e886ab90",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f53a77f_e7d31c33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2195
+      },
+      "writtenOn": "2022-12-24T15:29:55Z",
+      "side": 1,
+      "message": "Let\u0027s actually fix signing otherwise this\u0027ll be like this.\n\nIt\u0027s fine locally and one build did actually get signed so it might be some form of race condition perhaps. Or just some rare env bug.",
+      "revId": "dcbd18bf76cb2acdbf1ef48dba112ad9e886ab90",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
