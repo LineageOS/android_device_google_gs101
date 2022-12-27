@@ -203,6 +203,12 @@ PRODUCT_VENDOR_PROPERTIES += \
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	debug.mali.disable_backend_affinity=true
 
+# Mali Configuration Properties
+PRODUCT_VENDOR_PROPERTIES += \
+	vendor.mali.protected_max_core_count=3 \
+	vendor.mali.protected_tls_max=67108864 \
+	vendor.mali.platform_agt_frequency_khz=24576
+
 ifeq ($(USE_SWIFTSHADER),true)
 PRODUCT_PACKAGES += \
 	libGLESv1_CM_swiftshader \
