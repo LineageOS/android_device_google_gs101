@@ -49,7 +49,7 @@ namespace {
 #define BOOT_B_PATH     "/dev/block/by-name/boot_b"
 #define DEVINFO_PATH    "/dev/block/by-name/devinfo"
 
-#define BLOW_AR_PATH    "/sys/kernel/boot_control/blow_ar"
+//#define BLOW_AR_PATH    "/sys/kernel/boot_control/blow_ar"
 
 // slot flags
 #define AB_ATTR_PRIORITY_SHIFT      52
@@ -176,10 +176,12 @@ static void DevInfoInitSlot(devinfo_ab_slot_data_t &slot_data) {
     slot_data.fastboot_ok = 0;
 }
 
+#if 0
 static bool blowAR() {
     android::base::unique_fd fd(open(BLOW_AR_PATH, O_WRONLY | O_DSYNC));
     return android::base::WriteStringToFd("1", fd);
 }
+#endif
 
 }  // namespace
 
@@ -223,10 +225,14 @@ Return<void> BootControl::markBootSuccessful(markBootSuccessful_cb _hidl_cb) {
         return Void();
     }
 
+#if 0
     if (!blowAR()) {
         ALOGE("Failed to blow anti-rollback counter");
         // Ignore the error, since ABL will re-trigger it on reboot
     }
+#else
+    ALOGE("Intentionally not trying to blow anti-rollback counter");
+#endif
 
     _hidl_cb({true, ""});
     return Void();
