@@ -26,6 +26,7 @@ binder_call(rild, modem_svc_sit)
 binder_call(rild, vendor_ims_app)
 binder_call(rild, vendor_rcs_app)
 binder_call(rild, oemrilservice_app)
+binder_call(rild, logger_app)
 
 # for hal service
 add_hwservice(rild, hal_exynos_rild_hwservice)

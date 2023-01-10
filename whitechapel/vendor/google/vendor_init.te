@@ -35,3 +35,9 @@ set_prop(vendor_init, vendor_battery_defender_prop)
 
 # Fingerprint property
 set_prop(vendor_init, vendor_fingerprint_prop)
+
+# Display
+set_prop(vendor_init, vendor_display_prop)
+
+# Trusty storage FS ready
+get_prop(vendor_init, vendor_trusty_storage_prop)
