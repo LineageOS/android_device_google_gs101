@@ -58,6 +58,7 @@
     </hal>
     <hal format="aidl" optional="true">
       <name>com.google.face.debug</name>
+      <version>2</version>
         <interface>
             <name>IDebugHost</name>
             <instance>default</instance>
@@ -73,7 +74,7 @@
     </hal>
     <hal format="aidl" optional="true">
       <name>com.google.hardware.pixel.display</name>
-        <version>6</version>
+        <version>7</version>
         <interface>
             <name>IDisplay</name>
             <instance>default</instance>
@@ -121,6 +122,7 @@
     </hal>
     <hal format="aidl" optional="true">
         <name>hardware.qorvo.uwb</name>
+        <version>2</version>
         <interface>
             <name>IUwbVendor</name>
             <instance>default</instance>
@@ -152,7 +154,7 @@
     </hal>
     <hal format="hidl">
        <name>vendor.google.whitechapel.audio.audioext</name>
-       <version>3.0</version>
+       <version>4.0</version>
        <interface>
            <name>IAudioExt</name>
            <instance>default</instance>
