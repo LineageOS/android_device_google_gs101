@@ -33,6 +33,7 @@
 
 #define MODEM_LOG_DIRECTORY "/data/vendor/radio/logs/always-on"
 #define MODEM_EXTENDED_LOG_DIRECTORY "/data/vendor/radio/extended_logs"
+#define MODEM_LOG_HISTORY_DIRECTORY "/data/vendor/radio/logs/history"
 #define RIL_LOG_DIRECTORY "/data/vendor/radio"
 #define RIL_LOG_DIRECTORY_PROPERTY "persist.vendor.ril.log.base_dir"
 #define RIL_LOG_NUMBER_PROPERTY "persist.vendor.ril.log.num_file"
@@ -252,7 +253,6 @@ void endSection(int fd, const std::string &sectionName, timepoint_t startTime) {
 DumpstateDevice::DumpstateDevice()
   : mTextSections{
         { "pre-touch", [this](int fd) { dumpPreTouchSection(fd); } },
-        { "wlan", [this](int fd) { dumpWlanSection(fd); } },
         { "soc", [this](int fd) { dumpSocSection(fd); } },
         { "storage", [this](int fd) { dumpStorageSection(fd); } },
         { "memory", [this](int fd) { dumpMemorySection(fd); } },
@@ -270,6 +270,7 @@ DumpstateDevice::DumpstateDevice()
         { "camera", [this](int fd) { dumpCameraSection(fd); } },
         { "trusty", [this](int fd) { dumpTrustySection(fd); } },
         { "modem", [this](int fd) { dumpModemSection(fd); } },
+        { "perf-metrics", [this](int fd) { dumpPerfMetricsSection(fd); } },
     } {
 }
 
@@ -302,12 +303,6 @@ void DumpstateDevice::dumpTextSection(int fd, const std::string &sectionName) {
     }
     android::base::WriteStringToFd("\nNote: sections with attachments (e.g. modem) are"
                                    "not avalable from the command line.\n", fd);
-}
-
-// Dump items related to wlan
-void DumpstateDevice::dumpWlanSection(int fd) {
-    RunCommandToFd(fd, "WLAN Debug Dump", {"/vendor/bin/sh", "-c",
-                   "cat /sys/wifi/dump_start"});
 }
 
 // Dump items related to power and battery
@@ -386,6 +381,7 @@ void DumpstateDevice::dumpPowerSection(int fd) {
     DumpFileToFd(fd, "TTF stats", "/sys/class/power_supply/battery/ttf_stats");
     DumpFileToFd(fd, "maxq", "/dev/logbuffer_maxq");
     DumpFileToFd(fd, "aacr_state", "/sys/class/power_supply/battery/aacr_state");
+    DumpFileToFd(fd, "TEMP/DOCK-DEFEND", "/dev/logbuffer_bd");
 
     RunCommandToFd(fd, "TRICKLE-DEFEND Config", {"/vendor/bin/sh", "-c",
                         " cd /sys/devices/platform/google,battery/power_supply/battery/;"
@@ -525,6 +521,7 @@ void DumpstateDevice::dumpThermalSection(int fd) {
     DumpFileToFd(fd, "TMU_TOP fall thresholds:", "/sys/module/gs101_thermal/parameters/tmu_top_reg_dump_fall_thres");
     DumpFileToFd(fd, "TMU_SUB rise thresholds:", "/sys/module/gs101_thermal/parameters/tmu_sub_reg_dump_rise_thres");
     DumpFileToFd(fd, "TMU_SUB fall thresholds:", "/sys/module/gs101_thermal/parameters/tmu_sub_reg_dump_fall_thres");
+    DumpFileToFd(fd, "Temperature Residency Metrics:", "/sys/kernel/metrics/temp_residency/temp_residency_all/stats");
 }
 
 // Dump items related to touch
@@ -1088,6 +1085,7 @@ void DumpstateDevice::dumpModemSection(int fd) {
 static void *dumpModemThread(void *data) {
     std::string modemLogDir = MODEM_LOG_DIRECTORY;
     std::string extendedLogDir = MODEM_EXTENDED_LOG_DIRECTORY;
+    std::string modemLogHistoryDir = MODEM_LOG_HISTORY_DIRECTORY;
     std::string tcpdumpLogDir = TCPDUMP_LOG_DIRECTORY;
     static const std::string sectionName = "modem";
 
@@ -1150,6 +1148,7 @@ static void *dumpModemThread(void *data) {
         }
 
         dumpLogs(STDOUT_FILENO, extendedLogDir, modemLogAllDir, 50, EXTENDED_LOG_PREFIX);
+        dumpLogs(STDOUT_FILENO, modemLogHistoryDir, modemLogAllDir, 2, "Logging");
         dumpRilLogs(STDOUT_FILENO, modemLogAllDir);
         dumpNetmgrLogs(modemLogAllDir);
         dumpModemEFS(modemLogAllDir);
@@ -1192,6 +1191,11 @@ static void *dumpModemThread(void *data) {
     ALOGD("dumpModemThread finished\n");
 
     return NULL;
+}
+
+void DumpstateDevice::dumpPerfMetricsSection(int fd) {
+    DumpFileToFd(fd, "Long running IRQ metrics", "/sys/kernel/metrics/irq/long_irq_metrics");
+    DumpFileToFd(fd, "Resume latency metrics", "/sys/kernel/metrics/resume_latency/resume_latency_metrics");
 }
 
 // Methods from ::android::hardware::dumpstate::V1_0::IDumpstateDevice follow.
