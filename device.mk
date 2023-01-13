@@ -505,7 +505,7 @@ PRODUCT_PACKAGES += \
 	android.hardware.drm-service.clearkey \
 	liboemcrypto \
 
-include vendor/widevine/libwvdrmengine/apex/device/device.mk
+-include vendor/widevine/libwvdrmengine/apex/device/device.mk
 
 $(call soong_config_set,google3a_config,soc,gs101)
 $(call soong_config_set,google3a_config,gcam_awb,true)
