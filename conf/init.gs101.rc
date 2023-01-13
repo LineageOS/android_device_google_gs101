@@ -10,6 +10,9 @@ on init
     # CPU0 cannot be offline
     chmod 0444 /sys/devices/system/cpu/cpu0/online
 
+    # Set teo as cpu idle governor
+    write /sys/devices/system/cpu/cpuidle/current_governor teo
+
     # Boot time fs tuning
     write /sys/block/sda/queue/iostats 0
     write /sys/block/sda/queue/scheduler bfq
@@ -223,6 +226,7 @@ on init
     chown system system /dev/logbuffer_wireless
     chown system system /dev/logbuffer_pca9468
     chown system system /dev/logbuffer_cpm
+    chown system system /dev/logbuffer_bd
 
     # Dump maxfg
     chown system system /sys/class/power_supply/maxfg/m5_model_state
@@ -306,9 +310,7 @@ on init
     chown system system /sys/devices/platform/google,cpm/dc_ctl
     # Important to include dd_state as it's used in battery defender in charger mode
     chown system system /sys/devices/platform/google,charger/dd_state
-    # Disable dock-defend by default
     chown system system /sys/devices/platform/google,charger/dd_settings
-    write /sys/devices/platform/google,charger/dd_settings -1
 
     # Power Stats HAL
     chown system system /dev/bbd_pwrstat
@@ -411,6 +413,7 @@ on post-fs-data
 
 # Permissions Camera
     mkdir /data/vendor/camera 0770 system camera
+    mkdir /data/vendor/camera/catpipe 0770 system camera
     chmod 0755 /sys/kernel/debug/tracing
     restorecon /sys/kernel/debug/tracing/trace_marker
 
@@ -746,7 +749,6 @@ on property:sys.boot_completed=1
     setprop vendor.powerhal.init 1
 
     # Setup final cpu.uclamp
-    write /proc/vendor_sched/uclamp_threshold 8
     write /proc/vendor_sched/ta_uclamp_min 1
     write /proc/vendor_sched/fg_uclamp_min 0
     write /proc/vendor_sched/sys_prefer_idle 0
