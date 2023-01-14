@@ -4,3 +4,5 @@ android.hardware.drm.IDrmFactory/widevine                  u:object_r:hal_drm_se
 
 # EdgeTPU DBA Service
 com.google.edgetpu.dba.IDevice/default                     u:object_r:edgetpu_dba_service:s0
+
+vendor.google.wireless_charger.IWirelessCharger/default                      u:object_r:hal_wireless_charger_service:s0
