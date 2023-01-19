@@ -26,9 +26,6 @@
 /(vendor|system/vendor)/bin/hw/android\.hardware\.power\.stats@1\.0-service\.gs101              u:object_r:hal_power_stats_default_exec:s0
 /(vendor|system/vendor)/bin/hw/android\.hardware\.memtrack-service\.pixel                       u:object_r:hal_memtrack_default_exec:s0
 
-# EdgeTPU DBA service
-/vendor/bin/hw/com\.google\.edgetpu.dba-service u:object_r:edgetpu_dba_server_exec:s0
-
 # Wireless charger HAL
 /(vendor|system/vendor)/bin/hw/vendor\.google\.wireless_charger@1\.3-service-vendor             u:object_r:hal_wlc_exec:s0
 
