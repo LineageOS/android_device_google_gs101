@@ -1103,11 +1103,6 @@ include device/google/gs-common/edgetpu/edgetpu.mk
 $(call soong_config_set,edgetpu_config,chip,abrolhos)
 # TPU firmware
 PRODUCT_PACKAGES += edgetpu-abrolhos.fw
-# TPU DBA AIDL HAL service
-PRODUCT_PACKAGES += com.google.edgetpu.dba-service
-# TPU DBA C API library
-PRODUCT_PACKAGES += libedgetpu_dba.google
-
 
 # Connectivity Thermal Power Manager
 PRODUCT_PACKAGES += \
