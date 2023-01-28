@@ -44,7 +44,7 @@ cc_binary {
         "libbinder_ndk",
     ],
     static_libs: [
-        "libpixelusb",
+        "libpixelusb-aidl",
     ],
     proprietary: true,
     export_shared_lib_headers: [
