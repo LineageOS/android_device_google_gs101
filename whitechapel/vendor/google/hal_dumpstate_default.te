@@ -13,6 +13,10 @@ vndbinder_use(hal_dumpstate_default)
 allow hal_dumpstate_default vendor_gps_file:dir r_dir_perms;
 allow hal_dumpstate_default vendor_gps_file:file r_file_perms;
 
+allow hal_dumpstate_default sysfs_wlc:dir search;
+allow hal_dumpstate_default sysfs_wlc:dir r_dir_perms;
+allow hal_dumpstate_default sysfs_wlc:file r_file_perms;
+
 allow hal_dumpstate_default shell_data_file:file getattr;
 
 allow hal_dumpstate_default radio_vendor_data_file:dir create_dir_perms;
