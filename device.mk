@@ -917,6 +917,8 @@ SUPPORT_MULTI_SIM := true
 SUPPORT_NR := true
 # Using IRadio 1.6
 USE_RADIO_HAL_1_6 := true
+# Support SecureElement HAL for HIDL
+USE_SE_HIDL := true
 
 #$(call inherit-product, vendor/google_devices/telephony/common/device-vendor.mk)
 #$(call inherit-product, vendor/google_devices/gs101/proprietary/device-vendor.mk)
