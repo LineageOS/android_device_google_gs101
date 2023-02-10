@@ -239,24 +239,12 @@ void endSection(int fd, const std::string &sectionName, timepoint_t startTime) {
             "\n", fd);
 }
 
-// If you are adding a single RunCommandToFd() or DumpFileToFd() call, please
-// add it to dumpMiscSection().  But if you are adding multiple items that are
-// related to each other - for instance, for a Foo peripheral - please add them
-// to a new dump function and include it in this table so it can be accessed from the
-// command line, e.g.:
-//   dumpsys android.hardware.dumpstate.IDumpstateDevice/default foo
-//
-// However, if your addition generates attachments and/or binary data for the
-// bugreport (i.e. if it requires two file descriptors to execute), it must not be
-// added to this table and should instead be added to dumpstateBoard() below.
-
 Dumpstate::Dumpstate()
   : mTextSections{
         { "memory", [this](int fd) { dumpMemorySection(fd); } },
         { "Devfreq", [this](int fd) { dumpDevfreqSection(fd); } },
         { "power", [this](int fd) { dumpPowerSection(fd); } },
         { "display", [this](int fd) { dumpDisplaySection(fd); } },
-        { "misc", [this](int fd) { dumpMiscSection(fd); } },
         { "camera", [this](int fd) { dumpCameraSection(fd); } },
     } {
 }
@@ -305,6 +293,7 @@ void Dumpstate::dumpTextSection(int fd, const std::string &sectionName) {
     }
 
     if (dumpAll) {
+        RunCommandToFd(fd, "VENDOR PROPERTIES", {"/vendor/bin/getprop"});
         return;
     }
 
@@ -591,12 +580,6 @@ void Dumpstate::dumpDisplaySection(int fd) {
                            "echo $f ; cat $f ; done"},
                            CommandOptions::WithTimeout(2).Build());
     }
-}
-
-// Dump items that don't fit well into any other section
-void Dumpstate::dumpMiscSection(int fd) {
-    RunCommandToFd(fd, "VENDOR PROPERTIES", {"/vendor/bin/getprop"});
-    DumpFileToFd(fd, "VENDOR PROC DUMP", "/proc/vendor_sched/dump_task");
 }
 
 // Dump essential camera debugging logs
