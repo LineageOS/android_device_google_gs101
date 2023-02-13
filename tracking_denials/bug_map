@@ -1,5 +1,6 @@
 dump_pixel_metrics sysfs file b/268411073
 dump_stm sysfs_spi dir b/268147283
+dump_trusty radio_vendor_data_file file b/269045042
 dumpstate app_zygote process b/238263438
 dumpstate hal_input_processor_default process b/238143262
 dumpstate incident process b/238570971
