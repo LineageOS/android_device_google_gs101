@@ -1,2 +1,0 @@
-#b/247905787
-dontaudit kernel vendor_votable_debugfs:dir { search };
