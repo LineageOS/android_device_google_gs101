@@ -79,7 +79,9 @@ constexpr char kSmpAffinityList[] = "/smp_affinity_list";
 #ifndef UDC_PATH
 #define UDC_PATH "/sys/class/udc/11110000.dwc3/"
 #endif
-static MonitorFfs monitorFfs(kGadgetName);
+constexpr char kExtconTypecState[] = "/sys/class/extcon/extcon0/cable.0/state";
+constexpr char kUsbGadgetState[] = "/sys/devices/platform/11110000.usb/dwc3_exynos_gadget_state";
+static MonitorFfs monitorFfs(kGadgetName, kExtconTypecState, kUsbGadgetState);
 
 #define SPEED_PATH UDC_PATH "current_speed"
 

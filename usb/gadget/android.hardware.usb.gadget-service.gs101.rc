@@ -15,6 +15,7 @@ on post-fs
     chown root system /sys/devices/platform/11110000.usb/dwc3_exynos_otg_b_sess
     chown root system /sys/devices/platform/11110000.usb/dwc3_exynos_otg_id
     chown root system /sys/devices/platform/11110000.usb/usb_data_enabled
+    chown root system /sys/devices/platform/11110000.usb/dwc3_exynos_gadget_state
     chmod 664 /sys/class/typec/port0/power_role
     chmod 664 /sys/class/typec/port0/data_role
     chmod 664 /sys/class/typec/port0/port_type
