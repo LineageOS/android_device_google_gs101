@@ -86,9 +86,6 @@ userdebug_or_eng(`
   allow hal_dumpstate_default vendor_ion_debugfs:dir r_dir_perms;
   allow hal_dumpstate_default vendor_ion_debugfs:file r_file_perms;
 
-  allow hal_dumpstate_default vendor_page_pinner_debugfs:dir search;
-  allow hal_dumpstate_default vendor_page_pinner_debugfs:file r_file_perms;
-
   allow hal_dumpstate_default sysfs_pixel_stat:dir r_dir_perms;
   allow hal_dumpstate_default sysfs_pixel_stat:file r_file_perms;
 
@@ -99,8 +96,6 @@ userdebug_or_eng(`
 
   allow hal_dumpstate_default vendor_usb_debugfs:dir r_dir_perms;
   allow hal_dumpstate_default vendor_usb_debugfs:file r_file_perms;
-
-  allow hal_dumpstate_default vendor_dmabuf_debugfs:file r_file_perms;
 
   allow hal_dumpstate_default vendor_regmap_debugfs:dir r_dir_perms;
   allow hal_dumpstate_default vendor_regmap_debugfs:file r_file_perms;
@@ -133,9 +128,6 @@ userdebug_or_eng(`
 dontaudit hal_dumpstate_default vendor_ion_debugfs:dir r_dir_perms;
 dontaudit hal_dumpstate_default vendor_ion_debugfs:file r_file_perms;
 
-dontaudit hal_dumpstate_default vendor_page_pinner_debugfs:dir search;
-dontaudit hal_dumpstate_default vendor_page_pinner_debugfs:file r_file_perms;
-
 dontaudit hal_dumpstate_default sysfs_pixel_stat:dir r_dir_perms;
 dontaudit hal_dumpstate_default sysfs_pixel_stat:file r_file_perms;
 
@@ -149,8 +141,6 @@ dontaudit hal_dumpstate_default vendor_pm_genpd_debugfs:file r_file_perms;
 
 dontaudit hal_dumpstate_default vendor_usb_debugfs:dir r_dir_perms;
 dontaudit hal_dumpstate_default vendor_usb_debugfs:file r_file_perms;
-
-dontaudit hal_dumpstate_default vendor_dmabuf_debugfs:file r_file_perms;
 
 dontaudit hal_dumpstate_default vendor_regmap_debugfs:dir r_dir_perms;
 dontaudit hal_dumpstate_default vendor_regmap_debugfs:file r_file_perms;
