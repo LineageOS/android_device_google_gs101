@@ -5,9 +5,6 @@ dump_stm sysfs_spi dir b/268147283
 dump_trusty radio_vendor_data_file file b/269045042
 dumpstate app_zygote process b/238263438
 dumpstate hal_input_processor_default process b/238143262
-dumpstate incident process b/238570971
-dumpstate incident process b/238571324
-dumpstate incident process b/238571420
 dumpstate system_data_file dir b/264483156
 dumpstate system_data_file dir b/264483673
 hal_drm_default default_prop file b/232714489
