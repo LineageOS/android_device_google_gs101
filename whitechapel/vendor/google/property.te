@@ -27,6 +27,9 @@ vendor_internal_prop(vendor_battery_defender_prop)
 # Battery profile for harness mode
 vendor_internal_prop(vendor_battery_profile_prop)
 
+# hal_health
+vendor_internal_prop(vendor_shutdown_prop)
+
 # Logger
 vendor_internal_prop(vendor_logger_prop)
 
