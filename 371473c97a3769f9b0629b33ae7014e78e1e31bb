@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bae02694_a971dc2c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 25889
+      },
+      "writtenOn": "2023-02-19T21:11:10Z",
+      "side": 1,
+      "message": "Tested and verified pvmfw.img is in the ota now and passes AVB on the a Pixel 6.",
+      "revId": "371473c97a3769f9b0629b33ae7014e78e1e31bb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
