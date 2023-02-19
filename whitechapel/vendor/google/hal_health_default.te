@@ -4,6 +4,7 @@ allow hal_health_default persist_battery_file:file create_file_perms;
 allow hal_health_default persist_battery_file:dir rw_dir_perms;
 
 set_prop(hal_health_default, vendor_battery_defender_prop)
+set_prop(hal_health_default, vendor_shutdown_prop)
 r_dir_file(hal_health_default, sysfs_scsi_devices_0000)
 
 allow hal_health_default fwk_stats_service:service_manager find;
