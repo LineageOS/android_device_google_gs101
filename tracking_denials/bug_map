@@ -1,4 +1,5 @@
 dump_lsi radio_vendor_data_file file b/269218638
+dump_lsi vendor_camera_data_file file b/269964913
 dump_lsi vendor_slog_file file b/269218638
 dump_modem radio_vendor_data_file file b/269370106
 dump_pixel_metrics sysfs file b/268411073
@@ -15,3 +16,4 @@ incidentd debugfs_wakeup_sources file b/238263568
 incidentd incidentd anon_inode b/268146971
 rfsd vendor_rild_prop property_service b/269218654
 su modem_img_file filesystem b/238825802
+vndservicemanager hal_keymint_citadel binder b/269964825
