@@ -1,3 +1,5 @@
+dump_aoc radio_vendor_data_file file b/270080367
+dump_aoc vendor_camera_data_file file b/270080367
 dump_lsi radio_vendor_data_file file b/269218638
 dump_lsi vendor_camera_data_file file b/269964913
 dump_lsi vendor_slog_file file b/269218638
