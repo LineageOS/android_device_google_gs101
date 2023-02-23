@@ -54,7 +54,7 @@ cc_binary {
     static_libs: [
         "libpixelusb",
         "libpixelstats",
-        "libpixelthermalwrapper",
+        "libthermalutils",
     ],
     export_shared_lib_headers: [
         "android.frameworks.stats-V1-ndk",
