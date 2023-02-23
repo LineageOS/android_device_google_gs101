@@ -10,6 +10,7 @@ dumpstate system_data_file dir b/264483156
 dumpstate system_data_file dir b/264483673
 hal_drm_default default_prop file b/232714489
 hal_dumpstate_default dump_lsi process b/269045042
+hal_dumpstate_default dump_thermal process b/270247432
 hal_power_default hal_power_default capability b/240632824
 incidentd debugfs_wakeup_sources file b/238263568
 incidentd incidentd anon_inode b/268146971
