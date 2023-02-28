@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "461be742_1b6efcde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2023-02-28T20:56:49Z",
+      "side": 1,
+      "message": "If this is a no-op then just ignore it, we shouldn\u0027t touch aosp overlays if there is no real need. You could just upload this to AOSP",
+      "revId": "a833308976a6462688dd0d98cebabc35a193f575",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
