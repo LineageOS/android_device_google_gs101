@@ -50,7 +50,6 @@ class Dumpstate : public BnDumpstateDevice {
     void dumpPowerSection(int fd);
     void dumpDevfreqSection(int fd);
     void dumpMemorySection(int fd);
-    void dumpDisplaySection(int fd);
     void dumpCameraSection(int fd);
 };
 
