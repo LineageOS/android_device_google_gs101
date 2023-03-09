@@ -7,7 +7,6 @@ type vendor_media_data_file, file_type, data_file_type;
 type vendor_log_file, file_type, data_file_type;
 type vendor_cbd_log_file, file_type, data_file_type;
 type vendor_dmd_log_file, file_type, data_file_type;
-type vendor_hwc_log_file, file_type, data_file_type;
 type vendor_rfsd_log_file, file_type, data_file_type;
 type vendor_dump_log_file, file_type, data_file_type;
 type vendor_rild_log_file, file_type, data_file_type;
@@ -24,7 +23,6 @@ type vendor_rpmbmock_data_file, file_type, data_file_type;
 # Exynos debugfs
 type vendor_ion_debugfs, fs_type, debugfs_type;
 type vendor_mali_debugfs, fs_type, debugfs_type;
-type vendor_dri_debugfs, fs_type, debugfs_type;
 type vendor_pm_genpd_debugfs, fs_type, debugfs_type;
 type vendor_regmap_debugfs, fs_type, debugfs_type;
 type vendor_usb_debugfs, fs_type, debugfs_type;
