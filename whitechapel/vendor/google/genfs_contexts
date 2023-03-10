@@ -670,7 +670,6 @@ genfscon sysfs /devices/platform/14520000.pcie/power_stats                      
 genfscon debugfs /maxfg                                                                                   u:object_r:vendor_maxfg_debugfs:s0
 genfscon debugfs /maxfg_base                                                                              u:object_r:vendor_maxfg_debugfs:s0
 genfscon debugfs /maxfg_flip                                                                              u:object_r:vendor_maxfg_debugfs:s0
-genfscon debugfs /dri/0/crtc-                                                                             u:object_r:vendor_dri_debugfs:s0
 genfscon debugfs /ion                                                                                     u:object_r:vendor_ion_debugfs:s0
 genfscon debugfs /pm_genpd/pm_genpd_summary                                                               u:object_r:vendor_pm_genpd_debugfs:s0
 genfscon debugfs /regmap                                                                                  u:object_r:vendor_regmap_debugfs:s0
