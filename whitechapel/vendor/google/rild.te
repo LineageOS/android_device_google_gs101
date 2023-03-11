@@ -30,7 +30,6 @@ binder_call(rild, logger_app)
 
 # for hal service
 add_hwservice(rild, hal_exynos_rild_hwservice)
-allow rild hal_audio_ext_hwservice:hwservice_manager find;
 
 # Allow rild to access files on modem img.
 allow rild modem_img_file:dir r_dir_perms;
