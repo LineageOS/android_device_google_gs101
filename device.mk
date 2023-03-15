@@ -211,8 +211,8 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 # Mali Configuration Properties
 PRODUCT_VENDOR_PROPERTIES += \
-	vendor.mali.protected_max_core_count=3 \
-	vendor.mali.protected_tls_max=67108864 \
+	vendor.mali.base_protected_max_core_count=3 \
+	vendor.mali.base_protected_tls_max=67108864 \
 	vendor.mali.platform_agt_frequency_khz=24576
 
 ifeq ($(USE_SWIFTSHADER),true)
