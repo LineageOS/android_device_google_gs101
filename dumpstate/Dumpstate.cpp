@@ -283,7 +283,7 @@ void Dumpstate::dumpTextSection(int fd, const std::string &sectionName) {
         dumpFiles = dumpFiles + " " + bin;
         if (dumpAll || sectionName == bin) {
             auto startTime = startSection(fd, bin);
-            RunCommandToFd(fd, "/vendor/bin/dump/"+bin, {"/vendor/bin/dump/"+bin});
+            RunCommandToFd(fd, "/vendor/bin/dump/"+bin, {"/vendor/bin/dump/"+bin}, CommandOptions::WithTimeout(15).Build());
             endSection(fd, bin, startTime);
             if (!dumpAll) {
                 return;
