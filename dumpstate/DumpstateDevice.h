@@ -61,7 +61,6 @@ struct DumpstateDevice : public IDumpstateDevice {
 
     // Text sections that can be dumped individually on the command line in
     // addition to being included in full dumps
-    void dumpWlanSection(int fd);
     void dumpPowerSection(int fd);
     void dumpThermalSection(int fd);
     void dumpPreTouchSection(int fd);
@@ -80,6 +79,7 @@ struct DumpstateDevice : public IDumpstateDevice {
     void dumpCameraSection(int fd);
     void dumpTrustySection(int fd);
     void dumpModemSection(int fd);
+    void dumpPerfMetricsSection(int fd);
 };
 
 }  // namespace implementation
