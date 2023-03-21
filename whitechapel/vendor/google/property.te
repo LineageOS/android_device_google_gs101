@@ -56,3 +56,7 @@ system_vendor_config_prop(vendor_uwb_calibration_prop)
 
 # Trusty storage FS ready
 vendor_internal_prop(vendor_trusty_storage_prop)
+
+# Mali Integration
+vendor_public_prop(vendor_arm_runtime_option_prop)
+
