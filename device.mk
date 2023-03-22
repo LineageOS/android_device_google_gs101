@@ -18,6 +18,7 @@ include device/google/gs-common/device.mk
 include device/google/gs-common/gs_watchdogd/watchdog.mk
 include device/google/gs-common/ramdump/ramdump.mk
 include device/google/gs-common/soc/soc.mk
+include device/google/gs-common/soc/freq.mk
 include device/google/gs-common/modem/modem.mk
 include device/google/gs-common/aoc/aoc.mk
 include device/google/gs-common/thermal/thermal.mk
@@ -203,6 +204,12 @@ PRODUCT_VENDOR_PROPERTIES += \
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	debug.mali.disable_backend_affinity=true
+
+# Mali Configuration Properties
+PRODUCT_VENDOR_PROPERTIES += \
+	vendor.mali.base_protected_max_core_count=3 \
+	vendor.mali.base_protected_tls_max=67108864 \
+	vendor.mali.platform_agt_frequency_khz=24576
 
 ifeq ($(USE_SWIFTSHADER),true)
 PRODUCT_PACKAGES += \
