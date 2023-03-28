@@ -12,3 +12,10 @@ for d in $(ls -d /sys/kernel/pixel_stat/mm/cma/*); do
   fi
 done
 
+
+echo "------ Camera HAL Graph State Dump ------"
+for f in $(ls -t /data/vendor/camera/hal_graph_state*.txt |head -1); do
+  echo $f
+  cat $f
+done
+
