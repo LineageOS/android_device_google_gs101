@@ -49,7 +49,6 @@ class Dumpstate : public BnDumpstateDevice {
     // addition to being included in full dumps
     void dumpPowerSection(int fd);
     void dumpMemorySection(int fd);
-    void dumpCameraSection(int fd);
 };
 
 }  // namespace dumpstate

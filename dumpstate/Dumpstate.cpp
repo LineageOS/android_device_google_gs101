@@ -242,7 +242,6 @@ void endSection(int fd, const std::string &sectionName, timepoint_t startTime) {
 Dumpstate::Dumpstate()
   : mTextSections{
         { "power", [this](int fd) { dumpPowerSection(fd); } },
-        { "camera", [this](int fd) { dumpCameraSection(fd); } },
     } {
 }
 
@@ -489,14 +488,6 @@ void Dumpstate::dumpPowerSection(int fd) {
                         "a=${f/\\/sys\\/devices\\/virtual\\/pmic\\/mitigation\\/instruction\\//}; "
                         "echo \"$a=$val\" ; done"});
 
-}
-
-// Dump essential camera debugging logs
-void Dumpstate::dumpCameraSection(int fd) {
-    RunCommandToFd(fd, "Camera HAL Graph State Dump", {"/vendor/bin/sh", "-c",
-                       "for f in $(ls -t /data/vendor/camera/hal_graph_state*.txt |head -1); do "
-                       "echo $f ; cat $f ; done"},
-                       CommandOptions::WithTimeout(4).Build());
 }
 
 static void *dumpModemThread(void *data) {
