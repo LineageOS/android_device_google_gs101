@@ -3,3 +3,6 @@ allow dump_gs101 sysfs_pixel_stat:dir r_dir_perms;
 allow dump_gs101 sysfs_pixel_stat:file r_file_perms;
 allow dump_gs101 vendor_toolbox_exec:file execute_no_trans;
 
+allow dump_gs101 vendor_camera_data_file:dir r_dir_perms;
+allow dump_gs101 vendor_camera_data_file:file r_file_perms;
+
