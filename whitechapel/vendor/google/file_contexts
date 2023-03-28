@@ -17,6 +17,7 @@
 /(vendor|system/vendor)/lib(64)?/libgpudataproducer\.so                                         u:object_r:same_process_hal_file:s0
 
 /vendor/bin/dumpsys                                                                             u:object_r:vendor_dumpsys:s0
+/vendor/bin/dump/dump_gs101.sh                                                                  u:object_r:dump_gs101_exec:s0
 
 #
 # HALs
