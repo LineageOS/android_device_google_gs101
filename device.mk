@@ -26,6 +26,10 @@ include device/google/gs-common/pixel_metrics/pixel_metrics.mk
 include device/google/gs-common/performance/perf.mk
 include device/google/gs-common/display/dump.mk
 include device/google/gs101/dumpstate/item.mk
+include device/google/gs-common/radio/dump.mk
+include device/google/gs-common/gear/dumpstate/aidl.mk
+include device/google/gs-common/camera/dump.mk
+include device/google/gs-common/gps/dump/log.mk
 
 TARGET_BOARD_PLATFORM := gs101
 DEVICE_IS_64BIT_ONLY ?= $(if $(filter %_64,$(TARGET_PRODUCT)),true,false)
@@ -468,10 +472,6 @@ include hardware/google/pixel/rebalance_interrupts/rebalance_interrupts.mk
 # PowerStats HAL
 PRODUCT_PACKAGES += \
 	android.hardware.power.stats-service.pixel
-
-# dumpstate HAL
-PRODUCT_PACKAGES += \
-	android.hardware.dumpstate-service.gs101
 
 #
 # Audio HALs
