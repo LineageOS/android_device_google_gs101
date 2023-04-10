@@ -101,7 +101,6 @@ type sysfs_pca, sysfs_type, fs_type;
 # Camera
 type persist_camera_file, file_type;
 type vendor_camera_tuning_file, vendor_file_type, file_type;
-type vendor_camera_data_file, file_type, data_file_type;
 type sysfs_camera, sysfs_type, fs_type;
 
 # GPS
@@ -171,12 +170,6 @@ type sysfs_trusty, sysfs_type, fs_type;
 
 # BootControl
 type sysfs_bootctl, sysfs_type, fs_type;
-
-# Radio
-type radio_vendor_data_file, file_type, data_file_type;
-userdebug_or_eng(`
-  typeattribute radio_vendor_data_file mlstrustedobject;
-')
 
 # WLC
 type sysfs_wlc, sysfs_type, fs_type;

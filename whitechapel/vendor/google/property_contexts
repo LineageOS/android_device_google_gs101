@@ -27,7 +27,6 @@ vendor.usb.            u:object_r:vendor_usb_config_prop:s0
 # for logger app
 vendor.pixellogger.          u:object_r:vendor_logger_prop:s0
 persist.vendor.pixellogger.  u:object_r:vendor_logger_prop:s0
-persist.vendor.verbose_logging_enabled u:object_r:vendor_logger_prop:s0
 
 # for cbd
 vendor.cbd.                  u:object_r:vendor_cbd_prop:s0
@@ -53,7 +52,6 @@ persist.vendor.display.                 u:object_r:vendor_display_prop:s0
 # for camera
 persist.vendor.camera.               u:object_r:vendor_camera_prop:s0
 vendor.camera.                       u:object_r:vendor_camera_prop:s0
-vendor.camera.debug.                 u:object_r:vendor_camera_debug_prop:s0
 vendor.camera.fatp.                  u:object_r:vendor_camera_fatp_prop:s0
 
 # for gps
