@@ -161,7 +161,6 @@
 /vendor/lib64/camera/slider_.*\.binarypb                                u:object_r:vendor_camera_tuning_file:s0
 /vendor/bin/rlsservice                                                  u:object_r:rlsservice_exec:s0
 /mnt/vendor/persist/camera(/.*)?                                        u:object_r:persist_camera_file:s0
-/data/vendor/camera(/.*)?                                               u:object_r:vendor_camera_data_file:s0
 /vendor/lib(64)?/lib_aion_buffer\.so                                    u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libGralloc4Wrapper\.so                                 u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/pixel-power-ext-V1-ndk\.so                             u:object_r:same_process_hal_file:s0
@@ -379,5 +378,3 @@
 # Raw HID device
 /dev/hidraw[0-9]*                        u:object_r:hidraw_device:s0
 
-# Radio files.
-/data/vendor/radio(/.*)?                                                    u:object_r:radio_vendor_data_file:s0
