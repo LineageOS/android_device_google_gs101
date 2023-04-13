@@ -30,6 +30,7 @@ include device/google/gs-common/radio/dump.mk
 include device/google/gs-common/gear/dumpstate/aidl.mk
 include device/google/gs-common/camera/dump.mk
 include device/google/gs-common/gps/dump/log.mk
+include device/google/gs-common/widevine/widevine.mk
 
 TARGET_BOARD_PLATFORM := gs101
 DEVICE_IS_64BIT_ONLY ?= $(if $(filter %_64,$(TARGET_PRODUCT)),true,false)
@@ -533,10 +534,7 @@ PRODUCT_PACKAGES += \
 
 # WideVine modules
 PRODUCT_PACKAGES += \
-	android.hardware.drm-service.clearkey \
-	liboemcrypto \
-
--include vendor/widevine/libwvdrmengine/apex/device/device.mk
+	liboemcrypto
 
 $(call soong_config_set,google3a_config,soc,gs101)
 $(call soong_config_set,google3a_config,gcam_awb,true)
