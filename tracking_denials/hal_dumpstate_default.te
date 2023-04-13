@@ -1,0 +1,2 @@
+# b/277989067
+dontaudit hal_dumpstate_default vendor_shell_exec:file { execute_no_trans };
