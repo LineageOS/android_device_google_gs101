@@ -1,3 +1,4 @@
+dump_stm sysfs_spi dir b/277989397
 hal_camera_default boot_status_prop file b/275002227
 hal_camera_default edgetpu_app_service service_manager b/275002227
 hal_drm_default default_prop file b/232714489
