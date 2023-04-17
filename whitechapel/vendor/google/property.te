@@ -56,5 +56,4 @@ vendor_internal_prop(vendor_uwb_calibration_country_code)
 vendor_internal_prop(vendor_trusty_storage_prop)
 
 # Mali Integration
-vendor_public_prop(vendor_arm_runtime_option_prop)
-
+vendor_restricted_prop(vendor_arm_runtime_option_prop)
