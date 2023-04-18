@@ -250,5 +250,13 @@
             <Limit name="measured-frame-rate-640x360" range="64-97" />
             <Limit name="measured-frame-rate-1280x720" range="16-24" />
         </MediaCodec>
+        <MediaCodec name="c2.android.av1.encoder" type="video/av01" update="true">
+            <!-- measured 90%:297-298 med:298 N=2 -->
+            <Limit name="measured-frame-rate-320x240" range="297-298" /> <!-- v90%=1.0 -->
+            <!-- measured 90%:65-66 med:66 N=2 -->
+            <Limit name="measured-frame-rate-720x480" range="65-66" /> <!-- v90%=1.0 -->
+            <!-- measured 90%:24-25 med:25 N=2 -->
+            <Limit name="measured-frame-rate-1280x720" range="24-25" /> <!-- v90%=1.0 -->
+        </MediaCodec>
     </Encoders>
 </MediaCodecs>
