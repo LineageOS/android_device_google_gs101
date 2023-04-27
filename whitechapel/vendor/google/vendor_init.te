@@ -45,3 +45,5 @@ get_prop(vendor_init, vendor_trusty_storage_prop)
 # Mali
 set_prop(vendor_init, vendor_arm_runtime_option_prop)
 
+# ArmNN
+set_prop(vendor_init, vendor_armnn_config_prop)
