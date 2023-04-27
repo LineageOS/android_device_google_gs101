@@ -1,3 +1,0 @@
-# b/180550063
-dontaudit hal_neuralnetworks_armnn system_data_file:dir { search };
-dontaudit hal_neuralnetworks_armnn system_data_file:dir { search };
