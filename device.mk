@@ -536,28 +536,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	liboemcrypto
 
-$(call soong_config_set,google3a_config,soc,gs101)
-$(call soong_config_set,google3a_config,gcam_awb,true)
-$(call soong_config_set,google3a_config,ghawb_truetone,true)
-
-# Determine if Lyric is in the tree, and only have GCH build against it
-# if it is. Cases when Lyric isn't going to be in the tree:
-#    - Non-pixel gs101 devices that exclude vendor/google/services/LyricCameraHAL/src (none as of now)
-#    - master-without-vendor and other types of AOSP builds (those won't built GCH either, but need this to actually start building)
-#
-# Builds that will have it are
-#    - Regular gs101 builds
-#    - PDK gs101 builds because they still have vendor/google/services/LyricCameraHAL/src
-
-ifneq ($(wildcard vendor/google/services/LyricCameraHAL/src),)
+# Lyric Camera HAL settings
+include device/google/gs-common/camera/lyric.mk
 $(call soong_config_set,lyric,soc,gs101)
-$(call soong_config_set,lyric,use_lyric_camera_hal,true)
-# lyric::tuning_product is set in device-specific makefiles,
-# such as device/google/raviole/device-oriole.mk
-
-# Camera HAL library selection
-$(call soong_config_set,gch,hwl_library,lyric)
-endif
+$(call soong_config_set,google3a_config,soc,gs101)
 
 # WiFi
 PRODUCT_PACKAGES += \
