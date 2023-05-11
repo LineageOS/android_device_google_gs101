@@ -4,3 +4,4 @@ hal_camera_default edgetpu_app_service service_manager b/275002227
 hal_drm_default default_prop file b/232714489
 hal_power_default hal_power_default capability b/240632824
 rfsd vendor_rild_prop property_service b/269218654
+system_server system_userdir_file dir b/281814691
