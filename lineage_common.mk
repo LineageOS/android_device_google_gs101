@@ -23,6 +23,9 @@ PRODUCT_PRODUCT_PROPERTIES += ro.opa.eligible_device=true
 PRODUCT_PACKAGES += \
     EuiccSupportPixelOverlay
 
+# Lineage Health
+include hardware/google/pixel/lineage_health/device.mk
+
 # Parts
 PRODUCT_PACKAGES += \
     GoogleParts
