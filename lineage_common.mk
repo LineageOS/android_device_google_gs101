@@ -16,6 +16,9 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_PACKAGES += \
     EuiccSupportPixelOverlay
 
+# Lineage Health
+include hardware/google/pixel/lineage_health/device.mk
+
 # Linker config
 PRODUCT_VENDOR_LINKER_CONFIG_FRAGMENTS += \
     device/google/gs101/linker.config.json
