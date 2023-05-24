@@ -1,2 +1,0 @@
-masterclear.allow_retain_esim_profiles_after_fdr u:object_r:masterclear_esim_prop:s0 exact bool
-euicc.seamless_transfer_enabled_in_non_qs u:object_r:euicc_seamless_transfer_prop:s0 exact bool
