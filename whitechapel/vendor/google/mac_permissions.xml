@@ -30,7 +30,4 @@
     <signer signature="@EUICCSUPPORTPIXEL" >
         <seinfo value="EuiccSupportPixel" />
     </signer>
-    <signer signature="@EUICCGOOGLE" >
-      <seinfo value="EuiccGoogle" />
-    </signer>
 </policy>
