@@ -1,8 +1,0 @@
-product_restricted_prop(masterclear_esim_prop)
-product_restricted_prop(euicc_seamless_transfer_prop)
-
-neverallow { domain -init } masterclear_esim_prop:property_service set;
-neverallow { domain -init } euicc_seamless_transfer_prop:property_service set;
-
-get_prop(appdomain, masterclear_esim_prop)
-get_prop(appdomain, euicc_seamless_transfer_prop)
