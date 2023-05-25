@@ -19,5 +19,7 @@ PRODUCT_PACKAGES += \
     GF_delmar_factory \
     udfps_test
 
+DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs101/fingerprint/compatibility_matrix_factory.xml
+
 PRODUCT_PROPERTY_OVERRIDES += \
     gf.debug.dump_data=1
