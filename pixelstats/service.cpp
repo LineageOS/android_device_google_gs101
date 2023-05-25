@@ -57,9 +57,15 @@ const struct SysfsCollector::SysfsPaths sysfs_paths = {
             UFS_ERR_PATH(auto_hibern8_err_count)
         },
         .AmsRatePath = "/sys/devices/platform/audiometrics/ams_rate_read_once",
-        .TempResidencyPaths = {
-            "/sys/kernel/metrics/thermal/tr_by_group/tmu/stats",
-            "/sys/kernel/metrics/thermal/tr_by_group/spmic/stats",
+        .TempResidencyAndResetPaths = {
+            {
+                "/sys/kernel/metrics/thermal/tr_by_group/tmu/stats",
+                "/sys/kernel/metrics/thermal/tr_by_group/tmu/stats_reset"
+            },
+            {
+                "/sys/kernel/metrics/thermal/tr_by_group/spmic/stats",
+                "/sys/kernel/metrics/thermal/tr_by_group/spmic/stats_reset"
+            }
         },
 };
 
