@@ -22,4 +22,5 @@ incidentd debugfs_wakeup_sources file b/238263568
 incidentd incidentd anon_inode b/268146971
 rfsd vendor_rild_prop property_service b/269218654
 su modem_img_file filesystem b/238825802
+system_app proc_pagetypeinfo file b/287169829
 system_server system_userdir_file dir b/281814691
