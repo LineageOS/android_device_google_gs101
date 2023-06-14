@@ -621,7 +621,8 @@ PRODUCT_COPY_FILES += \
 
 ifneq ($(wildcard vendor/google/services/LyricCameraHAL/src),)
 PRODUCT_COPY_FILES += \
-	vendor/google/services/LyricCameraHAL/src/vendor.android.hardware.camera.preview-dis.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/vendor.android.hardware.camera.preview-dis.xml
+	vendor/google/services/LyricCameraHAL/src/vendor.android.hardware.camera.preview-dis.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/vendor.android.hardware.camera.preview-dis.xml\
+	vendor/google/services/LyricCameraHAL/src/vendor.android.hardware.camera.stream-usecase.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/vendor.android.hardware.camera.stream-usecase.xml
 endif
 
 #PRODUCT_COPY_FILES += \
