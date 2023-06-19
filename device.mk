@@ -31,6 +31,7 @@ include device/google/gs-common/gear/dumpstate/aidl.mk
 include device/google/gs-common/camera/dump.mk
 include device/google/gs-common/gps/dump/log.mk
 include device/google/gs-common/widevine/widevine.mk
+include device/google/gs-common/sota_app/factoryota.mk
 
 TARGET_BOARD_PLATFORM := gs101
 DEVICE_IS_64BIT_ONLY ?= $(if $(filter %_64,$(TARGET_PRODUCT)),true,false)
