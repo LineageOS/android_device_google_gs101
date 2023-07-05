@@ -55,6 +55,9 @@ type sysfs_fingerprint, sysfs_type, fs_type;
 # CHRE
 type chre_socket, file_type;
 
+# BT
+type vendor_bt_data_file, file_type, data_file_type;
+
 # IOMMU
 type sysfs_iommu, sysfs_type, fs_type;
 
