@@ -178,22 +178,16 @@
 
     <Encoders>
         <MediaCodec name="c2.exynos.h264.encoder" type="video/avc" update="true">
-            <Limit name="measured-frame-rate-320x240" range="371-554" />
-            <!-- measured 90%:301-313 med:302 N=2 -->
-            <Limit name="measured-frame-rate-720x480" range="301-307" /> <!-- v90%=1.0 -->
-            <!-- measured 90%:181-201 med:181 N=2 -->
-            <Limit name="measured-frame-rate-1280x720" range="181-190" /> <!-- v90%=1.1 -->
-            <!-- measured 90%:98-100 med:99 N=2 -->
-            <Limit name="measured-frame-rate-1920x1080" range="98-99" /> <!-- v90%=1.0 -->
+            <Limit name="measured-frame-rate-320x240" range="372-551" />
+            <Limit name="measured-frame-rate-720x480" range="221-308" />
+            <Limit name="measured-frame-rate-1280x720" range="151-190" />
+            <Limit name="measured-frame-rate-1920x1080" range="58-99" />
         </MediaCodec>
         <MediaCodec name="c2.exynos.hevc.encoder" type="video/hevc" update="true">
-            <Limit name="measured-frame-rate-320x240" range="365-546" />
-            <!-- measured 90%:291-304 med:292 N=2 -->
-            <Limit name="measured-frame-rate-720x480" range="291-298" /> <!-- v90%=1.0 -->
-            <!-- measured 90%:195-201 med:196 N=2 -->
-            <Limit name="measured-frame-rate-1280x720" range="195-198" /> <!-- v90%=1.0 -->
-            <!-- measured 90%:94-96 med:95 N=2 -->
-            <Limit name="measured-frame-rate-1920x1080" range="94-95" /> <!-- v90%=1.0 -->
+            <Limit name="measured-frame-rate-320x240" range="371-553" />
+            <Limit name="measured-frame-rate-720x480" range="214-305" />
+            <Limit name="measured-frame-rate-1280x720" range="154-198" />
+            <Limit name="measured-frame-rate-1920x1080" range="46-97" />
         </MediaCodec>
         <MediaCodec name="c2.exynos.mpeg4.encoder" type="video/mp4v-es" update="true">
             <Limit name="measured-frame-rate-176x144" range="280-451" /> <!-- v90%=1.1 -->
