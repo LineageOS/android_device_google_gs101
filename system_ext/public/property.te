@@ -3,3 +3,10 @@ system_vendor_config_prop(fingerprint_ghbm_prop)
 
 # eSIM properties
 system_vendor_config_prop(esim_modem_prop)
+
+# Telephony
+system_public_prop(telephony_ril_prop)
+
+userdebug_or_eng(`
+  set_prop(shell, telephony_ril_prop)
+')
