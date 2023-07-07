@@ -1,3 +1,5 @@
+set_prop(radio, telephony_ril_prop)
+
 allow radio hal_exynos_rild_hwservice:hwservice_manager find;
 allow radio proc_vendor_sched:dir r_dir_perms;
 allow radio proc_vendor_sched:file w_file_perms;

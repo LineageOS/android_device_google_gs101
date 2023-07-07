@@ -9,3 +9,6 @@ persist.bootanim.color4     u:object_r:bootanim_system_prop:s0     exact    int
 
 # Properties for euicc
 persist.modem.esim_profiles_exist            u:object_r:esim_modem_prop:s0    exact    string
+
+# Telephony
+telephony.ril.silent_reset    u:object_r:telephony_ril_prop:s0    exact    bool
