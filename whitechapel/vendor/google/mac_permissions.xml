@@ -30,4 +30,7 @@
     <signer signature="@EUICCSUPPORTPIXEL" >
         <seinfo value="EuiccSupportPixel" />
     </signer>
+    <signer signature="@CAMERASERVICES" >
+      <seinfo value="CameraServices" />
+    </signer>
 </policy>
