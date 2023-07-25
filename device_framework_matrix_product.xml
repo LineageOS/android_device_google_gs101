@@ -1,21 +1,5 @@
 <compatibility-matrix version="1.0" type="framework" level="6">
     <hal format="hidl" optional="true">
-        <name>android.hardware.radio</name>
-        <version>1.2</version>
-        <interface>
-            <name>ISap</name>
-            <instance>slot2</instance>
-        </interface>
-    </hal>
-    <hal format="aidl" optional="true">
-        <name>android.hardware.vibrator</name>
-        <version>2</version>
-        <interface>
-            <name>IVibrator</name>
-            <instance>dual</instance>
-        </interface>
-    </hal>
-    <hal format="hidl" optional="true">
         <name>android.vendor.samsung_slsi.telephony.hardware.radio</name>
         <version>1.1</version>
         <interface>
