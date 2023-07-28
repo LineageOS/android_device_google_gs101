@@ -22,6 +22,7 @@ include device/google/gs-common/soc/freq.mk
 include device/google/gs-common/modem/modem.mk
 include device/google/gs-common/aoc/aoc.mk
 include device/google/gs-common/thermal/dump/thermal.mk
+include device/google/gs-common/thermal/thermal_hal/device.mk
 include device/google/gs-common/pixel_metrics/pixel_metrics.mk
 include device/google/gs-common/performance/perf.mk
 include device/google/gs-common/display/dump.mk
@@ -1030,7 +1031,6 @@ PRODUCT_PACKAGES += \
 	libgc2_utils
 
 # Thermal HAL
-include hardware/google/pixel/thermal/device.mk
 PRODUCT_PROPERTY_OVERRIDES += persist.vendor.enable.thermal.genl=true
 
 # EdgeTPU
