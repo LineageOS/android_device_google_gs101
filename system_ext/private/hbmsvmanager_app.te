@@ -1,0 +1,11 @@
+typeattribute hbmsvmanager_app coredomain;
+
+app_domain(hbmsvmanager_app);
+
+allow hbmsvmanager_app proc_vendor_sched:dir r_dir_perms;
+allow hbmsvmanager_app proc_vendor_sched:file w_file_perms;
+
+# Standard system services
+allow hbmsvmanager_app app_api_service:service_manager find;
+
+allow hbmsvmanager_app cameraserver_service:service_manager find;

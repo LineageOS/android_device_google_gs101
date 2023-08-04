@@ -1,13 +1,2 @@
-# ConnectivityMonitor app
-type con_monitor_app, domain, coredomain;
-
-# TODO(b/296512193): move con_monitor_app out of vendor sepolicy
-typeattribute con_monitor_app vendor_seapp_assigns_coredomain_violators;
-
-app_domain(con_monitor_app)
-
-set_prop(con_monitor_app, radio_prop)
-allow con_monitor_app app_api_service:service_manager find;
-allow con_monitor_app radio_service:service_manager find;
 allow con_monitor_app radio_vendor_data_file:dir rw_dir_perms;
 allow con_monitor_app radio_vendor_data_file:file create_file_perms;
