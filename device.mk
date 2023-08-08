@@ -199,8 +199,6 @@ PRODUCT_SOONG_NAMESPACES += \
 
 $(call soong_config_set,pixel_mali,soc,$(TARGET_BOARD_PLATFORM))
 
-include device/google/gs-common/gpu/gpu.mk
-
 PRODUCT_PACKAGES += \
 	libGLES_mali \
 	vulkan.mali \
