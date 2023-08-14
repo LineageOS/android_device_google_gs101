@@ -57,12 +57,20 @@ const struct SysfsCollector::SysfsPaths sysfs_paths = {
             UFS_ERR_PATH(auto_hibern8_err_count)
         },
         .AmsRatePath = "/sys/devices/platform/audiometrics/ams_rate_read_once",
-        .TempResidencyPath = "/sys/kernel/metrics/temp_residency/temp_residency_all/stats",
+        .TempResidencyAndResetPaths = {
+            {
+                "/sys/kernel/metrics/thermal/tr_by_group/tmu/stats",
+                "/sys/kernel/metrics/thermal/tr_by_group/tmu/stats_reset"
+            },
+            {
+                "/sys/kernel/metrics/thermal/tr_by_group/spmic/stats",
+                "/sys/kernel/metrics/thermal/tr_by_group/spmic/stats_reset"
+            }
+        },
 };
 
 const struct UeventListener::UeventPaths ueventPaths = {
         .AudioUevent = "/devices/virtual/amcs/amcs",
-        .WirelessChargerPtmcPath = "/sys/class/power_supply/wireless/device/ptmc_id",
         .TypeCPartnerUevent = "PRODUCT_TYPE="};
 
 int main() {
