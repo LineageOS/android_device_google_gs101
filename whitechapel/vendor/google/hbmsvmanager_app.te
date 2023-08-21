@@ -1,5 +1,8 @@
 type hbmsvmanager_app, domain, coredomain;
 
+# TODO(b/296512193): move hbmsvmanager_app out of vendor sepolicy
+typeattribute hbmsvmanager_app vendor_seapp_assigns_coredomain_violators;
+
 app_domain(hbmsvmanager_app);
 
 allow hbmsvmanager_app proc_vendor_sched:dir r_dir_perms;
