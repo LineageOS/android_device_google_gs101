@@ -1,5 +1,8 @@
 type exo_app, coredomain, domain;
 
+# TODO(b/296512193): move exo_app out of vendor sepolicy
+typeattribute exo_app vendor_seapp_assigns_coredomain_violators;
+
 app_domain(exo_app)
 net_domain(exo_app)
 
