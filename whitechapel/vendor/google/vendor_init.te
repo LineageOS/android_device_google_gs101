@@ -42,3 +42,10 @@ set_prop(vendor_init, vendor_display_prop)
 
 # Trusty storage FS ready
 get_prop(vendor_init, vendor_trusty_storage_prop)
+allow vendor_init tee_data_file:lnk_file read;
+
+# Mali
+set_prop(vendor_init, vendor_arm_runtime_option_prop)
+
+# ArmNN
+set_prop(vendor_init, vendor_armnn_config_prop)
