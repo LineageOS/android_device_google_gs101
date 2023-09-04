@@ -24,3 +24,4 @@ rfsd vendor_rild_prop property_service b/269218654
 su modem_img_file filesystem b/238825802
 system_app proc_pagetypeinfo file b/287169829
 system_server system_userdir_file dir b/281814691
+platform_app hal_uwb_vendor_service find b/290766628
