@@ -1,17 +1,2 @@
-type hbmsvmanager_app, domain, coredomain;
-
-# TODO(b/296512193): move hbmsvmanager_app out of vendor sepolicy
-typeattribute hbmsvmanager_app vendor_seapp_assigns_coredomain_violators;
-
-app_domain(hbmsvmanager_app);
-
-allow hbmsvmanager_app proc_vendor_sched:dir r_dir_perms;
-allow hbmsvmanager_app proc_vendor_sched:file w_file_perms;
-
 allow hbmsvmanager_app hal_pixel_display_service:service_manager find;
 binder_call(hbmsvmanager_app, hal_graphics_composer_default)
-
-# Standard system services
-allow hbmsvmanager_app app_api_service:service_manager find;
-
-allow hbmsvmanager_app cameraserver_service:service_manager find;
