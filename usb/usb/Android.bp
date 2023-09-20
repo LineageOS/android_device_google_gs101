@@ -46,7 +46,7 @@ cc_binary {
         "android.hardware.usb.gadget@1.0",
         "android.hardware.usb-V2-ndk",
         "libcutils",
-        "android.frameworks.stats-V1-ndk",
+        "android.frameworks.stats-V2-ndk",
         "pixelatoms-cpp",
         "libbinder_ndk",
 
@@ -57,7 +57,7 @@ cc_binary {
         "libthermalutils",
     ],
     export_shared_lib_headers: [
-        "android.frameworks.stats-V1-ndk",
+        "android.frameworks.stats-V2-ndk",
         "pixelatoms-cpp",
     ],
 }
