@@ -38,38 +38,18 @@ namespace gadget {
 
 string enabledPath;
 constexpr char kHsi2cPath[] = "/sys/devices/platform/10d50000.hsi2c";
-constexpr char kI2CPath[] = "/sys/devices/platform/10d50000.hsi2c/i2c-";
-constexpr char kAccessoryLimitCurrent[] = "i2c-max77759tcpc/usb_limit_accessory_current";
-constexpr char kAccessoryLimitCurrentEnable[] = "i2c-max77759tcpc/usb_limit_accessory_enable";
-constexpr char kUpdateSdpEnumTimeout[] = "i2c-max77759tcpc/update_sdp_enum_timeout";
+constexpr char kMax77759TcpcDevName[] = "i2c-max77759tcpc";
+constexpr unsigned int kMax77759TcpcClientId = 0x25;
+constexpr char kAccessoryLimitCurrent[] = "usb_limit_accessory_current";
+constexpr char kAccessoryLimitCurrentEnable[] = "usb_limit_accessory_enable";
+constexpr char kUpdateSdpEnumTimeout[] = "update_sdp_enum_timeout";
 
 using ::android::base::GetBoolProperty;
 using ::android::hardware::google::pixel::usb::kUvcEnabled;
 
-Status getI2cBusHelper(string *name) {
-    DIR *dp;
-
-    dp = opendir(kHsi2cPath);
-    if (dp != NULL) {
-        struct dirent *ep;
-
-        while ((ep = readdir(dp))) {
-            if (ep->d_type == DT_DIR) {
-                if (string::npos != string(ep->d_name).find("i2c-")) {
-                    std::strtok(ep->d_name, "-");
-                    *name = std::strtok(NULL, "-");
-                }
-            }
-        }
-        closedir(dp);
-        return Status::SUCCESS;
-    }
-
-    ALOGE("Failed to open %s", kHsi2cPath);
-    return Status::ERROR;
-}
-
-UsbGadget::UsbGadget() : mGadgetIrqPath("") {
+UsbGadget::UsbGadget() : mGadgetIrqPath(""),
+      mI2cBusNumber(-1),
+      mI2cClientPath("") {
     if (access(OS_DESC_PATH, R_OK) != 0) {
         ALOGE("configfs setup not done yet");
         abort();
@@ -389,14 +369,16 @@ ScopedAStatus UsbGadget::reset(const shared_ptr<IUsbGadgetCallback> &callback,
 }
 
 void UsbGadget::updateSdpEnumTimeout() {
-    string i2c_node, update_sdp_enum_timeout_path;
+    string update_sdp_enum_timeout_path;
+    std::string_view i2cPath;
 
-    Status status = getI2cBusHelper(&i2c_node);
-    if (status != Status::SUCCESS) {
+    i2cPath = getI2cClientPath();
+    if (i2cPath.empty()) {
         ALOGE("%s: Unable to locate i2c bus node", __func__);
+        return;
     }
 
-    update_sdp_enum_timeout_path = kI2CPath + i2c_node + "/" + kUpdateSdpEnumTimeout;
+    update_sdp_enum_timeout_path = std::string{i2cPath} + "/" + kUpdateSdpEnumTimeout;
     if (!WriteStringToFile("1", update_sdp_enum_timeout_path)) {
         ALOGE("%s: Unable to write to %s.", __func__, update_sdp_enum_timeout_path.c_str());
     } else {
@@ -483,6 +465,75 @@ Status UsbGadget::setupFunctions(long functions,
     return Status::SUCCESS;
 }
 
+int UsbGadget::getI2cBusNumber() {
+    DIR *dp;
+    unsigned int busNumber;
+
+    // Since the i2c bus number doesn't change after boot, we only need to get
+    // it once.
+    if (mI2cBusNumber >= 0) {
+        return mI2cBusNumber;
+    }
+
+    dp = opendir(kHsi2cPath);
+    if (dp != NULL) {
+        struct dirent *ep;
+
+        while ((ep = readdir(dp))) {
+            if (ep->d_type == DT_DIR) {
+                if (sscanf(ep->d_name, "i2c-%u", &busNumber) == 1) {
+                    mI2cBusNumber = busNumber;
+                    break;
+                }
+            }
+        }
+        closedir(dp);
+    }
+
+    if (mI2cBusNumber < 0) {
+        ALOGE("Failed to open %s", kHsi2cPath);
+    }
+    return mI2cBusNumber;
+}
+
+std::string_view UsbGadget::getI2cClientPath() {
+    DIR *dp;
+    char i2cClientPathLabeled[PATH_MAX];
+    char i2cClientPathUnLabeled[PATH_MAX];
+
+    // Since the I2C client path doesn't change after boot, we only need to get
+    // it once.
+    if (!mI2cClientPath.empty()) {
+        return mI2cClientPath;
+    }
+
+    if (getI2cBusNumber() < 0) {
+        return std::string_view{""};
+    }
+
+    snprintf(i2cClientPathLabeled, sizeof(i2cClientPathLabeled),
+             "%s/i2c-%d/%s", kHsi2cPath, mI2cBusNumber,  kMax77759TcpcDevName);
+    snprintf(i2cClientPathUnLabeled, sizeof(i2cClientPathUnLabeled),
+             "%s/i2c-%d/%d-%04x", kHsi2cPath, mI2cBusNumber, mI2cBusNumber,
+             kMax77759TcpcClientId);
+
+    dp = opendir(i2cClientPathLabeled);
+    if (dp != NULL) {
+        mI2cClientPath.assign(i2cClientPathLabeled);
+        closedir(dp);
+        return mI2cClientPath;
+    }
+
+    dp = opendir(i2cClientPathUnLabeled);
+    if (dp != NULL) {
+        mI2cClientPath.assign(i2cClientPathUnLabeled);
+        closedir(dp);
+        return mI2cClientPath;
+    }
+
+    ALOGE("Failed to find the i2c client path under %s", kHsi2cPath);
+    return std::string_view{""};
+}
 
 ScopedAStatus UsbGadget::setCurrentUsbFunctions(long functions,
                                                const shared_ptr<IUsbGadgetCallback> &callback,
@@ -492,14 +543,19 @@ ScopedAStatus UsbGadget::setCurrentUsbFunctions(long functions,
     std::string current_usb_power_operation_mode, current_usb_type;
     std::string usb_limit_sink_enable;
 
-    string accessoryCurrentLimitEnablePath, accessoryCurrentLimitPath, path;
+    string accessoryCurrentLimitEnablePath, accessoryCurrentLimitPath;
+    std::string_view i2cPath;
 
     mCurrentUsbFunctions = functions;
     mCurrentUsbFunctionsApplied = false;
 
-    getI2cBusHelper(&path);
-    accessoryCurrentLimitPath = kI2CPath + path + "/" + kAccessoryLimitCurrent;
-    accessoryCurrentLimitEnablePath = kI2CPath + path + "/" + kAccessoryLimitCurrentEnable;
+    i2cPath = getI2cClientPath();
+    if (!i2cPath.empty()) {
+        accessoryCurrentLimitPath = std::string{i2cPath} + "/" + kAccessoryLimitCurrent;
+        accessoryCurrentLimitEnablePath = std::string{i2cPath} + "/" + kAccessoryLimitCurrentEnable;
+    } else {
+        ALOGE("%s: Unable to locate i2c bus node", __func__);
+    }
 
     // Get the gadget IRQ number before tearDownGadget()
     if (mGadgetIrqPath.empty())
@@ -560,15 +616,17 @@ ScopedAStatus UsbGadget::setCurrentUsbFunctions(long functions,
         current_usb_type == "Unknown SDP [CDP] DCP" &&
         (current_usb_power_operation_mode == "default" ||
         current_usb_power_operation_mode == "1.5A")) {
-        if (!WriteStringToFile("1300000", accessoryCurrentLimitPath)) {
+        if (accessoryCurrentLimitPath.empty() || !WriteStringToFile("1300000", accessoryCurrentLimitPath)) {
             ALOGI("Write 1.3A to limit current fail");
         } else {
-            if (!WriteStringToFile("1", accessoryCurrentLimitEnablePath)) {
+            if (accessoryCurrentLimitEnablePath.empty() ||
+                !WriteStringToFile("1", accessoryCurrentLimitEnablePath)) {
                 ALOGI("Enable limit current fail");
             }
         }
     } else {
-        if (!WriteStringToFile("0", accessoryCurrentLimitEnablePath))
+        if (accessoryCurrentLimitEnablePath.empty() ||
+            !WriteStringToFile("0", accessoryCurrentLimitEnablePath))
             ALOGI("unvote accessory limit current failed");
     }
 

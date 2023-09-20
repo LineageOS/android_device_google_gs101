@@ -111,9 +111,13 @@ struct Usb : public BnUsb {
          std::function<void(uint32_t)> cb;
     };
     std::map<std::string, struct epollEntry> mEpollEntries;
+    int getI2cBusNumber();
+    std::string_view getI2cClientPath();
 
   private:
     pthread_t mPoll;
+    int mI2cBusNumber;
+    std::string mI2cClientPath;
 };
 
 } // namespace usb
