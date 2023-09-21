@@ -1,0 +1,7 @@
+typeattribute con_monitor_app coredomain;
+
+app_domain(con_monitor_app)
+
+set_prop(con_monitor_app, radio_prop)
+allow con_monitor_app app_api_service:service_manager find;
+allow con_monitor_app radio_service:service_manager find;
