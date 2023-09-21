@@ -22,14 +22,6 @@
         <install-in user-type="FULL" />
         <install-in user-type="PROFILE" />
         <do-not-install-in user-type="android.os.usertype.profile.CLONE" />
-    </install-in-user-type>
-
-    <!-- RCS - Rich Communication Services (TestRcsApp)
-    TODO(b/259401601): Check if this should be preinstalled for SYSTEM user -->
-    <install-in-user-type package="com.google.android.sample.rcsclient">
-        <install-in user-type="SYSTEM" />
-        <install-in user-type="FULL" />
-        <install-in user-type="PROFILE" />
-        <do-not-install-in user-type="android.os.usertype.profile.CLONE" />
+        <do-not-install-in user-type="android.os.usertype.profile.PRIVATE" />
     </install-in-user-type>
 </config>

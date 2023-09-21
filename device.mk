@@ -34,6 +34,7 @@ include device/google/gs-common/gps/dump/log.mk
 include device/google/gs-common/widevine/widevine.mk
 include device/google/gs-common/sota_app/factoryota.mk
 include device/google/gs-common/misc_writer/misc_writer.mk
+include device/google/gs-common/gyotaku_app/gyotaku.mk
 
 TARGET_BOARD_PLATFORM := gs101
 DEVICE_IS_64BIT_ONLY ?= $(if $(filter %_64,$(TARGET_PRODUCT)),true,false)
@@ -889,10 +890,8 @@ PRODUCT_PACKAGES += ShannonIms
 
 $(call inherit-product-if-exists, vendor/samsung_slsi/telephony/$(BOARD_USES_SHARED_VENDOR_TELEPHONY)/shannon-iwlan/device-vendor.mk)
 
-#RCS Test Messaging App
 PRODUCT_PACKAGES_DEBUG += \
-	preinstalled-packages-product-gs101-device-debug.xml \
-	TestRcsApp
+	preinstalled-packages-product-gs101-device-debug.xml
 
 PRODUCT_PACKAGES += ShannonRcs
 endif
@@ -930,6 +929,7 @@ endif
 #$(call inherit-product-if-exists, vendor/google_devices/common/exynos-vendor.mk)
 #$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4375/device-bcm.mk)
 include device/google/gs-common/sensors/sensors.mk
+$(call soong_config_set,usf,target_soc,gs101)
 
 PRODUCT_COPY_FILES += \
 	device/google/gs101/default-permissions.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/default-permissions/default-permissions.xml \
@@ -1123,6 +1123,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Call deleteAllKeys if vold detects a factory reset
 PRODUCT_VENDOR_PROPERTIES += ro.crypto.metadata_init_delete_all_keys.enabled=true
+
+# Increase lmkd aggressiveness
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.lmk.swap_free_low_percentage=100
 
 # Hardware Info Collection
 include hardware/google/pixel/HardwareInfo/HardwareInfo.mk
