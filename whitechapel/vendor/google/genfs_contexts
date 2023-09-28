@@ -78,6 +78,7 @@ genfscon sysfs /devices/platform/10970000.hsi2c/i2c-7/7-005a            u:object
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-7/i2c-cs40l25a-dual u:object_r:sysfs_vibrator:s0
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-7/7-0042            u:object_r:sysfs_vibrator:s0
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-7/i2c-cs40l25a      u:object_r:sysfs_vibrator:s0
+genfscon sysfs /devices/platform/10970000.hsi2c/i2c-7/i2c-cs40l26a      u:object_r:sysfs_vibrator:s0
 genfscon sysfs /devices/platform/10970000.hsi2c/i2c-7/7-0043            u:object_r:sysfs_vibrator:s0
 
 # Fingerprint
