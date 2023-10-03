@@ -252,14 +252,6 @@ on init
     chown system system /sys/class/power_supply/maxfg/m5_model_state
     chown system system /sys/class/power_supply/maxfg_base/m5_model_state
 
-    # Dump eeprom
-    chown system system /sys/devices/platform/10970000.hsi2c/i2c-8/8-0050/eeprom
-    chown system system /sys/devices/platform/10970000.hsi2c/i2c-7/7-0050/eeprom
-    chown system system /sys/devices/platform/10970000.hsi2c/i2c-6/6-0050/eeprom
-    chown system system /sys/devices/platform/10970000.hsi2c/i2c-5/5-0050/eeprom
-    chown system system /sys/devices/platform/10970000.hsi2c/i2c-4/4-0050/eeprom
-    chown system system /dev/battery_history
-
     # Modem temperature driver
     chown radio system /sys/devices/platform/cp-tm1/cp_temp
 
@@ -614,6 +606,7 @@ on fs
     chown system system /sys/devices/platform/exynos-drm/primary-panel/idle_delay_ms
     chown system system /sys/devices/platform/exynos-drm/primary-panel/panel_need_handle_idle_exit
     chown system system /sys/module/drm/parameters/vblankoffdelay
+    chown system system /sys/module/drm/parameters/debug
     chown system system /sys/class/dqe0/atc/ambient_light
     chown system system /sys/class/dqe0/atc/st
     chown system system /sys/class/dqe0/atc/en
@@ -879,23 +872,6 @@ on post-fs-data
     chown bluetooth system /proc/bluetooth/sleep/lpm
     chown bluetooth system /proc/bluetooth/sleep/btwrite
     mkdir /data/vendor/bluetooth 0770 bluetooth system
-
-# ODPM
-on fs
-    chown system system /sys/devices/platform/acpm_mfd_bus@17500000/i2c-0/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device1/enabled_rails
-    chown system system /sys/devices/platform/acpm_mfd_bus@17500000/i2c-0/0-001f/s2mpg10-meter/s2mpg10-odpm/iio:device1/enabled_rails
-    chown system system /sys/devices/platform/acpm_mfd_bus@17510000/i2c-1/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device0/enabled_rails
-    chown system system /sys/devices/platform/acpm_mfd_bus@17510000/i2c-1/1-002f/s2mpg11-meter/s2mpg11-odpm/iio:device0/enabled_rails
-
-    chown system system /sys/devices/platform/acpm_mfd_bus@17500000/i2c-6/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device0/enabled_rails
-    chown system system /sys/devices/platform/acpm_mfd_bus@17500000/i2c-6/6-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/enabled_rails
-    chown system system /sys/devices/platform/acpm_mfd_bus@17510000/i2c-7/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device1/enabled_rails
-    chown system system /sys/devices/platform/acpm_mfd_bus@17510000/i2c-7/7-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/enabled_rails
-
-    chown system system /sys/devices/platform/acpm_mfd_bus@17500000/i2c-7/i2c-s2mpg10mfd/s2mpg10-meter/s2mpg10-odpm/iio:device0/enabled_rails
-    chown system system /sys/devices/platform/acpm_mfd_bus@17500000/i2c-7/7-001f/s2mpg10-meter/s2mpg10-odpm/iio:device0/enabled_rails
-    chown system system /sys/devices/platform/acpm_mfd_bus@17510000/i2c-8/i2c-s2mpg11mfd/s2mpg11-meter/s2mpg11-odpm/iio:device1/enabled_rails
-    chown system system /sys/devices/platform/acpm_mfd_bus@17510000/i2c-8/8-002f/s2mpg11-meter/s2mpg11-odpm/iio:device1/enabled_rails
 
 on post-fs-data
     mkdir /data/vendor/powerstats 0771 system system

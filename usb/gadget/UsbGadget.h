@@ -119,7 +119,12 @@ struct UsbGadget : public BnUsbGadget {
     // set SDP timeout to a lower value.
     void updateSdpEnumTimeout();
 
+    int getI2cBusNumber();
+    std::string_view getI2cClientPath();
+
   private:
+    int mI2cBusNumber;
+    std::string mI2cClientPath;
     Status tearDownGadget();
     Status getUsbGadgetIrqPath();
     Status setupFunctions(long functions, const shared_ptr<IUsbGadgetCallback> &callback,
