@@ -1,3 +1,4 @@
 hal_power_default hal_power_default capability b/240632824
 incidentd debugfs_wakeup_sources file b/282626428
 incidentd incidentd anon_inode b/282626428
+chre vendor_data_file dir b/301948771
