@@ -26,6 +26,8 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+#include <android-base/properties.h>
+
 #include <aidl/android/frameworks/stats/IStats.h>
 
 namespace aidl {
@@ -39,6 +41,9 @@ constexpr char kHsi2cPath[] = "/sys/devices/platform/10d50000.hsi2c";
 constexpr char kI2CPath[] = "/sys/devices/platform/10d50000.hsi2c/i2c-";
 constexpr char kAccessoryLimitCurrent[] = "i2c-max77759tcpc/usb_limit_accessory_current";
 constexpr char kAccessoryLimitCurrentEnable[] = "i2c-max77759tcpc/usb_limit_accessory_enable";
+
+using ::android::base::GetBoolProperty;
+using ::android::hardware::google::pixel::usb::kUvcEnabled;
 
 UsbGadget::UsbGadget() : mGadgetIrqPath("") {
     if (access(OS_DESC_PATH, R_OK) != 0) {
@@ -154,8 +159,8 @@ Status UsbGadget::tearDownGadget() {
     return Status::SUCCESS;
 }
 
-static Status validateAndSetVidPid(uint64_t functions) {
-    Status ret = Status::SUCCESS;
+static Status validateAndSetVidPid(int64_t functions) {
+    Status ret;
     std::string vendorFunctions = getVendorFunctions();
 
     switch (functions) {
@@ -302,6 +307,28 @@ static Status validateAndSetVidPid(uint64_t functions) {
                 ret = Status(setVidPid("0x18d1", "0x4eec"));
             }
             break;
+        case GadgetFunction::UVC:
+            if (!(vendorFunctions == "user" || vendorFunctions == "")) {
+                ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
+                ret = Status::CONFIGURATION_NOT_SUPPORTED;
+            } else if (!GetBoolProperty(kUvcEnabled, false)) {
+                ALOGE("UVC function not enabled by config");
+                ret = Status::CONFIGURATION_NOT_SUPPORTED;
+            } else {
+                ret = Status(setVidPid("0x18d1", "0x4eed"));
+            }
+            break;
+        case GadgetFunction::ADB | GadgetFunction::UVC:
+            if (!(vendorFunctions == "user" || vendorFunctions == "")) {
+                ALOGE("Invalid vendorFunctions set: %s", vendorFunctions.c_str());
+                ret = Status::CONFIGURATION_NOT_SUPPORTED;
+            } else if (!GetBoolProperty(kUvcEnabled, false)) {
+                ALOGE("UVC function not enabled by config");
+                ret = Status::CONFIGURATION_NOT_SUPPORTED;
+            } else {
+                ret = Status(setVidPid("0x18d1", "0x4eee"));
+            }
+            break;
         default:
             ALOGE("Combination not supported");
             ret = Status::CONFIGURATION_NOT_SUPPORTED;
@@ -309,11 +336,14 @@ static Status validateAndSetVidPid(uint64_t functions) {
     return ret;
 }
 
-ScopedAStatus UsbGadget::reset() {
+ScopedAStatus UsbGadget::reset(const shared_ptr<IUsbGadgetCallback> &callback,
+        int64_t in_transactionId) {
     ALOGI("USB Gadget reset");
 
     if (!WriteStringToFile("none", PULLUP_PATH)) {
         ALOGI("Gadget cannot be pulled down");
+        if (callback)
+            callback->resetCb(Status::ERROR, in_transactionId);
         return ScopedAStatus::fromServiceSpecificErrorWithMessage(
                 -1, "Gadget cannot be pulled down");
     }
@@ -322,9 +352,13 @@ ScopedAStatus UsbGadget::reset() {
 
     if (!WriteStringToFile(kGadgetName, PULLUP_PATH)) {
         ALOGI("Gadget cannot be pulled up");
+        if (callback)
+            callback->resetCb(Status::ERROR, in_transactionId);
         return ScopedAStatus::fromServiceSpecificErrorWithMessage(
                 -1, "Gadget cannot be pulled up");
     }
+    if (callback)
+        callback->resetCb(Status::SUCCESS, in_transactionId);
 
     return ScopedAStatus::ok();
 }
@@ -519,9 +553,7 @@ ScopedAStatus UsbGadget::setCurrentUsbFunctions(long functions,
     }
 
     ALOGI("Usb Gadget setcurrent functions called successfully");
-    return ScopedAStatus::fromServiceSpecificErrorWithMessage(
-                -1, "Usb Gadget setcurrent functions called successfully");
-
+    return ScopedAStatus::ok();
 
 error:
     ALOGI("Usb Gadget setcurrent functions failed");
