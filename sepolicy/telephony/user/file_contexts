@@ -1,0 +1,3 @@
+# ECC List
+/vendor/bin/init\.radio\.sh     u:object_r:init_radio_exec:s0
+

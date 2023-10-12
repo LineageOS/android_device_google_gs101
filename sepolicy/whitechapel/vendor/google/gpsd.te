@@ -1,0 +1,9 @@
+type gpsd, domain;
+type gpsd_exec, vendor_file_type, exec_type, file_type;
+# Allow gpsd access PixelLogger unix socket in debug build only
+userdebug_or_eng(`
+    typeattribute gpsd mlstrustedsubject;
+    allow gpsd logger_app:unix_stream_socket connectto;
+')
+
+
