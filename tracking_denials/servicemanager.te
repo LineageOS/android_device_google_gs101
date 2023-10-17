@@ -1,0 +1,2 @@
+# b/305600595
+dontaudit servicemanager hal_thermal_default:binder call;
