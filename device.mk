@@ -31,6 +31,9 @@ include device/google/gs-common/gear/dumpstate/aidl.mk
 include device/google/gs-common/camera/dump.mk
 include device/google/gs-common/gps/dump/log.mk
 include device/google/gs-common/widevine/widevine.mk
+include device/google/gs-common/sota_app/factoryota.mk
+include device/google/gs-common/misc_writer/misc_writer.mk
+include device/google/gs-common/gyotaku_app/gyotaku.mk
 
 TARGET_BOARD_PLATFORM := gs101
 DEVICE_IS_64BIT_ONLY ?= $(if $(filter %_64,$(TARGET_PRODUCT)),true,false)
@@ -196,8 +199,6 @@ PRODUCT_SOONG_NAMESPACES += \
 	vendor/arm/mali/valhall
 
 $(call soong_config_set,pixel_mali,soc,$(TARGET_BOARD_PLATFORM))
-
-include device/google/gs101/neuralnetwork/neuralnetwork.mk
 
 PRODUCT_PACKAGES += \
 	libGLES_mali \
@@ -522,28 +523,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	liboemcrypto
 
-$(call soong_config_set,google3a_config,soc,gs101)
-$(call soong_config_set,google3a_config,gcam_awb,true)
-$(call soong_config_set,google3a_config,ghawb_truetone,true)
-
-# Determine if Lyric is in the tree, and only have GCH build against it
-# if it is. Cases when Lyric isn't going to be in the tree:
-#    - Non-pixel gs101 devices that exclude vendor/google/services/LyricCameraHAL/src (none as of now)
-#    - master-without-vendor and other types of AOSP builds (those won't built GCH either, but need this to actually start building)
-#
-# Builds that will have it are
-#    - Regular gs101 builds
-#    - PDK gs101 builds because they still have vendor/google/services/LyricCameraHAL/src
-
-ifneq ($(wildcard vendor/google/services/LyricCameraHAL/src),)
+# Lyric Camera HAL settings
+include device/google/gs-common/camera/lyric.mk
 $(call soong_config_set,lyric,soc,gs101)
-$(call soong_config_set,lyric,use_lyric_camera_hal,true)
-# lyric::tuning_product is set in device-specific makefiles,
-# such as device/google/raviole/device-oriole.mk
-
-# Camera HAL library selection
-$(call soong_config_set,gch,hwl_library,lyric)
-endif
+$(call soong_config_set,google3a_config,soc,gs101)
 
 # WiFi
 PRODUCT_PACKAGES += \
@@ -621,7 +604,6 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.camera.concurrent.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.concurrent.xml \
 	frameworks/native/data/etc/android.hardware.camera.full.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.full.xml\
 	frameworks/native/data/etc/android.hardware.camera.raw.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.raw.xml\
-	vendor/google/services/LyricCameraHAL/src/vendor.android.hardware.camera.preview-dis.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/vendor.android.hardware.camera.preview-dis.xml\
 
 #PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml \
@@ -951,8 +933,7 @@ endif
 #$(call inherit-product-if-exists, vendor/google_devices/common/exynos-vendor.mk)
 #$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4375/device-bcm.mk)
 include device/google/gs-common/sensors/sensors.mk
-$(call inherit-product-if-exists, vendor/google/services/LyricCameraHAL/src/build/device-vendor.mk)
-$(call inherit-product-if-exists, vendor/google/camera/devices/whi/device-vendor.mk)
+$(call soong_config_set,usf,target_soc,gs101)
 
 PRODUCT_COPY_FILES += \
 	device/google/gs101/default-permissions.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/default-permissions/default-permissions.xml \
@@ -1150,6 +1131,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Call deleteAllKeys if vold detects a factory reset
 PRODUCT_VENDOR_PROPERTIES += ro.crypto.metadata_init_delete_all_keys.enabled=true
+
+# Increase lmkd aggressiveness
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.lmk.swap_free_low_percentage=100
 
 # Hardware Info Collection
 include hardware/google/pixel/HardwareInfo/HardwareInfo.mk
