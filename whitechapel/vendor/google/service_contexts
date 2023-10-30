@@ -2,3 +2,4 @@ com.google.hardware.pixel.display.IDisplay/default         u:object_r:hal_pixel_
 hardware.qorvo.uwb.IUwbVendor/default                      u:object_r:hal_uwb_vendor_service:s0
 android.hardware.drm.IDrmFactory/widevine                  u:object_r:hal_drm_service:s0
 vendor.google.wireless_charger.IWirelessCharger/default                      u:object_r:hal_wireless_charger_service:s0
+rlsservice                                                 u:object_r:rls_service:s0
