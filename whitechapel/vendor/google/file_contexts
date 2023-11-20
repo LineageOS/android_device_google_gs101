@@ -32,6 +32,9 @@
 # Vendor Firmwares
 /(vendor|system/vendor)/firmware(/.*)?                        u:object_r:vendor_fw_file:s0
 
+# Gralloc
+/(vendor|system/vendor)/lib(64)?/hw/mapper\.pixel\.so         u:object_r:same_process_hal_file:s0
+
 #
 # Exynos Block Devices
 #
