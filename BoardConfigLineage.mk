@@ -31,5 +31,8 @@ BOARD_AVB_VBMETA_VENDOR_ROLLBACK_INDEX_LOCATION := 3
 AB_OTA_PARTITIONS += \
     vbmeta_vendor
 
+# Reserve space for gapps install
+-include vendor/lineage/config/BoardConfigReservedSize.mk
+
 # Verified Boot
 BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
