@@ -899,11 +899,6 @@ PRODUCT_PACKAGES_DEBUG += \
 PRODUCT_PACKAGES += ShannonRcs
 endif
 
-# Boot Control HAL
-PRODUCT_PACKAGES += \
-	android.hardware.boot@1.2-impl-gs101 \
-	android.hardware.boot@1.2-service-gs101
-
 # Exynos RIL and telephony
 # Multi SIM(DSDS)
 SIM_COUNT := 2
