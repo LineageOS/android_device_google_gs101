@@ -153,6 +153,7 @@
 
 # data files
 /data/vendor/mediadrm(/.*)?  u:object_r:mediadrm_vendor_data_file:s0
+/data/vendor/bluetooth(/.*)? u:object_r:vendor_bt_data_file:s0
 
 # Camera
 /vendor/bin/hw/android\.hardware\.camera\.provider@2\.7-service-google  u:object_r:hal_camera_default_exec:s0
