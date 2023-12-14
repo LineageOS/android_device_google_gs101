@@ -730,29 +730,13 @@ endif
 $(call soong_config_set,bigo,soc,gs101)
 
 # 1. Codec 2.0
-# exynos service
-PRODUCT_SOONG_NAMESPACES += vendor/samsung_slsi/codec2
+# for settings used by different C2 hal
+include device/google/gs-common/mediacodec/common/mediacodec_common.mk
+# for Exynos C2 Hal
+include device/google/gs-common/mediacodec/samsung/mediacodec_samsung.mk
 
 PRODUCT_COPY_FILES += \
 	device/google/gs101/media_codecs_performance_c2.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance_c2.xml \
-
-PRODUCT_PACKAGES += \
-	samsung.hardware.media.c2@1.0-service \
-	codec2.vendor.base.policy \
-	codec2.vendor.ext.policy \
-	libExynosC2ComponentStore \
-	libExynosC2H264Dec \
-	libExynosC2H264Enc \
-	libExynosC2HevcDec \
-	libExynosC2HevcEnc \
-	libExynosC2Mpeg4Dec \
-	libExynosC2Mpeg4Enc \
-	libExynosC2H263Dec \
-	libExynosC2H263Enc \
-	libExynosC2Vp8Dec \
-	libExynosC2Vp8Enc \
-	libExynosC2Vp9Dec \
-	libExynosC2Vp9Enc
 
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.stagefright.c2-poolmask=458752 \
