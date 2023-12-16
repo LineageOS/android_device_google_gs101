@@ -203,7 +203,7 @@
 
     <!-- Default color temperature, in Kelvin, to tint the screen when night display is
          activated. -->
-    <integer name="config_nightDisplayColorTemperatureDefault">3339</integer>
+    <integer name="config_nightDisplayColorTemperatureDefault">4000</integer>
 
     <!-- Whether the device enable the standalone (SA) mode of 5G NR.-->
     <bool name="config_telephony5gStandalone">true</bool>
@@ -239,6 +239,9 @@
 
     <!-- Should the pinner service pin the Home application? -->
     <bool name="config_pinnerHomeApp">true</bool>
+
+     <!-- Bytes that the PinnerService will pin for WebView -->
+    <integer name="config_pinnerWebviewPinBytes">20971520</integer>
 
     <!-- The default intensity level for alarm vibrations. See
          Settings.System.ALARM_VIBRATION_INTENSITY more details on the constant values and
