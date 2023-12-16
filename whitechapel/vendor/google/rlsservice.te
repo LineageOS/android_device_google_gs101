@@ -36,3 +36,7 @@ allow rlsservice apex_info_file:file r_file_perms;
 
 # Allow read camera property
 get_prop(rlsservice, vendor_camera_prop);
+
+# Allow rlsservice bugreport generation
+allow rlsservice dumpstate:fd use;
+allow rlsservice dumpstate:fifo_file write;

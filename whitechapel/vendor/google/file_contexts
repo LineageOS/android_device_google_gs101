@@ -21,7 +21,6 @@
 #
 # HALs
 #
-/(vendor|system/vendor)/bin/hw/android\.hardware\.boot@1\.[0-2]-service-gs101                   u:object_r:hal_bootctl_default_exec:s0
 /(vendor|system/vendor)/bin/hw/android\.hardware\.dumpstate-service\.gs101                      u:object_r:hal_dumpstate_default_exec:s0
 /(vendor|system/vendor)/bin/hw/android\.hardware\.power\.stats@1\.0-service\.gs101              u:object_r:hal_power_stats_default_exec:s0
 /(vendor|system/vendor)/bin/hw/android\.hardware\.memtrack-service\.pixel                       u:object_r:hal_memtrack_default_exec:s0
@@ -287,10 +286,10 @@
 /vendor/bin/hw/android\.hardware\.gatekeeper-service\.trusty                     u:object_r:hal_gatekeeper_default_exec:s0
 /vendor/bin/hw/android\.hardware\.keymaster@4\.0-service\.trusty                 u:object_r:hal_keymaster_default_exec:s0
 /vendor/bin/hw/android\.hardware\.security\.keymint-service\.trusty              u:object_r:hal_keymint_default_exec:s0
+/vendor/bin/hw/android\.hardware\.security\.secretkeeper\.trusty                 u:object_r:hal_secretkeeper_default_exec:s0
 /dev/trusty-ipc-dev0                 u:object_r:tee_device:s0
 /data/vendor/ss(/.*)?                u:object_r:tee_data_file:s0
 /mnt/vendor/persist/ss(/.*)?         u:object_r:persist_ss_file:s0
-/dev/sg1                             u:object_r:sg_device:s0
 
 # Battery
 /mnt/vendor/persist/battery(/.*)?    u:object_r:persist_battery_file:s0
