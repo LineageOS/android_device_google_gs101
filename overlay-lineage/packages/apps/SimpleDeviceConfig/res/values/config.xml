@@ -17,9 +17,8 @@
 <resources>
     <string-array name="configs_device">
         <!-- ConnectivityThermalPowerManager 5G modem monitoring rules -->
-        <item>connectivity_thermal_power_manager/cellular_thermal_thermal_status_action_list=</item>
-        <item>connectivity_thermal_power_manager/sub6_approved_carrier_ids=1839,2126,2032,2146,1802,1849,1187,1,1788,1951,1952,1989,1404,2020,1403,1962,576,2021,1895,2008,1505,2,2101,2102,2103,2104,2419,28,718,1492,25,2147,2397,3,,1453,1454,1456,1993,2360,2361,32,27,1487,1958,2016,1345,1353,15,30,850,1894,2100,1581,2110,2109,1888,1881,1884,31,1707</item>
-        <item>connectivity_thermal_power_manager/sub6_device_supported=true</item>
+        <item>connectivity_thermal_power_manager/atm_power_threshold_mw=800</item>
+        <item>connectivity_thermal_power_manager/cellular_thermal_adaptive_thermal_status_adaptive_action_list=</item>
 
         <!-- Live Caption (Pixel 2017 + OEM) -->
         <item>device_personalization_services/Captions__available_for_download=en-US;en-GB;en-CA;en-IE;en-AU;en-SG;fr-FR;fr-CA;it-IT;de-DE;ja-JP;es-ES;es-US</item>
