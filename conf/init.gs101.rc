@@ -323,6 +323,7 @@ on init
     chown system system /sys/devices/platform/google,charger/bd_trigger_time
     chown system system /sys/devices/platform/google,charger/bd_trigger_voltage
     chown system system /sys/devices/platform/google,charger/bd_clear
+    chown system system /sys/devices/platform/google,charger/bd_state
     chown system system /sys/devices/platform/google,charger/charge_start_level
     chown system system /sys/devices/platform/google,charger/charge_stop_level
     chown system system /sys/devices/platform/google,cpm/dc_ctl
