@@ -75,9 +75,11 @@ class UsbDataSessionMonitor {
 
     static void *monitorThread(void *param);
     void handleUevent();
+    void handleTimerEvent();
     void handleDataRoleEvent();
     void handleDeviceStateEvent(struct usbDeviceState *deviceState);
     void clearDeviceStateEvents(struct usbDeviceState *deviceState);
+    void setupNewSession();
     void reportUsbDataSessionMetrics();
     void evaluateComplianceWarning();
     void notifyComplianceWarning();
@@ -86,6 +88,7 @@ class UsbDataSessionMonitor {
     pthread_t mMonitor;
     unique_fd mEpollFd;
     unique_fd mUeventFd;
+    unique_fd mTimerFd;
     unique_fd mDataRoleFd;
     struct usbDeviceState mDeviceState;
     struct usbDeviceState mHost1State;
