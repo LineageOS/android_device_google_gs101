@@ -52,11 +52,6 @@ namespace usb {
 #define WARNING_SURFACE_DELAY_SEC 5
 #define ENUM_FAIL_DEFAULT_COUNT_THRESHOLD 3
 #define DEVICE_FLAKY_CONNECTION_CONFIGURED_COUNT_THRESHOLD 5
-/*
- * Typically a smooth and successful enumeration in device mode would go through 5 states at
- * maximum: not attached -> default -> default -> addressed -> configured
- */
-#define DEVICE_STATE_TRANSITION_PER_ENUMERATION 5
 
 constexpr char kUdcConfigfsPath[] = "/config/usb_gadget/g1/UDC";
 constexpr char kNotAttachedState[] = "not attached\n";
@@ -250,7 +245,6 @@ void UsbDataSessionMonitor::evaluateComplianceWarning() {
 
     if (elapsedTimeSec >= WARNING_SURFACE_DELAY_SEC) {
         if (mDataRole == PortDataRole::DEVICE && mUdcBind) {
-            int stateCount = mDeviceState.states.size();
             int configuredCount = std::count(mDeviceState.states.begin(),
                                              mDeviceState.states.end(), kConfiguredState);
             int defaultCount =
@@ -259,12 +253,8 @@ void UsbDataSessionMonitor::evaluateComplianceWarning() {
             if (configuredCount == 0 && defaultCount > ENUM_FAIL_DEFAULT_COUNT_THRESHOLD)
                 newWarningSet.insert(ComplianceWarning::ENUMERATION_FAIL);
 
-            if (configuredCount > DEVICE_FLAKY_CONNECTION_CONFIGURED_COUNT_THRESHOLD &&
-                stateCount > configuredCount * DEVICE_STATE_TRANSITION_PER_ENUMERATION) {
-                ALOGI("Detected flaky connection: state count %d, configured count %d",
-                      stateCount, configuredCount);
+            if (configuredCount > DEVICE_FLAKY_CONNECTION_CONFIGURED_COUNT_THRESHOLD)
                 newWarningSet.insert(ComplianceWarning::FLAKY_CONNECTION);
-            }
         } else if (mDataRole == PortDataRole::HOST) {
             int host1StateCount = mHost1State.states.size();
             int host1ConfiguredCount =
