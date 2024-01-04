@@ -564,6 +564,11 @@ Usb::Usb()
         ALOGE("pthread_condattr_destroy failed: %s", strerror(errno));
         abort();
     }
+
+    ALOGI("feature flag enable_usb_data_compliance_warning: %d",
+          usb_flags::enable_usb_data_compliance_warning());
+    ALOGI("feature flag enable_input_power_limited_warning: %d",
+          usb_flags::enable_input_power_limited_warning());
 }
 
 ScopedAStatus Usb::switchRole(const string& in_portName, const PortRole& in_role,
