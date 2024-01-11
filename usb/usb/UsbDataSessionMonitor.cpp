@@ -164,6 +164,9 @@ UsbDataSessionMonitor::UsbDataSessionMonitor(
         ALOGE("pthread creation failed %d", errno);
         abort();
     }
+
+    ALOGI("feature flag enable_report_usb_data_compliance_warning: %d",
+          usb_flags::enable_report_usb_data_compliance_warning());
 }
 
 UsbDataSessionMonitor::~UsbDataSessionMonitor() {}
