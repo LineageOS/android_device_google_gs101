@@ -1,5 +1,4 @@
 chre vendor_data_file dir b/301948771
-dump_modem device chr_file b/305600375
 dumpstate virtual_camera binder b/312894628
 dumpstate virtual_camera process b/312894628
 hal_power_default hal_power_default capability b/240632824
