@@ -54,6 +54,8 @@
     <exception package="com.google.android.apps.camera.services">
         <!-- Camera -->
         <permission name="android.permission.CAMERA" fixed="false"/>
+        <!-- Camera Connectivity -->
+        <permission name="android.permission.ACCESS_FINE_LOCATION" fixed="false"/>
         <permission name="android.permission.POST_NOTIFICATIONS" fixed="false"/>
         <permission name="android.permission.BLUETOOTH_CONNECT" fixed="false"/>
         <permission name="android.permission.BLUETOOTH_SCAN" fixed="false"/>
