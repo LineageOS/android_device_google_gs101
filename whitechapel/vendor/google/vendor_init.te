@@ -46,6 +46,3 @@ allow vendor_init tee_data_file:lnk_file read;
 
 # Mali
 set_prop(vendor_init, vendor_arm_runtime_option_prop)
-
-# ArmNN
-set_prop(vendor_init, vendor_armnn_config_prop)
