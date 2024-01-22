@@ -9,6 +9,7 @@ kernel dm_device blk_file b/315907959
 kernel tmpfs chr_file b/315907959
 rfsd vendor_cbd_prop file b/317734418
 surfaceflinger selinuxfs file b/313804340
+system_server pm_archiving_enabled_prop file b/321730881
 untrusted_app nativetest_data_file dir b/305600845
 untrusted_app shell_test_data_file dir b/305600845
 untrusted_app system_data_root_file dir b/305600845
