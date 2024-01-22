@@ -286,6 +286,7 @@ on init
 
     # BatteryHealthData
     chown system system /sys/class/power_supply/battery/first_usage_date
+    chown system system /sys/class/power_supply/battery/swelling_data
 
     # Battery Defender
     chown system system /sys/devices/platform/google,battery/power_supply/battery/bd_trickle_cnt
