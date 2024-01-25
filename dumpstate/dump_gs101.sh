@@ -123,6 +123,8 @@ cat "/dev/logbuffer_pca9468"
 
 echo "\n------ Battery Health ------"
 cat "/sys/class/power_supply/battery/health_index_stats"
+echo "\n------ Battery Health SoC Residency ------"
+cat "/sys/class/power_supply/battery/swelling_data"
 echo "\n------ BMS ------"
 cat "/dev/logbuffer_ssoc"
 echo "\n------ TTF ------"
