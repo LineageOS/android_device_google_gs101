@@ -348,6 +348,14 @@ KERNEL_MODULES := $(wildcard $(KERNEL_MODULE_DIR)/*.ko)
 
 BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := $(KERNEL_MODULE_DIR)/vendor_dlkm.modules.blocklist
 
+# Since Pixel 6/6pro doesn't have a system_dlkm partition, the GKI modules are
+# on the vendor_dlkm partition. In order to allow them to load properly, we
+# need to retain the module signature which would normally get stripped during
+# packaging. Disable stripping the vendor_dlkm modules to retain the GKI
+# modules' signature. Note, the pixel kernel builds always strip the modules in
+# favor of saving space via the kleaf property: strip_modules = True.
+BOARD_DO_NOT_STRIP_VENDOR_MODULES := true
+
 # Prebuilt kernel modules that are *not* listed in vendor_boot.modules.load
 BOARD_PREBUILT_VENDOR_RAMDISK_KERNEL_MODULES = fips140/fips140.ko
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD_EXTRA = $(foreach k,$(BOARD_PREBUILT_VENDOR_RAMDISK_KERNEL_MODULES),$(if $(wildcard $(KERNEL_MODULE_DIR)/$(k)), $(k)))
