@@ -156,6 +156,8 @@ genfscon sysfs /devices/platform/11110000.usb/11110000.dwc3/xhci-hcd-exynos.5.au
 genfscon sysfs /devices/platform/10940000.spi/spi_master/spi5/spi5.0/nstandby   u:object_r:sysfs_gps:s0
 
 # Display
+genfscon sysfs /devices/platform/1c2c0000.drmdsim/1c2c0000.drmdsim.0/available_disp_stats           u:object_r:sysfs_display:s0
+genfscon sysfs /devices/platform/1c2d0000.drmdsim/1c2d0000.drmdsim.0/available_disp_stats           u:object_r:sysfs_display:s0
 genfscon sysfs /devices/platform/1c2c0000.drmdsim/1c2c0000.drmdsim.0/gamma                          u:object_r:sysfs_display:s0
 genfscon sysfs /devices/platform/1c2d0000.drmdsim/1c2d0000.drmdsim.0/gamma                          u:object_r:sysfs_display:s0
 genfscon sysfs /devices/platform/1c2c0000.drmdsim/1c2c0000.drmdsim.0/min_vrefresh                   u:object_r:sysfs_display:s0
@@ -168,6 +170,8 @@ genfscon sysfs /devices/platform/1c2c0000.drmdsim/1c2c0000.drmdsim.0/panel_idle 
 genfscon sysfs /devices/platform/1c2d0000.drmdsim/1c2d0000.drmdsim.0/panel_idle                     u:object_r:sysfs_display:s0
 genfscon sysfs /devices/platform/1c2c0000.drmdsim/1c2c0000.drmdsim.0/panel_need_handle_idle_exit    u:object_r:sysfs_display:s0
 genfscon sysfs /devices/platform/1c2d0000.drmdsim/1c2d0000.drmdsim.0/panel_need_handle_idle_exit    u:object_r:sysfs_display:s0
+genfscon sysfs /devices/platform/1c2c0000.drmdsim/1c2c0000.drmdsim.0/time_in_state                  u:object_r:sysfs_display:s0
+genfscon sysfs /devices/platform/1c2d0000.drmdsim/1c2d0000.drmdsim.0/time_in_state                  u:object_r:sysfs_display:s0
 genfscon sysfs /devices/platform/1c2c0000.drmdsim/hs_clock                                          u:object_r:sysfs_display:s0
 genfscon sysfs /devices/platform/1c2d0000.drmdsim/hs_clock                                          u:object_r:sysfs_display:s0
 genfscon sysfs /devices/platform/1c300000.drmdecon/counters                                         u:object_r:sysfs_display:s0
