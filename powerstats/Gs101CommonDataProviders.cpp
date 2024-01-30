@@ -18,6 +18,7 @@
 #include <Gs101CommonDataProviders.h>
 #include "AocStateResidencyDataProvider.h"
 #include "DevfreqStateResidencyDataProvider.h"
+#include <DisplayMrrStateResidencyDataProvider.h>
 #include "DvfsStateResidencyDataProvider.h"
 #include "UfsStateResidencyDataProvider.h"
 #include <dataproviders/GenericStateResidencyDataProvider.h>
@@ -34,6 +35,7 @@
 
 using aidl::android::hardware::power::stats::AocStateResidencyDataProvider;
 using aidl::android::hardware::power::stats::DevfreqStateResidencyDataProvider;
+using aidl::android::hardware::power::stats::DisplayMrrStateResidencyDataProvider;
 using aidl::android::hardware::power::stats::DvfsStateResidencyDataProvider;
 using aidl::android::hardware::power::stats::UfsStateResidencyDataProvider;
 using aidl::android::hardware::power::stats::EnergyConsumerType;
@@ -667,6 +669,11 @@ void addPixelStateResidencyDataProvider(std::shared_ptr<PowerStats> p) {
     pixelSdp->start();
 
     p->addStateResidencyDataProvider(std::move(pixelSdp));
+}
+
+void addDisplayMrr(std::shared_ptr<PowerStats> p) {
+    p->addStateResidencyDataProvider(std::make_unique<DisplayMrrStateResidencyDataProvider>(
+            "Display", "/sys/class/drm/card0/device/primary-panel/"));
 }
 
 void addGs101CommonDataProviders(std::shared_ptr<PowerStats> p) {
