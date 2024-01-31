@@ -1117,3 +1117,6 @@ PRODUCT_VENDOR_PROPERTIES += ro.crypto.metadata_init_delete_all_keys.enabled=tru
 
 # Hardware Info Collection
 include hardware/google/pixel/HardwareInfo/HardwareInfo.mk
+
+# Touch service
+include device/google/gs-common/touch/twoshay/aidl_gs101.mk
