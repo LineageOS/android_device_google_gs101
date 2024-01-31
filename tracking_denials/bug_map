@@ -9,7 +9,6 @@ kernel dm_device blk_file b/315907959
 kernel tmpfs chr_file b/315907959
 rfsd vendor_cbd_prop file b/317734418
 surfaceflinger selinuxfs file b/313804340
-system_server pm_archiving_enabled_prop file b/321730881
 system_suspend sysfs dir b/323086660
 system_suspend sysfs dir b/323086679
 system_suspend sysfs dir b/323087054
