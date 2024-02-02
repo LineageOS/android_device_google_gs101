@@ -35,11 +35,7 @@ cat "/sys/class/power_supply/main-charger/uevent"
 echo "\n------ Power supply property pca9486-mains ------"
 cat "/sys/class/power_supply/pca9468-mains/uevent"
 echo "\n------ Power supply property tcpm ------"
-if [ -e "/sys/class/power_supply/tcpm-source-psy-i2c-max77759tcpc/uevent" ]; then
-  cat "/sys/class/power_supply/tcpm-source-psy-i2c-max77759tcpc/uevent"
-elif [ -e "/sys/class/power_supply/tcpm-source-psy-8-0025/uevent" ]; then
-  cat "/sys/class/power_supply/tcpm-source-psy-8-0025/uevent"
-fi
+cat "/sys/class/power_supply/tcpm-source-psy-12-0025/uevent"
 echo "\n------ Power supply property usb ------"
 cat "/sys/class/power_supply/usb/uevent"
 echo "\n------ Power supply property wireless ------"
@@ -93,10 +89,7 @@ then
 fi
 
 echo "\n------ TCPC ------"
-max77759tcpc_path="/sys/devices/platform/10d50000.hsi2c/i2c-8/i2c-max77759tcpc"
-if [ -e "/sys/devices/platform/10d50000.hsi2c/i2c-8/8-0025" ]; then
-  max77759tcpc_path="/sys/devices/platform/10d50000.hsi2c/i2c-8/8-0025"
-fi
+max77759tcpc_path="/sys/devices/platform/10d50000.hsi2c/i2c-12/12-0025"
 echo "registers:"
 cat $max77759tcpc_path/registers
 echo "frs:"
@@ -206,9 +199,9 @@ then
 fi
 
 echo "\n------ Battery EEPROM ------"
-if [ -e "/sys/devices/platform/10970000.hsi2c/i2c-7/7-0050/eeprom" ]
+if [ -e "/sys/devices/platform/10970000.hsi2c/i2c-8/8-0050/eeprom" ]
 then
-  xxd /sys/devices/platform/10970000.hsi2c/i2c-7/7-0050/eeprom
+  xxd /sys/devices/platform/10970000.hsi2c/i2c-8/8-0050/eeprom
 fi
 
 echo "\n------ Charger Stats ------"
