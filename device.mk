@@ -1020,6 +1020,14 @@ PRODUCT_PROPERTY_OVERRIDES += persist.vendor.enable.thermal.genl=true
 include device/google/gs-common/edgetpu/edgetpu.mk
 # Config variables for TPU chip on device.
 $(call soong_config_set,edgetpu_config,chip,abrolhos)
+# Include the edgetpu targets defined the namespaces below into the final image.
+PRODUCT_SOONG_NAMESPACES += \
+	vendor/google_devices/gs101/proprietary/gchips/tpu/metrics \
+	vendor/google_devices/gs101/proprietary/gchips/tpu/tflite_delegate \
+	vendor/google_devices/gs101/proprietary/gchips/tpu/darwinn_logging_service \
+	vendor/google_devices/gs101/proprietary/gchips/tpu/nnapi_stable_aidl \
+	vendor/google_devices/gs101/proprietary/gchips/tpu/aidl \
+	vendor/google_devices/gs101/proprietary/gchips/tpu/hal
 # TPU firmware
 PRODUCT_PACKAGES += edgetpu-abrolhos.fw
 
