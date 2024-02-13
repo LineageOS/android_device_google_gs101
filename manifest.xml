@@ -34,13 +34,5 @@
         <name>android.hardware.boot</name>
         <fqname>IBootControl/default</fqname>
     </hal>
-    <hal format="aidl">
-        <name>com.google.input</name>
-        <version>2</version>
-        <interface>
-            <name>ITouchContextService</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
     <kernel target-level="6"/>
 </manifest>
