@@ -85,14 +85,6 @@
         </interface>
     </hal>
     <hal format="aidl" optional="true">
-        <name>com.google.input</name>
-        <version>2</version>
-        <interface>
-            <name>ITouchContextService</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="aidl" optional="true">
         <name>hardware.qorvo.uwb</name>
         <version>2</version>
         <interface>
