@@ -49,6 +49,7 @@ type sysfs_nanoapp_cmd, sysfs_type, fs_type;
 type sysfs_fingerprint, sysfs_type, fs_type;
 
 # CHRE
+type chre_data_file, file_type, data_file_type;
 type chre_socket, file_type;
 
 # BT
