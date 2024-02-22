@@ -235,9 +235,9 @@
 /data/vendor/sensor(/.*)?              u:object_r:sensor_vendor_data_file:s0
 
 # Contexthub
-/vendor/bin/hw/android\.hardware\.contexthub-service\.generic               u:object_r:hal_contexthub_default_exec:s0
 /(vendor|system/vendor)/bin/chre                                            u:object_r:chre_exec:s0
 /dev/socket/chre                                                            u:object_r:chre_socket:s0
+/data/vendor/chre(/.*)?                                                     u:object_r:chre_data_file:s0
 
 # Modem logging
 /vendor/bin/modem_logging_control   u:object_r:modem_logging_control_exec:s0
