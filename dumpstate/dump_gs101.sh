@@ -154,14 +154,15 @@ do
   echo "$f: `cat $f`"
 done
 
+echo "\n------ DC_registers dump ------"
+cat "/sys/class/power_supply/pca9468-mains/device/registers_dump"
+echo "\n------ max77759_chg registers dump ------"
+cat "/sys/class/power_supply/main-charger/device/registers_dump"
+echo "\n------ max77729_pmic registers dump ------"
+cat /sys/devices/platform/10d50000.hsi2c/i2c-*/*-0066/registers_dump
+
 if [ $build_type = "userdebug" ]
 then
-  echo "\n------ DC_registers dump ------"
-  cat "/sys/class/power_supply/pca9468-mains/device/registers_dump"
-  echo "\n------ max77759_chg registers dump ------"
-  cat "/d/max77759_chg/registers"
-  echo "\n------ max77729_pmic registers dump ------"
-  cat "/d/max77729_pmic/registers"
   echo "\n------ Charging table dump ------"
   cat "/d/google_battery/chg_raw_profile"
 
