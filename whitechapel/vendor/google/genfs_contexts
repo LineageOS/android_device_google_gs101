@@ -90,6 +90,7 @@ genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-12/12-0069/power_supply/dc/w
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-12/12-0069/power_supply/main-charger/wakeup                             u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-12/12-0069/wakeup/wakeup                                                u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-12/12-0025/power_supply/tcpm-source-psy-12-0025/wakeup                  u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-12/12-0025/power_supply/tcpm-source-psy-i2c-max77759tcpc/wakeup         u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-12/12-0025/power_supply/usb/wakeup                                      u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/10d50000.hsi2c/i2c-12/12-0025/wakeup                                                       u:object_r:sysfs_wakeup:s0
 
