@@ -111,3 +111,6 @@ dontaudit hal_camera_default traced_producer_socket:sock_file { write };
 
 # Allow access to always-on compute device node
 allow hal_camera_default aoc_device:chr_file rw_file_perms;
+
+# Allow the Camera HAL to acquire wakelocks for buffer pre-allocation purposes
+wakelock_use(hal_camera_default)
