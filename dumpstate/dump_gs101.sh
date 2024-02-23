@@ -35,7 +35,7 @@ cat "/sys/class/power_supply/main-charger/uevent"
 echo "\n------ Power supply property pca9486-mains ------"
 cat "/sys/class/power_supply/pca9468-mains/uevent"
 echo "\n------ Power supply property tcpm ------"
-cat "/sys/class/power_supply/tcpm-source-psy-12-0025/uevent"
+cat /sys/class/power_supply/tcpm-source-psy-*/uevent
 echo "\n------ Power supply property usb ------"
 cat "/sys/class/power_supply/usb/uevent"
 echo "\n------ Power supply property wireless ------"
