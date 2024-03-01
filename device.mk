@@ -1113,3 +1113,4 @@ include hardware/google/pixel/HardwareInfo/HardwareInfo.mk
 
 # Touch service
 include device/google/gs-common/touch/twoshay/aidl_gs101.mk
+include device/google/gs-common/touch/twoshay/twoshay.mk
