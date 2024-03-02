@@ -69,7 +69,10 @@ const struct SysfsCollector::SysfsPaths sysfs_paths = {
                 "/sys/kernel/metrics/thermal/tr_by_group/spmic/stats_reset"
             }
         },
-        .GMSRPath = "/sys/class/power_supply/maxfg/gmsr"
+        .GMSRPath = {
+            "/sys/class/power_supply/maxfg/gmsr",
+            "/sys/class/power_supply/maxfg_base/gmsr",
+        },
 };
 
 const struct UeventListener::UeventPaths ueventPaths = {
