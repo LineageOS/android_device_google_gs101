@@ -815,6 +815,10 @@ PRODUCT_PRODUCT_PROPERTIES += \
 	persist.bluetooth.bqr.min_interval_ms=500
 endif
 
+# Enable Bluetooth AutoOn feature
+PRODUCT_PRODUCT_PROPERTIES += \
+    bluetooth.server.automatic_turn_on=true
+
 #VNDK
 PRODUCT_PACKAGES += \
 	vndk-libs
