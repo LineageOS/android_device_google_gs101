@@ -125,6 +125,9 @@ genfscon sysfs /devices/platform/gpio_keys/wakeup                               
 genfscon sysfs /devices/platform/odm/odm:btbcm/wakeup                                                                       u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/sound-aoc/wakeup                                                                           u:object_r:sysfs_wakeup:s0
 
+genfscon sysfs /devices/platform/1c2c0000.drmdsim/1c2c0000.drmdsim.0/wakeup                                                 u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/1c2d0000.drmdsim/1c2d0000.drmdsim.0/wakeup                                                 u:object_r:sysfs_wakeup:s0
+
 # Input
 genfscon sysfs /devices/platform/11110000.usb/11110000.dwc3/xhci-hcd-exynos.4.auto/usb2/2-1 	u:object_r:sysfs_uhid:s0
 genfscon sysfs /devices/platform/11110000.usb/11110000.dwc3/xhci-hcd-exynos.5.auto/usb2/2-1 	u:object_r:sysfs_uhid:s0
