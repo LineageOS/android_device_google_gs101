@@ -36,7 +36,6 @@ include device/google/gs-common/sota_app/factoryota.mk
 include device/google/gs-common/misc_writer/misc_writer.mk
 include device/google/gs-common/gyotaku_app/gyotaku.mk
 include device/google/gs-common/bootctrl/bootctrl_aidl.mk
-include device/google/gs-common/betterbug/betterbug.mk
 ifneq ($(filter oriole raven bluejay, $(TARGET_PRODUCT)),)
   include device/google/gs-common/bcmbt/dump/dumplog.mk
 endif
@@ -509,10 +508,6 @@ PRODUCT_PACKAGES += \
 
 # for now include gralloc here. should come from hardware/google_devices/exynos5
 PRODUCT_PACKAGES += \
-	android.hardware.graphics.mapper@4.0-impl \
-	android.hardware.graphics.allocator-V1-service
-
-PRODUCT_PACKAGES += \
 	android.hardware.memtrack-service.pixel \
 	libion_exynos \
 	libion
@@ -819,6 +814,10 @@ PRODUCT_PRODUCT_PROPERTIES += \
 	persist.bluetooth.bqr.min_interval_ms=500
 endif
 
+# Enable Bluetooth AutoOn feature
+PRODUCT_PRODUCT_PROPERTIES += \
+    bluetooth.server.automatic_turn_on=true
+
 #VNDK
 PRODUCT_PACKAGES += \
 	vndk-libs
@@ -1117,3 +1116,4 @@ include hardware/google/pixel/HardwareInfo/HardwareInfo.mk
 
 # Touch service
 include device/google/gs-common/touch/twoshay/aidl_gs101.mk
+include device/google/gs-common/touch/twoshay/twoshay.mk
