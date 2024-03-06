@@ -21,7 +21,8 @@ include device/google/gs-common/soc/soc.mk
 include device/google/gs-common/soc/freq.mk
 include device/google/gs-common/modem/modem.mk
 include device/google/gs-common/aoc/aoc.mk
-include device/google/gs-common/thermal/thermal.mk
+include device/google/gs-common/thermal/dump/thermal.mk
+include device/google/gs-common/thermal/thermal_hal/device.mk
 include device/google/gs-common/pixel_metrics/pixel_metrics.mk
 include device/google/gs-common/performance/perf.mk
 include device/google/gs-common/display/dump.mk
@@ -34,6 +35,7 @@ include device/google/gs-common/widevine/widevine.mk
 include device/google/gs-common/sota_app/factoryota.mk
 include device/google/gs-common/misc_writer/misc_writer.mk
 include device/google/gs-common/gyotaku_app/gyotaku.mk
+include device/google/gs-common/bootctrl/bootctrl_aidl.mk
 
 TARGET_BOARD_PLATFORM := gs101
 DEVICE_IS_64BIT_ONLY ?= $(if $(filter %_64,$(TARGET_PRODUCT)),true,false)
@@ -200,6 +202,7 @@ PRODUCT_SOONG_NAMESPACES += \
 
 $(call soong_config_set,pixel_mali,soc,$(TARGET_BOARD_PLATFORM))
 
+include device/google/gs-common/gpu/gpu.mk
 PRODUCT_PACKAGES += \
 	libGLES_mali \
 	vulkan.mali \
@@ -252,6 +255,9 @@ PRODUCT_VENDOR_PROPERTIES += \
 	ro.opengles.version=196610 \
 	graphics.gpu.profiler.support=true \
 	debug.renderengine.backend=skiaglthreaded
+
+# b/295257834 Add HDR shaders to SurfaceFlinger's pre-warming cache
+PRODUCT_VENDOR_PROPERTIES += ro.surface_flinger.prime_shader_cache.ultrahdr=1
 
 # GRAPHICS - GPU (end)
 # ####################
@@ -505,7 +511,7 @@ PRODUCT_PACKAGES += \
 # for now include gralloc here. should come from hardware/google_devices/exynos5
 PRODUCT_PACKAGES += \
 	android.hardware.graphics.mapper@4.0-impl \
-	android.hardware.graphics.allocator-V1-service
+	android.hardware.graphics.allocator-V2-service
 
 PRODUCT_PACKAGES += \
 	android.hardware.memtrack-service.pixel \
@@ -846,10 +852,6 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 PRODUCT_PRODUCT_PROPERTIES += \
 	persist.sys.fuse.passthrough.enable=true
 
-# Use FUSE BPF
-PRODUCT_PRODUCT_PROPERTIES += \
-	ro.fuse.bpf.enabled=true
-
 # Use /product/etc/fstab.postinstall to mount system_other
 PRODUCT_PRODUCT_PROPERTIES += \
 	ro.postinstall.fstab.prefix=/product
@@ -892,18 +894,11 @@ PRODUCT_PACKAGES += ShannonIms
 
 $(call inherit-product-if-exists, vendor/samsung_slsi/telephony/$(BOARD_USES_SHARED_VENDOR_TELEPHONY)/shannon-iwlan/device-vendor.mk)
 
-#RCS Test Messaging App
 PRODUCT_PACKAGES_DEBUG += \
-	preinstalled-packages-product-gs101-device-debug.xml \
-	TestRcsApp
+	preinstalled-packages-product-gs101-device-debug.xml
 
 PRODUCT_PACKAGES += ShannonRcs
 endif
-
-# Boot Control HAL
-PRODUCT_PACKAGES += \
-	android.hardware.boot@1.2-impl-gs101 \
-	android.hardware.boot@1.2-service-gs101
 
 # Exynos RIL and telephony
 # Multi SIM(DSDS)
@@ -968,9 +963,6 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
 	device/google/gs101/radio/gnss_blanking.csv:$(TARGET_COPY_OUT_VENDOR)/etc/modem/gnss_blanking.csv
-
-# ARM NN files
-ARMNN_COMPUTE_CL_ENABLE := 1
 
 # Vibrator Diag
 PRODUCT_PACKAGES_DEBUG += \
@@ -1038,7 +1030,6 @@ PRODUCT_PACKAGES += \
 	libgc2_utils
 
 # Thermal HAL
-include hardware/google/pixel/thermal/device.mk
 PRODUCT_PROPERTY_OVERRIDES += persist.vendor.enable.thermal.genl=true
 
 # EdgeTPU
@@ -1131,10 +1122,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Call deleteAllKeys if vold detects a factory reset
 PRODUCT_VENDOR_PROPERTIES += ro.crypto.metadata_init_delete_all_keys.enabled=true
-
-# Increase lmkd aggressiveness
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.lmk.swap_free_low_percentage=100
 
 # Hardware Info Collection
 include hardware/google/pixel/HardwareInfo/HardwareInfo.mk

@@ -21,6 +21,7 @@
 #include <aidl/android/hardware/usb/BnUsbCallback.h>
 #include <pixelusb/UsbOverheatEvent.h>
 #include <utils/Log.h>
+#include <UsbDataSessionMonitor.h>
 
 #define UEVENT_MSG_LEN 2048
 // The type-c stack waits for 4.5 - 5.5 secs before declaring a port non-pd.
@@ -83,14 +84,21 @@ struct Usb : public BnUsb {
     // Variable to signal partner coming back online after type switch
     bool mPartnerUp;
 
+    // Report usb data session event and data incompliance warnings
+    UsbDataSessionMonitor mUsbDataSessionMonitor;
     // Usb Overheat object for push suez event
     UsbOverheatEvent mOverheat;
     // Temperature when connected
     float mPluggedTemperatureCelsius;
     // Usb Data status
     bool mUsbDataEnabled;
+    int getI2cBusNumber();
+    std::string_view getI2cClientPath();
+
   private:
     pthread_t mPoll;
+    int mI2cBusNumber;
+    std::string mI2cClientPath;
 };
 
 } // namespace usb
