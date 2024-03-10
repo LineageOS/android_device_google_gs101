@@ -57,6 +57,3 @@ vendor_internal_prop(vendor_trusty_storage_prop)
 
 # Mali Integration
 vendor_restricted_prop(vendor_arm_runtime_option_prop)
-
-# ArmNN configuration
-vendor_internal_prop(vendor_armnn_config_prop)

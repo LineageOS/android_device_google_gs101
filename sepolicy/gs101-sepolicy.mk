@@ -22,9 +22,6 @@ PRODUCT_PRIVATE_SEPOLICY_DIRS += device/google/gs101/sepolicy/private
 BOARD_SEPOLICY_DIRS += device/google/gs101/sepolicy/display/common
 BOARD_SEPOLICY_DIRS += device/google/gs101/sepolicy/display/gs101
 
-# Micro sensor framework (usf)
-BOARD_SEPOLICY_DIRS += device/google/gs101/sepolicy/usf
-
 # system_ext
 SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += device/google/gs101/sepolicy/system_ext/public
 SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += device/google/gs101/sepolicy/system_ext/private

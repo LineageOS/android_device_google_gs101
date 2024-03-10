@@ -24,17 +24,12 @@ user=_app seinfo=platform name=com.android.ramdump domain=ramdump_app type=app_d
 # grilservice
 user=_app isPrivApp=true name=com.google.android.grilservice domain=grilservice_app levelFrom=all
 
-# HbmSVManager
-user=_app seinfo=platform name=com.android.hbmsvmanager domain=hbmsvmanager_app type=app_data_file levelFrom=all
-
 # Domain for omadm
 user=_app isPrivApp=true seinfo=platform name=com.android.omadm.service domain=omadm_app type=app_data_file levelFrom=all
 
 # Modem Diagnostic System
 user=_app isPrivApp=true seinfo=mds name=com.google.mds domain=modem_diagnostic_app type=app_data_file levelFrom=user
-
-# Domain for connectivity monitor
-user=_app isPrivApp=true seinfo=platform name=com.google.android.connectivitymonitor domain=con_monitor_app type=app_data_file levelFrom=all
+user=_app isPrivApp=true seinfo=platform name=com.google.mds domain=modem_diagnostic_app type=app_data_file levelFrom=user
 
 # RIL Config Service
 user=radio isPrivApp=true seinfo=platform name=com.google.RilConfigService domain=ril_config_service_app type=app_data_file

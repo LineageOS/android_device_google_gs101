@@ -26,3 +26,7 @@ allow hal_usb_impl sysfs_usbc_throttling_stats:file r_file_perms;
 
 # For checking contaminant detection status
 get_prop(hal_usb_impl, vendor_usb_config_prop);
+
+# For monitoring usb sysfs attributes
+allow hal_usb_impl sysfs_wakeup:dir search;
+allow hal_usb_impl sysfs_wakeup:file r_file_perms;
