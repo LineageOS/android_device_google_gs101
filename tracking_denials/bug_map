@@ -8,6 +8,7 @@ incidentd incidentd anon_inode b/282626428
 kernel dm_device blk_file b/315907959
 kernel tmpfs chr_file b/315907959
 rfsd vendor_cbd_prop file b/317734418
+shell sysfs_net file b/329380904
 surfaceflinger selinuxfs file b/313804340
 untrusted_app nativetest_data_file dir b/305600845
 untrusted_app shell_test_data_file dir b/305600845
