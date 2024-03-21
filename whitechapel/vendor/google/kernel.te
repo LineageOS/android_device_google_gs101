@@ -8,7 +8,11 @@ allow kernel per_boot_file:file r_file_perms;
 allow kernel self:capability2 perfmon;
 allow kernel self:perf_event cpu;
 
-dontaudit kernel vendor_battery_debugfs:dir search;
-dontaudit kernel vendor_maxfg_debugfs:dir { search };
-dontaudit kernel vendor_votable_debugfs:dir { search };
-dontaudit kernel vendor_usb_debugfs:dir search;
+userdebug_or_eng(`
+  allow kernel vendor_battery_debugfs:dir search;
+  allow kernel vendor_regmap_debugfs:dir search;
+  allow kernel vendor_usb_debugfs:dir search;
+  allow kernel vendor_votable_debugfs:dir search;
+  allow kernel vendor_charger_debugfs:dir search;
+  allow kernel vendor_maxfg_debugfs:dir search;
+')
