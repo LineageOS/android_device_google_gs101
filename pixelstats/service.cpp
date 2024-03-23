@@ -78,7 +78,8 @@ const struct SysfsCollector::SysfsPaths sysfs_paths = {
         },
         .FGModelLoadingPath = {
             "/sys/class/power_supply/maxfg/m5_model_state"
-        }
+        },
+	.FGLogBufferPath = "/dev/logbuffer_maxfg_monitor"
 };
 
 const struct UeventListener::UeventPaths ueventPaths = {
