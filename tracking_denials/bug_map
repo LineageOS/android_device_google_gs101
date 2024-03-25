@@ -1,6 +1,4 @@
 chre vendor_data_file dir b/301948771
-dumpstate virtual_camera binder b/312894628
-dumpstate virtual_camera process b/312894628
 hal_power_default hal_power_default capability b/240632824
 hal_vibrator_default default_android_service service_manager b/317316478
 incidentd debugfs_wakeup_sources file b/282626428
