@@ -51,6 +51,10 @@
         <permission name="android.permission.BLUETOOTH_CONNECT" fixed="false"/>
     </exception>
 
+    <exception package="com.google.android.GoogleCamera">
+        <permission name="android.permission.POST_NOTIFICATIONS" fixed="false"/>
+    </exception>
+
     <exception package="com.google.android.apps.camera.services">
         <!-- Camera -->
         <permission name="android.permission.CAMERA" fixed="false"/>
