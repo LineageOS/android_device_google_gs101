@@ -390,6 +390,7 @@ on post-fs-data
     mkdir /data/exynos/log 0771 radio system
     mkdir /data/vendor/rild 0771 radio system
     mkdir /data/vendor/dump 0771 radio system
+    rmdir /data/vendor/slog
     mkdir /data/vendor/slog 0771 system system
 
     # PixelLogger log paths.
