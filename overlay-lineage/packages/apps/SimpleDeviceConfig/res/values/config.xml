@@ -17,12 +17,16 @@
 <resources>
     <string-array name="configs_device">
         <!-- ConnectivityThermalPowerManager 5G modem monitoring rules -->
+        <item>connectivity_thermal_power_manager/apply_action_time_seconds=10</item>
         <item>connectivity_thermal_power_manager/atm_power_threshold_mw=800</item>
         <item>connectivity_thermal_power_manager/cellular_thermal_adaptive_thermal_status_adaptive_action_list=</item>
+        <item>connectivity_thermal_power_manager/wifi_disconnected_time_seconds=180</item>
+        <item>connectivity_thermal_power_manager/wifi_internet_driven_endc_product_carrier_id_set=shiba,husky,akita,komodo,tokay,caiman,comet@1,1989,2023,2576,2067,2071,2073,2577,2522,2075,2578,2083,2433,1949</item>
 
         <!-- Live Caption (Pixel 2017 + OEM) -->
         <item>device_personalization_services/Captions__allow_box_x_axis_movement=true</item>
         <item>device_personalization_services/Captions__allow_use_public_speech_recognition=true</item>
+        <item>device_personalization_services/Captions__allow_voip_call_without_audio_recording=false</item>
         <item>device_personalization_services/Captions__available_for_download=en-US;en-GB;en-CA;en-IE;en-AU;en-SG;en-IN;fr-FR;fr-CA;fr-BE;fr-CH;it-IT;it-CH;de-DE;de-AT;de-BE;de-CH;ja-JP;es-ES;es-US</item>
         <item>device_personalization_services/Captions__disable_prod=false</item>
         <!-- <item>device_personalization_services/Captions__enable=false</item> -->
@@ -32,7 +36,9 @@
         <item>device_personalization_services/Captions__enable_augmented_modality_language_detection=true</item>
         <item>device_personalization_services/Captions__enable_augmented_music=true</item>
         <!-- <item>device_personalization_services/Captions__enable_clearcut_logging=true</item> -->
+        <item>device_personalization_services/Captions__enable_drag_and_double_tap_to_resize=false</item>
         <item>device_personalization_services/Captions__enable_language_detection=true</item>
+        <item>device_personalization_services/Captions__enable_one_caption_experiment=false</item>
         <item>device_personalization_services/Captions__enable_punctuations=true</item>
         <item>device_personalization_services/Captions__enable_setting_page=false</item>
         <item>device_personalization_services/Captions__enable_text_transform=true</item>
@@ -53,7 +59,7 @@
         <!-- Now Playing (Pixel 2017) -->
         <item>device_personalization_services/NowPlaying__ambient_music_apk_music_detector_min_score=0.45</item>
         <item>device_personalization_services/NowPlaying__ambient_music_get_model_state_cooldown_seconds_cloud_search=9</item>
-        <item>device_personalization_services/NowPlaying__ambient_music_index_manifest_17_09_02=3071:https://storage.googleapis.com/music-iq-db/updatable_db_v3/20231217-030102/manifest.json</item>
+        <item>device_personalization_services/NowPlaying__ambient_music_index_manifest_17_09_02=3082:https://storage.googleapis.com/music-iq-db/updatable_db_v3/20240421-030101/manifest.json</item>
         <item>device_personalization_services/NowPlaying__ambient_music_matcher_match_threshold_17_09_02=1.0E-6</item>
         <item>device_personalization_services/NowPlaying__ambient_music_on_demand_enabled=true</item>
         <item>device_personalization_services/NowPlaying__ambient_music_on_demand_music_confidence=0.48</item>
@@ -90,7 +96,7 @@
         <item>device_personalization_services/Translate__app_blocklist=com.google.android.talk</item>
         <item>device_personalization_services/Translate__blue_chip_translate_enabled=true</item>
         <item>device_personalization_services/Translate__characterset_lang_detection_enabled=true</item>
-        <item>device_personalization_services/Translate__chat_translate_languages=de,en,es,fr,it,ja,hi,zh,ru,pl,pt,ko,th,tr,nl,zh_Hant,sv,da,vi,ar,fa</item>
+        <item>device_personalization_services/Translate__chat_translate_languages=de,en,es,fr,it,ja,hi,zh,ru,pl,pt,ko,th,tr,nl,zh_Hant,sv,da,vi,ar,fa,no,bn,fil</item>
         <item>device_personalization_services/Translate__copy_to_translate_enabled=true</item>
         <item>device_personalization_services/Translate__differentiate_simplified_and_traditional_chinese=true</item>
         <item>device_personalization_services/Translate__disable_translate_without_system_animation=false</item>
@@ -98,6 +104,7 @@
         <item>device_personalization_services/Translate__enable_default_langid_model=false</item>
         <item>device_personalization_services/Translate__enable_dictionary_langid_detection=true</item>
         <item>device_personalization_services/Translate__enable_opmv4_service=true</item>
+        <item>device_personalization_services/Translate__enable_setup_wizard_dialog_v2=false</item>
         <item>device_personalization_services/Translate__enable_spa_setting=false</item>
         <item>device_personalization_services/Translate__interpreter_source_languages=de,en,ja,es,fr,it</item>
         <item>device_personalization_services/Translate__interpreter_target_languages=de,en,ja,es,fr,it</item>
