@@ -826,7 +826,7 @@ endif
 
 # Enable Bluetooth AutoOn feature
 PRODUCT_PRODUCT_PROPERTIES += \
-    bluetooth.server.automatic_turn_on=false
+    bluetooth.server.automatic_turn_on=true
 
 #VNDK
 PRODUCT_PACKAGES += \
