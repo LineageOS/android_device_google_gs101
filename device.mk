@@ -179,6 +179,7 @@ USE_LASSEN_OEMHOOK := true
 
 # Use for GRIL
 USES_LASSEN_MODEM := true
+$(call soong_config_set, vendor_ril_google_feature, use_lassen_modem, true)
 
 ifeq ($(USES_GOOGLE_DIALER_CARRIER_SETTINGS),true)
 USE_GOOGLE_DIALER := true
