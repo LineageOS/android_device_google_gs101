@@ -36,6 +36,10 @@ include device/google/gs-common/sota_app/factoryota.mk
 include device/google/gs-common/misc_writer/misc_writer.mk
 include device/google/gs-common/gyotaku_app/gyotaku.mk
 include device/google/gs-common/bootctrl/bootctrl_aidl.mk
+include device/google/gs-common/betterbug/betterbug.mk
+ifneq ($(filter oriole raven bluejay, $(TARGET_PRODUCT)),)
+  include device/google/gs-common/bcmbt/dump/dumplog.mk
+endif
 
 TARGET_BOARD_PLATFORM := gs101
 DEVICE_IS_64BIT_ONLY ?= $(if $(filter %_64,$(TARGET_PRODUCT)),true,false)
@@ -66,7 +70,7 @@ PRODUCT_SOONG_NAMESPACES += \
 	hardware/google/pixel \
 	device/google/gs101 \
 	device/google/gs101/powerstats \
-	system/chre/host/hal_generic \
+	vendor/google_devices/common/chre/host/hal \
 	vendor/google/whitechapel/tools \
 	vendor/google/camera \
 	vendor/google/interfaces \
@@ -254,8 +258,7 @@ PRODUCT_VENDOR_PROPERTIES += \
 
 PRODUCT_VENDOR_PROPERTIES += \
 	ro.opengles.version=196610 \
-	graphics.gpu.profiler.support=true \
-	debug.renderengine.backend=skiaglthreaded
+	graphics.gpu.profiler.support=true
 
 # b/295257834 Add HDR shaders to SurfaceFlinger's pre-warming cache
 PRODUCT_VENDOR_PROPERTIES += ro.surface_flinger.prime_shader_cache.ultrahdr=1
@@ -338,24 +341,20 @@ PRODUCT_HOST_PACKAGES += \
 PRODUCT_PACKAGES += \
 	messaging
 
-# Contexthub HAL
-PRODUCT_PACKAGES += \
-    android.hardware.contexthub-service.generic
-
-# CHRE tools
+# CHRE
+## tools
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += \
 	chre_power_test_client \
-	chre_test_client
+	chre_test_client \
+	chre_aidl_hal_client
 endif
 
+## HAL
+include device/google/gs-common/chre/hal.mk
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.context_hub.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.context_hub.xml
-
-# Enable the CHRE Daemon
-CHRE_USF_DAEMON_ENABLED := true
 PRODUCT_PACKAGES += \
-	chre \
 	preloaded_nanoapps.json
 
 # Filesystem management tools
@@ -512,7 +511,7 @@ PRODUCT_PACKAGES += \
 # for now include gralloc here. should come from hardware/google_devices/exynos5
 PRODUCT_PACKAGES += \
 	android.hardware.graphics.mapper@4.0-impl \
-	android.hardware.graphics.allocator-V2-service
+	android.hardware.graphics.allocator-V1-service
 
 PRODUCT_PACKAGES += \
 	android.hardware.memtrack-service.pixel \
@@ -677,10 +676,8 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.surface_flinger.use_color_management=tr
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.surface_flinger.protected_contents=true
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.surface_flinger.display_update_imminent_timeout_ms=50
 
-# force to blend in P3 mode
 PRODUCT_PROPERTY_OVERRIDES += \
-	persist.sys.sf.native_mode=2 \
-	persist.sys.sf.color_mode=9
+	persist.sys.sf.native_mode=2
 PRODUCT_COPY_FILES += \
 	device/google/gs101/display/display_colordata_cal0.pb:$(TARGET_COPY_OUT_VENDOR)/etc/display_colordata_cal0.pb
 
@@ -728,29 +725,13 @@ endif
 $(call soong_config_set,bigo,soc,gs101)
 
 # 1. Codec 2.0
-# exynos service
-PRODUCT_SOONG_NAMESPACES += vendor/samsung_slsi/codec2
+# for settings used by different C2 hal
+include device/google/gs-common/mediacodec/common/mediacodec_common.mk
+# for Exynos C2 Hal
+include device/google/gs-common/mediacodec/samsung/mediacodec_samsung.mk
 
 PRODUCT_COPY_FILES += \
 	device/google/gs101/media_codecs_performance_c2.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance_c2.xml \
-
-PRODUCT_PACKAGES += \
-	samsung.hardware.media.c2@1.0-service \
-	codec2.vendor.base.policy \
-	codec2.vendor.ext.policy \
-	libExynosC2ComponentStore \
-	libExynosC2H264Dec \
-	libExynosC2H264Enc \
-	libExynosC2HevcDec \
-	libExynosC2HevcEnc \
-	libExynosC2Mpeg4Dec \
-	libExynosC2Mpeg4Enc \
-	libExynosC2H263Dec \
-	libExynosC2H263Enc \
-	libExynosC2Vp8Dec \
-	libExynosC2Vp8Enc \
-	libExynosC2Vp9Dec \
-	libExynosC2Vp9Enc
 
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.stagefright.c2-poolmask=458752 \
@@ -1037,6 +1018,14 @@ PRODUCT_PROPERTY_OVERRIDES += persist.vendor.enable.thermal.genl=true
 include device/google/gs-common/edgetpu/edgetpu.mk
 # Config variables for TPU chip on device.
 $(call soong_config_set,edgetpu_config,chip,abrolhos)
+# Include the edgetpu targets defined the namespaces below into the final image.
+PRODUCT_SOONG_NAMESPACES += \
+	vendor/google_devices/gs101/proprietary/gchips/tpu/metrics \
+	vendor/google_devices/gs101/proprietary/gchips/tpu/tflite_delegate \
+	vendor/google_devices/gs101/proprietary/gchips/tpu/darwinn_logging_service \
+	vendor/google_devices/gs101/proprietary/gchips/tpu/nnapi_stable_aidl \
+	vendor/google_devices/gs101/proprietary/gchips/tpu/aidl \
+	vendor/google_devices/gs101/proprietary/gchips/tpu/hal
 # TPU firmware
 PRODUCT_PACKAGES += edgetpu-abrolhos.fw
 
@@ -1126,3 +1115,6 @@ PRODUCT_VENDOR_PROPERTIES += ro.crypto.metadata_init_delete_all_keys.enabled=tru
 
 # Hardware Info Collection
 include hardware/google/pixel/HardwareInfo/HardwareInfo.mk
+
+# Touch service
+include device/google/gs-common/touch/twoshay/aidl_gs101.mk

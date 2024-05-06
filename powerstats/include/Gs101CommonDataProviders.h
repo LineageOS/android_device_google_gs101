@@ -22,4 +22,5 @@ using aidl::android::hardware::power::stats::PowerStats;
 
 void addGs101CommonDataProviders(std::shared_ptr<PowerStats> p);
 
+void addDisplayMrr(std::shared_ptr<PowerStats> p);
 void addNFC(std::shared_ptr<PowerStats> p, const std::string& path);
