@@ -5,6 +5,7 @@ init_daemon_domain(cbd)
 set_prop(cbd, vendor_modem_prop)
 set_prop(cbd, vendor_cbd_prop)
 set_prop(cbd, vendor_rild_prop)
+get_prop(cbd, telephony_modem_prop)
 
 # Allow cbd to setuid from root to radio
 # TODO: confirming with vendor via b/182334947

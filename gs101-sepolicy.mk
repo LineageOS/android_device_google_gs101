@@ -20,9 +20,6 @@ SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += device/google/gs101-sepolicy/system_ext/priv
 #   PowerStats HAL
 BOARD_SEPOLICY_DIRS += hardware/google/pixel-sepolicy/powerstats
 
-# sscoredump
-BOARD_SEPOLICY_DIRS += hardware/google/pixel-sepolicy/sscoredump
-
 # Public
 PRODUCT_PUBLIC_SEPOLICY_DIRS += device/google/gs101-sepolicy/public
 

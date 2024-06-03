@@ -17,7 +17,7 @@ allow modem_svc_sit radio_vendor_data_file:file create_file_perms;
 allow modem_svc_sit modem_stat_data_file:dir create_dir_perms;
 allow modem_svc_sit modem_stat_data_file:file create_file_perms;
 
-allow modem_svc_sit mnt_vendor_file:dir search;
+allow modem_svc_sit mnt_vendor_file:dir r_dir_perms;
 allow modem_svc_sit modem_userdata_file:dir create_dir_perms;
 allow modem_svc_sit modem_userdata_file:file create_file_perms;
 
@@ -33,3 +33,12 @@ get_prop(modem_svc_sit, vendor_logger_prop)
 
 # Modem property
 set_prop(modem_svc_sit, vendor_modem_prop)
+
+# Write trace data to the Perfetto traced daemon. This requires connecting to
+# its producer socket and obtaining a (per-process) tmpfs fd.
+perfetto_producer(modem_svc_sit)
+
+# Allow modem_svc_sit to access modem image file/dir
+allow modem_svc_sit modem_img_file:dir r_dir_perms;
+allow modem_svc_sit modem_img_file:file r_file_perms;
+allow modem_svc_sit modem_img_file:lnk_file r_file_perms;

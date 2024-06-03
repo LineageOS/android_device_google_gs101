@@ -362,6 +362,7 @@
 
 # Fingerprint
 /dev/goodix_fp                                                                 u:object_r:fingerprint_device:s0
+/data/vendor/fingerprint(/.*)?                                                 u:object_r:fingerprint_vendor_data_file:s0
 
 # Wifi Firmware config update
 /data/vendor/firmware/wifi(/.*)?                                               u:object_r:updated_wifi_firmware_data_file:s0
