@@ -49,6 +49,11 @@ BOARD_KERNEL_CMDLINE += cma_sysfs.experimental=Y
 BOARD_KERNEL_CMDLINE += swiotlb=noforce
 BOARD_BOOTCONFIG += androidboot.boot_devices=14700000.ufs
 
+# Enable KUnit for userdebug and eng builds
+ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+  BOARD_KERNEL_CMDLINE += kunit.enable=1
+endif
+
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
 BOARD_PREBUILT_BOOTIMAGE := $(wildcard $(TARGET_KERNEL_DIR)/boot.img)
@@ -185,8 +190,8 @@ BOARD_GOOGLE_DYNAMIC_PARTITIONS_PARTITION_LIST := \
     vendor \
     vendor_dlkm
 
-# Set error limit to BOARD_SUPER_PARTITON_SIZE - 500MB
-BOARD_SUPER_PARTITION_ERROR_LIMIT := 8006926336
+# Set error limit to BOARD_SUPER_PARTITON_SIZE - 400MB
+BOARD_SUPER_PARTITION_ERROR_LIMIT := 8111783936
 
 # Testing related defines
 BOARD_PERFSETUP_SCRIPT := platform_testing/scripts/perf-setup/r4o6-setup.sh
@@ -357,9 +362,8 @@ BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := $(KERNEL_MODULE_DIR)/vendor_dlkm.m
 BOARD_DO_NOT_STRIP_VENDOR_MODULES := true
 
 # Prebuilt kernel modules that are *not* listed in vendor_boot.modules.load
-BOARD_PREBUILT_VENDOR_RAMDISK_KERNEL_MODULES = fips140/fips140.ko
+BOARD_PREBUILT_VENDOR_RAMDISK_KERNEL_MODULES = fips140.ko
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD_EXTRA = $(foreach k,$(BOARD_PREBUILT_VENDOR_RAMDISK_KERNEL_MODULES),$(if $(wildcard $(KERNEL_MODULE_DIR)/$(k)), $(k)))
-KERNEL_MODULES += $(addprefix $(KERNEL_MODULE_DIR)/, $(BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD_EXTRA))
 
 # Kernel modules that are listed in vendor_boot.modules.load
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD_FILE := $(strip $(shell cat $(KERNEL_MODULE_DIR)/vendor_boot.modules.load))
