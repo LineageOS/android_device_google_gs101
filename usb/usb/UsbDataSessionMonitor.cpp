@@ -26,6 +26,7 @@
 #include <pixelstats/StatsHelper.h>
 #include <pixelusb/CommonUtils.h>
 #include <sys/epoll.h>
+#include <sys/timerfd.h>
 #include <utils/Log.h>
 
 #include <regex>
@@ -48,6 +49,9 @@ namespace usb {
 #define UEVENT_MSG_LEN 2048
 #define USB_STATE_MAX_LEN 20
 #define DATA_ROLE_MAX_LEN 10
+#define WARNING_SURFACE_DELAY_SEC 5
+#define ENUM_FAIL_DEFAULT_COUNT_THRESHOLD 3
+#define DEVICE_FLAKY_CONNECTION_CONFIGURED_COUNT_THRESHOLD 5
 
 constexpr char kUdcConfigfsPath[] = "/config/usb_gadget/g1/UDC";
 constexpr char kNotAttachedState[] = "not attached\n";
@@ -115,6 +119,15 @@ UsbDataSessionMonitor::UsbDataSessionMonitor(
     if (addEpollFd(epollFd, ueventFd))
         abort();
 
+    unique_fd timerFd(timerfd_create(CLOCK_BOOTTIME, TFD_NONBLOCK));
+    if (timerFd.get() == -1) {
+        ALOGE("create timerFd failed");
+        abort();
+    }
+
+    if (addEpollFd(epollFd, timerFd))
+        abort();
+
     if (addEpollFile(epollFd.get(), dataRolePath, mDataRoleFd) != 0) {
         ALOGE("monitor data role failed");
         abort();
@@ -139,6 +152,7 @@ UsbDataSessionMonitor::UsbDataSessionMonitor(
 
     mEpollFd = std::move(epollFd);
     mUeventFd = std::move(ueventFd);
+    mTimerFd = std::move(timerFd);
     mUpdatePortStatusCb = updatePortStatusCb;
 
     if (ReadFileToString(kUdcConfigfsPath, &udc) && !udc.empty())
@@ -150,6 +164,9 @@ UsbDataSessionMonitor::UsbDataSessionMonitor(
         ALOGE("pthread creation failed %d", errno);
         abort();
     }
+
+    ALOGI("feature flag enable_report_usb_data_compliance_warning: %d",
+          usb_flags::enable_report_usb_data_compliance_warning());
 }
 
 UsbDataSessionMonitor::~UsbDataSessionMonitor() {}
@@ -223,13 +240,55 @@ void UsbDataSessionMonitor::notifyComplianceWarning() {
 
 void UsbDataSessionMonitor::evaluateComplianceWarning() {
     std::set<ComplianceWarning> newWarningSet;
+    int elapsedTimeSec;
 
-    // TODO: add heuristics and update newWarningSet
-    if (mDataRole == PortDataRole::DEVICE && mUdcBind) {
-    } else if (mDataRole == PortDataRole::HOST) {
+    elapsedTimeSec =
+        std::chrono::duration_cast<std::chrono::seconds>(boot_clock::now() - mDataSessionStart)
+            .count();
+
+    if (elapsedTimeSec >= WARNING_SURFACE_DELAY_SEC) {
+        if (mDataRole == PortDataRole::DEVICE && mUdcBind) {
+            int configuredCount = std::count(mDeviceState.states.begin(),
+                                             mDeviceState.states.end(), kConfiguredState);
+            int defaultCount =
+                std::count(mDeviceState.states.begin(), mDeviceState.states.end(), kDefaultState);
+
+            if (configuredCount == 0 && defaultCount > ENUM_FAIL_DEFAULT_COUNT_THRESHOLD)
+                newWarningSet.insert(ComplianceWarning::ENUMERATION_FAIL);
+
+            if (configuredCount > DEVICE_FLAKY_CONNECTION_CONFIGURED_COUNT_THRESHOLD)
+                newWarningSet.insert(ComplianceWarning::FLAKY_CONNECTION);
+        } else if (mDataRole == PortDataRole::HOST) {
+            int host1StateCount = mHost1State.states.size();
+            int host1ConfiguredCount =
+                std::count(mHost1State.states.begin(), mHost1State.states.end(), kConfiguredState);
+            int host1DefaultCount =
+                std::count(mHost1State.states.begin(), mHost1State.states.end(), kDefaultState);
+            int host2StateCount = mHost2State.states.size();
+            int host2ConfiguredCount =
+                std::count(mHost2State.states.begin(), mHost2State.states.end(), kConfiguredState);
+            int host2DefaultCount =
+                std::count(mHost2State.states.begin(), mHost2State.states.end(), kDefaultState);
+
+            if (host1ConfiguredCount == 0 && host2ConfiguredCount == 0 &&
+                (host1DefaultCount > ENUM_FAIL_DEFAULT_COUNT_THRESHOLD ||
+                 host2DefaultCount > ENUM_FAIL_DEFAULT_COUNT_THRESHOLD))
+                newWarningSet.insert(ComplianceWarning::ENUMERATION_FAIL);
+
+            if (host1StateCount == 1 && mHost1State.states.front() == kNotAttachedState &&
+                host2StateCount == 1 && mHost2State.states.front() == kNotAttachedState)
+                newWarningSet.insert(ComplianceWarning::MISSING_DATA_LINES);
+        }
     }
 
     if (newWarningSet != mWarningSet) {
+        std::string newWarningString;
+
+        for (auto e : newWarningSet) {
+            newWarningString += toString(e) + " ";
+        }
+        ALOGI("Usb data compliance warning changed to: %s", newWarningString.c_str());
+
         mWarningSet = newWarningSet;
         notifyComplianceWarning();
     }
@@ -259,6 +318,26 @@ void UsbDataSessionMonitor::handleDeviceStateEvent(struct usbDeviceState *device
     evaluateComplianceWarning();
 }
 
+void UsbDataSessionMonitor::setupNewSession() {
+    mWarningSet.clear();
+    mDataSessionStart = boot_clock::now();
+
+    if (mDataRole == PortDataRole::DEVICE) {
+        clearDeviceStateEvents(&mDeviceState);
+    } else if (mDataRole == PortDataRole::HOST) {
+        clearDeviceStateEvents(&mHost1State);
+        clearDeviceStateEvents(&mHost2State);
+    }
+
+    if (mDataRole != PortDataRole::NONE) {
+        struct itimerspec delay = itimerspec();
+        delay.it_value.tv_sec = WARNING_SURFACE_DELAY_SEC;
+        int ret = timerfd_settime(mTimerFd.get(), 0, &delay, NULL);
+        if (ret < 0)
+            ALOGE("timerfd_settime failed err:%d", errno);
+    }
+}
+
 void UsbDataSessionMonitor::handleDataRoleEvent() {
     int n;
     PortDataRole newDataRole;
@@ -283,17 +362,8 @@ void UsbDataSessionMonitor::handleDataRoleEvent() {
             reportUsbDataSessionMetrics();
         }
 
-        // Set up for the new data session
-        mWarningSet.clear();
         mDataRole = newDataRole;
-        mDataSessionStart = boot_clock::now();
-
-        if (newDataRole == PortDataRole::DEVICE) {
-            clearDeviceStateEvents(&mDeviceState);
-        } else if (newDataRole == PortDataRole::HOST) {
-            clearDeviceStateEvents(&mHost1State);
-            clearDeviceStateEvents(&mHost2State);
-        }
+        setupNewSession();
     }
 }
 
@@ -328,8 +398,7 @@ void UsbDataSessionMonitor::updateUdcBindStatus(const std::string &devname) {
 
         } else if (!mUdcBind && newUdcBind) {
             // Gadget soft pullup: reset and start accounting for a new data session.
-            clearDeviceStateEvents(&mDeviceState);
-            mDataSessionStart = boot_clock::now();
+            setupNewSession();
         }
     }
 
@@ -383,6 +452,23 @@ void UsbDataSessionMonitor::handleUevent() {
     }
 }
 
+void UsbDataSessionMonitor::handleTimerEvent() {
+    int byteRead;
+    uint64_t numExpiration;
+
+    byteRead = read(mTimerFd.get(), &numExpiration, sizeof(numExpiration));
+
+    if (byteRead != sizeof(numExpiration)) {
+        ALOGE("incorrect read size");
+    }
+
+    if (numExpiration != 1) {
+        ALOGE("incorrect expiration count");
+    }
+
+    evaluateComplianceWarning();
+}
+
 void *UsbDataSessionMonitor::monitorThread(void *param) {
     UsbDataSessionMonitor *monitor = (UsbDataSessionMonitor *)param;
     struct epoll_event events[64];
@@ -400,6 +486,8 @@ void *UsbDataSessionMonitor::monitorThread(void *param) {
         for (int n = 0; n < nevents; ++n) {
             if (events[n].data.fd == monitor->mUeventFd.get()) {
                 monitor->handleUevent();
+            } else if (events[n].data.fd == monitor->mTimerFd.get()) {
+                monitor->handleTimerEvent();
             } else if (events[n].data.fd == monitor->mDataRoleFd.get()) {
                 monitor->handleDataRoleEvent();
             } else if (events[n].data.fd == monitor->mDeviceState.fd.get()) {

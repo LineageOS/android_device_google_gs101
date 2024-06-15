@@ -55,7 +55,6 @@
 /dev/video55              0666   system     graphics
 /dev/g2d                  0660   system     graphics
 /dev/fimg2d               0666   system     graphics
-/dev/i2c-2                0660   system     system
 /dev/HPD                  0660   system     system
 
 # wfd
@@ -221,31 +220,24 @@
 /sys/devices/platform/11110000.usb/11110000.dwc3/xhci-hcd-exynos.4.auto/usb2/2-1/*/*/leds/* multi_intensity 0664 system system
 
 # Dump Battery EEPROM history for pixelstats
-/sys/devices/platform/10970000.hsi2c/i2c-7/7-0050 eeprom 0644 system system
+/sys/devices/platform/10970000.hsi2c/i2c-8/8-0050 eeprom 0644 system system
 /dev/battery_history                                     0644 system system
 
 # ODPM
 /sys/bus/iio/devices/iio:device*  enabled_rails 0660 system system
 
 # USB
-/sys/class/typec/port0 power_role                                                       664 root system
-/sys/class/typec/port0 data_role                                                        664 root system
-/sys/class/typec/port0 port_type                                                        664 root system
-/sys/devices/platform/10d50000.hsi2c/i2c-8/i2c-max77759tcpc contaminant_detection       664 root system
-/sys/devices/platform/10d50000.hsi2c/i2c-8/i2c-max77759tcpc usb_limit_accessory_current 664 root system
-/sys/devices/platform/10d50000.hsi2c/i2c-8/i2c-max77759tcpc usb_limit_accessory_enable  664 root system
-/sys/devices/platform/10d50000.hsi2c/i2c-8/i2c-max77759tcpc usb_limit_sink_current      664 root system
-/sys/devices/platform/10d50000.hsi2c/i2c-8/i2c-max77759tcpc usb_limit_sink_enable       664 root system
-/sys/devices/platform/10d50000.hsi2c/i2c-8/i2c-max77759tcpc usb_limit_source_enable     664 root system
-/sys/devices/platform/10d50000.hsi2c/i2c-8/i2c-max77759tcpc update_sdp_enum_timeout     664 root system
-/sys/devices/platform/10d50000.hsi2c/i2c-8/8-0025 contaminant_detection                 664 root system
-/sys/devices/platform/10d50000.hsi2c/i2c-8/8-0025 usb_limit_accessory_current           664 root system
-/sys/devices/platform/10d50000.hsi2c/i2c-8/8-0025 usb_limit_accessory_enable            664 root system
-/sys/devices/platform/10d50000.hsi2c/i2c-8/8-0025 usb_limit_sink_current                664 root system
-/sys/devices/platform/10d50000.hsi2c/i2c-8/8-0025 usb_limit_sink_enable                 664 root system
-/sys/devices/platform/10d50000.hsi2c/i2c-8/8-0025 usb_limit_source_enable               664 root system
-/sys/devices/platform/10d50000.hsi2c/i2c-8/8-0025 update_sdp_enum_timeout               664 root system
-/sys/devices/platform/11110000.usb dwc3_exynos_otg_b_sess                               664 root system
-/sys/devices/platform/11110000.usb dwc3_exynos_otg_id                                   664 root system
-/sys/devices/platform/11110000.usb usb_data_enabled                                     664 root system
-/sys/devices/platform/google,pogo move_data_to_usb                                      664 root system
+/sys/class/typec/port0 power_role                                                        664 root system
+/sys/class/typec/port0 data_role                                                         664 root system
+/sys/class/typec/port0 port_type                                                         664 root system
+/sys/devices/platform/10d50000.hsi2c/i2c-12/12-0025 contaminant_detection                664 root system
+/sys/devices/platform/10d50000.hsi2c/i2c-12/12-0025 usb_limit_accessory_current          664 root system
+/sys/devices/platform/10d50000.hsi2c/i2c-12/12-0025 usb_limit_accessory_enable           664 root system
+/sys/devices/platform/10d50000.hsi2c/i2c-12/12-0025 usb_limit_sink_current               664 root system
+/sys/devices/platform/10d50000.hsi2c/i2c-12/12-0025 usb_limit_sink_enable                664 root system
+/sys/devices/platform/10d50000.hsi2c/i2c-12/12-0025 usb_limit_source_enable              664 root system
+/sys/devices/platform/10d50000.hsi2c/i2c-12/12-0025 update_sdp_enum_timeout              664 root system
+/sys/devices/platform/11110000.usb dwc3_exynos_otg_b_sess                                664 root system
+/sys/devices/platform/11110000.usb dwc3_exynos_otg_id                                    664 root system
+/sys/devices/platform/11110000.usb usb_data_enabled                                      664 root system
+/sys/devices/platform/google,pogo move_data_to_usb                                       664 root system

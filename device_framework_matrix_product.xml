@@ -85,14 +85,6 @@
         </interface>
     </hal>
     <hal format="aidl" optional="true">
-        <name>com.google.input</name>
-        <version>2</version>
-        <interface>
-            <name>ITouchContextService</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="aidl" optional="true">
         <name>hardware.qorvo.uwb</name>
         <version>2</version>
         <interface>
@@ -140,13 +132,6 @@
             <instance>dm0</instance>
             <instance>dm1</instance>
             <instance>sced0</instance>
-        </interface>
-    </hal>
-    <hal format="aidl" optional="true">
-        <name>com.google.pixel.modem.logmasklibrary</name>
-        <interface>
-            <name>ILiboemserviceProxy</name>
-            <instance>default</instance>
         </interface>
     </hal>
     <hal format="hidl" optional="true">

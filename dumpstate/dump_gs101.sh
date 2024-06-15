@@ -35,11 +35,7 @@ cat "/sys/class/power_supply/main-charger/uevent"
 echo "\n------ Power supply property pca9486-mains ------"
 cat "/sys/class/power_supply/pca9468-mains/uevent"
 echo "\n------ Power supply property tcpm ------"
-if [ -e "/sys/class/power_supply/tcpm-source-psy-i2c-max77759tcpc/uevent" ]; then
-  cat "/sys/class/power_supply/tcpm-source-psy-i2c-max77759tcpc/uevent"
-elif [ -e "/sys/class/power_supply/tcpm-source-psy-8-0025/uevent" ]; then
-  cat "/sys/class/power_supply/tcpm-source-psy-8-0025/uevent"
-fi
+cat /sys/class/power_supply/tcpm-source-psy-*/uevent
 echo "\n------ Power supply property usb ------"
 cat "/sys/class/power_supply/usb/uevent"
 echo "\n------ Power supply property wireless ------"
@@ -93,10 +89,7 @@ then
 fi
 
 echo "\n------ TCPC ------"
-max77759tcpc_path="/sys/devices/platform/10d50000.hsi2c/i2c-8/i2c-max77759tcpc"
-if [ -e "/sys/devices/platform/10d50000.hsi2c/i2c-8/8-0025" ]; then
-  max77759tcpc_path="/sys/devices/platform/10d50000.hsi2c/i2c-8/8-0025"
-fi
+max77759tcpc_path="/sys/devices/platform/10d50000.hsi2c/i2c-12/12-0025"
 echo "registers:"
 cat $max77759tcpc_path/registers
 echo "frs:"
@@ -123,6 +116,8 @@ cat "/dev/logbuffer_pca9468"
 
 echo "\n------ Battery Health ------"
 cat "/sys/class/power_supply/battery/health_index_stats"
+echo "\n------ Battery Health SoC Residency ------"
+cat "/sys/class/power_supply/battery/swelling_data"
 echo "\n------ BMS ------"
 cat "/dev/logbuffer_ssoc"
 echo "\n------ TTF ------"
@@ -159,14 +154,15 @@ do
   echo "$f: `cat $f`"
 done
 
+echo "\n------ DC_registers dump ------"
+cat "/sys/class/power_supply/pca9468-mains/device/registers_dump"
+echo "\n------ max77759_chg registers dump ------"
+cat "/sys/class/power_supply/main-charger/device/registers_dump"
+echo "\n------ max77729_pmic registers dump ------"
+cat /sys/devices/platform/10d50000.hsi2c/i2c-*/*-0066/registers_dump
+
 if [ $build_type = "eng" ]
 then
-  echo "\n------ DC_registers dump ------"
-  cat "/sys/class/power_supply/pca9468-mains/device/registers_dump"
-  echo "\n------ max77759_chg registers dump ------"
-  cat "/d/max77759_chg/registers"
-  echo "\n------ max77729_pmic registers dump ------"
-  cat "/d/max77729_pmic/registers"
   echo "\n------ Charging table dump ------"
   cat "/d/google_battery/chg_raw_profile"
 
@@ -204,9 +200,9 @@ then
 fi
 
 echo "\n------ Battery EEPROM ------"
-if [ -e "/sys/devices/platform/10970000.hsi2c/i2c-7/7-0050/eeprom" ]
+if [ -e "/sys/devices/platform/10970000.hsi2c/i2c-8/8-0050/eeprom" ]
 then
-  xxd /sys/devices/platform/10970000.hsi2c/i2c-7/7-0050/eeprom
+  xxd /sys/devices/platform/10970000.hsi2c/i2c-8/8-0050/eeprom
 fi
 
 echo "\n------ Charger Stats ------"
