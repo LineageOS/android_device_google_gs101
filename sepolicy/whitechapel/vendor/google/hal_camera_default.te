@@ -72,7 +72,7 @@ binder_call(hal_camera_default, system_server);
 
 # Allow Binder calls to ECO service, needed by Entropy-Aware Filtering
 allow hal_camera_default eco_service:service_manager find;
-binder_call(hal_camera_default, mediacodec);
+binder_call(hal_camera_default, mediacodec_samsung);
 
 # Allow camera HAL to query preferred camera frequencies from the radio HAL
 # extensions to avoid interference with cellular antennas.
@@ -111,3 +111,6 @@ dontaudit hal_camera_default traced_producer_socket:sock_file { write };
 
 # Allow access to always-on compute device node
 allow hal_camera_default aoc_device:chr_file rw_file_perms;
+
+# Allow the Camera HAL to acquire wakelocks for buffer pre-allocation purposes
+wakelock_use(hal_camera_default)

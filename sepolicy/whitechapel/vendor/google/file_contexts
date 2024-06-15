@@ -105,6 +105,7 @@
 /dev/logbuffer_pca9468         u:object_r:logbuffer_device:s0
 /dev/logbuffer_cpm             u:object_r:logbuffer_device:s0
 /dev/logbuffer_bd              u:object_r:logbuffer_device:s0
+/dev/logbuffer_cpif            u:object_r:logbuffer_device:s0
 
 /dev/logbuffer_maxfg_monitor        u:object_r:logbuffer_device:s0
 /dev/logbuffer_maxfg_base_monitor   u:object_r:logbuffer_device:s0
@@ -224,10 +225,8 @@
 /dev/lwis-votf                                                          u:object_r:lwis_device:s0
 
 # VIDEO
-/vendor/bin/hw/samsung\.hardware\.media\.c2@1\.0-service                u:object_r:mediacodec_exec:s0
 /vendor/bin/hw/google\.hardware\.media\.c2@1\.0-service                 u:object_r:mediacodec_exec:s0
 /vendor/bin/hw/vendor\.dolby\.media\.c2@1\.0-service                    u:object_r:mediacodec_exec:s0
-/data/vendor/media(/.*)?                                                u:object_r:vendor_media_data_file:s0
 
 # IMS VoWiFi
 /data/vendor/misc(/.*)?                u:object_r:vendor_misc_data_file:s0
@@ -237,9 +236,9 @@
 /data/vendor/sensor(/.*)?              u:object_r:sensor_vendor_data_file:s0
 
 # Contexthub
-/vendor/bin/hw/android\.hardware\.contexthub-service\.generic               u:object_r:hal_contexthub_default_exec:s0
 /(vendor|system/vendor)/bin/chre                                            u:object_r:chre_exec:s0
 /dev/socket/chre                                                            u:object_r:chre_socket:s0
+/data/vendor/chre(/.*)?                                                     u:object_r:chre_data_file:s0
 
 # Modem logging
 /vendor/bin/modem_logging_control   u:object_r:modem_logging_control_exec:s0

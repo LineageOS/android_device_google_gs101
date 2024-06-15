@@ -1,7 +1,6 @@
 # Exynos Data Files
 #type vendor_data_file, file_type, data_file_type;
 type vendor_cbd_boot_file, file_type, data_file_type;
-type vendor_media_data_file, file_type, data_file_type;
 
 # Exynos Log Files
 type vendor_log_file, file_type, data_file_type;
@@ -50,6 +49,7 @@ type sysfs_nanoapp_cmd, sysfs_type, fs_type;
 type sysfs_fingerprint, sysfs_type, fs_type;
 
 # CHRE
+type chre_data_file, file_type, data_file_type;
 type chre_socket, file_type;
 
 # BT
@@ -133,9 +133,6 @@ type sysfs_memory, sysfs_type, fs_type;
 
 # bcmdhd (Broadcom FullMAC wireless cards support)
 type sysfs_bcmdhd, sysfs_type, fs_type;
-
-# Video
-type sysfs_video, sysfs_type, fs_type;
 
 # UWB vendor
 type uwb_vendor_data_file, file_type, data_file_type, app_data_file_type;
