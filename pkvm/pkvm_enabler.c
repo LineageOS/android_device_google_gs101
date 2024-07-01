@@ -24,7 +24,6 @@
 
 #include <log/log.h>
 
-#define KVM_DEVICE  "/dev/kvm"
 #define MISC_WRITER "/vendor/bin/misc_writer"
 
 int main() {
@@ -33,22 +32,7 @@ int main() {
     pid_t pid;
     int ret, wstatus;
 
-    /* Check whether KVM device exists. */
-    ret = access(KVM_DEVICE, F_OK);
-
-    /* If KVM device exists, return SUCCESS to continue booting. */
-    if (ret == 0) {
-        exit(EXIT_SUCCESS);
-    }
-
-    if (ret != -ENOENT) {
-        ALOGW("Unexpected error from access(): %d", ret);
-    }
-
-    /*
-     * If KVM device does not exist, run misc_writer and return FAILURE
-     * to force a reboot.
-     */
+    /* Run misc_writer and return FAILURE to force a reboot. */
     pid = fork();
     if (pid == -1) {
         ALOGE("Could not fork: %d", errno);

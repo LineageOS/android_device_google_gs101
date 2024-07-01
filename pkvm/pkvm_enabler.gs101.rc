@@ -2,5 +2,10 @@ service pkvm_enabler /vendor/bin/pkvm_enabler
     reboot_on_failure reboot,pkvm-not-enabled
     user root
 
-on early-init
+# Old bootloaders do not set the protected_vm sysprop when pkvm is disabled
+on early-init && property:ro.boot.hypervisor.protected_vm.supported=
+    exec_start pkvm_enabler
+
+# New bootloaders set the protected_vm sysprop to 0 when pkvm is disabled
+on early-init && property:ro.boot.hypervisor.protected_vm.supported=0
     exec_start pkvm_enabler
