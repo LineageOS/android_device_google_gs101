@@ -8,6 +8,9 @@ vendor.ril.                      u:object_r:vendor_rild_prop:s0
 vendor.radio.                    u:object_r:vendor_rild_prop:s0
 ro.vendor.build.svn              u:object_r:vendor_rild_prop:s0
 
+# for GRIL
+vendor.gril.                               u:object_r:vendor_gril_prop:s0
+
 # Ramdump
 persist.vendor.sys.crash_rcu    u:object_r:vendor_ramdump_prop:s0
 
