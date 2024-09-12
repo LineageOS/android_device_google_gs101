@@ -1,5 +1,6 @@
 {
   "provideLibs": [
-    "liboemcrypto.so"
+    "liboemcrypto.so",
+    "lib_aion_buffer.so"
   ]
 }
