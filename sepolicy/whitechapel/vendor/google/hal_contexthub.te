@@ -1,0 +1,30 @@
+# Allow context hub HAL to communicate with daemon via socket
+allow hal_contexthub_default chre:unix_stream_socket connectto;
+allow hal_contexthub_default chre_socket:sock_file write;
+
+# Permit communication with AoC
+allow hal_contexthub_default aoc_device:chr_file rw_file_perms;
+
+# Allow CHRE to determine AoC's current clock
+allow hal_contexthub_default sysfs_aoc:dir search;
+allow hal_contexthub_default sysfs_aoc_boottime:file r_file_perms;
+
+# Allow CHRE to create thread to watch AOC's device
+allow hal_contexthub_default aoc_device:dir r_dir_perms;
+
+# Allow CHRE to use the USF low latency transport
+usf_low_latency_transport(hal_contexthub_default)
+
+# Allow CHRE to talk to the WiFi HAL
+allow hal_contexthub_default hal_wifi_ext:binder { call transfer };
+allow hal_contexthub_default hal_wifi_ext_service:service_manager find;
+
+# Allow CHRE host to talk to stats service
+allow hal_contexthub_default fwk_stats_service:service_manager find;
+binder_call(hal_contexthub_default, stats_service_server)
+
+# Allow CHRE to use WakeLock
+wakelock_use(hal_contexthub_default)
+
+# Allow CHRE to block suspend, which is required to use EPOLLWAKEUP
+allow hal_contexthub_default self:global_capability2_class_set block_suspend;
