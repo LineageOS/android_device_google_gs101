@@ -1,0 +1,131 @@
+on init
+    # Dump maxfg
+    chown system system /sys/class/power_supply/maxfg/m5_model_state
+    chown system system /sys/class/power_supply/maxfg_base/model_state
+    chown system system /sys/class/power_supply/max77779fg/model_state
+
+    # Dump eeprom
+    chown system system /sys/devices/platform/10c90000.hsi2c/i2c-9/9-0050/eeprom
+    chown system system /sys/devices/platform/10ca0000.hsi2c/i2c-10/10-0050/eeprom
+
+    chown system system /dev/battery_history
+    chmod 0644 /dev/battery_history
+
+    chown system system /dev/maxfg_history
+    chmod 0644 /dev/maxfg_history
+
+    # Charge stats (write 0)
+    chown system system /sys/class/power_supply/battery/charge_stats
+
+    # Pca Charge stats (write 0)
+    chown system system /sys/class/power_supply/dc-mains/device/chg_stats
+
+    # Wireless Charge stats (write 0)
+    chown system system /sys/class/power_supply/wireless/device/charge_stats
+
+    # Thermal Charge stats (write 0)
+    chown system system /sys/devices/platform/google,charger/thermal_stats
+
+    # Google Charger stats (write 0)
+    chown system system /sys/devices/platform/google,charger/charge_stats
+
+    # Permission for wireless charging
+    chown system system /sys/class/power_supply/wireless/capacity
+    chown system system /sys/class/power_supply/wireless/device/rtx
+    chown system system /sys/class/power_supply/wireless/device/rxdata
+    chown system system /sys/class/power_supply/wireless/device/txdata
+    chown system system /sys/class/power_supply/wireless/device/rxlen
+    chown system system /sys/class/power_supply/wireless/device/txlen
+    chown system system /sys/class/power_supply/wireless/device/ccreset
+    chown system system /sys/class/power_supply/wireless/device/status
+    chown system system /sys/class/power_supply/wireless/device/version
+    chown system system /sys/class/power_supply/wireless/device/features
+    chown system system /sys/class/power_supply/wireless/device/authtype
+    chown system system /sys/class/power_supply/wireless/device/authstart
+
+    # Adaptive charge
+    chown system system /sys/class/power_supply/battery/charge_deadline
+
+    # Charging policy
+    chown system system /sys/class/power_supply/battery/charging_policy
+
+    # BatteryHealthData
+    chown system system /sys/class/power_supply/battery/first_usage_date
+
+    # Battery Defender
+    chown system system /sys/devices/platform/google,battery/power_supply/battery/bd_trickle_cnt
+    chown system system /sys/devices/platform/google,battery/power_supply/battery/bd_trickle_dry_run
+    chown system system /sys/devices/platform/google,battery/power_supply/battery/bd_trickle_enable
+    chown system system /sys/devices/platform/google,battery/power_supply/battery/bd_trickle_recharge_soc
+    chown system system /sys/devices/platform/google,battery/power_supply/battery/bd_trickle_reset_sec
+    chown system system /sys/devices/platform/google,battery/power_supply/battery/bd_clear
+    chown system system /sys/devices/platform/google,battery/power_supply/battery/health_safety_margin
+    chown system system /sys/devices/platform/google,battery/power_supply/battery/swelling_data
+    chown system system /sys/devices/platform/google,charger/bd_drainto_soc
+    chown system system /sys/devices/platform/google,charger/bd_recharge_soc
+    chown system system /sys/devices/platform/google,charger/bd_recharge_voltage
+    chown system system /sys/devices/platform/google,charger/bd_resume_abs_temp
+    chown system system /sys/devices/platform/google,charger/bd_resume_soc
+    chown system system /sys/devices/platform/google,charger/bd_resume_temp
+    chown system system /sys/devices/platform/google,charger/bd_resume_time
+    chown system system /sys/devices/platform/google,charger/bd_temp_dry_run
+    chown system system /sys/devices/platform/google,charger/bd_temp_enable
+    chown system system /sys/devices/platform/google,charger/bd_trigger_temp
+    chown system system /sys/devices/platform/google,charger/bd_trigger_time
+    chown system system /sys/devices/platform/google,charger/bd_trigger_voltage
+    chown system system /sys/devices/platform/google,charger/bd_clear
+    chown system system /sys/devices/platform/google,charger/charge_start_level
+    chown system system /sys/devices/platform/google,charger/charge_stop_level
+    chown system system /sys/devices/platform/google,cpm/dc_ctl
+    # Important to include dd_state as it's used in battery defender in charger mode
+    chown system system /sys/devices/platform/google,charger/dd_state
+    chown system system /sys/devices/platform/google,charger/dd_settings
+
+    # for parsing thismeal.bin
+    chown system system /vendor/bin/hw/battery_mitigation
+
+on early-boot
+    # Wait for insmod_sh to finish all common modules
+    wait_for_prop vendor.common.modules.ready 1
+
+    # logbuffer
+    chown system system /dev/logbuffer_maxfg
+    chown system system /dev/logbuffer_maxfg_monitor
+    chown system system /dev/logbuffer_max77779fg
+    chown system system /dev/logbuffer_max77779fg_monitor
+    chown system system /dev/logbuffer_maxfg_base
+    chown system system /dev/logbuffer_maxfg_secondary
+    chown system system /dev/logbuffer_maxfg_base_monitor
+    chown system system /dev/logbuffer_maxfg_secondary_monitor
+    chown system system /dev/logbuffer_maxq
+    chown system system /dev/logbuffer_rtx
+    chown system system /dev/logbuffer_ssoc
+    chown system system /dev/logbuffer_ttf
+    chown system system /dev/logbuffer_tcpm
+    chown system system /dev/logbuffer_usbpd
+    chown system system /dev/logbuffer_pogo_transport
+    chown system system /dev/logbuffer_wireless
+    chown system system /dev/logbuffer_pca9468
+    chown system system /dev/logbuffer_ln8411
+    chown system system /dev/logbuffer_cpm
+    chown system system /dev/logbuffer_wc68
+    chown system system /dev/logbuffer_max77779_fwupdate
+
+on property:sys.boot_completed=1
+    # gvotables for dumpstate
+    chown system system /sys/kernel/debug/gvotables
+
+    # Permission for wireless charging
+    chown system system /sys/class/power_supply/wireless/capacity
+    chown system system /sys/class/power_supply/wireless/device/rtx
+    chown system system /sys/class/power_supply/wireless/device/rxdata
+    chown system system /sys/class/power_supply/wireless/device/txdata
+    chown system system /sys/class/power_supply/wireless/device/rxlen
+    chown system system /sys/class/power_supply/wireless/device/txlen
+    chown system system /sys/class/power_supply/wireless/device/ccreset
+    chown system system /sys/class/power_supply/wireless/device/status
+    chown system system /sys/class/power_supply/wireless/device/version
+    chown system system /sys/class/power_supply/wireless/device/authstart
+
+    # write serialno to battery path for pairing
+    write /sys/class/power_supply/battery/dev_sn ${ro.boot.serialno}

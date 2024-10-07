@@ -343,7 +343,7 @@ void addSoC(std::shared_ptr<PowerStats> p) {
 }
 
 void setEnergyMeter(std::shared_ptr<PowerStats> p) {
-    std::vector<const std::string> deviceNames { "s2mpg10-odpm", "s2mpg11-odpm" };
+    std::vector<std::string> deviceNames { "s2mpg10-odpm", "s2mpg11-odpm" };
     p->setEnergyMeterDataProvider(std::make_unique<IioEnergyMeterDataProvider>(deviceNames, true));
 }
 

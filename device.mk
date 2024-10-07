@@ -213,6 +213,8 @@ PRODUCT_SOONG_NAMESPACES += \
 	vendor/arm/mali/valhall
 
 $(call soong_config_set,pixel_mali,soc,$(TARGET_BOARD_PLATFORM))
+# Used in gfx_tools when defining tests with composer2 interface for gs101 devices
+$(call soong_config_set,gfx_tools,use_hwc2,true)
 
 include device/google/gs-common/gpu/gpu.mk
 PRODUCT_PACKAGES += \
@@ -325,6 +327,14 @@ PRODUCT_COPY_FILES += \
 	device/google/gs101/conf/init.debug.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.debug.rc
 endif
 
+ifneq (,$(filter 5.%, $(TARGET_LINUX_KERNEL_VERSION)))
+PRODUCT_COPY_FILES += \
+	device/google/gs101/storage/5.10/init.gs101.storage.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.gs101.storage.rc
+else
+PRODUCT_COPY_FILES += \
+	device/google/gs101/storage/6.1/init.gs101.storage.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.gs101.storage.rc
+endif
+
 # Recovery files
 PRODUCT_COPY_FILES += \
 	device/google/gs101/conf/init.recovery.device.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.gs101.rc
@@ -350,6 +360,10 @@ PRODUCT_COPY_FILES += \
 	device/google/gs101/disable_contaminant_detection.sh:$(TARGET_COPY_OUT_VENDOR)/bin/hw/disable_contaminant_detection.sh
 
 include device/google/gs-common/insmod/insmod.mk
+
+# Insmod config files
+PRODUCT_COPY_FILES += \
+	$(call find-copy-subdir-files,init.insmod.*.cfg,$(TARGET_KERNEL_DIR),$(TARGET_COPY_OUT_VENDOR_DLKM)/etc)
 
 # For creating dtbo image
 PRODUCT_HOST_PACKAGES += \
@@ -570,6 +584,9 @@ include device/google/gs-common/storage/storage.mk
 # Storage health HAL
 PRODUCT_PACKAGES += \
 	android.hardware.health.storage-service.default
+
+# Battery Mitigation
+include device/google/gs-common/battery_mitigation/bcl.mk
 
 # storage pixelstats
 -include hardware/google/pixel/pixelstats/device.mk
@@ -1053,7 +1070,7 @@ PRODUCT_SOONG_NAMESPACES += \
 	vendor/google_devices/gs101/proprietary/gchips/tpu/nnapi_stable_aidl \
 	vendor/google_devices/gs101/proprietary/gchips/tpu/aidl \
 	vendor/google_devices/gs101/proprietary/gchips/tpu/hal \
-	vendor/google_devices/gs101/proprietary/gchips/tpu/tachyon/api \
+	vendor/google_devices/gs101/proprietary/gchips/tpu/tachyon/tachyon_apis \
 	vendor/google_devices/gs101/proprietary/gchips/tpu/tachyon/service
 # TPU firmware
 PRODUCT_PACKAGES += edgetpu-abrolhos.fw
@@ -1123,12 +1140,19 @@ PRODUCT_PACKAGES_DEBUG += BatteryStatsViewer
 DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs101/device_framework_matrix_product.xml
 
 # Preopt SystemUI
+ifneq ($(RELEASE_SYSTEMUI_USE_SPEED_PROFILE), true)
 PRODUCT_DEXPREOPT_SPEED_APPS += SystemUIGoogle  # For internal
-PRODUCT_DEXPREOPT_SPEED_APPS += SystemUI  # For AOSP
+PRODUCT_DEXPREOPT_SPEED_APPS += SystemUI        # For AOSP
+endif
 
-# Compile SystemUI on device with `speed`.
+# Set on-device compilation mode for SystemUI.
+ifeq ($(RELEASE_SYSTEMUI_USE_SPEED_PROFILE), true)
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.systemuicompilerfilter=speed-profile
+else
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.systemuicompilerfilter=speed
+endif
 
 # Keymaster configuration
 PRODUCT_COPY_FILES += \

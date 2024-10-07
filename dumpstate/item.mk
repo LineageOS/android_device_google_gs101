@@ -1,2 +1,2 @@
-PRODUCT_PACKAGES += dump_gs101.sh
+PRODUCT_PACKAGES += dump_power
 

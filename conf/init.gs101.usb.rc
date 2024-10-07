@@ -414,3 +414,7 @@ on property:vendor.usb.contaminantdisable=true
 
 on property:ro.bootmode=usbuwb
     setprop persist.vendor.usb.usbradio.config uwb_acm
+
+# WAR for kernel 5.10 with CONFIG_USB_DUMMY_HCD enabled
+on property:sys.usb.controller=dummy_udc.0
+    setprop sys.usb.controller "11110000.dwc3"

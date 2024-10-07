@@ -16,9 +16,6 @@
 include build/make/target/board/BoardConfigMainlineCommon.mk
 include build/make/target/board/BoardConfigPixelCommon.mk
 
-# Should be uncommented after fixing vndk-sp violation is fixed.
-PRODUCT_FULL_TREBLE_OVERRIDE := true
-
 # HACK : To fix up after bring up multimedia devices.
 TARGET_SOC := gs101
 
@@ -30,7 +27,6 @@ TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-2a
 TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_VARIANT := cortex-a55
-TARGET_CPU_VARIANT_RUNTIME := cortex-a55
 
 DEVICE_IS_64BIT_ONLY ?= $(if $(filter %_64,$(TARGET_PRODUCT)),true,false)
 
@@ -49,11 +45,6 @@ BOARD_KERNEL_CMDLINE += cma_sysfs.experimental=Y
 BOARD_KERNEL_CMDLINE += rcupdate.rcu_expedited=1 rcu_nocbs=all rcutree.enable_rcu_lazy
 BOARD_KERNEL_CMDLINE += swiotlb=noforce
 BOARD_BOOTCONFIG += androidboot.boot_devices=14700000.ufs
-
-# Enable KUnit for userdebug and eng builds
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
-  BOARD_KERNEL_CMDLINE += kunit.enable=1
-endif
 
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
