@@ -114,10 +114,6 @@ type sysfs_chargelevel, sysfs_type, fs_type;
 
 # ODPM
 type powerstats_vendor_data_file, file_type, data_file_type;
-type sysfs_odpm, sysfs_type, fs_type;
-
-# bcl
-type sysfs_bcl, sysfs_type, fs_type;
 
 # Chosen
 type sysfs_chosen, sysfs_type, fs_type;
@@ -165,3 +161,4 @@ type sysfs_bootctl, sysfs_type, fs_type;
 
 # WLC
 type sysfs_wlc, sysfs_type, fs_type;
+

@@ -1,8 +1,5 @@
 # Block Devices
-type efs_block_device, dev_type;
 type modem_block_device, dev_type;
-type modem_userdata_block_device, dev_type;
-type persist_block_device, dev_type;
 type mfg_data_block_device, dev_type;
 
 # Exynos devices
@@ -39,3 +36,4 @@ type st33spi_device, dev_type;
 
 # GPS
 type vendor_gnss_device, dev_type;
+

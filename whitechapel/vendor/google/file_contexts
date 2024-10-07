@@ -16,8 +16,7 @@
 /(vendor|system/vendor)/lib(64)?/libgpudataproducer\.so                                         u:object_r:same_process_hal_file:s0
 
 /vendor/bin/dumpsys                                                                             u:object_r:vendor_dumpsys:s0
-/vendor/bin/dump/dump_gs101.sh                                                                  u:object_r:dump_gs101_exec:s0
-
+/vendor/bin/dump/dump_power                                                                     u:object_r:dump_power_exec:s0
 #
 # HALs
 #
@@ -373,5 +372,6 @@
 
 # Statsd service to support EdgeTPU metrics logging service.
 /vendor/lib64/android\.frameworks\.stats-V1-ndk\.so u:object_r:same_process_hal_file:s0
+/vendor/lib64/android\.frameworks\.stats-V2-ndk\.so u:object_r:same_process_hal_file:s0
 /vendor/lib64/vendor-pixelatoms-cpp\.so u:object_r:same_process_hal_file:s0
 /vendor/lib64/libprotobuf-cpp-lite-(\d+\.){2,3}so u:object_r:same_process_hal_file:s0

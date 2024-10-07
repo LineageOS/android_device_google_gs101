@@ -1,6 +1,9 @@
 
+battery_mitigation sysfs file b/364446534
 chre vendor_data_file dir b/301948771
 dump_display sysfs file b/340722772
+dump_modem sscoredump_vendor_data_coredump_file dir b/366115873
+dump_modem sscoredump_vendor_data_logcat_file dir b/366115873
 hal_power_default hal_power_default capability b/240632824
 hal_sensors_default sysfs file b/340723303
 hal_vibrator_default default_android_service service_manager b/317316478
@@ -10,10 +13,16 @@ kernel dm_device blk_file b/315907959
 kernel kernel capability b/340722537
 kernel kernel capability b/340723030
 kernel tmpfs chr_file b/315907959
+pixelstats_vendor block_device dir b/369537606
+pixelstats_vendor block_device dir b/369735407
+ramdump ramdump capability b/369538457
 rfsd vendor_cbd_prop file b/317734418
 shell sysfs_net file b/329380904
 ssr_detector_app default_prop file b/350831964
 surfaceflinger selinuxfs file b/313804340
+system_server vendor_default_prop file b/366115457
+system_server vendor_default_prop file b/366116435
+system_server vendor_default_prop file b/366116587
 untrusted_app nativetest_data_file dir b/305600845
 untrusted_app shell_test_data_file dir b/305600845
 untrusted_app system_data_root_file dir b/305600845
@@ -22,3 +31,7 @@ vendor_init debugfs_trace_marker file b/340723222
 vendor_init default_prop file b/315104713
 vendor_init default_prop file b/316817111
 vendor_init default_prop property_service b/315104713
+vendor_init default_prop property_service b/366115458
+vendor_init default_prop property_service b/366116214
+vendor_init default_prop property_service b/369735133
+vendor_init default_prop property_service b/369735170
