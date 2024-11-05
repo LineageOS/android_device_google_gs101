@@ -22,6 +22,7 @@ TARGET_SOC := gs101
 TARGET_SOC_NAME := google
 
 USES_DEVICE_GOOGLE_GS101 := true
+$(call soong_config_set,CitadelProvision,target_soc,gs101)
 
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-2a
@@ -44,6 +45,7 @@ BOARD_KERNEL_CMDLINE += earlycon=exynos4210,0x10A00000 console=ttySAC0,115200 an
 BOARD_KERNEL_CMDLINE += cma_sysfs.experimental=Y
 BOARD_KERNEL_CMDLINE += rcupdate.rcu_expedited=1 rcu_nocbs=all rcutree.enable_rcu_lazy
 BOARD_KERNEL_CMDLINE += swiotlb=noforce
+BOARD_KERNEL_CMDLINE += cgroup.memory=nokmem
 BOARD_BOOTCONFIG += androidboot.boot_devices=14700000.ufs
 
 TARGET_NO_BOOTLOADER := true
@@ -237,6 +239,8 @@ BOARD_USES_EXYNOS_AFBC_FEATURE := true
 
 BOARD_LIBACRYL_DEFAULT_COMPOSITOR := fimg2d_gs101
 BOARD_LIBACRYL_G2D_HDR_PLUGIN := libacryl_hdr_plugin
+$(call soong_config_set,acryl,libacryl_g2d_hdr_plugin,//hardware/google/graphics/gs101/libacryl_plugins:libacryl_hdr_plugin)
+$(call soong_config_set,acryl,libacryl_c_include,hardware/google/graphics/$(TARGET_BOARD_PLATFORM)/libcap)
 
 # HWCServices
 BOARD_USES_HWC_SERVICES := true
