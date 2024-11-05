@@ -244,8 +244,8 @@
 # TCP logging
 /vendor/bin/tcpdump_logger          u:object_r:tcpdump_logger_exec:s0
 
-# modem_svc_sit files
-/vendor/bin/modem_svc_sit           u:object_r:modem_svc_sit_exec:s0
+# shared_modem_platform files
+/vendor/bin/shared_modem_platform   u:object_r:modem_svc_sit_exec:s0
 /data/vendor/modem_stat(/.*)?       u:object_r:modem_stat_data_file:s0
 
 # modem mnt files
