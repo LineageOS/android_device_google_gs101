@@ -488,6 +488,19 @@
           }
         }
       ]
+    },
+    {
+      "Name": "HighestCfsPrioScheduling",
+      "Actions": [
+        {
+          "Name": "SetSchedulerPolicy",
+          "Params":
+          {
+            "Policy": "SCHED_OTHER",
+            "Nice": "-20"
+          }
+        }
+      ]
     }
   ],
 
@@ -526,7 +539,7 @@
     },
     {
       "Name": "InputPolicy",
-      "Profiles": [ "MaxPerformance", "SCHED_QOS_SENSITIVE_EXTREME_SET" ]
+      "Profiles": [ "HighestCfsPrioScheduling", "MaxPerformance", "SCHED_QOS_SENSITIVE_EXTREME_SET" ]
     }
   ]
 }
