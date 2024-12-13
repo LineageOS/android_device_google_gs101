@@ -47,4 +47,5 @@ vendor_init default_prop property_service b/366115458
 vendor_init default_prop property_service b/366116214
 vendor_init default_prop property_service b/369735133
 vendor_init default_prop property_service b/369735170
+zygote aconfig_storage_metadata_file dir b/383949055
 zygote zygote capability b/379591519
