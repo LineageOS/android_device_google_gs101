@@ -1,3 +1,4 @@
+import /vendor/etc/init/hw/init.gs101.storage.rc
 import /vendor/etc/init/hw/init.gs101.usb.rc
 import android.hardware.drm@1.2-service.widevine.rc
 import init.exynos.sensorhub.rc
@@ -14,10 +15,6 @@ on init
     write /sys/devices/system/cpu/cpuidle/current_governor teo
     # Disable util-awareness
     write /proc/vendor_sched/teo_util_threshold "1024 1024 1024"
-
-    # Boot time fs tuning
-    write /sys/block/sda/queue/scheduler bfq
-    write /sys/block/sda/queue/iosched/slice_idle 0
 
     chown system system /proc/vendor_sched/groups/bg/set_task_group
     chown system system /proc/vendor_sched/groups/cam/set_task_group
@@ -47,6 +44,8 @@ on init
     chown system system /proc/vendor_sched/prefer_idle_clear
     chown system system /proc/vendor_sched/pmu_poll_enable
     chown system system /proc/vendor_sched/pmu_poll_time
+    chown system system /proc/vendor_sched/uclamp_fork_reset_clear
+    chown system system /proc/vendor_sched/uclamp_fork_reset_set
     chown system system /sys/devices/system/cpu/cpufreq/policy0/sched_pixel/lcpi_threshold
     chown system system /sys/devices/system/cpu/cpufreq/policy0/sched_pixel/spc_threshold
     chown system system /sys/devices/system/cpu/cpufreq/policy0/sched_pixel/limit_frequency
@@ -96,6 +95,8 @@ on init
     chmod 0220 /proc/vendor_sched/prefer_idle_clear
     chmod 0220 /proc/vendor_sched/pmu_poll_enable
     chmod 0220 /proc/vendor_sched/pmu_poll_time
+    chmod 0220 /proc/vendor_sched/uclamp_fork_reset_clear
+    chmod 0220 /proc/vendor_sched/uclamp_fork_reset_set
 
     start vendor.keymaster-3-0
 
@@ -136,16 +137,6 @@ on init
     write /sys/class/net/rmnet5/queues/rx-0/rps_cpus fe
     write /sys/class/net/rmnet6/queues/rx-0/rps_cpus fe
     write /sys/class/net/rmnet7/queues/rx-0/rps_cpus fe
-
-    # Create UDS structure for base VR services.
-    mkdir /dev/socket/pdx 0775 system system
-    mkdir /dev/socket/pdx/system 0775 system system
-    mkdir /dev/socket/pdx/system/buffer_hub 0775 system system
-    mkdir /dev/socket/pdx/system/performance 0775 system system
-    mkdir /dev/socket/pdx/system/vr 0775 system system
-    mkdir /dev/socket/pdx/system/vr/display 0775 system system
-    mkdir /dev/socket/pdx/system/vr/pose 0775 system system
-    mkdir /dev/socket/pdx/system/vr/sensors 0775 system system
 
     # Boot time 183626384
     write /proc/vendor_sched/groups/ta/uclamp_min 201
@@ -277,6 +268,7 @@ on init
     chown system system /sys/class/power_supply/wireless/device/version
     chown system system /sys/class/power_supply/wireless/device/features
     chown system system /sys/class/power_supply/wireless/device/authtype
+    chown system system /sys/class/power_supply/wireless/device/authtstart
 
     # Adaptive charge
     chown system system /sys/class/power_supply/battery/charge_deadline
@@ -388,7 +380,7 @@ on post-fs-data
     mkdir /data/vendor/radio/logs/always-on 777 system radio
 
     # Modem extended log folder
-    mkdir /data/vendor/radio/extended_logs 0770 radio system
+    mkdir /data/vendor/radio/extended_logs 0771 radio system
 
     # Modem MDS log folder
     mkdir /data/vendor/radio/mds 0771 radio system
@@ -702,6 +694,12 @@ on property:sys.boot_completed=1
     write /dev/cpuset/camera-daemon/cpus ${persist.device_config.vendor_system_native.camera-daemon_cpuset:-0-7}
     setprop vendor.powerhal.init 1
 
+    # Setup scheduler parameters
+    write /proc/vendor_sched/min_granularity_ns 1000000
+    write /proc/vendor_sched/latency_ns 8000000
+    write /proc/vendor_sched/max_load_balance_interval 1
+    write /proc/vendor_sched/enable_hrtick 1
+
     # Setup final cpu.uclamp
     write /proc/vendor_sched/groups/ta/uclamp_min 1
     write /proc/vendor_sched/groups/fg/uclamp_min 0
@@ -854,50 +852,12 @@ on property:vendor.thermal.link_ready=1
     write /sys/devices/virtual/pmic/mitigation/clock_ratio/gpu_heavy_clk_ratio 0xfff04385
     write /sys/devices/virtual/pmic/mitigation/clock_ratio/tpu_heavy_clk_ratio 0xfff041c1
     write /sys/devices/virtual/pmic/mitigation/clock_ratio/cpu2_heavy_clk_ratio 0xfff041c0
-    write /dev/thermal/tz-by-name/smpl_gm/policy user_space
-    write /dev/thermal/tz-by-name/vdroop1/policy user_space
-    write /dev/thermal/tz-by-name/vdroop2/policy user_space
-    write /dev/thermal/tz-by-name/ocp_cpu1/policy user_space
-    write /dev/thermal/tz-by-name/ocp_cpu2/policy user_space
-    write /dev/thermal/tz-by-name/ocp_tpu/policy user_space
-    write /dev/thermal/tz-by-name/ocp_gpu/policy user_space
-    write /dev/thermal/tz-by-name/soft_ocp_cpu1/policy user_space
-    write /dev/thermal/tz-by-name/soft_ocp_cpu2/policy user_space
-    write /dev/thermal/tz-by-name/soft_ocp_tpu/policy user_space
-    write /dev/thermal/tz-by-name/soft_ocp_gpu/policy user_space
-    write /dev/thermal/tz-by-name/soc/policy user_space
-    write /dev/thermal/tz-by-name/batoilo/policy user_space
     write /sys/devices/virtual/pmic/mitigation/triggered_lvl/smpl_lvl 3100
+    write /sys/devices/virtual/pmic/mitigation/triggered_lvl/ocp_cpu1_lvl 7000
+    write /sys/devices/virtual/pmic/mitigation/triggered_lvl/soft_ocp_cpu1_lvl 7000
     write /sys/devices/virtual/pmic/mitigation/clock_div/tpu_clk_div 0x1
     write /sys/devices/virtual/pmic/mitigation/clock_div/gpu_clk_div 0x1
     write /sys/devices/virtual/pmic/mitigation/clock_div/cpu2_clk_div 0x1
-    chown system system /dev/thermal/tz-by-name/soc/mode
-    chown system system /dev/thermal/tz-by-name/batoilo/trip_point_0_temp
-    chown system system /dev/thermal/tz-by-name/batoilo/trip_point_0_hyst
-    chown system system /dev/thermal/tz-by-name/vdroop2/trip_point_0_temp
-    chown system system /dev/thermal/tz-by-name/vdroop2/trip_point_0_hyst
-    chown system system /dev/thermal/tz-by-name/vdroop1/trip_point_0_temp
-    chown system system /dev/thermal/tz-by-name/vdroop1/trip_point_0_hyst
-    chown system system /dev/thermal/tz-by-name/smpl_gm/trip_point_0_temp
-    chown system system /dev/thermal/tz-by-name/smpl_gm/trip_point_0_hyst
-    chown system system /dev/thermal/tz-by-name/ocp_cpu1/trip_point_0_temp
-    chown system system /dev/thermal/tz-by-name/ocp_cpu1/trip_point_0_hyst
-    chown system system /dev/thermal/tz-by-name/ocp_cpu2/trip_point_0_temp
-    chown system system /dev/thermal/tz-by-name/ocp_cpu2/trip_point_0_hyst
-    chown system system /dev/thermal/tz-by-name/ocp_tpu/trip_point_0_temp
-    chown system system /dev/thermal/tz-by-name/ocp_tpu/trip_point_0_hyst
-    chown system system /dev/thermal/tz-by-name/ocp_gpu/trip_point_0_temp
-    chown system system /dev/thermal/tz-by-name/ocp_gpu/trip_point_0_hyst
-    chown system system /dev/thermal/tz-by-name/soft_ocp_cpu1/trip_point_0_temp
-    chown system system /dev/thermal/tz-by-name/soft_ocp_cpu1/trip_point_0_hyst
-    chown system system /dev/thermal/tz-by-name/soft_ocp_cpu2/trip_point_0_temp
-    chown system system /dev/thermal/tz-by-name/soft_ocp_cpu2/trip_point_0_hyst
-    chown system system /dev/thermal/tz-by-name/soft_ocp_tpu/trip_point_0_temp
-    chown system system /dev/thermal/tz-by-name/soft_ocp_tpu/trip_point_0_hyst
-    chown system system /dev/thermal/tz-by-name/soft_ocp_gpu/trip_point_0_temp
-    chown system system /dev/thermal/tz-by-name/soft_ocp_gpu/trip_point_0_hyst
-    chown system system /dev/thermal/tz-by-name/soc/trip_point_0_temp
-    chown system system /dev/thermal/tz-by-name/soc/trip_point_0_hyst
     # Thermal
     chown system system /dev/thermal/tz-by-name/quiet_therm/trip_point_0_temp
     chown system system /dev/thermal/tz-by-name/quiet_therm/trip_point_0_hyst

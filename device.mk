@@ -76,7 +76,6 @@ PRODUCT_SOONG_NAMESPACES += \
 	vendor/google/whitechapel/tools \
 	vendor/google/camera \
 	vendor/google/interfaces \
-	vendor/google_devices/common/proprietary/confirmatioui_hal \
 	vendor/google_nos/host/android \
 	vendor/google_nos/test/system-test-harness
 
@@ -186,6 +185,7 @@ USE_LASSEN_OEMHOOK := true
 # $(USE_LASSEN_OEMHOOK) is true and $(BOARD_WITHOUT_RADIO) is not true.
 ifneq ($(BOARD_WITHOUT_RADIO),true)
     PRODUCT_SOONG_NAMESPACES += vendor/google/tools/power-anomaly-sitril
+    $(call soong_config_set,sitril,use_lassen_oemhook_with_radio,true)
 endif
 
 # Use for GRIL
@@ -213,13 +213,24 @@ PRODUCT_SOONG_NAMESPACES += \
 	vendor/arm/mali/valhall
 
 $(call soong_config_set,pixel_mali,soc,$(TARGET_BOARD_PLATFORM))
+# Used in gfx_tools when defining tests with composer2 interface for gs101 devices
+$(call soong_config_set,gfx_tools,use_hwc2,true)
 
 include device/google/gs-common/gpu/gpu.mk
 PRODUCT_PACKAGES += \
 	libGLES_mali \
 	vulkan.mali \
-	libOpenCL \
 	libgpudataproducer
+
+# Install the OpenCL ICD Loader
+PRODUCT_SOONG_NAMESPACES += external/OpenCL-ICD-Loader
+PRODUCT_PACKAGES += \
+       libOpenCL \
+       mali_icd__customer_pixel_opencl-icd_ARM.icd
+ifeq ($(DEVICE_IS_64BIT_ONLY),false)
+PRODUCT_PACKAGES += \
+	mali_icd__customer_pixel_opencl-icd_ARM32.icd
+endif
 
 PRODUCT_VENDOR_PROPERTIES += \
 	ro.hardware.vulkan=mali
@@ -231,7 +242,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_VENDOR_PROPERTIES += \
 	vendor.mali.platform.config=/vendor/etc/mali/platform.config \
 	vendor.mali.debug.config=/vendor/etc/mali/debug.config \
-	vendor.mali.base_protected_max_core_count=3 \
+	vendor.mali.base_protected_max_core_count=4 \
 	vendor.mali.base_protected_tls_max=67108864 \
 	vendor.mali.platform_agt_frequency_khz=24576
 
@@ -277,6 +288,7 @@ PRODUCT_VENDOR_PROPERTIES += ro.surface_flinger.prime_shader_cache.ultrahdr=1
 DEVICE_MANIFEST_FILE := \
 	device/google/gs101/manifest$(LOCAL_64ONLY).xml
 
+BOARD_USE_CODEC2_AIDL := V1
 ifneq (,$(filter aosp_%,$(TARGET_PRODUCT)))
 DEVICE_MANIFEST_FILE += \
 	device/google/gs101/manifest_media_aosp.xml
@@ -313,6 +325,14 @@ PRODUCT_COPY_FILES += \
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_COPY_FILES += \
 	device/google/gs101/conf/init.debug.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.debug.rc
+endif
+
+ifneq (,$(filter 5.%, $(TARGET_LINUX_KERNEL_VERSION)))
+PRODUCT_COPY_FILES += \
+	device/google/gs101/storage/5.10/init.gs101.storage.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.gs101.storage.rc
+else
+PRODUCT_COPY_FILES += \
+	device/google/gs101/storage/6.1/init.gs101.storage.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.gs101.storage.rc
 endif
 
 # Recovery files
@@ -561,6 +581,9 @@ include device/google/gs-common/storage/storage.mk
 PRODUCT_PACKAGES += \
 	android.hardware.health.storage-service.default
 
+# Battery Mitigation
+include device/google/gs-common/battery_mitigation/bcl.mk
+
 # storage pixelstats
 -include hardware/google/pixel/pixelstats/device.mk
 
@@ -737,11 +760,18 @@ PRODUCT_COPY_FILES += \
 	device/google/gs101/media_codecs_performance_c2.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance_c2.xml \
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    debug.stagefright.c2-poolmask=458752 \
     debug.c2.use_dmabufheaps=1 \
     media.c2.dmabuf.padding=512 \
     debug.stagefright.ccodec_delayed_params=1 \
     ro.vendor.gpu.dataspace=1
+
+ifneq ($(BOARD_USE_CODEC2_AIDL), )
+PRODUCT_PROPERTY_OVERRIDES += \
+        debug.stagefright.c2-poolmask=1507328
+else
+PRODUCT_PROPERTY_OVERRIDES += \
+        debug.stagefright.c2-poolmask=458752
+endif
 
 # Create input surface on the framework side
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -803,8 +833,6 @@ include device/google/gs-common/trusty/trusty.mk
 PRODUCT_PACKAGES_DEBUG += \
     trusty-ut-ctrl \
     tipc-test
-
-include device/google/gs101/confirmationui/confirmationui.mk
 
 include device/google/gs101/trusty_metricsd/trusty_metricsd.mk
 
