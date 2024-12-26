@@ -22,7 +22,7 @@ TARGET_SOC := gs101
 TARGET_SOC_NAME := google
 
 USES_DEVICE_GOOGLE_GS101 := true
-$(call soong_config_set,CitadelProvision,target_soc,gs101)
+$(call soong_config_set,googleDeviceConfig,target_soc,gs101)
 
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-2a
