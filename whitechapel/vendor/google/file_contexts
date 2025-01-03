@@ -359,6 +359,7 @@
 /dev/bigocean                                                                  u:object_r:video_device:s0
 
 # Fingerprint
+/dev/fth_fd                                                                    u:object_r:fingerprint_device:s0
 /dev/goodix_fp                                                                 u:object_r:fingerprint_device:s0
 /data/vendor/fingerprint(/.*)?                                                 u:object_r:fingerprint_vendor_data_file:s0
 
