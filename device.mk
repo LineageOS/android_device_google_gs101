@@ -26,7 +26,7 @@ include device/google/gs-common/thermal/thermal_hal/device.mk
 include device/google/gs-common/pixel_metrics/pixel_metrics.mk
 include device/google/gs-common/performance/perf.mk
 include device/google/gs-common/power/power.mk
-include device/google/gs-common/display/dump.mk
+include device/google/gs-common/display/dump_exynos_display.mk
 include device/google/gs101/dumpstate/item.mk
 include device/google/gs-common/radio/dump.mk
 include device/google/gs-common/gear/dumpstate/aidl.mk
@@ -210,9 +210,8 @@ USE_SWIFTSHADER := false
 TARGET_USES_VULKAN = true
 
 PRODUCT_SOONG_NAMESPACES += \
-	vendor/arm/mali/valhall
+	vendor/arm/mali/gs101
 
-$(call soong_config_set,pixel_mali,soc,$(TARGET_BOARD_PLATFORM))
 # Used in gfx_tools when defining tests with composer2 interface for gs101 devices
 $(call soong_config_set,gfx_tools,use_hwc2,true)
 

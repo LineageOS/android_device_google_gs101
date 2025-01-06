@@ -16,36 +16,6 @@ on init
     # Disable util-awareness
     write /proc/vendor_sched/teo_util_threshold "1024 1024 1024"
 
-    chown system system /proc/vendor_sched/groups/bg/set_task_group
-    chown system system /proc/vendor_sched/groups/cam/set_task_group
-    chown system system /proc/vendor_sched/groups/fg/set_task_group
-    chown system system /proc/vendor_sched/groups/nnapi/set_task_group
-    chown system system /proc/vendor_sched/groups/sys/set_task_group
-    chown system system /proc/vendor_sched/groups/sys_bg/set_task_group
-    chown system system /proc/vendor_sched/groups/ta/set_task_group
-    chown system system /proc/vendor_sched/groups/rt/set_task_group
-    chown system system /proc/vendor_sched/groups/sf/set_task_group
-    chown system system /proc/vendor_sched/groups/dex2oat/set_task_group
-    chown system system /proc/vendor_sched/groups/cam_power/set_task_group
-    chown system system /proc/vendor_sched/groups/ota/set_task_group
-    chown system system /proc/vendor_sched/groups/bg/set_proc_group
-    chown system system /proc/vendor_sched/groups/cam/set_proc_group
-    chown system system /proc/vendor_sched/groups/fg/set_proc_group
-    chown system system /proc/vendor_sched/groups/nnapi/set_proc_group
-    chown system system /proc/vendor_sched/groups/sys/set_proc_group
-    chown system system /proc/vendor_sched/groups/sys_bg/set_proc_group
-    chown system system /proc/vendor_sched/groups/ta/set_proc_group
-    chown system system /proc/vendor_sched/groups/rt/set_proc_group
-    chown system system /proc/vendor_sched/groups/sf/set_proc_group
-    chown system system /proc/vendor_sched/groups/dex2oat/set_proc_group
-    chown system system /proc/vendor_sched/groups/cam_power/set_proc_group
-    chown system system /proc/vendor_sched/groups/ota/set_proc_group
-    chown system system /proc/vendor_sched/prefer_idle_set
-    chown system system /proc/vendor_sched/prefer_idle_clear
-    chown system system /proc/vendor_sched/pmu_poll_enable
-    chown system system /proc/vendor_sched/pmu_poll_time
-    chown system system /proc/vendor_sched/uclamp_fork_reset_clear
-    chown system system /proc/vendor_sched/uclamp_fork_reset_set
     chown system system /sys/devices/system/cpu/cpufreq/policy0/sched_pixel/lcpi_threshold
     chown system system /sys/devices/system/cpu/cpufreq/policy0/sched_pixel/spc_threshold
     chown system system /sys/devices/system/cpu/cpufreq/policy0/sched_pixel/limit_frequency
@@ -66,37 +36,6 @@ on init
     chown system system /sys/class/devfreq/gs_memlat_devfreq:devfreq_mif_cpu5_memlat@17000010/memlat_cpuidle_state_aware
     chown system system /sys/class/devfreq/gs_memlat_devfreq:devfreq_mif_cpu6_memlat@17000010/memlat_cpuidle_state_aware
     chown system system /sys/class/devfreq/gs_memlat_devfreq:devfreq_mif_cpu7_memlat@17000010/memlat_cpuidle_state_aware
-
-    chmod 0220 /proc/vendor_sched/groups/bg/set_task_group
-    chmod 0220 /proc/vendor_sched/groups/cam/set_task_group
-    chmod 0220 /proc/vendor_sched/groups/fg/set_task_group
-    chmod 0220 /proc/vendor_sched/groups/nnapi/set_task_group
-    chmod 0220 /proc/vendor_sched/groups/sys/set_task_group
-    chmod 0220 /proc/vendor_sched/groups/sys_bg/set_task_group
-    chmod 0220 /proc/vendor_sched/groups/ta/set_task_group
-    chmod 0220 /proc/vendor_sched/groups/rt/set_task_group
-    chmod 0220 /proc/vendor_sched/groups/sf/set_task_group
-    chmod 0220 /proc/vendor_sched/groups/dex2oat/set_task_group
-    chmod 0220 /proc/vendor_sched/groups/cam_power/set_task_group
-    chmod 0220 /proc/vendor_sched/groups/ota/set_task_group
-    chmod 0220 /proc/vendor_sched/groups/bg/set_proc_group
-    chmod 0220 /proc/vendor_sched/groups/cam/set_proc_group
-    chmod 0220 /proc/vendor_sched/groups/fg/set_proc_group
-    chmod 0220 /proc/vendor_sched/groups/nnapi/set_proc_group
-    chmod 0220 /proc/vendor_sched/groups/sys/set_proc_group
-    chmod 0220 /proc/vendor_sched/groups/sys_bg/set_proc_group
-    chmod 0220 /proc/vendor_sched/groups/ta/set_proc_group
-    chmod 0220 /proc/vendor_sched/groups/rt/set_proc_group
-    chmod 0220 /proc/vendor_sched/groups/sf/set_proc_group
-    chmod 0220 /proc/vendor_sched/groups/dex2oat/set_proc_group
-    chmod 0220 /proc/vendor_sched/groups/cam_power/set_proc_group
-    chmod 0220 /proc/vendor_sched/groups/ota/set_proc_group
-    chmod 0220 /proc/vendor_sched/prefer_idle_set
-    chmod 0220 /proc/vendor_sched/prefer_idle_clear
-    chmod 0220 /proc/vendor_sched/pmu_poll_enable
-    chmod 0220 /proc/vendor_sched/pmu_poll_time
-    chmod 0220 /proc/vendor_sched/uclamp_fork_reset_clear
-    chmod 0220 /proc/vendor_sched/uclamp_fork_reset_set
 
     start vendor.keymaster-3-0
 
@@ -149,14 +88,11 @@ on init
     # governor setting
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor sched_pixel
     write /sys/devices/system/cpu/cpu0/cpufreq/sched_pixel/up_rate_limit_us 500
-    write /sys/devices/system/cpu/cpu0/cpufreq/sched_pixel/down_rate_limit_us 5000
     write /sys/devices/system/cpu/cpu0/cpufreq/sched_pixel/down_rate_limit_scale_pow 2
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor sched_pixel
     write /sys/devices/system/cpu/cpu4/cpufreq/sched_pixel/up_rate_limit_us 500
-    write /sys/devices/system/cpu/cpu4/cpufreq/sched_pixel/down_rate_limit_us 20000
     write /sys/devices/system/cpu/cpu6/cpufreq/scaling_governor sched_pixel
     write /sys/devices/system/cpu/cpu6/cpufreq/sched_pixel/up_rate_limit_us 500
-    write /sys/devices/system/cpu/cpu6/cpufreq/sched_pixel/down_rate_limit_us 20000
 
     # memlat cpuidle awareness setting
     write /sys/class/devfreq/gs_memlat_devfreq:devfreq_mif_cpu0_memlat@17000010/memlat_cpuidle_state_aware 2
@@ -362,6 +298,11 @@ on late-fs
     # Mount RW partitions which need run fsck
     mount_all --late
 
+on late-init
+    write /sys/devices/system/cpu/cpu0/cpufreq/sched_pixel/down_rate_limit_us 5000
+    write /sys/devices/system/cpu/cpu4/cpufreq/sched_pixel/down_rate_limit_us 20000
+    write /sys/devices/system/cpu/cpu6/cpufreq/sched_pixel/down_rate_limit_us 20000
+
 on post-fs-data
     # Log data folder
     mkdir /data/vendor 0771 radio system
@@ -417,8 +358,8 @@ on post-fs-data
     restorecon /sys/kernel/debug/tracing/trace_marker
 
     # ranging sensor
-    chown system system /dev/stmvl53l1_ranging
-    chmod 0660 /dev/stmvl53l1_ranging
+    chown system system /dev/ispolin_ranging
+    chmod 0660 /dev/ispolin_ranging
 
     # Factory calibration files
     chmod 0771 /mnt/vendor/persist/camera
@@ -688,6 +629,7 @@ on property:sys.boot_completed=1
     # Setup final cpuset
     write /dev/cpuset/top-app/cpus ${persist.device_config.vendor_system_native.top-app_cpuset:-0-7}
     write /dev/cpuset/foreground/cpus ${persist.device_config.vendor_system_native.foreground_cpuset:-0-3,4-5}
+    write /dev/cpuset/foreground_window/cpus ${persist.device_config.vendor_system_native.foreground_window_cpuset:-0-3,4-5}
     write /dev/cpuset/background/cpus ${persist.device_config.vendor_system_native.background_cpuset:-0-3}
     write /dev/cpuset/system-background/cpus ${persist.device_config.vendor_system_native.system-background_cpuset:-0-3}
     write /dev/cpuset/restricted/cpus ${persist.device_config.vendor_system_native.restricted_cpuset:-0-3}
@@ -929,6 +871,8 @@ on property:persist.device_config.vendor_system_native.top-app_cpuset=*
     write /dev/cpuset/top-app/cpus ${persist.device_config.vendor_system_native.top-app_cpuset:-0-7}
 on property:persist.device_config.vendor_system_native.foreground_cpuset=*
     write /dev/cpuset/foreground/cpus ${persist.device_config.vendor_system_native.foreground_cpuset:-0-3,4-5}
+on property:persist.device_config.vendor_system_native.foreground_window_cpuset=*
+    write /dev/cpuset/foreground/cpus ${persist.device_config.vendor_system_native.foreground_window_cpuset:-0-3,4-5}
 on property:persist.device_config.vendor_system_native.background_cpuset=*
     write /dev/cpuset/background/cpus ${persist.device_config.vendor_system_native.background_cpuset:-0-3}
 on property:persist.device_config.vendor_system_native.system-background_cpuset=*
