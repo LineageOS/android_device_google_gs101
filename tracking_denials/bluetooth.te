@@ -1,0 +1,2 @@
+# b/382362462
+dontaudit bluetooth default_android_service:service_manager { find };

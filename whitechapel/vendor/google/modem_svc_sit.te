@@ -32,9 +32,6 @@ get_prop(modem_svc_sit, hwservicemanager_prop)
 # logging property
 get_prop(modem_svc_sit, vendor_logger_prop)
 
-# Modem SVC will register the default instance of the AIDL ISharedModemPlatform hal.
-hal_server_domain(modem_svc_sit, hal_shared_modem_platform)
-
 # Modem property
 set_prop(modem_svc_sit, vendor_modem_prop)
 
