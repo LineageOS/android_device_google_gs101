@@ -794,6 +794,7 @@ service init_display /vendor/bin/init.display.sh
     group root system
     disabled
     oneshot
+    file /dev/kmsg w
 
 # bugreport is triggered by holding down volume down, volume up and power
 service bugreport /system/bin/dumpstate -d -p -z
