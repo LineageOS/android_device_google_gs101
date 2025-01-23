@@ -533,9 +533,9 @@ Usb::Usb()
       mRoleSwitchLock(PTHREAD_MUTEX_INITIALIZER),
       mPartnerLock(PTHREAD_MUTEX_INITIALIZER),
       mPartnerUp(false),
-      mUsbDataSessionMonitor(kUdcUeventRegex, kUdcStatePath, kHost1UeventRegex, kHost1StatePath,
-                             kHost2UeventRegex, kHost2StatePath, kDataRolePath,
-                             std::bind(&updatePortStatus, this)),
+      mUsbDataSessionMonitor(new UsbDataSessionMonitor(kUdcUeventRegex, kUdcStatePath,
+                             kHost1UeventRegex, kHost1StatePath, kHost2UeventRegex,
+                             kHost2StatePath, kDataRolePath, std::bind(&updatePortStatus, this))),
       mOverheat(ZoneInfo(TemperatureType::USB_PORT, kThermalZoneForTrip,
                          ThrottlingSeverity::CRITICAL),
                 {ZoneInfo(TemperatureType::UNKNOWN, kThermalZoneForTempReadPrimary,
@@ -930,7 +930,7 @@ void queryUsbDataSession(android::hardware::usb::Usb *usb,
                           std::vector<PortStatus> *currentPortStatus) {
     std::vector<ComplianceWarning> warnings;
 
-    usb->mUsbDataSessionMonitor.getComplianceWarnings(
+    usb->mUsbDataSessionMonitor->getComplianceWarnings(
         (*currentPortStatus)[0].currentDataRole, &warnings);
     (*currentPortStatus)[0].complianceWarnings.insert(
         (*currentPortStatus)[0].complianceWarnings.end(),

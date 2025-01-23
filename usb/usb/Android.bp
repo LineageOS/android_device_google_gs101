@@ -32,7 +32,6 @@ cc_binary {
     srcs: [
         "service.cpp",
         "Usb.cpp",
-        "UsbDataSessionMonitor.cpp",
     ],
     shared_libs: [
         "libbase",
@@ -56,18 +55,13 @@ cc_binary {
     ],
     static_libs: [
         "libpixelusb",
+        "libpixelusb-datasession",
         "libpixelstats",
         "libthermalutils",
-        "android.hardware.usb.flags-aconfig-c-lib",
+        "android.hardware.usb.flags-aconfig-cc-lib",
     ],
     export_shared_lib_headers: [
         "android.frameworks.stats-V2-ndk",
         "pixelatoms-cpp",
     ],
-}
-
-cc_aconfig_library {
-    name: "android.hardware.usb.flags-aconfig-c-lib",
-    vendor: true,
-    aconfig_declarations: "android.hardware.usb.flags-aconfig",
 }
