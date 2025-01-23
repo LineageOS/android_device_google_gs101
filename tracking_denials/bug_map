@@ -2,7 +2,6 @@
 battery_mitigation sysfs file b/364446534
 bluetooth audio_config_prop file b/379226761
 bluetooth audio_config_prop file b/379245675
-chre vendor_data_file dir b/301948771
 dump_display sysfs file b/340722772
 dump_modem sscoredump_vendor_data_coredump_file dir b/366115873
 dump_modem sscoredump_vendor_data_logcat_file dir b/366115873
