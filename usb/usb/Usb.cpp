@@ -90,11 +90,11 @@ constexpr char kUdcUeventRegex[] =
 constexpr char kUdcStatePath[] =
     "/sys/devices/platform/11110000.usb/11110000.dwc3/udc/11110000.dwc3/state";
 constexpr char kHost1UeventRegex[] =
-    "/devices/platform/11110000.usb/11110000.dwc3/xhci-hcd-exynos.[0-9].auto/usb2/2-0:1.0";
-constexpr char kHost1StatePath[] = "/sys/bus/usb/devices/usb2/2-0:1.0/usb2-port1/state";
+    "/devices/platform/11110000.usb/11110000.dwc3/xhci-hcd-exynos.[0-9].auto/usb1/1-0:1.0";
+constexpr char kHost1StatePath[] = "/sys/bus/usb/devices/usb1/1-0:1.0/usb1-port1/state";
 constexpr char kHost2UeventRegex[] =
-    "/devices/platform/11110000.usb/11110000.dwc3/xhci-hcd-exynos.[0-9].auto/usb3/3-0:1.0";
-constexpr char kHost2StatePath[] = "/sys/bus/usb/devices/usb3/3-0:1.0/usb3-port1/state";
+    "/devices/platform/11110000.usb/11110000.dwc3/xhci-hcd-exynos.[0-9].auto/usb2/2-0:1.0";
+constexpr char kHost2StatePath[] = "/sys/bus/usb/devices/usb2/2-0:1.0/usb2-port1/state";
 constexpr char kDataRolePath[] = "/sys/devices/platform/11110000.usb/new_data_role";
 constexpr int kSamplingIntervalSec = 5;
 void queryVersionHelper(android::hardware::usb::Usb *usb,
