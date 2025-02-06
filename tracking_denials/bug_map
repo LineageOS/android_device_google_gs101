@@ -2,7 +2,6 @@
 battery_mitigation sysfs file b/364446534
 bluetooth audio_config_prop file b/379226761
 bluetooth audio_config_prop file b/379245675
-chre vendor_data_file dir b/301948771
 dump_display sysfs file b/340722772
 dump_modem sscoredump_vendor_data_coredump_file dir b/366115873
 dump_modem sscoredump_vendor_data_logcat_file dir b/366115873
@@ -26,7 +25,6 @@ priv_app audio_config_prop file b/379246066
 radio audio_config_prop file b/379227275
 ramdump ramdump capability b/369538457
 ramdump_app default_prop file b/386149238
-ramdump_app privapp_data_file lnk_file b/385977809
 rfsd vendor_cbd_prop file b/317734418
 shell sysfs_net file b/329380904
 ssr_detector_app default_prop file b/350831964
@@ -50,4 +48,5 @@ vendor_init default_prop property_service b/366116214
 vendor_init default_prop property_service b/369735133
 vendor_init default_prop property_service b/369735170
 zygote aconfig_storage_metadata_file dir b/383949055
+zygote media_config_prop file b/394433509
 zygote zygote capability b/379591519

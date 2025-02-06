@@ -352,3 +352,6 @@ genfscon sysfs /devices/platform/25f40000.etm    u:object_r:sysfs_devices_cs_etm
 
 # BootControl
 genfscon sysfs /kernel/boot_control/blow_ar      u:object_r:sysfs_bootctl:s0
+
+# USB
+genfscon sysfs /devices/platform/11110000.usb/11110000.dwc3/udc/11110000.dwc3/state   u:object_r:sysfs_udc:s0

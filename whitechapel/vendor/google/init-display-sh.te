@@ -8,3 +8,5 @@ allow init-display-sh vendor_toolbox_exec:file execute_no_trans;
 
 dontaudit init-display-sh proc_cmdline:file r_file_perms;
 
+# Allow modprobe to log to kmsg.
+allow init-display-sh kmsg_device:chr_file w_file_perms;
