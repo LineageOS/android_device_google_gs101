@@ -104,15 +104,6 @@ on init
     write /sys/class/devfreq/gs_memlat_devfreq:devfreq_mif_cpu6_memlat@17000010/memlat_cpuidle_state_aware 2
     write /sys/class/devfreq/gs_memlat_devfreq:devfreq_mif_cpu7_memlat@17000010/memlat_cpuidle_state_aware 2
 
-    # RT uclamp setting
-    write /proc/sys/kernel/sched_util_clamp_min_rt_default 0
-
-    # change permissions and default values for camera-daemon cpu controller
-    chown system system /dev/cpuctl/camera-daemon/cpu.uclamp.min
-    chown system system /dev/cpuctl/camera-daemon/cpu.uclamp.max
-    chown root root /dev/cpuctl/camera-daemon/cpu.uclamp.latency_sensitive
-    chown system system /dev/cpuctl/camera-daemon/cgroup.procs
-
     mkdir /dev/cpuset/camera-daemon-high-group
     write /dev/cpuset/camera-daemon-high-group/cpus 0-7
     write /dev/cpuset/camera-daemon-high-group/mems 0
@@ -130,11 +121,6 @@ on init
     write /dev/cpuset/camera-daemon-mid-high-group/mems 0
     chown system system /dev/cpuset/camera-daemon-mid-high-group/tasks
     chmod 0664 /dev/cpuset/camera-daemon-mid-high-group/tasks
-
-    write /proc/vendor_sched/groups/cam/prefer_idle 1
-    write /proc/vendor_sched/groups/cam/uclamp_min 1
-
-    chown system system /dev/cpuset/cgroup.procs
 
     # nanohub sensor
     chmod 0664 /dev/nanohub
@@ -250,10 +236,6 @@ on init
 
     # Power Stats HAL
     chown system system /dev/bbd_pwrstat
-
-    # Add a boost for NNAPI HAL
-    write /proc/vendor_sched/groups/nnapi/prefer_idle 0
-    write /proc/vendor_sched/groups/nnapi/uclamp_min 512
 
     # Add memlat governor settings
     write /sys/class/devfreq/gs_memlat_devfreq:devfreq_mif_cpu0_memlat@17000010/polling_interval 10
@@ -636,27 +618,6 @@ on property:sys.boot_completed=1
     write /dev/cpuset/camera-daemon/cpus ${persist.device_config.vendor_system_native.camera-daemon_cpuset:-0-7}
     setprop vendor.powerhal.init 1
 
-    # Setup scheduler parameters
-    write /proc/vendor_sched/min_granularity_ns 1000000
-    write /proc/vendor_sched/latency_ns 8000000
-    write /proc/vendor_sched/max_load_balance_interval 1
-    write /proc/vendor_sched/enable_hrtick 1
-
-    # Setup final cpu.uclamp
-    write /proc/vendor_sched/groups/ta/uclamp_min 1
-    write /proc/vendor_sched/groups/fg/uclamp_min 0
-    write /proc/vendor_sched/groups/sys/prefer_idle 0
-
-    # Set ug group
-    write /proc/vendor_sched/groups/bg/ug 0
-    write /proc/vendor_sched/groups/sys_bg/ug 0
-    write /proc/vendor_sched/groups/ota/ug 0
-    write /proc/vendor_sched/groups/dex2oat/ug 1
-    write /proc/vendor_sched/groups/ta/ug 1
-
-    # Set bg group throttle
-    write /proc/vendor_sched/ug_bg_group_throttle ${persist.device_config.vendor_system_native.ug_bg_group_throttle:-308}
-
     # Set uclamp.max for some groups, which could indicate cpu importance used in scheduling
     write /proc/vendor_sched/groups/bg/uclamp_max 512
     write /proc/vendor_sched/groups/sys_bg/uclamp_max 512
@@ -674,24 +635,6 @@ on property:sys.boot_completed=1
     write /sys/devices/system/cpu/cpufreq/policy6/sched_pixel/spc_threshold 69
     write /sys/devices/system/cpu/cpufreq/policy6/sched_pixel/limit_frequency 2507000
     write /proc/vendor_sched/pmu_poll_time 10
-
-    # Disable PMU freq limit
-    write /sys/devices/system/cpu/cpufreq/policy0/sched_pixel/pmu_limit_enable 1
-    write /sys/devices/system/cpu/cpufreq/policy4/sched_pixel/pmu_limit_enable 1
-    write /sys/devices/system/cpu/cpufreq/policy6/sched_pixel/pmu_limit_enable 1
-    write /proc/vendor_sched/pmu_poll_enable 0
-
-    # Setup cpu.shares to throttle background groups (bg ~ 5% sysbg ~ 5% dex2oat ~2.5%)
-    write /dev/cpuctl/background/cpu.shares 1024
-    write /dev/cpuctl/system-background/cpu.shares 1024
-    write /dev/cpuctl/dex2oat/cpu.shares 512
-    write /dev/cpuctl/system/cpu.shares 20480
-    # We only have system and background groups holding tasks and the groups below are empty
-    write /dev/cpuctl/camera-daemon/cpu.shares 20480
-    write /dev/cpuctl/foreground/cpu.shares 20480
-    write /dev/cpuctl/nnapi-hal/cpu.shares 20480
-    write /dev/cpuctl/rt/cpu.shares 20480
-    write /dev/cpuctl/top-app/cpu.shares 20480
 
     # gvotables for dumpstate
     chown system system /sys/kernel/debug/gvotables
@@ -736,6 +679,7 @@ service init_display /vendor/bin/init.display.sh
     group root system
     disabled
     oneshot
+    file /dev/kmsg w
 
 # bugreport is triggered by holding down volume down, volume up and power
 service bugreport /system/bin/dumpstate -d -p -z

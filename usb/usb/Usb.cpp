@@ -90,11 +90,11 @@ constexpr char kUdcUeventRegex[] =
 constexpr char kUdcStatePath[] =
     "/sys/devices/platform/11110000.usb/11110000.dwc3/udc/11110000.dwc3/state";
 constexpr char kHost1UeventRegex[] =
-    "/devices/platform/11110000.usb/11110000.dwc3/xhci-hcd-exynos.[0-9].auto/usb2/2-0:1.0";
-constexpr char kHost1StatePath[] = "/sys/bus/usb/devices/usb2/2-0:1.0/usb2-port1/state";
+    "/devices/platform/11110000.usb/11110000.dwc3/xhci-hcd-exynos.[0-9].auto/usb1/1-0:1.0";
+constexpr char kHost1StatePath[] = "/sys/bus/usb/devices/usb1/1-0:1.0/usb1-port1/state";
 constexpr char kHost2UeventRegex[] =
-    "/devices/platform/11110000.usb/11110000.dwc3/xhci-hcd-exynos.[0-9].auto/usb3/3-0:1.0";
-constexpr char kHost2StatePath[] = "/sys/bus/usb/devices/usb3/3-0:1.0/usb3-port1/state";
+    "/devices/platform/11110000.usb/11110000.dwc3/xhci-hcd-exynos.[0-9].auto/usb2/2-0:1.0";
+constexpr char kHost2StatePath[] = "/sys/bus/usb/devices/usb2/2-0:1.0/usb2-port1/state";
 constexpr char kDataRolePath[] = "/sys/devices/platform/11110000.usb/new_data_role";
 constexpr int kSamplingIntervalSec = 5;
 void queryVersionHelper(android::hardware::usb::Usb *usb,
@@ -533,9 +533,9 @@ Usb::Usb()
       mRoleSwitchLock(PTHREAD_MUTEX_INITIALIZER),
       mPartnerLock(PTHREAD_MUTEX_INITIALIZER),
       mPartnerUp(false),
-      mUsbDataSessionMonitor(kUdcUeventRegex, kUdcStatePath, kHost1UeventRegex, kHost1StatePath,
-                             kHost2UeventRegex, kHost2StatePath, kDataRolePath,
-                             std::bind(&updatePortStatus, this)),
+      mUsbDataSessionMonitor(new UsbDataSessionMonitor(kUdcUeventRegex, kUdcStatePath,
+                             kHost1UeventRegex, kHost1StatePath, kHost2UeventRegex,
+                             kHost2StatePath, kDataRolePath, std::bind(&updatePortStatus, this))),
       mOverheat(ZoneInfo(TemperatureType::USB_PORT, kThermalZoneForTrip,
                          ThrottlingSeverity::CRITICAL),
                 {ZoneInfo(TemperatureType::UNKNOWN, kThermalZoneForTempReadPrimary,
@@ -930,7 +930,7 @@ void queryUsbDataSession(android::hardware::usb::Usb *usb,
                           std::vector<PortStatus> *currentPortStatus) {
     std::vector<ComplianceWarning> warnings;
 
-    usb->mUsbDataSessionMonitor.getComplianceWarnings(
+    usb->mUsbDataSessionMonitor->getComplianceWarnings(
         (*currentPortStatus)[0].currentDataRole, &warnings);
     (*currentPortStatus)[0].complianceWarnings.insert(
         (*currentPortStatus)[0].complianceWarnings.end(),
