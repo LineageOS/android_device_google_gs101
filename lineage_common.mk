@@ -38,6 +38,10 @@ PRODUCT_VENDOR_LINKER_CONFIG_FRAGMENTS += \
 PRODUCT_PACKAGES += \
     GoogleParts
 
+# pKVM
+PRODUCT_VENDOR_PROPERTIES += \
+    persist.device_config.virtualization_framework_native.isolated_compilation_enabled=true
+
 # Tethering
 PRODUCT_PACKAGES += \
     TetheringOverlay
