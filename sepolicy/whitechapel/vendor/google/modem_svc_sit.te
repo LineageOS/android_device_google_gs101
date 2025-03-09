@@ -1,3 +1,4 @@
+# Selinux rule for modem_svc_sit daemon
 type modem_svc_sit, domain;
 type modem_svc_sit_exec, vendor_file_type, exec_type, file_type;
 init_daemon_domain(modem_svc_sit)

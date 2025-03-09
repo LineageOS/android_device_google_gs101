@@ -3,4 +3,3 @@ hardware.qorvo.uwb.IUwbVendor/default                      u:object_r:hal_uwb_ve
 android.hardware.drm.IDrmFactory/widevine                  u:object_r:hal_drm_service:s0
 vendor.google.wireless_charger.IWirelessCharger/default                      u:object_r:hal_wireless_charger_service:s0
 rlsservice                                                 u:object_r:rls_service:s0
-android.hardware.media.c2.IComponentStore/default1                    u:object_r:hal_codec2_service:s0

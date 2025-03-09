@@ -8,7 +8,7 @@ BOARD_SEPOLICY_DIRS += hardware/google/pixel-sepolicy/input
 BOARD_SEPOLICY_DIRS += hardware/google/pixel-sepolicy/googlebattery
 
 # sepolicy that are shared among devices using whitechapel
-BOARD_SEPOLICY_DIRS += device/google/gs101/sepolicy/whitechapel/vendor/google
+BOARD_VENDOR_SEPOLICY_DIRS += device/google/gs101/sepolicy/whitechapel/vendor/google
 
 # unresolved SELinux error log with bug tracking
 BOARD_SEPOLICY_DIRS += device/google/gs101/sepolicy/tracking_denials

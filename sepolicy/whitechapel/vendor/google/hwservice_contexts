@@ -11,7 +11,6 @@ android.vendor.samsung_slsi.telephony.hardware.radio::IOemSamsungslsi        u:o
 vendor.samsung_slsi.telephony.hardware.radioExternal::IOemSlsiRadioExternal        u:object_r:hal_exynos_rild_hwservice:s0
 
 # VIDEO
-android.hardware.media.c2::IComponentStore                      u:object_r:hal_codec2_hwservice:s0
 android.hardware.media.c2::IConfigurable                        u:object_r:hal_codec2_hwservice:s0
 
 # GRIL HAL
