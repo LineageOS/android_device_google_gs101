@@ -210,9 +210,8 @@ USE_SWIFTSHADER := false
 TARGET_USES_VULKAN = true
 
 PRODUCT_SOONG_NAMESPACES += \
-	vendor/arm/mali/valhall
+	vendor/arm/mali/gs101
 
-$(call soong_config_set,pixel_mali,soc,$(TARGET_BOARD_PLATFORM))
 # Used in gfx_tools when defining tests with composer2 interface for gs101 devices
 $(call soong_config_set,gfx_tools,use_hwc2,true)
 
@@ -360,6 +359,10 @@ PRODUCT_COPY_FILES += \
 	device/google/gs101/disable_contaminant_detection.sh:$(TARGET_COPY_OUT_VENDOR)/bin/hw/disable_contaminant_detection.sh
 
 include device/google/gs-common/insmod/insmod.mk
+
+# Insmod config files
+PRODUCT_COPY_FILES += \
+	$(call find-copy-subdir-files,init.insmod.*.cfg,$(TARGET_KERNEL_DIR),$(TARGET_COPY_OUT_VENDOR_DLKM)/etc)
 
 # For creating dtbo image
 PRODUCT_HOST_PACKAGES += \
@@ -955,9 +958,6 @@ PRODUCT_COPY_FILES += \
 	device/google/gs101/default-permissions.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/default-permissions/default-permissions.xml \
 	device/google/gs101/component-overrides.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sysconfig/component-overrides.xml
 
-# modem_svc_sit daemon
-PRODUCT_PACKAGES += modem_svc_sit
-
 # modem logging binary/configs
 PRODUCT_PACKAGES += modem_logging_control
 
@@ -1065,7 +1065,7 @@ PRODUCT_SOONG_NAMESPACES += \
 	vendor/google_devices/gs101/proprietary/gchips/tpu/nnapi_stable_aidl \
 	vendor/google_devices/gs101/proprietary/gchips/tpu/aidl \
 	vendor/google_devices/gs101/proprietary/gchips/tpu/hal \
-	vendor/google_devices/gs101/proprietary/gchips/tpu/tachyon/api \
+	vendor/google_devices/gs101/proprietary/gchips/tpu/tachyon/tachyon_apis \
 	vendor/google_devices/gs101/proprietary/gchips/tpu/tachyon/service
 # TPU firmware
 PRODUCT_PACKAGES += edgetpu-abrolhos.fw
@@ -1135,12 +1135,19 @@ PRODUCT_PACKAGES_ENG += BatteryStatsViewer
 DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs101/device_framework_matrix_product.xml
 
 # Preopt SystemUI
+ifneq ($(RELEASE_SYSTEMUI_USE_SPEED_PROFILE), true)
 PRODUCT_DEXPREOPT_SPEED_APPS += SystemUIGoogle  # For internal
-PRODUCT_DEXPREOPT_SPEED_APPS += SystemUI  # For AOSP
+PRODUCT_DEXPREOPT_SPEED_APPS += SystemUI        # For AOSP
+endif
 
-# Compile SystemUI on device with `speed`.
+# Set on-device compilation mode for SystemUI.
+ifeq ($(RELEASE_SYSTEMUI_USE_SPEED_PROFILE), true)
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.systemuicompilerfilter=speed-profile
+else
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.systemuicompilerfilter=speed
+endif
 
 # Keymaster configuration
 PRODUCT_COPY_FILES += \

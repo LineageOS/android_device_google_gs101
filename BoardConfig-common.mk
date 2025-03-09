@@ -22,6 +22,7 @@ TARGET_SOC := gs101
 TARGET_SOC_NAME := google
 
 USES_DEVICE_GOOGLE_GS101 := true
+$(call soong_config_set,CitadelProvision,target_soc,gs101)
 
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-2a
@@ -44,6 +45,7 @@ BOARD_KERNEL_CMDLINE += earlycon=exynos4210,0x10A00000 console=ttySAC0,115200 an
 BOARD_KERNEL_CMDLINE += cma_sysfs.experimental=Y
 BOARD_KERNEL_CMDLINE += rcupdate.rcu_expedited=1 rcu_nocbs=all rcutree.enable_rcu_lazy
 BOARD_KERNEL_CMDLINE += swiotlb=noforce
+BOARD_KERNEL_CMDLINE += cgroup.memory=nokmem
 BOARD_BOOTCONFIG += androidboot.boot_devices=14700000.ufs
 
 TARGET_NO_BOOTLOADER := true
@@ -67,7 +69,7 @@ TARGET_RECOVERY_FSTAB_GENRULE = gen_fstab.gs101
 TARGET_RECOVERY_PIXEL_FORMAT := ABGR_8888
 TARGET_RECOVERY_UI_MARGIN_HEIGHT := 165
 TARGET_RECOVERY_UI_LIB := \
-	librecovery_ui_pixel \
+	//hardware/google/pixel/recovery:librecovery_ui_pixel \
 	libfstab
 
 AB_OTA_UPDATER := true
@@ -170,7 +172,16 @@ BOARD_SUPPORT_MFC_ENC_RGB := true
 BOARD_USE_BLOB_ALLOCATOR := false
 BOARD_SUPPORT_MFC_ENC_BT2020 := true
 BOARD_SUPPORT_FLEXIBLE_P010 := true
-
+$(call soong_config_set,video_codec,target_soc_name,$(TARGET_SOC_NAME))
+$(call soong_config_set_bool,video_codec,board_use_codec2_hidl_1_2,$(BOARD_USE_CODEC2_HIDL_1_2))
+$(call soong_config_set_bool,video_codec,board_use_csc_filter,$(BOARD_USE_CSC_FILTER))
+$(call soong_config_set_bool,video_codec,board_use_dec_sw_csc,$(BOARD_USE_DEC_SW_CSC))
+$(call soong_config_set_bool,video_codec,board_use_enc_sw_csc,$(BOARD_USE_ENC_SW_CSC))
+$(call soong_config_set_bool,video_codec,board_support_mfc_enc_rgb,$(BOARD_SUPPORT_MFC_ENC_RGB))
+$(call soong_config_set_bool,video_codec,board_use_blob_allocator,$(BOARD_USE_BLOB_ALLOCATOR))
+$(call soong_config_set_bool,video_codec,board_support_mfc_enc_bt2020,$(BOARD_SUPPORT_MFC_ENC_BT2020))
+$(call soong_config_set_bool,video_codec,board_support_flexible_p010,$(BOARD_SUPPORT_FLEXIBLE_P010))
+$(call soong_config_set_bool,video_codec,board_use_codec2_aidl,$(if $(BOARD_USE_CODEC2_AIDL),true,false))
 ########################
 
 BOARD_SUPER_PARTITION_SIZE := 8531214336
