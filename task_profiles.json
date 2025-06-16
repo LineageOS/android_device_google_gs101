@@ -462,6 +462,76 @@
       ]
     },
     {
+      "Name": "SCHED_QOS_NONE",
+      "Actions": [
+        {
+          "Name": "WriteFile",
+          "Params":
+          {
+            "FilePath": "/proc/vendor_sched/sched_qos/sched_qos_none",
+            "Value": "<pid>",
+            "LogFailures": "false"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "SCHED_QOS_POWER_EFFICIENCY",
+      "Actions": [
+        {
+          "Name": "WriteFile",
+          "Params":
+          {
+            "FilePath": "/proc/vendor_sched/sched_qos/sched_qos_power_efficiency",
+            "Value": "<pid>",
+            "LogFailures": "false"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "SCHED_QOS_SENSITIVE_EXTREME",
+      "Actions": [
+        {
+          "Name": "WriteFile",
+          "Params":
+          {
+            "FilePath": "/proc/vendor_sched/sched_qos/sched_qos_sensitive_extreme",
+            "Value": "<pid>",
+            "LogFailures": "false"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "SCHED_QOS_SENSITIVE_HIGH",
+      "Actions": [
+        {
+          "Name": "WriteFile",
+          "Params":
+          {
+            "FilePath": "/proc/vendor_sched/sched_qos/sched_qos_sensitive_high",
+            "Value": "<pid>",
+            "LogFailures": "false"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "SCHED_QOS_SENSITIVE_STANDARD",
+      "Actions": [
+        {
+          "Name": "WriteFile",
+          "Params":
+          {
+            "FilePath": "/proc/vendor_sched/sched_qos/sched_qos_sensitive_standard",
+            "Value": "<pid>",
+            "LogFailures": "false"
+          }
+        }
+      ]
+    },
+    {
       "Name": "HighestCfsPrioScheduling",
       "Actions": [
         {
@@ -486,32 +556,8 @@
       "Profiles": [ "OtaPerformance", "ServiceCapacityLow", "LowIoPriority", "TimerSlackHigh" ]
     },
     {
-      "Name": "SCHED_QOS_SENSITIVE_EXTREME_SET",
-      "Profiles": [ "AdpfSet", "PreferIdleSet", "PreferFitSet", "BoostPrioSet", "PreemptWakeupSet" ]
-    },
-    {
-      "Name": "SCHED_QOS_SENSITIVE_EXTREME_CLEAR",
-      "Profiles": [ "AdpfClear", "PreferIdleClear", "PreferFitClear", "BoostPrioClear", "PreemptWakeupClear" ]
-    },
-    {
-      "Name": "SCHED_QOS_SENSITIVE_STANDARD_SET",
-      "Profiles": [ "AdpfSet", "PreferIdleSet", "PreferFitSet" ]
-    },
-    {
-      "Name": "SCHED_QOS_SENSITIVE_STANDARD_CLEAR",
-      "Profiles": [ "AdpfClear", "PreferIdleClear", "PreferFitClear" ]
-    },
-    {
-      "Name": "SCHED_QOS_POWER_EFFICIENCY_SET",
-      "Profiles": [ "AutoUclampMaxSet" ]
-    },
-    {
-      "Name": "SCHED_QOS_POWER_EFFICIENCY_CLEAR",
-      "Profiles": [ "AutoUclampMaxClear" ]
-    },
-    {
       "Name": "InputPolicy",
-      "Profiles": [ "HighestCfsPrioScheduling", "MaxPerformance", "SCHED_QOS_SENSITIVE_EXTREME_SET" ]
+      "Profiles": [ "MaxPerformance", "SCHED_QOS_SENSITIVE_EXTREME" ]
     }
   ]
 }
