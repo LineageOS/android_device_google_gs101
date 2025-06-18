@@ -69,25 +69,13 @@ PRODUCT_SOONG_NAMESPACES += \
 	hardware/google/interfaces \
 	hardware/google/pixel \
 	device/google/gs101 \
-	device/google/gs101/powerstats \
-	vendor/google_devices/common/chre/host/hal \
-	vendor/google/whitechapel/tools \
-	vendor/google/camera \
-	vendor/google/interfaces \
-	vendor/google_nos/host/android \
-	vendor/google_nos/test/system-test-harness
+	device/google/gs101/powerstats
 
 LOCAL_KERNEL := $(TARGET_KERNEL_DIR)/Image.lz4
 
 # OEM Unlock reporting
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	ro.oem_unlock_supported=1
-
-ifneq ($(BOARD_WITHOUT_RADIO),true)
-# Include vendor telephony soong namespace
-PRODUCT_SOONG_NAMESPACES += \
-	vendor/samsung_slsi/telephony/$(BOARD_USES_SHARED_VENDOR_TELEPHONY)
-endif
 
 include device/google/gs101/modem/user.mk
 
@@ -153,7 +141,6 @@ USE_LASSEN_OEMHOOK := true
 # The "power-anomaly-sitril" is added into PRODUCT_SOONG_NAMESPACES when
 # $(USE_LASSEN_OEMHOOK) is true and $(BOARD_WITHOUT_RADIO) is not true.
 ifneq ($(BOARD_WITHOUT_RADIO),true)
-    PRODUCT_SOONG_NAMESPACES += vendor/google/tools/power-anomaly-sitril
     $(call soong_config_set,sitril,use_lassen_oemhook_with_radio,true)
 endif
 
@@ -177,9 +164,6 @@ USE_SWIFTSHADER := false
 
 # HWUI
 TARGET_USES_VULKAN = true
-
-PRODUCT_SOONG_NAMESPACES += \
-	vendor/arm/mali/gs101
 
 # Used in gfx_tools when defining tests with composer2 interface for gs101 devices
 $(call soong_config_set,gfx_tools,use_hwc2,true)
@@ -817,12 +801,7 @@ PRODUCT_PACKAGES += \
 	vts.bin
 
 ifneq ($(BOARD_WITHOUT_RADIO),true)
-# This will be called only if IMSService is building with source code for dev branches.
-$(call inherit-product-if-exists, vendor/samsung_slsi/telephony/$(BOARD_USES_SHARED_VENDOR_TELEPHONY)/shannon-ims/device-vendor.mk)
-
 PRODUCT_PACKAGES += ShannonIms
-
-$(call inherit-product-if-exists, vendor/samsung_slsi/telephony/$(BOARD_USES_SHARED_VENDOR_TELEPHONY)/shannon-iwlan/device-vendor.mk)
 
 PRODUCT_PACKAGES += ShannonRcs
 endif
@@ -839,22 +818,12 @@ USE_RADIO_HAL_1_6 := true
 # Support SecureElement HAL for HIDL
 USE_SE_HIDL := true
 
-#$(call inherit-product, vendor/google_devices/telephony/common/device-vendor.mk)
-#$(call inherit-product, vendor/google_devices/gs101/proprietary/device-vendor.mk)
-
-ifneq ($(BOARD_WITHOUT_RADIO),true)
-$(call inherit-product-if-exists, vendor/samsung_slsi/telephony/$(BOARD_USES_SHARED_VENDOR_TELEPHONY)/common/device-vendor.mk)
-endif
-
 ifeq ($(DEVICE_IS_64BIT_ONLY),true)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
 else
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 endif
-#$(call inherit-product, hardware/google_devices/exynos5/exynos5.mk)
-#$(call inherit-product-if-exists, hardware/google_devices/gs101/gs101.mk)
-#$(call inherit-product-if-exists, vendor/google_devices/common/exynos-vendor.mk)
-#$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4375/device-bcm.mk)
+
 include device/google/gs-common/sensors/sensors.mk
 $(call soong_config_set,usf,target_soc,gs101)
 
@@ -898,9 +867,6 @@ PRODUCT_PACKAGES += \
 include device/google/gs-common/audio/hidl_gs101.mk
 
 ## AoC soong
-PRODUCT_SOONG_NAMESPACES += \
-        vendor/google/whitechapel/aoc
-
 $(call soong_config_set,aoc,target_soc,$(TARGET_BOARD_PLATFORM))
 $(call soong_config_set,aoc,target_product,$(TARGET_PRODUCT))
 
@@ -941,16 +907,7 @@ PRODUCT_PROPERTY_OVERRIDES += persist.vendor.enable.thermal.genl=true
 include device/google/gs-common/edgetpu/edgetpu.mk
 # Config variables for TPU chip on device.
 $(call soong_config_set,edgetpu_config,chip,abrolhos)
-# Include the edgetpu targets defined the namespaces below into the final image.
-PRODUCT_SOONG_NAMESPACES += \
-	vendor/google_devices/gs101/proprietary/gchips/tpu/metrics \
-	vendor/google_devices/gs101/proprietary/gchips/tpu/tflite_delegate \
-	vendor/google_devices/gs101/proprietary/gchips/tpu/darwinn_logging_service \
-	vendor/google_devices/gs101/proprietary/gchips/tpu/nnapi_stable_aidl \
-	vendor/google_devices/gs101/proprietary/gchips/tpu/aidl \
-	vendor/google_devices/gs101/proprietary/gchips/tpu/hal \
-	vendor/google_devices/gs101/proprietary/gchips/tpu/tachyon/tachyon_apis \
-	vendor/google_devices/gs101/proprietary/gchips/tpu/tachyon/service
+
 # TPU firmware
 PRODUCT_PACKAGES += edgetpu-abrolhos.fw
 
