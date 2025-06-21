@@ -1,11 +1,12 @@
 
 battery_mitigation sysfs file b/364446534
-bluetooth audio_config_prop file b/379226761
-bluetooth audio_config_prop file b/379245675
 dump_display sysfs file b/340722772
 dump_modem sscoredump_vendor_data_coredump_file dir b/366115873
 dump_modem sscoredump_vendor_data_logcat_file dir b/366115873
+fsck modem_block_device blk_file b/397548310
 hal_camera_default aconfig_storage_metadata_file dir b/383013727
+hal_contexthub_default hal_bluetooth_service service_manager b/396573314
+hal_drm_widevine system_userdir_file dir b/401397837
 hal_power_default hal_power_default capability b/240632824
 hal_sensors_default sysfs file b/340723303
 incidentd debugfs_wakeup_sources file b/282626428
@@ -18,6 +19,7 @@ kernel tmpfs chr_file b/315907959
 modem_svc_sit hal_radioext_default process b/372348067
 pixelstats_vendor block_device dir b/369537606
 pixelstats_vendor block_device dir b/369735407
+platform_app bluetooth_lea_mode_prop file b/402594680
 platform_app vendor_fw_file dir b/372122654
 platform_app vendor_rild_prop file b/372122654
 priv_app audio_config_prop file b/379226710
