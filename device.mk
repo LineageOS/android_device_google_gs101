@@ -1010,21 +1010,6 @@ include hardware/google/pixel/wifi_ext/device.mk
 # It must be split into the FCM of each partition.
 DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += device/google/gs101/device_framework_matrix_product.xml
 
-# Preopt SystemUI
-ifneq ($(RELEASE_SYSTEMUI_USE_SPEED_PROFILE), true)
-PRODUCT_DEXPREOPT_SPEED_APPS += SystemUIGoogle  # For internal
-PRODUCT_DEXPREOPT_SPEED_APPS += SystemUI        # For AOSP
-endif
-
-# Set on-device compilation mode for SystemUI.
-ifeq ($(RELEASE_SYSTEMUI_USE_SPEED_PROFILE), true)
-PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.systemuicompilerfilter=speed-profile
-else
-PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.systemuicompilerfilter=speed
-endif
-
 # Keymaster configuration
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.device_id_attestation.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.device_id_attestation.xml \
