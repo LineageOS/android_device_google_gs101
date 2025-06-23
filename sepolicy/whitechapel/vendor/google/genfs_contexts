@@ -33,6 +33,10 @@ genfscon sysfs /devices/platform/google,dock/power_supply/dock                  
 
 genfscon sysfs /devices/platform/10d50000.hsi2c                                 u:object_r:sysfs_batteryinfo:s0
 
+genfscon sysfs /class/power_supply/wireless/device/version                      u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /class/power_supply/wireless/device/status                       u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /class/power_supply/wireless/device/fw_rev                       u:object_r:sysfs_batteryinfo:s0
+
 # Slider
 genfscon sysfs /devices/platform/10d10000.hsi2c/i2c-0/0-003c                                    u:object_r:sysfs_wlc:s0
 genfscon sysfs /devices/platform/10d10000.hsi2c/i2c-0/0-003c/power_supply                       u:object_r:sysfs_batteryinfo:s0
@@ -127,6 +131,9 @@ genfscon sysfs /devices/platform/sound-aoc/wakeup                               
 
 genfscon sysfs /devices/platform/1c2c0000.drmdsim/1c2c0000.drmdsim.0/wakeup                                                 u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/1c2d0000.drmdsim/1c2d0000.drmdsim.0/wakeup                                                 u:object_r:sysfs_wakeup:s0
+
+genfscon sysfs /devices/platform/odm/odm:fps_touch_handler/power/wakeup                                                     u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/odm/odm:fps_touch_handler/wakeup                                                           u:object_r:sysfs_wakeup:s0
 
 # Input
 genfscon sysfs /devices/platform/11110000.usb/11110000.dwc3/xhci-hcd-exynos.4.auto/usb2/2-1 	u:object_r:sysfs_uhid:s0
@@ -345,3 +352,6 @@ genfscon sysfs /devices/platform/25f40000.etm    u:object_r:sysfs_devices_cs_etm
 
 # BootControl
 genfscon sysfs /kernel/boot_control/blow_ar      u:object_r:sysfs_bootctl:s0
+
+# USB
+genfscon sysfs /devices/platform/11110000.usb/11110000.dwc3/udc/11110000.dwc3/state   u:object_r:sysfs_udc:s0
