@@ -19,9 +19,9 @@
 #include <android-base/file.h>
 #include <aidl/android/hardware/usb/BnUsb.h>
 #include <aidl/android/hardware/usb/BnUsbCallback.h>
+#include <pixelusb/UsbDataSessionMonitor.h>
 #include <pixelusb/UsbOverheatEvent.h>
 #include <utils/Log.h>
-#include <UsbDataSessionMonitor.h>
 
 #define UEVENT_MSG_LEN 2048
 // The type-c stack waits for 4.5 - 5.5 secs before declaring a port non-pd.
@@ -39,6 +39,7 @@ using ::aidl::android::hardware::usb::IUsbCallback;
 using ::aidl::android::hardware::usb::PortRole;
 using ::android::base::ReadFileToString;
 using ::android::base::WriteStringToFile;
+using ::android::hardware::google::pixel::usb::UsbDataSessionMonitor;
 using ::android::hardware::google::pixel::usb::UsbOverheatEvent;
 using ::android::hardware::google::pixel::usb::ZoneInfo;
 using ::android::hardware::thermal::V2_0::TemperatureType;
@@ -87,7 +88,7 @@ struct Usb : public BnUsb {
     bool mPartnerUp;
 
     // Report usb data session event and data incompliance warnings
-    UsbDataSessionMonitor mUsbDataSessionMonitor;
+    std::unique_ptr<UsbDataSessionMonitor> mUsbDataSessionMonitor;
     // Usb Overheat object for push suez event
     UsbOverheatEvent mOverheat;
     // Temperature when connected

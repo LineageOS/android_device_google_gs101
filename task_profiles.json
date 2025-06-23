@@ -462,29 +462,14 @@
       ]
     },
     {
-      "Name": "ResetUclampGrp",
+      "Name": "HighestCfsPrioScheduling",
       "Actions": [
         {
-          "Name": "WriteFile",
+          "Name": "SetSchedulerPolicy",
           "Params":
           {
-            "FilePath": "/proc/vendor_sched/uclamp_fork_reset_set",
-            "Value": "<pid>",
-            "LogFailures": "false"
-          }
-        }
-      ]
-    },
-    {
-      "Name": "NoResetUclampGrp",
-      "Actions": [
-        {
-          "Name": "WriteFile",
-          "Params":
-          {
-            "FilePath": "/proc/vendor_sched/uclamp_fork_reset_clear",
-            "Value": "<pid>",
-            "LogFailures": "false"
+            "Policy": "SCHED_OTHER",
+            "Nice": "-20"
           }
         }
       ]
@@ -526,7 +511,7 @@
     },
     {
       "Name": "InputPolicy",
-      "Profiles": [ "MaxPerformance", "SCHED_QOS_SENSITIVE_EXTREME_SET" ]
+      "Profiles": [ "HighestCfsPrioScheduling", "MaxPerformance", "SCHED_QOS_SENSITIVE_EXTREME_SET" ]
     }
   ]
 }
