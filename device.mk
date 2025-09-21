@@ -19,7 +19,9 @@ include device/google/gs-common/gs_watchdogd/watchdog.mk
 include device/google/gs-common/ramdump_and_coredump/ramdump_and_coredump.mk
 include device/google/gs-common/soc/soc.mk
 include device/google/gs-common/soc/freq.mk
+ifneq ($(BOARD_WITHOUT_RADIO),true)
 include device/google/gs-common/modem/modem.mk
+endif
 include device/google/gs-common/aoc/aoc.mk
 include device/google/gs-common/thermal/dump/thermal.mk
 include device/google/gs-common/thermal/thermal_hal/device.mk
