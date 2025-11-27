@@ -124,21 +124,18 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	telephony.active_modems.max_count=2
 
+# Pixel Logger
+include hardware/google/pixel/PixelLogger/PixelLogger.mk
+
 # HWUI
 TARGET_USES_VULKAN = true
 
 include device/google/gs-common/gpu/gpu.mk
 
-PRODUCT_PACKAGES += \
-	libGLES_mali \
-	vulkan.mali \
-	libgpudataproducer
-
 # Install the OpenCL ICD Loader
 PRODUCT_SOONG_NAMESPACES += external/OpenCL-ICD-Loader
 PRODUCT_PACKAGES += \
-       libOpenCL \
-       mali_icd__customer_pixel_opencl-icd_ARM.icd
+	libOpenCL
 
 PRODUCT_VENDOR_PROPERTIES += \
 	ro.hardware.egl=mali \
@@ -213,22 +210,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_HOST_PACKAGES += \
 	mkdtimg
 
-PRODUCT_PACKAGES += \
-	messaging
-
 # CHRE
-## HAL
+## hal
 include device/google/gs-common/chre/hal.mk
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.context_hub.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.context_hub.xml
-PRODUCT_PACKAGES += \
-	preloaded_nanoapps.json
-
-# Filesystem management tools
-PRODUCT_PACKAGES += \
-	linker.vendor_ramdisk \
-	tune2fs.vendor_ramdisk \
-	resize2fs.vendor_ramdisk
 
 # Userdata Checkpointing OTA GC
 PRODUCT_PACKAGES += \
@@ -254,10 +240,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Add support dual SIM mode
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.vendor.radio.multisim_switch_support=true
-
-# RPMB TA
-PRODUCT_PACKAGES += \
-	tlrpmb
 
 # Touch
 PRODUCT_COPY_FILES += \
@@ -307,35 +289,12 @@ PRODUCT_PROPERTY_OVERRIDES += aaudio.mmap_policy=2
 PRODUCT_PROPERTY_OVERRIDES += aaudio.mmap_exclusive_policy=2
 PRODUCT_PROPERTY_OVERRIDES += aaudio.hw_burst_min_usec=2000
 
-# Libs
-PRODUCT_PACKAGES += \
-	com.android.future.usb.accessory
-
-# for now include gralloc here. should come from hardware/google_devices/exynos5
-PRODUCT_PACKAGES += \
-	android.hardware.memtrack-service.pixel \
-	libion_exynos \
-	libion
-
-PRODUCT_PACKAGES += \
-	libhwjpeg
-
-# Video Editor
-PRODUCT_PACKAGES += \
-	VideoEditorGoogle
-
-# WideVine modules
-PRODUCT_PACKAGES += \
-	liboemcrypto
-
 # Lyric Camera HAL settings
 include device/google/gs-common/camera/lyric.mk
 
 # WiFi
 PRODUCT_PACKAGES += \
-	wificond \
-	libwpa_client \
-	WifiOverlay \
+	WifiOverlay
 
 # Connectivity
 PRODUCT_PACKAGES += \
@@ -396,11 +355,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	debug.slsi_platform=1 \
 	debug.hwc.winupdate=1
-
-# hw composer HAL
-PRODUCT_PACKAGES += \
-	libdisplaycolor \
-	hwcomposer.$(TARGET_BOARD_PLATFORM)
 
 PRODUCT_PROPERTY_OVERRIDES += \
 	debug.sf.disable_backpressure=0 \
@@ -484,10 +438,6 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 
 PRODUCT_TAGS += dalvik.gc.type-precise
 
-# Exynos OpenVX framework
-PRODUCT_PACKAGES += \
-		libexynosvision
-
 # Location
 include device/google/gs-common/gps/brcm/device.mk
 
@@ -501,7 +451,6 @@ include device/google/gs-common/trusty/trusty.mk
 include device/google/gs101/trusty_metricsd/trusty_metricsd.mk
 
 PRODUCT_PACKAGES += \
-	android.hardware.graphics.composer@2.4-impl \
 	android.hardware.graphics.composer@2.4-service
 
 # Storage: for factory reset protection feature
@@ -516,10 +465,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
 # Enable Bluetooth AutoOn feature
 PRODUCT_PRODUCT_PROPERTIES += \
     bluetooth.server.automatic_turn_on=true
-
-#VNDK
-PRODUCT_PACKAGES += \
-	vndk-libs
 
 PRODUCT_ENFORCE_RRO_TARGETS := \
 	framework-res
@@ -547,23 +492,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	Iwlan
 
-PRODUCT_PACKAGES += \
-	whitelist \
-	libstagefright_hdcp \
-	libskia_opt
-
-PRODUCT_PACKAGES += ShannonIms
-
-PRODUCT_PACKAGES += ShannonRcs
-
 include device/google/gs-common/sensors/sensors.mk
 
 PRODUCT_COPY_FILES += \
 	device/google/gs101/default-permissions.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/default-permissions/default-permissions.xml \
 	device/google/gs101/component-overrides.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sysconfig/component-overrides.xml
-
-# modem logging binary/configs
-PRODUCT_PACKAGES += modem_logging_control
 
 PRODUCT_PACKAGES += \
 	android.hardware.health-service.gs101 \
@@ -584,15 +517,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += vndservicemanager
 PRODUCT_PACKAGES += vndservice
 
-PRODUCT_PACKAGES += \
-	google.hardware.media.c2@1.0-service \
-	libgc2_store \
-	libgc2_base \
-	libgc2_av1_dec \
-	libbo_av1 \
-	libgc2_cwl \
-	libgc2_utils
-
 ## Start packet router
 include device/google/gs-common/telephony/pktrouter.mk
 
@@ -601,13 +525,6 @@ PRODUCT_PROPERTY_OVERRIDES += persist.vendor.enable.thermal.genl=true
 
 # EdgeTPU
 include device/google/gs-common/edgetpu/edgetpu.mk
-
-# TPU firmware
-PRODUCT_PACKAGES += edgetpu-abrolhos.fw
-
-# Connectivity Thermal Power Manager
-PRODUCT_PACKAGES += \
-	ConnectivityThermalPowerManager
 
 # A/B support
 PRODUCT_PACKAGES += \
@@ -643,9 +560,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Project
 include hardware/google/pixel/common/pixel-common-device.mk
-
-# Pixel Logger
-include hardware/google/pixel/PixelLogger/PixelLogger.mk
 
 # Telephony
 include device/google/gs101/telephony/user.mk
