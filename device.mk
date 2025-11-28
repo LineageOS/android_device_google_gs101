@@ -5,17 +5,6 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-# Voice packs for Text-To-Speech
-PRODUCT_COPY_FILES += \
-    device/google/gs-common/tts/ja-jp/ja-jp-x-multi-r55.zvoice:$(TARGET_COPY_OUT_PRODUCT)/tts/google/ja-jp/ja-jp-x-multi-r55.zvoice \
-    device/google/gs-common/tts/fr-fr/fr-fr-x-multi-r57.zvoice:$(TARGET_COPY_OUT_PRODUCT)/tts/google/fr-fr/fr-fr-x-multi-r57.zvoice \
-    device/google/gs-common/tts/de-de/de-de-x-multi-r57.zvoice:$(TARGET_COPY_OUT_PRODUCT)/tts/google/de-de/de-de-x-multi-r57.zvoice \
-    device/google/gs-common/tts/it-it/it-it-x-multi-r54.zvoice:$(TARGET_COPY_OUT_PRODUCT)/tts/google/it-it/it-it-x-multi-r54.zvoice \
-    device/google/gs-common/tts/es-es/es-es-x-multi-r56.zvoice:$(TARGET_COPY_OUT_PRODUCT)/tts/google/es-es/es-es-x-multi-r56.zvoice
-
-PRODUCT_SOONG_NAMESPACES += \
-    device/google/gs-common/powerstats
-
 # Disable OMX
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.media.omx=0
@@ -29,83 +18,36 @@ PRODUCT_COPY_FILES += \
 DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += \
     device/google/gs-common/vintf/framework_compatibility_matrix.xml
 
-# Platform watchdogd
-PRODUCT_PACKAGES += gs_watchdogd
-PRODUCT_SOONG_NAMESPACES += \
-    device/google/gs-common/gs_watchdogd
-
 # sscoredump
 PRODUCT_PROPERTY_OVERRIDES += vendor.debug.ssrdump.type=sscoredump
 
-# SoC
-PRODUCT_PACKAGES += dump_soc
-
 # Modem
 PRODUCT_PACKAGES += dump_modem
-PRODUCT_PACKAGES += dump_modemlog
-
-# AoC
-PRODUCT_PACKAGES += dump_aoc
-
-# If AoC Daemon is not present on this build, load firmware at boot via rc
-PRODUCT_COPY_FILES += \
-    device/google/gs-common/aoc/conf/init.aoc.daemon.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.aoc.rc
-
-# Trusty
-PRODUCT_PACKAGES += dump_trusty.sh
-
-# Storage
-PRODUCT_PACKAGES += dump_storage
 
 # Thermal
-PRODUCT_PACKAGES += dump_thermal.sh
-
 PRODUCT_PACKAGES += android.hardware.thermal-service.pixel
 
 # Thermal utils
 PRODUCT_PACKAGES += thermal_symlinks
 
-# Performance
-PRODUCT_PACKAGES += dump_perf
-
 # Ensure enough free space to create zram backing device
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.zram_backing_device_min_free_mb=1536
 
-#include device/google/gs-common/pixel_metrics/pixel_metrics.mk
-PRODUCT_PACKAGES += dump_pixel_metrics
-
-#include device/google/gs-common/soc/freq.mk
-PRODUCT_PACKAGES += dump_devfreq
-
-#include device/google/gs-common/display/dump_exynos_display.mk
-PRODUCT_PACKAGES += dump_exynos_display
-
-#include device/google/gs-common/gear/dumpstate/aidl.mk
-PRODUCT_PACKAGES += android.hardware.dumpstate-service
-
-#include device/google/gs-common/widevine/widevine.mk
+# DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm-service.clearkey
 
-#include device/google/gs-common/misc_writer/misc_writer.mk
+# misc_writer
 PRODUCT_PACKAGES += \
     misc_writer
 
-#include device/google/gs-common/bootctrl/bootctrl_aidl.mk
+# Boot control
 PRODUCT_PACKAGES += \
     android.hardware.boot-service.default-pixel \
     android.hardware.boot-service.default_recovery-pixel
 
 PRODUCT_SOONG_NAMESPACES += device/google/gs-common/bootctrl/aidl
-
-#include device/google/gs-common/fingerprint/fingerprint.mk
-PRODUCT_PACKAGES += dump_fingerprint
-
-#include device/google/gs-common/power/power.mk
-PRODUCT_PACKAGES += init.power-gs.rc
-
-PRODUCT_PACKAGES += dump_power
 
 TARGET_BOARD_PLATFORM := gs101
 
@@ -125,8 +67,7 @@ PRODUCT_SOONG_NAMESPACES += \
 	hardware/google/av \
 	hardware/google/interfaces \
 	hardware/google/pixel \
-	device/google/gs101 \
-	device/google/gs101/powerstats
+	device/google/gs101
 
 # OEM Unlock reporting
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -194,7 +135,7 @@ include hardware/google/pixel/PixelLogger/PixelLogger.mk
 # HWUI
 TARGET_USES_VULKAN = true
 
-#include device/google/gs-common/gpu/gpu.mk
+# GPU
 PRODUCT_PACKAGES += gpu_probe
 
 # Install the OpenCL ICD Loader
@@ -264,11 +205,6 @@ PRODUCT_PACKAGES += \
 	fstab.gs101.vendor_ramdisk \
 	fstab.gs101-fips \
 	fstab.gs101-fips.vendor_ramdisk
-
-# Shell scripts
-PRODUCT_PACKAGES += \
-    insmod.sh \
-    init.common.cfg
 
 # Insmod config files
 PRODUCT_COPY_FILES += \
@@ -368,16 +304,9 @@ PRODUCT_PROPERTY_OVERRIDES += aaudio.mmap_policy=2
 PRODUCT_PROPERTY_OVERRIDES += aaudio.mmap_exclusive_policy=2
 PRODUCT_PROPERTY_OVERRIDES += aaudio.hw_burst_min_usec=2000
 
-# Lyric Camera HAL settings
+# Camera
 PRODUCT_SOONG_NAMESPACES += \
     hardware/google/camera
-
-# Init-time log settings for Google 3A
-PRODUCT_PACKAGES += libg3a_standalone_gabc_rc
-PRODUCT_PACKAGES += libg3a_standalone_gaf_rc
-PRODUCT_PACKAGES += libg3a_standalone_ghawb_rc
-
-PRODUCT_PACKAGES += lyric_preview_dis_xml
 
 DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += \
     device/google/gs-common/camera/device_framework_matrix_product.xml
@@ -531,9 +460,6 @@ PRODUCT_PACKAGES += \
 $(call inherit-product, system/core/trusty/trusty-storage.mk)
 $(call inherit-product, system/core/trusty/trusty-base.mk)
 
-# Trusty Metrics Daemon
-PRODUCT_PACKAGES += trusty_metricsd
-
 PRODUCT_PACKAGES += \
 	android.hardware.graphics.composer@2.4-service
 
@@ -575,8 +501,6 @@ PRODUCT_PACKAGES += \
 #google iwlan
 PRODUCT_PACKAGES += \
 	Iwlan
-
-PRODUCT_PACKAGES += dump_sensors
 
 PRODUCT_COPY_FILES += \
 	device/google/gs101/default-permissions.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/default-permissions/default-permissions.xml \
