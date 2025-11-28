@@ -1,5 +1,7 @@
 #
 # SPDX-FileCopyrightText: 2011 The Android Open-Source Project
+# SPDX-FileCopyrightText: The LineageOS Project
+# SPDX-FileCopyrightText: The Calyx Institute
 # SPDX-License-Identifier: Apache-2.0
 #
 
@@ -172,6 +174,7 @@ DEVICE_MATRIX_FILE := \
 	device/google/gs101/compatibility_matrix.xml
 
 DEVICE_PACKAGE_OVERLAYS += device/google/gs101/overlay
+DEVICE_PACKAGE_OVERLAYS += device/google/gs101/overlay-lineage
 
 # Enforce the Product interface
 PRODUCT_PRODUCT_VNDK_VERSION := current
@@ -596,3 +599,37 @@ include device/google/gs-common/touch/twoshay/twoshay.mk
 # since it can't be overridden from /vendor.
 PRODUCT_PRODUCT_PROPERTIES += \
 	dumpstate.strict_run=false
+
+# AiAi Config
+PRODUCT_COPY_FILES += \
+    device/google/gs101/allowlist_com.google.android.as.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/allowlist_com.google.android.as.xml
+
+# Camera
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.vendor.camera.extensions.package=com.google.android.apps.camera.services \
+    ro.vendor.camera.extensions.service=com.google.android.apps.camera.services.extensions.service.PixelExtensions
+
+# Google Assistant
+PRODUCT_PRODUCT_PROPERTIES += ro.opa.eligible_device=true
+
+# Lineage Health
+include hardware/google/pixel/lineage_health/device.mk
+
+$(call soong_config_set,lineage_health,charging_control_supports_deadline,true)
+$(call soong_config_set,lineage_health,charging_control_supports_limit,true)
+$(call soong_config_set,lineage_health,charging_control_supports_toggle,false)
+
+# Linker config
+PRODUCT_VENDOR_LINKER_CONFIG_FRAGMENTS += \
+    device/google/gs101/linker.config.json
+
+# Parts
+PRODUCT_PACKAGES += \
+    GoogleParts
+
+# Tethering
+PRODUCT_PACKAGES += \
+    TetheringOverlay
+
+# Touch
+include hardware/google/pixel/touch/device.mk
