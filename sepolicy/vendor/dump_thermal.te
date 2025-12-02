@@ -1,0 +1,5 @@
+pixel_bugreport(dump_thermal)
+
+r_dir_file(dump_thermal, sysfs_thermal)
+
+allow dump_thermal vendor_toolbox_exec:file execute_no_trans;

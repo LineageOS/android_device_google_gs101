@@ -1,0 +1,10 @@
+type storage_intelligence, domain;
+type storage_intelligence_exec, exec_type, file_type, vendor_file_type;
+
+init_daemon_domain(storage_intelligence)
+
+set_prop(storage_intelligence, vendor_intelligence_prop)
+
+allow storage_intelligence block_device:dir search;
+allow storage_intelligence userdata_exp_block_device:blk_file rw_file_perms;
+allow storage_intelligence vendor_toolbox_exec:file execute_no_trans;

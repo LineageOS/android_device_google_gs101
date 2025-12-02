@@ -1,0 +1,14 @@
+type repair_mode_app, coredomain, domain;
+
+app_domain(repair_mode_app)
+
+get_prop(repair_mode_app, gsid_prop)
+
+set_prop(repair_mode_app, repair_mode_init_prop)
+
+allow repair_mode_app app_api_service:service_manager find;
+allow repair_mode_app metadata_file:dir search;
+allow repair_mode_app repair_mode_metadata_config_file:dir rw_dir_perms;
+allow repair_mode_app repair_mode_metadata_config_file:file create_file_perms;
+allow repair_mode_app repair_mode_metadata_file:dir search;
+allow repair_mode_app system_api_service:service_manager find;

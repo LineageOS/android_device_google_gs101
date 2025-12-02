@@ -1,0 +1,37 @@
+type hal_neuralnetworks_darwinn, domain;
+type hal_neuralnetworks_darwinn_exec, exec_type, file_type, vendor_file_type;
+
+add_service(hal_neuralnetworks_darwinn, edgetpu_nnapi_service)
+
+binder_call(hal_neuralnetworks_darwinn, edgetpu_app_server)
+binder_call(hal_neuralnetworks_darwinn, system_server)
+
+binder_use(hal_neuralnetworks_darwinn)
+
+get_prop(hal_neuralnetworks_darwinn, hwservicemanager_prop)
+get_prop(hal_neuralnetworks_darwinn, vendor_edgetpu_runtime_prop)
+get_prop(hal_neuralnetworks_darwinn, vendor_hetero_runtime_prop)
+get_prop(hal_neuralnetworks_darwinn, vendor_tflite_delegate_prop)
+
+hal_client_domain(hal_neuralnetworks_darwinn, hal_graphics_allocator)
+hal_client_domain(hal_neuralnetworks_darwinn, hal_power)
+
+hal_server_domain(hal_neuralnetworks_darwinn, hal_neuralnetworks)
+
+hwbinder_use(hal_neuralnetworks_darwinn)
+
+init_daemon_domain(hal_neuralnetworks_darwinn)
+
+allow hal_neuralnetworks_darwinn dmabuf_system_heap_device:chr_file r_file_perms;
+allow hal_neuralnetworks_darwinn edgetpu_app_service:service_manager find;
+allow hal_neuralnetworks_darwinn edgetpu_device:chr_file rw_file_perms;
+allow hal_neuralnetworks_darwinn fwk_stats_service:service_manager find;
+allow hal_neuralnetworks_darwinn hal_graphics_allocator_service:service_manager find;
+allow hal_neuralnetworks_darwinn hal_neuralnetworks_darwinn_data_file:dir rw_dir_perms;
+allow hal_neuralnetworks_darwinn hal_neuralnetworks_darwinn_data_file:file create_file_perms;
+allow hal_neuralnetworks_darwinn hal_neuralnetworks_darwinn_data_file:sock_file { create rw_file_perms unlink };
+allow hal_neuralnetworks_darwinn proc_overcommit_memory:file r_file_perms;
+allow hal_neuralnetworks_darwinn proc_version:file r_file_perms;
+allow hal_neuralnetworks_darwinn sysfs_edgetpu:dir r_dir_perms;
+allow hal_neuralnetworks_darwinn sysfs_edgetpu:file r_file_perms;
+allow hal_neuralnetworks_darwinn vendor_configs_file:file r_file_perms;

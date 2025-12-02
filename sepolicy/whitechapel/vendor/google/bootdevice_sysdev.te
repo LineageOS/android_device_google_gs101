@@ -1,1 +1,0 @@
-allow bootdevice_sysdev sysfs:filesystem associate;

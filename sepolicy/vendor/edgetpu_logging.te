@@ -1,0 +1,13 @@
+type edgetpu_logging, domain;
+type edgetpu_logging_exec, exec_type, file_type, vendor_file_type;
+
+binder_call(edgetpu_logging, system_server)
+
+binder_use(edgetpu_logging)
+
+init_daemon_domain(edgetpu_logging)
+
+allow edgetpu_logging edgetpu_device:chr_file rw_file_perms;
+allow edgetpu_logging fwk_stats_service:service_manager find;
+allow edgetpu_logging sysfs_edgetpu:dir search;
+allow edgetpu_logging sysfs_edgetpu:file rw_file_perms;

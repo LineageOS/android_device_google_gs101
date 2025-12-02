@@ -1,0 +1,1 @@
+allow init_citadel citadel_updater:file rx_file_perms;

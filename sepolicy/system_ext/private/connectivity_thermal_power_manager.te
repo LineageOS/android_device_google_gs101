@@ -1,0 +1,9 @@
+type connectivity_thermal_power_manager, coredomain, domain, system_suspend_internal_server;
+
+app_domain(connectivity_thermal_power_manager)
+
+hal_client_domain(connectivity_thermal_power_manager, hal_power_stats)
+
+allow connectivity_thermal_power_manager app_api_service:service_manager find;
+allow connectivity_thermal_power_manager radio_service:service_manager find;
+allow connectivity_thermal_power_manager system_api_service:service_manager find;
