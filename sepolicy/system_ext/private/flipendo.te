@@ -1,0 +1,15 @@
+type flipendo, coredomain, domain;
+
+app_domain(flipendo)
+
+binder_call(flipendo, gpuservice)
+
+binder_use(flipendo)
+
+hal_client_domain(flipendo, hal_power)
+
+allow flipendo app_api_service:service_manager find;
+allow flipendo color_display_service:service_manager find;
+allow flipendo fwk_stats_service:service_manager find;
+
+dontaudit flipendo vendor_hwservice_type:hwservice_manager find;

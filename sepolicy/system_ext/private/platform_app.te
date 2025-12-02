@@ -1,5 +1,6 @@
-# allow systemui to set boot animation colors
-set_prop(platform_app, bootanim_system_prop);
+get_prop(platform_app, bluetooth_lea_prop)
 
-# allow systemui to access fingerprint
 hal_client_domain(platform_app, hal_fingerprint)
+
+set_prop(platform_app, bootanim_system_prop)
+set_prop(platform_app, vendor_sysuig_prop)

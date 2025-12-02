@@ -1,0 +1,32 @@
+type edgetpu_dba_server, domain;
+type edgetpu_dba_server_exec, exec_type, file_type, vendor_file_type;
+type edgetpu_dba_service, app_api_service, isolated_compute_allowed_service, service_manager_type;
+
+add_service(edgetpu_dba_server, edgetpu_dba_service)
+
+binder_call(edgetpu_dba_server, edgetpu_app_server)
+
+binder_service(edgetpu_dba_server)
+
+binder_use(edgetpu_dba_server)
+
+get_prop(edgetpu_dba_server, vendor_edgetpu_cpu_scheduler_prop)
+get_prop(edgetpu_dba_server, vendor_edgetpu_runtime_prop)
+get_prop(edgetpu_dba_server, vendor_hetero_runtime_prop)
+get_prop(edgetpu_dba_server, vendor_tflite_delegate_prop)
+
+hal_client_domain(edgetpu_dba_server, hal_power)
+
+init_daemon_domain(edgetpu_dba_server)
+
+allow edgetpu_dba_server dmabuf_system_heap_device:chr_file r_file_perms;
+allow edgetpu_dba_server edgetpu_app_service:service_manager find;
+allow edgetpu_dba_server edgetpu_device:chr_file rw_file_perms;
+allow edgetpu_dba_server gpu_device:chr_file rw_file_perms;
+allow edgetpu_dba_server gpu_device:dir r_dir_perms;
+allow edgetpu_dba_server hal_allocator:fd use;
+allow edgetpu_dba_server hal_graphics_allocator:fd use;
+allow edgetpu_dba_server hal_graphics_mapper_hwservice:hwservice_manager find;
+allow edgetpu_dba_server ion_device:chr_file r_file_perms;
+allow edgetpu_dba_server proc_overcommit_memory:file r_file_perms;
+allow edgetpu_dba_server proc_version:file r_file_perms;

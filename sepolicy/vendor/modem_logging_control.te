@@ -1,0 +1,19 @@
+type modem_logging_control, domain;
+type modem_logging_control_exec, exec_type, file_type, vendor_file_type;
+
+binder_call(modem_logging_control, dmd)
+
+get_prop(modem_logging_control, hwservicemanager_prop)
+
+hwbinder_use(modem_logging_control)
+
+init_daemon_domain(modem_logging_control)
+
+set_prop(modem_logging_control, vendor_modem_prop)
+
+allow modem_logging_control hal_vendor_oem_hwservice:hwservice_manager find;
+allow modem_logging_control radio_device:chr_file rw_file_perms;
+allow modem_logging_control radio_vendor_data_file:dir create_dir_perms;
+allow modem_logging_control radio_vendor_data_file:file create_file_perms;
+allow modem_logging_control vendor_slog_file:dir create_dir_perms;
+allow modem_logging_control vendor_slog_file:file create_file_perms;

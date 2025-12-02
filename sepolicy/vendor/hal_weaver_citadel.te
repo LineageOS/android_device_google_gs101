@@ -1,0 +1,14 @@
+type hal_weaver_citadel, domain;
+type hal_weaver_citadel_exec, exec_type, file_type, vendor_file_type;
+
+binder_call(hal_weaver_citadel, citadeld)
+
+hal_server_domain(hal_weaver_citadel, hal_authsecret)
+hal_server_domain(hal_weaver_citadel, hal_oemlock)
+hal_server_domain(hal_weaver_citadel, hal_weaver)
+
+init_daemon_domain(hal_weaver_citadel)
+
+vndbinder_use(hal_weaver_citadel)
+
+allow hal_weaver_citadel citadeld_service:service_manager find;

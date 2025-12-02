@@ -1,0 +1,22 @@
+type flood_control, domain;
+type flood_control_exec, exec_type, file_type, vendor_file_type;
+type flood_control_service, app_api_service, hal_service_type, service_manager_type;
+
+add_service(flood_control, flood_control_service)
+
+binder_use(flood_control)
+
+domain_auto_trans(flood_control, vendor_misc_writer_exec, vendor_misc_writer)
+
+get_prop(flood_control, system_boot_reason_prop)
+
+init_daemon_domain(flood_control)
+
+set_prop(flood_control, vendor_flood_prop)
+
+allow flood_control dumpstate:fd use;
+allow flood_control dumpstate:fifo_file w_file_perms;
+allow flood_control pstorefs:dir r_dir_perms;
+allow flood_control pstorefs:file r_file_perms;
+allow flood_control ramdump_vendor_data_file:dir r_dir_perms;
+allow flood_control ramdump_vendor_data_file:file r_file_perms;

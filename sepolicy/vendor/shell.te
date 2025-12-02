@@ -1,0 +1,7 @@
+set_prop(vendor_shell, vendor_battery_profile_prop)
+
+allow shell eco_service:service_manager find;
+
+dontaudit shell proc_vendor_sched:dir search;
+dontaudit shell proc_vendor_sched:file write;
+dontaudit shell sysfs_wlc:dir search;

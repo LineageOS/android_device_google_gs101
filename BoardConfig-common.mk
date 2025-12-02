@@ -207,7 +207,27 @@ $(error vendor_dlkm.modules.load not found or empty)
 endif
 BOARD_VENDOR_KERNEL_MODULES += $(KERNEL_MODULES)
 
-include device/google/gs101/sepolicy/gs101-sepolicy.mk
+# SEPolicy
+BOARD_VENDOR_SEPOLICY_DIRS += \
+    hardware/google/pixel-sepolicy/googlebattery \
+    hardware/google/pixel-sepolicy/input \
+    hardware/google/pixel-sepolicy/powerstats \
+    device/google/gs101/sepolicy/certificates \
+    device/google/gs101/sepolicy/recovery \
+    device/google/gs101/sepolicy/vendor
+
+PRODUCT_PRIVATE_SEPOLICY_DIRS += \
+    device/google/gs101/sepolicy/product/private
+
+PRODUCT_PUBLIC_SEPOLICY_DIRS += \
+    device/google/gs101/sepolicy/product/public
+
+SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += \
+    hardware/google/pixel-sepolicy/connectivity_thermal_power_manager \
+    device/google/gs101/sepolicy/system_ext/private
+
+SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += \
+    device/google/gs101/sepolicy/system_ext/public
 
 # Battery options
 BOARD_KERNEL_CMDLINE += at24.write_timeout=100

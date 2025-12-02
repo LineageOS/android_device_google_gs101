@@ -1,0 +1,19 @@
+type aocd, domain;
+type aocd_exec, exec_type, file_type, vendor_file_type;
+
+get_prop(aocd, vendor_volte_mif_off)
+
+init_daemon_domain(aocd)
+
+r_dir_file(aocd, persist_aoc_file)
+
+set_prop(aocd, vendor_aoc_prop)
+set_prop(aocd, vendor_timeout_aoc_prop)
+
+allow aocd aoc_device:chr_file rw_file_perms;
+allow aocd device:dir r_dir_perms;
+allow aocd mnt_vendor_file:dir search;
+allow aocd persist_file:dir search;
+allow aocd sysfs_aoc:dir search;
+allow aocd sysfs_aoc_firmware:file w_file_perms;
+allow aocd sysfs_aoc_notifytimeout:file r_file_perms;

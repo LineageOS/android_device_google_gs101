@@ -1,0 +1,4 @@
+/dev/watchdog[0-9] u:object_r:watchdog_device:s0
+/metadata/repair-mode/config(/.*)? u:object_r:repair_mode_metadata_config_file:s0
+/system_ext/bin/bluetooth_gci u:object_r:bluetooth_gci_exec:s0
+/system_ext/bin/gs_watchdogd u:object_r:gs_watchdogd_exec:s0
