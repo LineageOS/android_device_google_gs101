@@ -1,0 +1,21 @@
+type aocxd, domain;
+type aocxd_exec, exec_type, file_type, vendor_file_type;
+
+add_service(aocxd, aocx)
+
+binder_call(aocxd, dcservice_app)
+
+init_daemon_domain(aocxd)
+
+set_prop(aocxd, vendor_aoc_prop)
+
+vndbinder_use(aocxd)
+
+wakelock_use(aocxd)
+
+allow aocxd aoc_device:chr_file rw_file_perms;
+allow aocxd device:dir r_dir_perms;
+allow aocxd dumpstate:fd use;
+allow aocxd dumpstate:fifo_file write;
+allow aocxd self:global_capability_class_set sys_nice;
+allow aocxd sysfs_aoc:dir search;

@@ -1,0 +1,3 @@
+type modem_img_file, contextmount_type, file_type, vendor_file_type;
+
+allow modem_img_file self:filesystem associate;

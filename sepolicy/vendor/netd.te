@@ -1,0 +1,2 @@
+allow netd vendor_pcs_app:fd use;
+allow netd vendor_pcs_app:unpriv_socket_class_set create_socket_perms_no_ioctl;

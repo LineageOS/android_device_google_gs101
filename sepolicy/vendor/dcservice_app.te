@@ -1,0 +1,5 @@
+binder_call(dcservice_app, aocxd)
+binder_call(dcservice_app, twoshay)
+
+allow dcservice_app aocx:service_manager find;
+allow dcservice_app touch_context_service:service_manager find;

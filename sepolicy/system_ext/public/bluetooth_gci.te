@@ -1,0 +1,2 @@
+type bluetooth_gci, coredomain, domain;
+type bluetooth_gci_exec, exec_type, file_type, system_file_type;

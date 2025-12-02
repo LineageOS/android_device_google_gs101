@@ -1,0 +1,9 @@
+init_daemon_domain(bluetooth_gci)
+
+allow bluetooth_gci bluetooth_data_file:dir ra_dir_perms;
+allow bluetooth_gci bluetooth_data_file:file create_file_perms;
+allow bluetooth_gci fuse:dir r_dir_perms;
+allow bluetooth_gci fuse:file r_file_perms;
+allow bluetooth_gci media_rw_data_file:dir ra_dir_perms;
+allow bluetooth_gci media_rw_data_file:file r_file_perms;
+allow bluetooth_gci mnt_user_file:dir search;

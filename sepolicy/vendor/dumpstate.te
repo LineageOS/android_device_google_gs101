@@ -1,0 +1,21 @@
+binder_call(dumpstate, aocxd)
+binder_call(dumpstate, battery_mitigation)
+binder_call(dumpstate, flood_control)
+binder_call(dumpstate, twoshay)
+
+allow dumpstate fuse:dir search;
+allow dumpstate hal_battery_mitigation_service:service_manager find;
+allow dumpstate modem_efs_file:dir getattr;
+allow dumpstate modem_img_file:dir getattr;
+allow dumpstate modem_userdata_file:dir getattr;
+allow dumpstate persist_file:dir getattr;
+allow dumpstate persist_file:dir r_dir_perms;
+allow dumpstate rlsservice:binder call;
+allow dumpstate sysfs_scsi_devices_0000:file r_file_perms;
+allow dumpstate touch_context_service:service_manager find;
+allow dumpstate twoshay_file_dump_service:service_manager find;
+allow dumpstate vold:binder call;
+
+dontaudit dumpstate hal_power_stats_vendor_service:service_manager find;
+dontaudit dumpstate intelligence_data_file:dir getattr;
+dontaudit dumpstate vendor_dmabuf_debugfs:file r_file_perms;

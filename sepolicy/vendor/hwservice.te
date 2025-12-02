@@ -1,0 +1,6 @@
+type hal_audio_ext_hwservice, hwservice_manager_type;
+type hal_bluetooth_coexistence_hwservice, hwservice_manager_type, vendor_hwservice_type;
+type hal_exynos_rild_hwservice, hwservice_manager_type;
+type hal_fingerprint_ext_hwservice, hwservice_manager_type;
+type hal_vendor_oem_hwservice, hwservice_manager_type;
+type hal_vendor_surfaceflinger_hwservice, hwservice_manager_type;

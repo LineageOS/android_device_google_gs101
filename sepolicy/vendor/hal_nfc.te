@@ -1,0 +1,11 @@
+get_prop(hal_nfc_default, vendor_uwb_calibration_country_code)
+get_prop(hal_nfc_default, vendor_uwb_calibration_prop)
+
+set_prop(hal_nfc_default, vendor_modem_prop)
+set_prop(hal_nfc_default, vendor_nfc_prop)
+set_prop(hal_nfc_default, vendor_secure_element_prop)
+
+allow hal_nfc_default uwb_data_vendor:dir r_dir_perms;
+allow hal_nfc_default uwb_data_vendor:file r_file_perms;
+allow hal_nfc_default vendor_nfc_vendor_data_file:dir rw_dir_perms;
+allow hal_nfc_default vendor_nfc_vendor_data_file:file create_file_perms;

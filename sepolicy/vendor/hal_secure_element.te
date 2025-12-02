@@ -1,0 +1,6 @@
+binder_call(hal_secure_element_default, rild)
+
+set_prop(hal_secure_element_default, vendor_modem_prop)
+set_prop(hal_secure_element_default, vendor_secure_element_prop)
+
+allow hal_secure_element_default hal_exynos_rild_hwservice:hwservice_manager find;

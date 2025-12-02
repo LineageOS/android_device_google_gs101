@@ -1,0 +1,59 @@
+binder_call(pixelstats_vendor, stats_service_server)
+
+binder_use(pixelstats_vendor)
+
+get_prop(pixelstats_vendor, boottime_public_prop)
+get_prop(pixelstats_vendor, hwservicemanager_prop)
+get_prop(pixelstats_vendor, smart_idle_maint_enabled_prop)
+
+hwbinder_use(pixelstats_vendor)
+
+init_daemon_domain(pixelstats_vendor)
+
+r_dir_file(pixelstats_vendor, proc_vendor_mm)
+r_dir_file(pixelstats_vendor, sysfs_batteryinfo)
+r_dir_file(pixelstats_vendor, sysfs_vendor_metrics)
+r_dir_file(pixelstats_vendor, sysfs_vendor_mm)
+
+unix_socket_connect(pixelstats_vendor, chre, chre)
+unix_socket_connect(pixelstats_vendor, chre, hal_contexthub_default)
+
+allow pixelstats_vendor battery_history_device:chr_file r_file_perms;
+allow pixelstats_vendor block_device:dir search;
+allow pixelstats_vendor dm_device:blk_file getattr;
+allow pixelstats_vendor fwk_sensor_hwservice:hwservice_manager find;
+allow pixelstats_vendor fwk_sensor_service:service_manager find;
+allow pixelstats_vendor fwk_stats_service:service_manager find;
+allow pixelstats_vendor kernel:dir search;
+allow pixelstats_vendor kernel:file r_file_perms;
+allow pixelstats_vendor logbuffer_device:chr_file r_file_perms;
+allow pixelstats_vendor mnt_vendor_file:dir search;
+allow pixelstats_vendor proc_meminfo:file r_file_perms;
+allow pixelstats_vendor proc_pressure_cpu:file r_file_perms;
+allow pixelstats_vendor proc_pressure_io:file r_file_perms;
+allow pixelstats_vendor proc_pressure_mem:file r_file_perms;
+allow pixelstats_vendor proc_stat:file r_file_perms;
+allow pixelstats_vendor proc_vmstat:file r_file_perms;
+allow pixelstats_vendor self:netlink_kobject_uevent_socket create_socket_perms_no_ioctl;
+allow pixelstats_vendor sysfs_batteryinfo:file w_file_perms;
+allow pixelstats_vendor sysfs_bcl:dir search;
+allow pixelstats_vendor sysfs_bcl:file r_file_perms;
+allow pixelstats_vendor sysfs_dm:dir search;
+allow pixelstats_vendor sysfs_dm:file { getattr open read };
+allow pixelstats_vendor sysfs_dma_heap:dir search;
+allow pixelstats_vendor sysfs_dma_heap:file r_file_perms;
+allow pixelstats_vendor sysfs_fs_f2fs:dir search;
+allow pixelstats_vendor sysfs_fs_f2fs:file rw_file_perms;
+allow pixelstats_vendor sysfs_ion:dir search;
+allow pixelstats_vendor sysfs_ion:file r_file_perms;
+allow pixelstats_vendor sysfs_pca:file rw_file_perms;
+allow pixelstats_vendor sysfs_pixel_stat:dir search;
+allow pixelstats_vendor sysfs_pixel_stat:file getattr;
+allow pixelstats_vendor sysfs_pixelstats:file r_file_perms;
+allow pixelstats_vendor sysfs_scsi_devices_0000:dir search;
+allow pixelstats_vendor sysfs_scsi_devices_0000:file rw_file_perms;
+allow pixelstats_vendor sysfs_vendor_metrics:file w_file_perms;
+allow pixelstats_vendor sysfs_wlc:dir search;
+allow pixelstats_vendor sysfs_wlc:file rw_file_perms;
+allow pixelstats_vendor sysfs_zram:dir search;
+allow pixelstats_vendor sysfs_zram:file r_file_perms;

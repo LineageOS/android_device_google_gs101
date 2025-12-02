@@ -1,0 +1,20 @@
+type citadeld, domain;
+type citadeld_exec, exec_type, file_type, vendor_file_type;
+type citadeld_service, vndservice_manager_type;
+
+add_service(citadeld, citadeld_service)
+
+binder_call(citadeld, system_server)
+
+binder_use(citadeld)
+
+init_daemon_domain(citadeld)
+
+set_prop(citadeld, vendor_nos_citadel_version)
+
+vndbinder_use(citadeld)
+
+allow citadeld citadel_device:chr_file rw_file_perms;
+allow citadeld fwk_stats_service:service_manager find;
+allow citadeld hal_power_stats_vendor_service:service_manager find;
+allow citadeld hal_weaver_citadel:binder call;
