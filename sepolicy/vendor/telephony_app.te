@@ -1,0 +1,16 @@
+type vendor_telephony_app, domain;
+
+app_domain(vendor_telephony_app)
+
+binder_call(vendor_telephony_app, dmd)
+
+get_prop(vendor_telephony_app, vendor_rild_prop)
+
+set_prop(vendor_telephony_app, vendor_modem_prop)
+set_prop(vendor_telephony_app, vendor_persist_sys_default_prop)
+set_prop(vendor_telephony_app, vendor_slog_prop)
+
+allow vendor_telephony_app app_api_service:service_manager find;
+allow vendor_telephony_app hal_vendor_oem_hwservice:hwservice_manager find;
+allow vendor_telephony_app vendor_slog_file:dir create_dir_perms;
+allow vendor_telephony_app vendor_slog_file:file create_file_perms;

@@ -1,0 +1,30 @@
+type rlsservice, domain;
+type rlsservice_exec, exec_type, file_type, vendor_file_type;
+
+add_service(rlsservice, rls_service)
+
+binder_call(rlsservice, hal_camera_default)
+binder_call(rlsservice, hal_sensors_default)
+binder_call(rlsservice, servicemanager)
+
+get_prop(rlsservice, vendor_camera_prop)
+
+hal_client_domain(rlsservice, hal_graphics_allocator)
+
+init_daemon_domain(rlsservice)
+
+vndbinder_use(rlsservice)
+
+allow rlsservice aoc_device:chr_file rw_file_perms;
+allow rlsservice apex_info_file:file r_file_perms;
+allow rlsservice device:dir { read watch };
+allow rlsservice dumpstate:fd use;
+allow rlsservice dumpstate:fifo_file write;
+allow rlsservice hal_graphics_mapper_hwservice:hwservice_manager find;
+allow rlsservice mnt_vendor_file:dir search;
+allow rlsservice persist_camera_file:dir search;
+allow rlsservice persist_camera_file:file r_file_perms;
+allow rlsservice persist_file:dir search;
+allow rlsservice rls_device:chr_file rw_file_perms;
+allow rlsservice sysfs_leds:dir search;
+allow rlsservice sysfs_leds:file r_file_perms;

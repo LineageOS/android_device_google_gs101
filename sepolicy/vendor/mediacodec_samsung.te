@@ -1,0 +1,30 @@
+type mediacodec_samsung, domain;
+type mediacodec_samsung_exec, exec_type, file_type, vendor_file_type;
+
+add_service(mediacodec_samsung, eco_service)
+
+binder_call(mediacodec_samsung, hal_camera_default)
+
+binder_use(mediacodec_samsung)
+
+crash_dump_fallback(mediacodec_samsung)
+
+hal_client_domain(mediacodec_samsung, hal_graphics_allocator)
+
+hal_server_domain(mediacodec_samsung, hal_codec2)
+
+init_daemon_domain(mediacodec_samsung)
+
+vndbinder_use(mediacodec_samsung)
+
+allow mediacodec_samsung dmabuf_system_heap_device:chr_file r_file_perms;
+allow mediacodec_samsung gpu_device:chr_file rw_file_perms;
+allow mediacodec_samsung sysfs_force_empty:dir { getattr ioctl lock map open read watch watch_reads };
+allow mediacodec_samsung sysfs_force_empty:file rw_file_perms;
+allow mediacodec_samsung sysfs_mfc:dir r_dir_perms;
+allow mediacodec_samsung sysfs_mfc:file r_file_perms;
+allow mediacodec_samsung video_device:chr_file rw_file_perms;
+
+neverallow mediacodec_samsung domain:{ rawip_socket tcp_socket udp_socket } *;
+neverallow mediacodec_samsung file_type:file execute_no_trans;
+neverallow mediacodec_samsung fs_type:file execute_no_trans;

@@ -1,0 +1,18 @@
+type hal_usb_gadget_impl, domain;
+type hal_usb_gadget_impl_exec, exec_type, file_type, vendor_file_type;
+
+hal_server_domain(hal_usb_gadget_impl, hal_usb)
+hal_server_domain(hal_usb_gadget_impl, hal_usb_gadget)
+
+init_daemon_domain(hal_usb_gadget_impl)
+
+set_prop(hal_usb_gadget_impl, vendor_usb_config_prop)
+
+allow hal_usb_gadget_impl configfs:dir { create rmdir };
+allow hal_usb_gadget_impl functionfs:dir { watch watch_reads };
+allow hal_usb_gadget_impl proc_interrupts:file r_file_perms;
+allow hal_usb_gadget_impl proc_irq:dir r_dir_perms;
+allow hal_usb_gadget_impl proc_irq:file w_file_perms;
+allow hal_usb_gadget_impl sysfs_batteryinfo:dir r_dir_perms;
+allow hal_usb_gadget_impl sysfs_batteryinfo:file rw_file_perms;
+allow hal_usb_gadget_impl sysfs_extcon:dir search;

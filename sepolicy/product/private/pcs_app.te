@@ -1,0 +1,31 @@
+typeattribute vendor_pcs_app coredomain;
+
+app_domain(vendor_pcs_app)
+
+bluetooth_domain(vendor_pcs_app)
+
+net_domain(vendor_pcs_app)
+
+r_dir_file(vendor_pcs_app, preloads_data_file)
+r_dir_file(vendor_pcs_app, preloads_media_file)
+
+allow vendor_pcs_app app_api_service:service_manager find;
+allow vendor_pcs_app audioserver_service:service_manager find;
+allow vendor_pcs_app cache_file:dir create_dir_perms;
+allow vendor_pcs_app cache_file:file create_file_perms;
+allow vendor_pcs_app cache_file:lnk_file r_file_perms;
+allow vendor_pcs_app cache_recovery_file:dir create_dir_perms;
+allow vendor_pcs_app cache_recovery_file:file create_file_perms;
+allow vendor_pcs_app camera_cameraidremapper_service:service_manager find;
+allow vendor_pcs_app camera_lyricconfigprovider_service:service_manager find;
+allow vendor_pcs_app cameraserver_service:service_manager find;
+allow vendor_pcs_app drmserver_service:service_manager find;
+allow vendor_pcs_app media_rw_data_file:dir create_dir_perms;
+allow vendor_pcs_app media_rw_data_file:file create_file_perms;
+allow vendor_pcs_app mediametrics_service:service_manager find;
+allow vendor_pcs_app mediaserver_service:service_manager find;
+allow vendor_pcs_app nfc_service:service_manager find;
+allow vendor_pcs_app radio_service:service_manager find;
+
+dontaudit vendor_pcs_app device:dir read;
+dontaudit vendor_pcs_app usb_device:dir { open read search };

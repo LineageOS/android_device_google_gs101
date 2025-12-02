@@ -1,0 +1,5 @@
+get_prop(appdomain, vendor_edgetpu_runtime_prop)
+get_prop(appdomain, vendor_hetero_runtime_prop)
+get_prop(appdomain, vendor_tflite_delegate_prop)
+
+neverallow appdomain edgetpu_device:chr_file open;
