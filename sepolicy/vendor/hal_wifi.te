@@ -1,0 +1,2 @@
+allow hal_wifi updated_wifi_firmware_data_file:dir r_dir_perms;
+allow hal_wifi updated_wifi_firmware_data_file:file r_file_perms;

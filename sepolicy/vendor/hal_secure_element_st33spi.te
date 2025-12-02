@@ -1,0 +1,10 @@
+type hal_secure_element_st33spi, domain;
+type hal_secure_element_st33spi_exec, exec_type, file_type, vendor_file_type;
+
+hal_server_domain(hal_secure_element_st33spi, hal_secure_element)
+
+init_daemon_domain(hal_secure_element_st33spi)
+
+set_prop(hal_secure_element_st33spi, vendor_secure_element_prop)
+
+allow hal_secure_element_st33spi st33spi_device:chr_file rw_file_perms;

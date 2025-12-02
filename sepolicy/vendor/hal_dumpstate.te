@@ -1,0 +1,13 @@
+binder_call(hal_dumpstate_default, twoshay)
+
+domain_auto_trans(hal_dumpstate_default, dump_gsc_exec, dump_gsc)
+
+set_prop(hal_dumpstate_default, vendor_logger_prop)
+
+allow hal_dumpstate_default radio_vendor_data_file:dir create_dir_perms;
+allow hal_dumpstate_default radio_vendor_data_file:file create_file_perms;
+allow hal_dumpstate_default shell_data_file:file getattr;
+allow hal_dumpstate_default touch_context_service:service_manager find;
+allow hal_dumpstate_default vendor_toolbox_exec:file execute_no_trans;
+
+neverallow hal_dumpstate_default { vendor_file_type -vendor_toolbox_exec }:file execute_no_trans;

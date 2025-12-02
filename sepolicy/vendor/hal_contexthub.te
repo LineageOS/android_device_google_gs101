@@ -1,0 +1,20 @@
+binder_call(hal_contexthub_default, hal_sensors_default)
+binder_call(hal_contexthub_default, hal_wifi_ext)
+
+get_prop(hal_contexthub_default, vendor_aoc_prop)
+
+hal_client_domain(hal_contexthub_default, hal_graphics_allocator)
+
+unix_socket_connect(hal_contexthub_default, chre, chre)
+
+wakelock_use(hal_contexthub_default)
+
+allow hal_contexthub_default aoc_device:chr_file rw_file_perms;
+allow hal_contexthub_default aoc_device:dir r_dir_perms;
+allow hal_contexthub_default chre_data_file:dir create_dir_perms;
+allow hal_contexthub_default chre_data_file:file create_file_perms;
+allow hal_contexthub_default device:dir r_dir_perms;
+allow hal_contexthub_default hal_graphics_mapper_hwservice:hwservice_manager find;
+allow hal_contexthub_default hal_wifi_ext_service:service_manager find;
+allow hal_contexthub_default sysfs_aoc:dir search;
+allow hal_contexthub_default sysfs_aoc_boottime:file r_file_perms;

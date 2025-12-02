@@ -1,0 +1,8 @@
+binder_call(hal_wifi_ext, grilservice_app)
+
+set_prop(hal_wifi_ext, vendor_wifi_version)
+
+allow hal_wifi_ext priv_app:fd use;
+allow hal_wifi_ext privapp_data_file:file { map read };
+allow hal_wifi_ext updated_wifi_firmware_data_file:dir rw_dir_perms;
+allow hal_wifi_ext updated_wifi_firmware_data_file:file create_file_perms;
