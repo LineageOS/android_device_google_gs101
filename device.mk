@@ -126,9 +126,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	telephony.active_modems.max_count=2
 
-# Pixel Logger
-include hardware/google/pixel/PixelLogger/PixelLogger.mk
-
 # HWUI
 TARGET_USES_VULKAN = true
 
