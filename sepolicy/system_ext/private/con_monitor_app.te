@@ -1,4 +1,4 @@
-type con_monitor_app, coredomain, domain;
+typeattribute con_monitor_app coredomain;
 
 app_domain(con_monitor_app)
 
