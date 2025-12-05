@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2021 The Android Open Source Project
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<compatibility-matrix version="9.0" type="framework" level="6">
+    <hal format="hidl">
+        <name>android.vendor.samsung_slsi.telephony.hardware.radio</name>
+        <version>1.1</version>
+        <interface>
+            <name>IOemSamsungslsi</name>
+            <instance>slot1</instance>
+            <instance>slot2</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>com.fingerprints42.extension</name>
+        <version>1.0</version>
+        <interface>
+            <name>IFingerprintAuthenticator</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IFingerprintCalibration</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IFingerprintEngineering</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IFingerprintNavigation</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IFingerprintRecalibration</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IFingerprintSenseTouch</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IFingerprintSensorTest</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl">
+        <name>com.google.edgetpu</name>
+        <version>2</version>
+        <interface>
+            <name>IEdgeTpuVendorService</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl">
+        <name>com.google.edgetpu.dba</name>
+        <interface>
+            <name>IDevice</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl">
+        <name>com.google.face.debug</name>
+        <version>3-4</version>
+        <interface>
+            <name>IDebugHost</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IDebugManager</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl">
+        <name>com.google.flood</name>
+        <version>2</version>
+        <interface>
+            <name>IFloodService</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl">
+        <name>com.google.hardware.pixel.display</name>
+        <version>16</version>
+        <interface>
+            <name>IDisplay</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl">
+        <name>com.google.input</name>
+        <version>2-6</version>
+        <interface>
+            <name>ITouchContextService</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl">
+        <name>com.google.input</name>
+        <version>6</version>
+        <interface>
+            <name>ITwoshayFileDumpService</name>
+            <instance>touchflow_default</instance>
+            <instance>touchflow_outer</instance>
+            <instance>twoshay</instance>
+        </interface>
+    </hal>
+    <hal format="aidl">
+        <name>com.google.pixel.camera.connectivity.hal.provider</name>
+        <interface>
+            <name>ICameraProvider</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl">
+        <name>com.google.pixel.shared_modem_platform</name>
+        <version>3</version>
+        <interface>
+            <name>ISharedModemPlatform</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl">
+        <name>hardware.qorvo.uwb</name>
+        <version>2</version>
+        <interface>
+            <name>IUwbVendor</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.goodix.hardware.biometrics.fingerprint</name>
+        <version>2.1</version>
+        <interface>
+            <name>IGoodixFingerprintDaemon</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.google.audiometricext</name>
+        <version>1.0</version>
+        <interface>
+            <name>IAudioMetricExt</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.google.battery_mitigation</name>
+        <interface>
+            <name>IBatteryMitigation</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.google.bluetooth_ext</name>
+        <version>1-3</version>
+        <interface>
+            <name>IBTChannelAvoidance</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IBluetoothCcc</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IBluetoothCco</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IBluetoothEwp</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IBluetoothExt</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IBluetoothFinder</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
+            <name>IBluetoothSar</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.google.google_battery</name>
+        <version>4</version>
+        <interface>
+            <name>IGoogleBattery</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.google.radioext</name>
+        <version>1.3</version>
+        <interface>
+            <name>IRadioExt</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.google.whitechapel.audio.audioext</name>
+        <version>4.0</version>
+        <interface>
+            <name>IAudioExt</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.google.wifi_ext</name>
+        <version>2-4</version>
+        <interface>
+            <name>IWifiExt</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.samsung_slsi.telephony.hardware.oemservice</name>
+        <version>1.0</version>
+        <interface>
+            <name>IOemService</name>
+            <instance>dm0</instance>
+            <instance>dm1</instance>
+            <instance>sced0</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.samsung_slsi.telephony.hardware.radioExternal</name>
+        <version>1.1</version>
+        <interface>
+            <name>IOemSlsiRadioExternal</name>
+            <instance>rilExternal</instance>
+        </interface>
+    </hal>
+</compatibility-matrix>
