@@ -25,6 +25,7 @@ allow mediacodec_samsung sysfs_mfc:dir r_dir_perms;
 allow mediacodec_samsung sysfs_mfc:file r_file_perms;
 allow mediacodec_samsung video_device:chr_file rw_file_perms;
 
-neverallow mediacodec_samsung domain:{ rawip_socket tcp_socket udp_socket } *;
+neverallow mediacodec_samsung { domain userdebug_or_eng(`-su') }:tcp_socket *;
+neverallow mediacodec_samsung domain:{ rawip_socket udp_socket } *;
 neverallow mediacodec_samsung file_type:file execute_no_trans;
 neverallow mediacodec_samsung fs_type:file execute_no_trans;
