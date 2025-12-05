@@ -1,4 +1,4 @@
-type hbmsvmanager_app, coredomain, domain;
+typeattribute hbmsvmanager_app coredomain;
 
 app_domain(hbmsvmanager_app)
 
