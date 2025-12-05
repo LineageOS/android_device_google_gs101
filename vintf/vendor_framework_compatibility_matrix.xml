@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<compatibility-matrix version="9.0" type="framework">
+    <hal format="aidl">
+        <name>aocx</name>
+        <version>1-2</version>
+        <interface>
+            <name>IAocx</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl">
+        <name>com.google.android.imageprocessing.hal</name>
+        <interface>
+            <name>IImageProcessingHal</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+</compatibility-matrix>
