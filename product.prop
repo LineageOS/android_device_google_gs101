@@ -1,0 +1,2 @@
+# fsck
+persist.fsck.disable_linear_lookup=on

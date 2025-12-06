@@ -601,6 +601,10 @@ PRODUCT_VENDOR_LINKER_CONFIG_FRAGMENTS += \
 PRODUCT_PACKAGES += \
     GoogleParts
 
+# Properties
+TARGET_PRODUCT_PROP += device/google/gs101/product.prop
+TARGET_SYSTEM_PROP += device/google/gs101/system.prop
+
 # Tethering
 PRODUCT_PACKAGES += \
     TetheringOverlay
