@@ -609,8 +609,6 @@ PRODUCT_PACKAGES += \
 include hardware/google/pixel/touch/device.mk
 
 # VINTF
-DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
-    device/google/gs101/vintf/vendor_framework_compatibility_matrix.xml
 DEVICE_MANIFEST_FILE += \
     device/google/gs101/vintf/manifest.xml
 DEVICE_MATRIX_FILE += \
