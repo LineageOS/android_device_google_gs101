@@ -1,4 +1,4 @@
-type omadm_app, domain;
+typeattribute omadm_app coredomain;
 
 app_domain(omadm_app)
 
@@ -6,5 +6,3 @@ net_domain(omadm_app)
 
 allow omadm_app app_api_service:service_manager find;
 allow omadm_app radio_service:service_manager find;
-allow omadm_app radio_vendor_data_file:dir rw_dir_perms;
-allow omadm_app radio_vendor_data_file:file create_file_perms;

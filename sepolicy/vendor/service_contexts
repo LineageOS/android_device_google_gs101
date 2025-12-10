@@ -5,7 +5,6 @@ android.hardware.security.keymint.IRemotelyProvisionedComponent/strongbox u:obje
 android.hardware.security.sharedsecret.ISharedSecret/strongbox u:object_r:hal_sharedsecret_service:s0
 aocx.IAocx/default u:object_r:aocx:s0
 com.google.android.imageprocessing.hal.IImageProcessingHal/default u:object_r:vendor_image_processing_hal_service:s0
-com.google.edgetpu.IEdgeTpuAppService/default u:object_r:edgetpu_app_service:s0
 com.google.edgetpu.IEdgeTpuVendorService/default u:object_r:edgetpu_vendor_service:s0
 com.google.edgetpu.dba.IDevice/default u:object_r:edgetpu_dba_service:s0
 com.google.edgetpu.tachyon.IComputeService/default u:object_r:edgetpu_tachyon_service:s0
