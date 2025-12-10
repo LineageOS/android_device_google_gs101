@@ -1,13 +1,13 @@
 type hal_usb_impl, domain;
 type hal_usb_impl_exec, exec_type, file_type, vendor_file_type;
 
-binder_call(hal_usb_impl, servicemanager)
-
-get_prop(hal_usb_impl, vendor_usb_config_prop)
-
 hal_client_domain(hal_usb_impl, hal_thermal)
 
 hal_server_domain(hal_usb_impl, hal_usb)
+
+binder_call(hal_usb_impl, servicemanager)
+
+get_prop(hal_usb_impl, vendor_usb_config_prop)
 
 init_daemon_domain(hal_usb_impl)
 

@@ -2,11 +2,13 @@ type edgetpu_dba_server, domain;
 type edgetpu_dba_server_exec, exec_type, file_type, vendor_file_type;
 type edgetpu_dba_service, app_api_service, isolated_compute_allowed_service, service_manager_type;
 
+binder_service(edgetpu_dba_server)
+
+hal_client_domain(edgetpu_dba_server, hal_power)
+
 add_service(edgetpu_dba_server, edgetpu_dba_service)
 
 binder_call(edgetpu_dba_server, edgetpu_app_server)
-
-binder_service(edgetpu_dba_server)
 
 binder_use(edgetpu_dba_server)
 
@@ -14,8 +16,6 @@ get_prop(edgetpu_dba_server, vendor_edgetpu_cpu_scheduler_prop)
 get_prop(edgetpu_dba_server, vendor_edgetpu_runtime_prop)
 get_prop(edgetpu_dba_server, vendor_hetero_runtime_prop)
 get_prop(edgetpu_dba_server, vendor_tflite_delegate_prop)
-
-hal_client_domain(edgetpu_dba_server, hal_power)
 
 init_daemon_domain(edgetpu_dba_server)
 

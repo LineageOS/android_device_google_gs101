@@ -1,3 +1,6 @@
+hal_client_domain(hal_graphics_composer_default, hal_graphics_allocator)
+hal_client_domain(hal_graphics_composer_default, hal_power)
+
 add_service(hal_graphics_composer_default, hal_pixel_display_service)
 add_service(hal_graphics_composer_default, vendor_displaycolor_service)
 add_service(hal_graphics_composer_default, vendor_surfaceflinger_vndservice)
@@ -9,9 +12,6 @@ binder_use(hal_graphics_composer_default)
 get_prop(hal_graphics_composer_default, boot_status_prop)
 get_prop(hal_graphics_composer_default, device_config_surface_flinger_native_boot_prop)
 get_prop(hal_graphics_composer_default, vendor_persist_sys_default_prop)
-
-hal_client_domain(hal_graphics_composer_default, hal_graphics_allocator)
-hal_client_domain(hal_graphics_composer_default, hal_power)
 
 set_prop(hal_graphics_composer_default, vendor_display_prop)
 

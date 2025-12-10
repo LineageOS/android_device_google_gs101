@@ -1,6 +1,10 @@
 type mediacodec_samsung, domain;
 type mediacodec_samsung_exec, exec_type, file_type, vendor_file_type;
 
+hal_client_domain(mediacodec_samsung, hal_graphics_allocator)
+
+hal_server_domain(mediacodec_samsung, hal_codec2)
+
 add_service(mediacodec_samsung, eco_service)
 
 binder_call(mediacodec_samsung, hal_camera_default)
@@ -8,10 +12,6 @@ binder_call(mediacodec_samsung, hal_camera_default)
 binder_use(mediacodec_samsung)
 
 crash_dump_fallback(mediacodec_samsung)
-
-hal_client_domain(mediacodec_samsung, hal_graphics_allocator)
-
-hal_server_domain(mediacodec_samsung, hal_codec2)
 
 init_daemon_domain(mediacodec_samsung)
 

@@ -1,6 +1,6 @@
-binder_call(dump_exynos_display, hal_graphics_composer_default)
-
 pixel_bugreport(dump_exynos_display)
+
+binder_call(dump_exynos_display, hal_graphics_composer_default)
 
 vndbinder_use(dump_exynos_display)
 

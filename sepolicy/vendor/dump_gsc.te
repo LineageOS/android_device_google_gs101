@@ -1,9 +1,9 @@
 type dump_gsc, domain;
 type dump_gsc_exec, exec_type, file_type, vendor_file_type;
 
-binder_call(dump_gsc, citadeld)
-
 hal_client_domain(dump_gsc, hal_dumpstate)
+
+binder_call(dump_gsc, citadeld)
 
 vndbinder_use(dump_gsc)
 

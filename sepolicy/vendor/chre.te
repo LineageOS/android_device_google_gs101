@@ -1,9 +1,9 @@
 type chre, domain;
 type chre_exec, exec_type, file_type, vendor_file_type;
 
-binder_call(chre, stats_service_server)
-
 hal_client_domain(chre, hal_graphics_allocator)
+
+binder_call(chre, stats_service_server)
 
 init_daemon_domain(chre)
 

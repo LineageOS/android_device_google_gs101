@@ -2,9 +2,9 @@ type vendor_rcs_app, domain;
 
 app_domain(vendor_rcs_app)
 
-binder_call(vendor_rcs_app, rild)
-
 net_domain(vendor_rcs_app)
+
+binder_call(vendor_rcs_app, rild)
 
 set_prop(vendor_rcs_app, radio_prop)
 set_prop(vendor_rcs_app, vendor_rild_prop)

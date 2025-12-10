@@ -1,13 +1,13 @@
 type pktrouter, domain;
 type pktrouter_exec, exec_type, file_type, vendor_file_type;
 
+net_domain(pktrouter)
+
 domain_auto_trans(pktrouter, netutils_wrapper_exec, netutils_wrapper)
 
 get_prop(pktrouter, vendor_ims_prop)
 
 init_daemon_domain(pktrouter)
-
-net_domain(pktrouter)
 
 allow pktrouter pktrouter_device:chr_file rw_file_perms;
 allow pktrouter radio_device:chr_file r_file_perms;

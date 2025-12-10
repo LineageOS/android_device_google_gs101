@@ -1,6 +1,8 @@
 type rlsservice, domain;
 type rlsservice_exec, exec_type, file_type, vendor_file_type;
 
+hal_client_domain(rlsservice, hal_graphics_allocator)
+
 add_service(rlsservice, rls_service)
 
 binder_call(rlsservice, hal_camera_default)
@@ -8,8 +10,6 @@ binder_call(rlsservice, hal_sensors_default)
 binder_call(rlsservice, servicemanager)
 
 get_prop(rlsservice, vendor_camera_prop)
-
-hal_client_domain(rlsservice, hal_graphics_allocator)
 
 init_daemon_domain(rlsservice)
 

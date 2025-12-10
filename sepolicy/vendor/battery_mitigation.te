@@ -1,6 +1,9 @@
 type battery_mitigation, domain;
 type battery_mitigation_exec, exec_type, file_type, vendor_file_type;
 
+hal_client_domain(battery_mitigation, hal_health)
+hal_client_domain(battery_mitigation, hal_thermal)
+
 add_service(battery_mitigation, hal_battery_mitigation_service)
 
 binder_call(battery_mitigation, hal_audio_default)
@@ -9,9 +12,6 @@ binder_call(battery_mitigation, servicemanager)
 get_prop(battery_mitigation, boot_status_prop)
 get_prop(battery_mitigation, system_boot_reason_prop)
 get_prop(battery_mitigation, vendor_brownout_reason_prop)
-
-hal_client_domain(battery_mitigation, hal_health)
-hal_client_domain(battery_mitigation, hal_thermal)
 
 init_daemon_domain(battery_mitigation)
 

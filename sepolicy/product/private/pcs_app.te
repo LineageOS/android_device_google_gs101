@@ -1,10 +1,10 @@
-typeattribute vendor_pcs_app coredomain;
-
 app_domain(vendor_pcs_app)
 
 bluetooth_domain(vendor_pcs_app)
 
 net_domain(vendor_pcs_app)
+
+typeattribute vendor_pcs_app coredomain;
 
 r_dir_file(vendor_pcs_app, preloads_data_file)
 r_dir_file(vendor_pcs_app, preloads_media_file)

@@ -1,6 +1,11 @@
 type hal_neuralnetworks_darwinn, domain;
 type hal_neuralnetworks_darwinn_exec, exec_type, file_type, vendor_file_type;
 
+hal_client_domain(hal_neuralnetworks_darwinn, hal_graphics_allocator)
+hal_client_domain(hal_neuralnetworks_darwinn, hal_power)
+
+hal_server_domain(hal_neuralnetworks_darwinn, hal_neuralnetworks)
+
 add_service(hal_neuralnetworks_darwinn, edgetpu_nnapi_service)
 
 binder_call(hal_neuralnetworks_darwinn, edgetpu_app_server)
@@ -12,11 +17,6 @@ get_prop(hal_neuralnetworks_darwinn, hwservicemanager_prop)
 get_prop(hal_neuralnetworks_darwinn, vendor_edgetpu_runtime_prop)
 get_prop(hal_neuralnetworks_darwinn, vendor_hetero_runtime_prop)
 get_prop(hal_neuralnetworks_darwinn, vendor_tflite_delegate_prop)
-
-hal_client_domain(hal_neuralnetworks_darwinn, hal_graphics_allocator)
-hal_client_domain(hal_neuralnetworks_darwinn, hal_power)
-
-hal_server_domain(hal_neuralnetworks_darwinn, hal_neuralnetworks)
 
 hwbinder_use(hal_neuralnetworks_darwinn)
 

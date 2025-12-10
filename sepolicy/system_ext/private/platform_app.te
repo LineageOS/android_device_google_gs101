@@ -1,5 +1,5 @@
-get_prop(platform_app, bluetooth_lea_prop)
-
 hal_client_domain(platform_app, hal_fingerprint)
+
+get_prop(platform_app, bluetooth_lea_prop)
 
 set_prop(platform_app, bootanim_system_prop)

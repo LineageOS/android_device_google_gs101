@@ -1,8 +1,8 @@
+hal_client_domain(hal_thermal_default, hal_power)
+
 binder_call(hal_thermal_default, servicemanager)
 
 get_prop(hal_thermal_default, vendor_thermal_prop)
-
-hal_client_domain(hal_thermal_default, hal_power)
 
 allow hal_thermal_default fwk_stats_service:service_manager find;
 allow hal_thermal_default proc_stat:file r_file_perms;

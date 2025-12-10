@@ -4,12 +4,12 @@ app_domain(euicc_app)
 
 bluetooth_domain(euicc_app)
 
+net_domain(euicc_app)
+
 get_prop(euicc_app, bootloader_prop)
 get_prop(euicc_app, camera_config_prop)
 get_prop(euicc_app, esim_modem_prop)
 get_prop(euicc_app, exported_default_prop)
-
-net_domain(euicc_app)
 
 allow euicc_app app_api_service:service_manager find;
 allow euicc_app cameraserver_service:service_manager find;

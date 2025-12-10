@@ -2,6 +2,8 @@ type edgetpu_tachyon_server, domain;
 type edgetpu_tachyon_server_exec, exec_type, file_type, vendor_file_type;
 type edgetpu_tachyon_service, app_api_service, isolated_compute_allowed_service, service_manager_type;
 
+binder_service(edgetpu_tachyon_server)
+
 add_service(edgetpu_tachyon_server, edgetpu_tachyon_service)
 
 binder_call(edgetpu_tachyon_server, edgetpu_app_server)
@@ -10,8 +12,6 @@ binder_call(edgetpu_tachyon_server, platform_app)
 binder_call(edgetpu_tachyon_server, priv_app)
 binder_call(edgetpu_tachyon_server, shell)
 binder_call(edgetpu_tachyon_server, untrusted_app_all)
-
-binder_service(edgetpu_tachyon_server)
 
 binder_use(edgetpu_tachyon_server)
 

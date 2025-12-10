@@ -2,9 +2,9 @@ type edgetpu_vendor_server, domain;
 type edgetpu_vendor_server_exec, exec_type, file_type, vendor_file_type;
 type edgetpu_vendor_service, hal_service_type, service_manager_type;
 
-add_service(edgetpu_vendor_server, edgetpu_vendor_service)
-
 binder_service(edgetpu_vendor_server)
+
+add_service(edgetpu_vendor_server, edgetpu_vendor_service)
 
 binder_use(edgetpu_vendor_server)
 

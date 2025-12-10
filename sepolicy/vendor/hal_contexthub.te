@@ -1,9 +1,9 @@
+hal_client_domain(hal_contexthub_default, hal_graphics_allocator)
+
 binder_call(hal_contexthub_default, hal_sensors_default)
 binder_call(hal_contexthub_default, hal_wifi_ext)
 
 get_prop(hal_contexthub_default, vendor_aoc_prop)
-
-hal_client_domain(hal_contexthub_default, hal_graphics_allocator)
 
 unix_socket_connect(hal_contexthub_default, chre, chre)
 

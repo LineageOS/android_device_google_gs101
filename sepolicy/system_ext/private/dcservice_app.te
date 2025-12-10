@@ -1,10 +1,10 @@
-typeattribute dcservice_app coredomain;
-
 app_domain(dcservice_app)
 
-get_prop(dcservice_app, bluetooth_lea_prop)
-
 net_domain(dcservice_app)
+
+typeattribute dcservice_app coredomain;
+
+get_prop(dcservice_app, bluetooth_lea_prop)
 
 set_prop(dcservice_app, ctl_start_prop)
 

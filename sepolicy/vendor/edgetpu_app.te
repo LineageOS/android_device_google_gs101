@@ -2,12 +2,12 @@ type edgetpu_app_server, coredomain, domain;
 type edgetpu_app_server_exec, exec_type, file_type, system_file_type;
 type edgetpu_app_service, app_api_service, isolated_compute_allowed_service, service_manager_type;
 
+binder_service(edgetpu_app_server)
+
 add_service(edgetpu_app_server, edgetpu_app_service)
 
 binder_call(edgetpu_app_server, edgetpu_vendor_server)
 binder_call(edgetpu_app_server, system_server)
-
-binder_service(edgetpu_app_server)
 
 binder_use(edgetpu_app_server)
 

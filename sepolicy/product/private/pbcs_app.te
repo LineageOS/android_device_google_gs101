@@ -1,10 +1,10 @@
+app_domain(vendor_pbcs_app)
+
 typeattribute vendor_pbcs_app coredomain;
 
 add_service(vendor_pbcs_app, camera_binder_service)
 add_service(vendor_pbcs_app, camera_cameraidremapper_service)
 add_service(vendor_pbcs_app, camera_lyricconfigprovider_service)
-
-app_domain(vendor_pbcs_app)
 
 allow vendor_pbcs_app app_api_service:service_manager find;
 allow vendor_pbcs_app cameraserver_service:service_manager find;

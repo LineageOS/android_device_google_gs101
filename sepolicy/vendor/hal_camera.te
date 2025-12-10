@@ -1,3 +1,8 @@
+hal_client_domain(hal_camera_default, hal_graphics_allocator)
+hal_client_domain(hal_camera_default, hal_graphics_composer)
+hal_client_domain(hal_camera_default, hal_power)
+hal_client_domain(hal_camera_default, hal_thermal)
+
 add_service(hal_camera_default, vendor_image_processing_hal_service)
 
 binder_call(hal_camera_default, edgetpu_app_server)
@@ -14,11 +19,6 @@ get_prop(hal_camera_default, vendor_camera_debug_prop)
 get_prop(hal_camera_default, vendor_edgetpu_runtime_prop)
 get_prop(hal_camera_default, vendor_hetero_runtime_prop)
 get_prop(hal_camera_default, vendor_tflite_delegate_prop)
-
-hal_client_domain(hal_camera_default, hal_graphics_allocator)
-hal_client_domain(hal_camera_default, hal_graphics_composer)
-hal_client_domain(hal_camera_default, hal_power)
-hal_client_domain(hal_camera_default, hal_thermal)
 
 set_prop(hal_camera_default, log_tag_prop)
 set_prop(hal_camera_default, vendor_camera_prop)

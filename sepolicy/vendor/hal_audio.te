@@ -1,3 +1,7 @@
+hal_client_domain(hal_audio_default, hal_graphics_allocator)
+hal_client_domain(hal_audio_default, hal_health)
+hal_client_domain(hal_audio_default, hal_thermal)
+
 add_hwservice(hal_audio_default, hal_audio_ext_hwservice)
 
 binder_call(hal_audio_default, aocxd)
@@ -7,10 +11,6 @@ binder_call(hal_audio_default, edgetpu_vendor_server)
 get_prop(hal_audio_default, vendor_edgetpu_runtime_prop)
 get_prop(hal_audio_default, vendor_hetero_runtime_prop)
 get_prop(hal_audio_default, vendor_tflite_delegate_prop)
-
-hal_client_domain(hal_audio_default, hal_graphics_allocator)
-hal_client_domain(hal_audio_default, hal_health)
-hal_client_domain(hal_audio_default, hal_thermal)
 
 perfetto_producer(hal_audio_default)
 
