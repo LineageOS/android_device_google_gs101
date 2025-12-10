@@ -1,29 +1,9 @@
-type edgetpu_app_server, coredomain, domain;
-type edgetpu_app_server_exec, exec_type, file_type, system_file_type;
-type edgetpu_app_service, app_api_service, isolated_compute_allowed_service, service_manager_type;
-
-binder_service(edgetpu_app_server)
-
-add_service(edgetpu_app_server, edgetpu_app_service)
-
 binder_call(edgetpu_app_server, edgetpu_vendor_server)
-binder_call(edgetpu_app_server, system_server)
-
-binder_use(edgetpu_app_server)
 
 get_prop(edgetpu_app_server, device_config_edgetpu_native_prop)
 get_prop(edgetpu_app_server, vendor_edgetpu_service_prop)
 
-init_daemon_domain(edgetpu_app_server)
-
-perfetto_producer(edgetpu_app_server)
-
 allow edgetpu_app_server edgetpu_device:chr_file rw_file_perms;
 allow edgetpu_app_server edgetpu_vendor_service:service_manager find;
-allow edgetpu_app_server fwk_stats_service:service_manager find;
-allow edgetpu_app_server package_native_service:service_manager find;
-allow edgetpu_app_server privapp_data_file:file { map read };
-allow edgetpu_app_server self:capability ipc_lock;
-allow edgetpu_app_server shell_data_file:file { map read };
 allow edgetpu_app_server sysfs_edgetpu:dir r_dir_perms;
 allow edgetpu_app_server sysfs_edgetpu:file rw_file_perms;

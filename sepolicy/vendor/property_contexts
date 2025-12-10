@@ -7,6 +7,7 @@ persist.vendor.cbd. u:object_r:vendor_cbd_prop:s0
 persist.vendor.config. u:object_r:vendor_persist_config_default_prop:s0
 persist.vendor.debug_level u:object_r:vendor_rild_prop:s0
 persist.vendor.display. u:object_r:vendor_display_prop:s0
+persist.vendor.fingerprint. u:object_r:vendor_fingerprint_prop:s0
 persist.vendor.gps. u:object_r:vendor_gps_prop:s0
 persist.vendor.intelligence u:object_r:vendor_intelligence_prop:s0
 persist.vendor.modem. u:object_r:vendor_modem_prop:s0

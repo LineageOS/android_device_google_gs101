@@ -1,0 +1,3 @@
+app_domain(grilservice_app)
+
+typeattribute grilservice_app coredomain;

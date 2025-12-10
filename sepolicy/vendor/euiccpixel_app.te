@@ -11,3 +11,5 @@ allow euiccpixel_app app_api_service:service_manager find;
 allow euiccpixel_app nfc_service:service_manager find;
 allow euiccpixel_app radio_service:service_manager find;
 allow euiccpixel_app surfaceflinger_service:service_manager find;
+
+dontaudit euiccpixel_app secure_element_service:service_manager find;

@@ -14,7 +14,6 @@ allow dumpstate rlsservice:binder call;
 allow dumpstate sysfs_scsi_devices_0000:file r_file_perms;
 allow dumpstate touch_context_service:service_manager find;
 allow dumpstate twoshay_file_dump_service:service_manager find;
-allow dumpstate vold:binder call;
 
 dontaudit dumpstate hal_power_stats_vendor_service:service_manager find;
 dontaudit dumpstate intelligence_data_file:dir getattr;

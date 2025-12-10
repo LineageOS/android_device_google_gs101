@@ -3,6 +3,8 @@ type storage_init_exec, exec_type, file_type, vendor_file_type;
 
 init_daemon_domain(storage_init)
 
+set_prop(storage_init, logpersistd_logging_prop)
+
 allow storage_init proc_f2fs:dir search;
 allow storage_init proc_f2fs:file { getattr open read };
 allow storage_init sysfs_fs_f2fs:dir search;

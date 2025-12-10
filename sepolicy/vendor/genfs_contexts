@@ -10,6 +10,7 @@ genfscon debugfs /dri/0/crtc- u:object_r:vendor_dri_debugfs:s0
 genfscon debugfs /maxfg_base u:object_r:vendor_maxfg_debugfs:s0
 genfscon debugfs /maxfg_flip u:object_r:vendor_maxfg_debugfs:s0
 genfscon debugfs /gvotables u:object_r:vendor_votable_debugfs:s0
+genfscon debugfs /edgetpu u:object_r:vendor_edgetpu_debugfs:s0
 genfscon debugfs /regmap u:object_r:vendor_regmap_debugfs:s0
 genfscon debugfs /maxfg u:object_r:vendor_maxfg_debugfs:s0
 genfscon debugfs /f2fs u:object_r:debugfs_f2fs:s0
@@ -19,6 +20,7 @@ genfscon debugfs /ion u:object_r:vendor_ion_debugfs:s0
 genfscon debugfs /usb u:object_r:vendor_usb_debugfs:s0
 genfscon proc /sys/kernel/sched_pelt_multiplier u:object_r:proc_sched:s0
 genfscon proc /sys/vm/compaction_proactiveness u:object_r:proc_compaction_proactiveness:s0
+genfscon proc /bluetooth/sleep/wakelock_ctrl u:object_r:proc_bluetooth_writable:s0
 genfscon proc /bluetooth/sleep/btwrite u:object_r:proc_bluetooth_writable:s0
 genfscon proc /bluetooth/sleep/btwake u:object_r:proc_bluetooth_writable:s0
 genfscon proc /bluetooth/sleep/lpm u:object_r:proc_bluetooth_writable:s0

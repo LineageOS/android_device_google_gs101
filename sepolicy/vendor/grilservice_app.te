@@ -1,7 +1,3 @@
-type grilservice_app, domain;
-
-app_domain(grilservice_app)
-
 hal_client_domain(grilservice_app, hal_power_stats)
 
 binder_call(grilservice_app, hal_audiometricext_default)
