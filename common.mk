@@ -282,6 +282,10 @@ PRODUCT_AVF_REMOTE_ATTESTATION_DISABLED := true
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.euicc.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/android.hardware.telephony.euicc.xml
 
+PRODUCT_PACKAGES += \
+    EuiccPolicy \
+    EuiccPolicyPixel
+
 # Fingerprint
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
