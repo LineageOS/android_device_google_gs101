@@ -13,8 +13,7 @@ import android.util.Log;
 class EuiccDisabler {
     private static final String TAG = "GoogleParts";
     private static final String[] EUICC_DEPENDENCIES = new String[]{
-        "com.google.android.gms",
-        "com.google.android.gsf"
+        "com.google.android.gms"
     };
     private static final String[] EUICC_PACKAGES = new String[]{
         "com.google.android.euicc",
