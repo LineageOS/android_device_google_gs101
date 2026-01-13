@@ -1,3 +1,3 @@
-hal_attribute(shared_modem_platform)
-
 attribute vendor_persist_type;
+
+hal_attribute(shared_modem_platform)
