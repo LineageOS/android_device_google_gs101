@@ -52,9 +52,6 @@ PRODUCT_SOONG_NAMESPACES += \
 # HWUI
 TARGET_USES_VULKAN = true
 
-# GPU
-PRODUCT_PACKAGES += gpu_probe
-
 # Install the OpenCL ICD Loader
 PRODUCT_SOONG_NAMESPACES += external/OpenCL-ICD-Loader
 PRODUCT_PACKAGES += \
