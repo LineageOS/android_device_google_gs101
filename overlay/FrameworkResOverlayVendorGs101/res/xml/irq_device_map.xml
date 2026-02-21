@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<irq-device-map>
+    <device name="rtc-alarm0">
+        <subsystem>Alarm</subsystem>
+    </device>
+    <device name="dhdpcie_host_wake">
+        <subsystem>Wifi</subsystem>
+    </device>
+    <device name="cp2ap_wakeup">
+        <subsystem>Cellular_data</subsystem>
+    </device>
+    <device name="MAILBOX_AOC2APxE00">
+        <subsystem>Sound_trigger</subsystem>
+    </device>
+    <device name="MAILBOX_AOC2APx100">
+        <subsystem>Sensor</subsystem>
+    </device>
+</irq-device-map>

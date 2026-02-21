@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Array containing custom messages shown during fingerprint acquisision from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_acquired_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>သင့်လက်ချောင်းကို ရွှေ့ပါ။ ထပ်စမ်းကြည့်ပါ။</item>
+        <item>လက်ချောင်းကို စာရင်းသွင်းပြီးသောကြောင့် အခြားလက်ချောင်း သုံးပါ။</item>
+        <item>ညံ့ဖျင်းသော ပုံအရည်အသွေး။ ထပ်စမ်းကြည့်ပါ။</item>
+        <item/>
+        <item>ညံ့ဖျင်းသော ပုံအရည်အသွေး။ ထပ်စမ်းကြည့်ပါ။</item>
+        <item/>
+        <item/>
+        <item>အစွန်းအထင်း တွေ့ရှိရသည်။ ဖန်သားပြင်ကို ရှင်းပါ။ ထပ်စမ်းကြည့်ပါ။</item>
+        <item>ပုံဖတ်၍ မရပါ။ ထပ်စမ်းကြည့်ပါ။</item>
+        <item/>
+    </string-array>
+
+    <!-- Generic error message shown when fingerprint needs calibration [CHAR LIMIT=150] -->
+    <string name="fingerprint_error_bad_calibration">လက်ဗွေ အာရုံခံကိရိယာကို အသုံးပြု၍ မရပါ။ ပြုပြင်ရေး ဝန်ဆောင်မှုပေးသူ (သို့) g.co/pixel/fingerprintunlock သို့ သွားပါ</string>
+
+    <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_error_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>မကောင်းသောဒေတာ။ ထပ်စမ်းကြည့်ပါ။</item>
+        <item>လက်ချောင်းကို စာရင်းသွင်း၍ မရပါ။ ထပ်စမ်းကြည့်ပါ။</item>
+    </string-array>
+
+    <!-- Notification content shown when the system requires the user to re-calibrate their fingerprint. [CHAR LIMIT=NONE] -->
+    <string name="fingerprint_recalibrate_notification_content">ပြုပြင်ရေး ဝန်ဆောင်မှုပေးသူ (သို့) g.co/pixel/fingerprintunlock သို့ သွားပါ</string>
+</resources>

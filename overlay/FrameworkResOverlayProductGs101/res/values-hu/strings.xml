@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Array containing custom messages shown during fingerprint acquisision from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_acquired_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>Mozgassa ujját. Próbálja újra.</item>
+        <item>Az ujj már regisztrálva van, próbálkozzon egy másik ujjával.</item>
+        <item>Gyenge minőségű a kép. Próbálja újra.</item>
+        <item/>
+        <item>Gyenge minőségű a kép. Próbálja újra.</item>
+        <item/>
+        <item/>
+        <item>Szennyeződés a képernyőn, tisztítsa meg. Próbálja újra.</item>
+        <item>Hiba történt a kép beolvasása során. Próbálja újra.</item>
+        <item/>
+    </string-array>
+
+    <!-- Generic error message shown when fingerprint needs calibration [CHAR LIMIT=150] -->
+    <string name="fingerprint_error_bad_calibration">Nem lehet használni az ujjlenyomat-érzékelőt. Keresse fel a szervizt vagy a g.co/pixel/fingerprintunlock oldalt.</string>
+
+    <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_error_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>Hibás adatok. Próbálja újra.</item>
+        <item>Nem sikerült regisztrálni az ujjat. Próbálja újra.</item>
+    </string-array>
+
+    <!-- Notification content shown when the system requires the user to re-calibrate their fingerprint. [CHAR LIMIT=NONE] -->
+    <string name="fingerprint_recalibrate_notification_content">Keresse fel a szervizt vagy a g.co/pixel/fingerprintunlock oldalt</string>
+</resources>
