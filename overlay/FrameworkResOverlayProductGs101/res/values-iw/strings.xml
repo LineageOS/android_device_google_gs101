@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Array containing custom messages shown during fingerprint acquisision from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_acquired_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>עליך להזיז את האצבע. יש לנסות שוב.</item>
+        <item>טביעת האצבע כבר רשומה, יש להשתמש באצבע אחרת.</item>
+        <item>איכות התמונה נמוכה. יש לנסות שוב.</item>
+        <item/>
+        <item>איכות התמונה נמוכה. יש לנסות שוב.</item>
+        <item/>
+        <item/>
+        <item>זוהה כתם, צריך לנקות את המסך. יש לנסות שוב.</item>
+        <item>קריאת התמונה נכשלה. יש לנסות שוב.</item>
+        <item/>
+    </string-array>
+
+    <!-- Generic error message shown when fingerprint needs calibration [CHAR LIMIT=150] -->
+    <string name="fingerprint_error_bad_calibration">‏לא ניתן להשתמש בחיישן טביעות האצבע. צריך ליצור קשר עם ספק תיקונים או להיכנס לכתובת g.co/pixel/fingerprintunlock</string>
+
+    <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_error_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>הנתונים לא תקינים. יש לנסות שוב.</item>
+        <item>רישום טביעת האצבע נכשל. יש לנסות שוב.</item>
+    </string-array>
+
+    <!-- Notification content shown when the system requires the user to re-calibrate their fingerprint. [CHAR LIMIT=NONE] -->
+    <string name="fingerprint_recalibrate_notification_content">‏צריך ליצור קשר עם ספק תיקונים או להיכנס לכתובת g.co/pixel/fingerprintunlock</string>
+</resources>

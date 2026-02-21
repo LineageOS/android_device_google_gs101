@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- When a radio power off request is received, we will delay completing the request until
+         either IMS moves to the deregistered state or the timeout defined by this configuration
+         elapses. If 0, this feature is disabled and we do not delay radio power off requests.-->
+    <integer name="config_delay_for_ims_dereg_millis">3000</integer>
+
+    <!-- Boolean indicating whether the Iwlan data service supports persistence of iwlan ipsec
+         tunnels across service restart. If iwlan tunnels are not persisted across restart,
+         Framework will clean up dangling data connections when service restarts -->
+    <bool name="config_wlan_data_service_conn_persistence_on_restart">false</bool>
+
+    <!-- IWLAN data service package name to bind to by default. If none is specified in an overlay,
+         an empty string is passed in -->
+    <string name="config_wlan_data_service_package">com.google.android.iwlan</string>
+
+    <!-- IWLAN network service package name to bind to by default. If none is specified in an
+         overlay, an empty string is passed in -->
+    <string name="config_wlan_network_service_package">com.google.android.iwlan</string>
+
+    <!-- Telephony qualified networks service package name to bind to by default. -->
+    <string name="config_qualified_networks_service_package">com.shannon.qualifiednetworksservice</string>
+</resources>

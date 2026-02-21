@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_error_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>மோசமான தரவு. மீண்டும் முயலவும்.</item>
+        <item>விரலைப் பதிவுசெய்ய முடியவில்லை. மீண்டும் முயலவும்.</item>
+    </string-array>
+
+    <!-- Notification content shown when the system requires the user to re-calibrate their fingerprint. [CHAR LIMIT=NONE] -->
+    <string name="fingerprint_recalibrate_notification_content">பழுதுபார்ப்புச் சேவை வழங்குநரைத் தொடர்புகொள்ளவும் அல்லது g.co/pixel/fingerprintunlock இணைப்பிற்குச் செல்லவும்</string>
+</resources>

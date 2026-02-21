@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Array containing custom messages shown during fingerprint acquisision from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_acquired_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>指の位置をずらして、もう一度お試しください。</item>
+        <item>この指はすでに登録済みです、別の指を使用してください。</item>
+        <item>画質が良くありません。もう一度お試しください。</item>
+        <item/>
+        <item>画質が良くありません。もう一度お試しください。</item>
+        <item/>
+        <item/>
+        <item>汚れを検出しました。画面をきれいに拭いてから、もう一度お試しください。</item>
+        <item>画像を読み取れませんでした。もう一度お試しください。</item>
+        <item/>
+    </string-array>
+
+    <!-- Generic error message shown when fingerprint needs calibration [CHAR LIMIT=150] -->
+    <string name="fingerprint_error_bad_calibration">指紋認証センサーを使用できません。修理業者に問い合わせるか、g.co/pixel/fingerprintunlock にアクセスしてください</string>
+
+    <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_error_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>データが無効です。もう一度お試しください。</item>
+        <item>指を登録できませんでした。もう一度お試しください。</item>
+    </string-array>
+
+    <!-- Notification content shown when the system requires the user to re-calibrate their fingerprint. [CHAR LIMIT=NONE] -->
+    <string name="fingerprint_recalibrate_notification_content">修理業者に調整を依頼するか、g.co/pixel/fingerprintunlock にアクセスしてください</string>
+</resources>

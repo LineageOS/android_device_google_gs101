@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Array containing custom messages shown during fingerprint acquisision from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_acquired_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>Flytt fingeren. Prøv på nytt.</item>
+        <item>Fingeren er allerede registrert. Bruk en annen finger.</item>
+        <item>Dårlig bildekvalitet. Prøv på nytt.</item>
+        <item/>
+        <item>Dårlig bildekvalitet. Prøv på nytt.</item>
+        <item/>
+        <item/>
+        <item>En flekk er registrert. Rengjør skjermen. Prøv på nytt.</item>
+        <item>Kunne ikke lese bildet. Prøv på nytt.</item>
+        <item/>
+    </string-array>
+
+    <!-- Generic error message shown when fingerprint needs calibration [CHAR LIMIT=150] -->
+    <string name="fingerprint_error_bad_calibration">Kan ikke bruke fingeravtrykkssensoren. Gå til en reparasjonsleverandør eller g.co/pixel/fingerprintunlock</string>
+
+    <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_error_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>Ugyldige data. Prøv på nytt.</item>
+        <item>Kunne ikke registrere fingeren. Prøv på nytt.</item>
+    </string-array>
+
+    <!-- Notification content shown when the system requires the user to re-calibrate their fingerprint. [CHAR LIMIT=NONE] -->
+    <string name="fingerprint_recalibrate_notification_content">Gå til en reparasjonsleverandør eller g.co/pixel/fingerprintunlock</string>
+</resources>

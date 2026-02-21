@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Flag indicating whether we should enable the adaptive sleep.-->
+    <bool name="config_adaptive_sleep_available">true</bool>
+
+    <!-- The component name for the default system attention service.
+         This service must be trusted, as it can be activated without explicit consent of the user.
+         See android.attention.AttentionManagerService.
+    -->
+    <string name="config_defaultAttentionService">com.google.android.as/com.google.android.apps.miphone.aiai.attention.service.AiAiAttentionService</string>
+
+    <!-- The component name for the default system rotation resolver service.
+        This service must be trusted, as it can be activated without explicit consent of the user.
+        See android.service.rotationresolver.RotationResolverService.
+   -->
+    <string name="config_defaultRotationResolverService">com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiRotationResolverService</string>
+</resources>

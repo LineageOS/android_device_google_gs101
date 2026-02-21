@@ -166,9 +166,6 @@ PRODUCT_VENDOR_PROPERTIES += \
 # b/295257834 Add HDR shaders to SurfaceFlinger's pre-warming cache
 PRODUCT_VENDOR_PROPERTIES += ro.surface_flinger.prime_shader_cache.ultrahdr=1
 
-DEVICE_PACKAGE_OVERLAYS += device/google/gs101/overlay
-DEVICE_PACKAGE_OVERLAYS += device/google/gs101/overlay-lineage
-
 # Enforce the Product interface
 PRODUCT_PRODUCT_VNDK_VERSION := current
 PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE := true
@@ -274,14 +271,6 @@ PRODUCT_PROPERTY_OVERRIDES += aaudio.hw_burst_min_usec=2000
 # Camera
 PRODUCT_SOONG_NAMESPACES += \
     hardware/google/camera
-
-# WiFi
-PRODUCT_PACKAGES += \
-	WifiOverlay
-
-# Connectivity
-PRODUCT_PACKAGES += \
-        ConnectivityOverlay
 
 # Storage health HAL
 PRODUCT_PACKAGES += \
@@ -429,9 +418,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PRODUCT_PROPERTIES += \
 	persist.bluetooth.bqr.event_mask=30 \
 	persist.bluetooth.bqr.min_interval_ms=500
-
-PRODUCT_ENFORCE_RRO_TARGETS := \
-	framework-res
 
 # Dynamic Partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
@@ -593,6 +579,39 @@ $(call soong_config_set_bool,lineage_health,charging_control_supports_toggle,fal
 PRODUCT_VENDOR_LINKER_CONFIG_FRAGMENTS += \
     device/google/gs101/linker.config.json
 
+# Overlays
+DEVICE_PACKAGE_OVERLAYS += \
+    device/google/gs101/overlay-lineage
+
+PRODUCT_PACKAGES += \
+    DMServiceOverlayProductGs101 \
+    EuiccSupportPixelOverlay \
+    FrameworkResOverlayProductGs101 \
+    FrameworkResOverlayVendorGs101 \
+    GlanceableHubConfigOverlay \
+    GlanceableHubSettingsConfigOverlay \
+    GlanceableHubSysuiConfigOverlay \
+    GoogleConfigOverlay \
+    GooglePermissionControllerSafetyCenterOverlay \
+    NetworkStackOverlay \
+    PixelConfigOverlay2019 \
+    PixelConfigOverlay2021 \
+    PixelConfigOverlayCommon \
+    PixelConnectivityOverlay2022_midyear \
+    PixelNfcOverlayCommon \
+    PixelNfcOverlayGs101 \
+    PixelTetheringOverlay2021 \
+    PixelWifiOverlay2022_midyear \
+    SafetyRegulatoryInfoOverlayProductGs101 \
+    SettingsGoogleOverlayProductGs101 \
+    SettingsProviderOverlayProductGs101 \
+    SystemUIGoogleOverlayProductGs101 \
+    SystemUIGoogleOverlayVendorGs101 \
+    TeleServiceOverlayProductGs101 \
+    TeleServiceOverlayVendorGs101 \
+    TelecomOverlayProductGs101 \
+    TelephonyProviderOverlayProductGs101
+
 # Parts
 PRODUCT_PACKAGES += \
     GoogleParts
@@ -600,10 +619,6 @@ PRODUCT_PACKAGES += \
 # Properties
 TARGET_PRODUCT_PROP += device/google/gs101/product.prop
 TARGET_SYSTEM_EXT_PROP += device/google/gs101/system_ext.prop
-
-# Tethering
-PRODUCT_PACKAGES += \
-    TetheringOverlay
 
 # Touch
 include hardware/google/pixel/touch/device.mk
