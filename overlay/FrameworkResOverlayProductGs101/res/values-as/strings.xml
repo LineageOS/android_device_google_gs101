@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Generic error message shown when fingerprint needs calibration [CHAR LIMIT=150] -->
+    <string name="fingerprint_error_bad_calibration">ফিংগাৰপ্ৰিণ্ট ছেন্সৰ ব্যৱহাৰ কৰিব নোৱাৰি। মেৰামতি সেৱা প্ৰদানকাৰী কোনো প্ৰতিষ্ঠান অথবা g.co/pixel/fingerprintunlockলৈ যাওক</string>
+
+    <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_error_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>ত্ৰুটিপূৰ্ণ ডেটা। পুনৰ চেষ্টা কৰক।</item>
+        <item>আঙুলি পঞ্জীয়ন কৰিব পৰা নগ’ল। পুনৰ চেষ্টা কৰক।</item>
+    </string-array>
+
+    <!-- Notification content shown when the system requires the user to re-calibrate their fingerprint. [CHAR LIMIT=NONE] -->
+    <string name="fingerprint_recalibrate_notification_content">মেৰামতি সেৱা প্ৰদানকাৰী কোনো প্ৰতিষ্ঠান অথবা g.co/pixel/fingerprintunlockলৈ যাওক</string>
+</resources>

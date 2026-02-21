@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Array containing custom messages shown during fingerprint acquisision from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_acquired_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>حرِّك إصبعك. يُرجى إعادة المحاولة.</item>
+        <item>سبق أن تم تسجيل بصمة هذا الإصبع، يُرجى استخدام إصبع آخر.</item>
+        <item>جودة الصورة رديئة. يُرجى إعادة المحاولة.</item>
+        <item/>
+        <item>جودة الصورة رديئة. يُرجى إعادة المحاولة.</item>
+        <item/>
+        <item/>
+        <item>الشاشة متسخة، يُرجى تنظيفها ثم إعادة المحاولة.</item>
+        <item>تعذّرت قراءة الصورة. يُرجى إعادة المحاولة.</item>
+        <item/>
+    </string-array>
+
+    <!-- Generic error message shown when fingerprint needs calibration [CHAR LIMIT=150] -->
+    <string name="fingerprint_error_bad_calibration">‏يتعذّر استخدام أداة استشعار بصمة الإصبع. يُرجى التواصل مع مقدِّم خدمات إصلاح أو الانتقال إلى g.co/pixel/fingerprintunlock</string>
+
+    <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_error_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>البيانات غير صحيحة. يُرجى إعادة المحاولة.</item>
+        <item>تعذّر تسجيل بصمة الإصبع. يُرجى إعادة المحاولة.</item>
+    </string-array>
+
+    <!-- Notification content shown when the system requires the user to re-calibrate their fingerprint. [CHAR LIMIT=NONE] -->
+    <string name="fingerprint_recalibrate_notification_content">‏يُرجى التواصل مع مقدِّم خدمات إصلاح أو الانتقال إلى g.co/pixel/fingerprintunlock</string>
+</resources>
