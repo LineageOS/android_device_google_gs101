@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Array containing custom messages shown during fingerprint acquisision from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_acquired_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>Parmağınızı hareket ettirin. Tekrar deneyin.</item>
+        <item>Bu parmak zaten kaydedildi, başka bir parmak deneyin.</item>
+        <item>Düşük resim kalitesi. Tekrar deneyin.</item>
+        <item/>
+        <item>Düşük resim kalitesi. Tekrar deneyin.</item>
+        <item/>
+        <item/>
+        <item>Leke algılandı, ekranı temizleyin. Tekrar deneyin.</item>
+        <item>Resim okunamadı. Tekrar deneyin.</item>
+        <item/>
+    </string-array>
+
+    <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_error_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>Kötü veri. Tekrar deneyin.</item>
+        <item>Parmak kaydedilemedi. Tekrar deneyin.</item>
+    </string-array>
+
+    <!-- Notification content shown when the system requires the user to re-calibrate their fingerprint. [CHAR LIMIT=NONE] -->
+    <string name="fingerprint_recalibrate_notification_content">Bir onarım hizmeti sağlayıcıyı veya g.co/pixel/fingerprintunlock adresini ziyaret edin</string>
+</resources>

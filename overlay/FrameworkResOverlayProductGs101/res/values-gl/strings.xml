@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Array containing custom messages shown during fingerprint acquisision from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_acquired_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>Move o dedo. Téntao de novo.</item>
+        <item>Ese dedo xa está rexistrado; usa outro.</item>
+        <item>A imaxe ten mala calidade. Téntao de novo.</item>
+        <item/>
+        <item>A imaxe ten mala calidade. Téntao de novo.</item>
+        <item/>
+        <item/>
+        <item>Detectouse unha mancha; limpa a pantalla. Téntao de novo.</item>
+        <item>Produciuse un erro ao ler a imaxe. Téntao de novo.</item>
+        <item/>
+    </string-array>
+
+    <!-- Generic error message shown when fingerprint needs calibration [CHAR LIMIT=150] -->
+    <string name="fingerprint_error_bad_calibration">Non se puido usar o sensor de impresión dixital. Visita un provedor de reparacións ou accede a g.co/pixel/fingerprintunlock</string>
+
+    <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_error_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>Os datos son incorrectos. Téntao de novo.</item>
+        <item>Produciuse un erro ao rexistrar o dedo. Téntao de novo.</item>
+    </string-array>
+
+    <!-- Notification content shown when the system requires the user to re-calibrate their fingerprint. [CHAR LIMIT=NONE] -->
+    <string name="fingerprint_recalibrate_notification_content">Visita un provedor de reparacións ou accede a g.co/pixel/fingerprintunlock</string>
+</resources>
