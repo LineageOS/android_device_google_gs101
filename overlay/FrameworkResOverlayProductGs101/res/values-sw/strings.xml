@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Array containing custom messages shown during fingerprint acquisision from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_acquired_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>Sogeza kidole chako. Jaribu tena.</item>
+        <item>Tayari kidole hiki kimeandikishwa, tumia kidole tofauti.</item>
+        <item>Ubora duni wa picha. Jaribu tena.</item>
+        <item/>
+        <item>Ubora duni wa picha. Jaribu tena.</item>
+        <item/>
+        <item/>
+        <item>Imetambua doa, safisha skrini. Jaribu tena.</item>
+        <item>Imeshindwa kusoma picha. Jaribu tena.</item>
+        <item/>
+    </string-array>
+
+    <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_error_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>Data duni. Jaribu tena.</item>
+        <item>Imeshindwa kuandikisha kidole. Jaribu tena.</item>
+    </string-array>
+
+    <!-- Notification content shown when the system requires the user to re-calibrate their fingerprint. [CHAR LIMIT=NONE] -->
+    <string name="fingerprint_recalibrate_notification_content">Tembelea mtoa huduma za urekebishaji au g.co/pixel/fingerprintunlock</string>
+</resources>

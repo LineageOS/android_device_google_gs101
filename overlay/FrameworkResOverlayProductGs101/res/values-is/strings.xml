@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Array containing custom messages shown during fingerprint acquisision from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_acquired_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>Færðu fingurinn. Reyndu aftur.</item>
+        <item>Fingur er þegar skráður. Notaðu annan fingur.</item>
+        <item>Lítil myndgæði. Reyndu aftur.</item>
+        <item/>
+        <item>Lítil myndgæði. Reyndu aftur.</item>
+        <item/>
+        <item/>
+        <item>Óhreinindi greindust, hreinsaðu skjáinn. Reyndu aftur.</item>
+        <item>Ekki tókst að lesa mynd. Reyndu aftur.</item>
+        <item/>
+    </string-array>
+
+    <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_error_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>Léleg gögn. Reyndu aftur.</item>
+        <item>Ekki tókst að skrá fingur. Reyndu aftur.</item>
+    </string-array>
+
+    <!-- Notification content shown when the system requires the user to re-calibrate their fingerprint. [CHAR LIMIT=NONE] -->
+    <string name="fingerprint_recalibrate_notification_content">Farðu á verkstæði eða opnaðu g.co/pixel/fingerprintunlock</string>
+</resources>

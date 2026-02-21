@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Array containing custom messages shown during fingerprint acquisision from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_acquired_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>Posuňte prst. Skúste to znova.</item>
+        <item>Odtlačok prsta je už zaregistrovaný, použite iný prst.</item>
+        <item>Nízka kvalita obrázka. Skúste to znova.</item>
+        <item/>
+        <item>Nízka kvalita obrázka. Skúste to znova.</item>
+        <item/>
+        <item/>
+        <item>Zistila sa škvrna, vyčistite obrazovku. Skúste to znova.</item>
+        <item>Obrázok sa nepodarilo prečítať. Skúste to znova.</item>
+        <item/>
+    </string-array>
+
+    <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_error_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>Nesprávne údaje. Skúste to znova.</item>
+        <item>Odtlačok prsta sa nepodarilo zaregistrovať. Skúste to znova.</item>
+    </string-array>
+
+    <!-- Notification content shown when the system requires the user to re-calibrate their fingerprint. [CHAR LIMIT=NONE] -->
+    <string name="fingerprint_recalibrate_notification_content">Navštívte poskytovateľa opráv alebo prejdite na g.co/pixel/fingerprintunlock</string>
+</resources>

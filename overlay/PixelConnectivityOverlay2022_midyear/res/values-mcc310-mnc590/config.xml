@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Whether the device should automatically switch away from Wi-Fi networks that lose
+         Internet access. Actual device behaviour is controlled by
+         Settings.Global.NETWORK_AVOID_BAD_WIFI. This is the default value of that setting. -->
+    <integer name="config_networkAvoidBadWifi">0</integer>
+</resources>

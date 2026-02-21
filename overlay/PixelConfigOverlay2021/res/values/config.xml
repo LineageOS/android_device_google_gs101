@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- The list of packages to force slowJpegMode for Apps using Camera API1 -->
+    <string-array name="config_forceSlowJpegModeList">
+        <item>com.facebook.orca</item>
+        <item>com.skype.raider</item>
+        <item>com.tencent.mm</item>
+    </string-array>
+
+    <!-- Enable pause wallpaper rendering upon state change such as app launch -->
+    <bool name="config_pauseWallpaperRenderWhenStateChangeEnabled">true</bool>
+
+    <!-- The list of packages to pause wallpaper rendering upon state change such as app launch -->
+    <string-array name="pause_wallpaper_render_when_state_change">
+        <item>com.google.android.GoogleCamera</item>
+    </string-array>
+</resources>

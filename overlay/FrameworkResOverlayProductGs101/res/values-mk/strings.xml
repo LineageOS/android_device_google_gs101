@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Array containing custom messages shown during fingerprint acquisision from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_acquired_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>Поместете го прстот. Обидете се повторно.</item>
+        <item>Прстот веќе е регистриран. Користете друг прст.</item>
+        <item>Слаб квалитет на слика. Обидете се повторно.</item>
+        <item/>
+        <item>Слаб квалитет на слика. Обидете се повторно.</item>
+        <item/>
+        <item/>
+        <item>Има дамка на екранот, исчистете го. Обидете се повторно.</item>
+        <item>Не можеше да се прочита сликата. Обидете се повторно.</item>
+        <item/>
+    </string-array>
+
+    <!-- Generic error message shown when fingerprint needs calibration [CHAR LIMIT=150] -->
+    <string name="fingerprint_error_bad_calibration">Не може да се користи сензорот за отпечатоци. Однесете го на поправка или одете на g.co/pixel/fingerprintunlock</string>
+
+    <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_error_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>Лоши податоци. Обидете се повторно.</item>
+        <item>Не успеа регистрацијата на прстот. Обидете се повторно.</item>
+    </string-array>
+
+    <!-- Notification content shown when the system requires the user to re-calibrate their fingerprint. [CHAR LIMIT=NONE] -->
+    <string name="fingerprint_recalibrate_notification_content">Однесете го на поправка или одете на g.co/pixel/fingerprintunlock</string>
+</resources>
