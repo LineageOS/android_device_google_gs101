@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Array containing custom messages shown during fingerprint acquisision from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_acquired_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>រំកិលម្រាមដៃ​របស់អ្នក។ សូមព្យាយាមម្ដងទៀត។</item>
+        <item>បានបញ្ចូល​ម្រាមដៃរួចហើយ សូមប្រើ​ម្រាមដៃផ្សេង។</item>
+        <item>គុណភាព​រូបភាព​អន់។ សូមព្យាយាមម្ដងទៀត។</item>
+        <item/>
+        <item>គុណភាព​រូបភាព​អន់។ សូមព្យាយាមម្ដងទៀត។</item>
+        <item/>
+        <item/>
+        <item>បានរកឃើញ​ស្នាមប្រឡាក់ សូមសម្អាតអេក្រង់។ សូមព្យាយាមម្ដងទៀត។</item>
+        <item>មិនអាចអាន​រូបភាពបានទេ។ សូមព្យាយាមម្ដងទៀត។</item>
+        <item/>
+    </string-array>
+
+    <!-- Generic error message shown when fingerprint needs calibration [CHAR LIMIT=150] -->
+    <string name="fingerprint_error_bad_calibration">មិនអាចប្រើ​ឧបករណ៍ចាប់ស្នាមម្រាមដៃ​បានទេ។ សូមទាក់ទង​ក្រុមហ៊ុនផ្ដល់ការជួសជុល ឬចូលទៅកាន់ g.co/pixel/fingerprintunlock</string>
+
+    <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_error_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>ទិន្នន័យអន់។ សូមព្យាយាមម្ដងទៀត។</item>
+        <item>មិនអាច​បញ្ចូលម្រាមដៃបានទេ។ សូមព្យាយាមម្ដងទៀត។</item>
+    </string-array>
+
+    <!-- Notification content shown when the system requires the user to re-calibrate their fingerprint. [CHAR LIMIT=NONE] -->
+    <string name="fingerprint_recalibrate_notification_content">សូមទាក់ទង​ក្រុមហ៊ុនផ្ដល់ការជួសជុល ឬចូលទៅកាន់ g.co/pixel/fingerprintunlock</string>
+</resources>

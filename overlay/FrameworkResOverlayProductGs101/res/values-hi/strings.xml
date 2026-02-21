@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Array containing custom messages shown during fingerprint acquisision from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_acquired_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>उंगली को किसी और तरह से रखें. फिर से कोशिश करें.</item>
+        <item>इस उंगली का प्रिंट पहले ही जोड़ा जा चुका है. दूसरी उंगली का इस्तेमाल करें.</item>
+        <item>इमेज की क्वालिटी खराब है. फिर से कोशिश करें.</item>
+        <item/>
+        <item>इमेज की क्वालिटी खराब है. फिर से कोशिश करें.</item>
+        <item/>
+        <item/>
+        <item>धब्बे का पता चला, स्क्रीन साफ़ करें. फिर से कोशिश करें.</item>
+        <item>इमेज पहचानी नहीं जा सकी. फिर से कोशिश करें.</item>
+        <item/>
+    </string-array>
+
+    <!-- Generic error message shown when fingerprint needs calibration [CHAR LIMIT=150] -->
+    <string name="fingerprint_error_bad_calibration">फ़िंगरप्रिंट सेंसर इस्तेमाल नहीं किया जा सकता. रिपेयर की सेवा देने वाली कंपनी से संपर्क करें या g.co/pixel/fingerprintunlock पर जाएं</string>
+
+    <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_error_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>डेटा गलत है. फिर से कोशिश करें.</item>
+        <item>फ़िगरप्रिंट जोड़ा नहीं जा सका. फिर से कोशिश करें.</item>
+    </string-array>
+
+    <!-- Notification content shown when the system requires the user to re-calibrate their fingerprint. [CHAR LIMIT=NONE] -->
+    <string name="fingerprint_recalibrate_notification_content">रिपेयर की सेवा देने वाली कंपनी से संपर्क करें या g.co/pixel/fingerprintunlock पर जाएं</string>
+</resources>

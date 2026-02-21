@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Array containing custom messages shown during fingerprint acquisision from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_acquired_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>Przesuń palec. Spróbuj ponownie.</item>
+        <item>Już zarejestrowano ten palec, użyj innego.</item>
+        <item>Niska jakość obrazu. Spróbuj ponownie.</item>
+        <item/>
+        <item>Niska jakość obrazu. Spróbuj ponownie.</item>
+        <item/>
+        <item/>
+        <item>Wykryto smugi, wyczyść ekran. Spróbuj ponownie.</item>
+        <item>Nie udało się odczytać zdjęcia. Spróbuj ponownie.</item>
+        <item/>
+    </string-array>
+
+    <!-- Generic error message shown when fingerprint needs calibration [CHAR LIMIT=150] -->
+    <string name="fingerprint_error_bad_calibration">Nie można użyć czytnika linii papilarnych. Odwiedź serwis lub otwórz stronę g.co/pixel/fingerprintunlock</string>
+
+    <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_error_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>Złe dane. Spróbuj ponownie.</item>
+        <item>Nie udało się zarejestrować palca. Spróbuj ponownie.</item>
+    </string-array>
+
+    <!-- Notification content shown when the system requires the user to re-calibrate their fingerprint. [CHAR LIMIT=NONE] -->
+    <string name="fingerprint_recalibrate_notification_content">Odwiedź serwis lub otwórz stronę g.co/pixel/fingerprintunlock</string>
+</resources>

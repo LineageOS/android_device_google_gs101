@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Array containing custom messages shown during fingerprint acquisision from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_acquired_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>Verplaats je vinger. Probeer het opnieuw.</item>
+        <item>Deze vinger is al geregistreerd, gebruik een andere vinger.</item>
+        <item>Slechte beeldkwaliteit. Probeer het opnieuw.</item>
+        <item/>
+        <item>Slechte beeldkwaliteit. Probeer het opnieuw.</item>
+        <item/>
+        <item/>
+        <item>Vlek op de sensor, maak het scherm schoon. Probeer het opnieuw.</item>
+        <item>Kan niet lezen. Probeer het opnieuw.</item>
+        <item/>
+    </string-array>
+
+    <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
+    <string-array name="fingerprint_error_vendor">
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item/>
+        <item>Onjuiste gegevens. Probeer het opnieuw.</item>
+        <item>Kan vinger niet registreren. Probeer het opnieuw.</item>
+    </string-array>
+
+    <!-- Notification content shown when the system requires the user to re-calibrate their fingerprint. [CHAR LIMIT=NONE] -->
+    <string name="fingerprint_recalibrate_notification_content">Ga naar een reparateur of naar g.co/pixel/fingerprintunlock</string>
+</resources>

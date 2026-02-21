@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- List of packages that should be hidden for MVNO. Do not translate -->
+    <string-array name="datausage_hiding_carrier_service_package_names">
+        <item>com.verizon.mips.services</item>
+        <item>com.verizon.llkagent</item>
+        <item>com.verizon.obdm</item>
+        <item>com.verizon.obdm_permissions</item>
+        <item>com.verizon.services</item>
+        <item>com.vzw.apnlib</item>
+    </string-array>
+
+    <!-- List of MVNO. Do not translate -->
+    <integer-array name="datausage_hiding_carrier_service_carrier_id">
+        <item>1802</item>
+        <item>2032</item>
+        <item>2126</item>
+        <item>2146</item>
+        <item>10008</item>
+    </integer-array>
+
+    <!-- Array of carrier IDs for which the Wi-Fi scorer toggle should be OFF by default. -->
+    <integer-array name="config_carrier_for_wifi_scorer_toggle_off">
+        <item>1839</item>
+    </integer-array>
+
+    <!-- Array of carrier IDs for which the mobile network toggle should be disabled/hidden by default. -->
+    <integer-array name="config_carrier_for_mobile_network_toggle_disable">
+        <item>19</item>
+        <item>25</item>
+        <item>28</item>
+    </integer-array>
+</resources>
