@@ -17,18 +17,26 @@ bluetooth.profile.pan.nap.enabled?=true
 bluetooth.profile.pan.panu.enabled?=true
 bluetooth.profile.pbap.server.enabled?=true
 bluetooth.profile.sap.server.enabled?=true
+persist.bluetooth.a2dp_aac.vbr_supported=true
 persist.bluetooth.bqr.event_mask=30
 persist.bluetooth.bqr.min_interval_ms=500
+persist.bluetooth.firmware.selection=BCM.hcd
 
 # Camera
 ro.vendor.camera.extensions.package=com.google.android.apps.camera.services
 ro.vendor.camera.extensions.service=com.google.android.apps.camera.services.extensions.service.PixelExtensions
+
+# Cutout
+ro.support_hide_display_cutout=true
 
 # Dumpstate
 dumpstate.strict_run=false
 
 # e-SIM
 masterclear.allow_retain_esim_profiles_after_fdr=true
+
+# Fingerprint
+persist.vendor.fingerprint.disable.fake.override=none
 
 # fsck
 persist.fsck.disable_linear_lookup=on
@@ -39,6 +47,9 @@ persist.sys.fuse.passthrough.enable=true
 
 # Postinstall
 ro.postinstall.fstab.prefix=/product
+
+# Quick start
+ro.quick_start.oem_id=00e0
 
 # Telephony
 persist.radio.reboot_on_modem_change=false
