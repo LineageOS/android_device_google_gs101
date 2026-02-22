@@ -15,6 +15,9 @@ persist.bluetooth.a2dp_offload.cap=sbc-aac-aptx-aptxhd-ldac-opus
 persist.bluetooth.a2dp_offload.disabled=false
 ro.bluetooth.a2dp_offload.supported=true
 
+# Camera
+persist.vendor.camera.exif_reveal_make_model=true
+
 # Codec2
 debug.c2.use_dmabufheaps=1
 debug.stagefright.c2-poolmask=1507328
@@ -27,11 +30,22 @@ ro.vendor.gpu.dataspace=1
 # Dalvik
 dalvik.vm.dex2oat64.enabled=true
 
+# DCK
+ro.gms.dck.se_capability=1
+
+# Device family
+ro.build.device_family=O6R4B9
+
 # Display
 debug.hwc.winupdate=1
 debug.slsi_platform=1
 ro.vendor.ddk.set.afbc=1
+vendor.display.lbe.supported=1
 vendor.hwc.dpp.downscale=2
+
+# DRM
+drm.service.enabled=true
+media.mediadrmservice.enable=true
 
 # EdgeTPU
 vendor.edgetpu.cpu_scheduler.policy=FIFO
@@ -40,6 +54,11 @@ vendor.edgetpu.tflite_delegate.force_disable_io_coherency=0
 
 # Factory reset
 ro.crypto.metadata_init_delete_all_keys.enabled=true
+
+# Fingerprint
+persist.vendor.udfps.als_feed_forward_supported=true
+persist.vendor.udfps.fps_touch_handler_supported=false
+persist.vendor.udfps.lhbm_controlled_in_hal_supported=true
 
 # FRP
 ro.frp.pst=/dev/block/by-name/frp
@@ -63,6 +82,9 @@ vendor.pktrouter=1
 
 # IncrementalFS
 ro.incremental.enable=true
+
+# Media
+ro.odm.build.media_performance_class=31
 
 # OEM unlock
 ro.oem_unlock_supported=1
@@ -117,10 +139,13 @@ persist.vendor.radio.multisim_switch_support=true
 persist.vendor.ril.crash_handling_mode=2
 persist.vendor.ril.db_ecc.id.type=5
 persist.vendor.ril.db_ecc.use.iccid_to_plmn=1
+persist.vendor.ril.ecc.use.xml=1
 persist.vendor.ril.log.base_dir=/data/vendor/radio/sit-ril
 persist.vendor.ril.log.chunk_size=5242880
 persist.vendor.ril.log.num_file=3
 persist.vendor.ril.log_mask=3
+persist.vendor.ril.support_nr_ds=0
+persist.vendor.ril.use_radio_hal=1.6
 persist.vendor.sys.modem.logging.br_num=5
 persist.vendor.sys.modem.logging.enable=true
 persist.vendor.sys.silentlog.tcp=On
@@ -128,18 +153,24 @@ persist.vendor.verbose_logging_enabled=false
 ro.telephony.default_network=27
 ro.vendor.cbd.modem_removable=1
 ro.vendor.cbd.modem_type=s5100sit
+ro.vendor.config.build_carrier=europen
 ro.vendor.sys.modem.logging.loc=/data/vendor/slog
 telephony.active_modems.max_count=2
+vendor.rild.libpath=libsitril.so
 
 # Thermal
 persist.vendor.enable.thermal.genl=true
 
 # USB
+ro.usb.uvc.enabled=true
 sys.usb.ffs.io_uring_enabled=true
 
 # Watchdog
 framework_watchdog.fatal_count=3
 framework_watchdog.fatal_window.second=600
+
+# ZRAM
+vendor.zram.size=3g
 
 # Zygote
 zygote.critical_window.minute=10
