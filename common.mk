@@ -347,9 +347,6 @@ PRODUCT_PACKAGES += \
     android.hardware.nfc-service.st
 
 # Overlays
-DEVICE_PACKAGE_OVERLAYS += \
-    device/google/gs101/overlay-lineage
-
 PRODUCT_PACKAGES += \
     DMServiceOverlayProductGs101 \
     EuiccSupportPixelOverlay \
@@ -378,6 +375,11 @@ PRODUCT_PACKAGES += \
     TeleServiceOverlayVendorGs101 \
     TelecomOverlayProductGs101 \
     TelephonyProviderOverlayProductGs101
+
+PRODUCT_PACKAGES += \
+    FrameworkResOverlayLineageGs101 \
+    LineageSdkOverlayGs101 \
+    SimpleDeviceConfigOverlayGs101
 
 # Parts
 PRODUCT_PACKAGES += \
