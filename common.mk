@@ -357,7 +357,6 @@ PRODUCT_PACKAGES += \
     GlanceableHubSysuiConfigOverlay \
     GoogleConfigOverlay \
     GooglePermissionControllerSafetyCenterOverlay \
-    NetworkStackOverlay \
     PixelConfigOverlay2019 \
     PixelConfigOverlay2021 \
     PixelConfigOverlayCommon \
