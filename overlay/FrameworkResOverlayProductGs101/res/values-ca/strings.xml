@@ -12,19 +12,19 @@
         <item/>
         <item/>
         <item>Mou el dit. Torna-ho a provar.</item>
-        <item>"L'empremta digital ja s'ha registrat amb un altre dit."</item>
+        <item>L\'empremta digital ja s\'ha registrat amb un altre dit.</item>
         <item>La qualitat de la imatge és deficient. Torna-ho a provar.</item>
         <item/>
         <item>La qualitat de la imatge és deficient. Torna-ho a provar.</item>
         <item/>
         <item/>
-        <item>"S'ha detectat una taca; neteja la pantalla. Torna-ho a provar."</item>
-        <item>"No s'ha pogut llegir la imatge. Torna-ho a provar."</item>
+        <item>S\'ha detectat una taca; neteja la pantalla. Torna-ho a provar.</item>
+        <item>No s\'ha pogut llegir la imatge. Torna-ho a provar.</item>
         <item/>
     </string-array>
 
     <!-- Generic error message shown when fingerprint needs calibration [CHAR LIMIT=150] -->
-    <string name="fingerprint_error_bad_calibration">No es pot utilitzar el sensor d'empremtes digitals. Visita un proveïdor de reparacions o g.co/pixel/fingerprintunlock.</string>
+    <string name="fingerprint_error_bad_calibration">No es pot utilitzar el sensor d\'empremtes digitals. Visita un proveïdor de reparacions o g.co/pixel/fingerprintunlock.</string>
 
     <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
     <string-array name="fingerprint_error_vendor">
@@ -35,7 +35,7 @@
         <item/>
         <item/>
         <item>Les dades són incorrectes. Torna-ho a provar.</item>
-        <item>"No s'ha pogut registrar el dit. Torna-ho a provar."</item>
+        <item>No s\'ha pogut registrar el dit. Torna-ho a provar.</item>
     </string-array>
 
     <!-- Notification content shown when the system requires the user to re-calibrate their fingerprint. [CHAR LIMIT=NONE] -->
