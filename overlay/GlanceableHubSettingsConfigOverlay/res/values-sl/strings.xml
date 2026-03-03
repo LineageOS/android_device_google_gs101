@@ -18,7 +18,4 @@
 
     <!-- Summary for when to automatically show hub mode (widgets on lockscreen): upright and charging  [CHAR LIMIT=100] -->
     <string name="when_to_show_hubmode_charging_and_upright">V pokončni legi in med polnjenjem</string>
-
-    <!-- Summary for when to automatically show hub mode (widgets on lockscreen): docked and charging [CHAR LIMIT=100] -->
-    <string name="when_to_show_hubmode_docked">Na nosilcu in med polnjenjem</string>
 </resources>

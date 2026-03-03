@@ -23,7 +23,5 @@
     <string name="keywords_wifi_calling">wlan, anruf, anrufen, wlan call, anrufe über wlan</string>
 
     <!-- Warn the user that the phone have emergency call limitation. [CHAR LIMIT=NONE] -->
-    <string name="wfc_disclaimer_emergency_limitation_desc_text">"Notrufe über WLAN Call werden von deinem Mobilfunkanbieter nicht unterstützt.
-Das Gerät wechselt automatisch zu einem Mobilfunknetz, um einen Notruf abzusetzen.
-Notrufe sind nur in Bereichen mit Mobilfunkabdeckung möglich."</string>
+    <string name="wfc_disclaimer_emergency_limitation_desc_text">Notrufe über WLAN Call werden von deinem Mobilfunkanbieter nicht unterstützt.\nDas Gerät wechselt automatisch zu einem Mobilfunknetz, um einen Notruf abzusetzen.\nNotrufe sind nur in Bereichen mit Mobilfunkabdeckung möglich.</string>
 </resources>

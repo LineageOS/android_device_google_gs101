@@ -13,18 +13,18 @@
         <item/>
         <item>Déplacez votre doigt. Réessayez.</item>
         <item>Doigt déjà enregistré, utilisez un autre doigt.</item>
-        <item>"Mauvaise qualité d'image. Réessayez."</item>
+        <item>Mauvaise qualité d\'image. Réessayez.</item>
         <item/>
-        <item>"Mauvaise qualité d'image. Réessayez."</item>
+        <item>Mauvaise qualité d\'image. Réessayez.</item>
         <item/>
         <item/>
-        <item>"Taches détectées, nettoyez l'écran. Réessayez."</item>
-        <item>"Impossible de lire l'image. Réessayez."</item>
+        <item>Taches détectées, nettoyez l\'écran. Réessayez.</item>
+        <item>Impossible de lire l\'image. Réessayez.</item>
         <item/>
     </string-array>
 
     <!-- Generic error message shown when fingerprint needs calibration [CHAR LIMIT=150] -->
-    <string name="fingerprint_error_bad_calibration">Impossible d'utiliser le capteur d'empreintes digitales. Consultez un fournisseur de services de réparation ou visitez la page g.co/pixel/fingerprintunlock</string>
+    <string name="fingerprint_error_bad_calibration">Impossible d\'utiliser le capteur d\'empreintes digitales. Consultez un fournisseur de services de réparation ou visitez la page g.co/pixel/fingerprintunlock</string>
 
     <!-- Array containing custom error messages from vendor.  Vendor is expected to add and translate these strings -->
     <string-array name="fingerprint_error_vendor">
@@ -35,6 +35,6 @@
         <item/>
         <item/>
         <item>Données erronées. Réessayez.</item>
-        <item>"Impossible d'enregistrer le doigt. Réessayez."</item>
+        <item>Impossible d\'enregistrer le doigt. Réessayez.</item>
     </string-array>
 </resources>

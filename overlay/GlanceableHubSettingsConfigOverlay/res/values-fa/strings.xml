@@ -18,7 +18,4 @@
 
     <!-- Summary for when to automatically show hub mode (widgets on lockscreen): upright and charging  [CHAR LIMIT=100] -->
     <string name="when_to_show_hubmode_charging_and_upright">هنگام شارژ شدن و در حالت عمودی</string>
-
-    <!-- Summary for when to automatically show hub mode (widgets on lockscreen): docked and charging [CHAR LIMIT=100] -->
-    <string name="when_to_show_hubmode_docked">هنگام شارژ شدن و متصل بودن به پایه</string>
 </resources>

@@ -18,7 +18,4 @@
 
     <!-- Summary for when to automatically show hub mode (widgets on lockscreen): upright and charging  [CHAR LIMIT=100] -->
     <string name="when_to_show_hubmode_charging_and_upright">ထောင်ထားပြီး အားသွင်းနေစဉ်</string>
-
-    <!-- Summary for when to automatically show hub mode (widgets on lockscreen): docked and charging [CHAR LIMIT=100] -->
-    <string name="when_to_show_hubmode_docked">အထိုင်တွင် တပ်ဆင်ပြီး အားသွင်းနေစဉ်</string>
 </resources>

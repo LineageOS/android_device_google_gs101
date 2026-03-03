@@ -5,8 +5,8 @@
 -->
 <resources>
     <!-- Generic error message shown when fingerprint needs calibration [CHAR LIMIT=150] -->
-    <string name="fingerprint_error_bad_calibration">ਫਿੰਗਰਪ੍ਰਿੰਟ ਸੈਂਸਰ ਦੀ ਵਰਤੋਂ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕਦੀ। ਮੁਰੰਮਤ ਪ੍ਰਦਾਨਕ ਨੂੰ ਸੰਪਰਕ ਕਰੋ ਜਾਂ g.co/pixel/fingerprintunlock 'ਤੇ ਜਾਓ</string>
+    <string name="fingerprint_error_bad_calibration">ਫਿੰਗਰਪ੍ਰਿੰਟ ਸੈਂਸਰ ਦੀ ਵਰਤੋਂ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕਦੀ। ਮੁਰੰਮਤ ਪ੍ਰਦਾਨਕ ਨੂੰ ਸੰਪਰਕ ਕਰੋ ਜਾਂ g.co/pixel/fingerprintunlock \'ਤੇ ਜਾਓ</string>
 
     <!-- Notification content shown when the system requires the user to re-calibrate their fingerprint. [CHAR LIMIT=NONE] -->
-    <string name="fingerprint_recalibrate_notification_content">ਮੁਰੰਮਤ ਪ੍ਰਦਾਨਕ ਨੂੰ ਸੰਪਰਕ ਕਰੋ ਜਾਂ g.co/pixel/fingerprintunlock 'ਤੇ ਜਾਓ</string>
+    <string name="fingerprint_recalibrate_notification_content">ਮੁਰੰਮਤ ਪ੍ਰਦਾਨਕ ਨੂੰ ਸੰਪਰਕ ਕਰੋ ਜਾਂ g.co/pixel/fingerprintunlock \'ਤੇ ਜਾਓ</string>
 </resources>
