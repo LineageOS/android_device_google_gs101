@@ -1,3 +1,4 @@
+attribute mali_target_sdk;
 attribute vendor_persist_type;
 
 hal_attribute(shared_modem_platform)
