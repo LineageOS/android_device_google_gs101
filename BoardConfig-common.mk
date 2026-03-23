@@ -20,14 +20,32 @@ TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := generic
 TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a53
 
-BOARD_KERNEL_CMDLINE += dyndbg=\"func alloc_contig_dump_pages +p\"
-BOARD_KERNEL_CMDLINE += earlycon=exynos4210,0x10A00000 console=ttySAC0,115200 androidboot.console=ttySAC0 printk.devkmsg=on
-BOARD_KERNEL_CMDLINE += cma_sysfs.experimental=Y
-BOARD_KERNEL_CMDLINE += rcupdate.rcu_expedited=1 rcu_nocbs=all rcutree.enable_rcu_lazy
-BOARD_KERNEL_CMDLINE += swiotlb=noforce
-BOARD_KERNEL_CMDLINE += cgroup.memory=nokmem
-BOARD_KERNEL_CMDLINE += disable_dma32=on
-BOARD_BOOTCONFIG += androidboot.boot_devices=14700000.ufs
+BOARD_BOOTCONFIG += \
+    androidboot.load_modules_parallel=true \
+    androidboot.boot_devices=14700000.ufs
+
+BOARD_KERNEL_CMDLINE += \
+    fips140.load_sequential=1 \
+    exynos_mfc.load_sequential=1 \
+    exynos_drm.load_sequential=1 \
+    pcie-exynos-core.load_sequential=1 \
+    g2d.load_sequential=1 \
+    disable_dma32=on \
+    dyndbg="func alloc_contig_dump_pages +p" \
+    earlycon=exynos4210,0x10A00000 \
+    console=ttySAC0,115200 \
+    androidboot.console=ttySAC0 \
+    printk.devkmsg=on \
+    cma_sysfs.experimental=Y \
+    rcupdate.rcu_expedited=1 \
+    rcu_nocbs=all \
+    rcutree.enable_rcu_lazy \
+    swiotlb=noforce \
+    cgroup.memory=nokmem \
+    rodata=on \
+    at24.write_timeout=100 \
+    log_buf_len=1024K \
+    android_arch_task_struct_size=512
 
 TARGET_NO_BOOTLOADER := true
 BOARD_PREBUILT_BOOTIMAGE := $(wildcard $(TARGET_KERNEL_DIR)/boot.img)
@@ -223,12 +241,6 @@ SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += \
 
 SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += \
     device/google/gs101/sepolicy/system_ext/public
-
-# Battery options
-BOARD_KERNEL_CMDLINE += at24.write_timeout=100
-
-# Enable larger logbuf
-BOARD_KERNEL_CMDLINE += log_buf_len=1024K
 
 # Protected VM firmware
 BOARD_PVMFWIMAGE_PARTITION_SIZE := 0x00100000
