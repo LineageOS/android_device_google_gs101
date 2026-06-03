@@ -6,48 +6,19 @@
 package org.lineageos.settings;
 
 import android.content.Context;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
 
 class EuiccDisabler {
     private static final String TAG = "GoogleParts";
-    private static final String[] EUICC_DEPENDENCIES = new String[]{
-        "com.google.android.gms"
-    };
     private static final String[] EUICC_PACKAGES = new String[]{
         "com.google.android.euicc",
         "com.google.euiccpixel"
     };
 
-    private static boolean isInstalledAndEnabled(PackageManager pm, String pkgName) {
-        try {
-            PackageInfo info = pm.getPackageInfo(pkgName, 0);
-            Log.d(TAG, "package " + pkgName + " installed, " +
-                       "enabled = " + info.applicationInfo.enabled);
-            return info.applicationInfo.enabled;
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.d(TAG, "package " + pkgName + " is not installed");
-            return false;
-        }
-    }
-
-    private static boolean shouldDisable(PackageManager pm) {
-        for (String dep : EUICC_DEPENDENCIES) {
-            if (!isInstalledAndEnabled(pm, dep)) {
-                // Disable if any of the dependencies are disabled
-                return true;
-            }
-        }
-        return false;
-    }
-
     public static void enableOrDisableEuicc(Context context) {
         PackageManager pm = context.getPackageManager();
-        boolean disable = shouldDisable(pm);
-        int flag = disable
-            ? PackageManager.COMPONENT_ENABLED_STATE_DISABLED
-            : PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
+        int flag = PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
         for (String pkg : EUICC_PACKAGES) {
             try {
                 pm.setApplicationEnabledSetting(pkg, flag, 0);
