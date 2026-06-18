@@ -1,5 +1,7 @@
 type mediacodec_samsung, domain;
 type mediacodec_samsung_exec, exec_type, file_type, vendor_file_type;
+type sysfs_force_empty, fs_type, sysfs_type;
+type sysfs_mfc, fs_type, sysfs_type;
 
 hal_client_domain(mediacodec_samsung, hal_graphics_allocator)
 

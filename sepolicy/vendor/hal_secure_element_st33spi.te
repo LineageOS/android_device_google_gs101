@@ -1,5 +1,6 @@
 type hal_secure_element_st33spi, domain;
 type hal_secure_element_st33spi_exec, exec_type, file_type, vendor_file_type;
+type st33spi_device, dev_type;
 
 hal_server_domain(hal_secure_element_st33spi, hal_secure_element)
 

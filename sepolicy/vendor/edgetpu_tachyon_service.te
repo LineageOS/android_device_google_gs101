@@ -1,0 +1,38 @@
+type edgetpu_tachyon_server, domain;
+type edgetpu_tachyon_server_exec, exec_type, file_type, vendor_file_type;
+
+binder_service(edgetpu_tachyon_server)
+
+add_service(edgetpu_tachyon_server, edgetpu_tachyon_service)
+
+binder_call(edgetpu_tachyon_server, edgetpu_app_server)
+binder_call(edgetpu_tachyon_server, hal_camera_default)
+binder_call(edgetpu_tachyon_server, platform_app)
+binder_call(edgetpu_tachyon_server, priv_app)
+binder_call(edgetpu_tachyon_server, shell)
+binder_call(edgetpu_tachyon_server, untrusted_app_all)
+
+binder_use(edgetpu_tachyon_server)
+
+get_prop(edgetpu_tachyon_server, vendor_edgetpu_cpu_scheduler_prop)
+get_prop(edgetpu_tachyon_server, vendor_edgetpu_runtime_prop)
+get_prop(edgetpu_tachyon_server, vendor_hetero_runtime_prop)
+get_prop(edgetpu_tachyon_server, vendor_tflite_delegate_prop)
+
+init_daemon_domain(edgetpu_tachyon_server)
+
+perfetto_producer(edgetpu_tachyon_server)
+
+allow edgetpu_tachyon_server dmabuf_system_heap_device:chr_file r_file_perms;
+allow edgetpu_tachyon_server edgetpu_app_service:service_manager find;
+allow edgetpu_tachyon_server edgetpu_device:chr_file rw_file_perms;
+allow edgetpu_tachyon_server gpu_device:chr_file rw_file_perms;
+allow edgetpu_tachyon_server gpu_device:dir r_dir_perms;
+allow edgetpu_tachyon_server hal_allocator:fd use;
+allow edgetpu_tachyon_server hal_graphics_allocator:fd use;
+allow edgetpu_tachyon_server hal_graphics_mapper_hwservice:hwservice_manager find;
+allow edgetpu_tachyon_server ion_device:chr_file r_file_perms;
+allow edgetpu_tachyon_server privapp_data_file:file { map read };
+allow edgetpu_tachyon_server proc_overcommit_memory:file r_file_perms;
+allow edgetpu_tachyon_server proc_version:file r_file_perms;
+allow edgetpu_tachyon_server self:capability ipc_lock;

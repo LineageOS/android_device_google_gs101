@@ -1,3 +1,4 @@
+type touch_offload_device, dev_type;
 type twoshay, domain;
 type twoshay_exec, exec_type, file_type, vendor_file_type;
 

@@ -1,1 +1,5 @@
 get_prop(domain, vendor_arm_runtime_option_prop)
+
+allow proc_vendor_sched proc:filesystem associate;
+allow { domain -appdomain -rs } proc_vendor_sched:dir r_dir_perms;
+allow { domain -appdomain -rs } proc_vendor_sched:file w_file_perms;

@@ -3,7 +3,6 @@ type rfsd_exec, exec_type, file_type, vendor_file_type;
 
 init_daemon_domain(rfsd)
 
-r_dir_file(rfsd, modem_img_file)
 r_dir_file(rfsd, vendor_fw_file)
 
 set_prop(rfsd, vendor_modem_prop)
@@ -14,6 +13,8 @@ allow rfsd mnt_vendor_file:dir search;
 allow rfsd modem_block_device:blk_file rw_file_perms;
 allow rfsd modem_efs_file:dir create_dir_perms;
 allow rfsd modem_efs_file:file create_file_perms;
+allow rfsd modem_img_file:dir r_dir_perms;
+allow rfsd modem_img_file:{ file lnk_file } r_file_perms;
 allow rfsd radio_device:chr_file rw_file_perms;
 allow rfsd radio_vendor_data_file:dir r_dir_perms;
 allow rfsd radio_vendor_data_file:file r_file_perms;

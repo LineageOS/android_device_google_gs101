@@ -1,5 +1,7 @@
 pixel_bugreport(dump_sensors)
 
+type vendor_usf_stats, file_type, vendor_file_type;
+
 allow dump_sensors aoc_device:chr_file rw_file_perms;
 allow dump_sensors device:dir r_dir_perms;
 allow dump_sensors vendor_shell_exec:file execute_no_trans;

@@ -1,0 +1,20 @@
+type edgetpu_vendor_server, domain;
+type edgetpu_vendor_server_exec, exec_type, file_type, vendor_file_type;
+type edgetpu_vendor_service_data_file, data_file_type, file_type;
+
+binder_service(edgetpu_vendor_server)
+
+add_service(edgetpu_vendor_server, edgetpu_vendor_service)
+
+binder_use(edgetpu_vendor_server)
+
+get_prop(edgetpu_vendor_server, vendor_hetero_runtime_prop)
+
+init_daemon_domain(edgetpu_vendor_server)
+
+allow edgetpu_vendor_server edgetpu_vendor_service_data_file:dir create_dir_perms;
+allow edgetpu_vendor_server edgetpu_vendor_service_data_file:file create_file_perms;
+allow edgetpu_vendor_server hal_camera_default:fd use;
+allow edgetpu_vendor_server proc_overcommit_memory:file r_file_perms;
+allow edgetpu_vendor_server proc_version:file r_file_perms;
+allow edgetpu_vendor_server vndbinder_device:chr_file { ioctl map open read write };

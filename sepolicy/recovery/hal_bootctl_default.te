@@ -1,3 +1,0 @@
-recovery_only(`
-  allow hal_bootctl_default rootfs:dir r_dir_perms;
-')

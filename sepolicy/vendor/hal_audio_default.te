@@ -1,0 +1,51 @@
+type aoc_audio_file, file_type, vendor_file_type;
+type audio_vendor_data_file, data_file_type, file_type;
+type persist_audio_file, file_type, vendor_persist_type;
+type vendor_usb_debugfs, debugfs_type, fs_type;
+
+hal_client_domain(hal_audio_default, hal_graphics_allocator)
+hal_client_domain(hal_audio_default, hal_health)
+hal_client_domain(hal_audio_default, hal_thermal)
+
+add_hwservice(hal_audio_default, hal_audio_ext_hwservice)
+
+binder_call(hal_audio_default, aocxd)
+binder_call(hal_audio_default, edgetpu_app_server)
+binder_call(hal_audio_default, edgetpu_vendor_server)
+
+get_prop(hal_audio_default, vendor_edgetpu_runtime_prop)
+get_prop(hal_audio_default, vendor_hetero_runtime_prop)
+get_prop(hal_audio_default, vendor_tflite_delegate_prop)
+
+perfetto_producer(hal_audio_default)
+
+r_dir_file(hal_audio_default, aoc_audio_file)
+r_dir_file(hal_audio_default, mnt_vendor_file)
+r_dir_file(hal_audio_default, persist_audio_file)
+
+set_prop(hal_audio_default, vendor_audio_prop)
+set_prop(hal_audio_default, vendor_audio_prop_restricted)
+
+vndbinder_use(hal_audio_default)
+
+wakelock_use(hal_audio_default)
+
+allow hal_audio_default amcs_device:{ chr_file file } rw_file_perms;
+allow hal_audio_default aoc_device:{ chr_file file } rw_file_perms;
+allow hal_audio_default aocx:service_manager find;
+allow hal_audio_default audio_vendor_data_file:dir rw_dir_perms;
+allow hal_audio_default audio_vendor_data_file:file create_file_perms;
+allow hal_audio_default dmabuf_heap_device:chr_file r_file_perms;
+allow hal_audio_default dmabuf_system_heap_device:chr_file r_file_perms;
+allow hal_audio_default edgetpu_app_service:service_manager find;
+allow hal_audio_default edgetpu_device:chr_file rw_file_perms;
+allow hal_audio_default edgetpu_vendor_service:service_manager find;
+allow hal_audio_default fwk_sensor_hwservice:hwservice_manager find;
+allow hal_audio_default fwk_stats_service:service_manager find;
+allow hal_audio_default persist_file:dir search;
+allow hal_audio_default sysfs_aoc:dir search;
+allow hal_audio_default sysfs_aoc_boottime:file r_file_perms;
+allow hal_audio_default sysfs_extcon:dir search;
+allow hal_audio_default sysfs_extcon:file r_file_perms;
+allow hal_audio_default sysfs_pixelstats:file rw_file_perms;
+allow hal_audio_default vendor_usb_debugfs:dir search;

@@ -1,5 +1,6 @@
 type hal_usb_impl, domain;
 type hal_usb_impl_exec, exec_type, file_type, vendor_file_type;
+type sysfs_usbc_throttling_stats, fs_type, sysfs_type;
 
 hal_client_domain(hal_usb_impl, hal_thermal)
 
