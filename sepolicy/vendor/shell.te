@@ -1,12 +1,8 @@
 get_prop(shell, vendor_intelligence_prop)
 
-set_prop(vendor_shell, vendor_battery_profile_prop)
-
 allow shell eco_service:service_manager find;
 
-allowxperm shell gpu_device:chr_file ioctl { 0x8012 0x8013 0x8038 0x8039 };
-allowxperm shell gpu_device:chr_file ioctl 0x8102;
-allowxperm shell gpu_device:chr_file ioctl { 0xbf00 0xbf01 0xbf10 };
+allowxperm shell gpu_device:chr_file ioctl { 0x8012-0x8013 0x8038-0x8039 0x8102 0xbf00-0xbf01 0xbf10 };
 
 dontaudit shell proc_vendor_sched:dir search;
 dontaudit shell proc_vendor_sched:file write;

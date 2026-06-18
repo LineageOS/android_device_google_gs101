@@ -1,5 +1,7 @@
+user=_app isPrivApp=true name=com.android.theflippinapp domain=flag_flipper_app type=app_data_file levelFrom=all seinfo=platform
 user=_app isPrivApp=true name=com.google.android.apps.pixel.dcservice domain=dcservice_app type=privapp_data_file levelFrom=user
 user=_app isPrivApp=true name=com.google.android.apps.pixel.dcservice.ui domain=dcservice_app type=privapp_data_file levelFrom=user
+user=_app isPrivApp=true name=com.google.android.brownoutdetection domain=brownout_detection_app type=app_data_file levelFrom=all
 user=_app isPrivApp=true name=com.google.android.euicc domain=euicc_app type=privapp_data_file levelFrom=user
 user=_app isPrivApp=true name=com.google.android.grilservice domain=grilservice_app type=app_data_file levelFrom=all
 user=_app isPrivApp=true name=com.shannon.rcsservice domain=vendor_rcs_app levelFrom=all
@@ -7,5 +9,10 @@ user=_app isPrivApp=true name=com.shannon.rcsservice:shannonrcsservice domain=ve
 user=_app isPrivApp=true seinfo=platform name=com.google.android.connectivitymonitor domain=con_monitor_app type=app_data_file levelFrom=all
 user=_app seinfo=platform name=com.android.hbmsvmanager domain=hbmsvmanager_app type=app_data_file levelFrom=all
 user=_app seinfo=platform name=com.google.android.connectivitythermalpowermanager domain=connectivity_thermal_power_manager type=app_data_file levelFrom=all
+user=_app seinfo=platform name=com.google.android.factoryota domain=factory_ota_app levelFrom=all
+user=_app seinfo=platform name=com.google.android.flipendo domain=flipendo type=app_data_file levelFrom=all
+user=_app seinfo=platform name=com.google.android.pixelsystemservice domain=pixelsystemservice_app type=app_data_file levelFrom=all
+user=_app seinfo=platform name=com.google.android.pixelsystemservice:ephemeral domain=pixelsystemservice_app type=app_data_file levelFrom=all
+user=_app seinfo=platform name=com.google.android.turboadapter domain=turbo_adapter type=app_data_file levelFrom=all
 user=system seinfo=platform name=com.google.android.repairmode domain=repair_mode_app type=app_data_file levelFrom=user
 user=system seinfo=platform name=com.google.android.satellite domain=pixelntnservice_app type=app_data_file levelFrom=all

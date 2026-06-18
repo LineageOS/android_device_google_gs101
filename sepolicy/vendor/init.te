@@ -1,37 +1,4 @@
-get_prop(vendor_init, gesture_prop)
-get_prop(vendor_init, system_boot_reason_prop)
-get_prop(vendor_init, telephony_modem_prop)
-get_prop(vendor_init, vendor_battery_profile_prop)
-get_prop(vendor_init, vendor_brownout_br_feasible_prop)
-get_prop(vendor_init, vendor_touchpanel_prop)
-get_prop(vendor_init, vendor_trusty_storage_prop)
-
-set_prop(vendor_init, vendor_arm_runtime_option_prop)
-set_prop(vendor_init, vendor_audio_prop)
-set_prop(vendor_init, vendor_audio_prop_restricted)
-set_prop(vendor_init, vendor_battery_defender_prop)
-set_prop(vendor_init, vendor_brownout_reason_prop)
-set_prop(vendor_init, vendor_camera_prop)
-set_prop(vendor_init, vendor_cbd_prop)
-set_prop(vendor_init, vendor_chre_hal_prop)
-set_prop(vendor_init, vendor_device_prop)
-set_prop(vendor_init, vendor_display_prop)
-set_prop(vendor_init, vendor_fingerprint_prop)
-set_prop(vendor_init, vendor_ims_prop)
-set_prop(vendor_init, vendor_intelligence_prop)
-set_prop(vendor_init, vendor_logger_prop)
-set_prop(vendor_init, vendor_modem_prop)
-set_prop(vendor_init, vendor_nfc_prop)
-set_prop(vendor_init, vendor_rcs_prop)
-set_prop(vendor_init, vendor_rild_prop)
-set_prop(vendor_init, vendor_ro_config_default_prop)
-set_prop(vendor_init, vendor_secure_element_prop)
-set_prop(vendor_init, vendor_slog_prop)
-set_prop(vendor_init, vendor_ssrdump_prop)
-set_prop(vendor_init, vendor_sys_default_prop)
-set_prop(vendor_init, vendor_tcpdump_log_prop)
-set_prop(vendor_init, vendor_thermal_prop)
-set_prop(vendor_init, vendor_usb_config_prop)
+type intelligence_data_file, data_file_type, file_type;
 
 allow init boot_block_device:lnk_file relabelto;
 allow init custom_ab_block_device:lnk_file relabelto;
@@ -46,21 +13,8 @@ allow init persist_file:dir mounton;
 allow init ram_device:blk_file w_file_perms;
 allow init sysfs_scsi_devices_0000:file w_file_perms;
 allow init userdata_exp_block_device:blk_file write;
-allow vendor_init block_device:lnk_file setattr;
-allow vendor_init bootdevice_sysdev:file create_file_perms;
-allow vendor_init proc_compaction_proactiveness:file w_file_perms;
-allow vendor_init proc_dirty:file w_file_perms;
-allow vendor_init proc_percpu_pagelist_high_fraction:file w_file_perms;
-allow vendor_init proc_sched:file write;
-allow vendor_init sg_device:chr_file r_file_perms;
-allow vendor_init sysfs_st33spi:file w_file_perms;
-allow vendor_init tee_data_file:lnk_file read;
-allow vendor_init thermal_link_device:dir r_dir_perms;
-allow vendor_init thermal_link_device:lnk_file r_file_perms;
 
 allowxperm init per_boot_file:file ioctl F2FS_IOC_SET_PIN_FILE;
 
 dontaudit init overlayfs_file:chr_file unlink;
 dontaudit init overlayfs_file:file rename;
-dontaudit vendor_init default_prop:file read;
-dontaudit vendor_init default_prop:property_service set;

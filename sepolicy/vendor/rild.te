@@ -1,3 +1,5 @@
+type rild_vendor_data_file, data_file_type, file_type;
+
 add_hwservice(rild, hal_exynos_rild_hwservice)
 
 binder_call(rild, bipchmgr)

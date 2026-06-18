@@ -1,3 +1,4 @@
+user=_app isPrivApp=true name=com.google.android.apps.internal.betterbug domain=better_bug_app type=privapp_data_file levelFrom=user
 user=_app isPrivApp=true seinfo=platform name=com.android.omadm.service domain=omadm_app type=app_data_file levelFrom=all
 user=_app seinfo=CameraServices name=com.google.android.apps.camera.services domain=vendor_pcs_app type=app_data_file levelFrom=all
 user=_app seinfo=CameraServices name=com.google.android.apps.camera.services:* domain=vendor_pcs_app type=app_data_file levelFrom=all

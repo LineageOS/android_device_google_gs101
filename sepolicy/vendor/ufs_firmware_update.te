@@ -1,5 +1,6 @@
 type ufs_firmware_update, domain;
 type ufs_firmware_update_exec, exec_type, file_type, vendor_file_type;
+type ufs_internal_block_device, dev_type;
 
 init_daemon_domain(ufs_firmware_update)
 

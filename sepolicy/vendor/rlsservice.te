@@ -1,3 +1,4 @@
+type rls_device, dev_type;
 type rlsservice, domain;
 type rlsservice_exec, exec_type, file_type, vendor_file_type;
 

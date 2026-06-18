@@ -1,5 +1,7 @@
 type sscoredump, domain;
+type sscoredump_device, dev_type;
 type sscoredump_exec, exec_type, file_type, vendor_file_type;
+type sysfs_sscoredump_subsystem_report_count, fs_type, sysfs_type;
 
 init_daemon_domain(sscoredump)
 

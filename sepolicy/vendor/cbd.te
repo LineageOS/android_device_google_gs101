@@ -1,11 +1,10 @@
 type cbd, domain;
 type cbd_exec, exec_type, file_type, vendor_file_type;
+type persist_modem_file, file_type, vendor_persist_type;
 
 get_prop(cbd, telephony_modem_prop)
 
 init_daemon_domain(cbd)
-
-r_dir_file(cbd, modem_img_file)
 
 set_prop(cbd, vendor_cbd_prop)
 set_prop(cbd, vendor_modem_prop)
@@ -17,6 +16,8 @@ allow cbd mnt_vendor_file:dir r_dir_perms;
 allow cbd modem_block_device:blk_file r_file_perms;
 allow cbd modem_efs_file:dir create_dir_perms;
 allow cbd modem_efs_file:file create_file_perms;
+allow cbd modem_img_file:dir r_dir_perms;
+allow cbd modem_img_file:{ file lnk_file } r_file_perms;
 allow cbd modem_userdata_file:dir create_dir_perms;
 allow cbd modem_userdata_file:file create_file_perms;
 allow cbd persist_file:dir search;
