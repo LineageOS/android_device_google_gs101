@@ -1,5 +1,16 @@
 persist.fingerprint.ghbm u:object_r:fingerprint_ghbm_prop:s0 exact bool
 persist.modem.esim_profiles_exist u:object_r:esim_modem_prop:s0 exact string
+persist.vendor.factoryota. u:object_r:sota_prop:s0
+persist.vendor.nfc.factoryota. u:object_r:sota_prop:s0
+persist.vendor.pulsar u:object_r:vendor_sysuig_prop:s0
+persist.vendor.radio.bootwithlpm u:object_r:sota_prop:s0
+pixelsystemservice.device.contextualawarenessbool u:object_r:pixelsystemservice_contextualawareness_prop:s0 exact bool
 repair_mode.init_completed. u:object_r:repair_mode_init_prop:s0 prefix bool
+ro.boot.sota u:object_r:sota_prop:s0
+ro.boot.sota. u:object_r:sota_prop:s0
+ro.chipname u:object_r:deprecated_soc_prop:s0 exact string
+ro.hardware.chipname u:object_r:deprecated_soc_prop:s0 exact string
+ro.mediatek.platform u:object_r:deprecated_soc_prop:s0 exact string
+sota.charge.stop.level u:object_r:sota_prop:s0
 telephony.TnNtn.image_switch u:object_r:telephony_modem_prop:s0 exact enum ntn tn
 telephony.ril.silent_reset u:object_r:telephony_ril_prop:s0 exact bool

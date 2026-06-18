@@ -1,0 +1,46 @@
+type persist_sensor_reg_file, file_type, vendor_persist_type;
+type sensor_data_file, data_file_type, file_type;
+type sensor_reg_data_file, data_file_type, file_type;
+type sysfs_aoc_reset, fs_type, sysfs_type;
+
+hal_client_domain(hal_sensors_default, hal_graphics_allocator)
+
+binder_call(hal_sensors_default, hal_contexthub_default)
+binder_call(hal_sensors_default, hal_graphics_composer_default)
+binder_call(hal_sensors_default, system_server)
+
+get_prop(hal_sensors_default, vendor_aoc_prop)
+get_prop(hal_sensors_default, vendor_chre_hal_prop)
+get_prop(hal_sensors_default, vendor_dynamic_sensor_prop)
+
+r_dir_file(hal_sensors_default, persist_camera_file)
+r_dir_file(hal_sensors_default, persist_sensor_reg_file)
+r_dir_file(hal_sensors_default, sysfs_batteryinfo)
+r_dir_file(hal_sensors_default, sysfs_chosen)
+
+unix_socket_connect(hal_sensors_default, chre, chre)
+unix_socket_connect(hal_sensors_default, chre, hal_contexthub_default)
+
+allow hal_sensors_default aoc_device:chr_file rw_file_perms;
+allow hal_sensors_default device:dir r_dir_perms;
+allow hal_sensors_default fwk_stats_service:service_manager find;
+allow hal_sensors_default hal_contexthub_service:service_manager find;
+allow hal_sensors_default hal_graphics_mapper_hwservice:hwservice_manager find;
+allow hal_sensors_default hal_pixel_display_service:service_manager find;
+allow hal_sensors_default hidraw_device:chr_file rw_file_perms;
+allow hal_sensors_default mnt_vendor_file:dir search;
+allow hal_sensors_default persist_file:dir search;
+allow hal_sensors_default persist_file:file r_file_perms;
+allow hal_sensors_default sensor_data_file:dir { add_name remove_name search write };
+allow hal_sensors_default sensor_data_file:sock_file { create unlink };
+allow hal_sensors_default sensor_reg_data_file:dir rw_dir_perms;
+allow hal_sensors_default sensor_reg_data_file:file create_file_perms;
+allow hal_sensors_default sysfs_aoc:dir search;
+allow hal_sensors_default sysfs_aoc:file r_file_perms;
+allow hal_sensors_default sysfs_aoc_boottime:file rw_file_perms;
+allow hal_sensors_default sysfs_aoc_dumpstate:file r_file_perms;
+allow hal_sensors_default sysfs_aoc_reset:file rw_file_perms;
+allow hal_sensors_default sysfs_display:file r_file_perms;
+allow hal_sensors_default sysfs_leds:dir search;
+allow hal_sensors_default sysfs_leds:file rw_file_perms;
+allow hal_sensors_default sysfs_wlc:dir r_dir_perms;

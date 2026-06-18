@@ -1,5 +1,8 @@
 type aocd, domain;
 type aocd_exec, exec_type, file_type, vendor_file_type;
+type persist_aoc_file, file_type, vendor_persist_type;
+type sysfs_aoc_firmware, fs_type, sysfs_type;
+type sysfs_aoc_notifytimeout, fs_type, sysfs_type;
 
 get_prop(aocd, vendor_volte_mif_off)
 

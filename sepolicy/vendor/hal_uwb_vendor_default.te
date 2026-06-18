@@ -1,0 +1,18 @@
+type hal_uwb_vendor_default, domain;
+type hal_uwb_vendor_default_exec, exec_type, file_type, vendor_file_type;
+
+hal_server_domain(hal_uwb_vendor_default, hal_uwb)
+hal_server_domain(hal_uwb_vendor_default, hal_uwb_vendor)
+
+add_service(hal_uwb_vendor_default, hal_uwb_vendor_service)
+
+binder_call(hal_uwb_vendor_default, uwb_vendor_app)
+
+get_prop(hal_uwb_vendor_default, vendor_uwb_calibration_prop)
+
+init_daemon_domain(hal_uwb_vendor_default)
+
+allow hal_uwb_vendor_default kernel:process setsched;
+allow hal_uwb_vendor_default self:global_capability_class_set sys_nice;
+allow hal_uwb_vendor_default uwb_data_vendor:dir create_dir_perms;
+allow hal_uwb_vendor_default uwb_data_vendor:file create_file_perms;

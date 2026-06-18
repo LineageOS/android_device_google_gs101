@@ -1,5 +1,9 @@
 pixel_bugreport(dump_modem)
 
+type sscoredump_vendor_data_coredump_file, data_file_type, file_type, mlstrustedobject;
+type sscoredump_vendor_data_logcat_file, data_file_type, file_type, mlstrustedobject;
+type sysfs_dump_modem, fs_type, sysfs_type;
+
 allow dump_modem logbuffer_device:chr_file r_file_perms;
 allow dump_modem modem_stat_data_file:dir search;
 allow dump_modem modem_stat_data_file:file r_file_perms;

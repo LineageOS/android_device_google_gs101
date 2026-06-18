@@ -2,6 +2,8 @@ type repair_mode_app, coredomain, domain;
 
 app_domain(repair_mode_app)
 
+type repair_mode_metadata_config_file, file_type, mlstrustedobject;
+
 get_prop(repair_mode_app, gsid_prop)
 
 set_prop(repair_mode_app, repair_mode_init_prop)

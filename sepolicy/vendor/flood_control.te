@@ -1,6 +1,7 @@
 type flood_control, domain;
 type flood_control_exec, exec_type, file_type, vendor_file_type;
 type flood_control_service, app_api_service, hal_service_type, service_manager_type;
+type ramdump_vendor_data_file, data_file_type, file_type, mlstrustedobject;
 
 add_service(flood_control, flood_control_service)
 

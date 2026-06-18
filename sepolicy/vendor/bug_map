@@ -1,6 +1,7 @@
 battery_mitigation sysfs file b/434566101
 dump_modem sscoredump_vendor_data_coredump_file dir b/366115873
 dump_modem sscoredump_vendor_data_logcat_file dir b/366115873
+dumpstate su process b/220019932
 hal_camera_default system_userdir_file dir b/438632726
 hal_fingerprint_default default_prop property_service b/215640468
 hal_health_default sysfs_typec dir b/443867649
