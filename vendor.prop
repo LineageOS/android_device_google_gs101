@@ -29,12 +29,10 @@ ro.vendor.gpu.dataspace=1
 
 # Dalvik
 dalvik.vm.dex2oat64.enabled=true
+dalvik.vm.enable_time_based_gc_trigger=true
 
 # DCK
 ro.gms.dck.se_capability=1
-
-# Device family
-ro.build.device_family=O6R4B9
 
 # Display
 debug.hwc.winupdate=1
@@ -66,6 +64,13 @@ ro.frp.pst=/dev/block/by-name/frp
 # Graphics
 debug.mali.disable_backend_affinity=true
 graphics.gpu.profiler.support=true
+graphics.gpu.profiler.support.gpu_counters.groups=true
+graphics.gpu.profiler.support.gpu_counters.period=true
+graphics.gpu.profiler.support.gpu_counters.zeroes_optimization=true
+graphics.gpu.profiler.support.gpu_counters=true
+graphics.gpu.profiler.support.gpu_frequency=true
+graphics.gpu.profiler.support.render_stages.queue_submit=true
+graphics.gpu.profiler.support.render_stages=true
 ro.egl.blobcache.multifile=true
 ro.egl.blobcache.multifile_limit=33554432
 ro.hardware.egl=mali
@@ -154,6 +159,7 @@ ro.telephony.default_network=27
 ro.vendor.cbd.modem_removable=1
 ro.vendor.cbd.modem_type=s5100sit
 ro.vendor.config.build_carrier=europen
+ro.vendor.ril.use_radio_hal=1.6
 ro.vendor.sys.modem.logging.loc=/data/vendor/slog
 telephony.active_modems.max_count=2
 vendor.rild.libpath=libsitril.so
@@ -162,6 +168,7 @@ vendor.rild.libpath=libsitril.so
 persist.vendor.enable.thermal.genl=true
 
 # USB
+ro.usb.data_protection.disable_when_locked.supported=true
 ro.usb.uvc.enabled=true
 sys.usb.ffs.io_uring_enabled=true
 
