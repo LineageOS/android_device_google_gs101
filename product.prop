@@ -23,11 +23,14 @@ persist.bluetooth.bqr.min_interval_ms=500
 persist.bluetooth.firmware.selection=BCM.hcd
 
 # Camera
+ro.frameworks.camera2.extension.service=com.google.android.apps.camera.services.extensions.service.CameraExtensions
 ro.vendor.camera.extensions.package=com.google.android.apps.camera.services
-ro.vendor.camera.extensions.service=com.google.android.apps.camera.services.extensions.service.PixelExtensions
 
 # Cutout
 ro.support_hide_display_cutout=true
+
+# Device family
+ro.build.device_family=O6R4B9
 
 # Dumpstate
 dumpstate.strict_run=false
@@ -51,6 +54,10 @@ ro.postinstall.fstab.prefix=/product
 # Quick start
 ro.quick_start.oem_id=00e0
 
+# Strongbox
+ro.strongbox.manufacturer=Google
+ro.strongbox.model=Titan-M2
+
 # Telephony
 persist.radio.reboot_on_modem_change=false
 persist.vendor.ril.camp_on_earlier=1
@@ -71,4 +78,5 @@ mmd.zram.writeback.idle.enabled=true
 mmd.zram.writeback.limit.enabled=false
 mmd.zram.writeback.max_idle_seconds=86400
 mmd.zram.writeback.min_idle_seconds=0
+mmd.zram.writeback.use_nr_tags_prop=true
 ro.zram_backing_device_min_free_mb=1536
