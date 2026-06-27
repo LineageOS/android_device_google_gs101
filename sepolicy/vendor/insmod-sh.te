@@ -5,6 +5,7 @@ init_daemon_domain(insmod-sh)
 
 set_prop(insmod-sh, vendor_device_prop)
 
+allow insmod-sh kernel:key search;
 allow insmod-sh kernel:process setsched;
 allow insmod-sh kmsg_debug_device:chr_file rw_file_perms;
 allow insmod-sh self:capability sys_module;

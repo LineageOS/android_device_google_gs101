@@ -4,7 +4,11 @@ type hal_usb_gadget_impl_exec, exec_type, file_type, vendor_file_type;
 hal_server_domain(hal_usb_gadget_impl, hal_usb)
 hal_server_domain(hal_usb_gadget_impl, hal_usb_gadget)
 
+get_prop(hal_usb_gadget_impl, usb_control_prop)
+
 init_daemon_domain(hal_usb_gadget_impl)
+
+r_dir_file(hal_usb_gadget_impl, sysfs_udc)
 
 set_prop(hal_usb_gadget_impl, vendor_usb_config_prop)
 

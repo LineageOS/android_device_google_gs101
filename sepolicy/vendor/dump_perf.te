@@ -1,3 +1,4 @@
 pixel_bugreport(dump_perf)
 
+allow dump_perf cgroup_v2:file r_file_perms;
 allow dump_perf proc_vendor_sched:file r_file_perms;

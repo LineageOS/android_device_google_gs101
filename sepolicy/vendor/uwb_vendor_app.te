@@ -1,22 +1,21 @@
-type uwb_vendor_app, domain;
-
-app_domain(uwb_vendor_app)
-
 type uwb_vendor_data_file, app_data_file_type, data_file_type, file_type;
 
-not_recovery(`
 hal_client_domain(uwb_vendor_app, hal_uwb_vendor)
 
+not_recovery(`
 binder_call(uwb_vendor_app, hal_uwb_vendor_default)
 
 get_prop(uwb_vendor_app, vendor_secure_element_prop)
 
 set_prop(uwb_vendor_app, vendor_uwb_calibration_country_code)
 
-allow uwb_vendor_app app_api_service:service_manager find;
 allow uwb_vendor_app hal_uwb_vendor_service:service_manager find;
-allow uwb_vendor_app nfc_service:service_manager find;
-allow uwb_vendor_app radio_service:service_manager find;
 allow uwb_vendor_app uwb_vendor_data_file:dir create_dir_perms;
 allow uwb_vendor_app uwb_vendor_data_file:file create_file_perms;
+')
+
+recovery_only(`
+allow uwb_vendor_app vendor_file:file x_file_perms;
+
+allowxperm uwb_vendor_app self:udp_socket ioctl { unpriv_sock_ioctls unpriv_tty_ioctls };
 ')

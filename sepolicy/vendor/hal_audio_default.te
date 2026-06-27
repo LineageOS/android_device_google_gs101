@@ -11,6 +11,7 @@ add_hwservice(hal_audio_default, hal_audio_ext_hwservice)
 
 binder_call(hal_audio_default, aocxd)
 binder_call(hal_audio_default, edgetpu_app_server)
+binder_call(hal_audio_default, edgetpu_tachyon_server)
 binder_call(hal_audio_default, edgetpu_vendor_server)
 
 get_prop(hal_audio_default, vendor_edgetpu_runtime_prop)
@@ -30,8 +31,10 @@ vndbinder_use(hal_audio_default)
 
 wakelock_use(hal_audio_default)
 
-allow hal_audio_default amcs_device:{ chr_file file } rw_file_perms;
-allow hal_audio_default aoc_device:{ chr_file file } rw_file_perms;
+allow hal_audio_default amcs_device:chr_file rw_file_perms;
+allow hal_audio_default amcs_device:file rw_file_perms;
+allow hal_audio_default aoc_device:chr_file rw_file_perms;
+allow hal_audio_default aoc_device:file rw_file_perms;
 allow hal_audio_default aocx:service_manager find;
 allow hal_audio_default audio_vendor_data_file:dir rw_dir_perms;
 allow hal_audio_default audio_vendor_data_file:file create_file_perms;
@@ -39,6 +42,7 @@ allow hal_audio_default dmabuf_heap_device:chr_file r_file_perms;
 allow hal_audio_default dmabuf_system_heap_device:chr_file r_file_perms;
 allow hal_audio_default edgetpu_app_service:service_manager find;
 allow hal_audio_default edgetpu_device:chr_file rw_file_perms;
+allow hal_audio_default edgetpu_tachyon_service:service_manager find;
 allow hal_audio_default edgetpu_vendor_service:service_manager find;
 allow hal_audio_default fwk_sensor_hwservice:hwservice_manager find;
 allow hal_audio_default fwk_stats_service:service_manager find;

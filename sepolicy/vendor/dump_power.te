@@ -10,5 +10,6 @@ allow dump_power sysfs_batteryinfo:file r_file_perms;
 allow dump_power sysfs_bcl:dir r_dir_perms;
 allow dump_power sysfs_bcl:file r_file_perms;
 allow dump_power sysfs_cpu:file r_file_perms;
+allow dump_power sysfs_typec:dir search;
 allow dump_power sysfs_wlc:dir search;
 allow dump_power sysfs_wlc:file r_file_perms;

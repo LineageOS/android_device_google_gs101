@@ -1,0 +1,4 @@
+app_domain(oemrilservice_app)
+
+allow oemrilservice_app app_api_service:service_manager find;
+allow oemrilservice_app radio_service:service_manager find;

@@ -1,4 +1,3 @@
-dump_hal(hal_graphics_composer)
 dump_hal(hal_telephony)
 
 binder_call(dumpstate, aocxd)

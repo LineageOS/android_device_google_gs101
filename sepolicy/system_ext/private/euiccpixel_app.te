@@ -1,0 +1,8 @@
+app_domain(euiccpixel_app)
+
+get_prop(euiccpixel_app, dck_prop)
+
+allow euiccpixel_app app_api_service:service_manager find;
+allow euiccpixel_app nfc_service:service_manager find;
+allow euiccpixel_app radio_service:service_manager find;
+allow euiccpixel_app surfaceflinger_service:service_manager find;

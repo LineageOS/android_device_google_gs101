@@ -1,8 +1,0 @@
-type gpu_probe, domain;
-type gpu_probe_exec, exec_type, file_type, vendor_file_type;
-
-init_daemon_domain(gpu_probe)
-
-perfetto_producer(gpu_probe)
-
-allow gpu_probe gpu_device:chr_file rw_file_perms;

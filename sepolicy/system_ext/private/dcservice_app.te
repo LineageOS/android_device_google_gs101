@@ -2,14 +2,14 @@ app_domain(dcservice_app)
 
 net_domain(dcservice_app)
 
-typeattribute dcservice_app coredomain;
-
 get_prop(dcservice_app, bluetooth_lea_prop)
 
 set_prop(dcservice_app, ctl_start_prop)
 
 allow dcservice_app app_api_service:service_manager find;
 allow dcservice_app audioserver_service:service_manager find;
+allow dcservice_app mediametrics_service:service_manager find;
+allow dcservice_app mediaserver_service:service_manager find;
 allow dcservice_app nfc_service:service_manager find;
 allow dcservice_app privapp_data_file:file execute;
 allow dcservice_app privapp_data_file:lnk_file r_file_perms;

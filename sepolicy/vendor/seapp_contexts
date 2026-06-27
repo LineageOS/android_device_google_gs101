@@ -1,16 +1,7 @@
-user=_app isPrivApp=true name=.ShannonImsService domain=vendor_ims_app levelFrom=all
-user=_app isPrivApp=true name=com.google.pixel.digitalkey.timesync domain=vendor_cccdktimesync_app type=app_data_file levelFrom=all
-user=_app isPrivApp=true name=com.samsung.slsi.telephony.oemril domain=oemrilservice_app levelFrom=all
-user=_app isPrivApp=true name=com.shannon.imsservice domain=vendor_ims_app levelFrom=all
-user=_app isPrivApp=true name=com.shannon.imsservice:remote domain=vendor_ims_app levelFrom=all
-user=_app isPrivApp=true name=com.shannon.qualifiednetworksservice domain=vendor_ims_app levelFrom=all
-user=_app isPrivApp=true seinfo=EuiccSupportPixel name=com.google.euiccpixel domain=euiccpixel_app type=app_data_file levelFrom=all
 user=_app isPrivApp=true seinfo=mds name=com.google.mds domain=modem_diagnostic_app type=app_data_file levelFrom=user
 user=_app isPrivApp=true seinfo=platform name=com.thales.device.ofl.app.basicagent domain=ofl_app type=app_data_file levelFrom=user
-user=_app isPrivApp=true seinfo=uwb name=com.qorvo.uwb.vendorservice domain=uwb_vendor_app type=uwb_vendor_data_file levelFrom=all
 user=_app seinfo=platform name=com.android.ramdump domain=ramdump_app type=app_data_file levelFrom=all
 user=_app seinfo=platform name=com.google.googlecbrs domain=cbrs_setup_app type=app_data_file levelFrom=user
-user=system seinfo=platform name=com.google.SSRestartDetector domain=ssr_detector_app type=system_app_data_file levelFrom=user
 user=system seinfo=platform name=com.samsung.slsi.sysdebugmode domain=vendor_telephony_app levelFrom=all
 user=system seinfo=platform name=com.samsung.slsi.telephony.networktestmode domain=vendor_telephony_app levelFrom=all
 user=system seinfo=platform name=com.samsung.slsi.telephony.silentlogging domain=vendor_telephony_app levelFrom=all

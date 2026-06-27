@@ -1,1 +1,4 @@
 system_internal_prop(repair_mode_init_prop)
+system_internal_prop(system_ssrdump_prop)
+
+neverallow { domain -init -vendor_init } esim_modem_prop:property_service set;
