@@ -8,14 +8,14 @@
     <bool name="hac_enabled">true</bool>
 
     <!-- The package name for the platform carrier config app, bundled with system image. -->
-    <string name="platform_carrier_config_package">com.google.android.carrier</string>
+    <string name="platform_carrier_config_package" translatable="false">com.google.android.carrier</string>
 
     <!-- Whether the device supports dialing emergency RTT calls when there's no SIM card installed
     -->
     <bool name="config_support_simless_emergency_rtt">true</bool>
 
     <!-- The country list that shortcut view can be enabled. -->
-    <string-array name="config_countries_to_enable_shortcut_view">
+    <string-array name="config_countries_to_enable_shortcut_view" translatable="false">
         <item>ca</item>
         <item>us</item>
         <item>de</item>
@@ -66,7 +66,7 @@
     <bool name="config_use_device_to_device_communication">true</bool>
 
     <!-- The package names which can request thermal mitigation. -->
-    <string-array name="thermal_mitigation_allowlisted_packages">
+    <string-array name="thermal_mitigation_allowlisted_packages" translatable="false">
         <item>com.google.android.connectivitythermalpowermanager</item>
     </string-array>
 </resources>

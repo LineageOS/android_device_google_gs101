@@ -27,7 +27,7 @@
     <bool name="config_ringtoneVibrationSettingsSupported">true</bool>
 
     <!-- When each intermediate UDFPS enroll stage ends, as a fraction of total progress. -->
-    <string-array name="config_udfps_enroll_stage_thresholds">
+    <string-array name="config_udfps_enroll_stage_thresholds" translatable="false">
         <item>0.065</item>
         <item>0.48</item>
         <item>0.584</item>

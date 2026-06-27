@@ -5,7 +5,7 @@
 -->
 <resources>
     <!-- Template for showing mobile network operator name while WFC is active -->
-    <string-array name="wfcSpnFormats">
+    <string-array name="wfcSpnFormats" translatable="false">
         <item>%s</item>
         <item>WLAN</item>
     </string-array>

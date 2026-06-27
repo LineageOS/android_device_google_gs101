@@ -14,13 +14,13 @@
          This service must be trusted, as the system binds to it and keeps it running.
          Example: "com.android.captions/.SystemCaptionsManagerService"
     -->
-    <string name="config_defaultSystemCaptionsManagerService">com.google.android.as/com.google.android.apps.miphone.aiai.captions.SystemCaptionsManagerService</string>
+    <string name="config_defaultSystemCaptionsManagerService" translatable="false">com.google.android.as/com.google.android.apps.miphone.aiai.captions.SystemCaptionsManagerService</string>
 
     <!-- The package name for the system's app prediction service.
          This service must be trusted, as it can be activated without explicit consent of the user.
          Example: "com.android.intelligence/.AppPredictionService"
     -->
-    <string name="config_defaultAppPredictionService">com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiPredictionService</string>
+    <string name="config_defaultAppPredictionService" translatable="false">com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiPredictionService</string>
 
     <!-- The package name for the system's content suggestions service.
          Provides suggestions for text and image selection regions in snapshots of apps and should
@@ -31,38 +31,38 @@
          disabled.
          Example: "com.android.contentsuggestions/.ContentSuggestionsService"
     -->
-    <string name="config_defaultContentSuggestionsService">com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiContentSuggestionsService</string>
+    <string name="config_defaultContentSuggestionsService" translatable="false">com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiContentSuggestionsService</string>
 
     <!-- Package name of the on-device intelligent processor for system UI
          features. Examples include the search functionality or the app
          predictor. -->
-    <string name="config_systemUiIntelligence">com.google.android.as</string>
+    <string name="config_systemUiIntelligence" translatable="false">com.google.android.as</string>
 
     <!-- Package name of the on-device intelligent processor for ambient audio.
          Ambient audio is the sound surrounding the device captured by the DSP
          or the microphone. In other words, the device is continuously
          processing audio data in background. -->
-    <string name="config_systemAmbientAudioIntelligence">com.google.android.as</string>
+    <string name="config_systemAmbientAudioIntelligence" translatable="false">com.google.android.as</string>
 
     <!-- Package name of the on-device intelligent processor for audio. The
          difference of 'ambient audio' and 'audio' is that in 'audio', the
          user intentionally and consciously aware that the device is recording
          or using the microphone.
          -->
-    <string name="config_systemAudioIntelligence">com.google.android.as</string>
+    <string name="config_systemAudioIntelligence" translatable="false">com.google.android.as</string>
 
     <!-- Package name of the on-device intelligent processor for notification.
          -->
-    <string name="config_systemNotificationIntelligence">com.google.android.as</string>
+    <string name="config_systemNotificationIntelligence" translatable="false">com.google.android.as</string>
 
     <!-- Package name of the on-device intelligent processor for text. Examples
         include providing autofill functionality based on incoming text
         messages. -->
-    <string name="config_systemTextIntelligence">com.google.android.as</string>
+    <string name="config_systemTextIntelligence" translatable="false">com.google.android.as</string>
 
     <!-- Package name of the on-device intelligent processor for visual
          features. Examples include the autorotate feature. -->
-    <string name="config_systemVisualIntelligence">com.google.android.as</string>
+    <string name="config_systemVisualIntelligence" translatable="false">com.google.android.as</string>
 
     <!-- The maximum number of call log entries for each sim card that can be stored in the call log
          provider on the device. -->

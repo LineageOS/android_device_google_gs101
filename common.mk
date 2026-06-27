@@ -359,7 +359,6 @@ PRODUCT_PACKAGES += \
     SystemUIGoogleOverlayVendorGs101 \
     TeleServiceOverlayProductGs101 \
     TeleServiceOverlayVendorGs101 \
-    TelecomOverlayProductGs101 \
     TelephonyProviderOverlayProductGs101
 
 PRODUCT_PACKAGES += \
