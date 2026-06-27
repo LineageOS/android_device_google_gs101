@@ -17,5 +17,6 @@ allow hal_uwb_vendor_default uwb_data_vendor:file create_file_perms;
 
 not_recovery(`
 allow hal_uwb_vendor_default kernel:process setsched;
+allow hal_uwb_vendor_default self:global_capability_class_set net_admin;
 allow hal_uwb_vendor_default self:global_capability_class_set sys_nice;
 ')
