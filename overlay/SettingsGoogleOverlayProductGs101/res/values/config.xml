@@ -5,7 +5,7 @@
 -->
 <resources>
     <!-- List of packages that should be hidden for MVNO. Do not translate -->
-    <string-array name="datausage_hiding_carrier_service_package_names">
+    <string-array name="datausage_hiding_carrier_service_package_names" translatable="false">
         <item>com.verizon.mips.services</item>
         <item>com.verizon.llkagent</item>
         <item>com.verizon.obdm</item>

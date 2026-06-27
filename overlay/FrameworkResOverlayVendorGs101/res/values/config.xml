@@ -76,14 +76,6 @@
     <!-- Is the device capable of hot swapping an UICC Card -->
     <bool name="config_hotswapCapable">true</bool>
 
-    <!-- If true, then the Android system server will rate-limit guesses of lock screen knowledge
-         factors such as PINs. This does not replace the hardware (Gatekeeper or Weaver)
-         rate-limiter, but rather applies concurrently to it. The software rate-limiter uses
-         exponential backoff and allows up to 20 guesses in theory, but practically about 10-15
-         before the delays get very long. The software rate-limiter also does not count duplicate
-         wrong guesses, improving usability. -->
-    <bool name="config_softwareLskfRateLimiterEnforcing">true</bool>
-
     <!-- Minimum screen brightness setting allowed by power manager.
          -2 is invalid so setting will resort to int value specified above.
          Set this to 0.0 to allow screen to go to minimal brightness.
@@ -317,7 +309,7 @@
              * SDK level 31 makes the following algorithms mandatory : "rfc3686(ctr(aes))",
                "xcbc(aes)", "cmac(aes)", "rfc7539esp(chacha20,poly1305)"
      -->
-    <string-array name="config_optionalIpSecAlgorithms">
+    <string-array name="config_optionalIpSecAlgorithms" translatable="false">
         <item>xcbc(aes)</item>
         <item>rfc3686(ctr(aes))</item>
     </string-array>
@@ -339,19 +331,19 @@
 
          Note that doze dreams are not subject to the same start conditions as ordinary dreams.
          Doze dreams will run whenever the power manager is in a dozing state. -->
-    <string name="config_dozeComponent">com.android.systemui/com.android.systemui.doze.DozeService</string>
+    <string name="config_dozeComponent" translatable="false">com.android.systemui/com.android.systemui.doze.DozeService</string>
 
     <!-- Doze: should the TYPE_PICK_UP_GESTURE sensor be used as a pulse signal. -->
     <bool name="config_dozePulsePickup">true</bool>
 
     <!-- Type of the tap sensor. Empty if tap is not supported. -->
-    <string name="config_dozeTapSensorType">com.google.sensor.single_touch</string>
+    <string name="config_dozeTapSensorType" translatable="false">com.google.sensor.single_touch</string>
 
     <!-- Type of the udfps long press sensor. Empty if long press is not supported. -->
-    <string name="config_dozeUdfpsLongPressSensorType">com.google.sensor.long_press</string>
+    <string name="config_dozeUdfpsLongPressSensorType" translatable="false">com.google.sensor.long_press</string>
 
     <!-- Type of the quick pickup sensor. Empty if quick pickup is not supported. -->
-    <string name="config_quickPickupSensorType">com.google.sensor.quick_pickup</string>
+    <string name="config_quickPickupSensorType" translatable="false">com.google.sensor.quick_pickup</string>
 
     <!-- Control whether the always on display mode is available. This should only be enabled on
          devices where the display has been tuned to be power efficient in DOZE and/or DOZE_SUSPEND
@@ -415,11 +407,13 @@
          -->
     <integer name="config_multiuserMaximumUsers">4</integer>
 
-    <!-- Whether UI for multi user should be shown.
+    <!-- Whether this device supports multiple switchable users.
+         Note that, even if false, multiple users such as profiles can still be supported since
+         they are not switchable.
          Note: If true, it is expected that secondary users are supported on the device (at least
          for testing purposes, even if in practice the UI really only allows other switchable
          types, such as restricted profiles or guests, to be created).
-         @deprecated  Use config_multiuserMaximumUsers instead.
+         @deprecated  Rely on config_multiuserMaximumUsers instead. For now, OEMs must set both.
          This config will likely be removed in the future; config_multiuserMaximumUsers, which now
          only applies to full users, not profiles, should be updated accordingly as needed.
          TODO(b/435521983): Remove this since it's now made redundant by config_multiuserMaximumUsers
@@ -472,7 +466,7 @@
              nr5gc : nr5gcSupportedRelease
              eutran5gc : eutran5gcSupportedRelease
     -->
-    <string-array name="config_telephonyEuiccDeviceCapabilities">
+    <string-array name="config_telephonyEuiccDeviceCapabilities" translatable="false">
         <item>gsm,8</item>
         <item>utran,9</item>
         <item>eutran,15</item>
@@ -505,7 +499,7 @@
          Empty is viewed as "all".  Only used on devices which
          don't support RIL_REQUEST_GET_RADIO_CAPABILITY
          format is UMTS|LTE|... -->
-    <string name="config_radio_access_family">GSM|CDMA|EVDO|WCDMA|LTE</string>
+    <string name="config_radio_access_family" translatable="false">GSM|CDMA|EVDO|WCDMA|LTE</string>
 
     <!-- Whether the display cutout region of the main built-in display should be forced to
          black in software (to avoid aliasing or emulate a cutout that is not physically existent).
@@ -513,13 +507,13 @@
     <bool name="config_fillMainBuiltInDisplayCutout">true</bool>
 
     <!-- Default files to pin via Pinner Service -->
-    <string-array name="config_defaultPinnerServiceFiles">
+    <string-array name="config_defaultPinnerServiceFiles" translatable="false">
         <item>/apex/com.android.art/javalib/core-oj.jar</item>
         <item>/apex/com.android.art/javalib/core-libart.jar</item>
         <item>/system/framework/framework.jar</item>
         <item>/system/framework/services.jar</item>
         <item>/system/bin/surfaceflinger</item>
-        <item>/system_ext/priv-app/SystemUI/SystemUI.apk</item>
+        <item>/system_ext/priv-app/SystemUIGoogle/SystemUIGoogle.apk</item>
     </string-array>
 
     <!-- Pre-scale volume at volume step 1 for Absolute Volume -->
@@ -539,12 +533,12 @@
 
     <!-- The type of the light sensor to be used by the display framework for things like
          auto-brightness. If unset, then it just gets the default sensor of type TYPE_LIGHT. -->
-    <string name="config_displayLightSensorType">com.google.sensor.auto_brightness</string>
+    <string name="config_displayLightSensorType" translatable="false">com.google.sensor.auto_brightness</string>
 
     <!-- The list of packages to automatically opt in to refresh rate suppressing by small area
-    detection. Format of this array should be packageName:threshold and threshold value should
-     be between 0 to 1-->
-    <string-array name="config_smallAreaDetectionAllowlist">
+         detection. Format of this array should be packageName:threshold and threshold value should
+         be between 0 to 1-->
+    <string-array name="config_smallAreaDetectionAllowlist" translatable="false">
         <item>com.tencent.mm:0.07</item>
         <item>com.facebook.katana:0.07</item>
         <item>com.instagram.android:0.07</item>
@@ -574,6 +568,9 @@
     <!-- Whether to enable usb state update via udc sysfs. -->
     <bool name="config_enableUdcSysfsUsbStateUpdate">true</bool>
 
-    <!-- Whether to enable fp unlock when screen turns off on udfps devices -->
-    <bool name="config_screen_off_udfps_enabled">true</bool>
+    <!-- Whether to enable app launch blur -->
+    <bool name="config_enableAppLaunchBlur">false</bool>
+
+    <!-- Whether to enable blur expansion (surface blurs) -->
+    <bool name="config_enableBlurExpansion">false</bool>
 </resources>

@@ -13,21 +13,21 @@
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
          USB interfaces.  If the device doesn't want to support tethering over USB this should
          be empty.  An example would be "usb.*" -->
-    <string-array name="config_tether_usb_regexs">
+    <string-array name="config_tether_usb_regexs" translatable="false">
         <item>rndis\\d</item>
     </string-array>
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
          NCM interfaces.  If the device doesn't want to support tethering over NCM this should
          be empty. -->
-    <string-array name="config_tether_ncm_regexs">
+    <string-array name="config_tether_ncm_regexs" translatable="false">
         <item>ncm\\d</item>
     </string-array>
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
          Wifi P2P interfaces.  If the device doesn't want to support tethering over Wifi P2p this
          should be empty.  An example would be "p2p-p2p\\d-.*" -->
-    <string-array name="config_tether_wifi_p2p_regexs">
+    <string-array name="config_tether_wifi_p2p_regexs" translatable="false">
         <item>p2p-p2p\\d-.*</item>
         <item>p2p\\d</item>
         <item>p2p-wlan\\d-.*</item>

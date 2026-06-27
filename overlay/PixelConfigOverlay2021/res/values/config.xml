@@ -5,7 +5,7 @@
 -->
 <resources>
     <!-- The list of packages to force slowJpegMode for Apps using Camera API1 -->
-    <string-array name="config_forceSlowJpegModeList">
+    <string-array name="config_forceSlowJpegModeList" translatable="false">
         <item>com.facebook.orca</item>
         <item>com.skype.raider</item>
         <item>com.tencent.mm</item>
@@ -15,7 +15,7 @@
     <bool name="config_pauseWallpaperRenderWhenStateChangeEnabled">true</bool>
 
     <!-- The list of packages to pause wallpaper rendering upon state change such as app launch -->
-    <string-array name="pause_wallpaper_render_when_state_change">
+    <string-array name="pause_wallpaper_render_when_state_change" translatable="false">
         <item>com.google.android.GoogleCamera</item>
     </string-array>
 </resources>

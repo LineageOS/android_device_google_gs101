@@ -6,25 +6,25 @@
 <resources>
     <!-- Options for screensaver "When to start" for devices that do not support screensavers
          while on battery -->
-    <string-array name="when_to_start_screensaver_entries_no_battery">
+    <string-array name="when_to_start_screensaver_entries_no_battery" translatable="false">
         <item>@string/screensaver_settings_summary_sleep</item>
         <item>@string/screensaver_settings_summary_postured_and_charging</item>
     </string-array>
 
     <!-- Values for screensaver "When to start" for devices that do not support screensavers
          while on battery -->
-    <string-array name="when_to_start_screensaver_values_no_battery">
+    <string-array name="when_to_start_screensaver_values_no_battery" translatable="false">
         <item>while_charging_only</item>
         <item>while_postured_only</item>
     </string-array>
 
-    <string-array name="when_to_start_hubmode_entries">
+    <string-array name="when_to_start_hubmode_entries" translatable="false">
         <item>@string/when_to_show_hubmode_never</item>
         <item>@string/when_to_show_hubmode_charging</item>
         <item>@string/when_to_show_hubmode_charging_and_upright</item>
     </string-array>
 
-    <string-array name="when_to_start_hubmode_values">
+    <string-array name="when_to_start_hubmode_values" translatable="false">
         <item>never</item>
         <item>while_charging</item>
         <item>while_charging_and_upright</item>

@@ -13,7 +13,7 @@
          so that applications can still use their own mechanisms. -->
     <bool name="config_enableAutoPowerModes">true</bool>
 
-    <string-array name="config_forceInvertPackageBlocklist">
+    <string-array name="config_forceInvertPackageBlocklist" translatable="false">
         <item>com.amazon.mShop.android.shopping</item>
         <item>com.google.android.apps.maps</item>
         <item>fr.vinted</item>

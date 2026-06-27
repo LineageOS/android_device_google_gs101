@@ -8,6 +8,9 @@
          auto-rotation setting. -->
     <bool name="config_alwaysAllowDreamRotation">true</bool>
 
+    <!-- Specifies whether the dream switcher should be enabled. -->
+    <bool name="config_dreamSwitcherEnabled">true</bool>
+
     <!-- If supported, are dreams enabled? (by default) -->
     <bool name="config_dreamsEnabledByDefault">false</bool>
 
@@ -18,15 +21,16 @@
     <bool name="config_dreamsActivatedOnSleepByDefault">true</bool>
 
     <!-- ComponentNames of the dreams that we should hide -->
-    <string-array name="config_disabledDreamComponents">
-        <item>com.android.systemui/com.android.systemui.lowlightclock.LowLightClockDreamService</item>
-    </string-array>
+    <string-array name="config_disabledDreamComponents" translatable="false"/>
 
     <!-- The list of supported dream complications -->
     <integer-array name="config_supportedDreamComplications">
         <item>1</item>
         <item>3</item>
     </integer-array>
+
+    <!-- Whether to support restricting dreams to wireless charging. -->
+    <bool name="config_supportDreamWirelessChargingRestriction">true</bool>
 
     <!-- Whether dreams are disabled when ambient mode is suppressed. -->
     <bool name="config_dreamsDisabledByAmbientModeSuppressionConfig">true</bool>

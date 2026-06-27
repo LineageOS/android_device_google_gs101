@@ -5,7 +5,7 @@
 -->
 <resources>
     <!-- Component names of allowed communal widgets -->
-    <string-array name="config_communalWidgetAllowlist">
+    <string-array name="config_communalWidgetAllowlist" translatable="false">
         <item>com.google.android.apps.bard/com.google.android.apps.bard.widget.RobinToolBarAppWidgetReceiver</item>
         <item>com.google.android.apps.weather/com.google.android.apps.weather.widget.FullForecastWidgetReceiver</item>
         <item>com.google.android.googlequicksearchbox/com.google.android.apps.search.widgets.stocks.StocksWidgetReceiver</item>

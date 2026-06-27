@@ -5,7 +5,7 @@
 -->
 <resources>
     <!-- Display settings screen, summary fragment for screen saver options, activated when asleep and charging [CHAR LIMIT=40] -->
-    <string name="screensaver_settings_summary_sleep">충전 중</string>
+    <string name="screensaver_settings_summary_sleep">충전 중일 때</string>
 
     <!-- Summary for when screensaver is enabled, only while stationary and upright and charging [CHAR LIMIT=40] -->
     <string name="screensaver_settings_summary_postured_and_charging">똑바로 세워져 있고 충전 중일 때</string>
