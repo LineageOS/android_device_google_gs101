@@ -7,6 +7,12 @@ set_prop(storage_init, logpersistd_logging_prop)
 
 allow storage_init proc_f2fs:dir search;
 allow storage_init proc_f2fs:file { getattr open read };
+allow storage_init sysfs:dir { open read };
+allow storage_init sysfs_block:dir search;
 allow storage_init sysfs_fs_f2fs:dir search;
 allow storage_init sysfs_fs_f2fs:file { getattr open read write };
+allow storage_init sysfs_loop:dir search;
+allow storage_init sysfs_loop:file rw_file_perms;
+allow storage_init sysfs_scsi_devices_0000:dir search;
+allow storage_init sysfs_scsi_devices_0000:file rw_file_perms;
 allow storage_init vendor_toolbox_exec:file execute_no_trans;

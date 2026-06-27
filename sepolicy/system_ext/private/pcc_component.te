@@ -1,0 +1,3 @@
+allow pcc_component edgetpu_app_service:service_manager find;
+allow pcc_component edgetpu_device:chr_file { getattr ioctl map read write };
+allow pcc_component edgetpu_nnapi_service:service_manager find;

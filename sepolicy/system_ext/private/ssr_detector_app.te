@@ -1,0 +1,8 @@
+app_domain(ssr_detector_app)
+
+set_prop(ssr_detector_app, system_ssrdump_prop)
+
+allow ssr_detector_app app_api_service:service_manager find;
+allow ssr_detector_app radio_service:service_manager find;
+allow ssr_detector_app system_app_data_file:dir create_dir_perms;
+allow ssr_detector_app system_app_data_file:file create_file_perms;

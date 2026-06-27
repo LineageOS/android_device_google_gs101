@@ -1,1 +1,1 @@
-type vendor_pcs_app, domain;
+type vendor_pcs_app, coredomain, domain;

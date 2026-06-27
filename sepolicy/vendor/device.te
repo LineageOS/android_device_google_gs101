@@ -1,7 +1,6 @@
 type amcs_device, dev_type;
 type aoc_device, dev_type;
 type custom_ab_block_device, dev_type;
-type edgetpu_device, dev_type, isolated_compute_allowed_device, mlstrustedobject;
 type efs_block_device, dev_type;
 type logbuffer_device, dev_type;
 type modem_block_device, dev_type;
@@ -12,3 +11,4 @@ type sg_device, dev_type;
 type thermal_link_device, dev_type;
 type trusty_log_device, dev_type;
 type userdata_exp_block_device, dev_type;
+type vdu_device, dev_type;

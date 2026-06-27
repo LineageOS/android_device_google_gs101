@@ -21,7 +21,8 @@ set_prop(modem_svc_sit, vendor_modem_prop)
 allow modem_svc_sit hal_exynos_rild_hwservice:hwservice_manager find;
 allow modem_svc_sit mnt_vendor_file:dir r_dir_perms;
 allow modem_svc_sit modem_img_file:dir r_dir_perms;
-allow modem_svc_sit modem_img_file:{ file lnk_file } r_file_perms;
+allow modem_svc_sit modem_img_file:file r_file_perms;
+allow modem_svc_sit modem_img_file:lnk_file r_file_perms;
 allow modem_svc_sit modem_stat_data_file:dir create_dir_perms;
 allow modem_svc_sit modem_stat_data_file:file create_file_perms;
 allow modem_svc_sit modem_userdata_file:dir create_dir_perms;

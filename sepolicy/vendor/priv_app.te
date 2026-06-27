@@ -1,5 +1,1 @@
 hal_client_domain(priv_app, hal_power)
-
-allow priv_app edgetpu_app_service:service_manager find;
-allow priv_app edgetpu_device:chr_file { getattr ioctl map read write };
-allow priv_app edgetpu_nnapi_service:service_manager find;

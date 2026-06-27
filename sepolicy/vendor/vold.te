@@ -1,3 +1,5 @@
+binder_call(vold, tee)
+
 allow vold efs_block_device:blk_file getattr;
 allow vold modem_efs_file:dir rw_dir_perms;
 allow vold modem_efs_file:dir { ioctl open read };

@@ -1,0 +1,15 @@
+app_domain(vendor_ims_app)
+
+net_domain(vendor_ims_app)
+
+typeattribute vendor_ims_app coredomain;
+
+set_prop(vendor_ims_app, radio_prop)
+
+allow vendor_ims_app app_api_service:service_manager find;
+allow vendor_ims_app audioserver_service:service_manager find;
+allow vendor_ims_app cameraserver_service:service_manager find;
+allow vendor_ims_app mediametrics_service:service_manager find;
+allow vendor_ims_app mediaserver_service:service_manager find;
+allow vendor_ims_app radio_service:service_manager find;
+allow vendor_ims_app self:udp_socket create_socket_perms_no_ioctl;

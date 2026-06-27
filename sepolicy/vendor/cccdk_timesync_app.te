@@ -1,8 +1,0 @@
-type vendor_cccdktimesync_app, domain;
-
-app_domain(vendor_cccdktimesync_app)
-
-binder_call(vendor_cccdktimesync_app, hal_bluetooth_btlinux)
-
-allow vendor_cccdktimesync_app app_api_service:service_manager find;
-allow vendor_cccdktimesync_app hal_bluetooth_coexistence_hwservice:hwservice_manager find;

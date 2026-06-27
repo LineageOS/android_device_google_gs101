@@ -35,9 +35,12 @@ ro.vendor.build.svn u:object_r:vendor_rild_prop:s0
 ro.vendor.config. u:object_r:vendor_ro_config_default_prop:s0
 ro.vendor.flood. u:object_r:vendor_flood_prop:s0
 ro.vendor.hwc.drm.device u:object_r:vendor_display_prop:s0
+ro.vendor.ril. u:object_r:vendor_rild_prop:s0
 ro.vendor.sys. u:object_r:vendor_ro_sys_default_prop:s0
 ro.vendor.sys.modem. u:object_r:vendor_modem_prop:s0
 ro.vendor.trusty.storage.fs_ready u:object_r:vendor_trusty_storage_prop:s0
+ro.vendor.trusty.storage.fs_ready_rw u:object_r:vendor_trusty_storage_prop:s0
+ro.vendor.usb.userspace.aoa.enabled u:object_r:vendor_usb_aoa_prop:s0 exact bool
 ro.vendor.uwb.calibration. u:object_r:vendor_uwb_calibration_prop:s0 exact string
 vendor.all.devices.ready u:object_r:vendor_device_prop:s0
 vendor.all.modules.ready u:object_r:vendor_device_prop:s0
@@ -61,11 +64,11 @@ vendor.camera.debug. u:object_r:vendor_camera_debug_prop:s0
 vendor.camera.fatp. u:object_r:vendor_camera_fatp_prop:s0
 vendor.camera.pbcs.debug. u:object_r:vendor_camera_pbcs_debug_prop:s0
 vendor.cbd. u:object_r:vendor_cbd_prop:s0
-vendor.chre.multiclient_hal u:object_r:vendor_chre_hal_prop:s0
 vendor.common.modules.ready u:object_r:vendor_device_prop:s0
 vendor.config. u:object_r:vendor_config_default_prop:s0
 vendor.debug.ramdump. u:object_r:vendor_ramdump_prop:s0
 vendor.debug.ssrdump. u:object_r:vendor_ssrdump_prop:s0
+vendor.devcoredump. u:object_r:vendor_devcoredump_prop:s0
 vendor.device.modules.ready u:object_r:vendor_device_prop:s0
 vendor.dynamic_sensor. u:object_r:vendor_dynamic_sensor_prop:s0
 vendor.edgetpu.cpu_scheduler. u:object_r:vendor_edgetpu_cpu_scheduler_prop:s0
@@ -103,3 +106,4 @@ vendor.usb. u:object_r:vendor_usb_config_prop:s0
 vendor.uwb.calibration.country_code u:object_r:vendor_uwb_calibration_country_code:s0 exact string
 vendor.wlan.driver.version u:object_r:vendor_wifi_version:s0
 vendor.wlan.firmware.version u:object_r:vendor_wifi_version:s0
+vendor.zram.nr_tags u:object_r:vendor_zram_nr_tags_prop:s0 exact int

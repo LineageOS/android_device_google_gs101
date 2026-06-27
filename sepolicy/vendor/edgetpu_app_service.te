@@ -1,3 +1,5 @@
+hal_client_domain(edgetpu_app_server, hal_power)
+
 binder_call(edgetpu_app_server, edgetpu_vendor_server)
 
 get_prop(edgetpu_app_server, device_config_edgetpu_native_prop)

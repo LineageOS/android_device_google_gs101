@@ -1,0 +1,11 @@
+type block_queue_depth, domain;
+type block_queue_depth_exec, exec_type, file_type, vendor_file_type;
+
+init_daemon_domain(block_queue_depth)
+
+set_prop(block_queue_depth, vendor_zram_nr_tags_prop)
+
+allow block_queue_depth block_device:dir r_dir_perms;
+allow block_queue_depth dev_type:blk_file getattr;
+allow block_queue_depth sysfs_type:dir r_dir_perms;
+allow block_queue_depth sysfs_type:file r_file_perms;

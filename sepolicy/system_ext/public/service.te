@@ -1,0 +1,1 @@
+type edgetpu_nnapi_service, app_api_service, isolated_compute_allowed_service, service_manager_type;
