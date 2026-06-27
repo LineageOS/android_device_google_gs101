@@ -1,0 +1,3 @@
+allow priv_app_all edgetpu_app_service:service_manager find;
+allow priv_app_all edgetpu_device:chr_file { getattr ioctl map read write };
+allow priv_app_all edgetpu_nnapi_service:service_manager find;

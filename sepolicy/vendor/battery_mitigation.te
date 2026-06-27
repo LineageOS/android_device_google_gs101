@@ -8,6 +8,7 @@ add_service(battery_mitigation, hal_battery_mitigation_service)
 
 binder_call(battery_mitigation, hal_audio_default)
 binder_call(battery_mitigation, servicemanager)
+binder_call(battery_mitigation, system_server)
 
 get_prop(battery_mitigation, boot_status_prop)
 get_prop(battery_mitigation, system_boot_reason_prop)

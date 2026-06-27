@@ -1,0 +1,7 @@
+app_domain(uwb_vendor_app)
+
+not_recovery(`
+allow uwb_vendor_app app_api_service:service_manager find;
+allow uwb_vendor_app nfc_service:service_manager find;
+allow uwb_vendor_app radio_service:service_manager find;
+')

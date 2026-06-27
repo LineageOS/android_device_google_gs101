@@ -1,5 +1,6 @@
 type hal_camera_default_tmpfs, file_type;
 type lwis_device, dev_type;
+type vendor_camera_interference_avoidance_service, hal_service_type, protected_service, service_manager_type;
 type vendor_camera_tuning_file, file_type, vendor_file_type;
 type vendor_image_processing_hal_service, hal_service_type, protected_service, service_manager_type;
 
@@ -8,6 +9,7 @@ hal_client_domain(hal_camera_default, hal_graphics_composer)
 hal_client_domain(hal_camera_default, hal_power)
 hal_client_domain(hal_camera_default, hal_thermal)
 
+add_service(hal_camera_default, vendor_camera_interference_avoidance_service)
 add_service(hal_camera_default, vendor_image_processing_hal_service)
 
 binder_call(hal_camera_default, edgetpu_app_server)
@@ -45,6 +47,7 @@ allow hal_camera_default edgetpu_device:chr_file rw_file_perms;
 allow hal_camera_default edgetpu_tachyon_service:service_manager find;
 allow hal_camera_default edgetpu_vendor_service:service_manager find;
 allow hal_camera_default fwk_stats_service:service_manager find;
+allow hal_camera_default gpu_device:chr_file rw_file_perms;
 allow hal_camera_default hal_pixel_remote_camera_service:service_manager find;
 allow hal_camera_default hal_radioext_hwservice:hwservice_manager find;
 allow hal_camera_default kernel:process setsched;
@@ -73,5 +76,6 @@ allow hal_camera_default vendor_camera_tuning_file:dir r_dir_perms;
 allow hal_camera_default vendor_camera_tuning_file:file r_file_perms;
 
 dontaudit hal_camera_default system_data_file:dir search;
+dontaudit hal_camera_default system_userdir_file:dir search;
 dontaudit hal_camera_default traced:unix_stream_socket connectto;
 dontaudit hal_camera_default traced_producer_socket:sock_file write;

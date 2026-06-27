@@ -8,13 +8,10 @@ allow init modem_efs_file:dir mounton;
 allow init modem_img_file:dir mounton;
 allow init modem_img_file:filesystem { getattr mount relabelfrom };
 allow init modem_userdata_file:dir mounton;
-allow init per_boot_file:file ioctl;
 allow init persist_file:dir mounton;
 allow init ram_device:blk_file w_file_perms;
 allow init sysfs_scsi_devices_0000:file w_file_perms;
 allow init userdata_exp_block_device:blk_file write;
-
-allowxperm init per_boot_file:file ioctl F2FS_IOC_SET_PIN_FILE;
 
 dontaudit init overlayfs_file:chr_file unlink;
 dontaudit init overlayfs_file:file rename;

@@ -24,6 +24,7 @@ genfscon proc /bluetooth/sleep/lpm u:object_r:proc_bluetooth_writable:s0
 genfscon proc /bluetooth/sleep/wakelock_ctrl u:object_r:proc_bluetooth_writable:s0
 genfscon proc /bluetooth/timesync u:object_r:proc_bluetooth_writable:s0
 genfscon proc /fs/f2fs u:object_r:proc_f2fs:s0
+genfscon proc /gs_perf_mon u:object_r:proc_gs_perf_mon:s0
 genfscon proc /sys/kernel/sched_pelt_multiplier u:object_r:proc_sched:s0
 genfscon proc /sys/vm/compaction_proactiveness u:object_r:proc_compaction_proactiveness:s0
 genfscon proc /sys/vm/swappiness u:object_r:proc_dirty:s0
@@ -331,6 +332,7 @@ genfscon sysfs /devices/platform/google,usbc_port_cooling_dev/hysteresis_time u:
 genfscon sysfs /devices/platform/google,usbc_port_cooling_dev/trip_time u:object_r:sysfs_usbc_throttling_stats:s0
 genfscon sysfs /devices/platform/google,usbc_port_cooling_dev/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/gpio_keys/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/gvdu u:object_r:sysfs_vdu:s0
 genfscon sysfs /devices/platform/mfc-core/sscoredump/sscd_mfc-core/report_count u:object_r:sysfs_sscoredump_subsystem_report_count:s0
 genfscon sysfs /devices/platform/mfc/video4linux/video u:object_r:sysfs_mfc:s0
 genfscon sysfs /devices/platform/odm/odm:btbcm/rfkill/rfkill0/state u:object_r:sysfs_bluetooth_writable:s0
@@ -341,6 +343,11 @@ genfscon sysfs /devices/platform/odm/odm:fps_touch_handler/power/wakeup u:object
 genfscon sysfs /devices/platform/odm/odm:fps_touch_handler/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/sjtag_ap/interface u:object_r:sysfs_sjtag:s0
 genfscon sysfs /devices/platform/sjtag_gsa/interface u:object_r:sysfs_sjtag:s0
+genfscon sysfs /devices/platform/soc@0/14700000.ufs/attributes/wb_avail_buf u:object_r:sysfs_scsi_devices_0000:s0
+genfscon sysfs /devices/platform/soc@0/14700000.ufs/clkgate_enable u:object_r:sysfs_scsi_devices_0000:s0
+genfscon sysfs /devices/platform/soc@0/14700000.ufs/device_descriptor u:object_r:sysfs_scsi_devices_0000:s0
+genfscon sysfs /devices/platform/soc@0/14700000.ufs/health_descriptor u:object_r:sysfs_scsi_devices_0000:s0
+genfscon sysfs /devices/platform/soc@0/14700000.ufs/host0/target0:0:0/0:0:0: u:object_r:sysfs_scsi_devices_0000:s0
 genfscon sysfs /devices/platform/sound-aoc/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/wlan/sscoredump/sscd_wlan/report_count u:object_r:sysfs_sscoredump_subsystem_report_count:s0
 genfscon sysfs /devices/soc0/machine u:object_r:sysfs_soc:s0
@@ -362,6 +369,7 @@ genfscon sysfs /firmware/devicetree/base/chosen u:object_r:sysfs_chosen:s0
 genfscon sysfs /firmware/devicetree/base/drmdsim@0x1C2C0000/panel@0/compatible u:object_r:sysfs_display:s0
 genfscon sysfs /firmware/devicetree/base/drmdsim@0x1C2D0000/panel@0/compatible u:object_r:sysfs_display:s0
 genfscon sysfs /kernel/boot_control/blow_ar u:object_r:sysfs_bootctl:s0
+genfscon sysfs /kernel/iommu u:object_r:sysfs_iommu_telemetry:s0
 genfscon sysfs /kernel/metrics/irq/long_irq_metrics u:object_r:sysfs_vendor_metrics:s0
 genfscon sysfs /kernel/metrics/irq/stats_reset u:object_r:sysfs_vendor_metrics:s0
 genfscon sysfs /kernel/metrics/irq/storm_irq_metrics u:object_r:sysfs_vendor_metrics:s0
@@ -382,3 +390,4 @@ genfscon sysfs /module/trusty_core/parameters/use_high_wq u:object_r:sysfs_trust
 genfscon sysfs /module/trusty_virtio/parameters/use_high_wq u:object_r:sysfs_trusty:s0
 genfscon sysfs /wifi u:object_r:sysfs_wifi:s0
 genfscon tracefs /events/dmabuf_heap/dma_heap_stat u:object_r:debugfs_tracing:s0
+genfscon tracefs /events/mali/gpu_power_state u:object_r:debugfs_tracing:s0

@@ -2,12 +2,17 @@ type devinfo_block_device, dev_type;
 type sda_block_device, dev_type;
 type sysfs_bootctl, fs_type, sysfs_type;
 type sysfs_ota, fs_type, sysfs_type;
+type ufs_bsg_device, dev_type;
 
 allow hal_bootctl_default devinfo_block_device:blk_file rw_file_perms;
 allow hal_bootctl_default sda_block_device:blk_file rw_file_perms;
+allow hal_bootctl_default self:capability sys_rawio;
 allow hal_bootctl_default sysfs_bootctl:file rw_file_perms;
 allow hal_bootctl_default sysfs_ota:file rw_file_perms;
 allow hal_bootctl_default tee_device:chr_file rw_file_perms;
+allow hal_bootctl_default ufs_bsg_device:chr_file { ioctl open read write };
+
+allowxperm hal_bootctl_default ufs_bsg_device:chr_file ioctl SG_IO;
 
 recovery_only(`
 allow hal_bootctl_default rootfs:dir r_dir_perms;

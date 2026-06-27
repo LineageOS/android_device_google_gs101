@@ -1,3 +1,4 @@
+type fingerprint_device, dev_type;
 type hal_fingerprint_ext_hwservice, hwservice_manager_type;
 type mfg_data_block_device, dev_type;
 type sysfs_fingerprint, fs_type, sysfs_type;

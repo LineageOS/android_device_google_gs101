@@ -18,9 +18,6 @@ r_dir_file(hal_sensors_default, persist_sensor_reg_file)
 r_dir_file(hal_sensors_default, sysfs_batteryinfo)
 r_dir_file(hal_sensors_default, sysfs_chosen)
 
-unix_socket_connect(hal_sensors_default, chre, chre)
-unix_socket_connect(hal_sensors_default, chre, hal_contexthub_default)
-
 allow hal_sensors_default aoc_device:chr_file rw_file_perms;
 allow hal_sensors_default device:dir r_dir_perms;
 allow hal_sensors_default fwk_stats_service:service_manager find;

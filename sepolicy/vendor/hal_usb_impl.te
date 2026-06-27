@@ -8,9 +8,12 @@ hal_server_domain(hal_usb_impl, hal_usb)
 
 binder_call(hal_usb_impl, servicemanager)
 
+get_prop(hal_usb_impl, usb_control_prop)
 get_prop(hal_usb_impl, vendor_usb_config_prop)
 
 init_daemon_domain(hal_usb_impl)
+
+r_dir_file(hal_usb_impl, sysfs_udc)
 
 wakelock_use(hal_usb_impl)
 
@@ -21,7 +24,6 @@ allow hal_usb_impl self:capability2 wake_alarm;
 allow hal_usb_impl sysfs_batteryinfo:dir r_dir_perms;
 allow hal_usb_impl sysfs_batteryinfo:file rw_file_perms;
 allow hal_usb_impl sysfs_extcon:dir search;
-allow hal_usb_impl sysfs_udc:file r_file_perms;
 allow hal_usb_impl sysfs_usbc_throttling_stats:file r_file_perms;
 allow hal_usb_impl sysfs_wakeup:dir search;
 allow hal_usb_impl sysfs_wakeup:file r_file_perms;

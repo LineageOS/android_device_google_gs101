@@ -1,0 +1,3 @@
+type edgetpu_device, dev_type, isolated_compute_allowed_device, mlstrustedobject;
+type fips_block_device, dev_type;
+type ufs_internal_block_device, dev_type;

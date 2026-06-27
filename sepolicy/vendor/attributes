@@ -1,4 +1,6 @@
 attribute mali_target_sdk;
+attribute pixel_bluetooth_hwservice_type;
+attribute pixel_display_hal_service_type;
 attribute vendor_persist_type;
 
 hal_attribute(shared_modem_platform)
