@@ -122,6 +122,11 @@ PRODUCT_PACKAGES += \
 # storage pixelstats
 -include hardware/google/pixel/pixelstats/device.mk
 
+# Power
+PRODUCT_ARTIFACT_PATH_REQUIREMENT_ALLOWED_LIST += \
+    system/lib/android.hardware.power.stats-V2-ndk.so \
+    system/lib64/android.hardware.power.stats-V2-ndk.so
+
 # Enable project quotas and casefolding for emulated storage without sdcardfs
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 
