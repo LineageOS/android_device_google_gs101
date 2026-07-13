@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fd38e5c_9cad0c3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2026-07-13T04:08:52Z",
+      "side": 1,
+      "message": "Can\u0027t crack this - my env without any additions _refuses_ to build without this.\n\nMike and I had this on floral for a while until suddenly he started hitting it as well.\n\nPlease let me know if this breaks build in your envs.",
+      "revId": "ddf15f7b2d42936e8aa743b7c27caa5b2537ea70",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
