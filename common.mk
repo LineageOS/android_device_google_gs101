@@ -103,6 +103,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += android.hardware.sensors-service.multihal
 
 # USB HAL
+PRODUCT_SOONG_NAMESPACES += \
+    hardware/google/pixel/pixelstats \
+    hardware/google/pixel/usb
+
 PRODUCT_PACKAGES += \
 	android.hardware.usb-service.gs101
 PRODUCT_PACKAGES += \
