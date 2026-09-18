@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- The root keys for TrustTokenService. The keys are in COSE_Key (RFC 9052) format and then
+      encoded with BASE64.
+
+      It should be updated in accordance with root keys used by the TrustTokenService. It's highly
+      recommended to rotate the root keys periodically. To ensure the smooth operation of existing
+      devices, it's also recommended to front-load several root keys.
+
+      If not already present in resource overlay, please add
+      vendor_required_trust_token_roots.xml (matching this file) in vendor overlay.
+    -->
+    <string-array name="vendor_required_trust_token_roots" translatable="false">
+        <item>owEBIAYhWCCxt37pU23uFJWvBtcG9D+OIz0TXdDyOjZsmPfGBFzYDg==</item>
+        <item>owEBIAYhWCDgLh7H78+Ycl34O5PKZ10MCg/ARI+LnUhQhCJE/J47HQ==</item>
+        <item>owEBIAYhWCC83FrJxHEFSnvnEAkuWOfXEms632xIZbRD19Ukcv5yKQ==</item>
+        <item>owEBIAYhWCAwpfJWuS+kCXNx0FPvUP8R/XOzmK5X+FAJxIpQ7UPxFQ==</item>
+        <item>owEBIAYhWCBoPXYnI9Gv3OKjW1bgWbsPGRRyiCxPKrjA6HhO8QpQAQ==</item>
+        <item>owEBIAYhWCDxRtMvYT/atVVP2iLtVqymariwTZGuAG2Z2jJE8sQBtg==</item>
+        <item>owEBIAYhWCAZnIrJPitioKaLC0/9+GMCil440MQGVVT/J+DhQDiwoQ==</item>
+        <item>owEBIAYhWCCFiLF8e+uSIlhss7zmjfK00ZxvHYU7z9z45mJzttKzqg==</item>
+        <item>owEBIAYhWCA7lFHa7uG43C9i4CFqPnaydO9t+1q258dKmugr3MiTcg==</item>
+        <item>owEBIAYhWCAPigBeCY3564lp2UQdzI3y8EEEhzJD2iYfFF+cTDvKjA==</item>
+        <item>owEBIAYhWCDgJCwPya0EUCO4mdNI1lr1tzPcnegnF4l2GA6sM58GDg==</item>
+        <item>owEBIAYhWCCCFWs+7+hWILo5o2nAY4e9WYv5oKwUB+ZqPdJ9WA6QlA==</item>
+    </string-array>
+
+    <!-- The timestamp in seconds the keys are provisioned. -->
+    <integer name="vendor_required_trust_token_roots_timestamp">1779874873</integer>
+</resources>

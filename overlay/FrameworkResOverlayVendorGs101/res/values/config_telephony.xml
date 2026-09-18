@@ -24,4 +24,7 @@
 
     <!-- Telephony qualified networks service package name to bind to by default. -->
     <string name="config_qualified_networks_service_package" translatable="false">com.shannon.qualifiednetworksservice</string>
+
+    <!-- Whether to wait for carrier config loaded before using operator name to publish from modem. -->
+    <bool name="config_update_operator_name_after_carrier_config_loaded">true</bool>
 </resources>
