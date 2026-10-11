@@ -1,0 +1,2 @@
+type gpu_counter_producer, domain;
+type gpu_counter_producer_exec, exec_type, file_type, system_file_type;

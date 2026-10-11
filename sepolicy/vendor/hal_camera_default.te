@@ -3,6 +3,7 @@ type lwis_device, dev_type;
 type vendor_camera_interference_avoidance_service, hal_service_type, protected_service, service_manager_type;
 type vendor_camera_tuning_file, file_type, vendor_file_type;
 type vendor_image_processing_hal_service, hal_service_type, protected_service, service_manager_type;
+type vendor_intelligent_camera_hal_service, hal_service_type, protected_service, service_manager_type;
 
 hal_client_domain(hal_camera_default, hal_graphics_allocator)
 hal_client_domain(hal_camera_default, hal_graphics_composer)
@@ -11,13 +12,13 @@ hal_client_domain(hal_camera_default, hal_thermal)
 
 add_service(hal_camera_default, vendor_camera_interference_avoidance_service)
 add_service(hal_camera_default, vendor_image_processing_hal_service)
+add_service(hal_camera_default, vendor_intelligent_camera_hal_service)
 
 binder_call(hal_camera_default, edgetpu_app_server)
 binder_call(hal_camera_default, edgetpu_tachyon_server)
 binder_call(hal_camera_default, edgetpu_vendor_server)
 binder_call(hal_camera_default, hal_radioext_default)
 binder_call(hal_camera_default, mediacodec_samsung)
-binder_call(hal_camera_default, rlsservice)
 binder_call(hal_camera_default, system_server)
 binder_call(hal_camera_default, vendor_pbcs_app)
 binder_call(hal_camera_default, vendor_pcs_app)
@@ -60,7 +61,6 @@ allow hal_camera_default proc_interrupts:dir r_dir_perms;
 allow hal_camera_default proc_interrupts:file r_file_perms;
 allow hal_camera_default proc_irq:dir r_dir_perms;
 allow hal_camera_default proc_irq:file rw_file_perms;
-allow hal_camera_default rls_service:service_manager find;
 allow hal_camera_default self:global_capability_class_set sys_nice;
 allow hal_camera_default sysfs_chip_id:file r_file_perms;
 allow hal_camera_default sysfs_devfreq_cur:file r_file_perms;

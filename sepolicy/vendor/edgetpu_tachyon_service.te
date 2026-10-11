@@ -1,4 +1,3 @@
-type edgetpu_tachyon_server, domain;
 type edgetpu_tachyon_server_exec, exec_type, file_type, vendor_file_type;
 
 binder_service(edgetpu_tachyon_server)

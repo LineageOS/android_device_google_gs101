@@ -8,7 +8,9 @@ binder_use(pixelstats_vendor)
 
 get_prop(pixelstats_vendor, boottime_public_prop)
 get_prop(pixelstats_vendor, hwservicemanager_prop)
+get_prop(pixelstats_vendor, rootdisk_prop)
 get_prop(pixelstats_vendor, smart_idle_maint_enabled_prop)
+get_prop(pixelstats_vendor, userdisk_prop)
 
 hwbinder_use(pixelstats_vendor)
 

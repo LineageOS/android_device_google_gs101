@@ -1,0 +1,2 @@
+type edgetpu_tachyon_server, domain;
+type edgetpu_tachyon_service, app_api_service, isolated_compute_allowed_service, service_manager_type;

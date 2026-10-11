@@ -1,7 +1,8 @@
 binder_call(vendor_pcs_app, hal_camera_default)
 
 allow netd vendor_pcs_app:fd use;
-allow netd vendor_pcs_app:unpriv_socket_class_set create_socket_perms_no_ioctl;
+allow netd vendor_pcs_app:{ sctp_socket unix_dgram_socket unix_stream_socket } create_socket_perms_no_ioctl;
+allow netd vendor_pcs_app:{ tcp_socket udp_socket } create_socket_perms_no_ioctl;
 allow vendor_pcs_app camera_cameraidremapper_service:service_manager find;
 allow vendor_pcs_app camera_lyricconfigprovider_service:service_manager find;
 allow vendor_pcs_app edgetpu_app_service:service_manager find;
@@ -12,4 +13,5 @@ allow vendor_pcs_app netd:unix_stream_socket connectto;
 allow vendor_pcs_app node:udp_socket node_bind;
 allow vendor_pcs_app port:tcp_socket name_connect;
 allow vendor_pcs_app port:udp_socket name_bind;
-allow vendor_pcs_app vendor_pcs_app:unpriv_socket_class_set create_socket_perms_no_ioctl;
+allow vendor_pcs_app vendor_pcs_app:{ dgram_socket_class_set sctp_socket tcp_socket } create_socket_perms_no_ioctl;
+allow vendor_pcs_app vendor_pcs_app:unix_stream_socket create_socket_perms_no_ioctl;

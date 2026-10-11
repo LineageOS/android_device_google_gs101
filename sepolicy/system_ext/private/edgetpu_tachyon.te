@@ -1,0 +1,1 @@
+binder_call(edgetpu_tachyon_server, pcc_component)
