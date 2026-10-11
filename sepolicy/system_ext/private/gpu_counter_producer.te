@@ -1,0 +1,12 @@
+typeattribute gpu_counter_producer coredomain;
+
+perfetto_producer(gpu_counter_producer)
+
+allow gpu_counter_producer adbd:fd use;
+allow gpu_counter_producer adbd:unix_stream_socket { read write };
+allow gpu_counter_producer gpu_counter_producer_exec:file execute_no_trans;
+allow gpu_counter_producer gpu_device:chr_file rw_file_perms;
+allow gpu_counter_producer graphics_device:chr_file rw_file_perms;
+allow gpu_counter_producer same_process_hal_file:file { execute getattr map open read };
+allow gpu_counter_producer shell:fd use;
+allow gpu_counter_producer shell:unix_stream_socket { read write };

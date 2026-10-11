@@ -7,6 +7,7 @@ type modem_block_device, dev_type;
 type modem_userdata_block_device, dev_type;
 type persist_block_device, dev_type;
 type pktrouter_device, dev_type;
+type rls_device, dev_type;
 type sg_device, dev_type;
 type thermal_link_device, dev_type;
 type trusty_log_device, dev_type;

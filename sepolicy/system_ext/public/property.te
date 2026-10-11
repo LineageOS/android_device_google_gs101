@@ -4,3 +4,5 @@ system_restricted_prop(telephony_modem_prop)
 
 system_vendor_config_prop(esim_modem_prop)
 system_vendor_config_prop(fingerprint_ghbm_prop)
+system_vendor_config_prop(rootdisk_prop)
+system_vendor_config_prop(userdisk_prop)
