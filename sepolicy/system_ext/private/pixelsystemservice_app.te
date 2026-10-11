@@ -1,0 +1,3 @@
+allow pixelsystemservice_app nfc_service:service_manager find;
+
+allow pixelsystemservice_app fwk_stats_service:service_manager find;

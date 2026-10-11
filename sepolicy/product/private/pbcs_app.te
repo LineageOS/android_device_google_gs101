@@ -3,8 +3,11 @@ app_domain(vendor_pbcs_app)
 add_service(vendor_pbcs_app, camera_binder_service)
 add_service(vendor_pbcs_app, camera_cameraidremapper_service)
 add_service(vendor_pbcs_app, camera_lyricconfigprovider_service)
+add_service(vendor_pbcs_app, camera_lyricmaintenancetaskprovider_service)
 
 allow vendor_pbcs_app app_api_service:service_manager find;
 allow vendor_pbcs_app cameraserver_service:service_manager find;
+allow vendor_pbcs_app system_app_data_file:dir create_dir_perms;
+allow vendor_pbcs_app system_app_data_file:file create_file_perms;
 
 dontaudit vendor_pbcs_app system_app_data_file:dir *;

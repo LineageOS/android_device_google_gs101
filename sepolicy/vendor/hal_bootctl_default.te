@@ -15,5 +15,8 @@ allow hal_bootctl_default ufs_bsg_device:chr_file { ioctl open read write };
 allowxperm hal_bootctl_default ufs_bsg_device:chr_file ioctl SG_IO;
 
 recovery_only(`
-allow hal_bootctl_default rootfs:dir r_dir_perms;
+allow hal_bootctl_default hal_bootctl_default_exec:file entrypoint;
+allow hal_bootctl_default proc_vendor_sched:dir { ioctl lock open read search watch watch_reads };
+allow hal_bootctl_default rootfs:dir { ioctl lock open read watch watch_reads };
+allow hal_bootctl_default vendor_file:dir { ioctl lock open read watch watch_reads };
 ')

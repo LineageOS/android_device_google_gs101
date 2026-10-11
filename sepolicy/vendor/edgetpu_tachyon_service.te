@@ -1,4 +1,3 @@
-type edgetpu_tachyon_server, domain;
 type edgetpu_tachyon_server_exec, exec_type, file_type, vendor_file_type;
 
 binder_service(edgetpu_tachyon_server)
@@ -12,6 +11,7 @@ binder_call(edgetpu_tachyon_server, edgetpu_app_server)
 binder_call(edgetpu_tachyon_server, hal_audio_default)
 binder_call(edgetpu_tachyon_server, hal_camera_default)
 binder_call(edgetpu_tachyon_server, isolated_compute_app)
+binder_call(edgetpu_tachyon_server, pixelsupport_app)
 binder_call(edgetpu_tachyon_server, platform_app)
 binder_call(edgetpu_tachyon_server, priv_app_all)
 binder_call(edgetpu_tachyon_server, shell)
