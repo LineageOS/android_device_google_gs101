@@ -352,10 +352,6 @@ PRODUCT_PACKAGES += \
     SettingsOverlayGs101 \
     SimpleDeviceConfigOverlayGs101
 
-# Parts
-PRODUCT_PACKAGES += \
-    GoogleParts
-
 # Properties
 TARGET_PRODUCT_PROP += device/google/gs101/product.prop
 TARGET_SYSTEM_EXT_PROP += device/google/gs101/system_ext.prop
