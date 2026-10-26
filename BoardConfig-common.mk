@@ -52,7 +52,6 @@ BOARD_PREBUILT_BOOTIMAGE := $(wildcard $(TARGET_KERNEL_DIR)/boot.img)
 TARGET_NO_KERNEL := true
 BOARD_USES_GENERIC_KERNEL_IMAGE := true
 BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT := true
-BOARD_MOVE_GSI_AVB_KEYS_TO_VENDOR_BOOT := true
 TARGET_RECOVERY_WIPE := device/google/gs101/conf/recovery.wipe
 
 # This is the fstab file that will be included in the recovery image.  Note that
